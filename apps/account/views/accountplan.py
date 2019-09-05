@@ -6,7 +6,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.accountplan import PyAccountPlan
+from ..models.accountplan import PyAccountPlan
 
 ACCOUNTPLAN_FIELDS = [
             {'string': 'Código', 'field': 'code'},

@@ -6,7 +6,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.accountmove import PyAccountMove
+from ..models.accountmove import PyAccountMove
 
 ACCOUNTMOVE_FIELDS = [
             {'string': 'Código', 'field': 'code'},

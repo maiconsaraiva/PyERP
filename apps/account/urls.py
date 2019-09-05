@@ -3,10 +3,10 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Librerias en carpetas locales
-from .subviews.accountmove import (
+from .views.accountmove import (
     AccountMoveCreateView, AccountMoveDetailView, AccountMoveListView,
     AccountMoveUpdateView, DeleteAccountMove)
-from .subviews.accountplan import (
+from .views.accountplan import (
     AccountPlanCreateView, AccountPlanDetailView, AccountPlanListView,
     AccountPlanUpdateView, DeleteAccountPlan)
 

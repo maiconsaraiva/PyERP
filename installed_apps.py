@@ -1,1 +1,1 @@
-apps.crm
+apps.account
