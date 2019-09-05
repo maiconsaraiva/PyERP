@@ -147,7 +147,10 @@ def InstallApps(self, pk):
     app.save()
     path = os.environ.get('PWD')
     with open('%s/installed_apps.py' % path, 'a+') as installed_apps_file:
-        installed_apps_file.write('apps.%s\n' % app.name.lower())
+        if installed_apps_file.write('apps.%s\n' % app.name.lower()):
+            print("ok")
+        else:
+            print("no")
     return redirect(reverse('apps'))
 
 
