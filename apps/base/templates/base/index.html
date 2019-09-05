@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<link rel="stylesheet" href="{% static '/css/django.css' %}">
+
+<link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
+
+<style>
+    .center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 100px;
+}
+
+
+</style>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PyERP</title>
+</head>
+
+<body class="django-background">
+<div>
+    <a href="{% url 'home' %}"><img class="center" src="{% static 'dist/favicon_white.png' %}" width="500" height="500" /></a>
+</div>
+
+
+</body>
+</html>
