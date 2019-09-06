@@ -5,7 +5,7 @@ from django.conf.urls import url
 from .views import PosIndex
 
 # Librerias en carpetas locales
-from .subviews.pos import (
+from .views.pos import (
     DeletePos, PosCreateView, PosDetailView, PosListView, PosUpdateView)
 
 urlpatterns = [

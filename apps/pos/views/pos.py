@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.pos import PyPos
+from ..models.pos import PyPos
 
 POS_FIELDS = [
             {'string': 'Nombre', 'field': 'name'},

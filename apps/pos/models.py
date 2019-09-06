@@ -1,2 +1,2 @@
 # Librerias en carpetas locales
-from .submodels.pos import PyPos
+from .models.pos import PyPos
