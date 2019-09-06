@@ -4,10 +4,10 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Librerias en carpetas locales
-from .subviews.trigger import (
+from .views.trigger import (
     DeleteTrigger, TriggerCreateView, TriggerDetailView, TriggerListView,
     TriggersUpdateView)
-from .views import chat_home, get_by_sid, get_client_name, register_message, get_history
+from .views import  get_by_sid, get_client_name, register_message, get_history, chat_home
 
 urlpatterns = [
     url(r'chat-home', chat_home, name='chat-home'),

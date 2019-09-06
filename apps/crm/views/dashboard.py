@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Librerias en carpetas locales
-from .lead import PyLead
+from ..models.lead import PyLead
 
 
 @login_required(login_url="/base/login")

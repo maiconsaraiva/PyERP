@@ -8,7 +8,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ...chat.models import PyTrigger
+from ..models.trigger import PyTrigger
 
 TRIGGER_FIELDS = [
     {'string': _('Question'), 'field': 'question'},

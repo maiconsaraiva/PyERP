@@ -9,7 +9,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.stage import PyStage
+from ..models.stage import PyStage
 
 """ BEGIN STAGE """
 STAGE_FIELDS = [

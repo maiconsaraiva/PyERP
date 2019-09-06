@@ -3,10 +3,11 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Librerias en carpetas locales
-from .subviews.dashboard import DashboardCrmView
-from .subviews.lead import (
+from .views.dashboard import DashboardCrmView
+from .views.lead import (
     DeleteLead, LeadCreateView, LeadDetailView, LeadListView, LeadUpdateView)
-from .subviews.stage import (
+
+from .views.stage import (
     DeleteStage, StageCreateView, StageDetailView, StageListView,
     StageUpdateView)
 

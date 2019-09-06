@@ -3,7 +3,7 @@ import json
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponse, render
-from .models import PyVisitor, PyChatHistory
+from ..models.visitor import PyVisitor, PyChatHistory
 
 
 @login_required(login_url="/base/login")

@@ -9,7 +9,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.lead import PyLead
+from ..models.lead import PyLead
 
 """ BEGIN LEAD """
 LEAD_FIELDS = [
