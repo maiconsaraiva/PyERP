@@ -6,8 +6,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
-# Librerias en carpetas locales
-from ..submodels.employee import PyEmployee
+from ..models.employee import PyEmployee
 
 """ BEGIN EMPLEOYEE """
 EMPLEOYEE_FIELDS = [
@@ -24,7 +23,7 @@ EMPLEOYEE_FIELDS_SHORT = ['name', 'name2', 'email', 'first_name', 'last_name', '
 
 class EmployeeListView(LoginRequiredMixin, ListView):
     model = PyEmployee
-    template_name = 'erp/list.html'
+    template_name = 'base/list.html'
     login_url = "/base/login"
 
     def get_context_data(self, **kwargs):

@@ -2,13 +2,12 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-# Librerias en carpetas locales
-from .subviews.department import (
-    DeleteDepartment, DepartmentCreateView, DepartmentDetailView,
-    DepartmentListView, DepartmentUpdateView)
-from .subviews.employee import (
+from apps.payroll.views.employee import (
     DeleteEmployee, EmployeeCreateView, EmployeeDetailView, EmployeeListView,
     EmployeeUpdateView)
+from .views.department import (
+    DeleteDepartment, DepartmentCreateView, DepartmentDetailView,
+    DepartmentListView, DepartmentUpdateView)
 
 urlpatterns = [
     path('employee', EmployeeListView.as_view(), name='employee'),

@@ -6,8 +6,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
-# Librerias en carpetas locales
-from ..submodels.department import PyDepartment
+from ..models.department import PyDepartment
 
 DEPARTMENT_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},
