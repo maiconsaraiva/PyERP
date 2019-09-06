@@ -145,8 +145,7 @@ def InstallApps(self, pk):
     app = PyApp.objects.get(id=pk)
     app.installed = True
     app.save()
-    path = os.environ.get('PWD')
-    with open('%s/installed_apps.py' % path, 'a+') as installed_apps_file:
+    with open('installed_apps.py', 'a+') as installed_apps_file:
         if installed_apps_file.write('apps.%s\n' % app.name.lower()):
             print("ok")
         else:
@@ -159,11 +158,10 @@ def UninstallApps(self, pk):
     app = PyApp.objects.get(id=pk)
     app.installed = False
     app.save()
-    path = os.environ.get('PWD')
     app_lists = []
-    with open('%s/installed_apps.py' % path, 'r') as installed_apps_file:
+    with open('installed_apps.py', 'r') as installed_apps_file:
         app_lists = installed_apps_file.readlines()
-    with open('%s/installed_apps.py' % path, 'w+') as installed_apps_file:
+    with open('installed_apps.py', 'w+') as installed_apps_file:
         for line in app_lists:
             if 'apps.%s' % app.name.lower() == line.strip():
                 continue

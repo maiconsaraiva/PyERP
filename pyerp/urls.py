@@ -13,10 +13,16 @@ urlpatterns = [
     path('base/', include('apps.base.urls')),
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT, }),
     path('static/<path:path>', serve, {'document_root': settings.STATIC_ROOT, }),
+    # path('', include('apps.home.urls')),
 ]
 
 
 with open('installed_apps.py', 'r') as ins_apps_file:
     for line in ins_apps_file.readlines():
-        app, _ = line.split('.')
-        urlpatterns += [path('%s/' % app, include('%s.urls' % line.strip()))]
+        if line.strip() == 'apps.home':
+            urlpatterns.pop(0)
+            urlpatterns += [path('', include('apps.home.urls'))]
+        else:
+            _ , app = line.split('.')
+            urlpatterns += [path('%s/' % app, include('%s.urls' % line.strip()))]
+
