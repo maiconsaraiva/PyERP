@@ -1,2 +1,0 @@
-apps.crm
-apps.home
