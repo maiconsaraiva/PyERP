@@ -25,13 +25,13 @@ CRON_SHORT = ['name', 'active', 'interval_type', 'model_name', 'function', 'numb
 class CronListView(LoginRequiredMixin, ListView):
     model = PyCron
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CronListView, self).get_context_data(**kwargs)
         context['title'] = 'Crons'
         context['detail_url'] = 'cron-detail'
-        context['add_url'] = 'cron-add'
+        context['add_url'] = 'base:cron-add'
         context['fields'] = CRON_FIELDS
         return context
 
@@ -39,7 +39,7 @@ class CronListView(LoginRequiredMixin, ListView):
 class CronDetailView(LoginRequiredMixin, DetailView):
     model = PyCron
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CronDetailView, self).get_context_data(**kwargs)
@@ -55,7 +55,7 @@ class CronCreateView(LoginRequiredMixin, CreateView):
     model = PyCron
     fields = CRON_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CronCreateView, self).get_context_data(**kwargs)
@@ -69,7 +69,7 @@ class CronUpdateView(LoginRequiredMixin, UpdateView):
     model = PyCron
     fields = CRON_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CronUpdateView, self).get_context_data(**kwargs)
@@ -79,7 +79,7 @@ class CronUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteCron(self, pk):
     cron = PyCron.objects.get(id=pk)
     cron.delete()

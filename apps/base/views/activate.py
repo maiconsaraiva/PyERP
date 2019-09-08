@@ -22,7 +22,7 @@ class ActivateView(RedirectView):
     """Esta clase activa a la persona cuando confirma el link enviado desde
     su correo
     """
-    url = 'login'
+    url = 'base:login'
 
     def get(self, request, *args, **kwargs):
         uidb64 = self.kwargs['uidb64']
@@ -31,8 +31,8 @@ class ActivateView(RedirectView):
         uid = force_text(urlsafe_base64_decode(uidb64))
 
         try:
-            user =UserCustom.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, Persona.DoesNotExist):
+            user = UserCustom.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, UserCustom.DoesNotExist):
             user = None
 
         token_valid = ACCOUNT_ACTIVATION_TOKEN.check_token(user, token)

@@ -29,10 +29,10 @@
           {% for product in object_list %}
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="{% url 'home-product' product.id %}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="{% url 'base:home-product' product.id %}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="{% url 'home-product' product.id %}">{{ product.name }}</a>
+                  <a href="{% url 'base:home-product' product.id %}">{{ product.name }}</a>
                 </h4>
                 {% if user|web_show_price %}
                   <h5> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ product.price }} {% else %} {{ product.price }} {{ user|currency_symbol }} {% endif %} </h5>

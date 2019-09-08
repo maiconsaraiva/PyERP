@@ -25,7 +25,7 @@ class AccountMoveListView(ListView):
         context = super(AccountMoveListView, self).get_context_data(**kwargs)
         context['title'] = 'Asiento Contable'
         context['detail_url'] = 'account-move-detail'
-        context['add_url'] = 'account-move-add'
+        context['add_url'] = 'base:account-move-add'
         context['fields'] = ACCOUNTMOVE_FIELDS
         return context
 
@@ -66,7 +66,7 @@ class AccountMoveUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteAccountMove(self, pk):
     accountmove = PyAccountMove.objects.get(id=pk)
     accountmove.delete()

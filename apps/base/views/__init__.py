@@ -50,8 +50,8 @@ class UserListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(UserListView, self).get_context_data(**kwargs)
         context['title'] = 'Usuarios'
-        context['detail_url'] = 'user-detail'
-        context['add_url'] = 'user-add'
+        context['detail_url'] = 'base:user-detail'
+        context['add_url'] = 'base:user-add'
         context['fields'] = [
             {'string': _('User Name'), 'field': 'username'},
             {'string': _('Name'), 'field': 'first_name'},
@@ -68,7 +68,7 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].username
-        context['breadcrumbs'] = [{'url': 'users', 'name': 'Usuarios'}]
+        context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
         context['update_url'] = 'user-update'
         context['delete_url'] = 'user-delete'
         context['fields'] = [
@@ -79,7 +79,7 @@ class UserDetailView(DetailView):
         ]
         context['buttons'] = [
             {
-                'act': reverse('password-change', kwargs={'pk': context['object'].pk}),
+                'act': reverse('base:password-change', kwargs={'pk': context['object'].pk}),
                 'name': 'Cambiar contraseña',
                 'class': 'success'
             }
@@ -95,8 +95,8 @@ class UserCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(UserCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Usuario'
-        context['breadcrumbs'] = [{'url': 'users', 'name': 'Usuarios'}]
-        context['back_url'] = reverse('users')
+        context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
+        context['back_url'] = reverse('base:users')
         return context
 
 
@@ -108,16 +108,16 @@ class UserUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UserUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].username
-        context['breadcrumbs'] = [{'url': 'users', 'name': 'Usuarios'}]
-        context['back_url'] = reverse('user-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
+        context['back_url'] = reverse('base:user-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteUser(self, pk):
     user = UserCustom.objects.get(id=pk)
     user.delete()
-    return redirect(reverse('users'))
+    return redirect(reverse('base:users'))
 
 
 def ChangePasswordForm(self, pk):
@@ -130,10 +130,10 @@ def DoChangePassword(self, pk, **kwargs):
         user.set_password(self.POST['new_password1'])
     else:
         return render(self, 'base/change_password.html', {'pk': pk, 'error': 'Las contraseñas no coinciden.'})
-    return redirect(reverse('user-detail', kwargs={'pk': pk}))
+    return redirect(reverse('base:user-detail', kwargs={'pk': pk}))
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def UpdateApps(self):
     FILE_NAME = 'py_info.json'
     folder_apps = 'apps'
@@ -152,10 +152,10 @@ def UpdateApps(self):
         except Exception:
             continue
 
-    return redirect(reverse('apps'))
+    return redirect(reverse('base:apps'))
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def InstallApps(self, pk):
     app = PyApp.objects.get(id=pk)
     app.installed = True
@@ -165,10 +165,10 @@ def InstallApps(self, pk):
             print("ok")
         else:
             print("no")
-    return redirect(reverse('apps'))
+    return redirect(reverse('base:apps'))
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def UninstallApps(self, pk):
     app = PyApp.objects.get(id=pk)
     app.installed = False
@@ -181,10 +181,10 @@ def UninstallApps(self, pk):
             if 'apps.%s' % app.name.lower() == line.strip():
                 continue
             installed_apps_file.write(line)
-    return redirect(reverse('apps'))
+    return redirect(reverse('base:apps'))
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """

@@ -39,6 +39,8 @@ from .views.product_webcategory import (
     ProductWebCategoryDetailView, ProductWebCategoryListView,
     ProductWebCategoryUpdateView)
 
+app_name = 'base'
+
 urlpatterns = [
     path('', erp_home, name='home'),
     # path(
@@ -149,7 +151,7 @@ urlpatterns = [
     ),
     path(
         'logout',
-        LogoutView.as_view(next_page='login'),
+        LogoutView.as_view(next_page='base:login'),
         name='logout'
     ),
     path('logoutmodal/', LogOutModalView.as_view(), name='logout-modal'),

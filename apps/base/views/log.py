@@ -21,13 +21,13 @@ LOG_SHORT = ['name', 'note']
 class LogListView(LoginRequiredMixin, ListView):
     model = PyLog
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(LogListView, self).get_context_data(**kwargs)
         context['title'] = 'Logs'
         context['detail_url'] = 'log-detail'
-        context['add_url'] = 'log-add'
+        context['add_url'] = 'base:log-add'
         context['fields'] = LOG_FIELDS
         return context
 
@@ -35,7 +35,7 @@ class LogListView(LoginRequiredMixin, ListView):
 class LogDetailView(LoginRequiredMixin, DetailView):
     model = PyLog
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(LogDetailView, self).get_context_data(**kwargs)
@@ -51,7 +51,7 @@ class LogCreateView(LoginRequiredMixin, CreateView):
     model = PyLog
     fields = LOG_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(LogCreateView, self).get_context_data(**kwargs)
@@ -65,7 +65,7 @@ class LogUpdateView(LoginRequiredMixin, UpdateView):
     model = PyLog
     fields = LOG_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(LogUpdateView, self).get_context_data(**kwargs)
@@ -75,7 +75,7 @@ class LogUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteLog(self, pk):
     log = PyLog.objects.get(id=pk)
     log.delete()

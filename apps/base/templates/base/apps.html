@@ -18,9 +18,9 @@
                                     </span>
                                       <span class="info-box-text">{{ app.description }}</span>
                                       {% if app.installed %}
-                                      <a class="btn btn-danger float-right ml-1" href="{% url 'uninstall-app' app.id %}">Uninstall</a>
+                                      <a class="btn btn-danger float-right ml-1" href="{% url 'base:uninstall-app' app.id %}">Uninstall</a>
                                       {% else %}
-                                      <a  class="btn btn-success float-right ml-1" href="{% url 'install-app' app.id %}">Install</a>
+                                      <a  class="btn btn-success float-right ml-1" href="{% url 'base:install-app' app.id %}">Install</a>
                                       {% endif %}
                                       <button class="btn btn-primary float-right" ><i class="fa fa-eye"></i></button>
                                   </div>

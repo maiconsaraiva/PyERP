@@ -22,7 +22,7 @@ class SaleOrderListView(LoginRequiredMixin, ListView):
     """
     model = PySaleOrder
     template_name = 'saleorderlist.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         """Definición de variables de contexto
@@ -30,7 +30,7 @@ class SaleOrderListView(LoginRequiredMixin, ListView):
         context = super(SaleOrderListView, self).get_context_data(**kwargs)
         context['title'] = 'Orden de Venta'
         context['detail_url'] = 'sale:sale-order-detail'
-        context['add_url'] = 'sale:sale-order-add'
+        context['add_url'] = 'base:sale:sale-order-add'
         context['edit_url'] = 'sale:sale-order-edit'
         context['delete_url'] = 'sale:sale-order-delete'
         context['fields'] = SALE_FIELDS

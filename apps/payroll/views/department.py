@@ -19,13 +19,13 @@ DEPARTMENT_FIELDS_SHORT = ['name']
 class DepartmentListView(LoginRequiredMixin, ListView):
     model = PyDepartment
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(DepartmentListView, self).get_context_data(**kwargs)
         context['title'] = 'Departamentos'
         context['detail_url'] = 'department-detail'
-        context['add_url'] = 'department-add'
+        context['add_url'] = 'base:department-add'
         context['fields'] = DEPARTMENT_FIELDS
         return context
 
@@ -33,7 +33,7 @@ class DepartmentListView(LoginRequiredMixin, ListView):
 class DepartmentDetailView(LoginRequiredMixin, DetailView):
     model = PyDepartment
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(DepartmentDetailView, self).get_context_data(**kwargs)
@@ -49,7 +49,7 @@ class DepartmentCreateView(LoginRequiredMixin, CreateView):
     model = PyDepartment
     fields = DEPARTMENT_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(DepartmentCreateView, self).get_context_data(**kwargs)
@@ -63,7 +63,7 @@ class DepartmentUpdateView(LoginRequiredMixin, UpdateView):
     model = PyDepartment
     fields = DEPARTMENT_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(DepartmentUpdateView, self).get_context_data(**kwargs)
@@ -73,7 +73,7 @@ class DepartmentUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteDepartment(self, pk):
     department = PyDepartment.objects.get(id=pk)
     department.delete()

@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils import translation
 
 # Librerias en carpetas locales
 from ...base.models import PyCompany
@@ -20,16 +21,16 @@ COMPANY_FIELDS = [
 COMPANY_FIELDS_SHORT = ['name', 'city', 'phone', 'email', 'social_facebook', 'social_instagram', 'social_linkedin', 'currency_id']
 
 
-class CompanyListView(LoginRequiredMixin, ListView):
+class CompanyListView(ListView):
     model = PyCompany
     template_name = 'base/list.html'
-    login_url = "/base/login"
 
     def get_context_data(self, **kwargs):
+        print("IDOMA: {}".format(translation.get_language()))
         context = super(CompanyListView, self).get_context_data(**kwargs)
         context['title'] = 'Compañías'
-        context['detail_url'] = 'company-detail'
-        context['add_url'] = 'company-add'
+        context['detail_url'] = 'base:company-detail'
+        context['add_url'] = 'base:company-add'
         context['fields'] = COMPANY_FIELDS
         return context
 
@@ -37,29 +38,30 @@ class CompanyListView(LoginRequiredMixin, ListView):
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     model = PyCompany
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CompanyDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'companies', 'name': 'Compañia'}]
-        context['update_url'] = 'company-update'
-        context['delete_url'] = 'company-delete'
+        context['breadcrumbs'] = [{'url': 'base:companies', 'name': 'Compañia'}]
+        context['update_url'] = 'base:company-update'
+        context['delete_url'] = 'base:company-delete'
         context['fields'] = COMPANY_FIELDS
         return context
 
 
-class CompanyCreateView(LoginRequiredMixin, CreateView):
+class CompanyCreateView(CreateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    # login_url = "login"
 
     def get_context_data(self, **kwargs):
+        print("IDOMA: {}".format(translation.get_language()))
         context = super(CompanyCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Compañía'
-        context['breadcrumbs'] = [{'url': 'companies', 'name': 'Compañías'}]
-        context['back_url'] = reverse('companies')
+        context['breadcrumbs'] = [{'url': 'base:companies', 'name': 'Compañías'}]
+        context['back_url'] = reverse('base:companies')
         return context
 
 
@@ -67,7 +69,7 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CompanyUpdateView, self).get_context_data(**kwargs)
@@ -77,7 +79,7 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteCompany(self, pk):
     company = PyCompany.objects.get(id=pk)
     company.delete()

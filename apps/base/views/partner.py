@@ -31,13 +31,13 @@ class CustomerListView(LoginRequiredMixin, ListView):
     model = PyPartner
     template_name = 'base/list.html'
     queryset = PyPartner.objects.filter(customer=True).all()
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CustomerListView, self).get_context_data(**kwargs)
         context['title'] = 'Partners'
         context['detail_url'] = 'partner-detail'
-        context['add_url'] = 'partner-add'
+        context['add_url'] = 'base:partner-add'
         context['fields'] = PARTNER_FIELDS
         return context
 
@@ -46,13 +46,13 @@ class ProviderListView(LoginRequiredMixin, ListView):
     model = PyPartner
     template_name = 'base/list.html'
     queryset = PyPartner.objects.filter(provider=True).all()
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProviderListView, self).get_context_data(**kwargs)
         context['title'] = 'Partners'
         context['detail_url'] = 'partner-detail'
-        context['add_url'] = 'partner-add'
+        context['add_url'] = 'base:partner-add'
         context['fields'] = PARTNER_FIELDS
         return context
 
@@ -60,7 +60,7 @@ class ProviderListView(LoginRequiredMixin, ListView):
 class PartnerDetailView(LoginRequiredMixin, DetailView):
     model = PyPartner
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(PartnerDetailView, self).get_context_data(**kwargs)
@@ -76,7 +76,7 @@ class PartnerCreateView(LoginRequiredMixin, CreateView):
     model = PyPartner
     fields = ['name', 'email', 'phone', 'customer', 'provider']
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(PartnerCreateView, self).get_context_data(**kwargs)
@@ -99,7 +99,7 @@ class PartnerUpdateView(UpdateView):
     model = PyPartner
     fields = PARTNER_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(PartnerUpdateView, self).get_context_data(**kwargs)
@@ -126,7 +126,7 @@ class PartnerUpdateView(UpdateView):
         return form"""
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeletePartner(self, pk):
     partner = PyPartner.objects.get(id=pk)
     partner.delete()

@@ -22,20 +22,20 @@ PROJECT_FIELDS_SHORT = ['name','state','user_id','note']
 class ProjectListView(LoginRequiredMixin, ListView):
     model = PyProject
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProjectListView, self).get_context_data(**kwargs)
         context['title'] = 'Proyectos'
         context['detail_url'] = 'project-detail'
-        context['add_url'] = 'project-add'
+        context['add_url'] = 'base:project-add'
         context['fields'] = PROJECT_FIELDS
         return context
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = PyProject
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
@@ -50,7 +50,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = PyProject
     fields = PROJECT_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProjectCreateView, self).get_context_data(**kwargs)
@@ -63,7 +63,7 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = PyProject
     fields = PROJECT_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProjectUpdateView, self).get_context_data(**kwargs)
@@ -73,7 +73,7 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteProject(self, pk):
     project = PyProject.objects.get(id=pk)
     project.delete()

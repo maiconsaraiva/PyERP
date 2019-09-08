@@ -2,7 +2,7 @@
 {% load erp_tags %}
 <!doctype html>
 {% if not user|web_under_construction %}
-     <meta http-equiv="Refresh" content="0; url={% url 'home-index' %}">
+     <meta http-equiv="Refresh" content="0; url={% url 'base:home-index' %}">
 {% endif %}
 
 <title> {{ user|get_company_name }} | {{ user|get_company_slogan }} </title>

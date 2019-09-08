@@ -27,9 +27,9 @@
         </div>
         <div class="intro-heading text-uppercase">{{ user|get_company_name }}</div>
         {% if current_user.is_authenticated %}
-          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'login' %}">{{ _("Login") }}</a>
+          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'base:login' %}">{{ _("Login") }}</a>
         {% else %}
-           <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'home' %}">{{ _("Enter") }}</a>
+           <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'base:home' %}">{{ _("Enter") }}</a>
         {% endif %}
       </div>
     </div>

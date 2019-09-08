@@ -23,20 +23,20 @@ BUG_FIELDS_SHORT = ['name','state','user_id','note']
 class BugListView(LoginRequiredMixin, ListView):
     model = PyBug
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(BugListView, self).get_context_data(**kwargs)
         context['title'] = 'Errores'
         context['detail_url'] = 'bug-detail'
-        context['add_url'] = 'bug-add'
+        context['add_url'] = 'base:bug-add'
         context['fields'] = BUG_FIELDS
         return context
 
 class BugDetailView(LoginRequiredMixin, DetailView):
     model = PyBug
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(BugDetailView, self).get_context_data(**kwargs)
@@ -51,7 +51,7 @@ class BugCreateView(LoginRequiredMixin, CreateView):
     model = PyBug
     fields = BUG_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(BugCreateView, self).get_context_data(**kwargs)
@@ -64,7 +64,7 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
     model = PyBug
     fields = BUG_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(BugUpdateView, self).get_context_data(**kwargs)
@@ -74,7 +74,7 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteBug(self, pk):
     bug = PyBug.objects.get(id=pk)
     bug.delete()

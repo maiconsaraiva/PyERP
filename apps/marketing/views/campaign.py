@@ -22,20 +22,20 @@ CAMPAIGN_FIELDS_SHORT = ['name','code']
 class CampaignListView(LoginRequiredMixin, ListView):
     model = PyCampaign
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CampaignListView, self).get_context_data(**kwargs)
         context['title'] = 'Campañas'
         context['detail_url'] = 'campaign-detail'
-        context['add_url'] = 'campaign-add'
+        context['add_url'] = 'base:campaign-add'
         context['fields'] = CAMPAIGN_FIELDS
         return context
 
 class CampaignDetailView(LoginRequiredMixin, DetailView):
     model = PyCampaign
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CampaignDetailView, self).get_context_data(**kwargs)
@@ -50,7 +50,7 @@ class CampaignCreateView(LoginRequiredMixin, CreateView):
     model = PyCampaign
     fields = CAMPAIGN_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CampaignCreateView, self).get_context_data(**kwargs)
@@ -63,7 +63,7 @@ class CampaignUpdateView(LoginRequiredMixin, UpdateView):
     model = PyCampaign
     fields = CAMPAIGN_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CampaignUpdateView, self).get_context_data(**kwargs)

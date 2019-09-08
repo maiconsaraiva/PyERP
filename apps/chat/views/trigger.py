@@ -23,13 +23,13 @@ TRIGGER_SHORT = ['question','answer','init']
 class TriggerListView(LoginRequiredMixin, ListView):
     model = PyTrigger
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TriggerListView, self).get_context_data(**kwargs)
         context['title'] = 'Trigger'
         context['detail_url'] = 'trigger-detail'
-        context['add_url'] = 'trigger-add'
+        context['add_url'] = 'base:trigger-add'
         context['fields'] = TRIGGER_FIELDS
         return context
 
@@ -37,7 +37,7 @@ class TriggerListView(LoginRequiredMixin, ListView):
 class TriggerDetailView(LoginRequiredMixin, DetailView):
     model = PyTrigger
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TriggerDetailView, self).get_context_data(**kwargs)
@@ -53,7 +53,7 @@ class TriggerCreateView(LoginRequiredMixin, CreateView):
     model = PyTrigger
     fields = TRIGGER_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TriggerCreateView, self).get_context_data(**kwargs)
@@ -67,7 +67,7 @@ class TriggersUpdateView(LoginRequiredMixin, UpdateView):
     model = PyTrigger
     fields = TRIGGER_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TriggersUpdateView, self).get_context_data(**kwargs)
@@ -77,7 +77,7 @@ class TriggersUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteTrigger(self, pk):
     trigger = PyTrigger.objects.get(id=pk)
     trigger.delete()

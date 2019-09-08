@@ -28,7 +28,7 @@ class PasswordRecoveryView(PasswordResetView):
     contraseña
     2.- Despliega un formulario para recuperar la contraseña
     """
-    success_url = 'login'
+    success_url = 'base:login'
     template_name = 'usercustom/password_reset_form.html'
     extra_context = {}
 
@@ -38,7 +38,7 @@ class PasswordRecoveryView(PasswordResetView):
             # Formulario para escribir la nueva contraseña
             context['form'] = PasswordSetForm()
             context['url_action'] = reverse_lazy(
-                'password-set',
+                'base:password-set',
                 kwargs={
                     'uidb64': self.kwargs['uidb64'],
                     'token': self.kwargs['token']
@@ -47,7 +47,7 @@ class PasswordRecoveryView(PasswordResetView):
         else:
             # Fromulario para solicitar el link de recuperación de contraseña
             context['form'] = PasswordRecoveryForm()
-            context['url_action'] = reverse_lazy('password-recovery')
+            context['url_action'] = reverse_lazy('base:password-recovery')
 
         return context
 
@@ -87,8 +87,8 @@ class PasswordRecoveryView(PasswordResetView):
             uid = force_text(urlsafe_base64_decode(uidb64))
 
             try:
-                user =UserCustom.objects.get(pk=uid)
-            except (TypeError, ValueError, OverflowError, Persona.DoesNotExist):
+                user = UserCustom.objects.get(pk=uid)
+            except (TypeError, ValueError, OverflowError, UserCustom.DoesNotExist):
                 user = None
 
             token_valid = PASSWORD_RECOVERY_TOKEN.check_token(user, token)
@@ -111,8 +111,8 @@ class PasswordRecoveryView(PasswordResetView):
         else:
             email = form.cleaned_data['email']
             try:
-                user =UserCustom.objects.get(email=email)
-            except (TypeError, ValueError, OverflowError, Persona.DoesNotExist):
+                user = UserCustom.objects.get(email=email)
+            except (TypeError, ValueError, OverflowError, UserCustom.DoesNotExist):
                 user = None
             if user is not None:
                 current_site = get_current_site(self.request)
@@ -121,7 +121,7 @@ class PasswordRecoveryView(PasswordResetView):
                 }
 
                 url = reverse_lazy(
-                    'password-set',
+                    'base:password-set',
                     kwargs={
                         'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
                         'token': PASSWORD_RECOVERY_TOKEN.make_token(user)
@@ -149,5 +149,5 @@ class PasswordRecoveryView(PasswordResetView):
                 )
 
                 return HttpResponseRedirect(
-                    reverse_lazy('password-recovery')
+                    reverse_lazy('base:password-recovery')
                 )

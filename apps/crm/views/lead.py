@@ -36,20 +36,20 @@ LEAD_FIELDS_SHORT = ['name','partner_id','user_id','income','stage_id','content'
 class LeadListView(LoginRequiredMixin, ListView):
     model = PyLead
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(LeadListView, self).get_context_data(**kwargs)
         context['title'] = 'Oportunidades'
         context['detail_url'] = 'lead-detail'
-        context['add_url'] = 'lead-add'
+        context['add_url'] = 'base:lead-add'
         context['fields'] = LEAD_FIELDS_VIEW
         return context
 
 class LeadDetailView(LoginRequiredMixin, DetailView):
     model = PyLead
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
     def get_context_data(self, **kwargs):
         context = super(LeadDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
@@ -63,7 +63,7 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
     model = PyLead
     fields = LEAD_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(LeadCreateView, self).get_context_data(**kwargs)
@@ -85,7 +85,7 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteLead(self, pk):
     lead = PyLead.objects.get(id=pk)
     lead.delete()

@@ -29,7 +29,7 @@ class SignUpView(CreateView):
     form_class = PersonaCreationForm
     template_name = 'usercustom/signup.html'
     extra_context = {}
-    success_url = 'login'
+    success_url = 'base:login'
     success_message = _('Your account was created successfully. A link was sent to your email that you must sign in to confirm your sign up.')
 
     def post(self, request, *args, **kwargs):

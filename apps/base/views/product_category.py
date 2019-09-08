@@ -20,13 +20,13 @@ CATEGORY_FIELDS_SHORT = ['name', 'parent_id']
 class ProductCategoryListView(LoginRequiredMixin, ListView):
     model = PyProductCategory
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryListView, self).get_context_data(**kwargs)
         context['title'] = 'Categorías de Productos'
         context['detail_url'] = 'product-category-detail'
-        context['add_url'] = 'product-category-add'
+        context['add_url'] = 'base:product-category-add'
         context['fields'] = CATEGORY_FIELDS
         return context
 
@@ -34,7 +34,7 @@ class ProductCategoryListView(LoginRequiredMixin, ListView):
 class ProductCategoryDetailView(LoginRequiredMixin, DetailView):
     model = PyProductCategory
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryDetailView, self).get_context_data(**kwargs)
@@ -50,7 +50,7 @@ class ProductCategoryCreateView(LoginRequiredMixin, CreateView):
     model = PyProductCategory
     fields = CATEGORY_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryCreateView, self).get_context_data(**kwargs)
@@ -64,7 +64,7 @@ class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = PyProductCategory
     fields = CATEGORY_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryUpdateView, self).get_context_data(**kwargs)
@@ -74,7 +74,7 @@ class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteProductCategory(self, pk):
     product_category = PyProductCategory.objects.get(id=pk)
     product_category.delete()

@@ -22,13 +22,13 @@ CHANNEL_FIELDS_SHORT = ['name','code']
 class ChannelListView(LoginRequiredMixin, ListView):
     model = PyChannel
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ChannelListView, self).get_context_data(**kwargs)
         context['title'] = 'Canales'
         context['detail_url'] = 'channel-detail'
-        context['add_url'] = 'channel-add'
+        context['add_url'] = 'base:channel-add'
         context['fields'] = CHANNEL_FIELDS
         return context
 
@@ -48,7 +48,7 @@ class ChannelCreateView(LoginRequiredMixin, CreateView):
     model = PyChannel
     fields = CHANNEL_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ChannelCreateView, self).get_context_data(**kwargs)
@@ -61,7 +61,7 @@ class ChannelUpdateView(LoginRequiredMixin, UpdateView):
     model = PyChannel
     fields = CHANNEL_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ChannelUpdateView, self).get_context_data(**kwargs)
@@ -71,7 +71,7 @@ class ChannelUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteChannel(self, pk):
     channel = PyChannel.objects.get(id=pk)
     channel.delete()

@@ -17,10 +17,10 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           {% if request.user.is_authenticated %}
               <div class="image">
-                  <a href="{% url 'profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle elevation-2" alt="{{ request.user }}"></a>
+                  <a href="{% url 'base:profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle elevation-2" alt="{{ request.user }}"></a>
               </div>
               <div class="info">
-                  <a href="{% url 'profile' %}" class="d-block">{{ user }}</a>
+                  <a href="{% url 'base:profile' %}" class="d-block">{{ user }}</a>
               </div>
           {% endif %}
       </div>
@@ -31,7 +31,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <a href="{% url 'home' %}" class="nav-link">
+            <a href="{% url 'base:home' %}" class="nav-link">
               <i class="fa fa-home nav-icon"></i>
               <p>{{ _('Home') }}</p>
             </a>
@@ -55,14 +55,14 @@
               <ul class="nav nav-treeview">
 
                 <li class="nav-item">
-                  <a href="{% url 'apps' %}" class="nav-link">
+                  <a href="{% url 'base:apps' %}" class="nav-link">
                     <i class="fa fa-users nav-icon"></i>
                     <p>{{ _('Apps') }}</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'update-app' %}" class="nav-link">
+                  <a href="{% url 'base:update-app' %}" class="nav-link">
                     <i class="fa fa-users nav-icon"></i>
                     <p>{{ _('Update') }}</p>
                   </a>
@@ -85,14 +85,14 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{% url 'users' %}" class="nav-link">
+                  <a href="{% url 'base:users' %}" class="nav-link">
                     <i class="fa fa-users nav-icon"></i>
                     <p>Usuarios</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'companies' %}" class="nav-link">
+                  <a href="{% url 'base:companies' %}" class="nav-link">
                     <i class="fa fa-building nav-icon"></i>
                     <p>Compañias</p>
                   </a>
@@ -101,28 +101,28 @@
 
 
                 <li class="nav-item">
-                    <a href="{% url 'base-config' 1 %}" class="nav-link">
+                    <a href="{% url 'base:base-config' 1 %}" class="nav-link">
                       <i class="fa fa-cog nav-icon"></i>
                       <p>General</p>
                     </a>
                   </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'logs' %}" class="nav-link">
+                  <a href="{% url 'base:logs' %}" class="nav-link">
                     <i class="fa fa-building nav-icon"></i>
                     <p>Log</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'crons' %}" class="nav-link">
+                  <a href="{% url 'base:crons' %}" class="nav-link">
                     <i class="fa fa-building nav-icon"></i>
                     <p>Cron</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'countries' %}" class="nav-link">
+                  <a href="{% url 'base:countries' %}" class="nav-link">
                     <i class="fa fa-building nav-icon"></i>
                     <p>{{ _('Countries') }}</p>
                   </a>
@@ -130,7 +130,7 @@
 
 
                   <li class="nav-item">
-                    <a href="{% url 'load-data' %}" class="nav-link">
+                    <a href="{% url 'base:load-data' %}" class="nav-link">
                       <i class="fa fa-database nav-icon"></i>
                       <p>Cargar Datos Iniciales</p>
                     </a>

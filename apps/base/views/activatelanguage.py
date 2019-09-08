@@ -27,10 +27,10 @@ class ActivateLanguageView(View):
         '''
         self.redirect_from = request.META.get('HTTP_REFERER', None) or '/'
         self.match = resolve(urlparse(self.redirect_from)[2])
-        print(self.match)
+        print("ENTRO {}:".format(self.match))
         self.language_code = kwargs.get('language_code')
-        # self.redirect_to = self.match.namespace + ':' + self.match.url_name
-        self.redirect_to = self.match.url_name
+        self.redirect_to = self.match.namespace + ':' + self.match.url_name
+        # self.redirect_to = self.match.url_name
         translation.activate(self.language_code)
         request.session[translation.LANGUAGE_SESSION_KEY] = self.language_code
 

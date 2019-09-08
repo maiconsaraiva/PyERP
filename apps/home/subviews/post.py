@@ -23,7 +23,7 @@ class PostListView(ListView):
         context = super(PostListView, self).get_context_data(**kwargs)
         context['title'] = 'Entradas'
         context['detail_url'] = 'post-detail'
-        context['add_url'] = 'post-add'
+        context['add_url'] = 'base:post-add'
         context['fields'] = POST_FIELDS
         return context
 
@@ -64,7 +64,7 @@ class PostUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeletePost(self, pk):
     post = PyPost.objects.get(id=pk)
     post.delete()

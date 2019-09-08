@@ -34,13 +34,13 @@ LEAD_FIELDS_SHORT = ['name', 'category_id', 'web_category_id', 'code', 'price', 
 class ProductListView(LoginRequiredMixin, ListView):
     model = PyProduct
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['title'] = 'Productos'
         context['detail_url'] = 'product-detail'
-        context['add_url'] = 'product-add'
+        context['add_url'] = 'base:product-add'
         context['fields'] = PRODUCT_FIELDS
         return context
 
@@ -48,7 +48,7 @@ class ProductListView(LoginRequiredMixin, ListView):
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = PyProduct
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
@@ -65,7 +65,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = PyProduct
     fields = LEAD_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductCreateView, self).get_context_data(**kwargs)
@@ -79,7 +79,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = PyProduct
     fields = LEAD_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductUpdateView, self).get_context_data(**kwargs)
@@ -89,7 +89,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteProduct(self, pk):
     product = PyProduct.objects.get(id=pk)
     product.delete()

@@ -33,7 +33,7 @@
         <div class="login-box">
             <div class="login-logo">
                 <img src="{{ MEDIA_URL }}favicon_white.png" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="30px" >
-                <a href="{% url 'home_easy' %}" style="color:#ffffff;"><b>{{ settings.PREFIX }}</b>{{ settings.SUFIX }}</a>
+                <a href="{% url 'home:home_easy' %}" style="color:#ffffff;"><b>{{ settings.PREFIX }}</b>{{ settings.SUFIX }}</a>
             </div>
             <div class="card">
                 <div class="card-header d-flex p-0">
@@ -78,8 +78,8 @@
                     <div class="row">
                         <div class="col text-center">
                             <a href="/">{{ _('Back') }}</a>&nbsp;|&nbsp;
-                            <a href="{% url 'password-recovery' %}">{{ _('Password recovery') }}</a>&nbsp;|&nbsp;
-                            <a href="{% url 'signup' %}">{{ _('Signup') }}</a>
+                            <a href="{% url 'base:password-recovery' %}">{{ _('Password recovery') }}</a>&nbsp;|&nbsp;
+                            <a href="{% url 'base:signup' %}">{{ _('Signup') }}</a>
                         </div>
                     </div>
                 </div>

@@ -20,13 +20,13 @@ COUNTRY_SHORT = ['name']
 class CountryListView(LoginRequiredMixin, ListView):
     model = PyCountry
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryListView, self).get_context_data(**kwargs)
         context['title'] = _("Countries")
         context['detail_url'] = 'country-detail'
-        context['add_url'] = 'country-add'
+        context['add_url'] = 'base:country-add'
         context['fields'] = COUNTRY_FIELDS
         return context
 
@@ -34,7 +34,7 @@ class CountryListView(LoginRequiredMixin, ListView):
 class CountryDetailView(LoginRequiredMixin, DetailView):
     model = PyCountry
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryDetailView, self).get_context_data(**kwargs)
@@ -50,7 +50,7 @@ class CountryCreateView(LoginRequiredMixin, CreateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryCreateView, self).get_context_data(**kwargs)
@@ -64,7 +64,7 @@ class CountryUpdateView(LoginRequiredMixin, UpdateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryUpdateView, self).get_context_data(**kwargs)
@@ -74,7 +74,7 @@ class CountryUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteCountry(self, pk):
     country = PyCountry.objects.get(id=pk)
     country.delete()

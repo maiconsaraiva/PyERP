@@ -19,7 +19,7 @@ class AvatarUpdateView(UpdateView):
     """
     model = UserCustom
     form_class = AvatarForm
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('base:profile')
 
     def get_object(self, queryset=None):
         """

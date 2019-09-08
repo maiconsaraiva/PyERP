@@ -26,7 +26,7 @@ class AccountPlanListView(ListView):
         context = super(AccountPlanListView, self).get_context_data(**kwargs)
         context['title'] = 'Plan de Cuenta'
         context['detail_url'] = 'accountplan-detail'
-        context['add_url'] = 'accountplan-add'
+        context['add_url'] = 'base:accountplan-add'
         context['fields'] = ACCOUNTPLAN_FIELDS
         return context
 
@@ -67,7 +67,7 @@ class AccountPlanUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteAccountPlan(self, pk):
     accountplan = PyAccountPlan.objects.get(id=pk)
     accountplan.delete()

@@ -20,13 +20,13 @@ CATEGORY_FIELDS_SHORT = ['name', 'parent_id']
 class ProductWebCategoryListView(LoginRequiredMixin, ListView):
     model = PyProductWebCategory
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductWebCategoryListView, self).get_context_data(**kwargs)
         context['title'] = 'Categorías Web de Productos'
         context['detail_url'] = 'product-webcategory-detail'
-        context['add_url'] = 'product-webcategory-add'
+        context['add_url'] = 'base:product-webcategory-add'
         context['fields'] = CATEGORY_FIELDS
         return context
 
@@ -34,7 +34,7 @@ class ProductWebCategoryListView(LoginRequiredMixin, ListView):
 class ProductWebCategoryDetailView(LoginRequiredMixin, DetailView):
     model = PyProductWebCategory
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductWebCategoryDetailView, self).get_context_data(**kwargs)
@@ -50,7 +50,7 @@ class ProductWebCategoryCreateView(LoginRequiredMixin, CreateView):
     model = PyProductWebCategory
     fields = CATEGORY_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductWebCategoryCreateView, self).get_context_data(**kwargs)
@@ -64,7 +64,7 @@ class ProductWebCategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = PyProductWebCategory
     fields = CATEGORY_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductWebCategoryUpdateView, self).get_context_data(**kwargs)
@@ -74,7 +74,7 @@ class ProductWebCategoryUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteProductWebCategory(self, pk):
     product_category = PyProductWebCategory.objects.get(id=pk)
     product_category.delete()

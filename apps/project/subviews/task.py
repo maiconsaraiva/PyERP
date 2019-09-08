@@ -24,20 +24,20 @@ TASK_FIELDS_SHORT = ['name','state','user_id','project_id','note']
 class TaskListView(LoginRequiredMixin, ListView):
     model = PyTask
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
         context['title'] = 'Tareas'
         context['detail_url'] = 'task-detail'
-        context['add_url'] = 'task-add'
+        context['add_url'] = 'base:task-add'
         context['fields'] = TASK_FIELDS
         return context
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = PyTask
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaskDetailView, self).get_context_data(**kwargs)
@@ -52,7 +52,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model = PyTask
     fields = TASK_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaskCreateView, self).get_context_data(**kwargs)
@@ -65,7 +65,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = PyTask
     fields = TASK_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaskUpdateView, self).get_context_data(**kwargs)
@@ -75,7 +75,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteTask(self, pk):
     task = PyTask.objects.get(id=pk)
     task.delete()

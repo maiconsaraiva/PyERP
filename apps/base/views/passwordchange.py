@@ -22,7 +22,7 @@ def cambio_clave(request):
             update_session_auth_hash(request, user)  # Importante!
             messages.success(request, _('Your password change was successfully \
                 processed'))
-            return redirect('profile')
+            return redirect('base:profile')
     else:
         form = PasswordChangeForm(request.user)
     return render(

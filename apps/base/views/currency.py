@@ -22,13 +22,13 @@ CURRENCY_SHORT = ['name', 'alias', 'symbol', 'position']
 class CurrencyListView(LoginRequiredMixin, ListView):
     model = PyCurrency
     template_name = 'base/list.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CurrencyListView, self).get_context_data(**kwargs)
         context['title'] = 'Monedas'
         context['detail_url'] = 'currency-detail'
-        context['add_url'] = 'currency-add'
+        context['add_url'] = 'base:currency-add'
         context['fields'] = CURRENCY_FIELDS
         return context
 
@@ -36,7 +36,7 @@ class CurrencyListView(LoginRequiredMixin, ListView):
 class CurrencyDetailView(LoginRequiredMixin, DetailView):
     model = PyCurrency
     template_name = 'base/detail.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CurrencyDetailView, self).get_context_data(**kwargs)
@@ -52,7 +52,7 @@ class CurrencyCreateView(LoginRequiredMixin, CreateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CurrencyCreateView, self).get_context_data(**kwargs)
@@ -66,7 +66,7 @@ class CurrencyUpdateView(LoginRequiredMixin, UpdateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'
-    login_url = "/base/login"
+    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CurrencyUpdateView, self).get_context_data(**kwargs)
@@ -76,7 +76,7 @@ class CurrencyUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="login")
+@login_required(login_url="base:login")
 def DeleteCurrency(self, pk):
     currency = PyCurrency.objects.get(id=pk)
     currency.delete()

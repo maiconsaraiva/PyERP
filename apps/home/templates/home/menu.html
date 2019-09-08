@@ -8,21 +8,21 @@
     </a>
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="{% url 'post' %}" class="nav-link">
+        <a href="{% url 'base:post' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
           <p>Entradas</p>
         </a>
       </li>
 
        <li class="nav-item">
-        <a href="{% url 'product-webcategory' %}" class="nav-link">
+        <a href="{% url 'base:product-webcategory' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
           <p>Categorías Web</p>
         </a>
       </li>
 
         <li class="nav-item">
-            <a href="{% url 'website-config' 1 %}" class="nav-link">
+            <a href="{% url 'base:website-config' 1 %}" class="nav-link">
                 <i class="fa fa-cog nav-icon"></i>
                 <p>Configuración</p>
             </a>
