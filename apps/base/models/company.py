@@ -25,7 +25,7 @@ class PyCompany(PyFather):
     slogan = models.CharField('Eslogan', max_length=250, blank=True)
 
     def get_absolute_url(self):
-        return reverse('company-detail', kwargs={'pk': self.pk})
+        return reverse('base:company-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

@@ -29,21 +29,21 @@
                 {% for app in app_list|get_app_list %}
                     {% include app %}
                 {% endfor %}
-                <!-- Apps Begin -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Apps') }}<i class="fas fa-angle-left right"></i><span class="badge badge-info right">{{ count_app }}</span></p></a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{% url 'base:apps' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Apps') }}</p></a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="{% url 'base:update-app' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Update') }}</p></a>
-                        </li>
-                    </ul>
-                </li>
                 <!-- Apps End -->
                 {% if user.is_superuser %}
                     <!-- Configuracion Begin Sección solo para los administrdores -->
+                    <!-- Apps Begin -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Apps') }}<i class="fas fa-angle-left right"></i><span class="badge badge-info right">{{ count_app }}</span></p></a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'base:apps' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Apps') }}</p></a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="{% url 'base:update-app' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Update') }}</p></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link"><i class="fa fa-cogs nav-icon"></i><p>{{ _('Configuration') }}<i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">
