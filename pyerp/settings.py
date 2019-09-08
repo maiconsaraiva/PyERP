@@ -33,7 +33,7 @@ SECRET_KEY = '(5u_8%)7z-9t#pxxg8@$bt99rr)m6*ceuqf4-ic79-mmd8=^mw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1', 'www.pyerp.cl', 'pyerp.cl']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'www.pyerp.cl', 'pyerp.cl']
 
 
 # Application definition
@@ -144,9 +144,9 @@ TEMPLATES = [
 establece las rutas para algunas funciones.
 """
 AUTH_USER_MODEL = 'base.UserCustom'
-LOGIN_URL = '/account/login'
+LOGIN_URL = '/base/login'
 LOGIN_REDIRECT_URL = '/base'
-LOGOUT_REDIRECT_URL = '/account/login'
+LOGOUT_REDIRECT_URL = '/base/login'
 
 
 # ========================================================================== #
@@ -161,11 +161,6 @@ PASSWORD_RESET_TIMEOUT_DAYS = 1
 """
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-
-# def gettext(cadena):
-#     '''  "dummy" gettext() function
-#     '''
-#     return cadena
 
 LANGUAGE_CODE = 'en'
 TIME_ZONE = 'America/Santiago'
