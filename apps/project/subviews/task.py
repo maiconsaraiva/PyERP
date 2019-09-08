@@ -42,9 +42,9 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(TaskDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'task', 'name': 'Tarea'}]
-        context['update_url'] = 'task-update'
-        context['delete_url'] = 'task-delete'
+        context['breadcrumbs'] = [{'url': 'base:task', 'name': 'Tarea'}]
+        context['update_url'] = 'base:task-update'
+        context['delete_url'] = 'base:task-delete'
         context['fields'] = TASK_FIELDS
         return context
 
@@ -57,8 +57,8 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(TaskCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Tarea'
-        context['breadcrumbs'] = [{'url': 'task', 'name': 'Tarea'}]
-        context['back_url'] = reverse('task')
+        context['breadcrumbs'] = [{'url': 'base:task', 'name': 'Tarea'}]
+        context['back_url'] = reverse('base:task')
         return context
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
@@ -70,8 +70,8 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(TaskUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'task', 'name': 'Tarea'}]
-        context['back_url'] = reverse('task-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:task', 'name': 'Tarea'}]
+        context['back_url'] = reverse('base:task-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

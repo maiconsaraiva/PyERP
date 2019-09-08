@@ -53,10 +53,10 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'products', 'name': 'Productos'}]
+        context['breadcrumbs'] = [{'url': 'base:products', 'name': 'Productos'}]
         context['detail_name'] = 'Producto: %s' % context['object'].name
-        context['update_url'] = 'product-update'
-        context['delete_url'] = 'product-delete'
+        context['update_url'] = 'base:product-update'
+        context['delete_url'] = 'base:product-delete'
         context['fields'] = PRODUCT_FIELDS
         return context
 
@@ -70,8 +70,8 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ProductCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear producto'
-        context['breadcrumbs'] = [{'url': 'products', 'name': 'Productos'}]
-        context['back_url'] = reverse('products')
+        context['breadcrumbs'] = [{'url': 'base:products', 'name': 'Productos'}]
+        context['back_url'] = reverse('base:products')
         return context
 
 
@@ -84,8 +84,8 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProductUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'products', 'name': 'Productos'}]
-        context['back_url'] = reverse('product-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:products', 'name': 'Productos'}]
+        context['back_url'] = reverse('base:product-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

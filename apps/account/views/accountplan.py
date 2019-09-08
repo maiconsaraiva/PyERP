@@ -36,9 +36,9 @@ class AccountPlanDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(AccountPlanDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'accountplan', 'name': 'Cuenta Contable'}]
-        context['update_url'] = 'accountplan-update'
-        context['delete_url'] = 'accountplan-delete'
+        context['breadcrumbs'] = [{'url': 'base:accountplan', 'name': 'Cuenta Contable'}]
+        context['update_url'] = 'base:accountplan-update'
+        context['delete_url'] = 'base:accountplan-delete'
         context['fields'] = ACCOUNTPLAN_FIELDS
         return context
 
@@ -50,8 +50,8 @@ class AccountPlanCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(AccountPlanCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Cuenta'
-        context['breadcrumbs'] = [{'url': 'accountplan', 'name': 'Crear Cuenta'}]
-        context['back_url'] = reverse('accountplan')
+        context['breadcrumbs'] = [{'url': 'base:accountplan', 'name': 'Crear Cuenta'}]
+        context['back_url'] = reverse('base:accountplan')
         return context
 
 class AccountPlanUpdateView(UpdateView):
@@ -62,8 +62,8 @@ class AccountPlanUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(AccountPlanUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'accountplan', 'name': 'Cuenta Contable'}]
-        context['back_url'] = reverse('accountplan-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:accountplan', 'name': 'Cuenta Contable'}]
+        context['back_url'] = reverse('base:accountplan-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

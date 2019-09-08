@@ -65,9 +65,9 @@ class PartnerDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(PartnerDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'partners', 'name': 'Partners'}]
-        context['update_url'] = 'partner-update'
-        context['delete_url'] = 'partner-delete'
+        context['breadcrumbs'] = [{'url': 'base:partners', 'name': 'Partners'}]
+        context['update_url'] = 'base:partner-update'
+        context['delete_url'] = 'base:partner-delete'
         context['fields'] = PARTNER_FIELDS
         return context
 
@@ -81,8 +81,8 @@ class PartnerCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(PartnerCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear partner'
-        context['breadcrumbs'] = [{'url': 'partners', 'name': 'Partners'}]
-        context['back_url'] = reverse('partners')
+        context['breadcrumbs'] = [{'url': 'base:partners', 'name': 'Partners'}]
+        context['back_url'] = reverse('base:partners')
         return context
 
     """
@@ -104,8 +104,8 @@ class PartnerUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(PartnerUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'partners', 'name': 'Partners'}]
-        context['back_url'] = reverse('partner-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:partners', 'name': 'Partners'}]
+        context['back_url'] = reverse('base:partner-detail', kwargs={'pk': context['object'].pk})
         return context
     """
     def form_valid(self, form):

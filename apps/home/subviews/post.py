@@ -33,9 +33,9 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'post', 'name': 'Entradas'}]
-        context['update_url'] = 'post-update'
-        context['delete_url'] = 'post-delete'
+        context['breadcrumbs'] = [{'url': 'base:post', 'name': 'Entradas'}]
+        context['update_url'] = 'base:post-update'
+        context['delete_url'] = 'base:post-delete'
         context['fields'] = POST_FIELDS
         return context
 
@@ -47,8 +47,8 @@ class PostCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Post'
-        context['breadcrumbs'] = [{'url': 'post', 'name': 'Entrada'}]
-        context['back_url'] = reverse('post')
+        context['breadcrumbs'] = [{'url': 'base:post', 'name': 'Entrada'}]
+        context['back_url'] = reverse('base:post')
         return context
 
 class PostUpdateView(UpdateView):
@@ -59,8 +59,8 @@ class PostUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(PostUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'post', 'name': 'Entrada'}]
-        context['back_url'] = reverse('post-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:post', 'name': 'Entrada'}]
+        context['back_url'] = reverse('base:post-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

@@ -38,9 +38,9 @@ class WebPaymentMethodDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(WebPaymentMethodDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'web-payment-methods', 'name': 'Métodos de Pagos Webs'}]
-        context['update_url'] = 'web-payment-method-update'
-        context['delete_url'] = 'web-payment-method-delete'
+        context['breadcrumbs'] = [{'url': 'base:web-payment-methods', 'name': 'Métodos de Pagos Webs'}]
+        context['update_url'] = 'base:web-payment-method-update'
+        context['delete_url'] = 'base:web-payment-method-delete'
         context['fields'] = WPM_FIELDS
         return context
 
@@ -54,8 +54,8 @@ class WebPaymentMethodCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(WebPaymentMethodCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Métodos de Pagos Web'
-        context['breadcrumbs'] = [{'url': 'web-payment-methods', 'name': 'Métodos de Pagos Web'}]
-        context['back_url'] = reverse('web-payment-methods')
+        context['breadcrumbs'] = [{'url': 'base:web-payment-methods', 'name': 'Métodos de Pagos Web'}]
+        context['back_url'] = reverse('base:web-payment-methods')
         return context
 
 
@@ -68,8 +68,8 @@ class WebPaymentMethodUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(WebPaymentMethodUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'web-payment-methods', 'name': 'Métodos de Pagos Web'}]
-        context['back_url'] = reverse('web-payment-method-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:web-payment-methods', 'name': 'Métodos de Pagos Web'}]
+        context['back_url'] = reverse('base:web-payment-method-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

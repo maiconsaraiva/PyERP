@@ -40,9 +40,9 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'project', 'name': 'Proyecto'}]
-        context['update_url'] = 'project-update'
-        context['delete_url'] = 'project-delete'
+        context['breadcrumbs'] = [{'url': 'base:project', 'name': 'Proyecto'}]
+        context['update_url'] = 'base:project-update'
+        context['delete_url'] = 'base:project-delete'
         context['fields'] = PROJECT_FIELDS
         return context
 
@@ -55,8 +55,8 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ProjectCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Proyecto'
-        context['breadcrumbs'] = [{'url': 'project', 'name': 'Proyecto'}]
-        context['back_url'] = reverse('project')
+        context['breadcrumbs'] = [{'url': 'base:project', 'name': 'Proyecto'}]
+        context['back_url'] = reverse('base:project')
         return context
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
@@ -68,8 +68,8 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProjectUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'project', 'name': 'Proyecto'}]
-        context['back_url'] = reverse('project-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:project', 'name': 'Proyecto'}]
+        context['back_url'] = reverse('base:project-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

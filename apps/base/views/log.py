@@ -40,9 +40,9 @@ class LogDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(LogDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'logs', 'name': 'Logs'}]
-        context['update_url'] = 'log-update'
-        context['delete_url'] = 'log-delete'
+        context['breadcrumbs'] = [{'url': 'base:logs', 'name': 'Logs'}]
+        context['update_url'] = 'base:log-update'
+        context['delete_url'] = 'base:log-delete'
         context['fields'] = LOG_FIELDS
         return context
 
@@ -56,8 +56,8 @@ class LogCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(LogCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Log'
-        context['breadcrumbs'] = [{'url': 'logs', 'name': 'Logs'}]
-        context['back_url'] = reverse('logs')
+        context['breadcrumbs'] = [{'url': 'base:logs', 'name': 'Logs'}]
+        context['back_url'] = reverse('base:logs')
         return context
 
 
@@ -70,8 +70,8 @@ class LogUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(LogUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'logs', 'name': 'Logs'}]
-        context['back_url'] = reverse('log-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:logs', 'name': 'Logs'}]
+        context['back_url'] = reverse('base:log-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

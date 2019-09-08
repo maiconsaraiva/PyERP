@@ -32,6 +32,6 @@ class SaleOrderListView(LoginRequiredMixin, ListView):
         context['detail_url'] = 'sale:sale-order-detail'
         context['add_url'] = 'base:sale:sale-order-add'
         context['edit_url'] = 'sale:sale-order-edit'
-        context['delete_url'] = 'sale:sale-order-delete'
+        context['delete_url'] = 'base:sale:sale-order-delete'
         context['fields'] = SALE_FIELDS
         return context

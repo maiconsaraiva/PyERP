@@ -44,9 +44,9 @@ class CronDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(CronDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'crons', 'name': 'Crons'}]
-        context['update_url'] = 'cron-update'
-        context['delete_url'] = 'cron-delete'
+        context['breadcrumbs'] = [{'url': 'base:crons', 'name': 'Crons'}]
+        context['update_url'] = 'base:cron-update'
+        context['delete_url'] = 'base:cron-delete'
         context['fields'] = CRON_FIELDS
         return context
 
@@ -60,8 +60,8 @@ class CronCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(CronCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Cron'
-        context['breadcrumbs'] = [{'url': 'crons', 'name': 'Crons'}]
-        context['back_url'] = reverse('crons')
+        context['breadcrumbs'] = [{'url': 'base:crons', 'name': 'Crons'}]
+        context['back_url'] = reverse('base:crons')
         return context
 
 
@@ -74,8 +74,8 @@ class CronUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CronUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'crons', 'name': 'Crons'}]
-        context['back_url'] = reverse('cron-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:crons', 'name': 'Crons'}]
+        context['back_url'] = reverse('base:cron-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

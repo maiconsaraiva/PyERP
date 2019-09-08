@@ -41,9 +41,9 @@ class BugDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(BugDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'bug', 'name': 'Error'}]
-        context['update_url'] = 'bug-update'
-        context['delete_url'] = 'bug-delete'
+        context['breadcrumbs'] = [{'url': 'base:bug', 'name': 'Error'}]
+        context['update_url'] = 'base:bug-update'
+        context['delete_url'] = 'base:bug-delete'
         context['fields'] = BUG_FIELDS
         return context
 
@@ -56,8 +56,8 @@ class BugCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(BugCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Error'
-        context['breadcrumbs'] = [{'url': 'bug', 'name': 'Error'}]
-        context['back_url'] = reverse('bug')
+        context['breadcrumbs'] = [{'url': 'base:bug', 'name': 'Error'}]
+        context['back_url'] = reverse('base:bug')
         return context
 
 class BugUpdateView(LoginRequiredMixin, UpdateView):
@@ -69,8 +69,8 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(BugUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'bug', 'name': 'Error'}]
-        context['back_url'] = reverse('bug-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:bug', 'name': 'Error'}]
+        context['back_url'] = reverse('base:bug-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

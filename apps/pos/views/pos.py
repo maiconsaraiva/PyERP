@@ -37,9 +37,9 @@ class PosDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(PosDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'pos', 'name': 'Punto de Venta'}]
-        context['update_url'] = 'pos-update'
-        context['delete_url'] = 'pos-delete'
+        context['breadcrumbs'] = [{'url': 'base:pos', 'name': 'Punto de Venta'}]
+        context['update_url'] = 'base:pos-update'
+        context['delete_url'] = 'base:pos-delete'
         context['fields'] = POS_FIELDS
         return context
 
@@ -52,8 +52,8 @@ class PosCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(PosCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Puntos de Venta'
-        context['breadcrumbs'] = [{'url': 'pos', 'name': 'Punto de Venta'}]
-        context['back_url'] = reverse('pos')
+        context['breadcrumbs'] = [{'url': 'base:pos', 'name': 'Punto de Venta'}]
+        context['back_url'] = reverse('base:pos')
         return context
 
 class PosUpdateView(LoginRequiredMixin, UpdateView):
@@ -65,8 +65,8 @@ class PosUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(PosUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'pos', 'name': 'Punto de Venta'}]
-        context['back_url'] = reverse('pos-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:pos', 'name': 'Punto de Venta'}]
+        context['back_url'] = reverse('base:pos-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

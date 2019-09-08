@@ -26,7 +26,6 @@ class CompanyListView(ListView):
     template_name = 'base/list.html'
 
     def get_context_data(self, **kwargs):
-        print("IDOMA: {}".format(translation.get_language()))
         context = super(CompanyListView, self).get_context_data(**kwargs)
         context['title'] = 'Compañías'
         context['detail_url'] = 'base:company-detail'
@@ -57,7 +56,6 @@ class CompanyCreateView(CreateView):
     # login_url = "login"
 
     def get_context_data(self, **kwargs):
-        print("IDOMA: {}".format(translation.get_language()))
         context = super(CompanyCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Compañía'
         context['breadcrumbs'] = [{'url': 'base:companies', 'name': 'Compañías'}]
@@ -74,8 +72,8 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CompanyUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'companies', 'name': 'Compañías'}]
-        context['back_url'] = reverse('company-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:companies', 'name': 'Compañías'}]
+        context['back_url'] = reverse('base:company-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

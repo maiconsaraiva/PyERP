@@ -35,9 +35,9 @@ class AccountMoveDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(AccountMoveDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'account-move', 'name': 'Asiento Contable'}]
-        context['update_url'] = 'account-move-update'
-        context['delete_url'] = 'account-move-delete'
+        context['breadcrumbs'] = [{'url': 'base:account-move', 'name': 'Asiento Contable'}]
+        context['update_url'] = 'base:account-move-update'
+        context['delete_url'] = 'base:account-move-delete'
         context['fields'] = ACCOUNTMOVE_FIELDS
         return context
 
@@ -49,8 +49,8 @@ class AccountMoveCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(AccountMoveCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Asiento'
-        context['breadcrumbs'] = [{'url': 'account-move', 'name': 'Crear Asiento'}]
-        context['back_url'] = reverse('account-move')
+        context['breadcrumbs'] = [{'url': 'base:account-move', 'name': 'Crear Asiento'}]
+        context['back_url'] = reverse('base:account-move')
         return context
 
 class AccountMoveUpdateView(UpdateView):
@@ -61,8 +61,8 @@ class AccountMoveUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(AccountMoveUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'account-move', 'name': 'Asiento Contable'}]
-        context['back_url'] = reverse('account-move-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:account-move', 'name': 'Asiento Contable'}]
+        context['back_url'] = reverse('base:account-move-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

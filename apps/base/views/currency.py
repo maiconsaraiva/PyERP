@@ -41,9 +41,9 @@ class CurrencyDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(CurrencyDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'currencies', 'name': 'Monedas'}]
-        context['update_url'] = 'currency-update'
-        context['delete_url'] = 'currency-delete'
+        context['breadcrumbs'] = [{'url': 'base:currencies', 'name': 'Monedas'}]
+        context['update_url'] = 'base:currency-update'
+        context['delete_url'] = 'base:currency-delete'
         context['fields'] = CURRENCY_FIELDS
         return context
 
@@ -57,8 +57,8 @@ class CurrencyCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(CurrencyCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Moneda'
-        context['breadcrumbs'] = [{'url': 'currencies', 'name': 'Monedas'}]
-        context['back_url'] = reverse('currencies')
+        context['breadcrumbs'] = [{'url': 'base:currencies', 'name': 'Monedas'}]
+        context['back_url'] = reverse('base:currencies')
         return context
 
 
@@ -71,8 +71,8 @@ class CurrencyUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CurrencyUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'currencies', 'name': 'Monedas'}]
-        context['back_url'] = reverse('currency-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:currencies', 'name': 'Monedas'}]
+        context['back_url'] = reverse('base:currency-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

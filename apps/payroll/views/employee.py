@@ -44,9 +44,9 @@ class EmployeeDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'employee', 'name': 'Empleados'}]
-        context['update_url'] = 'employee-update'
-        context['delete_url'] = 'employee-delete'
+        context['breadcrumbs'] = [{'url': 'base:employee', 'name': 'Empleados'}]
+        context['update_url'] = 'base:employee-update'
+        context['delete_url'] = 'base:employee-delete'
         context['fields'] = EMPLEOYEE_FIELDS
         return context
 
@@ -60,8 +60,8 @@ class EmployeeCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Empleado'
-        context['breadcrumbs'] = [{'url': 'employee', 'name': 'Empleado'}]
-        context['back_url'] = reverse('employee')
+        context['breadcrumbs'] = [{'url': 'base:employee', 'name': 'Empleado'}]
+        context['back_url'] = reverse('base:employee')
         return context
 
 
@@ -74,8 +74,8 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'employee', 'name': 'Empleados'}]
-        context['back_url'] = reverse('employee-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:employee', 'name': 'Empleados'}]
+        context['back_url'] = reverse('base:employee-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

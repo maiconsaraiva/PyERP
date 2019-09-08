@@ -69,8 +69,8 @@ class UserDetailView(DetailView):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].username
         context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
-        context['update_url'] = 'user-update'
-        context['delete_url'] = 'user-delete'
+        context['update_url'] = 'base:user-update'
+        context['delete_url'] = 'base:user-delete'
         context['fields'] = [
             {'string': _('User Name'), 'field': 'username'},
             {'string': _('Name'), 'field': 'first_name'},

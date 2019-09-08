@@ -39,9 +39,9 @@ class CountryDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(CountryDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'countries', 'name': _("Countries")}]
-        context['update_url'] = 'country-update'
-        context['delete_url'] = 'country-delete'
+        context['breadcrumbs'] = [{'url': 'base:countries', 'name': _("Countries")}]
+        context['update_url'] = 'base:country-update'
+        context['delete_url'] = 'base:country-delete'
         context['fields'] = COUNTRY_FIELDS
         return context
 
@@ -55,8 +55,8 @@ class CountryCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(CountryCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Country Create'
-        context['breadcrumbs'] = [{'url': 'countries', 'name': _("Countries")}]
-        context['back_url'] = reverse('countries')
+        context['breadcrumbs'] = [{'url': 'base:countries', 'name': _("Countries")}]
+        context['back_url'] = reverse('base:countries')
         return context
 
 
@@ -69,8 +69,8 @@ class CountryUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CountryUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'countries', 'name': _("Countries")}]
-        context['back_url'] = reverse('country-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:countries', 'name': _("Countries")}]
+        context['back_url'] = reverse('base:country-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

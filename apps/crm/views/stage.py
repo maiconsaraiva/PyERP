@@ -40,9 +40,9 @@ class StageDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(StageDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'stage', 'name': 'Etapas'}]
-        context['update_url'] = 'stage-update'
-        context['delete_url'] = 'stage-delete'
+        context['breadcrumbs'] = [{'url': 'base:stage', 'name': 'Etapas'}]
+        context['update_url'] = 'base:stage-update'
+        context['delete_url'] = 'base:stage-delete'
         context['fields'] = STAGE_FIELDS
         return context
 
@@ -55,8 +55,8 @@ class StageCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(StageCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Etapa'
-        context['breadcrumbs'] = [{'url': 'stage', 'name': 'Etapa'}]
-        context['back_url'] = reverse('stage')
+        context['breadcrumbs'] = [{'url': 'base:stage', 'name': 'Etapa'}]
+        context['back_url'] = reverse('base:stage')
         return context
 
 class StageUpdateView(LoginRequiredMixin, UpdateView):
@@ -68,8 +68,8 @@ class StageUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(StageUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'stage', 'name': 'Etapa'}]
-        context['back_url'] = reverse('stage-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:stage', 'name': 'Etapa'}]
+        context['back_url'] = reverse('base:stage-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

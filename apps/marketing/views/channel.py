@@ -38,9 +38,9 @@ class ChannelDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ChannelDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'channel', 'name': 'Canal'}]
-        context['update_url'] = 'channel-update'
-        context['delete_url'] = 'channel-delete'
+        context['breadcrumbs'] = [{'url': 'base:channel', 'name': 'Canal'}]
+        context['update_url'] = 'base:channel-update'
+        context['delete_url'] = 'base:channel-delete'
         context['fields'] = CHANNEL_FIELDS
         return context
 
@@ -53,8 +53,8 @@ class ChannelCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ChannelCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Canal'
-        context['breadcrumbs'] = [{'url': 'channel', 'name': 'Canal'}]
-        context['back_url'] = reverse('channel')
+        context['breadcrumbs'] = [{'url': 'base:channel', 'name': 'Canal'}]
+        context['back_url'] = reverse('base:channel')
         return context
 
 class ChannelUpdateView(LoginRequiredMixin, UpdateView):
@@ -66,8 +66,8 @@ class ChannelUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ChannelUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'channel', 'name': 'Canal'}]
-        context['back_url'] = reverse('channel-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:channel', 'name': 'Canal'}]
+        context['back_url'] = reverse('base:channel-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

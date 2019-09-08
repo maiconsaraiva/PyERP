@@ -39,9 +39,9 @@ class ProductCategoryDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'product-category', 'name': 'Categorias de Productos'}]
-        context['update_url'] = 'product-category-update'
-        context['delete_url'] = 'product-category-delete'
+        context['breadcrumbs'] = [{'url': 'base:product-category', 'name': 'Categorias de Productos'}]
+        context['update_url'] = 'base:product-category-update'
+        context['delete_url'] = 'base:product-category-delete'
         context['fields'] = CATEGORY_FIELDS
         return context
 
@@ -55,8 +55,8 @@ class ProductCategoryCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Categoria de Productos'
-        context['breadcrumbs'] = [{'url': 'product-category', 'name': 'Categoria de Producto'}]
-        context['back_url'] = reverse('product-category')
+        context['breadcrumbs'] = [{'url': 'base:product-category', 'name': 'Categoria de Producto'}]
+        context['back_url'] = reverse('base:product-category')
         return context
 
 
@@ -69,8 +69,8 @@ class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'product-category', 'name': 'Categoria de Producto'}]
-        context['back_url'] = reverse('product-category-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:product-category', 'name': 'Categoria de Producto'}]
+        context['back_url'] = reverse('base:product-category-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

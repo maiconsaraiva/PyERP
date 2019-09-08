@@ -42,9 +42,9 @@ class TriggerDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(TriggerDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].question
-        context['breadcrumbs'] = [{'url': 'triggers', 'name': 'Triggers'}]
-        context['update_url'] = 'trigger-update'
-        context['delete_url'] = 'trigger-delete'
+        context['breadcrumbs'] = [{'url': 'base:triggers', 'name': 'Triggers'}]
+        context['update_url'] = 'base:trigger-update'
+        context['delete_url'] = 'base:trigger-delete'
         context['fields'] = TRIGGER_FIELDS
         return context
 
@@ -58,8 +58,8 @@ class TriggerCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(TriggerCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Trigger'
-        context['breadcrumbs'] = [{'url': 'triggers', 'name': 'Triggers'}]
-        context['back_url'] = reverse('triggers')
+        context['breadcrumbs'] = [{'url': 'base:triggers', 'name': 'Triggers'}]
+        context['back_url'] = reverse('base:triggers')
         return context
 
 
@@ -72,8 +72,8 @@ class TriggersUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(TriggersUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].question
-        context['breadcrumbs'] = [{'url': 'triggers', 'name': 'Triggers'}]
-        context['back_url'] = reverse('trigger-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:triggers', 'name': 'Triggers'}]
+        context['back_url'] = reverse('base:trigger-detail', kwargs={'pk': context['object'].pk})
         return context
 
 

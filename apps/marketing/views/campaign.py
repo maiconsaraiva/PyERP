@@ -40,9 +40,9 @@ class CampaignDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(CampaignDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'campaign', 'name': 'Campaña'}]
-        context['update_url'] = 'campaign-update'
-        context['delete_url'] = 'campaign-delete'
+        context['breadcrumbs'] = [{'url': 'base:campaign', 'name': 'Campaña'}]
+        context['update_url'] = 'base:campaign-update'
+        context['delete_url'] = 'base:campaign-delete'
         context['fields'] = CAMPAIGN_FIELDS
         return context
 
@@ -55,8 +55,8 @@ class CampaignCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(CampaignCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Campaña'
-        context['breadcrumbs'] = [{'url': 'campaign', 'name': 'Campaña'}]
-        context['back_url'] = reverse('campaign')
+        context['breadcrumbs'] = [{'url': 'base:campaign', 'name': 'Campaña'}]
+        context['back_url'] = reverse('base:campaign')
         return context
 
 class CampaignUpdateView(LoginRequiredMixin, UpdateView):
@@ -68,8 +68,8 @@ class CampaignUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CampaignUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'campaign', 'name': 'Campaña'}]
-        context['back_url'] = reverse('campaign-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'base:campaign', 'name': 'Campaña'}]
+        context['back_url'] = reverse('base:campaign-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
