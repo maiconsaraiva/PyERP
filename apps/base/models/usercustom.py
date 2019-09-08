@@ -22,7 +22,7 @@ def image_path(instance, filename):
     return os.path.join('avatar', str(instance.pk) + '.' + filename.rsplit('.', 1)[1])
 
 
-class UserCustom(AbstractUser):
+class PyUser(AbstractUser):
     '''Modelo de los usuarios
     '''
     SEXO_CHOICES = (

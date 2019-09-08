@@ -13,7 +13,7 @@ from .stage import PyStage
 class PyLead(PyFather):
     name = models.CharField('Nombre', max_length=80)
     partner_id = models.ForeignKey(PyPartner, null=True, blank=True, on_delete=models.CASCADE)
-    user_id = models.ForeignKey('base.UserCustom', null=True, blank=True, on_delete=models.CASCADE)
+    user_id = models.ForeignKey('base.PyUser', null=True, blank=True, on_delete=models.CASCADE)
     stage_id = models.ForeignKey(PyStage, null=True, blank=True, on_delete=models.CASCADE)
     income = models.DecimalField('Ingreso', max_digits=10, decimal_places=2, default=0)
 

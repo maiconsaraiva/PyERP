@@ -12,14 +12,14 @@ from django.views.generic import UpdateView
 
 # Librerias de terceros
 from ..forms import AvatarForm, PerfilForm
-from ..models import UserCustom
+from ..models import PyUser
 
 
 # ========================================================================== #
 class ProfileView(SuccessMessageMixin, UpdateView):
     """Vista para editarar las sale
     """
-    model = UserCustom
+    model = PyUser
     form_class = PerfilForm
     template_name = 'usercustom/profile.html'
     success_message = _('Your profile was updated successfully')

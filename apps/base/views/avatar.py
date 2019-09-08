@@ -10,14 +10,14 @@ from django.urls import reverse_lazy
 
 # Librerias en carpetas locales
 from ..forms import AvatarForm
-from ..models import UserCustom
+from ..models import PyUser
 
 
 # ========================================================================== #
 class AvatarUpdateView(UpdateView):
     """Vista para editarar las sale
     """
-    model = UserCustom
+    model = PyUser
     form_class = AvatarForm
     success_url = reverse_lazy('base:profile')
 
@@ -62,7 +62,7 @@ class AvatarUpdateView(UpdateView):
         Handle POST requests: instantiate a form instance with the passed
         POST variables and then check if it's valid.
         """
-        usuario =UserCustom.objects.get(pk=self.request.user.pk)
+        usuario =PyUser.objects.get(pk=self.request.user.pk)
 
         if request.method == 'POST':
             form = AvatarForm(self.request.POST, self.request.FILES, instance=usuario)
@@ -77,7 +77,7 @@ class AvatarUpdateView(UpdateView):
 #     """Función para actualizar el avatar
 #     """
 
-#     usuario =UserCustom.objects.get(pk=request.user.pk)
+#     usuario =PyUser.objects.get(pk=request.user.pk)
 
 #     if request.method == 'POST':
 #         form = AvatarForm(request.POST, request.FILES, instance=usuario)

@@ -6,7 +6,7 @@ from os import listdir
 # Librerias Django
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from ..models import UserCustom
+from ..models import PyUser
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -25,7 +25,7 @@ from .partner import (
 
 # Librerias en carpetas locales
 from ..forms import AvatarForm
-from ..models import UserCustom
+from ..models import PyUser
 from .activate import ActivateView
 from .activatelanguage import ActivateLanguageView
 from .passwordchange import cambio_clave
@@ -44,7 +44,7 @@ def Apps(request):
 
 
 class UserListView(ListView):
-    model = UserCustom
+    model = PyUser
     template_name = 'base/list.html'
 
     def get_context_data(self, **kwargs):
@@ -62,7 +62,7 @@ class UserListView(ListView):
 
 
 class UserDetailView(DetailView):
-    model = UserCustom
+    model = PyUser
     template_name = 'base/detail.html'
 
     def get_context_data(self, **kwargs):
@@ -88,7 +88,7 @@ class UserDetailView(DetailView):
 
 
 class UserCreateView(CreateView):
-    model = UserCustom
+    model = PyUser
     fields = ['username', 'email', 'first_name', 'last_name', 'password']
     template_name = 'base/form.html'
 
@@ -101,7 +101,7 @@ class UserCreateView(CreateView):
 
 
 class UserUpdateView(UpdateView):
-    model = UserCustom
+    model = PyUser
     fields = ['username', 'email', 'first_name', 'last_name']
     template_name = 'base/form.html'
 
@@ -115,7 +115,7 @@ class UserUpdateView(UpdateView):
 
 @login_required(login_url="base:login")
 def DeleteUser(self, pk):
-    user = UserCustom.objects.get(id=pk)
+    user = PyUser.objects.get(id=pk)
     user.delete()
     return redirect(reverse('base:users'))
 
@@ -125,7 +125,7 @@ def ChangePasswordForm(self, pk):
 
 
 def DoChangePassword(self, pk, **kwargs):
-    user = UserCustom.objects.get(id=pk)
+    user = PyUser.objects.get(id=pk)
     if user and self.POST['new_password1'] == self.POST['new_password2']:
         user.set_password(self.POST['new_password1'])
     else:
@@ -202,7 +202,7 @@ def erp_home(request):
     return render(request, "home.html", {
         'customers': partners.filter(customer=True),
         'providers': partners.filter(provider=True),
-        'users': UserCustom.objects.all(),
+        'users': PyUser.objects.all(),
         'products': PyProduct.objects.all(),
         'app_list': app_list,
         'count_app': count_app

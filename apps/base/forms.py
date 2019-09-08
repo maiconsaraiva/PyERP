@@ -15,14 +15,14 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias de terceros
 from tempus_dominus.widgets import DatePicker
 # Librerias en carpetas locales
-from .models import UserCustom
+from .models import PyUser
 
 
 class PerfilForm(ModelForm):
     """Clase para actualizar el perfil del usuario en el sistema
     """
     class Meta:
-        model = UserCustom
+        model = PyUser
         fields = (
             'first_name',
             'last_name',
@@ -80,7 +80,7 @@ class PersonaChangeForm(UserChangeForm):
     """Para algo sera esto
     """
     class Meta(UserChangeForm.Meta):
-        model = UserCustom
+        model = PyUser
         fields = (
             'username',
             'is_superuser',
@@ -98,7 +98,7 @@ class PasswordRecoveryForm(ModelForm):
     """Para enviar el correo de recuperacion de la cuenta
     """
     class Meta():
-        model = UserCustom
+        model = PyUser
         fields = (
             'email',
         )
@@ -144,7 +144,7 @@ class PersonaCreationForm(UserCreationForm):
     ususarios
     """
     class Meta(UserCreationForm.Meta):
-        model = UserCustom
+        model = PyUser
         fields = (
             'username',
             'email',
@@ -163,7 +163,7 @@ class AvatarForm(ModelForm):
     """Clase para actualizar el perfil del usuario en el sistema
     """
     class Meta:
-        model = UserCustom
+        model = PyUser
         fields = (
             'avatar',
         )

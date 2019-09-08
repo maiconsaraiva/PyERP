@@ -9,7 +9,7 @@ from django.contrib.auth.models import Permission
 
 # Librerias en carpetas locales
 from .forms import PersonaChangeForm, PersonaCreationForm
-from .models import UserCustom
+from .models import PyUser
 from .models import (
     PyApp, PyCompany, PyCountry, PyPartner, PyProduct, PyProductCategory)
 
@@ -86,7 +86,7 @@ class PersonaAdmin(UserAdmin):
     #             cedulaidentidad=search_term_as_int)
     #     return queryset, use_distinct
 
-admin.site.register(UserCustom, PersonaAdmin)
+admin.site.register(PyUser, PersonaAdmin)
 
 
 admin.site.register(LogEntry)

@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 
 # Librerias de terceros
-from ..models import UserCustom
+from ..models import PyUser
 from ..tokens import ACCOUNT_ACTIVATION_TOKEN
 
 
@@ -31,8 +31,8 @@ class ActivateView(RedirectView):
         uid = force_text(urlsafe_base64_decode(uidb64))
 
         try:
-            user = UserCustom.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, UserCustom.DoesNotExist):
+            user = PyUser.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, PyUser.DoesNotExist):
             user = None
 
         token_valid = ACCOUNT_ACTIVATION_TOKEN.check_token(user, token)

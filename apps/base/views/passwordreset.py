@@ -17,7 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias de terceros
 import requests
 from ..forms import PasswordRecoveryForm, PasswordSetForm
-from ..models import UserCustom
+from ..models import PyUser
 from ..tokens import PASSWORD_RECOVERY_TOKEN
 
 
@@ -87,8 +87,8 @@ class PasswordRecoveryView(PasswordResetView):
             uid = force_text(urlsafe_base64_decode(uidb64))
 
             try:
-                user = UserCustom.objects.get(pk=uid)
-            except (TypeError, ValueError, OverflowError, UserCustom.DoesNotExist):
+                user = PyUser.objects.get(pk=uid)
+            except (TypeError, ValueError, OverflowError, PyUser.DoesNotExist):
                 user = None
 
             token_valid = PASSWORD_RECOVERY_TOKEN.check_token(user, token)
@@ -111,8 +111,8 @@ class PasswordRecoveryView(PasswordResetView):
         else:
             email = form.cleaned_data['email']
             try:
-                user = UserCustom.objects.get(email=email)
-            except (TypeError, ValueError, OverflowError, UserCustom.DoesNotExist):
+                user = PyUser.objects.get(email=email)
+            except (TypeError, ValueError, OverflowError, PyUser.DoesNotExist):
                 user = None
             if user is not None:
                 current_site = get_current_site(self.request)

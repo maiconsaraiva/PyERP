@@ -18,100 +18,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/usercustom/forms.py:38 apps/usercustom/models.py:42
+#: apps/base/forms.py:38 apps/base/models.py:42
 msgid "Name"
 msgstr "Nombre"
 
-#: apps/usercustom/forms.py:39
+#: apps/base/forms.py:39
 msgid "Last Name"
 msgstr "Apellido"
 
-#: apps/usercustom/forms.py:40 apps/usercustom/models.py:45
+#: apps/base/forms.py:40 apps/base/models.py:45
 msgid "Secondary email"
 msgstr "Correo Secundario"
 
-#: apps/usercustom/forms.py:42 apps/usercustom/models.py:51
+#: apps/base/forms.py:42 apps/base/models.py:51
 msgid "Mobile Phone"
 msgstr "Teléfono Móvil"
 
-#: apps/usercustom/forms.py:43 apps/usercustom/models.py:52
+#: apps/base/forms.py:43 apps/base/models.py:52
 msgid "Birthdate"
 msgstr "Fecha de Nacimiento"
 
-#: apps/usercustom/forms.py:44 apps/usercustom/models.py:53
+#: apps/base/forms.py:44 apps/base/models.py:53
 msgid "Sex"
 msgstr "Sexo"
 
-#: apps/usercustom/forms.py:136 apps/usercustom/forms.py:195
-#: apps/usercustom/models.py:44
+#: apps/base/forms.py:136 apps/base/forms.py:195
+#: apps/base/models.py:44
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: apps/usercustom/forms.py:147 apps/usercustom/models.py:36
-#: apps/usercustom/templates/usercustom/login.html:72
-#: apps/usercustom/templates/usercustom/signup.html:84
+#: apps/base/forms.py:147 apps/base/models.py:36
+#: apps/base/templates/base/login.html:72
+#: apps/base/templates/base/signup.html:84
 msgid "Password"
 msgstr "Contraseña"
 
-#: apps/usercustom/forms.py:152
-#: apps/usercustom/templates/usercustom/signup.html:90
+#: apps/base/forms.py:152
+#: apps/base/templates/base/signup.html:90
 msgid "Retype password"
 msgstr "Vuelva a escribir la contraseña"
 
-#: apps/usercustom/forms.py:163 apps/usercustom/forms.py:167
+#: apps/base/forms.py:163 apps/base/forms.py:167
 msgid "The two password fields didn't match."
 msgstr "Los dos campos de contraseña no coinciden."
 
-#: apps/usercustom/forms.py:186
-#: apps/usercustom/templates/usercustom/login.html:66
+#: apps/base/forms.py:186
+#: apps/base/templates/base/login.html:66
 msgid "User"
 msgstr "Usuario"
 
-#: apps/usercustom/models.py:29
+#: apps/base/models.py:29
 msgid "FEMALE"
 msgstr "FEMENINO"
 
-#: apps/usercustom/models.py:30
+#: apps/base/models.py:30
 msgid "MALE"
 msgstr "MASCULINO"
 
-#: apps/usercustom/models.py:37
+#: apps/base/models.py:37
 msgid "Last login"
 msgstr "Inicio de sesión"
 
-#: apps/usercustom/models.py:38
+#: apps/base/models.py:38
 msgid "Super Admin"
 msgstr "Administrador"
 
-#: apps/usercustom/models.py:39
+#: apps/base/models.py:39
 msgid "Staff"
 msgstr "Mantenimiento"
 
-#: apps/usercustom/models.py:40
+#: apps/base/models.py:40
 msgid "Active"
 msgstr "Activo"
 
-#: apps/usercustom/models.py:41
+#: apps/base/models.py:41
 msgid "User name"
 msgstr "Usuario"
 
-#: apps/usercustom/models.py:43
+#: apps/base/models.py:43
 msgid "Last name"
 msgstr "Apellido"
 
-#: apps/usercustom/models.py:50
+#: apps/base/models.py:50
 msgid "Phone"
 msgstr "Teléfono"
 
-#: apps/usercustom/models.py:70
+#: apps/base/models.py:70
 msgid "Person"
 msgstr "Persona"
 
-#: apps/usercustom/models.py:71
+#: apps/base/models.py:71
 msgid "People"
 msgstr "Personas"
 
-#: apps/usercustom/subviews/activate.py:45
+#: apps/base/views/activate.py:45
 msgid ""
 "Welcome, your account has been successfully activated. Please log in using "
 "your credentials."
@@ -119,7 +119,7 @@ msgstr ""
 "Bienvenido, su cuenta ha sido activada con éxito. Inicie sesión con sus "
 "credenciales."
 
-#: apps/usercustom/subviews/activate.py:50
+#: apps/base/views/activate.py:50
 msgid ""
 "The sign up confirm link is invalid. If your account is not yet active, use "
 "the password recovery link."
@@ -127,16 +127,16 @@ msgstr ""
 "El enlace de confirmación de registro no es válido. Si su cuenta aún no está "
 "activa, use el enlace de recuperación de contraseña."
 
-#: apps/usercustom/subviews/passwordchange.py:23
+#: apps/base/views/passwordchange.py:23
 msgid "Your password change was successfully                 processed"
 msgstr "Tu cambio de contraseña fue procesado exitosamente"
 
-#: apps/usercustom/subviews/passwordreset.py:76
-#: apps/usercustom/subviews/signup.py:56
+#: apps/base/views/passwordreset.py:76
+#: apps/base/views/signup.py:56
 msgid "Invalid reCAPTCHA"
 msgstr "reCAPTCHA invalido"
 
-#: apps/usercustom/subviews/passwordreset.py:102
+#: apps/base/views/passwordreset.py:102
 msgid ""
 "Welcome back, your password has been successfully modified. Please log in "
 "using your credentials."
@@ -144,18 +144,18 @@ msgstr ""
 "Bienvenido de nuevo, su contraseña ha sido modificada con éxito. Por favor "
 "Iniciar sesión usando sus credenciales."
 
-#: apps/usercustom/subviews/passwordreset.py:107
+#: apps/base/views/passwordreset.py:107
 msgid "The password recovery link is invalid or has already been used."
 msgstr ""
 "El enlace de recuperación de contraseña no es válido o ya se ha utilizado."
 
-#: apps/usercustom/subviews/passwordreset.py:119
+#: apps/base/views/passwordreset.py:119
 #, fuzzy, python-format
 #| msgid "%(app_name)s password recovery"
 msgid "%(app_name)s password recovery"
 msgstr "Recuperar contraseña"
 
-#: apps/usercustom/subviews/passwordreset.py:131
+#: apps/base/views/passwordreset.py:131
 #, python-format
 msgid ""
 "You received this email because you requested that your password be reset to "
@@ -184,7 +184,7 @@ msgstr ""
 "\n"
 "El equipo %(app_name)s."
 
-#: apps/usercustom/subviews/passwordreset.py:138
+#: apps/base/views/passwordreset.py:138
 #, python-format
 msgid ""
 "Instructions to recover your password in %(app_name)s were sent to the email "
@@ -193,21 +193,21 @@ msgstr ""
 "Las instrucciones para recuperar su contraseña en %(app_name)s fueron "
 "enviadas a la cuenta de correo electrónico %(email)s"
 
-#: apps/usercustom/subviews/passwordreset.py:146
+#: apps/base/views/passwordreset.py:146
 #, python-format
 msgid "The email provided is not registered in %(app_name)s"
 msgstr "El correo electrónico proporcionado no está registrado en %(app_name)s"
 
-#: apps/usercustom/subviews/profile.py:25
+#: apps/base/views/profile.py:25
 msgid "Your profile was updated successfully"
 msgstr "Tu perfil se actualizó correctamente"
 
-#: apps/usercustom/subviews/profile.py:65
+#: apps/base/views/profile.py:65
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "No se encontró %(verbose_name)s que coincida con la consulta"
 
-#: apps/usercustom/subviews/signup.py:33
+#: apps/base/views/signup.py:33
 msgid ""
 "Your account was created successfully. A link was sent to your email that "
 "you must sign in to confirm your sign up."
@@ -215,12 +215,12 @@ msgstr ""
 "Tu cuenta ha sido creada exitosamente. Se envió un enlace a su correo "
 "electrónico que debe iniciar sesión para confirmar su registro."
 
-#: apps/usercustom/subviews/signup.py:63
+#: apps/base/views/signup.py:63
 #, python-format
 msgid "%(app_name)s sign up"
 msgstr "%(app_name)s registro"
 
-#: apps/usercustom/subviews/signup.py:73
+#: apps/base/views/signup.py:73
 #, python-format
 msgid ""
 "Thank you for registering in %(app_name)s, your username is: %(user)s.\n"
@@ -247,7 +247,7 @@ msgstr ""
 "\n"
 "The equipo de %(app_name)s."
 
-#: apps/usercustom/subviews/signup.py:80
+#: apps/base/views/signup.py:80
 msgid ""
 "Your account has been created successfully. Open the link that was sent to "
 "your email, to confirm your registration and activate your account."
@@ -255,59 +255,59 @@ msgstr ""
 "Tu cuenta ha sido creada exitosamente. Abre el enlace que se envió a tu "
 "correo electrónico, para confirmar tu registro y activar tu cuenta."
 
-#: apps/usercustom/templates/usercustom/base.html:81
-#: apps/usercustom/templates/usercustom/login.html:47
-#: apps/usercustom/templates/usercustom/password_reset_form.html:49
-#: apps/usercustom/templates/usercustom/signup.html:49
+#: apps/base/templates/base/base.html:81
+#: apps/base/templates/base/login.html:47
+#: apps/base/templates/base/password_reset_form.html:49
+#: apps/base/templates/base/signup.html:49
 msgid "Language"
 msgstr "Idioma"
 
-#: apps/usercustom/templates/usercustom/base.html:99
+#: apps/base/templates/base/base.html:99
 msgid "Log Out"
 msgstr "Salir"
 
-#: apps/usercustom/templates/usercustom/base.html:114
+#: apps/base/templates/base/base.html:114
 msgid "Version"
 msgstr "Versión"
 
-#: apps/usercustom/templates/usercustom/base.html:115
+#: apps/base/templates/base/base.html:115
 msgid "All rights reserved."
 msgstr "Todos los derechos reservados"
 
-#: apps/usercustom/templates/usercustom/login.html:11
-#: apps/usercustom/templates/usercustom/login.html:59
-#: apps/usercustom/templates/usercustom/login.html:79
-#: apps/usercustom/templates/usercustom/password_reset_form.html:97
-#: apps/usercustom/templates/usercustom/signup.html:110
+#: apps/base/templates/base/login.html:11
+#: apps/base/templates/base/login.html:59
+#: apps/base/templates/base/login.html:79
+#: apps/base/templates/base/password_reset_form.html:97
+#: apps/base/templates/base/signup.html:110
 msgid "Login"
 msgstr "Inicio de sesión"
 
-#: apps/usercustom/templates/usercustom/login.html:51
-#: apps/usercustom/templates/usercustom/password_reset_form.html:53
-#: apps/usercustom/templates/usercustom/signup.html:53
+#: apps/base/templates/base/login.html:51
+#: apps/base/templates/base/password_reset_form.html:53
+#: apps/base/templates/base/signup.html:53
 msgid "Change to"
 msgstr "Cambiar a"
 
-#: apps/usercustom/templates/usercustom/login.html:85
-#: apps/usercustom/templates/usercustom/password_reset_form.html:96
-#: apps/usercustom/templates/usercustom/signup.html:108
+#: apps/base/templates/base/login.html:85
+#: apps/base/templates/base/password_reset_form.html:96
+#: apps/base/templates/base/signup.html:108
 msgid "Back"
 msgstr "Regresar"
 
-#: apps/usercustom/templates/usercustom/login.html:86
-#: apps/usercustom/templates/usercustom/password_reset_form.html:90
-#: apps/usercustom/templates/usercustom/signup.html:109
+#: apps/base/templates/base/login.html:86
+#: apps/base/templates/base/password_reset_form.html:90
+#: apps/base/templates/base/signup.html:109
 msgid "Password recovery"
 msgstr "Recuperar contraseña"
 
-#: apps/usercustom/templates/usercustom/login.html:87
-#: apps/usercustom/templates/usercustom/password_reset_form.html:98
+#: apps/base/templates/base/login.html:87
+#: apps/base/templates/base/password_reset_form.html:98
 msgid "Signup"
 msgstr "Registro"
 
-#: apps/usercustom/templates/usercustom/login.html:121
-#: apps/usercustom/templates/usercustom/password_change_form.html:106
-#: apps/usercustom/templates/usercustom/profile.html:154
+#: apps/base/templates/base/login.html:121
+#: apps/base/templates/base/password_change_form.html:106
+#: apps/base/templates/base/profile.html:154
 msgid ""
 "Your account does not have the necessary privileges to access this section. "
 "To continue, log in with an account that has the necessary privileges."
@@ -316,66 +316,66 @@ msgstr ""
 "Para continuar, inicie sesión con una cuenta que tenga los privilegios "
 "necesarios."
 
-#: apps/usercustom/templates/usercustom/login.html:123
-#: apps/usercustom/templates/usercustom/password_change_form.html:108
-#: apps/usercustom/templates/usercustom/profile.html:156
+#: apps/base/templates/base/login.html:123
+#: apps/base/templates/base/password_change_form.html:108
+#: apps/base/templates/base/profile.html:156
 msgid "Please login to visit this page."
 msgstr "Por favor inicie sesión para visitar esta página."
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:16
-#: apps/usercustom/templates/usercustom/password_change_form.html:22
-#: apps/usercustom/templates/usercustom/profile.html:70
+#: apps/base/templates/base/password_change_form.html:16
+#: apps/base/templates/base/password_change_form.html:22
+#: apps/base/templates/base/profile.html:70
 msgid "Change Password"
 msgstr "Cambiar Contraseña"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:20
-#: apps/usercustom/templates/usercustom/profile.html:45
+#: apps/base/templates/base/password_change_form.html:20
+#: apps/base/templates/base/profile.html:45
 msgid "Home"
 msgstr "Inicio"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:21
-#: apps/usercustom/templates/usercustom/profile.html:46
+#: apps/base/templates/base/password_change_form.html:21
+#: apps/base/templates/base/profile.html:46
 msgid "User Profile"
 msgstr "Perfil"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:41
+#: apps/base/templates/base/password_change_form.html:41
 msgid "Actual Password"
 msgstr "Contraseña"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:43
+#: apps/base/templates/base/password_change_form.html:43
 msgid "Enter the actual password"
 msgstr "Vuelva a escribir la contraseña"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:50
+#: apps/base/templates/base/password_change_form.html:50
 msgid "New Password"
 msgstr "Contraseña"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:52
+#: apps/base/templates/base/password_change_form.html:52
 msgid "Enter the new password"
 msgstr "Vuelva a escribir la contraseña"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:59
-#: apps/usercustom/templates/usercustom/password_change_form.html:61
+#: apps/base/templates/base/password_change_form.html:59
+#: apps/base/templates/base/password_change_form.html:61
 msgid "Retype the new password"
 msgstr "Vuelva a escribir la contraseña"
 
-#: apps/usercustom/templates/usercustom/password_change_form.html:69
-#: apps/usercustom/templates/usercustom/profile.html:101
+#: apps/base/templates/base/password_change_form.html:69
+#: apps/base/templates/base/profile.html:101
 msgid "Submit"
 msgstr "Enviar"
 
-#: apps/usercustom/templates/usercustom/password_reset_form.html:11
-#: apps/usercustom/templates/usercustom/signup.html:11
-#: apps/usercustom/templates/usercustom/signup.html:61
-#: apps/usercustom/templates/usercustom/signup.html:102
+#: apps/base/templates/base/password_reset_form.html:11
+#: apps/base/templates/base/signup.html:11
+#: apps/base/templates/base/signup.html:61
+#: apps/base/templates/base/signup.html:102
 msgid "Sign up"
 msgstr "Registro"
 
-#: apps/usercustom/templates/usercustom/password_reset_form.html:61
+#: apps/base/templates/base/password_reset_form.html:61
 msgid "Password Recovery"
 msgstr "Recuperar Contraseña"
 
-#: apps/usercustom/templates/usercustom/password_reset_form.html:62
+#: apps/base/templates/base/password_reset_form.html:62
 msgid ""
 "Write the email with which you registered, validate the recaptcha and press "
 "the password recovery button."
@@ -383,18 +383,18 @@ msgstr ""
 "Escriba el correo electrónico con el que se registro y presione el botón de "
 "recuperar contraseña"
 
-#: apps/usercustom/templates/usercustom/profile.html:41
+#: apps/base/templates/base/profile.html:41
 msgid "Profile"
 msgstr "Perfil"
 
-#: apps/usercustom/templates/usercustom/profile.html:115
+#: apps/base/templates/base/profile.html:115
 msgid "Crop the image"
 msgstr "Recorta la imagen"
 
-#: apps/usercustom/templates/usercustom/profile.html:122
+#: apps/base/templates/base/profile.html:122
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: apps/usercustom/templates/usercustom/profile.html:123
+#: apps/base/templates/base/profile.html:123
 msgid "Crop"
 msgstr "Recortar"

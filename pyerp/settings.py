@@ -157,7 +157,7 @@ DATABASES = {
 """ Esta configuración define el modelo personalizado para auth.user. Tambien
 establece las rutas para algunas funciones.
 """
-AUTH_USER_MODEL = 'base.UserCustom'
+AUTH_USER_MODEL = 'base.PyUser'
 LOGIN_URL = 'base:login'
 LOGIN_REDIRECT_URL = 'base:home'
 LOGOUT_REDIRECT_URL = 'base:login'

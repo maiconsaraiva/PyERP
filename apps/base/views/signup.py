@@ -17,7 +17,7 @@ from django.views.generic import CreateView
 # Librerias de terceros
 import requests
 from ..forms import PersonaCreationForm
-from ..models import UserCustom
+from ..models import PyUser
 from ..tokens import ACCOUNT_ACTIVATION_TOKEN
 
 
@@ -25,7 +25,7 @@ from ..tokens import ACCOUNT_ACTIVATION_TOKEN
 class SignUpView(CreateView):
     """Esta clase sirve registrar a los usuarios en el sistema
     """
-    model = UserCustom
+    model = PyUser
     form_class = PersonaCreationForm
     template_name = 'usercustom/signup.html'
     extra_context = {}

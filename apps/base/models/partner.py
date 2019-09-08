@@ -2,7 +2,6 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-# from .models import UserCustom
 
 # Librerias en carpetas locales
 from .father import PyFather
@@ -23,7 +22,7 @@ class PyPartner(PyFather):
     not_email = models.BooleanField('No Email', default=False)
 
     created_by = models.ForeignKey(
-        'base.UserCustom', related_name='pypartner_created_by',
+        'base.PyUser', related_name='pypartner_created_by',
         on_delete=models.SET_NULL, null=True)
 
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
