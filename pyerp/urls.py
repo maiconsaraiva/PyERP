@@ -13,8 +13,8 @@ from apps.base.views import ActivateLanguageView
 
 urlpatterns = [
     path('', include('apps.base.home_urls')),
-    path('admin/', admin.site.urls),
-    path('base/', include('apps.base.urls')),
+    # path('admin/', admin.site.urls),
+    # path('base/', include('apps.base.urls')),
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT, }),
     path('static/<path:path>', serve, {'document_root': settings.STATIC_ROOT, }),
     # path('', include('apps.home.urls')),
@@ -22,8 +22,8 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     # path('', include('apps.base.home_urls')),
-    # path('base/', include('apps.base.urls')),
-    # path('admin/', admin.site.urls),
+    path('base/', include('apps.base.urls')),
+    path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
     path(
         '<language_code>/language/activate/',
