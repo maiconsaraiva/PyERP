@@ -20,7 +20,7 @@ class PyLead(PyFather):
     content = models.TextField(null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('base:lead-detail', kwargs={'pk': self.pk})
+        return reverse('crm:lead-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

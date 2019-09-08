@@ -11,7 +11,7 @@ class PyStage(PyFather):
     name = models.CharField('Nombre', max_length=80)
 
     def get_absolute_url(self):
-        return reverse('base:stage-detail', kwargs={'pk': self.pk})
+        return reverse('crm:stage-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)
