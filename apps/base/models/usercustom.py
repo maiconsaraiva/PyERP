@@ -42,7 +42,6 @@ class UserCustom(AbstractUser):
     first_name = models.CharField(_("Name"), max_length=30)
     last_name = models.CharField(_("Last name"), max_length=30)
     email = models.CharField(_("Email"), max_length=254, null=False, db_index=True, unique=True)
-    email_secundario = models.CharField(_("Secondary email"), max_length=254, null=True, blank=True, db_index=True, unique=True)
     telefono = models.CharField(_("Phone"), max_length=255, blank=True, null=True)
     celular = models.CharField(_("Mobile Phone"), max_length=255, blank=True, null=True)
     fecha_nacimiento = models.DateField(_("Birthdate"), blank=True, null=True)
