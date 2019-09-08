@@ -78,4 +78,4 @@ class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteProductCategory(self, pk):
     product_category = PyProductCategory.objects.get(id=pk)
     product_category.delete()
-    return redirect(reverse('product-category'))
+    return redirect(reverse('base:product-category'))

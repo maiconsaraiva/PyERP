@@ -83,4 +83,4 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteEmployee(self, pk):
     employee = PyEmployee.objects.get(id=pk)
     employee.delete()
-    return redirect(reverse('employee'))
+    return redirect(reverse('base:employee'))

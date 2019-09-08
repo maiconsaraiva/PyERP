@@ -78,4 +78,4 @@ class CountryUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteCountry(self, pk):
     country = PyCountry.objects.get(id=pk)
     country.delete()
-    return redirect(reverse('countries'))
+    return redirect(reverse('base:countries'))

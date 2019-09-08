@@ -75,4 +75,4 @@ class ChannelUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteChannel(self, pk):
     channel = PyChannel.objects.get(id=pk)
     channel.delete()
-    return redirect(reverse('channel'))
+    return redirect(reverse('base:channel'))

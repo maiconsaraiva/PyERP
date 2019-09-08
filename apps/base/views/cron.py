@@ -83,4 +83,4 @@ class CronUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteCron(self, pk):
     cron = PyCron.objects.get(id=pk)
     cron.delete()
-    return redirect(reverse('crons'))
+    return redirect(reverse('base:crons'))

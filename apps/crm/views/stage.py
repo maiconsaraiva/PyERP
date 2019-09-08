@@ -77,5 +77,5 @@ class StageUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteStage(self, pk):
     lead = PyStage.objects.get(id=pk)
     lead.delete()
-    return redirect(reverse('stage'))
+    return redirect(reverse('base:stage'))
 """ END STAGE """

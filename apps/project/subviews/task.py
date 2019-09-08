@@ -79,5 +79,5 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteTask(self, pk):
     task = PyTask.objects.get(id=pk)
     task.delete()
-    return redirect(reverse('task'))
+    return redirect(reverse('base:task'))
 """ END TASK """

@@ -77,4 +77,4 @@ class DepartmentUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteDepartment(self, pk):
     department = PyDepartment.objects.get(id=pk)
     department.delete()
-    return redirect(reverse('department'))
+    return redirect(reverse('base:department'))

@@ -71,4 +71,4 @@ class AccountPlanUpdateView(UpdateView):
 def DeleteAccountPlan(self, pk):
     accountplan = PyAccountPlan.objects.get(id=pk)
     accountplan.delete()
-    return redirect(reverse('accountplan'))
+    return redirect(reverse('base:accountplan'))

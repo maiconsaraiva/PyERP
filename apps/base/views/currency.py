@@ -80,4 +80,4 @@ class CurrencyUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteCurrency(self, pk):
     currency = PyCurrency.objects.get(id=pk)
     currency.delete()
-    return redirect(reverse('currencies'))
+    return redirect(reverse('base:currencies'))

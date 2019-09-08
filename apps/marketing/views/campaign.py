@@ -77,4 +77,4 @@ class CampaignUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteCampaign(self, pk):
     campaign = PyCampaign.objects.get(id=pk)
     campaign.delete()
-    return redirect(reverse('campaign'))
+    return redirect(reverse('base:campaign'))

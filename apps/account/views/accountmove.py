@@ -70,4 +70,4 @@ class AccountMoveUpdateView(UpdateView):
 def DeleteAccountMove(self, pk):
     accountmove = PyAccountMove.objects.get(id=pk)
     accountmove.delete()
-    return redirect(reverse('account-move'))
+    return redirect(reverse('base:account-move'))

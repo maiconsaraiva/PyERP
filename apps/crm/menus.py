@@ -22,16 +22,16 @@ def profile_title(request):
 
 # this item will be shown to users who are not logged in
 # Menu.add_item("user", MenuItem("Login",
-                               reverse('django.contrib.auth.views.login'),
+                               reverse('base:django.contrib.auth.views.login'),
                                check=lambda request: not request.user.is_authenticated()))
 
 # this will only be shown to logged in users and also demonstrates how to use
 # a callable for the title to return a customized title for each request
 # Menu.add_item("user", MenuItem(profile_title,
-                               reverse('accounts.views.profile'),
+                               reverse('base:accounts.views.profile'),
                                check=lambda request: request.user.is_authenticated()))
 # Menu.add_item("user", MenuItem("Logout",
-                               reverse('django.contrib.auth.views.logout'),
+                               reverse('base:django.contrib.auth.views.logout'),
                                check=lambda request: request.user.is_authenticated()))
 
 # this only shows to superusers

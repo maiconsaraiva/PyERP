@@ -77,4 +77,4 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteProject(self, pk):
     project = PyProject.objects.get(id=pk)
     project.delete()
-    return redirect(reverse('project'))
+    return redirect(reverse('base:project'))

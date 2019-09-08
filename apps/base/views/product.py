@@ -93,7 +93,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteProduct(self, pk):
     product = PyProduct.objects.get(id=pk)
     product.delete()
-    return redirect(reverse('products'))
+    return redirect(reverse('base:products'))
 
 """
 class ProductAutoComplete(autocomplete.Select2QuerySetView):

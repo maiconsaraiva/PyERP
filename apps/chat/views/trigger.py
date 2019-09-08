@@ -81,4 +81,4 @@ class TriggersUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteTrigger(self, pk):
     trigger = PyTrigger.objects.get(id=pk)
     trigger.delete()
-    return redirect(reverse('triggers'))
+    return redirect(reverse('base:triggers'))

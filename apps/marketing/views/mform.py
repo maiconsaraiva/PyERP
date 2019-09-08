@@ -80,4 +80,4 @@ class MformUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteMform(self, pk):
     mform = PyMform.objects.get(id=pk)
     mform.delete()
-    return redirect(reverse('mform'))
+    return redirect(reverse('base:mform'))

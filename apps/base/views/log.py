@@ -79,4 +79,4 @@ class LogUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteLog(self, pk):
     log = PyLog.objects.get(id=pk)
     log.delete()
-    return redirect(reverse('logs'))
+    return redirect(reverse('base:logs'))

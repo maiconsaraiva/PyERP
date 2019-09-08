@@ -89,4 +89,4 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteLead(self, pk):
     lead = PyLead.objects.get(id=pk)
     lead.delete()
-    return redirect(reverse('lead'))
+    return redirect(reverse('base:lead'))

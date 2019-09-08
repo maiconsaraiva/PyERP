@@ -77,4 +77,4 @@ class WebPaymentMethodUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteWebPaymentMethod(self, pk):
     web_payment_method = PyWebPaymentMethod.objects.get(id=pk)
     web_payment_method.delete()
-    return redirect(reverse('web-payment-methods'))
+    return redirect(reverse('base:web-payment-methods'))

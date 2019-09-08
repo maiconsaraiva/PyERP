@@ -131,7 +131,7 @@ def DeletePartner(self, pk):
     partner = PyPartner.objects.get(id=pk)
     partner.delete()
     PyLog(name='Partner', note='PartnerDelete:').save()
-    return redirect(reverse('partners'))
+    return redirect(reverse('base:partners'))
 
 
 class PartnerAutoComplete(autocomplete.Select2QuerySetView):

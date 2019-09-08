@@ -68,4 +68,4 @@ class PostUpdateView(UpdateView):
 def DeletePost(self, pk):
     post = PyPost.objects.get(id=pk)
     post.delete()
-    return redirect(reverse('post'))
+    return redirect(reverse('base:post'))

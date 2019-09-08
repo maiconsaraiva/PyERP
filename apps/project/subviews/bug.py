@@ -78,4 +78,4 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteBug(self, pk):
     bug = PyBug.objects.get(id=pk)
     bug.delete()
-    return redirect(reverse('bug'))
+    return redirect(reverse('base:bug'))

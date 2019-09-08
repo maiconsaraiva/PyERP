@@ -74,4 +74,4 @@ class PosUpdateView(LoginRequiredMixin, UpdateView):
 def DeletePos(self, pk):
     pos = PyPos.objects.get(id=pk)
     pos.delete()
-    return redirect(reverse('pos'))
+    return redirect(reverse('base:pos'))

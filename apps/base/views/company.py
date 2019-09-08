@@ -81,4 +81,4 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteCompany(self, pk):
     company = PyCompany.objects.get(id=pk)
     company.delete()
-    return redirect(reverse('companies'))
+    return redirect(reverse('base:companies'))
