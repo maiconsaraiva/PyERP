@@ -1,149 +1,80 @@
 {% load static %}
 {% load erp_tags %}
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-
-      <img src="{% static 'dist/favicon_white.png' %}"
-           alt="PyERP"
-           style="opacity: .8; margin-left: 12px;" height="30px" >
-      <span style="margin-left: 12px;" class="brand-text font-weight-light"><b>Py</b>ERP</span>
+        <img src="{% static 'dist/favicon_white.png' %}" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="30px" >
+        <span style="margin-left: 12px;" class="brand-text font-weight-light"><b>Py</b>ERP</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          {% if request.user.is_authenticated %}
-              <div class="image">
-                  <a href="{% url 'base:profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle elevation-2" alt="{{ request.user }}"></a>
-              </div>
-              <div class="info">
-                  <a href="{% url 'base:profile' %}" class="d-block">{{ user }}</a>
-              </div>
-          {% endif %}
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a href="{% url 'base:home' %}" class="nav-link">
-              <i class="fa fa-home nav-icon"></i>
-              <p>{{ _('Home') }}</p>
-            </a>
-          </li>
-
-
-{% for app in app_list|get_app_list %}
- {% include app %}
-{% endfor %}
-
-<!-- Configuracion Begin -->
-          <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="fa fa-microchip nav-icon"></i>
-                <p>
-                    {{ _('Apps') }}
-                    <i class="fas fa-angle-left right"></i>
-                    <span class="badge badge-info right">{{ count_app }}</span>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-
-                <li class="nav-item">
-                  <a href="{% url 'base:apps' %}" class="nav-link">
-                    <i class="fa fa-users nav-icon"></i>
-                    <p>{{ _('Apps') }}</p>
-                  </a>
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            {% if request.user.is_authenticated %}
+                <div class="image">
+                    <a href="{% url 'base:profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle elevation-2" alt="{{ request.user }}"></a>
+                </div>
+                <div class="info">
+                    <a href="{% url 'base:profile' %}" class="d-block">{{ user }}</a>
+                </div>
+            {% endif %}
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item has-treeview">
+                    <a href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="{% url 'base:update-app' %}" class="nav-link">
-                    <i class="fa fa-users nav-icon"></i>
-                    <p>{{ _('Update') }}</p>
-                  </a>
+                {% for app in app_list|get_app_list %}
+                    {% include app %}
+                {% endfor %}
+                <!-- Apps Begin -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Apps') }}<i class="fas fa-angle-left right"></i><span class="badge badge-info right">{{ count_app }}</span></p></a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'base:apps' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Apps') }}</p></a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{% url 'base:update-app' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Update') }}</p></a>
+                        </li>
+                    </ul>
                 </li>
-
-              </ul>
-            </li>
-<!-- Configuracion End -->
-
-
-
-<!-- Configuracion Begin -->
-          <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="fa fa-cogs nav-icon"></i>
-                <p>
-                  {{ _('Configuration') }}
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{% url 'base:users' %}" class="nav-link">
-                    <i class="fa fa-users nav-icon"></i>
-                    <p>Usuarios</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="{% url 'base:companies' %}" class="nav-link">
-                    <i class="fa fa-building nav-icon"></i>
-                    <p>Compañias</p>
-                  </a>
-                </li>
-
-
-
-                <li class="nav-item">
-                    <a href="{% url 'base:base-config' 1 %}" class="nav-link">
-                      <i class="fa fa-cog nav-icon"></i>
-                      <p>General</p>
-                    </a>
-                  </li>
-
-                <li class="nav-item">
-                  <a href="{% url 'base:logs' %}" class="nav-link">
-                    <i class="fa fa-building nav-icon"></i>
-                    <p>Log</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="{% url 'base:crons' %}" class="nav-link">
-                    <i class="fa fa-building nav-icon"></i>
-                    <p>Cron</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="{% url 'base:countries' %}" class="nav-link">
-                    <i class="fa fa-building nav-icon"></i>
-                    <p>{{ _('Countries') }}</p>
-                  </a>
-                </li>
-
-
-                  <li class="nav-item">
-                    <a href="{% url 'base:load-data' %}" class="nav-link">
-                      <i class="fa fa-database nav-icon"></i>
-                      <p>Cargar Datos Iniciales</p>
-                    </a>
-                  </li>
-
-              </ul>
-
-            </li>
-<!-- Configuracion End -->
-
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+                <!-- Apps End -->
+                {% if user.is_superuser %}
+                    <!-- Configuracion Begin Sección solo para los administrdores -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link"><i class="fa fa-cogs nav-icon"></i><p>{{ _('Configuration') }}<i class="fas fa-angle-left right"></i></p></a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'base:users' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>Usuarios</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:companies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>Compañias</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:base-config' 1 %}" class="nav-link"><i class="fa fa-cog nav-icon"></i><p>General</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:logs' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>Log</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:crons' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>Cron</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:countries' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Countries') }}</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:load-data' %}" class="nav-link"><i class="fa fa-database nav-icon"></i><p>Cargar Datos Iniciales</p></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Configuracion Begin Sección solo para los administrdores End -->
+                {% endif %}
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-  </aside>
+</aside>
