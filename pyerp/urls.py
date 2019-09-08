@@ -39,5 +39,5 @@ with open('installed_apps.py', 'r') as ins_apps_file:
             urlpatterns.pop(0)
             urlpatterns += [path('', include('apps.home.urls'))]
         else:
-            _ , app = line.split('.')
+            _, app = line.split('.')
             urlpatterns += [path('%s/' % app, include('%s.urls' % line.strip()))]

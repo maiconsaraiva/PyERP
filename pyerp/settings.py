@@ -236,3 +236,10 @@ Django para enviar correos.
 """
 # During development only
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# ========================================================================== #
+# Copiar en localsettings.py
+with open('installed_apps.py', 'r') as ins_apps_file:
+    for line in ins_apps_file.readlines():
+        INSTALLED_APPS += [line.strip()]

@@ -1,5 +1,4 @@
 # Librerias Django
-from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Librerias en carpetas locales
@@ -9,6 +8,8 @@ from .views.lead import (
 from .views.stage import (
     DeleteStage, StageCreateView, StageDetailView, StageListView,
     StageUpdateView)
+
+app_name = 'crm'
 
 urlpatterns = [
     path('dashboard-crm', DashboardCrmView, name='dashboard-crm'),

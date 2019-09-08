@@ -41,8 +41,8 @@ class LeadListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(LeadListView, self).get_context_data(**kwargs)
         context['title'] = 'Oportunidades'
-        context['detail_url'] = 'base:lead-detail'
-        context['add_url'] = 'base:lead-add'
+        context['detail_url'] = 'crm:lead-detail'
+        context['add_url'] = 'crm:lead-add'
         context['fields'] = LEAD_FIELDS_VIEW
         return context
 
@@ -53,9 +53,9 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(LeadDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:lead', 'name': 'Oportunidad'}]
-        context['update_url'] = 'base:lead-update'
-        context['delete_url'] = 'base:lead-delete'
+        context['breadcrumbs'] = [{'url': 'crm:lead', 'name': 'Oportunidad'}]
+        context['update_url'] = 'crm:lead-update'
+        context['delete_url'] = 'crm:lead-delete'
         context['fields'] = LEAD_FIELDS_VIEW
         return context
 
@@ -68,8 +68,8 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(LeadCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Lead'
-        context['breadcrumbs'] = [{'url': 'base:lead', 'name': 'Oportunidad'}]
-        context['back_url'] = reverse('base:lead')
+        context['breadcrumbs'] = [{'url': 'crm:lead', 'name': 'Oportunidad'}]
+        context['back_url'] = reverse('crm:lead')
         return context
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):
@@ -80,8 +80,8 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(LeadUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:lead', 'name': 'Oportunidad'}]
-        context['back_url'] = reverse('base:lead-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'crm:lead', 'name': 'Oportunidad'}]
+        context['back_url'] = reverse('crm:lead-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
@@ -89,4 +89,4 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteLead(self, pk):
     lead = PyLead.objects.get(id=pk)
     lead.delete()
-    return redirect(reverse('base:lead'))
+    return redirect(reverse('crm:lead'))
