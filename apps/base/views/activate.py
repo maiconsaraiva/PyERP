@@ -14,7 +14,7 @@ from django.views.generic import RedirectView
 
 # Librerias de terceros
 from ..models import UserCustom
-from apps.usercustom.tokens import ACCOUNT_ACTIVATION_TOKEN
+from ..tokens import ACCOUNT_ACTIVATION_TOKEN
 
 
 # ========================================================================== #
@@ -22,7 +22,7 @@ class ActivateView(RedirectView):
     """Esta clase activa a la persona cuando confirma el link enviado desde
     su correo
     """
-    url = 'usercustom:login'
+    url = 'login'
 
     def get(self, request, *args, **kwargs):
         uidb64 = self.kwargs['uidb64']

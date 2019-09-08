@@ -22,7 +22,7 @@ class PyPartner(PyFather):
     not_email = models.BooleanField('No Email', default=False)
 
     created_by = models.ForeignKey(
-        'usercustom.UserCustom', related_name='pypartner_created_by',
+        'base.UserCustom', related_name='pypartner_created_by',
         on_delete=models.SET_NULL, null=True)
 
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)

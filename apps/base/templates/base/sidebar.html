@@ -17,10 +17,10 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           {% if request.user.is_authenticated %}
               <div class="image">
-                  <a href="{% url 'usercustom:profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle elevation-2" alt="{{ request.user }}"></a>
+                  <a href="{% url 'profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle elevation-2" alt="{{ request.user }}"></a>
               </div>
               <div class="info">
-                  <a href="{% url 'usercustom:profile' %}" class="d-block">{{ user }}</a>
+                  <a href="{% url 'profile' %}" class="d-block">{{ user }}</a>
               </div>
           {% endif %}
       </div>

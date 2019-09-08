@@ -16,9 +16,9 @@ from django.views.generic import CreateView
 
 # Librerias de terceros
 import requests
-from apps.usercustom.forms import PersonaCreationForm
+from ..forms import PersonaCreationForm
 from ..models import UserCustom
-from apps.usercustom.tokens import ACCOUNT_ACTIVATION_TOKEN
+from ..tokens import ACCOUNT_ACTIVATION_TOKEN
 
 
 ##############################################################################
@@ -29,7 +29,7 @@ class SignUpView(CreateView):
     form_class = PersonaCreationForm
     template_name = 'usercustom/signup.html'
     extra_context = {}
-    success_url = 'usercustom:login'
+    success_url = 'login'
     success_message = _('Your account was created successfully. A link was sent to your email that you must sign in to confirm your sign up.')
 
     def post(self, request, *args, **kwargs):
@@ -63,7 +63,7 @@ class SignUpView(CreateView):
         subject = _('%(app_name)s sign up') % {'app_name': settings.APP_NAME}
 
         url = reverse_lazy(
-            'usercustom:activar',
+            'activar',
             kwargs={
                 'uidb64': urlsafe_base64_encode(force_bytes(self.object.pk)),
                 'token': ACCOUNT_ACTIVATION_TOKEN.make_token(self.object)

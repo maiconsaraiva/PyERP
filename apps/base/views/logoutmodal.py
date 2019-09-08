@@ -1,6 +1,11 @@
+"""Sub Vista logout modaldel módulo erp
+"""
 # Librerias Django
 from django.views.generic import TemplateView
 
 
+# ========================================================================== #
 class LogOutModalView(TemplateView):
-    template_name = 'base/logoutmodal.html'
+    """Lista de las ordenes de venta
+    """
+    template_name = 'usercusto/logoutmodal.html'

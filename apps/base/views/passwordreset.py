@@ -16,9 +16,9 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 import requests
-from apps.usercustom.forms import PasswordRecoveryForm, PasswordSetForm
+from ..forms import PasswordRecoveryForm, PasswordSetForm
 from ..models import UserCustom
-from apps.usercustom.tokens import PASSWORD_RECOVERY_TOKEN
+from ..tokens import PASSWORD_RECOVERY_TOKEN
 
 
 # ========================================================================== #
@@ -28,7 +28,7 @@ class PasswordRecoveryView(PasswordResetView):
     contraseña
     2.- Despliega un formulario para recuperar la contraseña
     """
-    success_url = 'usercustom:login'
+    success_url = 'login'
     template_name = 'usercustom/password_reset_form.html'
     extra_context = {}
 
@@ -38,7 +38,7 @@ class PasswordRecoveryView(PasswordResetView):
             # Formulario para escribir la nueva contraseña
             context['form'] = PasswordSetForm()
             context['url_action'] = reverse_lazy(
-                'usercustom:password-set',
+                'password-set',
                 kwargs={
                     'uidb64': self.kwargs['uidb64'],
                     'token': self.kwargs['token']
@@ -47,7 +47,7 @@ class PasswordRecoveryView(PasswordResetView):
         else:
             # Fromulario para solicitar el link de recuperación de contraseña
             context['form'] = PasswordRecoveryForm()
-            context['url_action'] = reverse_lazy('usercustom:password-recovery')
+            context['url_action'] = reverse_lazy('password-recovery')
 
         return context
 
@@ -121,7 +121,7 @@ class PasswordRecoveryView(PasswordResetView):
                 }
 
                 url = reverse_lazy(
-                    'usercustom:password-set',
+                    'password-set',
                     kwargs={
                         'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
                         'token': PASSWORD_RECOVERY_TOKEN.make_token(user)
@@ -149,5 +149,5 @@ class PasswordRecoveryView(PasswordResetView):
                 )
 
                 return HttpResponseRedirect(
-                    reverse_lazy('usercustom:password-recovery')
+                    reverse_lazy('password-recovery')
                 )

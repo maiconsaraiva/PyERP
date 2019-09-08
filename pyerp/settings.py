@@ -49,7 +49,6 @@ INSTALLED_APPS = [
 
     # Local Apps
     'apps.base',
-    'apps.usercustom',
     'tempus_dominus',
 
     # Third-Party Apps
@@ -144,7 +143,7 @@ TEMPLATES = [
 """ Esta configuración define el modelo personalizado para auth.user. Tambien
 establece las rutas para algunas funciones.
 """
-AUTH_USER_MODEL = 'usercustom.UserCustom'
+AUTH_USER_MODEL = 'base.UserCustom'
 LOGIN_URL = '/account/login'
 LOGIN_REDIRECT_URL = '/base'
 LOGOUT_REDIRECT_URL = '/account/login'

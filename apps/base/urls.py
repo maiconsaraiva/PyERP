@@ -1,4 +1,6 @@
 # Librerias Django
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
@@ -9,7 +11,9 @@ from .views import (
     DeleteUser, DoChangePassword, InstallApps, PartnerAutoComplete,
     PartnerCreateView, PartnerDetailView, PartnerUpdateView, ProviderListView,
     UninstallApps, UpdateApps, UpdateBaseConfigView, UserCreateView,
-    UserDetailView, UserListView, UserUpdateView, erp_home)
+    UserDetailView, UserListView, UserUpdateView, erp_home,
+    ActivateView, ChangePasswordView, PasswordRecoveryView, ProfileView,
+    SignUpView, AvatarUpdateView, LogOutModalView)
 from .views.app import AppView
 from .views.base_config import LoadData
 from .views.country import (
@@ -22,7 +26,7 @@ from .views.currency import (
     CurrencyUpdateView, DeleteCurrency)
 from .views.log import (
     DeleteLog, LogCreateView, LogDetailView, LogListView, LogUpdateView)
-from .views.logoutmodal import LogOutModalView
+# from .views.logoutmodal import LogOutModalView
 from .views.product import (
     DeleteProduct, ProductCreateView, ProductDetailView, ProductListView,
     ProductUpdateView)
@@ -37,17 +41,17 @@ from .views.product_webcategory import (
 
 urlpatterns = [
     path('', erp_home, name='home'),
-    path(
-        'login/',
-        auth_views.LoginView.as_view(template_name='login.html'),
-        name='login'
-    ),
+    # path(
+    #     'login/',
+    #     auth_views.LoginView.as_view(template_name='login.html'),
+    #     name='login'
+    # ),
     path(
         'logout/',
         auth_views.LogoutView.as_view(template_name='base/login.html'),
         name='logout'
     ),
-    path('logoutmodal/', LogOutModalView.as_view(), name='logout-modal'),
+    # path('logoutmodal/', LogOutModalView.as_view(), name='logout-modal'),
     path('config/<int:pk>', UpdateBaseConfigView.as_view(), name='base-config'),
     path('load-data', LoadData, name='load-data'),
 
@@ -132,6 +136,43 @@ urlpatterns = [
         name='partners-autocomplete'
     ),
 ]
+
+urlpatterns += [
+    path('signup', SignUpView.as_view(), name='signup'),
+    path('activate/<uidb64>/<token>', ActivateView.as_view(), name='activar'),
+    path(
+        'login/',
+        LoginView.as_view(
+            template_name='usercustom/login.html',
+            redirect_field_name='next',
+        ),
+        name='login'
+    ),
+    path(
+        'logout',
+        LogoutView.as_view(next_page='login'),
+        name='logout'
+    ),
+    path('logoutmodal/', LogOutModalView.as_view(), name='logout-modal'),
+    path('profile', login_required(ProfileView.as_view()), name='profile'),
+    path(
+        'changepasword',
+        login_required(ChangePasswordView),
+        name='change-password'
+        ),
+    path(
+        'password-recovery',
+        PasswordRecoveryView.as_view(),
+        name='password-recovery'
+    ),
+    path(
+        'password-recovery/<uidb64>/<token>',
+        PasswordRecoveryView.as_view(),
+        name='password-set'
+    ),
+    path('avatar', login_required(AvatarUpdateView.as_view()), name='avatar'),
+]
+
 
 
 """

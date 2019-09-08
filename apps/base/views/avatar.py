@@ -19,7 +19,7 @@ class AvatarUpdateView(UpdateView):
     """
     model = UserCustom
     form_class = AvatarForm
-    success_url = reverse_lazy('usercustom:profile')
+    success_url = reverse_lazy('profile')
 
     def get_object(self, queryset=None):
         """
@@ -69,7 +69,7 @@ class AvatarUpdateView(UpdateView):
             if form.is_valid():
                 form.save()
 
-        return redirect('usercustom:profile')
+        return redirect('profile')
 
 
 # ========================================================================== #
@@ -84,4 +84,4 @@ class AvatarUpdateView(UpdateView):
 #         if form.is_valid():
 #             form.save()
 
-    # return redirect('usercustom:profile')
+    # return redirect('profile')

@@ -10,3 +10,4 @@ from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
 from .app import PyApp
 from .father import PyFather
+from .usercustom import UserCustom

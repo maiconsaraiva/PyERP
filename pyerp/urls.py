@@ -9,19 +9,19 @@ from django.urls import path
 from django.views.static import serve
 
 # Librerias de terceros
-from apps.usercustom.views import ActivateLanguageView
+from apps.base.views import ActivateLanguageView
 
 urlpatterns = [
     path('', include('apps.base.home_urls')),
     # path('admin/', admin.site.urls),
-    path('base/', include('apps.base.urls')),
+    # path('base/', include('apps.base.urls')),
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT, }),
     path('static/<path:path>', serve, {'document_root': settings.STATIC_ROOT, }),
     # path('', include('apps.home.urls')),
 ]
 
 urlpatterns += i18n_patterns(
-    path('account/', include('apps.usercustom.urls')),
+    path('base/', include('apps.base.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
     path(

@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 
 # Librerias de terceros
-from apps.usercustom.forms import AvatarForm, PerfilForm
+from ..forms import AvatarForm, PerfilForm
 from ..models import UserCustom
 
 
@@ -23,7 +23,7 @@ class ProfileView(SuccessMessageMixin, UpdateView):
     form_class = PerfilForm
     template_name = 'usercustom/profile.html'
     success_message = _('Your profile was updated successfully')
-    success_url = reverse_lazy('usercustom:profile')
+    success_url = reverse_lazy('profile')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

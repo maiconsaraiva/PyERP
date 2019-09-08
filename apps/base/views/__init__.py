@@ -6,7 +6,7 @@ from os import listdir
 # Librerias Django
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from apps.usercustom.models import UserCustom
+from ..models import UserCustom
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -22,6 +22,21 @@ from .company import (
 from .partner import (
     CustomerListView, DeletePartner, PartnerAutoComplete, PartnerCreateView,
     PartnerDetailView, PartnerUpdateView, ProviderListView)
+
+# Librerias en carpetas locales
+from ..forms import AvatarForm
+from ..models import UserCustom
+from .activate import ActivateView
+from .activatelanguage import ActivateLanguageView
+from .passwordchange import cambio_clave
+from .passwordreset import PasswordRecoveryView
+from .profile import ProfileView
+from .signup import SignUpView
+from .avatar import AvatarUpdateView
+from .logoutmodal import LogOutModalView
+
+
+ChangePasswordView = cambio_clave
 
 
 def Apps(request):
