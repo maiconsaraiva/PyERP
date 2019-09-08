@@ -8,23 +8,41 @@ register = template.Library()
 
 @register.filter
 def web_chat(obj):
-    return WebsiteConfig.objects.get(pk=1).show_chat
+    try:
+        return WebsiteConfig.objects.get(pk=1).show_chat
+    except WebsiteConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter
 def web_show_shop(obj):
-    return WebsiteConfig.objects.get(pk=1).show_shop
+    try:
+        return WebsiteConfig.objects.get(pk=1).show_shop
+    except WebsiteConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter
 def web_under_construction(obj):
-    return WebsiteConfig.objects.get(pk=1).under_construction
+    try:
+        return WebsiteConfig.objects.get(pk=1).under_construction
+    except WebsiteConfig.DoesNotExist:
+        return None
+
 
 @register.filter
 def web_show_blog(obj):
-    return WebsiteConfig.objects.get(pk=1).show_blog
+    try:
+        return WebsiteConfig.objects.get(pk=1).show_blog
+    except WebsiteConfig.DoesNotExist:
+        return None
 
 
 @register.filter
 def web_show_price(obj):
-    return WebsiteConfig.objects.get(pk=1).show_price
+    try:
+        return WebsiteConfig.objects.get(pk=1).show_price
+    except WebsiteConfig.DoesNotExist:
+        return None

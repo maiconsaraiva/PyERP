@@ -32,7 +32,10 @@ def get_company_name(obj):
 
 @register.filter
 def get_company_email(obj):
-    return BaseConfig.objects.get(pk=1).main_company_id.email
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.email
+    except BaseConfig.DoesNotExist:
+        return None
 
 
 @register.filter
@@ -46,22 +49,37 @@ def get_company_slogan(obj):
 
 @register.filter
 def get_company_rut(obj):
-    return BaseConfig.objects.get(pk=1).main_company_id.rut
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.rut
+    except BaseConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter
 def get_company_facebook(obj):
-    return BaseConfig.objects.get(pk=1).main_company_id.social_facebook
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.social_facebook
+    except BaseConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter
 def get_company_instagram(obj):
-    return BaseConfig.objects.get(pk=1).main_company_id.social_instagram
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.social_instagram
+    except BaseConfig.DoesNotExist:
+        return None
 
 
 @register.filter
 def get_company_linkedin(obj):
-    return BaseConfig.objects.get(pk=1).main_company_id.social_linkedin
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.social_linkedin
+    except BaseConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter

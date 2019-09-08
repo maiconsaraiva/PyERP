@@ -14,6 +14,8 @@ from .subviews.web_payment_method import (
     WebPaymentMethodUpdateView)
 from .subviews.website_config import UpdateWebsiteConfigView
 
+app_name = 'home'
+
 urlpatterns = [
     url(r'^$', index, name='home-index'),
 
