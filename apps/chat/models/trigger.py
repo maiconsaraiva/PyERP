@@ -14,7 +14,7 @@ class PyTrigger(PyFather):
     init = models.BooleanField(_("Init"),default=False)
 
     def get_absolute_url(self):
-        return reverse('trigger-detail', kwargs={'pk': self.pk})
+        return reverse('base:trigger-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.question)

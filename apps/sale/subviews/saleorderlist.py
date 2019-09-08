@@ -29,7 +29,7 @@ class SaleOrderListView(LoginRequiredMixin, ListView):
         """
         context = super(SaleOrderListView, self).get_context_data(**kwargs)
         context['title'] = 'Orden de Venta'
-        context['detail_url'] = 'sale:sale-order-detail'
+        context['detail_url'] = 'base:sale:sale-order-detail'
         context['add_url'] = 'base:sale:sale-order-add'
         context['edit_url'] = 'sale:sale-order-edit'
         context['delete_url'] = 'base:sale:sale-order-delete'

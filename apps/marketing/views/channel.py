@@ -27,7 +27,7 @@ class ChannelListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ChannelListView, self).get_context_data(**kwargs)
         context['title'] = 'Canales'
-        context['detail_url'] = 'channel-detail'
+        context['detail_url'] = 'base:channel-detail'
         context['add_url'] = 'base:channel-add'
         context['fields'] = CHANNEL_FIELDS
         return context

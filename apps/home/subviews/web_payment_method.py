@@ -24,7 +24,7 @@ class WebPaymentMethodListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(WebPaymentMethodListView, self).get_context_data(**kwargs)
         context['title'] = 'Métodos de Pagos Webs'
-        context['detail_url'] = 'web-payment-method-detail'
+        context['detail_url'] = 'base:web-payment-method-detail'
         context['add_url'] = 'base:web-payment-method-add'
         context['fields'] = WPM_FIELDS
         return context

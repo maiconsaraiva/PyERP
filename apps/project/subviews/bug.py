@@ -28,7 +28,7 @@ class BugListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(BugListView, self).get_context_data(**kwargs)
         context['title'] = 'Errores'
-        context['detail_url'] = 'bug-detail'
+        context['detail_url'] = 'base:bug-detail'
         context['add_url'] = 'base:bug-add'
         context['fields'] = BUG_FIELDS
         return context

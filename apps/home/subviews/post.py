@@ -22,7 +22,7 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
         context['title'] = 'Entradas'
-        context['detail_url'] = 'post-detail'
+        context['detail_url'] = 'base:post-detail'
         context['add_url'] = 'base:post-add'
         context['fields'] = POST_FIELDS
         return context

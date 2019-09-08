@@ -22,7 +22,7 @@ class PyAccountPlan(models.Model):
     reconcile = models.BooleanField('Conciliación', default=False)
 
     def get_absolute_url(self):
-        return reverse('accountplan-detail', kwargs={'pk': self.pk})
+        return reverse('base:accountplan-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return + "[" + format(self.code) + "] " + format(self.name)

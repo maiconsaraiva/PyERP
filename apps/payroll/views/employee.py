@@ -30,7 +30,7 @@ class EmployeeListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeListView, self).get_context_data(**kwargs)
         context['title'] = 'Empleados'
-        context['detail_url'] = 'employee-detail'
+        context['detail_url'] = 'base:employee-detail'
         context['add_url'] = 'base:employee-add'
         context['fields'] = EMPLEOYEE_FIELDS
         return context

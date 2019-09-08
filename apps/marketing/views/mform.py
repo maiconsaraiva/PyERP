@@ -32,7 +32,7 @@ class MformListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(MformListView, self).get_context_data(**kwargs)
         context['title'] = 'Formularios'
-        context['detail_url'] = 'mform-detail'
+        context['detail_url'] = 'base:mform-detail'
         context['add_url'] = 'base:mform-add'
         context['fields'] = MFORM_FIELDS_VIEW
         return context

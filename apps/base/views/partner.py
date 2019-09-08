@@ -36,7 +36,7 @@ class CustomerListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(CustomerListView, self).get_context_data(**kwargs)
         context['title'] = 'Partners'
-        context['detail_url'] = 'partner-detail'
+        context['detail_url'] = 'base:partner-detail'
         context['add_url'] = 'base:partner-add'
         context['fields'] = PARTNER_FIELDS
         return context
@@ -51,7 +51,7 @@ class ProviderListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ProviderListView, self).get_context_data(**kwargs)
         context['title'] = 'Partners'
-        context['detail_url'] = 'partner-detail'
+        context['detail_url'] = 'base:partner-detail'
         context['add_url'] = 'base:partner-add'
         context['fields'] = PARTNER_FIELDS
         return context

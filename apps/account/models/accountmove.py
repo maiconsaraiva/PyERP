@@ -17,7 +17,7 @@ class PyAccountMove(models.Model):
         choices=STATE, max_length=64, default='draft')
 
     def get_absolute_url(self):
-        return reverse('account-move-detail', kwargs={'pk': self.pk})
+        return reverse('base:account-move-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return + "[" + format(self.code) + "] " + format(self.name)

@@ -25,7 +25,7 @@ class ProductCategoryListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductCategoryListView, self).get_context_data(**kwargs)
         context['title'] = 'Categorías de Productos'
-        context['detail_url'] = 'product-category-detail'
+        context['detail_url'] = 'base:product-category-detail'
         context['add_url'] = 'base:product-category-add'
         context['fields'] = CATEGORY_FIELDS
         return context

@@ -29,7 +29,7 @@ class TaskListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
         context['title'] = 'Tareas'
-        context['detail_url'] = 'task-detail'
+        context['detail_url'] = 'base:task-detail'
         context['add_url'] = 'base:task-add'
         context['fields'] = TASK_FIELDS
         return context

@@ -24,7 +24,7 @@ class DepartmentListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(DepartmentListView, self).get_context_data(**kwargs)
         context['title'] = 'Departamentos'
-        context['detail_url'] = 'department-detail'
+        context['detail_url'] = 'base:department-detail'
         context['add_url'] = 'base:department-add'
         context['fields'] = DEPARTMENT_FIELDS
         return context

@@ -16,7 +16,7 @@ class PyMform(PyFather):
     campaign_id = models.ForeignKey(PyCampaign, null=True, blank=True, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('mform-detail', kwargs={'pk': self.pk})
+        return reverse('base:mform-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

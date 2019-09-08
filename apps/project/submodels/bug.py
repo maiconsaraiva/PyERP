@@ -23,7 +23,7 @@ class PyBug(PyFather):
         choices=BUG_STATE, max_length=64, default='nuevo')
 
     def get_absolute_url(self):
-        return reverse('bug-detail', kwargs={'pk': self.pk})
+        return reverse('base:bug-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

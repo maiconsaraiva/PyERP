@@ -24,7 +24,7 @@ class AccountMoveListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(AccountMoveListView, self).get_context_data(**kwargs)
         context['title'] = 'Asiento Contable'
-        context['detail_url'] = 'account-move-detail'
+        context['detail_url'] = 'base:account-move-detail'
         context['add_url'] = 'base:account-move-add'
         context['fields'] = ACCOUNTMOVE_FIELDS
         return context

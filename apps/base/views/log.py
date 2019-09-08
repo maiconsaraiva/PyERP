@@ -26,7 +26,7 @@ class LogListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(LogListView, self).get_context_data(**kwargs)
         context['title'] = 'Logs'
-        context['detail_url'] = 'log-detail'
+        context['detail_url'] = 'base:log-detail'
         context['add_url'] = 'base:log-add'
         context['fields'] = LOG_FIELDS
         return context

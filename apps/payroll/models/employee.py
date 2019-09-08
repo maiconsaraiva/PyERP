@@ -18,7 +18,7 @@ class PyEmployee(PyFather):
     email = models.CharField('Correo', max_length=40, blank=True)
 
     def get_absolute_url(self):
-        return reverse('employee-detail', kwargs={'pk': self.pk})
+        return reverse('base:employee-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

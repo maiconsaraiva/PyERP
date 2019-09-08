@@ -31,7 +31,7 @@ class PyProduct(PyFather):
     type = models.CharField(_("type"), choices=PRODUCT_CHOICE, max_length=64, default='consu')
 
     def get_absolute_url(self):
-        return reverse('product-detail', kwargs={'pk': self.pk})
+        return reverse('base:product-detail', kwargs={'pk': self.pk})
 
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
 

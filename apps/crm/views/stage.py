@@ -27,7 +27,7 @@ class StageListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(StageListView, self).get_context_data(**kwargs)
         context['title'] = 'Etapas'
-        context['detail_url'] = 'stage-detail'
+        context['detail_url'] = 'base:stage-detail'
         context['add_url'] = 'base:stage-add'
         context['fields'] = STAGE_FIELDS
         return context

@@ -13,7 +13,7 @@ class PyCampaign(PyFather):
     code = models.CharField('Código', max_length=13)
 
     def get_absolute_url(self):
-        return reverse('campaign-detail', kwargs={'pk': self.pk})
+        return reverse('base:campaign-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

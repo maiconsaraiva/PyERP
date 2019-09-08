@@ -26,7 +26,7 @@ class PyCron(PyFather):
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('cron-detail', kwargs={'pk': self.pk})
+        return reverse('base:cron-detail', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-created_on']

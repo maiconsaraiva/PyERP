@@ -14,4 +14,4 @@ class PyCountry(PyFather):
         return format(self.name)
 
     def get_absolute_url(self):
-        return reverse('country-detail', kwargs={'pk': self.pk})
+        return reverse('base:country-detail', kwargs={'pk': self.pk})

@@ -27,7 +27,7 @@ class CurrencyListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(CurrencyListView, self).get_context_data(**kwargs)
         context['title'] = 'Monedas'
-        context['detail_url'] = 'currency-detail'
+        context['detail_url'] = 'base:currency-detail'
         context['add_url'] = 'base:currency-add'
         context['fields'] = CURRENCY_FIELDS
         return context

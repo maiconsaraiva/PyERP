@@ -28,7 +28,7 @@ class TriggerListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(TriggerListView, self).get_context_data(**kwargs)
         context['title'] = 'Trigger'
-        context['detail_url'] = 'trigger-detail'
+        context['detail_url'] = 'base:trigger-detail'
         context['add_url'] = 'base:trigger-add'
         context['fields'] = TRIGGER_FIELDS
         return context

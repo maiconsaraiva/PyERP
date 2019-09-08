@@ -27,7 +27,7 @@ class ProjectListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ProjectListView, self).get_context_data(**kwargs)
         context['title'] = 'Proyectos'
-        context['detail_url'] = 'project-detail'
+        context['detail_url'] = 'base:project-detail'
         context['add_url'] = 'base:project-add'
         context['fields'] = PROJECT_FIELDS
         return context

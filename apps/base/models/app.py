@@ -19,7 +19,7 @@ class PyApp(PyFather):
     sequence = models.IntegerField(_("Sequence"), default=100)
 
     def get_absolute_url(self):
-        return reverse('lead-detail', kwargs={'pk': self.pk})
+        return reverse('base:lead-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

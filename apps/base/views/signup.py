@@ -63,7 +63,7 @@ class SignUpView(CreateView):
         subject = _('%(app_name)s sign up') % {'app_name': settings.APP_NAME}
 
         url = reverse_lazy(
-            'activar',
+            'base:activar',
             kwargs={
                 'uidb64': urlsafe_base64_encode(force_bytes(self.object.pk)),
                 'token': ACCOUNT_ACTIVATION_TOKEN.make_token(self.object)

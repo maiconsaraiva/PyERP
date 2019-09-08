@@ -27,7 +27,7 @@ class CampaignListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(CampaignListView, self).get_context_data(**kwargs)
         context['title'] = 'Campañas'
-        context['detail_url'] = 'campaign-detail'
+        context['detail_url'] = 'base:campaign-detail'
         context['add_url'] = 'base:campaign-add'
         context['fields'] = CAMPAIGN_FIELDS
         return context

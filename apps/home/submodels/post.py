@@ -12,7 +12,7 @@ class PyPost(PyFather):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
+        return reverse('base:post-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.title)

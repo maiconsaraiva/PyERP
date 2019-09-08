@@ -25,7 +25,7 @@ class CountryListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(CountryListView, self).get_context_data(**kwargs)
         context['title'] = _("Countries")
-        context['detail_url'] = 'country-detail'
+        context['detail_url'] = 'base:country-detail'
         context['add_url'] = 'base:country-add'
         context['fields'] = COUNTRY_FIELDS
         return context

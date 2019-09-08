@@ -24,7 +24,7 @@ class PosListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(PosListView, self).get_context_data(**kwargs)
         context['title'] = 'Puntos de Ventas'
-        context['detail_url'] = 'pos-detail'
+        context['detail_url'] = 'base:pos-detail'
         context['add_url'] = 'base:pos-add'
         context['fields'] = POS_FIELDS
         return context

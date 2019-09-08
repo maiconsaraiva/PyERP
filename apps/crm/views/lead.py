@@ -41,7 +41,7 @@ class LeadListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(LeadListView, self).get_context_data(**kwargs)
         context['title'] = 'Oportunidades'
-        context['detail_url'] = 'lead-detail'
+        context['detail_url'] = 'base:lead-detail'
         context['add_url'] = 'base:lead-add'
         context['fields'] = LEAD_FIELDS_VIEW
         return context

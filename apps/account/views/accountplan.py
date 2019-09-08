@@ -25,7 +25,7 @@ class AccountPlanListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(AccountPlanListView, self).get_context_data(**kwargs)
         context['title'] = 'Plan de Cuenta'
-        context['detail_url'] = 'accountplan-detail'
+        context['detail_url'] = 'base:accountplan-detail'
         context['add_url'] = 'base:accountplan-add'
         context['fields'] = ACCOUNTPLAN_FIELDS
         return context

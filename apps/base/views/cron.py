@@ -30,7 +30,7 @@ class CronListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(CronListView, self).get_context_data(**kwargs)
         context['title'] = 'Crons'
-        context['detail_url'] = 'cron-detail'
+        context['detail_url'] = 'base:cron-detail'
         context['add_url'] = 'base:cron-add'
         context['fields'] = CRON_FIELDS
         return context

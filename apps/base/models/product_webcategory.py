@@ -15,4 +15,4 @@ class PyProductWebCategory(PyFather):
         return '%s%s' % (self.parent_id and ('[%s] ' % self.parent_id) or '', self.name)
 
     def get_absolute_url(self):
-        return reverse('product-webcategory-detail', kwargs={'pk': self.pk})
+        return reverse('base:product-webcategory-detail', kwargs={'pk': self.pk})

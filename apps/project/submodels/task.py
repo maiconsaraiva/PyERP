@@ -27,7 +27,7 @@ class PyTask(PyFather):
         choices=TASK_STATE, max_length=64, default='nuevo')
 
     def get_absolute_url(self):
-        return reverse('task-detail', kwargs={'pk': self.pk})
+        return reverse('base:task-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

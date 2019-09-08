@@ -17,7 +17,7 @@ class PyVisitor(PyFather):
     sid = models.CharField('SID', max_length=100, null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('visitor-detail', kwargs={'pk': self.pk})
+        return reverse('base:visitor-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

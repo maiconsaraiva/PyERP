@@ -39,7 +39,7 @@ class ProductListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['title'] = 'Productos'
-        context['detail_url'] = 'product-detail'
+        context['detail_url'] = 'base:product-detail'
         context['add_url'] = 'base:product-add'
         context['fields'] = PRODUCT_FIELDS
         return context

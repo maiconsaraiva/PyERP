@@ -28,7 +28,7 @@ class PyPartner(PyFather):
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse('partner-detail', kwargs={'pk': self.pk})
+        return reverse('base:partner-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         # %s%s' % (self.rut and ('[%s] ' % self.rut) or '', self.name)
