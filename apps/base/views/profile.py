@@ -23,7 +23,7 @@ class ProfileView(SuccessMessageMixin, UpdateView):
     form_class = PerfilForm
     template_name = 'usercustom/profile.html'
     success_message = _('Your profile was updated successfully')
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('base:profile')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
