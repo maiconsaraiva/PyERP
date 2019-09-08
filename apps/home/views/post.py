@@ -6,7 +6,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.post import PyPost
+from ..models.post import PyPost
 
 POST_FIELDS = [
             {'string': 'Título', 'field': 'title'},
@@ -48,7 +48,7 @@ class PostCreateView(CreateView):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Post'
         context['breadcrumbs'] = [{'url': 'base:post', 'name': 'Entrada'}]
-        context['back_url'] = reverse('base:post')
+        context['back_url'] = reverse('home:post')
         return context
 
 class PostUpdateView(UpdateView):
@@ -60,7 +60,7 @@ class PostUpdateView(UpdateView):
         context = super(PostUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].title
         context['breadcrumbs'] = [{'url': 'base:post', 'name': 'Entrada'}]
-        context['back_url'] = reverse('base:post-detail', kwargs={'pk': context['object'].pk})
+        context['back_url'] = reverse('home:post-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
@@ -68,4 +68,4 @@ class PostUpdateView(UpdateView):
 def DeletePost(self, pk):
     post = PyPost.objects.get(id=pk)
     post.delete()
-    return redirect(reverse('base:post'))
+    return redirect(reverse('home:post'))

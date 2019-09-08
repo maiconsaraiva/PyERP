@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.web_payment_methods import PyWebPaymentMethod
+from ..models.web_payment_methods import PyWebPaymentMethod
 
 WPM_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},

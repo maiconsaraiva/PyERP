@@ -12,7 +12,7 @@ from apps.base.models import PyPartner, PyProduct
 
 # Librerias en carpetas locales
 # from apps.crm.submodels.lead import PyLead
-from ..submodels.post import PyPost
+from ..models.post import PyPost
 
 
 def index(request):

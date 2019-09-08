@@ -3,16 +3,19 @@ from django.conf.urls import url
 from django.urls import path
 
 # Librerias en carpetas locales
-from .subviews.post import (
+from .views.post import (
     DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
-from .subviews.views import (
+
+from .views.views import (
     BlogView, PostDetailView, UnderConstruction, WebProductDetailView,
     WebProductView, contact, index)
-from .subviews.web_payment_method import (
+
+from .views.web_payment_method import (
     DeleteWebPaymentMethod, WebPaymentMethodCreateView,
     WebPaymentMethodDetailView, WebPaymentMethodListView,
     WebPaymentMethodUpdateView)
-from .subviews.website_config import UpdateWebsiteConfigView
+
+from .views.website_config import UpdateWebsiteConfigView
 
 app_name = 'home'
 

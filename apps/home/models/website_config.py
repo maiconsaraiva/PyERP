@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from apps.base.models import PyFather
 
 
-class WebsiteConfig(PyFather):
+class PyWebsiteConfig(PyFather):
     show_blog = models.BooleanField(_("Show Blog"), default=False)
     show_shop = models.BooleanField(_("Show Shop"), default=False)
     show_price = models.BooleanField(_("Show price"), default=True)
@@ -16,4 +16,4 @@ class WebsiteConfig(PyFather):
 
 
     def get_absolute_url(self):
-        return reverse('base:website-config', kwargs={'pk': self.pk})
+        return reverse('home:website-config', kwargs={'pk': self.pk})
