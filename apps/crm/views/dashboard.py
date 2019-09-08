@@ -6,7 +6,7 @@ from django.shortcuts import render
 from ..models.lead import PyLead
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DashboardCrmView(request):
     leads = PyLead.objects.all()
     return render(request, 'crm/dashboard-crm.html', {

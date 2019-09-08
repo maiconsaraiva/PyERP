@@ -74,7 +74,7 @@ class CountryUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteCountry(self, pk):
     country = PyCountry.objects.get(id=pk)
     country.delete()

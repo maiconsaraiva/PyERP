@@ -73,7 +73,7 @@ class WebPaymentMethodUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteWebPaymentMethod(self, pk):
     web_payment_method = PyWebPaymentMethod.objects.get(id=pk)
     web_payment_method.delete()

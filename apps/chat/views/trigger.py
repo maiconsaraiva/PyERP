@@ -77,7 +77,7 @@ class TriggersUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteTrigger(self, pk):
     trigger = PyTrigger.objects.get(id=pk)
     trigger.delete()

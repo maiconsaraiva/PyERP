@@ -75,7 +75,7 @@ class LogUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteLog(self, pk):
     log = PyLog.objects.get(id=pk)
     log.delete()

@@ -71,7 +71,7 @@ class ChannelUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteChannel(self, pk):
     channel = PyChannel.objects.get(id=pk)
     channel.delete()

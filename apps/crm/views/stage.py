@@ -73,7 +73,7 @@ class StageUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteStage(self, pk):
     lead = PyStage.objects.get(id=pk)
     lead.delete()

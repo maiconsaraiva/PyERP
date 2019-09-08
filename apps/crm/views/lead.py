@@ -85,7 +85,7 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteLead(self, pk):
     lead = PyLead.objects.get(id=pk)
     lead.delete()

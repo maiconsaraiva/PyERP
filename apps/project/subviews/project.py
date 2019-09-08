@@ -73,7 +73,7 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteProject(self, pk):
     project = PyProject.objects.get(id=pk)
     project.delete()

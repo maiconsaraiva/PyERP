@@ -73,7 +73,7 @@ class DepartmentUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteDepartment(self, pk):
     department = PyDepartment.objects.get(id=pk)
     department.delete()

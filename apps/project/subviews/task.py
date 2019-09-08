@@ -75,7 +75,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteTask(self, pk):
     task = PyTask.objects.get(id=pk)
     task.delete()

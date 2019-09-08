@@ -70,7 +70,7 @@ class PosUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeletePos(self, pk):
     pos = PyPos.objects.get(id=pk)
     pos.delete()

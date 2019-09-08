@@ -74,7 +74,7 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteBug(self, pk):
     bug = PyBug.objects.get(id=pk)
     bug.delete()

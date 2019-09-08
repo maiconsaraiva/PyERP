@@ -126,7 +126,7 @@ class PartnerUpdateView(UpdateView):
         return form"""
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeletePartner(self, pk):
     partner = PyPartner.objects.get(id=pk)
     partner.delete()

@@ -67,7 +67,7 @@ class AccountPlanUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteAccountPlan(self, pk):
     accountplan = PyAccountPlan.objects.get(id=pk)
     accountplan.delete()

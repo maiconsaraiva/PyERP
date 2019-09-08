@@ -76,7 +76,7 @@ class CurrencyUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteCurrency(self, pk):
     currency = PyCurrency.objects.get(id=pk)
     currency.delete()

@@ -79,7 +79,7 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteEmployee(self, pk):
     employee = PyEmployee.objects.get(id=pk)
     employee.delete()

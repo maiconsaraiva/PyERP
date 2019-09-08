@@ -64,7 +64,7 @@ class PostUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeletePost(self, pk):
     post = PyPost.objects.get(id=pk)
     post.delete()

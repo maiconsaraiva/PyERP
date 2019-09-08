@@ -66,7 +66,7 @@ class AccountMoveUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteAccountMove(self, pk):
     accountmove = PyAccountMove.objects.get(id=pk)
     accountmove.delete()

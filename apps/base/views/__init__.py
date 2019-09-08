@@ -113,7 +113,7 @@ class UserUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteUser(self, pk):
     user = UserCustom.objects.get(id=pk)
     user.delete()
@@ -133,7 +133,7 @@ def DoChangePassword(self, pk, **kwargs):
     return redirect(reverse('user-detail', kwargs={'pk': pk}))
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def UpdateApps(self):
     FILE_NAME = 'py_info.json'
     folder_apps = 'apps'
@@ -155,7 +155,7 @@ def UpdateApps(self):
     return redirect(reverse('apps'))
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def InstallApps(self, pk):
     app = PyApp.objects.get(id=pk)
     app.installed = True
@@ -168,7 +168,7 @@ def InstallApps(self, pk):
     return redirect(reverse('apps'))
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def UninstallApps(self, pk):
     app = PyApp.objects.get(id=pk)
     app.installed = False
@@ -184,7 +184,7 @@ def UninstallApps(self, pk):
     return redirect(reverse('apps'))
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """

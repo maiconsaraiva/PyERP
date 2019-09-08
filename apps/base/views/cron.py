@@ -79,7 +79,7 @@ class CronUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteCron(self, pk):
     cron = PyCron.objects.get(id=pk)
     cron.delete()

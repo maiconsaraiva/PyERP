@@ -74,7 +74,7 @@ class ProductWebCategoryUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="/base/login")
+@login_required(login_url="login")
 def DeleteProductWebCategory(self, pk):
     product_category = PyProductWebCategory.objects.get(id=pk)
     product_category.delete()
