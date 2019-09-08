@@ -1,2 +1,1 @@
-apps.crm
 apps.home
