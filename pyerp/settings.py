@@ -144,9 +144,9 @@ TEMPLATES = [
 establece las rutas para algunas funciones.
 """
 AUTH_USER_MODEL = 'base.UserCustom'
-LOGIN_URL = '/base/login'
-LOGIN_REDIRECT_URL = '/base'
-LOGOUT_REDIRECT_URL = '/base/login'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
 
 
 # ========================================================================== #
@@ -161,6 +161,11 @@ PASSWORD_RESET_TIMEOUT_DAYS = 1
 """
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
+
+def gettext(cadena):
+    '''  "dummy" gettext() function
+    '''
+    return cadena
 
 LANGUAGE_CODE = 'en'
 TIME_ZONE = 'America/Santiago'

@@ -135,16 +135,15 @@ urlpatterns = [
         PartnerAutoComplete.as_view(),
         name='partners-autocomplete'
     ),
-]
 
-urlpatterns += [
     path('signup', SignUpView.as_view(), name='signup'),
     path('activate/<uidb64>/<token>', ActivateView.as_view(), name='activar'),
     path(
         'login/',
         LoginView.as_view(
             template_name='usercustom/login.html',
-            redirect_field_name='next',
+            # redirect_field_name='next',
+            success_url = 'home'
         ),
         name='login'
     ),

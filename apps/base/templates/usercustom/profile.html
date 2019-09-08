@@ -1,5 +1,5 @@
 {% extends "base/dashboard.html" %}
-{% block stylesheets %}
+{% block head %}
     <!-- Cropper JS -->
     <link rel="stylesheet" href="{{ STATIC_URL }}css/cropper.css">
     <!-- Tempus Dominus -->
@@ -22,7 +22,7 @@
         max-width: 100%;
       }
     </style>
-{% endblock stylesheets %}
+{% endblock %}
 
 {% block content %}
             <div class="container-fluid">
@@ -99,7 +99,7 @@
                 </div>
             </div><!-- /.modal -->
 {% endblock content %}
-{% block javascripts %}
+{% block scripts %}
     <!-- cropper 4.0.0 -->
     <script src="{{ STATIC_URL }}js/cropper.js"></script>
     <!-- page script -->
@@ -250,4 +250,4 @@
             });
         });
     </script>
-{% endblock javascripts %}
+{% endblock %}
