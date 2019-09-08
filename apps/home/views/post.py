@@ -23,7 +23,7 @@ class PostListView(ListView):
         context = super(PostListView, self).get_context_data(**kwargs)
         context['title'] = 'Entradas'
         context['detail_url'] = 'base:post-detail'
-        context['add_url'] = 'base:post-add'
+        context['add_url'] = 'home:post-add'
         context['fields'] = POST_FIELDS
         return context
 
@@ -34,8 +34,8 @@ class PostDetailView(DetailView):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].title
         context['breadcrumbs'] = [{'url': 'base:post', 'name': 'Entradas'}]
-        context['update_url'] = 'base:post-update'
-        context['delete_url'] = 'base:post-delete'
+        context['update_url'] = 'home:post-update'
+        context['delete_url'] = 'home:post-delete'
         context['fields'] = POST_FIELDS
         return context
 
