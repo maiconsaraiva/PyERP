@@ -2,9 +2,12 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
+# Librerias de terceros
 from apps.payroll.views.employee import (
     DeleteEmployee, EmployeeCreateView, EmployeeDetailView, EmployeeListView,
     EmployeeUpdateView)
+
+# Librerias en carpetas locales
 from .views.department import (
     DeleteDepartment, DepartmentCreateView, DepartmentDetailView,
     DepartmentListView, DepartmentUpdateView)

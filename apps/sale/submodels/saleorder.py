@@ -7,7 +7,6 @@ from django.dispatch import receiver
 # Librerias de terceros
 from apps.base.models import PyFather, PyPartner, PyProduct
 
-
 SALE_STATE = (
         ("draft", "Borrador"),
         ('open', 'Consumible'),

@@ -1,7 +1,7 @@
 # Librerias Django
 from django.contrib import admin
 
-from .models import (
-    WebsiteConfig)
+# Librerias en carpetas locales
+from .models import WebsiteConfig
 
 admin.site.register(WebsiteConfig)

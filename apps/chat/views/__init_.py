@@ -1,9 +1,13 @@
 # Librerias Django
-import json
+# Librerias Standard
 import datetime
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponse, render
-from ..models.visitor import PyVisitor, PyChatHistory
+
+# Librerias en carpetas locales
+from ..models.visitor import PyChatHistory, PyVisitor
 
 
 @login_required(login_url="/base/login")

@@ -1,7 +1,8 @@
 # Librerias Django
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import  ListView
+from django.views.generic import ListView
 
+# Librerias en carpetas locales
 from ...base.models import PyApp
 
 APP_FIELDS = [

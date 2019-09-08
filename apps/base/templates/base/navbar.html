@@ -19,6 +19,17 @@
             </div>
 
         </li>
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" type="button" data-toggle="dropdown" href="#"><i class="fas fa-globe"></i>&nbsp;{{ _('Language') }}&nbsp;<i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                {% for language_code, language in LANGUAGES %}
+                    {% if LANGUAGE_CODE != language_code %}
+                        <a class="dropdown-item" tabindex="-1"  href="{% url 'activate_language' language_code %}"><img src="{{ MEDIA_URL }}flag/{{ language_code }}.png" data-toggle="tooltip" title="{{ _('Change to') }} {{ language }}" height="20" width="20" class="user-image" alt="{{ _('Change to') }} {{ language }} | ">&nbsp;{{ language }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </li>
         <li class="nav-item d-none d-sm-inline-block">
           <div class="nav-link" title="Modo Online">
             {% if user|get_online %}

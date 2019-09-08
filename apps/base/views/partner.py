@@ -10,7 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyPartner, PyLog
+from ..models import PyLog, PyPartner
 
 PARTNER_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},

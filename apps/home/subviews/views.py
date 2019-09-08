@@ -9,6 +9,8 @@ from django.views.generic import DetailView, ListView
 
 # Librerias de terceros
 from apps.base.models import PyPartner, PyProduct
+
+# Librerias en carpetas locales
 # from apps.crm.submodels.lead import PyLead
 from ..submodels.post import PyPost
 

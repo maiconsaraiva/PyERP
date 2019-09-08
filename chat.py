@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
+# Librerias Standard
+from datetime import datetime
+
 # Librerias de terceros
 import eventlet
-import socketio
 import requests
-from datetime import datetime
+import socketio
 
 sio = socketio.Server(cors_allowed_origins='*')
 app = socketio.WSGIApp(sio)

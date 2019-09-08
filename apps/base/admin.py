@@ -1,9 +1,9 @@
 # Librerias Django
 from django.contrib import admin
 
-# Librerias de terceros
+# Librerias en carpetas locales
 from .models import (
-    PyCompany, PyCountry, PyPartner, PyProduct, PyProductCategory, PyApp)
+    PyApp, PyCompany, PyCountry, PyPartner, PyProduct, PyProductCategory)
 
 admin.site.register(PyPartner)
 admin.site.register(PyProduct)

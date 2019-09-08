@@ -3,13 +3,11 @@ from django.conf.urls import url
 from django.urls import path
 
 # Librerias en carpetas locales
+from .subviews.post import (
+    DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
 from .subviews.views import (
     BlogView, PostDetailView, UnderConstruction, WebProductDetailView,
     WebProductView, contact, index)
-
-from .subviews.post import (
-    DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
-
 from .subviews.web_payment_method import (
     DeleteWebPaymentMethod, WebPaymentMethodCreateView,
     WebPaymentMethodDetailView, WebPaymentMethodListView,

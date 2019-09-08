@@ -1,6 +1,10 @@
+# Librerias Django
 from django.db import models
 
+# Librerias de terceros
 from apps.base.models import PyPartner
+
+# Librerias en carpetas locales
 from .campaign import PyCampaign
 from .channel import PyChannel
 

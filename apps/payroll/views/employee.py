@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
+# Librerias en carpetas locales
 from ..models.employee import PyEmployee
 
 """ BEGIN EMPLEOYEE """

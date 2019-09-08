@@ -1,6 +1,9 @@
-from apps.home.models import WebsiteConfig
 # Librerias Django
 from django import template
+
+# Librerias de terceros
+from apps.home.models import WebsiteConfig
+
 register = template.Library()
 
 @register.filter

@@ -2,7 +2,7 @@
 from django.db import models
 from django.urls import reverse
 
-# Librerias en carpetas locales
+# Librerias de terceros
 from apps.base.models import PyFather
 
 

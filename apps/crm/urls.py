@@ -6,7 +6,6 @@ from django.urls import path
 from .views.dashboard import DashboardCrmView
 from .views.lead import (
     DeleteLead, LeadCreateView, LeadDetailView, LeadListView, LeadUpdateView)
-
 from .views.stage import (
     DeleteStage, StageCreateView, StageDetailView, StageListView,
     StageUpdateView)

@@ -3,39 +3,37 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Librerias en carpetas locales
-from .views import (ChangePasswordForm, CompanyCreateView, CompanyDetailView,
-                    CompanyListView, CompanyUpdateView, CustomerListView,
-                    DeleteCompany, DeletePartner, DeleteUser, DoChangePassword,
-                    InstallApps, PartnerAutoComplete, PartnerCreateView,
-                    PartnerDetailView, PartnerUpdateView, ProviderListView,
-                    UninstallApps, UpdateApps, UpdateBaseConfigView,
-                    UserCreateView, UserDetailView, UserListView,
-                    UserUpdateView, erp_home)
+from .views import (
+    ChangePasswordForm, CompanyCreateView, CompanyDetailView, CompanyListView,
+    CompanyUpdateView, CustomerListView, DeleteCompany, DeletePartner,
+    DeleteUser, DoChangePassword, InstallApps, PartnerAutoComplete,
+    PartnerCreateView, PartnerDetailView, PartnerUpdateView, ProviderListView,
+    UninstallApps, UpdateApps, UpdateBaseConfigView, UserCreateView,
+    UserDetailView, UserListView, UserUpdateView, erp_home)
 from .views.app import AppView
 from .views.base_config import LoadData
-from .views.country import (CountryCreateView, CountryDetailView,
-                            CountryListView, CountryUpdateView, DeleteCountry)
-from .views.cron import (CronCreateView, CronDetailView, CronListView,
-                         CronUpdateView, DeleteCron)
-from .views.currency import (CurrencyCreateView, CurrencyDetailView,
-                             CurrencyListView, CurrencyUpdateView,
-                             DeleteCurrency)
-from .views.log import (DeleteLog, LogCreateView, LogDetailView, LogListView,
-                        LogUpdateView)
+from .views.country import (
+    CountryCreateView, CountryDetailView, CountryListView, CountryUpdateView,
+    DeleteCountry)
+from .views.cron import (
+    CronCreateView, CronDetailView, CronListView, CronUpdateView, DeleteCron)
+from .views.currency import (
+    CurrencyCreateView, CurrencyDetailView, CurrencyListView,
+    CurrencyUpdateView, DeleteCurrency)
+from .views.log import (
+    DeleteLog, LogCreateView, LogDetailView, LogListView, LogUpdateView)
 from .views.logoutmodal import LogOutModalView
-from .views.product import (DeleteProduct,
-                            ProductCreateView, ProductDetailView,
-                            ProductListView, ProductUpdateView)
-from .views.product_category import (DeleteProductCategory,
-                                     ProductCategoryCreateView,
-                                     ProductCategoryDetailView,
-                                     ProductCategoryListView,
-                                     ProductCategoryUpdateView)
-from .views.product_webcategory import (DeleteProductWebCategory,
-                                        ProductWebCategoryCreateView,
-                                        ProductWebCategoryDetailView,
-                                        ProductWebCategoryListView,
-                                        ProductWebCategoryUpdateView)
+from .views.product import (
+    DeleteProduct, ProductCreateView, ProductDetailView, ProductListView,
+    ProductUpdateView)
+from .views.product_category import (
+    DeleteProductCategory, ProductCategoryCreateView,
+    ProductCategoryDetailView, ProductCategoryListView,
+    ProductCategoryUpdateView)
+from .views.product_webcategory import (
+    DeleteProductWebCategory, ProductWebCategoryCreateView,
+    ProductWebCategoryDetailView, ProductWebCategoryListView,
+    ProductWebCategoryUpdateView)
 
 urlpatterns = [
     path('', erp_home, name='home'),

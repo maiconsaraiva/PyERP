@@ -40,6 +40,8 @@ wrapt = "==1.11.2"
 Django = "==2.2.4"
 Pillow = "==6.1.0"
 PyPDF2 = "==1.26.0"
+django-settings-export = "*"
+django-tempus-dominus = "*"
 
 [requires]
 python_version = "3.7"

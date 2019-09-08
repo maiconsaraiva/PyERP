@@ -1,75 +1,95 @@
-{% extends 'base/dashboard.html' %}
-{% load staticfiles %}
-
+{% extends "base/dashboard.html" %}
 {% block content %}
-<section class="content">
-  <div style="margin-top: 20px;"></div>
-    <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ customers.count }}</h3>
-                <p>{{ _('Customers') }}</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'partners' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>{{ providers.count }}</h3>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>{{ customers.count }}</h3>
+                                <p>{{ _('Customers') }}</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="{% url 'partners' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ providers.count }}</h3>
+                                <p>{{ _('Providers') }}</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="{% url 'provider' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>{{ users.count }}</h3>
+                                <p>{{ _('Users') }}</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="{% url 'users' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{ products.count }}</h3>
+                                <p>{{ _('Products') }}</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <a href="{% url 'products' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                  </div>
+            </div><!-- /.container-fluid -->
+{% endblock content %}
+{% block javascripts %}
+    <!-- page script -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toastr.options.closeButton = true
+            toastr.options.timeOut = 11000
+            toastr.options.preventDuplicates = true
+            toastr.options.progressBar = true
 
-                <p>{{ _('Providers') }}</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'provider' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>{{ users.count }}</h3>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        toastr.error("{{ error|escape }}")
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    toastr.error("{{ error|escape }}")
+                {% endfor %}
+            {% endif %}
 
-                <p>{{ _('Users') }}</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'users' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>{{ products.count }}</h3>
-
-                <p>{{ _('Products') }}</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="{% url 'products' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-        <!-- /.row -->
-        <!-- Main row -->
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-  <script src="{% static '/plugins/chart.js/Chart.min.js' %}"></script> 
-{% endblock %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'debug' %}toastr.info("{{ message }}"){% endif %}
+                    {% if message.tags == 'info' %}toastr.info("{{ message }}"){% endif %}
+                    {% if message.tags == 'success' %}toastr.success("{{ message }}"){% endif %}
+                    {% if message.tags == 'warning' %}toastr.warning("{{ message }}"){% endif %}
+                    {% if message.tags == 'error' %}toastr.error("{{ message }}"){% endif %}
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
+{% endblock javascripts %}

@@ -1,10 +1,10 @@
 # Librerias Django
+from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from django.conf.urls import url
-from .views import PosIndex
 
 # Librerias en carpetas locales
+from .views import PosIndex
 from .views.pos import (
     DeletePos, PosCreateView, PosDetailView, PosListView, PosUpdateView)
 

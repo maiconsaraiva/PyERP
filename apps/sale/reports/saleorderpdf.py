@@ -2,22 +2,20 @@
 """
 # Librerias Standard
 import io
+import locale
 
 # Librerias Django
 from django.conf import settings
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from django.utils import timezone
-from django.http import HttpResponse
-import locale
 
 # Librerias de terceros
 from apps.sale.models import PySaleOrder, PySaleOrderDetail
+from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import cm
-from reportlab.lib import colors
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table, TableStyle
-
 
 locale.setlocale(locale.LC_ALL, '')
 locale._override_localeconv = {'mon_thousands_sep': '.'}

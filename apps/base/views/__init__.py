@@ -6,7 +6,7 @@ from os import listdir
 # Librerias Django
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from apps.usercustom.models import UserCustom
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -29,7 +29,7 @@ def Apps(request):
 
 
 class UserListView(ListView):
-    model = User
+    model = UserCustom
     template_name = 'base/list.html'
 
     def get_context_data(self, **kwargs):
@@ -47,7 +47,7 @@ class UserListView(ListView):
 
 
 class UserDetailView(DetailView):
-    model = User
+    model = UserCustom
     template_name = 'base/detail.html'
 
     def get_context_data(self, **kwargs):
@@ -73,7 +73,7 @@ class UserDetailView(DetailView):
 
 
 class UserCreateView(CreateView):
-    model = User
+    model = UserCustom
     fields = ['username', 'email', 'first_name', 'last_name', 'password']
     template_name = 'base/form.html'
 
@@ -86,7 +86,7 @@ class UserCreateView(CreateView):
 
 
 class UserUpdateView(UpdateView):
-    model = User
+    model = UserCustom
     fields = ['username', 'email', 'first_name', 'last_name']
     template_name = 'base/form.html'
 
@@ -100,7 +100,7 @@ class UserUpdateView(UpdateView):
 
 @login_required(login_url="/base/login")
 def DeleteUser(self, pk):
-    user = User.objects.get(id=pk)
+    user = UserCustom.objects.get(id=pk)
     user.delete()
     return redirect(reverse('users'))
 
@@ -110,7 +110,7 @@ def ChangePasswordForm(self, pk):
 
 
 def DoChangePassword(self, pk, **kwargs):
-    user = User.objects.get(id=pk)
+    user = UserCustom.objects.get(id=pk)
     if user and self.POST['new_password1'] == self.POST['new_password2']:
         user.set_password(self.POST['new_password1'])
     else:
@@ -187,7 +187,7 @@ def erp_home(request):
     return render(request, "home.html", {
         'customers': partners.filter(customer=True),
         'providers': partners.filter(provider=True),
-        'users': User.objects.all(),
+        'users': UserCustom.objects.all(),
         'products': PyProduct.objects.all(),
         'app_list': app_list,
         'count_app': count_app

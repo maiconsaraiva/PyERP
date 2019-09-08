@@ -1,6 +1,9 @@
+# Librerias Django
 from django.core.urlresolvers import reverse
 
+# Librerias de terceros
 from menu import Menu, MenuItem
+
 
 def profile_title(request):
     """

@@ -8,3 +8,19 @@ input[required],input[required]:focus {
     padding-top: 3px !important;
     color: #666666;
 }
+
+
+.login-logo,
+.register-logo {
+  font-size: 35px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+.login-box,
+.register-box {
+  margin: 5% auto;
+  width: 360px;
+}

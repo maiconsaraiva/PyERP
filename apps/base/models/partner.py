@@ -1,5 +1,4 @@
 # Librerias Django
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -23,7 +22,7 @@ class PyPartner(PyFather):
     not_email = models.BooleanField('No Email', default=False)
 
     created_by = models.ForeignKey(
-        User, related_name='pypartner_created_by',
+        'usercustom.UserCustom', related_name='pypartner_created_by',
         on_delete=models.SET_NULL, null=True)
 
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)

@@ -3,6 +3,7 @@ from django import template
 
 # Librerias en carpetas locales
 from ..models import BaseConfig, PyApp
+
 # from apps.home.models import WebsiteConfig
 
 register = template.Library()
@@ -15,12 +16,18 @@ def get_obj_attr(obj, attr):
 
 @register.filter
 def get_online(obj):
-    return BaseConfig.objects.get(pk=1).online
+    try:
+        return BaseConfig.objects.get(pk=1).online
+    except BaseConfig.DoesNotExist:
+        return None
 
 
 @register.filter
 def get_company_name(obj):
-    return BaseConfig.objects.get(pk=1).main_company_id.name
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.name
+    except BaseConfig.DoesNotExist:
+        return None
 
 
 @register.filter
@@ -30,7 +37,11 @@ def get_company_email(obj):
 
 @register.filter
 def get_company_slogan(obj):
-    return BaseConfig.objects.get(pk=1).main_company_id.slogan
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.slogan
+    except BaseConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter
