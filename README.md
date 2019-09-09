@@ -17,28 +17,28 @@ python manage.py runserver
 ```
     
 
-# Modules Status
-| Module  | State | New mode | Translation | Bugs | Date | Note |
-| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| base  | starting | x | - | - | - | - |
-| home  | starting | - | - | - | - | - |
-| chat  | starting | - | - | - | - | - |
-| crm  | starting | x | - | - | - | - |
-| marketing  | starting | - | - | - | - | - |
-| pos  | starting | x | - | - | - | - |
-| project  | starting | x | - | - | - | - |
-| purchase | starting | x | - | - | - | - |
-| sale  | starting | - | - | - | - | - |
-| stock | starting | - | - | - | - | - |
-| flow | starting | - | - | - | - | - |
-| paypal | starting | - | - | - | - | - |
-| payroll | starting | x | - | - | - | - |
-| odoo api | starting | - | - | - | - | - |
-| l10n_spain | - | - | - | - | - | - |
-| l10n_chile | - | - | - | - | - | - |
-| run_server | - | - | - | - | - | - |
-| academy | - | - | - | - | - | - |
-| forum | - | - | - | - | - | - |
+# Modules Status, if you want to help send me email: mfalcon@ynext.cl
+| #  | Module  | State | New mode | Translation | Bugs | Date | Note |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| 01 | base  | starting | x | - | - | - | - |
+| 02 | home  | starting | - | - | - | - | - |
+| 03 | chat  | starting | - | - | - | - | - |
+| 04 | crm  | starting | x | - | - | - | - |
+| 05 | marketing  | starting | - | - | - | - | - |
+| 06 | pos  | starting | x | - | - | - | - |
+| 07 | project  | starting | x | - | - | - | - |
+| 08 | purchase | starting | x | - | - | - | - |
+| 09 | sale  | starting | - | - | - | - | - |
+| 10 | stock | starting | - | - | - | - | - |
+| 11 | flow | starting | - | - | - | - | - |
+| 12 | paypal | starting | - | - | - | - | - |
+| 13 | payroll | starting | x | - | - | - | - |
+| 14 | odoo api | starting | - | - | - | - | - |
+| 15 | l10n_spain | - | - | - | - | - | - |
+| 16 | l10n_chile | - | - | - | - | - | - |
+| 17 | run_server | - | - | - | - | - | - |
+| 18 | academy | - | - | - | - | - | - |
+| 19 | forum | - | - | - | - | - | - |
 
 
 # Rules for Developers
