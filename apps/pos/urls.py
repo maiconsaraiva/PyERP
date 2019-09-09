@@ -8,6 +8,8 @@ from .views import PosIndex
 from .views.pos import (
     DeletePos, PosCreateView, PosDetailView, PosListView, PosUpdateView)
 
+app_name = 'pos'
+
 urlpatterns = [
     url('pos-index', PosIndex, name='pos-index'),
     path('pos', PosListView.as_view(), name='pos'),
