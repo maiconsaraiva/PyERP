@@ -18,20 +18,20 @@ python manage.py runserver
     
 
 # Modules Status
-| Module  | State |
-| ------------- | ------------- |
-| base  | starting |
-| home  | starting |
-| chat  | starting |
-| crm  | starting |
-| marketing  | starting |
-| pos  | starting |
-| project  | starting |
-| purchase  | starting |
-| Sale  | starting |
-| Stock| starting |
-| Flow| starting |
-| Paypal| starting |
+| Module  | State | new mode |
+| ------------- | ------------- | ------------- |
+| base  | starting | - |
+| home  | starting | - |
+| chat  | starting | - |
+| crm  | starting | - |
+| marketing  | starting | - |
+| pos  | starting | - |
+| project  | starting | - |
+| purchase  | starting | - |
+| Sale  | starting | - |
+| Stock| starting | - |
+| Flow| starting | - |
+| Paypal| starting | - |
 
 # My contact data
 ```
