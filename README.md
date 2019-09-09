@@ -22,6 +22,16 @@ python manage.py runserver
 | ------------- | ------------- |
 | base  | starting |
 | home  | starting |
+| chat  | starting |
+| crm  | starting |
+| marketing  | starting |
+| pos  | starting |
+| project  | starting |
+| purchase  | starting |
+| Sale  | starting |
+| Stock| starting |
+| Flow| starting |
+| Paypal| starting |
 
 # My contact data
 ```
