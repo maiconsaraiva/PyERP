@@ -34,6 +34,8 @@ python manage.py runserver
 | paypal | starting | - | - | - | - | - |
 | payroll | starting | x | - | - | - | - |
 | odoo api | starting | - | - | - | - | - |
+| l10n_spain | - | - | - | - | - | - |
+| l10n_chile | - | - | - | - | - | - |
 
 
 # Rules for Developers
