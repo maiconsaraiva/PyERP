@@ -41,6 +41,7 @@ python manage.py runserver
 | 18 | [academy](https://github.com/falconsoft3d/pyerp/tree/master/apps/academy) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 19 | [forum](https://github.com/falconsoft3d/pyerp/tree/master/apps/forum) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 20 | [bim](https://github.com/falconsoft3d/pyerp/tree/master/apps/bim) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 21 | [marketplace](https://github.com/falconsoft3d/pyerp/tree/master/apps/marketplace) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 
 # Rules for Developers
 1- all apps with namespace urls.py
