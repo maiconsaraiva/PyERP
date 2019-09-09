@@ -40,7 +40,7 @@ python manage.py runserver
 | 18 | [academy](https://github.com/falconsoft3d/pyerp/tree/master/apps/academy) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 19 | [forum](https://github.com/falconsoft3d/pyerp/tree/master/apps/forum) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 
-if you want to help send me email: mfalcon@ynext.cl
+if you want to help send me email: mfalcon@ynext.cl :+1:
 
 # Rules for Developers
 1- all apps with namespace urls.py
