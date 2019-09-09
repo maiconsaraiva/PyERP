@@ -1,1 +1,1 @@
-apps.purchase
+apps.sale

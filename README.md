@@ -27,7 +27,7 @@ python manage.py runserver
 | marketing  | starting | - | - | - | - | - |
 | pos  | starting | x | - | - | - | - |
 | project  | starting | x | - | - | - | - |
-| purchase  | starting | - | - | - | - | - |
+| purchase  | starting | x | - | - | - | - |
 | sale  | starting | - | - | - | - | - |
 | stock| starting | - | - | - | - | - |
 | flow| starting | - | - | - | - | - |

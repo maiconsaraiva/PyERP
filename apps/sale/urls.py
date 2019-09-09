@@ -7,7 +7,9 @@ from django.urls import path
 from apps.sale.views import (
     SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailAddView,
     SaleOrderDetailDeleteView, SaleOrderDetailEditView, SaleOrderEditView,
-    SaleOrderListView, sale_order_pdf)
+    SaleOrderListView )
+
+from apps.sale.reports.saleorderpdf import sale_order_pdf
 
 app_name = 'sale'
 
