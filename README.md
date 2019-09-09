@@ -82,19 +82,6 @@ info.json
 
 ```
 
-# My contact data
-```
-Ynext | Marlon Falcón Hernández | Santiago de Chile | Chile
-* ERP, CRM y Software: https://www.ynext.cl
-» WhatsApp: +56 9 4299 4534
-» Email: mfalcon@ynext.cl , falconsof.3d@gmail.com
-» Instagram: https://www.instagram.com/ynextspa
-» Facebook: https://www.facebook.com/Ynext-1150152835134897
-» Github: https://github.com/falconsoft3d
-» linkedin: https://linkedin.com/in/marlon-falcón-3a2aa9a4
-» Support me Paypal: https://www.paypal.me/falconsoft3d
-```
-
 # Feedback and Support
 We welcome your feedback and support, raise issues if you want to see a new feature or report a bug.
 https://github.com/falconsoft3d/pyerp/issues
@@ -110,4 +97,17 @@ https://github.com/falconsoft3d/pyerp/issues
 # Who I am
 My Name is Marlon Falcón Hernández. I am a Civil Engineer and Master in Architecture. I have worked for years in ERP development.
 ![Alt text](https://github.com/falconsoft3d/pyerp/blob/master/marketing/marlon-falcon-youtube.png?raw=true "Marlon")
+
+# My contact data
+```
+Ynext | Marlon Falcón Hernández | Santiago de Chile | Chile
+* ERP, CRM y Software: https://www.ynext.cl
+» WhatsApp: +56 9 4299 4534
+» Email: mfalcon@ynext.cl , falconsof.3d@gmail.com
+» Instagram: https://www.instagram.com/ynextspa
+» Facebook: https://www.facebook.com/Ynext-1150152835134897
+» Github: https://github.com/falconsoft3d
+» linkedin: https://linkedin.com/in/marlon-falcón-3a2aa9a4
+» Support me Paypal: https://www.paypal.me/falconsoft3d
+```
 
