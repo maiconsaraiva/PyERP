@@ -27,11 +27,12 @@ python manage.py runserver
 | marketing  | starting | - | - | - | - | - |
 | pos  | starting | x | - | - | - | - |
 | project  | starting | x | - | - | - | - |
-| purchase  | starting | x | - | - | - | - |
+| purchase | starting | x | - | - | - | - |
 | sale  | starting | - | - | - | - | - |
-| stock| starting | - | - | - | - | - |
-| flow| starting | - | - | - | - | - |
-| paypal| starting | - | - | - | - | - |
+| stock | starting | - | - | - | - | - |
+| flow | starting | - | - | - | - | - |
+| paypal | starting | - | - | - | - | - |
+| payroll | starting | - | - | - | - | - |
 
 
 # Rules for Developers
