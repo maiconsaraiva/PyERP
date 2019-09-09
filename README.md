@@ -32,7 +32,7 @@ python manage.py runserver
 | stock | starting | - | - | - | - | - |
 | flow | starting | - | - | - | - | - |
 | paypal | starting | - | - | - | - | - |
-| payroll | starting | - | - | - | - | - |
+| payroll | starting | x | - | - | - | - |
 
 
 # Rules for Developers
