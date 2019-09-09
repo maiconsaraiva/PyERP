@@ -18,20 +18,20 @@ python manage.py runserver
     
 
 # Modules Status
-| Module  | State | New mode | Translation | Note |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| base  | starting | x | - | - |
-| home  | starting | - | - | - |
-| chat  | starting | - | - | - |
-| crm  | starting | x | - | - |
-| marketing  | starting | - | - | - |
-| pos  | starting | x | - | - |
-| project  | starting | x | - | - |
-| purchase  | starting | - | - | - |
-| sale  | starting | - | - | - |
-| stock| starting | - | - | - |
-| flow| starting | - | - | - |
-| paypal| starting | - | - | - |
+| Module  | State | New mode | Translation | Bugs | Note |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| base  | starting | x | - | - | - |
+| home  | starting | - | - | - | - |
+| chat  | starting | - | - | - | - |
+| crm  | starting | x | - | - | - |
+| marketing  | starting | - | - | - | - |
+| pos  | starting | x | - | - | - |
+| project  | starting | x | - | - | - |
+| purchase  | starting | - | - | - | - |
+| sale  | starting | - | - | - | - |
+| stock| starting | - | - | - | - |
+| flow| starting | - | - | - | - |
+| paypal| starting | - | - | - | - |
 
 # My contact data
 ```
