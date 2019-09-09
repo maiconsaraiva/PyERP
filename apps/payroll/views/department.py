@@ -24,8 +24,8 @@ class DepartmentListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(DepartmentListView, self).get_context_data(**kwargs)
         context['title'] = 'Departamentos'
-        context['detail_url'] = 'base:department-detail'
-        context['add_url'] = 'base:department-add'
+        context['detail_url'] = 'payroll:department-detail'
+        context['add_url'] = 'payroll:department-add'
         context['fields'] = DEPARTMENT_FIELDS
         return context
 
@@ -38,9 +38,9 @@ class DepartmentDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(DepartmentDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:department', 'name': 'Departamento'}]
-        context['update_url'] = 'base:department-update'
-        context['delete_url'] = 'base:department-delete'
+        context['breadcrumbs'] = [{'url': 'payroll:department', 'name': 'Departamento'}]
+        context['update_url'] = 'payroll:department-update'
+        context['delete_url'] = 'payroll:department-delete'
         context['fields'] = DEPARTMENT_FIELDS
         return context
 
@@ -54,8 +54,8 @@ class DepartmentCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(DepartmentCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Departamento'
-        context['breadcrumbs'] = [{'url': 'base:department', 'name': 'Departamento'}]
-        context['back_url'] = reverse('base:department')
+        context['breadcrumbs'] = [{'url': 'payroll:department', 'name': 'Departamento'}]
+        context['back_url'] = reverse('payroll:department')
         return context
 
 
@@ -68,8 +68,8 @@ class DepartmentUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(DepartmentUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:departmen', 'name': 'Departamento'}]
-        context['back_url'] = reverse('base:departmen-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'payroll:departmen', 'name': 'Departamento'}]
+        context['back_url'] = reverse('payroll:departmen-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
@@ -77,4 +77,4 @@ class DepartmentUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteDepartment(self, pk):
     department = PyDepartment.objects.get(id=pk)
     department.delete()
-    return redirect(reverse('base:department'))
+    return redirect(reverse('payroll:department'))

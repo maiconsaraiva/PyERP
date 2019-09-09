@@ -30,8 +30,8 @@ class EmployeeListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeListView, self).get_context_data(**kwargs)
         context['title'] = 'Empleados'
-        context['detail_url'] = 'base:employee-detail'
-        context['add_url'] = 'base:employee-add'
+        context['detail_url'] = 'payroll:employee-detail'
+        context['add_url'] = 'payroll:employee-add'
         context['fields'] = EMPLEOYEE_FIELDS
         return context
 
@@ -44,9 +44,9 @@ class EmployeeDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:employee', 'name': 'Empleados'}]
-        context['update_url'] = 'base:employee-update'
-        context['delete_url'] = 'base:employee-delete'
+        context['breadcrumbs'] = [{'url': 'payroll:employee', 'name': 'Empleados'}]
+        context['update_url'] = 'payroll:employee-update'
+        context['delete_url'] = 'payroll:employee-delete'
         context['fields'] = EMPLEOYEE_FIELDS
         return context
 
@@ -60,8 +60,8 @@ class EmployeeCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Empleado'
-        context['breadcrumbs'] = [{'url': 'base:employee', 'name': 'Empleado'}]
-        context['back_url'] = reverse('base:employee')
+        context['breadcrumbs'] = [{'url': 'payroll:employee', 'name': 'Empleado'}]
+        context['back_url'] = reverse('payroll:employee')
         return context
 
 
@@ -74,8 +74,8 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:employee', 'name': 'Empleados'}]
-        context['back_url'] = reverse('base:employee-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'payroll:employee', 'name': 'Empleados'}]
+        context['back_url'] = reverse('payroll:employee-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
@@ -83,4 +83,4 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteEmployee(self, pk):
     employee = PyEmployee.objects.get(id=pk)
     employee.delete()
-    return redirect(reverse('base:employee'))
+    return redirect(reverse('payroll:employee'))

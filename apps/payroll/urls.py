@@ -12,6 +12,8 @@ from .views.department import (
     DeleteDepartment, DepartmentCreateView, DepartmentDetailView,
     DepartmentListView, DepartmentUpdateView)
 
+app_name = 'payroll'
+
 urlpatterns = [
     path('employee', EmployeeListView.as_view(), name='employee'),
     path('employee/add/', EmployeeCreateView.as_view(), name='employee-add'),
