@@ -33,6 +33,28 @@ python manage.py runserver
 | flow| starting | - | - | - | - |
 | paypal| starting | - | - | - | - |
 
+
+# Rules for Developers
+1- all apps with namespace urls.py
+```
+app_name = 'crm'
+```
+2- Translation
+Translation in the Templates
+```
+<p>{{ _('Project') }}</p>
+```
+Traslation in the models
+```
+name = models.CharField(_("Name"), max_length=80)
+```
+Traslation in the Views
+```
+COUNTRY_FIELDS = [
+    {'string': _("Name"), 'field': 'name'},
+]
+```
+
 # My contact data
 ```
 Ynext | Marlon Falcón Hernández | Santiago de Chile | Chile
