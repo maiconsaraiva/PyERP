@@ -36,6 +36,8 @@ python manage.py runserver
 | odoo api | starting | - | - | - | - | - |
 | l10n_spain | - | - | - | - | - | - |
 | l10n_chile | - | - | - | - | - | - |
+| run_server | - | - | - | - | - | - |
+| academy | - | - | - | - | - | - |
 
 
 # Rules for Developers
