@@ -18,27 +18,27 @@ python manage.py runserver
     
 
 # Modules Status
-| #  | Module  | State | New mode | Translation | Bugs | Date | User | Note |
+| #  | Module  | State | New mode | Translation | Bugs | Date | Developer | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | 01 | base  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 02 | home  | starting | - | - | - | - | - | - |
-| 03 | chat  | starting | - | - | - | - | - | - |
-| 04 | crm  | starting | x | - | - | - | - | - |
-| 05 | marketing  | starting | - | - | - | - | - | - |
-| 06 | pos  | starting | x | - | - | - | - | - |
-| 07 | project  | starting | x | - | - | - | - | - |
-| 08 | purchase | starting | x | - | - | - | - | - |
-| 09 | sale  | starting | - | - | - | - | - | - |
-| 10 | stock | starting | - | - | - | - | - | - |
-| 11 | flow | starting | - | - | - | - | - | - |
-| 12 | paypal | starting | - | - | - | - | - | - |
-| 13 | payroll | starting | x | - | - | - | - | - |
-| 14 | odoo api | starting | - | - | - | - | - | - |
-| 15 | l10n_spain | - | - | - | - | - | - | - |
-| 16 | l10n_chile | - | - | - | - | - | - | - |
-| 17 | run_server | - | - | - | - | - | - | - |
-| 18 | academy | - | - | - | - | - | - | - |
-| 19 | forum | - | - | - | - | - | - | - |
+| 02 | home  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d)| - |
+| 03 | chat  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 04 | crm  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 05 | marketing  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 06 | pos  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 07 | project  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 08 | purchase | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 09 | sale  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 10 | stock | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 11 | flow | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 12 | paypal | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 13 | payroll | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 14 | odoo api | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 15 | l10n_spain | - | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) |
+| 16 | l10n_chile | - | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) |
+| 17 | run_server | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 18 | academy | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 19 | forum | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 
 if you want to help send me email: mfalcon@ynext.cl
 
