@@ -1,1 +1,1 @@
-apps.project
+apps.purchase
