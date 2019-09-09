@@ -18,7 +18,6 @@ python manage.py runserver
     
 
 # Modules Status
-if you want to help send me email: mfalcon@ynext.cl
 | #  | Module  | State | New mode | Translation | Bugs | Date | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | 01 | base  | starting | x | - | - | - | - |
@@ -41,6 +40,7 @@ if you want to help send me email: mfalcon@ynext.cl
 | 18 | academy | - | - | - | - | - | - |
 | 19 | forum | - | - | - | - | - | - |
 
+if you want to help send me email: mfalcon@ynext.cl
 
 # Rules for Developers
 1- all apps with namespace urls.py
