@@ -10,11 +10,6 @@ from .views.views import (
     BlogView, PostDetailView, UnderConstruction, WebProductDetailView,
     WebProductView, contact, index)
 
-from .views.web_payment_method import (
-    DeleteWebPaymentMethod, WebPaymentMethodCreateView,
-    WebPaymentMethodDetailView, WebPaymentMethodListView,
-    WebPaymentMethodUpdateView)
-
 from .views.website_config import UpdateWebsiteConfigView
 
 app_name = 'home'
