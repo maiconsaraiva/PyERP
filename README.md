@@ -20,8 +20,8 @@ python manage.py runserver
 # Modules Status
 | #  | Module  | State | New mode | Translation | Bugs | Date | Developer | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| 01 | base  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 02 | home  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d)| - |
+| 01 | [base](https://github.com/falconsoft3d/pyerp/tree/master/apps/base) | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 02 | [home](https://github.com/falconsoft3d/pyerp/tree/master/apps/home) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d)| - |
 | 03 | chat  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 04 | crm  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 05 | marketing  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
@@ -34,8 +34,8 @@ python manage.py runserver
 | 12 | paypal | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 13 | payroll | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 14 | odoo api | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 15 | l10n_spain | - | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) |
-| 16 | l10n_chile | - | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) |
+| 15 | l10n_spain | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 16 | l10n_chile | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 17 | run_server | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 18 | academy | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 19 | forum | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
