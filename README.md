@@ -54,6 +54,26 @@ COUNTRY_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
 ]
 ```
+3- Alls Apps need this file
+info.json
+```
+{
+	"name": "Chat",
+	"version":"1.0.0.1",
+	"author": "YnexT SpA",
+	"website": "www.ynext.cl",
+	"category": "Accounting",
+	"summary": "Account",
+	"depends": "",
+	"description": "Demo Hello",
+	"external_dependencies":"",
+	"type":"public",
+	"color":"bg-success",
+	"fa":"fa-comments",
+	"sequence":"10"
+}
+
+```
 
 # My contact data
 ```
