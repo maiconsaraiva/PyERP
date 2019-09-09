@@ -32,9 +32,9 @@ python manage.py runserver
 | 09 | [sale](https://github.com/falconsoft3d/pyerp/tree/master/apps/sale)  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 10 | [stock](https://github.com/falconsoft3d/pyerp/tree/master/apps/stock) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 11 | [flow](https://github.com/falconsoft3d/pyerp/tree/master/apps/flow) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 12 | [paypal](https://github.com/falconsoft3d/pyerp/tree/master/apps/paypal) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 12 | [paypal](https://github.com/falconsoft3d/pyerp/tree/master/apps/paypal) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 13 | [payroll](https://github.com/falconsoft3d/pyerp/tree/master/apps/payroll) | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 14 | [odoo_api](https://github.com/falconsoft3d/pyerp/tree/master/apps/odoo_api) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 14 | [odoo_api](https://github.com/falconsoft3d/pyerp/tree/master/apps/odoo_api) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 15 | [l10n_spain](https://github.com/falconsoft3d/pyerp/tree/master/apps/l10n_spain) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 16 | [l10n_chile](https://github.com/falconsoft3d/pyerp/tree/master/apps/l10n_chile) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 17 | [run_server](https://github.com/falconsoft3d/pyerp/tree/master/apps/run_server) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
