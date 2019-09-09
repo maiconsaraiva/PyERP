@@ -26,12 +26,12 @@ python manage.py runserver
 | crm  | starting | x | - |
 | marketing  | starting | - | - |
 | pos  | starting | x | - |
-| project  | starting | - | - |
+| project  | starting | x | - |
 | purchase  | starting | - | - |
-| Sale  | starting | - | - |
-| Stock| starting | - | - |
-| Flow| starting | - | - |
-| Paypal| starting | - | - |
+| sale  | starting | - | - |
+| stock| starting | - | - |
+| flow| starting | - | - |
+| paypal| starting | - | - |
 
 # My contact data
 ```

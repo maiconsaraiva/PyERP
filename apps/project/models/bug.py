@@ -17,13 +17,12 @@ BUG_STATE = (
 class PyBug(PyFather):
     name = models.CharField('Nombre', max_length=80)
     note = models.TextField(blank=True, null=True)
-    user_id = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     state = models.CharField(
         choices=BUG_STATE, max_length=64, default='nuevo')
 
     def get_absolute_url(self):
-        return reverse('base:bug-detail', kwargs={'pk': self.pk})
+        return reverse('project:bug-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

@@ -3,13 +3,17 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Librerias en carpetas locales
-from .subviews.bug import (
+from .views.bug import (
     BugCreateView, BugDetailView, BugListView, BugUpdateView, DeleteBug)
-from .subviews.project import (
+
+from .views.project import (
     DeleteProject, ProjectCreateView, ProjectDetailView, ProjectListView,
     ProjectUpdateView)
-from .subviews.task import (
+
+from .views.task import (
     DeleteTask, TaskCreateView, TaskDetailView, TaskListView, TaskUpdateView)
+
+app_name = 'project'
 
 urlpatterns = [
     path('task', TaskListView.as_view(), name='task'),

@@ -7,17 +7,16 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.bug import PyBug
+from ..models.bug import PyBug
 
 """ BEGIN BUG """
 BUG_FIELDS = [
             {'string': 'Nombre', 'field': 'name'},
             {'string': 'Estado', 'field': 'state'},
-            {'string': 'Usuario', 'field': 'user_id'},
             {'string': 'Notas', 'field': 'note'},
         ]
 
-BUG_FIELDS_SHORT = ['name','state','user_id','note']
+BUG_FIELDS_SHORT = ['name','state', 'note']
 
 
 class BugListView(LoginRequiredMixin, ListView):
@@ -28,8 +27,8 @@ class BugListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(BugListView, self).get_context_data(**kwargs)
         context['title'] = 'Errores'
-        context['detail_url'] = 'base:bug-detail'
-        context['add_url'] = 'base:bug-add'
+        context['detail_url'] = 'project:bug-detail'
+        context['add_url'] = 'project:bug-add'
         context['fields'] = BUG_FIELDS
         return context
 
@@ -41,9 +40,9 @@ class BugDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(BugDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:bug', 'name': 'Error'}]
-        context['update_url'] = 'base:bug-update'
-        context['delete_url'] = 'base:bug-delete'
+        context['breadcrumbs'] = [{'url': 'project:bug', 'name': 'Error'}]
+        context['update_url'] = 'project:bug-update'
+        context['delete_url'] = 'project:bug-delete'
         context['fields'] = BUG_FIELDS
         return context
 
@@ -56,8 +55,8 @@ class BugCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(BugCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Error'
-        context['breadcrumbs'] = [{'url': 'base:bug', 'name': 'Error'}]
-        context['back_url'] = reverse('base:bug')
+        context['breadcrumbs'] = [{'url': 'project:bug', 'name': 'Error'}]
+        context['back_url'] = reverse('project:bug')
         return context
 
 class BugUpdateView(LoginRequiredMixin, UpdateView):
@@ -69,7 +68,7 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(BugUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:bug', 'name': 'Error'}]
+        context['breadcrumbs'] = [{'url': 'project:bug', 'name': 'Error'}]
         context['back_url'] = reverse('base:bug-detail', kwargs={'pk': context['object'].pk})
         return context
 
@@ -78,4 +77,4 @@ class BugUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteBug(self, pk):
     bug = PyBug.objects.get(id=pk)
     bug.delete()
-    return redirect(reverse('base:bug'))
+    return redirect(reverse('project:bug'))

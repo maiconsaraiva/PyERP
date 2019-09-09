@@ -7,18 +7,16 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.task import PyTask
+from ..models.task import PyTask
 
-""" BEGIN TASK """
 TASK_FIELDS = [
             {'string': 'Nombre', 'field': 'name'},
             {'string': 'Estado', 'field': 'state'},
-            {'string': 'Usuario', 'field': 'user_id'},
             {'string': 'Proyecto', 'field': 'project_id'},
             {'string': 'Notas', 'field': 'note'},
         ]
 
-TASK_FIELDS_SHORT = ['name','state','user_id','project_id','note']
+TASK_FIELDS_SHORT = ['name','state','project_id','note']
 
 
 class TaskListView(LoginRequiredMixin, ListView):
@@ -29,8 +27,8 @@ class TaskListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
         context['title'] = 'Tareas'
-        context['detail_url'] = 'base:task-detail'
-        context['add_url'] = 'base:task-add'
+        context['detail_url'] = 'project:task-detail'
+        context['add_url'] = 'project:task-add'
         context['fields'] = TASK_FIELDS
         return context
 
@@ -42,9 +40,9 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(TaskDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:task', 'name': 'Tarea'}]
-        context['update_url'] = 'base:task-update'
-        context['delete_url'] = 'base:task-delete'
+        context['breadcrumbs'] = [{'url': 'project:task', 'name': 'Tarea'}]
+        context['update_url'] = 'project:task-update'
+        context['delete_url'] = 'project:task-delete'
         context['fields'] = TASK_FIELDS
         return context
 
@@ -57,8 +55,8 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(TaskCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Tarea'
-        context['breadcrumbs'] = [{'url': 'base:task', 'name': 'Tarea'}]
-        context['back_url'] = reverse('base:task')
+        context['breadcrumbs'] = [{'url': 'project:task', 'name': 'Tarea'}]
+        context['back_url'] = reverse('project:task')
         return context
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
@@ -70,8 +68,8 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(TaskUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:task', 'name': 'Tarea'}]
-        context['back_url'] = reverse('base:task-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'project:task', 'name': 'Tarea'}]
+        context['back_url'] = reverse('project:task-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
@@ -79,5 +77,4 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteTask(self, pk):
     task = PyTask.objects.get(id=pk)
     task.delete()
-    return redirect(reverse('base:task'))
-""" END TASK """
+    return redirect(reverse('project:task'))

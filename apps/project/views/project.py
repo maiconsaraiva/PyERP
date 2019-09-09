@@ -7,16 +7,15 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..submodels.project import PyProject
+from ..models.project import PyProject
 
 PROJECT_FIELDS = [
             {'string': 'Nombre', 'field': 'name'},
             {'string': 'Estado', 'field': 'state'},
-            {'string': 'Usuario', 'field': 'user_id'},
             {'string': 'Notas', 'field': 'note'},
         ]
 
-PROJECT_FIELDS_SHORT = ['name','state','user_id','note']
+PROJECT_FIELDS_SHORT = ['name','state', 'note']
 
 
 class ProjectListView(LoginRequiredMixin, ListView):
@@ -27,8 +26,8 @@ class ProjectListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ProjectListView, self).get_context_data(**kwargs)
         context['title'] = 'Proyectos'
-        context['detail_url'] = 'base:project-detail'
-        context['add_url'] = 'base:project-add'
+        context['detail_url'] = 'project:project-detail'
+        context['add_url'] = 'project:project-add'
         context['fields'] = PROJECT_FIELDS
         return context
 
@@ -40,9 +39,9 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:project', 'name': 'Proyecto'}]
-        context['update_url'] = 'base:project-update'
-        context['delete_url'] = 'base:project-delete'
+        context['breadcrumbs'] = [{'url': 'project:project', 'name': 'Proyecto'}]
+        context['update_url'] = 'project:project-update'
+        context['delete_url'] = 'project:project-delete'
         context['fields'] = PROJECT_FIELDS
         return context
 
@@ -55,8 +54,8 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ProjectCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Proyecto'
-        context['breadcrumbs'] = [{'url': 'base:project', 'name': 'Proyecto'}]
-        context['back_url'] = reverse('base:project')
+        context['breadcrumbs'] = [{'url': 'project:project', 'name': 'Proyecto'}]
+        context['back_url'] = reverse('project:project')
         return context
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
@@ -68,8 +67,8 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProjectUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:project', 'name': 'Proyecto'}]
-        context['back_url'] = reverse('base:project-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'project:project', 'name': 'Proyecto'}]
+        context['back_url'] = reverse('project:project-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
@@ -77,4 +76,4 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteProject(self, pk):
     project = PyProject.objects.get(id=pk)
     project.delete()
-    return redirect(reverse('base:project'))
+    return redirect(reverse('project:project'))
