@@ -2,29 +2,47 @@
 from django import template
 
 # Librerias de terceros
-from apps.home.models import WebsiteConfig
+from apps.home.models import PyWebsiteConfig
 
 register = template.Library()
 
 @register.filter
 def web_chat(obj):
-    return WebsiteConfig.objects.get(pk=1).show_chat
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_chat
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter
 def web_show_shop(obj):
-    return WebsiteConfig.objects.get(pk=1).show_shop
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_shop
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter
 def web_under_construction(obj):
-    return WebsiteConfig.objects.get(pk=1).under_construction
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).under_construction
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+
 
 @register.filter
 def web_show_blog(obj):
-    return WebsiteConfig.objects.get(pk=1).show_blog
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_blog
+    except PyWebsiteConfig.DoesNotExist:
+        return None
 
 
 @register.filter
 def web_show_price(obj):
-    return WebsiteConfig.objects.get(pk=1).show_price
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_price
+    except PyWebsiteConfig.DoesNotExist:
+        return None

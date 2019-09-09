@@ -8,23 +8,23 @@
     </a>
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="{% url 'base:task' %}" class="nav-link">
+        <a href="{% url 'project:task' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
-          <p>Tareas</p>
+          <p>{{ _('Task') }}</p>
         </a>
       </li>
 
         <li class="nav-item">
-        <a href="{% url 'base:project' %}" class="nav-link">
+        <a href="{% url 'project:project' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
-          <p>Proyectos</p>
+          <p>{{ _('Project') }}</p>
         </a>
       </li>
 
         <li class="nav-item">
-        <a href="{% url 'base:bug' %}" class="nav-link">
+        <a href="{% url 'project:bug' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
-          <p>Errores</p>
+          <p>{{ _('Bugs') }}</p>
         </a>
       </li>
     </ul>
