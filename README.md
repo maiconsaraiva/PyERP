@@ -38,6 +38,7 @@ python manage.py runserver
 | l10n_chile | - | - | - | - | - | - |
 | run_server | - | - | - | - | - | - |
 | academy | - | - | - | - | - | - |
+| forum | - | - | - | - | - | - |
 
 
 # Rules for Developers
