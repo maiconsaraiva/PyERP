@@ -1,1 +1,2 @@
 apps.crm
+apps.home

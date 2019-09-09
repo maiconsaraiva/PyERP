@@ -65,7 +65,15 @@
                                             </div>
                                         <!-- /.col -->
                                         </div>
-                                        {% if forloop.counter|divisibleby:"2" or forloop.last == true %}
+                                        {% if forloop.counter|divisibleby:"2" %}
+                                            </div>
+                                            <!-- /.row -->
+                                        {% elif forloop.last %}
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                    </div>
+                                                <!-- /.col -->
+                                                </div>
                                             </div>
                                             <!-- /.row -->
                                         {%endif%}
