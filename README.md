@@ -1,5 +1,5 @@
 # PyERP
-PyERP is an project open-source, user-oriented, ERP system based on Django framework. If you want to help both as an investor, partner or as a developer send me email: mfalcon@ynext.cl :+1:.
+PyERP is an project open-source, user-oriented, **ERP** system based on Django framework. If you want to help both as an **investor**, **partner** or as a **developer** send me email: mfalcon@ynext.cl :+1:.
 The first version will be released at the end of 2020. While we will upload videos so you can see our progress. Follow me [Youtube](https://www.youtube.com/channel/UCM93kgnjXu393jgKjjSkUjQ).
 
 # Telegram Group (Pyerp)
