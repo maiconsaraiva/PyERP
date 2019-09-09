@@ -22,23 +22,23 @@ python manage.py runserver
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | 01 | [base](https://github.com/falconsoft3d/pyerp/tree/master/apps/base) | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 02 | [home](https://github.com/falconsoft3d/pyerp/tree/master/apps/home) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d)| - |
-| 03 | chat  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 04 | crm  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 05 | marketing  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 06 | pos  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 07 | project  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 08 | purchase | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 09 | sale  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 10 | stock | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 11 | flow | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 12 | paypal | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 13 | payroll | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 14 | odoo api | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 15 | l10n_spain | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 16 | l10n_chile | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 17 | run_server | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 18 | academy | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 19 | forum | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 03 | [chat](https://github.com/falconsoft3d/pyerp/tree/master/apps/chat)  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 04 | [crm](https://github.com/falconsoft3d/pyerp/tree/master/apps/crm)  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 05 | [marketing](https://github.com/falconsoft3d/pyerp/tree/master/apps/marketing)  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 06 | [pos](https://github.com/falconsoft3d/pyerp/tree/master/apps/pos)  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 07 | [project](https://github.com/falconsoft3d/pyerp/tree/master/apps/project)  | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 08 | [purchase](https://github.com/falconsoft3d/pyerp/tree/master/apps/purchase) | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 09 | [sale](https://github.com/falconsoft3d/pyerp/tree/master/apps/sale)  | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 10 | [stock](https://github.com/falconsoft3d/pyerp/tree/master/apps/stock) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 11 | [flow](https://github.com/falconsoft3d/pyerp/tree/master/apps/flow) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 12 | [paypal](https://github.com/falconsoft3d/pyerp/tree/master/apps/paypal) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 13 | [payroll](https://github.com/falconsoft3d/pyerp/tree/master/apps/payroll) | starting | x | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 14 | [odoo_api](https://github.com/falconsoft3d/pyerp/tree/master/apps/odoo_api) | starting | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 15 | [l10n_spain](https://github.com/falconsoft3d/pyerp/tree/master/apps/l10n_spain) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 16 | [l10n_chile](https://github.com/falconsoft3d/pyerp/tree/master/apps/l10n_chile) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 17 | [run_server](https://github.com/falconsoft3d/pyerp/tree/master/apps/run_server) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 18 | [academy](https://github.com/falconsoft3d/pyerp/tree/master/apps/academy) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 19 | [forum](https://github.com/falconsoft3d/pyerp/tree/master/apps/forum) | - | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 
 if you want to help send me email: mfalcon@ynext.cl
 
