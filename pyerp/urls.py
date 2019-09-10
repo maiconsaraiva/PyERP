@@ -1,5 +1,7 @@
 """Rutas de PyErp
 """
+import os
+
 # Librerias Django
 from django.conf import settings
 from django.conf.urls import include
@@ -10,6 +12,7 @@ from django.views.static import serve
 
 # Librerias de terceros
 from apps.base.views import ActivateLanguageView
+from pyerp.settings import BASE_DIR
 
 urlpatterns = [
     path('', include('apps.base.home_urls')),
@@ -32,8 +35,7 @@ urlpatterns += i18n_patterns(
     ),
 )
 
-
-with open('installed_apps.py', 'r') as ins_apps_file:
+with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
     for line in ins_apps_file.readlines():
         if line.strip() == 'apps.home':
             urlpatterns.pop(0)
