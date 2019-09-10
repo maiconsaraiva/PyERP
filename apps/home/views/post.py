@@ -1,7 +1,7 @@
 # Librerias Django
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -44,7 +44,7 @@ class PostCreateView(CreateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
     template_name = 'base/form.html'
-    # success_url = reverse('home:post-backend')
+    success_url = reverse_lazy('home:post-backend')
 
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
@@ -52,6 +52,7 @@ class PostCreateView(CreateView):
         context['breadcrumbs'] = [{'url': 'home:post-backend', 'name': 'Entrada'}]
         context['back_url'] = reverse('home:post-backend')
         return context
+
 
 class PostUpdateView(UpdateView):
     model = PyPost

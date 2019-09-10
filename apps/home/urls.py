@@ -25,11 +25,11 @@ urlpatterns = [
     url(r'^under-construction/', UnderConstruction, name='under-construction'),
     url(r'^contact_me$', contact, name='contact-me'),
 
-    path('post-backend', PostListView.as_view(), name='post-backend'),
-    path('post-backend/add/', PostCreateView.as_view(), name='post-add'),
-    path('post-backend/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('post-backend/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
-    path('post-backend/<int:pk>/delete/', DeletePost, name='post-delete'),
+    path('post', PostListView.as_view(), name='post-backend'),
+    path('post/add/', PostCreateView.as_view(), name='post-add'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', DeletePost, name='post-delete'),
 
     path('config/<int:pk>', UpdateWebsiteConfigView.as_view(), name='website-config'),
 ]
