@@ -43,15 +43,10 @@
                         <div class="wrapper_second_useful tb_bottompadder60">
                             <h4>Páginas <span> útiles </span></h4>
                             <ul>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>About Company</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Company Profile </a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Company Team </a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>history</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>events</a> </li>
+                                <li><a href="{% url 'webodoobim:index' %}">Inicio</a></li>
+                                <li><a href="{% url 'webodoobim:services' %}">Servicios</a></li>
+                                <li><a href="{% url 'webodoobim:blog' %}">Blog</a></li>
+                                <li><a href="{% url 'webodoobim:contact' %}">Contacto</a></li>
                             </ul>
                         </div>
                     </div>
@@ -93,17 +88,9 @@
                     <div class="tb_foter_right">
                         <div class="copyright_icon_wrapper">
                             <ul class="copyright_icons">
-                                <li><a href="#">home</a>
-                                </li>
-                                <li><a href="#">about</a>
-                                </li>
-                                <li><a href="#">contact</a>
-                                </li>
-                                <li><a href="#">shop</a>
-                                </li>
-                                <li><a href="#">privacy & terms</a>
-                                </li>
-
+                                <li><a href="{% url 'webodoobim:index' %}">Inicio</a></li>
+                                <li><a href="{% url 'webodoobim:blog' %}">Blog</a></li>
+                                <li><a href="{% url 'webodoobim:contact' %}">Contacto</a></li>
                             </ul>
                         </div>
                     </div>
