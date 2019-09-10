@@ -33,22 +33,24 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'home:post', 'name': 'Entradas'}]
+        context['breadcrumbs'] = [{'url': 'home:post-backend', 'name': 'Entradas'}]
         context['update_url'] = 'home:post-update'
         context['delete_url'] = 'home:post-delete'
         context['fields'] = POST_FIELDS
         return context
 
+
 class PostCreateView(CreateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
     template_name = 'base/form.html'
+    # success_url = reverse('home:post-backend')
 
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Post'
-        context['breadcrumbs'] = [{'url': 'home:post', 'name': 'Entrada'}]
-        context['back_url'] = reverse('home:post')
+        context['breadcrumbs'] = [{'url': 'home:post-backend', 'name': 'Entrada'}]
+        context['back_url'] = reverse('home:post-backend')
         return context
 
 class PostUpdateView(UpdateView):
@@ -59,7 +61,7 @@ class PostUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(PostUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'home:post', 'name': 'Entrada'}]
+        context['breadcrumbs'] = [{'url': 'home:post-backend', 'name': 'Entrada'}]
         context['back_url'] = reverse('home:post-detail', kwargs={'pk': context['object'].pk})
         return context
 
@@ -68,4 +70,4 @@ class PostUpdateView(UpdateView):
 def DeletePost(self, pk):
     post = PyPost.objects.get(id=pk)
     post.delete()
-    return redirect(reverse('home:post'))
+    return redirect(reverse('home:post-backend'))
