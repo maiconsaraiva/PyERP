@@ -106,7 +106,7 @@ Purchase:
                         <div class="main-menu-wrapper clear-fix">
 
                             <div class="logo float-left">
-                                <a href="index.html"><img style="width:120px;" src="{% static 'img/logo-odoo-bim-w.png' %}" alt="LOGO"></a>
+                                <a href="{% url 'webodoobim:contact' %}"><img style="width:120px;" src="{% static 'img/logo-odoo-bim-w.png' %}" alt="LOGO"></a>
                             </div>
 
                             <div class="serach-header bt_search_wrapper_respnsive hidden-lg hidden-md">
@@ -124,35 +124,16 @@ Purchase:
                         <div class="sc_navigation hidden-sm hidden-xs">
                             <nav id="primary-nav" class="dropdown nav_left_margin">
                                 <ul class="dropdown menu cart_dropdown_wrapper">
-                                    <li><a href="index.html" title="">Inicio</a>
+                                    <li><a href="{% url 'webodoobim:index' %}" title="">Inicio</a>
                                     </li>
-                                    <li><a href="about_us.html" title="">Acerca De</a>
+                                    <li><a href="{% url 'webodoobim:about' %}" title="">Acerca De</a>
                                     </li>
-                                    <li><a href="services.html" title="">Servicios</a>
+                                    <li><a href="{% url 'webodoobim:services' %}" title="">Servicios</a>
                                     </li>
-                                    <li><a href="#" title="">Páginas</a>
-									 <ul>
-                                            <li><a href="about_us.html" title=""> about us</a></li>
-                                            <li><a href="error.html" title=""> 404 error</a></li>
-											<li><a href="project.html" title=""> project</a></li>
-											<li><a href="services.html" title=""> services</a></li>
-											<li><a href="project_single.html" title=""> project single</a></li>
-
-                                        </ul>
-                                    </li>
-									<li><a href="project.html" title="">Proyectos</a>
-										 <ul>
-											<li><a href="project.html" title=""> project</a></li>
-											<li><a href="project_single.html" title=""> project single</a></li>
-										</ul>
-									</li>
-                                    <li><a href="blog_single.html" title="">blog</a>
-                                        <ul>
-                                            <li><a href="blog_single.html" title="">blog single</a></li>
-                                            <li><a href="blog_category.html" title=""> blog category</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact_us.html" title="">Contacto</a>
+                                    <li><a href="project.html" title="">Videos</a></li>
+                                    <li><a href="project.html" title="">Presentación</a></li>
+                                    <li><a href="{% url 'webodoobim:blog' %}" title="">Blog</a>
+                                    <li><a href="{% url 'webodoobim:contact' %}" title="">Contacto</a>
                                     </li>
 
 
