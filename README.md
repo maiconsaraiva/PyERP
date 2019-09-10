@@ -40,7 +40,7 @@ python manage.py runserver
 | 17 | [run_server](https://github.com/falconsoft3d/pyerp/tree/master/apps/run_server) | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 18 | [academy](https://github.com/falconsoft3d/pyerp/tree/master/apps/academy) | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 19 | [forum](https://github.com/falconsoft3d/pyerp/tree/master/apps/forum) | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 20 | [bim](https://github.com/falconsoft3d/pyerp/tree/master/apps/bim) | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | Construction Project Management Software  |
+| 20 | [bim](https://github.com/falconsoft3d/pyerp/tree/master/apps/bim) | - | [bim](https://github.com/falconsoft3d/pyerp/projects/2) | - | - | [falconsoft3d](https://github.com/falconsoft3d) | Construction Project Management Software  |
 | 21 | [marketplace](https://github.com/falconsoft3d/pyerp/tree/master/apps/marketplace) | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 
 # Rules for Developers
