@@ -248,7 +248,7 @@ try:
         for line in ins_apps_file.readlines():
             INSTALLED_APPS += [line.strip()]
 except:
-    _logger('No se encuentra archivo installed_apps.py, se buscará en el localsettings (si se existe).')
+    _logger.warning('No se encuentra archivo installed_apps.py, se buscará en el localsettings (si se existe).')
 
 # No borrar esto, si falla importando, entra en el try y simplemente muestra el
 # warning, esto porque en producción SI EXISTE EL LOCALSETTINGS, es buena
