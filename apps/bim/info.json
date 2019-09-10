@@ -9,7 +9,7 @@
 	"description": "Construction",
 	"external_dependencies":"",
 	"type":"public",
-	"color":"bg-success",
-	"fa":"fa-connectdevelop",
+	"color":"bg-warning",
+	"fa":"fa-home",
 	"sequence":"10"
 }
