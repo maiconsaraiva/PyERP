@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 # Librerias Standard
+import logging
 import os
 
 # Librerias Django
@@ -243,3 +244,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 with open('installed_apps.py', 'r') as ins_apps_file:
     for line in ins_apps_file.readlines():
         INSTALLED_APPS += [line.strip()]
+
+# No borrar esto, si falla importando, entra en el try y simplemente muestra el
+# warning, esto porque en producción SI EXISTE EL LOCALSETTINGS, es buena
+# practica tener un localsettings para configuraciones locales, y no meter claves
+# ni cosas delicadas en éste settings.py
+try:
+    from localsetings import *
+except ImportError:
+    logging.getLogger(__name__).warning('No hay localsettings, trabajando con settings global.')
