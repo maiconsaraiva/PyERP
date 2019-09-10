@@ -9,4 +9,4 @@ from django.views.generic import DetailView, ListView
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'webodoobim/index.html')
