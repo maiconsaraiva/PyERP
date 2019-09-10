@@ -17,6 +17,8 @@ import os
 # Librerias Django
 from django.utils.translation import ugettext_lazy as _
 
+_logger = logging.getLogger(__name__)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -241,9 +243,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # ========================================================================== #
 # Copiar en localsettings.py
-with open('installed_apps.py', 'r') as ins_apps_file:
-    for line in ins_apps_file.readlines():
-        INSTALLED_APPS += [line.strip()]
+try:
+    with open('installed_apps.py', 'r') as ins_apps_file:
+        for line in ins_apps_file.readlines():
+            INSTALLED_APPS += [line.strip()]
+except:
+    _logger('No se encuentra archivo installed_apps.py, se buscará en el localsettings (si se existe).')
 
 # No borrar esto, si falla importando, entra en el try y simplemente muestra el
 # warning, esto porque en producción SI EXISTE EL LOCALSETTINGS, es buena
@@ -252,4 +257,4 @@ with open('installed_apps.py', 'r') as ins_apps_file:
 try:
     from localsetings import *
 except ImportError:
-    logging.getLogger(__name__).warning('No hay localsettings, trabajando con settings global.')
+    _logger.warning('No hay localsettings, trabajando con settings global.')
