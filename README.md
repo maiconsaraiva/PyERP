@@ -22,12 +22,12 @@ python manage.py runserver
 | #  | Module  | State | Project | Bugs | Date | Developer | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | 01 | [base](https://github.com/falconsoft3d/pyerp/tree/master/apps/base) | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 02 | [home](https://github.com/falconsoft3d/pyerp/tree/master/apps/home) | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d)| - |
+| 02 | [home](https://github.com/falconsoft3d/pyerp/tree/master/apps/home) | starting | [home](https://github.com/falconsoft3d/pyerp/projects/3) | - | - | [falconsoft3d](https://github.com/falconsoft3d)| - |
 | 03 | [chat](https://github.com/falconsoft3d/pyerp/tree/master/apps/chat)  | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 04 | [crm](https://github.com/falconsoft3d/pyerp/tree/master/apps/crm)  | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 05 | [marketing](https://github.com/falconsoft3d/pyerp/tree/master/apps/marketing)  | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 06 | [pos](https://github.com/falconsoft3d/pyerp/tree/master/apps/pos)  | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
-| 07 | [project](https://github.com/falconsoft3d/pyerp/tree/master/apps/project)  | starting | x | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
+| 07 | [project](https://github.com/falconsoft3d/pyerp/tree/master/apps/project)  | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 08 | [purchase](https://github.com/falconsoft3d/pyerp/tree/master/apps/purchase) | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 09 | [sale](https://github.com/falconsoft3d/pyerp/tree/master/apps/sale)  | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 | 10 | [stock](https://github.com/falconsoft3d/pyerp/tree/master/apps/stock) | starting | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
