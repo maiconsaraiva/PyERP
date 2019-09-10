@@ -42,3 +42,12 @@ cd pyerp
 git pull
 ./manage.py collectstatic
 ```
+
+# GIT
+```
+git checkout -b fixing_url_name_space
+git pull origin fixing_url_name_space
+git add .
+git commit -m "Cambios en Rama"
+git push origin fixing_url_name_space
+```
