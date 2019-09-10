@@ -1,1 +1,1 @@
-apps.bim
+apps.webodoobim

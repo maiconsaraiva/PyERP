@@ -32,12 +32,16 @@ urlpatterns += i18n_patterns(
     ),
 )
 
-
 with open('installed_apps.py', 'r') as ins_apps_file:
     for line in ins_apps_file.readlines():
         if line.strip() == 'apps.home':
             urlpatterns.pop(0)
             urlpatterns += [path('', include('apps.home.urls'))]
+
+        elif line.strip() == 'apps.webodoobim':
+            urlpatterns.pop(0)
+            urlpatterns += [path('', include('apps.webodoobim.urls'))]
+
         else:
             _, app = line.split('.')
             urlpatterns += [path('%s/' % app.rstrip('\n'), include('%s.urls' % line.strip()))]
