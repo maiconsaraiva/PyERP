@@ -9,9 +9,9 @@ from django.contrib.auth.models import Permission
 
 # Librerias en carpetas locales
 from .forms import PersonaChangeForm, PersonaCreationForm
-from .models import PyUser
 from .models import (
-    PyApp, PyCompany, PyCountry, PyPartner, PyProduct, PyProductCategory)
+    PyApp, PyCompany, PyCountry, PyPartner, PyProduct, PyProductCategory,
+    PyUser)
 
 admin.site.register(PyPartner)
 admin.site.register(PyProduct)

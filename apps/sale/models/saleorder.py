@@ -2,23 +2,25 @@
 from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import post_delete, post_save
+from django.utils.translation import ugettext_lazy as _
 from django.dispatch import receiver
 
 # Librerias de terceros
 from apps.base.models import PyFather, PyPartner, PyProduct
 
 SALE_STATE = (
-        ("draft", "Borrador"),
-        ('open', 'Consumible'),
-        ('cancel', 'Servicio'),
-        ('confirmada', 'confirmada')
+        (_('draft'), "Borrador"),
+        (_('open'), 'Consumible'),
+        (_('cancel'), 'Servicio'),
+        (_('confirmed'), 'confirmada')
     )
+
 
 # ========================================================================== #
 class PySaleOrder(PyFather):
     """Modelo de la orden de pago
     """
-    name = models.CharField('Nombre', max_length=80)
+    name = models.CharField(_('Name'), max_length=80)
     partner_id = models.ForeignKey(
         PyPartner,
         null=True,
@@ -27,25 +29,26 @@ class PySaleOrder(PyFather):
     )
     date_order = models.DateTimeField(auto_now_add=True, null=True)
     amount_untaxec = models.DecimalField(
-        'Monto Neto',
+        _('Net Amount'),
         max_digits=10,
         decimal_places=2,
         default=0
     )
     amount_taxt = models.DecimalField(
-        'Total Impuestos',
+        _('Total taxes'),
         max_digits=10,
         decimal_places=2,
         default=0
     )
     amount_total = models.DecimalField(
-        'Total',
+        _('Total'),
         max_digits=10,
         decimal_places=2,
         default=0
     )
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(_('Description'), blank=True, null=True)
     state = models.CharField(
+        _('Status'),
         choices=SALE_STATE,
         max_length=64,
         default='draft'

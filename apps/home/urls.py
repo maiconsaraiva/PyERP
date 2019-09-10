@@ -5,11 +5,9 @@ from django.urls import path
 # Librerias en carpetas locales
 from .views.post import (
     DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
-
 from .views.views import (
     BlogView, PostDetailView, UnderConstruction, WebProductDetailView,
     WebProductView, contact, index)
-
 from .views.website_config import UpdateWebsiteConfigView
 
 app_name = 'home'

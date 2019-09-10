@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..models import PySaleOrder, PySaleOrderDetail
@@ -20,7 +21,7 @@ class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
     """Vista para eliminar las sale
     """
     model = PySaleOrder
-    template_name = 'saleorderdelete.html'
+    template_name = 'sale/saleorderdelete.html'
     success_url = reverse_lazy('sale:sale-order')
 
     def get_context_data(self, **kwargs):

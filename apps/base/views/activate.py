@@ -12,7 +12,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 
-# Librerias de terceros
+# Librerias en carpetas locales
 from ..models import PyUser
 from ..tokens import ACCOUNT_ACTIVATION_TOKEN
 

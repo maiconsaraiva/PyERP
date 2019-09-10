@@ -35,7 +35,7 @@ class SaleOrderForm(ModelForm):
                 },
             ),
             'partner_id': autocomplete.ModelSelect2(
-                url='partners-autocomplete',
+                url='base:partners-autocomplete',
                 attrs={
                     'class': 'form-control',
                     'data-placeholder': 'Seleccione un cliente ...',
@@ -82,7 +82,7 @@ class SaleOrderDetailForm(ModelForm):
         widgets = {
             'sale_order': HiddenInput(),
             'product': autocomplete.ModelSelect2(
-                url='product-autocomplete',
+                url='sale:product-autocomplete',
                 forward=('sale_order',),
                 attrs={
                     'class': 'form-control',

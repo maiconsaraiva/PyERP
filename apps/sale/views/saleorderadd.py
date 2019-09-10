@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..forms import SaleOrderForm
@@ -22,14 +23,15 @@ class SaleOrderAddView(LoginRequiredMixin, CreateView):
     """
     model = PySaleOrder
     form_class = SaleOrderForm
-    template_name = 'saleorderform.html'
+    template_name = 'sale/saleorderform.html'
     success_url = 'sale:sale-order-edit'
 
     def get_context_data(self, **kwargs):
         context = super(SaleOrderAddView, self).get_context_data(**kwargs)
-        context['title'] = 'Agregar Orden de Venta'
+        context['title'] = _('Sale Order Add')
         context['action_url'] = 'sale:sale-order-add'
         context['back_url'] = 'sale:sale-order'
+        context['breadcrumbs'] = [{'url': 'sale:sale-order', 'name': _('Sales')}]
 
         return context
 

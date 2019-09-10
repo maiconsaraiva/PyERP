@@ -5,11 +5,9 @@ from django.urls import path
 # Librerias en carpetas locales
 from .views.bug import (
     BugCreateView, BugDetailView, BugListView, BugUpdateView, DeleteBug)
-
 from .views.project import (
     DeleteProject, ProjectCreateView, ProjectDetailView, ProjectListView,
     ProjectUpdateView)
-
 from .views.task import (
     DeleteTask, TaskCreateView, TaskDetailView, TaskListView, TaskUpdateView)
 

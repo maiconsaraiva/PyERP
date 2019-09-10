@@ -7,6 +7,7 @@ import logging
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 
 # Librerias en carpetas locales
@@ -32,19 +33,20 @@ class SaleOrderEditView(LoginRequiredMixin, UpdateView):
     """
     model = PySaleOrder
     form_class = SaleOrderForm
-    template_name = 'saleorderform.html'
+    template_name = 'sale/saleorderform.html'
     success_url = 'sale:sale-order-edit'
 
     def get_context_data(self, **kwargs):
         _pk = self.kwargs.get(self.pk_url_kwarg)
         context = super(SaleOrderEditView, self).get_context_data(**kwargs)
-        context['title'] = 'Editar Orden de Venta'
+        context['title'] = _('Sale Order Edit')
         context['action_url'] = 'sale:sale-order-edit'
         context['back_url'] = 'sale:sale-order'
         context['print_url'] = 'sale:sale-order-pdf'
         context['product_add_url'] = 'sale:sale-order-detail-add'
         context['product_edit_url'] = 'sale:sale-order-detail-edit'
         context['product_delete_url'] = 'sale:sale-order-detail-delete'
+        context['breadcrumbs'] = [{'url': 'sale:sale-order', 'name': _('Sales')}]
         context['fields'] = SALE_DETAIL_FIELDS
         context['object_list'] = PySaleOrderDetail.objects.filter(
             sale_order=_pk

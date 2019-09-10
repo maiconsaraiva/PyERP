@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView
 
-# Librerias de terceros
+# Librerias en carpetas locales
 from ..forms import AvatarForm, PerfilForm
 from ..models import PyUser
 

@@ -8,19 +8,19 @@
             <div class="modal-body">
                 {% if not detail %}
                     {{ delete_message|safe }}
-                    <p>Si desea continuar presione "Eliminar", tenga en cuenta que esta acción esta acción es irreversible.</p>
-                    <p>Presione "Cancelar" para anular la acción.</p>
+                    <p>{{ _('If you wish to continue press "Delete", keep in mind that this action is irreversible.') }}</p>
+                    <p>{{ _('Press "Cancel" to cancel the action.') }}</p>
                 {% else %}
                     {{ cant_delete_message|safe }}
                 {% endif %}
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-light" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-outline-light" type="button" data-dismiss="modal">{{ _('Cancel') }}</button>
                 {% if not detail %}
                     <form class="form-horizontal" role="form" action="{% url action_url object.pk %}" method="post">
                     <form method="post" class="form">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-light">Eliminar</button>
+                        <button type="submit" class="btn btn-outline-light">{{ _('Delete') }}</button>
                     </form>
                 {% endif %}
             </div>

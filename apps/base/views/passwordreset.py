@@ -16,6 +16,8 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 import requests
+
+# Librerias en carpetas locales
 from ..forms import PasswordRecoveryForm, PasswordSetForm
 from ..models import PyUser
 from ..tokens import PASSWORD_RECOVERY_TOKEN

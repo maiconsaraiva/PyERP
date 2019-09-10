@@ -94,19 +94,3 @@ def DeleteProduct(self, pk):
     product = PyProduct.objects.get(id=pk)
     product.delete()
     return redirect(reverse('base:products'))
-
-"""
-class ProductAutoComplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        _sale_order = self.forwarded.get('sale_order', None)
-
-        if _sale_order:
-            product_sale_order = PySaleOrderDetail.objects.filter(sale_order=_sale_order).values("product")
-            queryset = PyProduct.objects.filter(~Q(pk__in=product_sale_order))
-        else:
-            queryset = PyProduct.objects.all()
-
-        if self.q:
-            queryset = queryset.filter(name__icontains=self.q)
-
-        return queryset"""

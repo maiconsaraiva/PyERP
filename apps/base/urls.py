@@ -1,19 +1,19 @@
 # Librerias Django
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Librerias en carpetas locales
 from .views import (
-    ChangePasswordForm, CompanyCreateView, CompanyDetailView, CompanyListView,
-    CompanyUpdateView, CustomerListView, DeleteCompany, DeletePartner,
-    DeleteUser, DoChangePassword, InstallApps, PartnerAutoComplete,
-    PartnerCreateView, PartnerDetailView, PartnerUpdateView, ProviderListView,
+    ActivateView, AvatarUpdateView, ChangePasswordForm, ChangePasswordView,
+    CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
+    CustomerListView, DeleteCompany, DeletePartner, DeleteUser,
+    DoChangePassword, InstallApps, LogOutModalView, PartnerAutoComplete,
+    PartnerCreateView, PartnerDetailView, PartnerUpdateView,
+    PasswordRecoveryView, ProfileView, ProviderListView, SignUpView,
     UninstallApps, UpdateApps, UpdateBaseConfigView, UserCreateView,
-    UserDetailView, UserListView, UserUpdateView, erp_home,
-    ActivateView, ChangePasswordView, PasswordRecoveryView, ProfileView,
-    SignUpView, AvatarUpdateView, LogOutModalView)
+    UserDetailView, UserListView, UserUpdateView, erp_home)
 from .views.app import AppView
 from .views.base_config import LoadData
 from .views.country import (
@@ -173,12 +173,3 @@ urlpatterns = [
     ),
     path('avatar', login_required(AvatarUpdateView.as_view()), name='avatar'),
 ]
-
-
-
-"""
-    path(
-        'product/product-autocomplete',
-        ProductAutoComplete.as_view(),
-        name='product-autocomplete'
-    ),"""

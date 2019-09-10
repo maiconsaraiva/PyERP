@@ -1,4 +1,4 @@
-{% extends "erp/dashboard.html" %}
+{% extends "base/dashboard.html" %}
 {% load static %}
 {% load erp_tags %}
 {% block head %}
@@ -14,10 +14,10 @@
     <form method="post" class="form">
         <div class="card card-primary card-outline mt-2">
             <div class="card-header">
-                <a href="{% url back_url %}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Descartar</a>
-                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Guardar</button>
+                <a href="{% url back_url %}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> {{ _('Discard') }}</a>
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> {{ _('Save') }}</button>
                 {% if object %}
-                    <a href="{% url print_url object.pk %}" class="btn btn-success btn-sm"><i class="fas fa-download"></i> Imprimir</a>
+                    <a href="{% url print_url object.pk %}" class="btn btn-success btn-sm"><i class="fas fa-download"></i> {{ _('Print') }}</a>
                 {% endif %}
             </div>
             <div class="card-body">
@@ -44,7 +44,7 @@
                                 {% for field in fields %}
                                 <th class="text-center">{{ field.string }}</th>
                                 {% endfor %}
-                                <th class="text-center col-sm-2">Acciones</th>
+                                <th class="text-center col-sm-2">{{ _('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,7 +62,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th class="col-12" colspan="12"><button class="btn text-primary" onclick="return abrir_modal('{% url product_add_url object.pk %}')" type="button" data-dismiss="modal">Agregar un producto</button></th>
+                                <th class="col-12" colspan="12"><button class="btn text-primary" onclick="return abrir_modal('{% url product_add_url object.pk %}')" type="button" data-dismiss="modal">{{ _('Add Product')}}</button></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -72,32 +72,32 @@
             {% if object %}
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">Monto Neto o Afecto:</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_untaxec }}</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">Monto Exento:</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_taxt }}</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">IVA:</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('IVA:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ ???</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">otros Impuestos:</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ ???</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">Total Impuestos:</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ ???</div>
                     </div>
                     <hr class="style1">
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">Total:</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_total }}</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">Margen:</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Margin:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ ???</div>
                     </div>
                 </div>

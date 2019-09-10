@@ -3,10 +3,10 @@
 Vistas de la aplicación globales
 """
 # Librerias Django
-from django.shortcuts import redirect
-from django.views.generic import UpdateView
 from django.http import Http404
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 
 # Librerias en carpetas locales
 from ..forms import AvatarForm

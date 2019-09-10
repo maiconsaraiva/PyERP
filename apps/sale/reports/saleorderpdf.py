@@ -16,6 +16,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table, TableStyle
+from django.utils.translation import ugettext_lazy as _
 
 locale.setlocale(locale.LC_ALL, '')
 locale._override_localeconv = {'mon_thousands_sep': '.'}
@@ -25,7 +26,7 @@ def sale_order_pdf(request, pk):
     """ Función para imprimir la orden de ventas
     """
     response = HttpResponse(content_type='application/pdf')
-    pdf_name = "clientes.pdf"
+    pdf_name = _("clientes.pdf")
     response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
 
     # Los productos de la orden
@@ -56,13 +57,13 @@ def sale_order_pdf(request, pk):
 
     # Header del reporte
     _pdf.setFont('Helvetica', 22)
-    _pdf.drawString(30, 650, 'Presupuesto # ' + _sale_order.name)
+    _pdf.drawString(30, 650, 'Budget # ' + _sale_order.name)
 
     _pdf.setFont('Helvetica-Bold', 12)
-    _pdf.drawString(30, 625, 'Fecha de cotización:')
+    _pdf.drawString(30, 625, 'Quotation Date:')
 
     _pdf.setFont('Helvetica-Bold', 12)
-    _pdf.drawString(180, 625, 'Vendedor:')
+    _pdf.drawString(180, 625, 'Seller:')
 
     today = timezone.now()
     _pdf.setFont('Helvetica', 12)
@@ -81,11 +82,11 @@ def sale_order_pdf(request, pk):
     _data_header = []
     _data_header.append([
         # "Producto",
-        "Descripcion",
-        "Cantidad",
-        "Precio",
-        "Descuento",
-        "Sub Total"
+        _('Description'),
+        _('Quantity'),
+        _('Price'),
+        _('Discount'),
+        _('Subtotal')
     ])
 
     # Imprimir el header de la tabla
@@ -109,43 +110,45 @@ def sale_order_pdf(request, pk):
     table.wrapOn(_pdf, _width, _height)
     table.drawOn(_pdf, 30, _high)
 
-    # Cuerpo de la tabla
-    _data_table = []
-    for _product in _products:
-        _data_table.append(
-            [
-                _product.product,
-                # _product.description,
-                str(_product.quantity) + ' Unidades',
-                _product.amount_untaxed,
-                _product.discount,
-                locale.format(
-                    '%.2f',
-                    _product.amount_total,
-                    grouping=True,
-                    monetary=True
-                )
-            ]
-        )
-        _high = _high - 18
+    if _products:
+        # Cuerpo de la tabla
+        _data_table = []
+        for _product in _products:
+            _data_table.append(
+                [
+                    _product.product,
+                    # _product.description,
+                    str(_product.quantity) + ' Units',
+                    _product.amount_untaxed,
+                    _product.discount,
+                    locale.format(
+                        '%.2f',
+                        _product.amount_total,
+                        grouping=True,
+                        monetary=True
+                    )
+                ]
+            )
+            _high = _high - 18
 
-    # Imprimir cuerpo la tabla
-    table = Table(
-        _data_table,
-        colWidths=[7*cm, 3*cm, 3*cm, 3*cm, 3.5*cm]
-    )
-    table.setStyle(
-        TableStyle([
-            # ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-            # ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-            ('LINEBELOW', (0, 0), (-1, -1), 0.5, colors.black),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            # ('ALIGN', (0, 0), (0, -1), 'CENTER'),
-            ('ALIGN', (1, 0), (-1, -1), 'RIGHT'),
-            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica'),
-            ('FONTSIZE', (0, 0), (-1, -1), 10),
-        ])
-    )
+        # Imprimir cuerpo la tabla
+        table = Table(
+            _data_table,
+            colWidths=[7*cm, 3*cm, 3*cm, 3*cm, 3.5*cm]
+        )
+        table.setStyle(
+            TableStyle([
+                # ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+                # ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
+                ('LINEBELOW', (0, 0), (-1, -1), 0.5, colors.black),
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                # ('ALIGN', (0, 0), (0, -1), 'CENTER'),
+                ('ALIGN', (1, 0), (-1, -1), 'RIGHT'),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica'),
+                ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ])
+        )
+
     table.wrapOn(_pdf, _width, _height)
     table.drawOn(_pdf, 30, _high)
 

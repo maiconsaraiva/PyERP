@@ -4,12 +4,11 @@
 from django.urls import path
 
 # Librerias de terceros
-from apps.sale.views import (
+from .reports.saleorderpdf import sale_order_pdf
+from .views import (
     SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailAddView,
     SaleOrderDetailDeleteView, SaleOrderDetailEditView, SaleOrderEditView,
-    SaleOrderListView )
-
-from apps.sale.reports.saleorderpdf import sale_order_pdf
+    SaleOrderListView, ProductAutoComplete)
 
 app_name = 'sale'
 
@@ -48,5 +47,11 @@ urlpatterns = [
         'sale-order-pdf/<int:pk>',
         sale_order_pdf,
         name='sale-order-pdf'
+    ),
+    # ==================== Auto completado de Productos ==================== #
+    path(
+        'product-autocomplete',
+        ProductAutoComplete.as_view(),
+        name='product-autocomplete'
     ),
 ]
