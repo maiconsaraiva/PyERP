@@ -72,7 +72,7 @@ git commit -am "Dañando cosas."
 git push origin nombreramma 
 ```
 
-# uniendo ramas me paro en master y me traigo lo que tenia en nombreramma
+# uniendo ramas me paro en master y me traigo lo que tenia en nombre ramma
 ```
 git checkout master
 git merge nombreramma
