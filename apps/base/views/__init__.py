@@ -1,40 +1,44 @@
 # Librerias Standard
 import json
 import os
+import sys
+from collections import OrderedDict
+from importlib import reload
 from os import listdir
 
 # Librerias Django
+from django.apps import apps
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from ..models import PyUser
+from django.core.management import call_command
 from django.shortcuts import redirect, render
-from django.urls import reverse, reverse_lazy
+from django.urls import clear_url_caches, reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
+# Librerias de terceros
+from pyerp.settings import BASE_DIR
+
 # Librerias en carpetas locales
-from ..models import PyApp, PyPartner, PyProduct, PyProductCategory
+from ..forms import AvatarForm
+from ..models import PyApp, PyPartner, PyProduct, PyProductCategory, PyUser
+from .activate import ActivateView
+from .activatelanguage import ActivateLanguageView
+from .avatar import AvatarUpdateView
 from .base_config import UpdateBaseConfigView
 from .company import (
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
     DeleteCompany)
+from .logoutmodal import LogOutModalView
 from .partner import (
     CustomerListView, DeletePartner, PartnerAutoComplete, PartnerCreateView,
     PartnerDetailView, PartnerUpdateView, ProviderListView)
-
-# Librerias en carpetas locales
-from ..forms import AvatarForm
-from ..models import PyUser
-from .activate import ActivateView
-from .activatelanguage import ActivateLanguageView
 from .passwordchange import cambio_clave
 from .passwordreset import PasswordRecoveryView
 from .profile import ProfileView
 from .signup import SignUpView
-from .avatar import AvatarUpdateView
-from .logoutmodal import LogOutModalView
-
 
 ChangePasswordView = cambio_clave
 
@@ -161,8 +165,32 @@ def InstallApps(self, pk):
     app.installed = True
     app.save()
     with open('installed_apps.py', 'a+') as installed_apps_file:
-        if installed_apps_file.write('apps.%s\n' % app.name.lower()):
-            print("ok")
+        if installed_apps_file.write('apps.{}\n'.format(app.name.lower())):
+            # Como no se cargar una sola app, se leen todas las app que estan
+            # como plugins en tiempo de ejecución al instalar cualquier app
+            with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
+                for line in ins_apps_file.readlines():
+                    installed_apps += [line.strip()]
+
+            # Para cargar la nueva aplicación, restablezcamos app_configs, el
+            # diccionario con la configuración de aplicaciones cargadas
+            apps.app_configs = OrderedDict()
+            apps.ready = False
+
+            # Se recargan todas las aplicaciones ¿como cargar solo una?
+            apps.populate(settings.INSTALLED_APPS)
+
+            # Se contruyen las migraciones de la app
+            call_command('makemigrations', app.name.lower(), interactive=False)
+
+            # Se ejecutan las migraciones de la app
+            call_command('migrate', app.name.lower(), interactive=False)
+
+            # Recargo en memoria la rutas del proyecto
+            urlconf = settings.ROOT_URLCONF
+            if urlconf in sys.modules:
+                clear_url_caches()
+                reload(sys.modules[urlconf])
         else:
             print("no")
     return redirect(reverse('base:apps'))

@@ -138,6 +138,7 @@ urlpatterns = [
         name='partners-autocomplete'
     ),
 
+    # ================= Rutas de Auto Gestion de Usuarios ================== #
     path('signup', SignUpView.as_view(), name='signup'),
     path('activate/<uidb64>/<token>', ActivateView.as_view(), name='activar'),
     path(
@@ -145,7 +146,7 @@ urlpatterns = [
         LoginView.as_view(
             template_name='usercustom/login.html',
             # redirect_field_name='next',
-            success_url = 'home'
+            success_url='home'
         ),
         name='login'
     ),

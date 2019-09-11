@@ -1,5 +1,6 @@
 """Rutas de PyErp
 """
+# Librerias Standard
 import os
 
 # Librerias Django
@@ -35,11 +36,19 @@ urlpatterns += i18n_patterns(
     ),
 )
 
+
+# ========================================================================== #
+# Recorrer el archivo de aplicaciones instaladas y construir sus rutas
 with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
     for line in ins_apps_file.readlines():
         if line.strip() == 'apps.home':
             urlpatterns.pop(0)
             urlpatterns += [path('', include('apps.home.urls'))]
         else:
-            _, app = line.split('.')
-            urlpatterns += [path('%s/' % app.rstrip('\n'), include('%s.urls' % line.strip()))]
+            app = line.split('.')
+            urlpatterns += [
+                path(
+                    '{}/'.format(app.rstrip('\n')),
+                    include('{}.urls'.format(line.strip()))
+                )
+            ]

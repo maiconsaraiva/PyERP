@@ -8,6 +8,7 @@ import locale
 from django.conf import settings
 from django.http import FileResponse, HttpResponse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.sale.models import PySaleOrder, PySaleOrderDetail
@@ -16,7 +17,6 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table, TableStyle
-from django.utils.translation import ugettext_lazy as _
 
 locale.setlocale(locale.LC_ALL, '')
 locale._override_localeconv = {'mon_thousands_sep': '.'}

@@ -7,8 +7,8 @@ import logging
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import UpdateView
 
 # Librerias en carpetas locales
 from ..forms import SaleOrderDetailForm

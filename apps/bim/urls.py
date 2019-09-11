@@ -2,16 +2,17 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-app_name = 'bim'
-
 # Librerias en carpetas locales
+from .views.bim_budget import (
+    BimBudgetCreateView, BimBudgetDetailView, BimBudgetListView,
+    BimBudgetUpdateView, DeleteBimBudget)
 from .views.bim_project import (
-    BimProjectListView, BimProjectDetailView, BimProjectCreateView,
+    BimProjectCreateView, BimProjectDetailView, BimProjectListView,
     BimProjectUpdateView, DeleteBimProject)
 
-from .views.bim_budget import (
-    BimBudgetListView, BimBudgetDetailView, BimBudgetCreateView,
-    BimBudgetUpdateView, DeleteBimBudget)
+app_name = 'bim'
+
+
 
 urlpatterns = [
     path('budget', BimBudgetListView.as_view(), name='budget'),
