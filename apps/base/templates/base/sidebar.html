@@ -39,6 +39,39 @@
             <p>{{ _('Products') }}</p>
           </a>
         </li>
+
+         <li class="nav-item has-treeview">
+    <a href="#" class="nav-link">
+      <i class="fa fa-cloud nav-icon"></i>
+      <p>
+        Website
+        <i class="fas fa-angle-left right"></i>
+      </p>
+    </a>
+    <ul class="nav nav-treeview">
+      <li class="nav-item">
+        <a href="{% url 'home:post-backend' %}" class="nav-link">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Entradas</p>
+        </a>
+      </li>
+
+       <li class="nav-item">
+        <a href="{% url 'base:product-webcategory' %}" class="nav-link">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Categorías Web</p>
+        </a>
+      </li>
+
+        <li class="nav-item">
+            <a href="{% url 'home:website-config' 1 %}" class="nav-link">
+                <i class="fa fa-cog nav-icon"></i>
+                <p>Configuración</p>
+            </a>
+        </li>
+
+    </ul>
+  </li>
                 {% for app in app_list|get_app_list %}
                     {% include app %}
                 {% endfor %}
