@@ -2,8 +2,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<link rel="stylesheet" href="{% static '/css/django.css' %}">
-
 <link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
 
 <style>
@@ -53,9 +51,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>PyERP</title>
 </head>
-    <body class="django-background">
+    <body>
         <div class="container">
-                  <img src="{% static 'dist/favicon_white.png' %}" alt="Avatar" width="500" height="500" class="center image">
+                  <img src="{% static 'dist/favicon.png' %}" alt="Avatar" width="500" height="500" class="center image">
                   <div class="middle">
                       <a href="{% url 'base:home' %}"><div class="text">Login</div></a>
                   </div>

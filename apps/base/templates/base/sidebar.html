@@ -1,10 +1,10 @@
 {% load static %}
 {% load erp_tags %}
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-light elevation-1">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{% static 'dist/favicon_white.png' %}" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="30px" >
+        <img src="{% static 'dist/favicon.png' %}" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="30px" >
         <span style="margin-left: 12px;" class="brand-text font-weight-light"><b>Py</b>ERP</span>
     </a>
     <!-- Sidebar -->
@@ -13,7 +13,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             {% if request.user.is_authenticated %}
                 <div class="image">
-                    <a href="{% url 'base:profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle elevation-2" alt="{{ request.user }}"></a>
+                    <a style="color:#fff;" href="{% url 'base:profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle" alt="{{ request.user }}"></a>
                 </div>
                 <div class="info">
                     <a href="{% url 'base:profile' %}" class="d-block">{{ user }}</a>

@@ -17,8 +17,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-        <!-- PyErp CSS -->
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/django.css">
+
         <style>
             .toast {
                 opacity: 1 !important;
@@ -29,7 +28,7 @@
             }
         </style>
     </head>
-    <body class="hold-transition django-font-w login-page django-background">
+    <body class="hold-transition django-font-w login-page">
         <div class="login-box">
             <div class="login-logo">
                 <img src="{{ MEDIA_URL }}favicon_white.png" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="30px" >
@@ -71,7 +70,7 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="col">
-                                <button type="submit" class="django-background btn btn-block btn btn-sm" style="color:#fff;">{{ _('Login') }}</button>
+                                <button type="submit" class="btn btn-block btn btn-sm" >{{ _('Login') }}</button>
                             </div>
                         </div>
                     </form>

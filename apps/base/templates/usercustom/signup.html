@@ -20,7 +20,7 @@
         <!-- Google Recaptcha -->
         <script src='https://www.google.com/recaptcha/api.js?hl={{ LANGUAGE_CODE }}'></script>
         <!-- PyErp CSS -->
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/django.css">
+
         <style>
             .toast {
                 opacity: 1 !important;
@@ -31,7 +31,7 @@
             }
         </style>
     </head>
-    <body class="hold-transition django-font-w login-page django-background">
+    <body class="hold-transition django-font-w login-page">
         <div class="login-box" style="margin: 3% auto;">
             <div class="login-logo">
                 <img src="{{ MEDIA_URL }}favicon_white.png" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="30px" >
@@ -94,7 +94,7 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="col">
-                                <button type="submit" class="django-background btn btn-block btn btn-sm" style="color:#fff;">{{ _('Sign up') }}</button>
+                                <button type="submit" class="btn btn-block btn btn-sm">{{ _('Sign up') }}</button>
                             </div>
                         </div>
                     </form>
