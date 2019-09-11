@@ -43,7 +43,7 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
-    margin-top: 100px;
+    margin-top: 300px;
 }
 </style>
 
@@ -53,10 +53,9 @@
 </head>
     <body>
         <div class="container">
-                  <img src="{% static 'dist/favicon.png' %}" alt="Avatar" width="500" height="500" class="center image">
-                  <div class="middle">
-                      <a href="{% url 'base:home' %}"><div class="text">Login</div></a>
-                  </div>
+            <a href="{% url 'base:home' %}">
+                  <img src="{{ MEDIA_URL }}your_logo.png" alt="Avatar" height="120" class="center image">
+            </a>
         </div>
     </body>
 </html>
