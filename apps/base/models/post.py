@@ -10,6 +10,7 @@ class PyPost(PyFather):
     title = models.CharField('Nombre', max_length=255)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
+    # published = models.BooleanField(default=True, blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('base:post-detail', kwargs={'pk': self.pk})

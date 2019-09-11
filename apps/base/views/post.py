@@ -11,6 +11,7 @@ from ..models.post import PyPost
 POST_FIELDS = [
             {'string': 'Título', 'field': 'title'},
             {'string': 'Creado en', 'field': 'created_on'},
+
         ]
 
 POST_FIELDS_SHORT = ['title','content']
