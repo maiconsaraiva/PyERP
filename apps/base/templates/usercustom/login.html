@@ -31,7 +31,9 @@
     <body class="hold-transition django-font-w login-page">
         <div class="login-box">
             <div class="login-logo">
-                <img src="{{ MEDIA_URL }}your_logo.png" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="80px" >
+                <a href="{% url 'base:home' %}">
+                    <img src="{{ MEDIA_URL }}your_logo.png" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="80px" >
+                </a>
             </div>
             <div class="card">
                 <div class="card-header d-flex p-0">
@@ -69,7 +71,7 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="col">
-                                <button type="submit" class="btn btn-block btn btn-sm" >{{ _('Login') }}</button>
+                                <button type="submit" class="btn btn-block btn btn-primary" >{{ _('Login') }}</button>
                             </div>
                         </div>
                     </form>
