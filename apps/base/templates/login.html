@@ -16,8 +16,6 @@
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="{% static '/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
 
-  <link rel="stylesheet" href="{% static '/css/django.css' %}">
-
   <link rel="stylesheet" href="{% static '/dist/jquery-confirm/jquery-confirm.min.css' %}">
 
   <!-- Theme style -->
@@ -25,11 +23,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition django-font-w login-page django-background">
+<body class="hold-transition django-font-w login-page">
 <div class="login-box">
     <div class="login-logo">
 
-      <img src="{% static 'dist/favicon_white.png' %}"
+      <img src="{% static 'dist/favicon.png' %}"
            alt="PyERP"
            style="opacity: .8; margin-left: 12px;" height="30px" >
 
@@ -71,8 +69,7 @@
             <a href="/">{{ _('Home') }}</a>
           </div>
           <div class="col-4">
-            <button type="submit" style="color:#fff;" class="django-background btn btn-block btn-flat">{{ _('Login') }}</button>
-
+            <button type="submit"  class="btn btn-block btn-flat">{{ _('Login') }}</button>
           </div>
           <!-- /.col -->
         </div>

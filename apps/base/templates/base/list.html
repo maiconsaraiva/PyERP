@@ -38,14 +38,14 @@
 <script src="{% static 'plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js'%}"></script>
 <script src="{% static 'plugins/datatables/extensions/Buttons/js/buttons.flash.min.js'%}"></script>
 <script src="{% static 'plugins/datatables/extensions/Buttons/js/buttons.html5.min.js'%}"></script>
+<!--
 <script src="{% static 'plugins/datatables/extensions/Buttons/js/buttons.print.min.js'%}"></script>
 <script src="{% static 'plugins/datatables/extensions/pdfmake/pdfmake.min.js'%}"></script>
 <script src="{% static 'plugins/datatables/extensions/pdfmake/vfs_fonts.js'%}"></script>
+-->
 <script>
     $(function () {
         $("#list_table").DataTable({
-            dom: 'Bfrtip',
-            buttons: ['csv' ,'pdf'],
         });
     });
     $('[data-row-location]').click(function () {
