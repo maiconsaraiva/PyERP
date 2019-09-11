@@ -4,8 +4,7 @@
 <aside class="main-sidebar sidebar-light elevation-1">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{% static 'dist/favicon.png' %}" alt="PyERP" style="opacity: .8; margin-left: 12px;" height="30px" >
-        <span style="margin-left: 12px;" class="brand-text font-weight-light"><b>Py</b>ERP</span>
+        <img src="{{ MEDIA_URL }}your_logo.png" alt="PyERP" style="opacity: .8; margin-left: 12px;" width="90%" >
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -24,7 +23,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item has-treeview">
-                    <a href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
+                    <a style="color:#6c6565;" href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
                 </li>
                 {% for app in app_list|get_app_list %}
                     {% include app %}
