@@ -2,7 +2,9 @@
 from django import template
 
 # Librerias en carpetas locales
-from ..models import BaseConfig, PyApp
+from ..models import PyApp
+from ..models.base_config import BaseConfig
+
 
 # from apps.home.models import WebsiteConfig
 

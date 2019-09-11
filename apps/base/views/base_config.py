@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic.edit import UpdateView
 
 # Librerias en carpetas locales
-from ..models import BaseConfig
+from ..models.base_config import BaseConfig
 
 
 class UpdateBaseConfigView(LoginRequiredMixin, UpdateView):
