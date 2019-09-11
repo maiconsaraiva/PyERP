@@ -15,6 +15,10 @@ from .models import (
 
 from .models.base_config import BaseConfig
 
+from .models import PyWebsiteConfig
+
+admin.site.register(PyWebsiteConfig)
+
 admin.site.register(PyPartner)
 admin.site.register(PyProduct)
 admin.site.register(PyCountry)

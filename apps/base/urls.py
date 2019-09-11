@@ -39,6 +39,13 @@ from .views.product_webcategory import (
     ProductWebCategoryDetailView, ProductWebCategoryListView,
     ProductWebCategoryUpdateView)
 
+from .views.website_config import UpdateWebsiteConfigView
+
+# Librerias en carpetas locales
+from .views.post import (
+    DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
+
+
 app_name = 'base'
 
 urlpatterns = [
@@ -57,6 +64,7 @@ urlpatterns = [
     path('config/<int:pk>', UpdateBaseConfigView.as_view(), name='base-config'),
     path('load-data', LoadData, name='load-data'),
 
+    path('config/<int:pk>', UpdateWebsiteConfigView.as_view(), name='website-config'),
 
     path('update-app', UpdateApps, name='update-app'),
     path('install-app/<int:pk>/', InstallApps, name='install-app'),
@@ -127,6 +135,12 @@ urlpatterns = [
     path('currency/<int:pk>/', CurrencyDetailView.as_view(), name='currency-detail'),
     path('currency/<int:pk>/update', CurrencyUpdateView.as_view(), name='currency-update'),
     path('currency/<int:pk>/delete/', DeleteCurrency, name='currency-delete'),
+
+    path('post', PostListView.as_view(), name='post-backend'),
+    path('post/add/', PostCreateView.as_view(), name='post-add'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', DeletePost, name='post-delete'),
 
 
     path('apps', AppView.as_view(), name='apps'),

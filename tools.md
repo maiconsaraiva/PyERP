@@ -26,6 +26,11 @@ manage.py collectstatic
 supervisor ctl restart django_app
 ```
 
+# FOR ERROR
+```
+python manage.py migrate --run-syncdb
+```
+
 # REINICIAR RSYNC
 ```
 rsync -av db.sqlite3 root@ipdelservidor:/home/django/pyerp
