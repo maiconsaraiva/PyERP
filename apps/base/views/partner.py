@@ -30,7 +30,7 @@ PARTNER_FIELDS_SHORT = ['name', 'street', 'email', 'phone', 'note', 'customer', 
 class CustomerListView(LoginRequiredMixin, ListView):
     model = PyPartner
     template_name = 'base/list.html'
-    queryset = PyPartner.objects.filter(customer=True).all()
+    queryset = PyPartner.objects.all()
     login_url = "login"
 
     def get_context_data(self, **kwargs):

@@ -40,6 +40,11 @@ with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
         if line.strip() == 'apps.home':
             urlpatterns.pop(0)
             urlpatterns += [path('', include('apps.home.urls'))]
+
+        elif line.strip() == 'apps.webodoobim':
+            urlpatterns.pop(0)
+            urlpatterns += [path('', include('apps.webodoobim.urls'))]
+
         else:
             _, app = line.split('.')
             urlpatterns += [path('%s/' % app.rstrip('\n'), include('%s.urls' % line.strip()))]

@@ -2,9 +2,10 @@
 from django import template
 
 # Librerias en carpetas locales
-from ..models import BaseConfig, PyApp
+from ..models import PyApp
+from ..models.base_config import BaseConfig
 
-# from apps.home.models import WebsiteConfig
+from apps.base.models import PyWebsiteConfig
 
 register = template.Library()
 
@@ -102,3 +103,45 @@ def currency_position(obj):
 def get_app_list(obj):
     apps = PyApp.objects.all().filter(installed=True).order_by('sequence')
     return [app.name.lower() + "/menu.html" for app in apps]
+
+@register.filter
+def web_chat(obj):
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_chat
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+
+
+
+@register.filter
+def web_show_shop(obj):
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_shop
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+
+
+
+@register.filter
+def web_under_construction(obj):
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).under_construction
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+
+
+@register.filter
+def web_show_blog(obj):
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_blog
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+
+
+@register.filter
+def web_show_price(obj):
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).show_price
+    except PyWebsiteConfig.DoesNotExist:
+        return None
+

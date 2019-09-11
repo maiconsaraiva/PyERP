@@ -12,8 +12,8 @@ from apps.base.models import PyPartner, PyProduct
 
 # Librerias en carpetas locales
 # from apps.crm.submodels.lead import PyLead
-from ..models.post import PyPost
 
+from apps.base.models.post import PyPost
 
 def index(request):
     return render(request, 'index.html')
