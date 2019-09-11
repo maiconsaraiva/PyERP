@@ -22,8 +22,5 @@ urlpatterns = [
     url(r'^license/', license, name='home-license'),
     url(r'^under-construction/', UnderConstruction, name='under-construction'),
     url(r'^contact_me$', contact, name='contact-me'),
-
-    
-
     
 ]
