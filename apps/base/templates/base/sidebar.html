@@ -25,6 +25,20 @@
                 <li class="nav-item has-treeview">
                     <a style="color:#6c6565;" href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
                 </li>
+
+      <li class="nav-item">
+        <a href="{% url 'base:partners' %}" class="nav-link">
+          <i class="fa fa-user nav-icon"></i>
+          <p>{{ _('Partners') }}</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+          <a href="{% url 'base:products' %}" class="nav-link">
+            <i class="fa fa-barcode nav-icon"></i>
+            <p>{{ _('Products') }}</p>
+          </a>
+        </li>
                 {% for app in app_list|get_app_list %}
                     {% include app %}
                 {% endfor %}
@@ -33,7 +47,7 @@
                     <!-- Configuracion Begin Sección solo para los administrdores -->
                     <!-- Apps Begin -->
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Apps') }}<i class="fas fa-angle-left right"></i><span class="badge badge-info right">{{ count_app }}</span></p></a>
+                        <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Apps') }}<i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{% url 'base:apps' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Apps') }}</p></a>
