@@ -16,4 +16,4 @@ class PyWebsiteConfig(PyFather):
 
 
     def get_absolute_url(self):
-        return reverse('home:website-config', kwargs={'pk': self.pk})
+        return reverse('base:website-config', kwargs={'pk': self.pk})

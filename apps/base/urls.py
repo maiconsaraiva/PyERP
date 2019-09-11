@@ -64,7 +64,7 @@ urlpatterns = [
     path('config/<int:pk>', UpdateBaseConfigView.as_view(), name='base-config'),
     path('load-data', LoadData, name='load-data'),
 
-    path('config/<int:pk>', UpdateWebsiteConfigView.as_view(), name='website-config'),
+    path('website-config/<int:pk>', UpdateWebsiteConfigView.as_view(), name='website-config'),
 
     path('update-app', UpdateApps, name='update-app'),
     path('install-app/<int:pk>/', InstallApps, name='install-app'),
