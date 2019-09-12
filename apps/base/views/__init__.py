@@ -164,11 +164,11 @@ def UpdateApps(self):
 
 @login_required(login_url="base:login")
 def InstallApps(self, pk):
-    app = PyApp.objects.get(id=pk)
-    app.installed = True
-    app.save()
+    plugin = PyApp.objects.get(id=pk)
+    plugin.installed = True
+    plugin.save()
     with open('installed_apps.py', 'a+') as installed_apps_file:
-        if installed_apps_file.write('apps.{}\n'.format(app.name.lower())):
+        if installed_apps_file.write('apps.{}\n'.format(plugin.name.lower())):
             print('yes')
         else:
             print("no")
@@ -186,11 +186,11 @@ def InstallApps(self, pk):
     # Se recargan todas las aplicaciones ¿como cargar solo una?
     apps.populate(settings.INSTALLED_APPS)
 
-    # Se contruyen las migraciones de la app
+    # Se contruyen las migraciones del plugin
     call_command('makemigrations', app.name.lower(), interactive=False)
 
     # Se ejecutan las migraciones de la app
-    call_command('migrate', app.name.lower(), interactive=False)
+    call_command('migrate', plugin.name.lower(), interactive=False)
 
     # Recargo en memoria la rutas del proyecto
     urlconf = settings.ROOT_URLCONF
