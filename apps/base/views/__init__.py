@@ -46,6 +46,9 @@ ChangePasswordView = cambio_clave
 def Apps(request):
     return render(request, 'base/apps.html')
 
+def Install(request):
+    return render(request, 'base/install.html')
+
 
 class UserListView(ListView):
     model = PyUser
