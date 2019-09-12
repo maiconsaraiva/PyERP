@@ -13,7 +13,9 @@ from .views import (
     PartnerCreateView, PartnerDetailView, PartnerUpdateView,
     PasswordRecoveryView, ProfileView, ProviderListView, SignUpView,
     UninstallApps, UpdateApps, UpdateBaseConfigView, UserCreateView,
-    UserDetailView, UserListView, UserUpdateView, erp_home)
+    UserDetailView, UserListView, UserUpdateView, erp_home, Install)
+
+
 from .views.app import AppView
 from .views.base_config import LoadData
 from .views.country import (
@@ -50,6 +52,7 @@ app_name = 'base'
 
 urlpatterns = [
     path('', erp_home, name='home'),
+    path('install', Install, name='install'),
     # path(
     #     'login/',
     #     auth_views.LoginView.as_view(template_name='login.html'),
