@@ -50,7 +50,7 @@ with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
             urlpatterns += [path('', include('apps.webodoobim.urls'))]
 
         else:
-            app = line.split('.')
+            _, app = line.split('.')
             urlpatterns += [
                 path(
                     '{}/'.format(app.rstrip('\n')),

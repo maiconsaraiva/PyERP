@@ -166,33 +166,35 @@ def InstallApps(self, pk):
     app.save()
     with open('installed_apps.py', 'a+') as installed_apps_file:
         if installed_apps_file.write('apps.{}\n'.format(app.name.lower())):
-            # Como no se cargar una sola app, se leen todas las app que estan
-            # como plugins en tiempo de ejecución al instalar cualquier app
-            with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
-                for line in ins_apps_file.readlines():
-                    installed_apps += [line.strip()]
-
-            # Para cargar la nueva aplicación, restablezcamos app_configs, el
-            # diccionario con la configuración de aplicaciones cargadas
-            apps.app_configs = OrderedDict()
-            apps.ready = False
-
-            # Se recargan todas las aplicaciones ¿como cargar solo una?
-            apps.populate(settings.INSTALLED_APPS)
-
-            # Se contruyen las migraciones de la app
-            call_command('makemigrations', app.name.lower(), interactive=False)
-
-            # Se ejecutan las migraciones de la app
-            call_command('migrate', app.name.lower(), interactive=False)
-
-            # Recargo en memoria la rutas del proyecto
-            urlconf = settings.ROOT_URLCONF
-            if urlconf in sys.modules:
-                clear_url_caches()
-                reload(sys.modules[urlconf])
+            print('yes')
         else:
             print("no")
+
+    # Como no se cargar una sola app, se leen todas las app que estan
+    # como plugins en tiempo de ejecución al instalar cualquier app
+    with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
+        for line in ins_apps_file.readlines():
+            settings.INSTALLED_APPS += (line.strip().rstrip('\n'), )
+
+    apps.app_configs = OrderedDict()
+    apps.apps_ready = apps.models_ready = apps.loading = apps.ready = False
+    apps.clear_cache()
+
+    # Se recargan todas las aplicaciones ¿como cargar solo una?
+    apps.populate(settings.INSTALLED_APPS)
+
+    # Se contruyen las migraciones de la app
+    call_command('makemigrations', app.name.lower(), interactive=False)
+
+    # Se ejecutan las migraciones de la app
+    call_command('migrate', app.name.lower(), interactive=False)
+
+    # Recargo en memoria la rutas del proyecto
+    urlconf = settings.ROOT_URLCONF
+    if urlconf in sys.modules:
+        clear_url_caches()
+        reload(sys.modules[urlconf])
+
     return redirect(reverse('base:apps'))
 
 
@@ -216,7 +218,6 @@ def UninstallApps(self, pk):
 def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """
-
     count_app = PyApp.objects.all().count()
 
     apps = PyApp.objects.all().filter(installed=True).order_by('sequence')
