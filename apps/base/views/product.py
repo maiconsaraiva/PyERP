@@ -65,7 +65,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = PyProduct
     fields = LEAD_FIELDS_SHORT
     template_name = 'base/form.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(ProductCreateView, self).get_context_data(**kwargs)

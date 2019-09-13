@@ -1,12 +1,21 @@
 # Librerias Django
+# Librerias Standard
+import os
+
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..rename_image import RenameImage
 from .father import PyFather
 from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
+
+
+def image_path(instance, filename):
+    return os.path.join('logo', str(instance.pk) + '.' + filename.rsplit('.', 1)[1])
+
 
 PRODUCT_CHOICE = (
     ("product", "Almacenable"),
@@ -24,7 +33,14 @@ class PyProduct(PyFather):
     category_id = models.ForeignKey(PyProductCategory, null=True, blank=True, on_delete=models.CASCADE)
     web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(_("description"), blank=True, null=True)
-    img = models.ImageField(_("image"), default="default.png")
+    img = models.ImageField(
+        max_length=255,
+        storage=RenameImage(),
+        upload_to=image_path,
+        blank=True,
+        null=True,
+        default='product/default_product.png'
+    )
 
     web_active = models.BooleanField('Web', default=False)
 

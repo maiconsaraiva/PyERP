@@ -19,7 +19,18 @@ COMPANY_FIELDS = [
     {'string': 'Slogan', 'field': 'slogan'},
 ]
 
-COMPANY_FIELDS_SHORT = ['name', 'city', 'phone', 'email', 'social_facebook', 'social_instagram', 'social_linkedin', 'currency_id', 'slogan']
+COMPANY_FIELDS_SHORT = [
+    'name',
+    'city',
+    'phone',
+    'email',
+    'social_facebook',
+    'social_instagram',
+    'social_linkedin',
+    'currency_id',
+    'slogan',
+    'logo'
+]
 
 
 class CompanyListView(ListView):
@@ -53,8 +64,7 @@ class CompanyDetailView(LoginRequiredMixin, DetailView):
 class CompanyCreateView(CreateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
-    template_name = 'base/form.html'
-    # login_url = "login"
+    template_name = 'base/form_img.html'
 
     def get_context_data(self, **kwargs):
         context = super(CompanyCreateView, self).get_context_data(**kwargs)
@@ -67,7 +77,7 @@ class CompanyCreateView(CreateView):
 class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
-    template_name = 'base/form.html'
+    template_name = 'base/form_img.html'
     login_url = "login"
 
     def get_context_data(self, **kwargs):

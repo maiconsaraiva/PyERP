@@ -1,10 +1,9 @@
-{% load static %}
 {% load erp_tags %}
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light elevation-1">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{% static '.' %}logo.png" alt="PyERP" style="opacity: .8; margin-left: 12px;" width="90%" >
+        <img src="{{ MEDIA_URL }}{{ user|get_company_logo }}" alt="PyERP" style="opacity: .8; margin-left: 0px;" width="100%" >
     </a>
     <!-- Sidebar -->
     <div class="sidebar">

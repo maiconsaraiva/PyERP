@@ -9,11 +9,10 @@ from django.views.generic import DetailView, ListView
 
 # Librerias de terceros
 from apps.base.models import PyPartner, PyProduct
+from apps.base.models.post import PyPost
 
-# Librerias en carpetas locales
 # from apps.crm.submodels.lead import PyLead
 
-from apps.base.models.post import PyPost
 
 def index(request):
     return render(request, 'index.html')

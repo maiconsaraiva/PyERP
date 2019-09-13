@@ -2,8 +2,8 @@
 from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import post_delete, post_save
-from django.utils.translation import ugettext_lazy as _
 from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.models import PyFather, PyPartner, PyProduct

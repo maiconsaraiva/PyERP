@@ -3,12 +3,12 @@
 # Librerias Django
 from django.urls import path
 
-# Librerias de terceros
+# Librerias en carpetas locales
 from .reports.saleorderpdf import sale_order_pdf
 from .views import (
-    SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailAddView,
-    SaleOrderDetailDeleteView, SaleOrderDetailEditView, SaleOrderEditView,
-    SaleOrderListView, ProductAutoComplete)
+    ProductAutoComplete, SaleOrderAddView, SaleOrderDeleteView,
+    SaleOrderDetailAddView, SaleOrderDetailDeleteView, SaleOrderDetailEditView,
+    SaleOrderEditView, SaleOrderListView)
 
 app_name = 'sale'
 

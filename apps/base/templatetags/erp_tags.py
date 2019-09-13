@@ -1,11 +1,12 @@
 # Librerias Django
 from django import template
 
+# Librerias de terceros
+from apps.base.models import PyWebsiteConfig
+
 # Librerias en carpetas locales
 from ..models import PyApp
 from ..models.base_config import BaseConfig
-
-from apps.base.models import PyWebsiteConfig
 
 register = template.Library()
 
@@ -27,6 +28,14 @@ def get_online(obj):
 def get_company_name(obj):
     try:
         return BaseConfig.objects.get(pk=1).main_company_id.name
+    except BaseConfig.DoesNotExist:
+        return None
+
+
+@register.filter
+def get_company_logo(obj):
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.logo
     except BaseConfig.DoesNotExist:
         return None
 
@@ -144,4 +153,3 @@ def web_show_price(obj):
         return PyWebsiteConfig.objects.get(pk=1).show_price
     except PyWebsiteConfig.DoesNotExist:
         return None
-

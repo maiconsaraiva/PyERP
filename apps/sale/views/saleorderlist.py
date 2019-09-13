@@ -2,8 +2,8 @@
 """
 # Librerias Django
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView
 
 # Librerias en carpetas locales
 from ..models import PySaleOrder
