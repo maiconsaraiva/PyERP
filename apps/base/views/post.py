@@ -9,8 +9,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from ..models.post import PyPost
 
 POST_FIELDS = [
-            {'string': 'Título', 'field': 'title'},
-            {'string': 'Creado en', 'field': 'created_on'},
+            {'string': '_("Title")', 'field': 'title'},
+            {'string': '_("Created on")', 'field': 'created_on'},
 
         ]
 
