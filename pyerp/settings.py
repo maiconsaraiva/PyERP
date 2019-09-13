@@ -67,6 +67,15 @@ INSTALLED_APPS = [
     # 'apps.project',
 ]
 
+
+# ========================================================================== #
+# Se instalan todas las app que estan como plugins en tiempo de arranque
+# Copiar en localsettings.py
+with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
+    for line in ins_apps_file.readlines():
+        INSTALLED_APPS += [line.strip()]
+
+
 # ========================================================================== #
 """ Para la localizacion i18n de los componentes de fecha y hora de bootstrap
 """
@@ -243,13 +252,6 @@ Django para enviar correos.
 """
 # During development only
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
-# ========================================================================== #
-# Copiar en localsettings.py
-with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
-    for line in ins_apps_file.readlines():
-        INSTALLED_APPS += [line.strip()]
 
 # No borrar esto, si falla importando, entra en el try y simplemente muestra el
 # warning, esto porque en producción SI EXISTE EL LOCALSETTINGS, es buena

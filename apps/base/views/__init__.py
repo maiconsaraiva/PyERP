@@ -1,41 +1,44 @@
 # Librerias Standard
 import json
 import os
+import sys
+from collections import OrderedDict
+from importlib import reload
 from os import listdir
 
 # Librerias Django
+from django.apps import apps
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
-from ..models import PyUser
+from django.core.management import call_command
 from django.shortcuts import redirect, render
-from django.urls import reverse, reverse_lazy
+from django.urls import clear_url_caches, reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
+# Librerias de terceros
+from pyerp.settings import BASE_DIR
+
 # Librerias en carpetas locales
-from ..models import PyApp, PyPartner, PyProduct, PyProductCategory
+from ..forms import AvatarForm
+from ..models import PyApp, PyPartner, PyProduct, PyProductCategory, PyUser
+from .activate import ActivateView
+from .activatelanguage import ActivateLanguageView
+from .avatar import AvatarUpdateView
 from .base_config import UpdateBaseConfigView
 from .company import (
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
     DeleteCompany)
+from .logoutmodal import LogOutModalView
 from .partner import (
     CustomerListView, DeletePartner, PartnerAutoComplete, PartnerCreateView,
     PartnerDetailView, PartnerUpdateView, ProviderListView)
-
-# Librerias en carpetas locales
-from ..forms import AvatarForm
-from ..models import PyUser
-from .activate import ActivateView
-from .activatelanguage import ActivateLanguageView
 from .passwordchange import cambio_clave
 from .passwordreset import PasswordRecoveryView
 from .profile import ProfileView
 from .signup import SignUpView
-from .avatar import AvatarUpdateView
-from .logoutmodal import LogOutModalView
-
 
 ChangePasswordView = cambio_clave
 
@@ -161,14 +164,40 @@ def UpdateApps(self):
 
 @login_required(login_url="base:login")
 def InstallApps(self, pk):
-    app = PyApp.objects.get(id=pk)
-    app.installed = True
-    app.save()
+    plugin = PyApp.objects.get(id=pk)
+    plugin.installed = True
+    plugin.save()
     with open('installed_apps.py', 'a+') as installed_apps_file:
-        if installed_apps_file.write('apps.%s\n' % app.name.lower()):
-            print("ok")
+        if installed_apps_file.write('apps.{}\n'.format(plugin.name.lower())):
+            print('yes')
         else:
             print("no")
+
+    # Como no se cargar una sola app, se leen todas las app que estan
+    # como plugins en tiempo de ejecución al instalar cualquier app
+    with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
+        for line in ins_apps_file.readlines():
+            settings.INSTALLED_APPS += (line.strip().rstrip('\n'), )
+
+    apps.app_configs = OrderedDict()
+    apps.apps_ready = apps.models_ready = apps.loading = apps.ready = False
+    apps.clear_cache()
+
+    # Se recargan todas las aplicaciones ¿como cargar solo una?
+    apps.populate(settings.INSTALLED_APPS)
+
+    # Se contruyen las migraciones del plugin
+    call_command('makemigrations', plugin.name.lower(), interactive=False)
+
+    # Se ejecutan las migraciones de la app
+    call_command('migrate', plugin.name.lower(), interactive=False)
+
+    # Recargo en memoria la rutas del proyecto
+    urlconf = settings.ROOT_URLCONF
+    if urlconf in sys.modules:
+        clear_url_caches()
+        reload(sys.modules[urlconf])
+
     return redirect(reverse('base:apps'))
 
 
@@ -192,7 +221,6 @@ def UninstallApps(self, pk):
 def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """
-
     count_app = PyApp.objects.all().count()
 
     apps = PyApp.objects.all().filter(installed=True).order_by('sequence')

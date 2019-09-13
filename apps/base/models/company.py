@@ -68,3 +68,6 @@ def save_file(sender, instance, created, **kwargs):
         instance.logo = getattr(instance, _UNSAVED_FILEFIELD)
         instance.save()
         instance.__dict__.pop(_UNSAVED_FILEFIELD)
+    if not instance.logo or instance.logo is None:
+        instance.logo = 'logo/default_logo.png'
+        instance.save()
