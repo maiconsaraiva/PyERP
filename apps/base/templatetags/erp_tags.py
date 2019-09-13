@@ -37,7 +37,7 @@ def get_company_logo(obj):
     try:
         return BaseConfig.objects.get(pk=1).main_company_id.logo
     except BaseConfig.DoesNotExist:
-        return None
+        return 'logo/default_logo.png'
 
 
 @register.filter
