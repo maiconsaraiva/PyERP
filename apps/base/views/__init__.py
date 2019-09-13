@@ -187,7 +187,7 @@ def InstallApps(self, pk):
     apps.populate(settings.INSTALLED_APPS)
 
     # Se contruyen las migraciones del plugin
-    call_command('makemigrations', app.name.lower(), interactive=False)
+    call_command('makemigrations', plugin.name.lower(), interactive=False)
 
     # Se ejecutan las migraciones de la app
     call_command('migrate', plugin.name.lower(), interactive=False)

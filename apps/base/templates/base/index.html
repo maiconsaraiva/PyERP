@@ -1,50 +1,50 @@
 {% load static %}
+{% load erp_tags %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
-
+    <link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
 <style>
+    .image {
+        opacity: 1;
+        display: block;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
 
-.image {
-  opacity: 1;
-  display: block;
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
 
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
+    .container:hover .image {
+        opacity: 0.3;
+    }
 
-.container:hover .image {
-  opacity: 0.3;
-}
+    .container:hover .middle {
+        opacity: 1;
+    }
 
-.container:hover .middle {
-  opacity: 1;
-}
+    .text {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 16px 32px;
+    }
 
-.text {
-  background-color: #4CAF50;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
-}
-
-.center {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    margin-top: 300px;
-}
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        margin-top: 300px;
+    }
 </style>
 
 <head>
@@ -54,7 +54,7 @@
     <body>
         <div class="container">
             <a href="{% url 'base:home' %}">
-                  <img src="{% static '.' %}logo.png" alt="Avatar" height="120" class="center image">
+                <img src="{{ MEDIA_URL }}{{ user|get_company_logo }}" alt="PyERP" height="120" class="center image">
             </a>
         </div>
     </body>
