@@ -32,7 +32,10 @@ def get_online(obj):
 @register.filter
 def get_company_name(obj):
     try:
-        return BaseConfig.objects.get(pk=1).main_company_id.name
+        if BaseConfig.objects.get(pk=1).main_company_id:
+            return BaseConfig.objects.get(pk=1).main_company_id.name
+        else:
+            return _('Your Company Name')
     except BaseConfig.DoesNotExist:
         return _('Your Company Name')
 
@@ -40,7 +43,10 @@ def get_company_name(obj):
 @register.filter
 def get_company_logo(obj):
     try:
-        return BaseConfig.objects.get(pk=1).main_company_id.logo
+        if BaseConfig.objects.get(pk=1).main_company_id:
+            return BaseConfig.objects.get(pk=1).main_company_id.logo
+        else:
+            return 'logo/default_logo.png'
     except BaseConfig.DoesNotExist:
         return 'logo/default_logo.png'
 
@@ -56,9 +62,12 @@ def get_company_email(obj):
 @register.filter
 def get_company_slogan(obj):
     try:
-        return BaseConfig.objects.get(pk=1).main_company_id.slogan
+        if BaseConfig.objects.get(pk=1).main_company_id:
+            return BaseConfig.objects.get(pk=1).main_company_id.slogan
+        else:
+            return _('Your Company Slogan')
     except BaseConfig.DoesNotExist:
-        return None
+        return _('Your Company Slogan')
 
 
 
