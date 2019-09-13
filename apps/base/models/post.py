@@ -5,6 +5,7 @@ from django.urls import reverse
 # Librerias de terceros
 from apps.base.models import PyFather
 
+
 class Category(models.Model):
     name = models.CharField(max_length=20, unique=True)
     slug = models.CharField(max_length=20, unique=True)

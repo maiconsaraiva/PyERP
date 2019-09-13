@@ -15,16 +15,16 @@ from apps.base.models.post import PyPost
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'home/index.html')
 
 def post(request):
-    return render(request, 'post.html')
+    return render(request, 'home/post.html')
 
 def license(request):
-    return render(request, 'license.html')
+    return render(request, 'home/license.html')
 
 def UnderConstruction(request):
-    return render(request, 'under_construction.html')
+    return render(request, 'home/under_construction.html')
 
 
 def contact(request):
@@ -57,16 +57,16 @@ BLOG
 """
 
 POST_FIELDS = [
-            {'string': 'Título', 'field': 'title'},
-            {'string': 'Creado en', 'field': 'created_on'},
-            {'string': 'Contenido', 'field': 'content'},
-        ]
+    {'string': 'Título', 'field': 'title'},
+    {'string': 'Creado en', 'field': 'created_on'},
+    {'string': 'Contenido', 'field': 'content'},
+]
 
 POST_FIELDS_SHORT = ['title','content','created_on']
 
 class BlogView(ListView):
     model = PyPost
-    template_name = 'blog.html'
+    template_name = 'home/blog.html'
     fields = POST_FIELDS
     paginate_by = 8
 
@@ -76,39 +76,7 @@ class BlogView(ListView):
 
 class PostDetailView(DetailView):
     model = PyPost
-    template_name = 'post.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-
-
-# Tienda de Productos
-
-PRODUCT_FIELDS = [
-            {'string': 'Nombre', 'field': 'name'},
-            {'string': 'Descripción', 'field': 'description'},
-            {'string': 'Precio', 'field': 'price'},
-            {'string': 'Activo', 'field': 'web_active'},
-            {'string': 'Código', 'field': 'code'},
-            {'string': 'Código Barra', 'field': 'code'},
-        ]
-
-class WebProductView(ListView):
-    model = PyProduct
-    template_name = 'shop.html'
-    fields = PRODUCT_FIELDS
-    paginate_by = 8
-    queryset = PyProduct.objects.filter(web_active='True')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-
-class WebProductDetailView(DetailView):
-    model = PyProduct
-    template_name = 'product.html'
+    template_name = 'home/post.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context

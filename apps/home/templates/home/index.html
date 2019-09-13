@@ -1,9 +1,6 @@
-{% load static %}
+{% extends "home/home.html" %}
 {% load erp_tags %}
-{% include "header.html" %}
-
-
-
+{% block content %}
   <!-- Header -->
   <header class="masthead">
     <div class="container">
@@ -90,7 +87,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="{% static '/img/portfolio/01-thumbnail.jpg' %}" alt="">
+            <img class="img-fluid" src="{{ STATIC_URL }}img/portfolio/01-thumbnail.jpg" alt="">
           </a>
           <div class="portfolio-caption">
             <h4>Threads</h4>
@@ -104,7 +101,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="{% static '/img/portfolio/02-thumbnail.jpg' %}" alt="">
+            <img class="img-fluid" src="{{ STATIC_URL }}img/portfolio/02-thumbnail.jpg" alt="">
           </a>
           <div class="portfolio-caption">
             <h4>Explore</h4>
@@ -118,7 +115,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="{% static '/img/portfolio/03-thumbnail.jpg' %}" alt="">
+            <img class="img-fluid" src="{{ STATIC_URL }}img/portfolio/03-thumbnail.jpg" alt="">
           </a>
           <div class="portfolio-caption">
             <h4>Finish</h4>
@@ -132,7 +129,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="{% static '/img/portfolio/04-thumbnail.jpg' %}" alt="">
+            <img class="img-fluid" src="{{ STATIC_URL }}img/portfolio/04-thumbnail.jpg" alt="">
           </a>
           <div class="portfolio-caption">
             <h4>Lines</h4>
@@ -146,7 +143,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="{% static '/img/portfolio/05-thumbnail.jpg' %}" alt="">
+            <img class="img-fluid" src="{{ STATIC_URL }}img/portfolio/05-thumbnail.jpg" alt="">
           </a>
           <div class="portfolio-caption">
             <h4>Southwest</h4>
@@ -160,7 +157,7 @@
                 <i class="fas fa-plus fa-3x"></i>
               </div>
             </div>
-            <img class="img-fluid" src="{% static '/img/portfolio/06-thumbnail.jpg' %}" alt="">
+            <img class="img-fluid" src="{{ STATIC_URL }}img/portfolio/06-thumbnail.jpg" alt="">
           </a>
           <div class="portfolio-caption">
             <h4>Window</h4>
@@ -185,7 +182,7 @@
           <ul class="timeline">
             <li>
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" src="{% static '/img/about/1.jpg' %}" alt="">
+                <img class="rounded-circle img-fluid" src="{{ STATIC_URL }}/img/about/1.jpg" alt="">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -199,7 +196,7 @@
             <!--
             <li class="timeline-inverted">
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" src="{% static '/img/about/2.jpg' %}" alt="">
+                <img class="rounded-circle img-fluid" src="{{ STATIC_URL }}/img/about/2.jpg" alt="">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -216,7 +213,7 @@
             <!--
             <li>
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" src="{% static '/img/about/3.jpg' %}" alt="">
+                <img class="rounded-circle img-fluid" src="{{ STATIC_URL }}/img/about/3.jpg" alt="">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -233,7 +230,7 @@
             <!--
             <li class="timeline-inverted">
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" src="{% static '/img/about/4.jpg' %}" alt="">
+                <img class="rounded-circle img-fluid" src="{{ STATIC_URL }}/img/about/4.jpg" alt="">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -273,7 +270,7 @@
         <div class="col-sm-4">
           <div class="team-member">
             <!--
-            <img class="mx-auto rounded-circle" src="{% static '/img/team/1.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{{ STATIC_URL }}img/team/1.jpg' %}" alt="">
             <h4>Kay Garland</h4>
             <p class="text-muted">Lead Designer</p>
             <ul class="list-inline social-buttons">
@@ -298,7 +295,7 @@
         </div>
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{% static '/img/team/marlon.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{{ STATIC_URL }}img/team/marlon.jpg" alt="">
             <h4>Marlon Falcón</h4>
             <p class="text-muted">CEO</p>
             <ul class="list-inline social-buttons">
@@ -323,7 +320,7 @@
         <div class="col-sm-4">
           <div class="team-member">
              <!--
-            <img class="mx-auto rounded-circle" src="{% static '/img/team/3.jpg' %}" alt="">
+            <img class="mx-auto rounded-circle" src="{{ STATIC_URL }}img/team/3.jpg' %}" alt="">
             <h4>Diana Pertersen</h4>
             <p class="text-muted">Lead Developer</p>
             <ul class="list-inline social-buttons">
@@ -369,7 +366,7 @@
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/01-full.jpg' %}" alt="">
+                <img class="img-fluid d-block mx-auto" src="{{ STATIC_URL }}img/portfolio/01-full.jpg" alt="">
                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
@@ -403,7 +400,7 @@
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/02-full.jpg' %}" alt="">
+                <img class="img-fluid d-block mx-auto" src="{{ STATIC_URL }}img/portfolio/02-full.jpg" alt="">
                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
@@ -437,7 +434,7 @@
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/03-full.jpg' %}" alt="">
+                <img class="img-fluid d-block mx-auto" src="{{ STATIC_URL }}img/portfolio/03-full.jpg" alt="">
                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
@@ -471,7 +468,7 @@
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/04-full.jpg' %}" alt="">
+                <img class="img-fluid d-block mx-auto" src="{{ STATIC_URL }}img/portfolio/04-full.jpg" alt="">
                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
@@ -505,7 +502,7 @@
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/05-full.jpg' %}" alt="">
+                <img class="img-fluid d-block mx-auto" src="{{ STATIC_URL }}img/portfolio/05-full.jpg" alt="">
                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
@@ -539,7 +536,7 @@
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="{% static '/img/portfolio/06-full.jpg' %}" alt="">
+                <img class="img-fluid d-block mx-auto" src="{{ STATIC_URL }}img/portfolio/06-full.jpg" alt="">
                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
@@ -556,4 +553,4 @@
       </div>
     </div>
   </div>
-{% include "footer.html" %}
+{% endblock %}

@@ -14,6 +14,16 @@ class PyWebsiteConfig(PyFather):
     show_chat = models.BooleanField(_("Show chat"), default=False)
     under_construction = models.BooleanField(_("Under Construction"), default=False)
 
-
     def get_absolute_url(self):
         return reverse('base:website-config', kwargs={'pk': self.pk})
+
+
+# ========================================================================== #
+class PyPaymentMethod(PyFather):
+    """Register the payment methods that are installed as a PyErp plugin
+    """
+    name = models.CharField(max_length=40)
+    plugin = models.CharField(max_length=40)
+
+    # def get_absolute_url(self):
+    #     return reverse('base:payment-method', kwargs={'pk': self.pk})
