@@ -9,13 +9,11 @@ from .views import (
     ActivateView, AvatarUpdateView, ChangePasswordForm, ChangePasswordView,
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
     CustomerListView, DeleteCompany, DeletePartner, DeleteUser,
-    DoChangePassword, InstallApps, LogOutModalView, PartnerAutoComplete,
-    PartnerCreateView, PartnerDetailView, PartnerUpdateView,
-    PasswordRecoveryView, ProfileView, ProviderListView, SignUpView,
-    UninstallApps, UpdateApps, UpdateBaseConfigView, UserCreateView,
-    UserDetailView, UserListView, UserUpdateView, erp_home, Install)
-
-
+    DoChangePassword, Install, InstallApps, LogOutModalView,
+    PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
+    PartnerUpdateView, PasswordRecoveryView, ProfileView, ProviderListView,
+    SignUpView, UninstallApps, UpdateApps, UpdateBaseConfigView,
+    UserCreateView, UserDetailView, UserListView, UserUpdateView, erp_home)
 from .views.app import AppView
 from .views.base_config import LoadData
 from .views.country import (
@@ -28,6 +26,8 @@ from .views.currency import (
     CurrencyUpdateView, DeleteCurrency)
 from .views.log import (
     DeleteLog, LogCreateView, LogDetailView, LogListView, LogUpdateView)
+from .views.post import (
+    DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
 # from .views.logoutmodal import LogOutModalView
 from .views.product import (
     DeleteProduct, ProductCreateView, ProductDetailView, ProductListView,
@@ -40,13 +40,7 @@ from .views.product_webcategory import (
     DeleteProductWebCategory, ProductWebCategoryCreateView,
     ProductWebCategoryDetailView, ProductWebCategoryListView,
     ProductWebCategoryUpdateView)
-
 from .views.website_config import UpdateWebsiteConfigView
-
-# Librerias en carpetas locales
-from .views.post import (
-    DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
-
 
 app_name = 'base'
 

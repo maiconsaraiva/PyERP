@@ -1,7 +1,9 @@
 # Librerias Django
 from django.conf.urls import url
 from django.urls import path
-from .views.views import index, about, services, contact, blog
+
+# Librerias en carpetas locales
+from .views.views import about, blog, contact, index, services
 
 app_name = 'webodoobim'
 

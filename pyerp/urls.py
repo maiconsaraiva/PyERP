@@ -1,8 +1,5 @@
 """Rutas de PyErp
 """
-# Librerias Standard
-import os
-
 # Librerias Django
 from django.conf import settings
 from django.conf.urls import include

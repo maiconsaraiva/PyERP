@@ -15,7 +15,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..sobre_escribir_imagen import SobreEscribirImagen
+from ..rename_image import RenameImage
 
 
 def image_path(instance, filename):
@@ -46,7 +46,7 @@ class PyUser(AbstractUser):
     celular = models.CharField(_("Mobile Phone"), max_length=255, blank=True, null=True)
     fecha_nacimiento = models.DateField(_("Birthdate"), blank=True, null=True)
     sexo = models.CharField(_("Sex"), max_length=255, choices=SEXO_CHOICES, blank=True, null=True)
-    avatar = models.ImageField(max_length=255, storage=SobreEscribirImagen(), upload_to=image_path, blank=True, null=True, default='avatar/default_avatar.png')
+    avatar = models.ImageField(max_length=255, storage=RenameImage(), upload_to=image_path, blank=True, null=True, default='avatar/default_avatar.png')
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)

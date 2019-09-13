@@ -11,11 +11,8 @@ from django.contrib.auth.models import Permission
 from .forms import PersonaChangeForm, PersonaCreationForm
 from .models import (
     PyApp, PyCompany, PyCountry, PyPartner, PyProduct, PyProductCategory,
-    PyUser)
-
+    PyUser, PyWebsiteConfig)
 from .models.base_config import BaseConfig
-
-from .models import PyWebsiteConfig
 
 admin.site.register(PyWebsiteConfig)
 

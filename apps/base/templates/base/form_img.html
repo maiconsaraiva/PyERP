@@ -1,0 +1,50 @@
+{% extends "base/dashboard.html" %}
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+{% block content %}
+<div class="card card-primary card-outline mt-2">
+    <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+        <div class="card-header" style="background-color:#ffffff;">
+        {% buttons %}
+            <a href="{{ back_url }}" class="btn btn-danger">{{ _("Discard") }}</a>
+            <button type="submit" class="btn btn-primary">
+                {{ _("Save") }}
+            </button>
+        {% endbuttons %}
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {% if forloop.counter0|divisibleby:"2" or forloop.counter0 == 0 %}
+                    <div class="row">
+                {%endif%}
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {% bootstrap_field field %}
+                    </div>
+                <!-- /.col -->
+                </div>
+                {% if forloop.counter|divisibleby:"2" %}
+                    </div>
+                    <!-- /.row -->
+                {% elif forloop.last %}
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                            </div>
+                        <!-- /.col -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                {%endif%}
+            {% endfor %}
+        </div>
+    </form>
+</div>
+{% endblock %}

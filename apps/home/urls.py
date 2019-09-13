@@ -2,11 +2,10 @@
 from django.conf.urls import url
 from django.urls import path
 
-
+# Librerias en carpetas locales
 from .views.views import (
     BlogView, PostDetailView, UnderConstruction, WebProductDetailView,
     WebProductView, contact, index)
-
 
 app_name = 'home'
 

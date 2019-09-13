@@ -143,7 +143,7 @@ def DoChangePassword(self, pk, **kwargs):
 @login_required(login_url="base:login")
 def UpdateApps(self):
     FILE_NAME = 'info.json'
-    folder_apps = 'apps'
+    folder_apps = '{}/apps'.format(settings.BASER_DIR)
     list_app = listdir(folder_apps)
     PyApp.objects.all().delete()
     for folder in list_app:

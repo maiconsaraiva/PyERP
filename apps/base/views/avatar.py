@@ -62,26 +62,15 @@ class AvatarUpdateView(UpdateView):
         Handle POST requests: instantiate a form instance with the passed
         POST variables and then check if it's valid.
         """
-        usuario =PyUser.objects.get(pk=self.request.user.pk)
+        usuario = PyUser.objects.get(pk=self.request.user.pk)
 
         if request.method == 'POST':
-            form = AvatarForm(self.request.POST, self.request.FILES, instance=usuario)
+            form = AvatarForm(
+                self.request.POST,
+                self.request.FILES,
+                instance=usuario
+            )
             if form.is_valid():
                 form.save()
 
-        return redirect('profile')
-
-
-# ========================================================================== #
-# def avatar(request):
-#     """Función para actualizar el avatar
-#     """
-
-#     usuario =PyUser.objects.get(pk=request.user.pk)
-
-#     if request.method == 'POST':
-#         form = AvatarForm(request.POST, request.FILES, instance=usuario)
-#         if form.is_valid():
-#             form.save()
-
-    # return redirect('profile')
+        return redirect('base:profile')
