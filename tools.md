@@ -77,6 +77,12 @@ git commit -am "Dañando cosas."
 git push origin nombreramma 
 ```
 
+# Borrar Rama
+```
+git branch -d <branchname>
+```
+
+
 # uniendo ramas me paro en master y me traigo lo que tenia en nombre ramma
 ```
 git checkout master
