@@ -4,13 +4,14 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..models.post import PyPost
 
 POST_FIELDS = [
-            {'string': '_("Title")', 'field': 'title'},
-            {'string': '_("Created on")', 'field': 'created_on'},
+            {'string': _("Title"), 'field': 'title'},
+            {'string': _("Created on"), 'field': 'created_on'},
 
         ]
 
