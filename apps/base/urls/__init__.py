@@ -10,11 +10,13 @@ from ..views import (
     ActivateView, AvatarUpdateView, ChangePasswordForm, ChangePasswordView,
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
     CustomerListView, DeleteCompany, DeletePartner, DeleteUser,
-    DoChangePassword, Install, InstallApps, LogOutModalView,
+    DoChangePassword, Install, InstallApps, LogOutModalView, InstallPyERP,
     PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
     PartnerUpdateView, PasswordRecoveryView, ProfileView, ProviderListView,
     SignUpView, UninstallApps, UpdateApps, UpdateBaseConfigView,
     UserCreateView, UserDetailView, UserListView, UserUpdateView, erp_home)
+
+
 from ..views.app import AppView
 from ..views.base_config import LoadData
 from ..views.country import (
@@ -48,11 +50,9 @@ app_name = 'base'
 urlpatterns = [
     path('', erp_home, name='home'),
     path('install', Install, name='install'),
-    # path(
-    #     'login/',
-    #     auth_views.LoginView.as_view(template_name='login.html'),
-    #     name='login'
-    # ),
+    path('install-erp', InstallPyERP, name='install-erp'),
+
+
     path(
         'logout/',
         auth_views.LogoutView.as_view(template_name='base/login.html'),

@@ -23,7 +23,7 @@ from pyerp.settings import BASE_DIR
 
 # Librerias en carpetas locales
 from ..forms import AvatarForm
-from ..models import PyApp, PyPartner, PyProduct, PyProductCategory, PyUser
+from ..models import PyApp, PyPartner, PyProduct, PyProductCategory, PyUser, PyWebsiteConfig, BaseConfig, PyCompany, PyUser
 from .activate import ActivateView
 from .activatelanguage import ActivateLanguageView
 from .avatar import AvatarUpdateView
@@ -160,6 +160,20 @@ def UpdateApps(self):
             continue
 
     return redirect(reverse('base:apps'))
+
+
+def InstallPyERP(self):
+    count_pw = PyWebsiteConfig.objects.all().count()
+    if count_pw > 1:
+        print("Instalado")
+    else:
+        print("Instalando")
+        PyWebsiteConfig().save()
+        BaseConfig().save()
+        PyCompany().save()
+
+    return redirect(reverse('base:login'))
+
 
 
 @login_required(login_url="base:login")
