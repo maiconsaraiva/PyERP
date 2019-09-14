@@ -28,7 +28,19 @@ PRODUCT_FIELDS = [
     {'string': _("Descriptions"), 'field': 'description'},
 ]
 
-LEAD_FIELDS_SHORT = ['name', 'category_id', 'web_category_id', 'code', 'bar_code',  'price', 'cost', 'type', 'description', 'web_active']
+LEAD_FIELDS_SHORT = [
+    'name',
+    'category_id',
+    'web_category_id',
+    'code',
+    'bar_code',
+    'price',
+    'cost',
+    'type',
+    'description',
+    'web_active',
+    'img'
+]
 
 
 class ProductListView(LoginRequiredMixin, ListView):

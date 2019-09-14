@@ -3,6 +3,8 @@
 import os
 
 from django.db import models
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -13,8 +15,12 @@ from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
 
 
+_UNSAVED_FILEFIELD = 'unsaved_filefield'
+
+
 def image_path(instance, filename):
-    return os.path.join('logo', str(instance.pk) + '.' + filename.rsplit('.', 1)[1])
+    root, ext = os.path.splitext(filename)
+    return "product/{id}{ext}".format(id=instance.pk, ext=ext)
 
 
 PRODUCT_CHOICE = (
@@ -33,6 +39,7 @@ class PyProduct(PyFather):
     category_id = models.ForeignKey(PyProductCategory, null=True, blank=True, on_delete=models.CASCADE)
     web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(_("description"), blank=True, null=True)
+
     img = models.ImageField(
         max_length=255,
         storage=RenameImage(),
@@ -56,3 +63,20 @@ class PyProduct(PyFather):
 
     class Meta:
         ordering = ['created_on']
+
+@receiver(pre_save, sender=PyProduct)
+def skip_saving_file(sender, instance, **kwargs):
+    if not instance.pk and not hasattr(instance, _UNSAVED_FILEFIELD):
+        setattr(instance, _UNSAVED_FILEFIELD, instance.img)
+        instance.img = 'product/default_product.png'
+
+
+@receiver(post_save, sender=PyProduct)
+def save_file(sender, instance, created, **kwargs):
+    if created and hasattr(instance, _UNSAVED_FILEFIELD):
+        instance.img = getattr(instance, _UNSAVED_FILEFIELD)
+        instance.save()
+        instance.__dict__.pop(_UNSAVED_FILEFIELD)
+    if not instance.img or instance.img is None:
+        instance.img = 'product/default_product.png'
+        instance.save()
