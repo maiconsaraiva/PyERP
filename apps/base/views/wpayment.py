@@ -12,10 +12,10 @@ from ..models import PyWPayment
 
 WPAYMENT_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
-    # {'string': _("Published"), 'field': 'published'},
+    {'string': _("Web Active"), 'field': 'web_active'},
 ]
 
-WPAYMENT_SHORT = ['name']
+WPAYMENT_SHORT = ['name','web_active']
 
 
 class WPaymentListView(LoginRequiredMixin, ListView):
@@ -54,7 +54,7 @@ class WPaymentCreateView(LoginRequiredMixin, CreateView):
     login_url = "login"
 
     def get_context_data(self, **kwargs):
-        context = super(LogCreateView, self).get_context_data(**kwargs)
+        context = super(WPaymentCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Create Payment'
         context['breadcrumbs'] = [{'url': 'base:wpayments', 'name': 'Payments'}]
         context['back_url'] = reverse('base:wpayments')

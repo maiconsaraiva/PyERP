@@ -9,7 +9,7 @@ from .father import PyFather
 
 
 class PyFaq(PyFather):
-    name = models.CharField(_("Name"), max_length=40)
+    name = models.CharField(_("Name"), max_length=255)
     content = models.TextField()
 
     def get_absolute_url(self):

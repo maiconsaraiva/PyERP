@@ -10,7 +10,7 @@ from .father import PyFather
 
 class PyWPayment(PyFather):
     name = models.CharField(_("Name"), max_length=40)
-    # web_published = models.BooleanField(default=True, blank=True, null=True)
+    web_active = models.BooleanField(_("Web Active"), default=True)
 
     def get_absolute_url(self):
         return reverse('base:wpayment-detail', kwargs={'pk': self.pk})
