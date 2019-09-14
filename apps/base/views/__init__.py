@@ -163,11 +163,11 @@ def UpdateApps(self):
 
 
 def InstallPyERP(self):
-    count_pw = PyWebsiteConfig.objects.all().count()
-    if count_pw > 1:
-        print("Instalado")
+    count_pw = BaseConfig.objects.all().count()
+    if count_pw > 0:
+        print("=== Ya Instalado ====")
     else:
-        print("Instalando")
+        print("=== Se Instalo ====")
         PyWebsiteConfig().save()
         BaseConfig().save()
         PyCompany().save()
