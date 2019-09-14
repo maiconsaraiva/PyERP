@@ -2,9 +2,18 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light elevation-1">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link">
-        <img src="{{ MEDIA_URL }}{{ user|get_company_logo }}" alt="PyERP" style="opacity: .8; margin-left: 0px;" width="100%" >
+    {% if user.is_superuser %}
+    <a href="{% url 'base:website-config' 1 %}" class="brand-link">
+    {% else %}
+            <a href="/" class="brand-link">
+    {% endif %}
+        <img src="{{ MEDIA_URL }}{{ user|get_company_logo }}" alt="PyERP" class="logo_company" style="opacity: .8; margin-left: 0px;" width="100%" >
     </a>
+
+        <style>
+            .logo_company:hover {filter: grayscale(80%);}
+        </style>
+
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user (optional) -->
