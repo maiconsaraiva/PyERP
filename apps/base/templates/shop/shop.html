@@ -32,6 +32,7 @@
               <div class="card-body">
                 <h4 class="card-title">
                 {#  <a href="{% url 'base:home-product' product.id %}">{{ product.name }}</a> #}
+                <a href="#">{{ product.name }}</a>
                 </h4>
                 {% if user|web_show_price %}
                   <h5> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ product.price }} {% else %} {{ product.price }} {{ user|currency_symbol }} {% endif %} </h5>
