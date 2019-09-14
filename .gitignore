@@ -5,7 +5,6 @@
 localsettings.py
 /static/
 __pycache__
-migrations/
 
 git-completion.bash
 installed_apps.py
