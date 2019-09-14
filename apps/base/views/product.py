@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 # from apps.sale.models import PySaleOrderDetail
@@ -15,20 +16,19 @@ from dal import autocomplete
 from ..models import PyProduct
 
 PRODUCT_FIELDS = [
-    {'string': 'Código', 'field': 'code'},
-    {'string': 'Código Barra', 'field': 'bar_code'},
-    {'string': 'Nombre', 'field': 'name'},
-    {'string': 'Categoría', 'field': 'category_id'},
-    {'string': 'Categoría Web', 'field': 'web_category_id'},
-    {'string': 'Precio', 'field': 'price'},
-    {'string': 'Costo', 'field': 'cost'},
-    {'string': 'tipo', 'field': 'type'},
-    {'string': 'Creado', 'field': 'created_on'},
-    {'string': 'Descripción', 'field': 'description'},
-    {'string': 'Creado', 'field': 'created_on'},
+    {'string': _("Code"), 'field': 'code'},
+    {'string': _("Bar Code"), 'field': 'bar_code'},
+    {'string': _("Name"), 'field': 'name'},
+    {'string': _("Category"), 'field': 'category_id'},
+    {'string': _("Web Category"), 'field': 'web_category_id'},
+    {'string': _("Price"), 'field': 'price'},
+    {'string': _("Cost"), 'field': 'cost'},
+    {'string': _("Type"), 'field': 'type'},
+    {'string': _("Created On"), 'field': 'created_on'},
+    {'string': _("Descriptions"), 'field': 'description'},
 ]
 
-LEAD_FIELDS_SHORT = ['name', 'category_id', 'web_category_id', 'code', 'price', 'cost', 'type', 'description', 'web_active']
+LEAD_FIELDS_SHORT = ['name', 'category_id', 'web_category_id', 'code', 'bar_code',  'price', 'cost', 'type', 'description', 'web_active']
 
 
 class ProductListView(LoginRequiredMixin, ListView):
