@@ -157,4 +157,7 @@ urlpatterns = [
 
     # ============================ Store Routes ============================ #
     path('shop/', include('apps.base.urls.shop')),
+
+    # ============================ WPayment Routes ============================ #
+    path('wpayment/', include('apps.base.urls.wpayment')),
 ]
