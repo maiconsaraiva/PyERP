@@ -122,28 +122,31 @@
                         <a href="#" class="nav-link"><i class="fa fa-cogs nav-icon"></i><p>{{ _('Configuration') }}<i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{% url 'base:users' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>Usuarios</p></a>
+                                <a href="{% url 'base:users' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Users') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:companies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>Compañias</p></a>
+                                <a href="{% url 'base:companies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Company') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:currencies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>Currencies</p></a>
+                                <a href="{% url 'base:currencies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Currencies') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:base-config' 1 %}" class="nav-link"><i class="fa fa-cog nav-icon"></i><p>General</p></a>
+                                <a href="{% url 'base:base-config' 1 %}" class="nav-link"><i class="fa fa-cog nav-icon"></i><p>{{ _('General') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:logs' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>Log</p></a>
+                                <a href="{% url 'base:logs' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Log') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:crons' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>Cron</p></a>
+                                <a href="{% url 'base:crons' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Cron') }}</p></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{% url 'base:countries' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Countries') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:load-data' %}" class="nav-link"><i class="fa fa-database nav-icon"></i><p>Cargar Datos Iniciales</p></a>
+                                <a href="{% url 'base:parameters' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Parameters') }}</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:load-data' %}" class="nav-link"><i class="fa fa-database nav-icon"></i><p>{{ _('Load Data') }}</p></a>
                             </li>
                         </ul>
                     </li>
