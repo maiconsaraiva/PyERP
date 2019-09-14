@@ -5,14 +5,15 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..models import PyLog
 
 LOG_FIELDS = [
-    {'string': 'Creado el', 'field': 'created_on'},
-    {'string': 'Nombre', 'field': 'name'},
-    {'string': 'Notas', 'field': 'note'},
+    {'string': _("Created On"), 'field': 'created_on'},
+    {'string': _("Name"), 'field': 'name'},
+    {'string': _("Note"), 'field': 'note'},
 ]
 
 LOG_SHORT = ['name', 'note']

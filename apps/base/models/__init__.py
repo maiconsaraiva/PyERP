@@ -14,3 +14,4 @@ from .usercustom import PyUser
 from .base_config import BaseConfig
 from .website_config import PyWebsiteConfig
 from .wpayment import PyWPayment
+from .faq import PyFaq
