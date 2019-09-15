@@ -163,4 +163,5 @@ urlpatterns = [
     path('wparameter/', include('apps.base.urls.wparameter')),
     path('meta/', include('apps.base.urls.meta')),
     path('variant/', include('apps.base.urls.variant')),
+    path('attribute/', include('apps.base.urls.attribute')),
 ]

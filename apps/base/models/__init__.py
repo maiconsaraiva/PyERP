@@ -25,3 +25,4 @@ from .comment import PyComment
 from .page import PyPage
 from .meta import PyMeta
 from .variant import PyVariant
+from .attribute import PyAttribute

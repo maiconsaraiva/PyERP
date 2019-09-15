@@ -72,17 +72,32 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                       <a href="{% url 'base:products' %}" class="nav-link">
-                        <i class="fa fa-barcode nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>{{ _('Products') }}</p>
                       </a>
                     </li>
 
                     <li class="nav-item">
                       <a href="{% url 'base:variants' %}" class="nav-link">
-                        <i class="fa fa-barcode nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>{{ _('Variants') }}</p>
                       </a>
                     </li>
+
+                     <li class="nav-item">
+                        <a href="{% url 'base:attributes' %}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>{{ _('Attributes') }}</p></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'base:product-category' %}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>{{ _('Product Category') }}</p></a>
+                    </li>
+
+
+
 
                 </ul>
               </li>
@@ -105,6 +120,8 @@
                     <li class="nav-item">
                         <a href="{% url 'base:currencies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Currencies') }}</p></a>
                     </li>
+
+
 
                 </ul>
               </li>
