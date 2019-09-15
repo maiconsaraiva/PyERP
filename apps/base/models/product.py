@@ -13,6 +13,7 @@ from ..rename_image import RenameImage
 from .father import PyFather
 from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
+from .uom import PyUom
 
 
 _UNSAVED_FILEFIELD = 'unsaved_filefield'
@@ -40,6 +41,7 @@ class PyProduct(PyFather):
     category_id = models.ForeignKey(PyProductCategory, null=True, blank=True, on_delete=models.CASCADE)
     web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(_("description"), blank=True, null=True)
+    uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
 
     img = models.ImageField(
         max_length=255,
