@@ -160,4 +160,5 @@ urlpatterns = [
     path('wpayment/', include('apps.base.urls.wpayment')),
     path('faq/', include('apps.base.urls.faq')),
     path('parameter/', include('apps.base.urls.parameter')),
+    path('image/', include('apps.base.urls.image')),
 ]
