@@ -48,6 +48,9 @@ class PyCompany(PyFather):
         default='logo/default_logo.png'
     )
 
+    latitude = models.IntegerField(null=True, blank=True)
+    longitude = models.IntegerField(null=True, blank=True)
+
     def get_absolute_url(self):
         return reverse('base:company-detail', kwargs={'pk': self.pk})
 

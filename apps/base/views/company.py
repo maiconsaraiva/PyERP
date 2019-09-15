@@ -34,6 +34,9 @@ COMPANY_FIELDS_SHORT = [
     'social_linkedin',
     'social_youtube',
 
+    'latitude',
+    'longitude',
+
     'currency_id',
     'slogan',
     'logo'
