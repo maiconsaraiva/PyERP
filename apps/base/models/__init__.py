@@ -20,3 +20,4 @@ from .faq import PyFaq
 from .parameter import PyParameter
 from .image import PyImage
 from .tag import PyTag
+from .comment import PyComment
