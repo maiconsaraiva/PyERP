@@ -165,4 +165,5 @@ urlpatterns = [
     path('comment/', include('apps.base.urls.comment')),
     path('page/', include('apps.base.urls.page')),
     path('wparameter/', include('apps.base.urls.wparameter')),
+    path('meta/', include('apps.base.urls.meta')),
 ]

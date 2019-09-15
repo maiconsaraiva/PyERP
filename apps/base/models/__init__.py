@@ -23,3 +23,4 @@ from .image import PyImage
 from .tag import PyTag
 from .comment import PyComment
 from .page import PyPage
+from .meta import PyMeta

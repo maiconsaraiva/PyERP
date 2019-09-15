@@ -34,19 +34,52 @@
                     <a style="color:#6c6565;" href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
                 </li>
 
-      <li class="nav-item">
+       <!-- PARTNER -->
+        <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-user nav-icon"></i>
+                  <p>
+                    {{ _('Contacts') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
         <a href="{% url 'base:partners' %}" class="nav-link">
           <i class="fa fa-user nav-icon"></i>
           <p>{{ _('Partners') }}</p>
         </a>
       </li>
 
-      <li class="nav-item">
-          <a href="{% url 'base:products' %}" class="nav-link">
-            <i class="fa fa-barcode nav-icon"></i>
-            <p>{{ _('Products') }}</p>
-          </a>
-        </li>
+                </ul>
+              </li>
+         <!-- END PARTNER -->
+
+
+
+
+
+
+        <!-- PRODUCT -->
+        <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-barcode nav-icon"></i>
+                  <p>
+                    {{ _('Product') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{% url 'base:products' %}" class="nav-link">
+                        <i class="fa fa-barcode nav-icon"></i>
+                        <p>{{ _('Products') }}</p>
+                      </a>
+                    </li>
+
+                </ul>
+              </li>
+            <!-- END PRODUCT -->
 
 
 
@@ -93,6 +126,13 @@
                     <a href="{% url 'base:wparameters' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>{{ _('Web Parameters') }}</p>
+                    </a>
+                  </li>
+
+                    <li class="nav-item">
+                    <a href="{% url 'base:metas' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Metas') }}</p>
                     </a>
                   </li>
 
