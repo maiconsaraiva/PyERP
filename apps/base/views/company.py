@@ -6,27 +6,34 @@ from django.urls import reverse
 from django.utils import translation
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ...base.models import PyCompany
 
 COMPANY_FIELDS = [
-    {'string': 'Nombre', 'field': 'name'},
-    {'string': 'Teléfono', 'field': 'phone'},
-    {'string': 'Email', 'field': 'email'},
-    {'string': 'Giro', 'field': 'giro'},
-    {'string': 'Moneda', 'field': 'currency_id'},
-    {'string': 'Slogan', 'field': 'slogan'},
+    {'string': _("Name"), 'field': 'name'},
+    {'string': _("Street"), 'field': 'street'},
+    {'string': _("Phone"), 'field': 'phone'},
+    {'string': _("Email"), 'field': 'email'},
+    {'string': _("Currency"), 'field': 'currency_id'},
+    {'string': _("Slogan"), 'field': 'slogan'},
+    {'string': _("Postal Code"), 'field': 'postal_code'},
 ]
 
 COMPANY_FIELDS_SHORT = [
     'name',
+    'street',
     'city',
     'phone',
     'email',
+    'postal_code',
+
     'social_facebook',
     'social_instagram',
     'social_linkedin',
+    'social_youtube',
+
     'currency_id',
     'slogan',
     'logo'

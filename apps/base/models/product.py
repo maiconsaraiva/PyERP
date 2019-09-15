@@ -26,7 +26,8 @@ def image_path(instance, filename):
 PRODUCT_CHOICE = (
     ("product", "Almacenable"),
     ('consu', 'Consumible'),
-    ('service', 'Servicio')
+    ('service', 'Servicio'),
+    ('software', 'Software')
 )
 
 
