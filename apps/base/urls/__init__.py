@@ -161,4 +161,5 @@ urlpatterns = [
     path('faq/', include('apps.base.urls.faq')),
     path('parameter/', include('apps.base.urls.parameter')),
     path('image/', include('apps.base.urls.image')),
+    path('tag/', include('apps.base.urls.tag')),
 ]
