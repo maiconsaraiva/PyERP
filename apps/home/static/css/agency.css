@@ -179,7 +179,7 @@ img::-moz-selection {
 
 header.masthead {
   text-align: center;
-  color: #000;
+  color: #777;
   background-color: #EEE;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -188,7 +188,7 @@ header.masthead {
 }
 
 header.masthead a{
-  color: #000 !important;
+  color: #777 !important;
 }
 
 header.masthead .intro-text {
