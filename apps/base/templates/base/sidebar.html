@@ -126,11 +126,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                       <a href="{% url 'base:countries' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Countries') }}</p></a>
+                       <a href="{% url 'base:countries' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Countries') }}</p></a>
                    </li>
 
                     <li class="nav-item">
-                        <a href="{% url 'base:currencies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Currencies') }}</p></a>
+                        <a href="{% url 'base:currencies' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Currencies') }}</p></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'base:taxs' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Taxs') }}</p></a>
                     </li>
 
 

@@ -14,6 +14,7 @@ from .father import PyFather
 from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
 from .uom import PyUom
+from .tax import PyTax
 
 
 _UNSAVED_FILEFIELD = 'unsaved_filefield'
@@ -42,6 +43,7 @@ class PyProduct(PyFather):
     web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(_("description"), blank=True, null=True)
     uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
+    tax_id = models.ForeignKey(PyTax, null=True, blank=True, on_delete=models.CASCADE)
 
     img = models.ImageField(
         max_length=255,

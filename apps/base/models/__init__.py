@@ -30,4 +30,5 @@ from .page import PyPage
 from .meta import PyMeta
 from .variant import PyVariant
 from .attribute import PyAttribute
+from .tax import PyTax
 
