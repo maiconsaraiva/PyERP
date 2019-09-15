@@ -8,13 +8,13 @@ from django.utils.translation import ugettext_lazy as _
 from .father import PyFather
 
 
-class PyParameter(PyFather):
+class PyWParameter(PyFather):
     name = models.CharField('Nombre', max_length=100)
     value = models.CharField('Nombre', max_length=255)
 
 
     def get_absolute_url(self):
-        return reverse('base:parameter-detail', kwargs={'pk': self.pk})
+        return reverse('base:wparameter-detail', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-id']

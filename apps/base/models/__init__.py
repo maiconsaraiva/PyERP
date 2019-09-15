@@ -11,13 +11,14 @@ from .app import PyApp
 from .father import PyFather
 from .usercustom import PyUser
 from .base_config import BaseConfig
+from .parameter import PyParameter
 
 # Website
 from .product_webcategory import PyProductWebCategory
 from .website_config import PyWebsiteConfig
 from .wpayment import PyWPayment
 from .faq import PyFaq
-from .parameter import PyParameter
+from .wparameter import PyWParameter
 from .image import PyImage
 from .tag import PyTag
 from .comment import PyComment

@@ -68,7 +68,7 @@ class ParameterUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "login"
 
     def get_context_data(self, **kwargs):
-        context = super(LogUpdateView, self).get_context_data(**kwargs)
+        context = super(ParameterUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
         context['breadcrumbs'] = [{'url': 'base:parameters', 'name': 'Parameters'}]
         context['back_url'] = reverse('base:parameter-detail', kwargs={'pk': context['object'].pk})
