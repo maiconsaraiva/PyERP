@@ -164,4 +164,7 @@ urlpatterns = [
     path('meta/', include('apps.base.urls.meta')),
     path('variant/', include('apps.base.urls.variant')),
     path('attribute/', include('apps.base.urls.attribute')),
+    path('product_category_uom/', include('apps.base.urls.product_category_uom')),
+    path('uom/', include('apps.base.urls.uom')),
+
 ]

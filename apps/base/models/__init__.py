@@ -13,6 +13,10 @@ from .usercustom import PyUser
 from .base_config import BaseConfig
 from .parameter import PyParameter
 
+# Product
+from .product_category_uom import PyProductCategoryUOM
+from .uom import PyUom
+
 # Website
 from .product_webcategory import PyProductWebCategory
 from .website_config import PyWebsiteConfig
@@ -26,3 +30,4 @@ from .page import PyPage
 from .meta import PyMeta
 from .variant import PyVariant
 from .attribute import PyAttribute
+
