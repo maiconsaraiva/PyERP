@@ -1,4 +1,5 @@
 # Librerias Django
 from django.contrib import admin
+from .models.paypal_config import PaypalConfig
 
-# Register your models here.
+admin.site.register(PaypalConfig)
