@@ -150,12 +150,8 @@ urlpatterns = [
         name='partners-autocomplete'
     ),
 
-
-    # ===================== User Self Management Routes ==================== #
+    # ============================ New URLs ============================ #
     path('', include('apps.base.urls.usercustom')),
-
-
-    # ============================ Store Routes ============================ #
     path('shop/', include('apps.base.urls.shop')),
     path('wpayment/', include('apps.base.urls.wpayment')),
     path('faq/', include('apps.base.urls.faq')),
@@ -166,4 +162,5 @@ urlpatterns = [
     path('page/', include('apps.base.urls.page')),
     path('wparameter/', include('apps.base.urls.wparameter')),
     path('meta/', include('apps.base.urls.meta')),
+    path('variant/', include('apps.base.urls.variant')),
 ]

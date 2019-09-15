@@ -77,9 +77,38 @@
                       </a>
                     </li>
 
+                    <li class="nav-item">
+                      <a href="{% url 'base:variants' %}" class="nav-link">
+                        <i class="fa fa-barcode nav-icon"></i>
+                        <p>{{ _('Variants') }}</p>
+                      </a>
+                    </li>
+
                 </ul>
               </li>
             <!-- END PRODUCT -->
+
+            <!-- Location -->
+        <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-building nav-icon"></i>
+                  <p>
+                    {{ _('Location') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                       <a href="{% url 'base:countries' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Countries') }}</p></a>
+                   </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'base:currencies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Currencies') }}</p></a>
+                    </li>
+
+                </ul>
+              </li>
+            <!-- END Location -->
 
 
 
@@ -203,9 +232,7 @@
                             <li class="nav-item">
                                 <a href="{% url 'base:companies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Company') }}</p></a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{% url 'base:currencies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Currencies') }}</p></a>
-                            </li>
+
                             <li class="nav-item">
                                 <a href="{% url 'base:base-config' 1 %}" class="nav-link"><i class="fa fa-cog nav-icon"></i><p>{{ _('General') }}</p></a>
                             </li>
@@ -215,9 +242,7 @@
                             <li class="nav-item">
                                 <a href="{% url 'base:crons' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Cron') }}</p></a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{% url 'base:countries' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Countries') }}</p></a>
-                            </li>
+
                             <li class="nav-item">
                                 <a href="{% url 'base:parameters' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Parameters') }}</p></a>
                             </li>
