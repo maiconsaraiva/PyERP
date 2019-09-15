@@ -163,4 +163,5 @@ urlpatterns = [
     path('image/', include('apps.base.urls.image')),
     path('tag/', include('apps.base.urls.tag')),
     path('comment/', include('apps.base.urls.comment')),
+    path('page/', include('apps.base.urls.page')),
 ]

@@ -39,7 +39,9 @@ COMPANY_FIELDS_SHORT = [
 
     'currency_id',
     'slogan',
-    'logo'
+    'logo',
+
+    'description'
 ]
 
 

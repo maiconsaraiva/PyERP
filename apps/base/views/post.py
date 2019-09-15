@@ -12,10 +12,11 @@ from ..models.post import PyPost
 POST_FIELDS = [
             {'string': _("Title"), 'field': 'title'},
             {'string': _("Created on"), 'field': 'created_on'},
+            {'string': _("Keywords"), 'field': 'keywords'},
 
         ]
 
-POST_FIELDS_SHORT = ['title','content']
+POST_FIELDS_SHORT = ['title','content','keywords']
 
 class PostListView(ListView):
     model = PyPost

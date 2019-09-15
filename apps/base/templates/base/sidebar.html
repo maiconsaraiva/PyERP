@@ -68,6 +68,14 @@
                   </li>
 
                   <li class="nav-item">
+                    <a href="{% url 'base:page-backend' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Pages') }}</p>
+                    </a>
+                  </li>
+
+
+                  <li class="nav-item">
                     <a href="{% url 'base:comments' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>{{ _('Comments') }}</p>
@@ -112,8 +120,8 @@
 
                     <li class="nav-item">
                         <a href="{% url 'base:website-config' 1 %}" class="nav-link">
-                            <i class="fa fa-cog nav-icon"></i>
-                            <p>{{ _('Configurations') }}</p>
+                            <i class="fa fa-circle nav-icon"></i>
+                            <p>{{ _('Web Configurations') }}</p>
                         </a>
                     </li>
 

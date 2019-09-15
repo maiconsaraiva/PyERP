@@ -51,6 +51,8 @@ class PyCompany(PyFather):
     latitude = models.IntegerField(null=True, blank=True)
     longitude = models.IntegerField(null=True, blank=True)
 
+    description = models.TextField(null=True, blank=True)
+
     def get_absolute_url(self):
         return reverse('base:company-detail', kwargs={'pk': self.pk})
 
