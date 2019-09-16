@@ -4,9 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
-from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 # from apps.sale.models import PySaleOrderDetail
@@ -42,9 +42,9 @@ LEAD_FIELDS_SHORT = [
     'price',
     'cost',
     'type',
-    'description',
     'web_active',
-    'img'
+    'img',
+    'description',
 ]
 
 

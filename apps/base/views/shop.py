@@ -30,12 +30,14 @@ class WebProductView(ListView):
     paginate_by = 8
     extend_from = None
     url_web_product = None
+    header_title = None
     queryset = PyProduct.objects.filter(web_active='True')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['extend_from'] = self.extend_from
         context['url_web_product'] = self.url_web_product
+        context['header_title'] = self.header_title
 
         return context
 
@@ -47,10 +49,12 @@ class WebProductDetailView(DetailView):
     template_name = 'shop/product.html'
     extend_from = None
     url_web_shop = None
+    header_title = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['extend_from'] = self.extend_from
         context['url_web_shop'] = self.url_web_shop
+        context['header_title'] = self.header_title
 
         return context

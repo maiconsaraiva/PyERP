@@ -1,9 +1,11 @@
 # Librerias Future
 from __future__ import unicode_literals
-from ...base.models.base_config import BaseConfig
 
 # Librerias Django
-from django.shortcuts import HttpResponse, render, redirect
+from django.shortcuts import HttpResponse, redirect, render
+
+# Librerias en carpetas locales
+from ...base.models.base_config import BaseConfig
 
 
 def IndexEasy(request):

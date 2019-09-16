@@ -4,9 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import translation
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
-from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ...base.models import PyCompany
@@ -76,7 +76,7 @@ class CompanyDetailView(LoginRequiredMixin, DetailView):
 class CompanyCreateView(CreateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
-    template_name = 'base/form_img.html'
+    template_name = 'base/form.html'
 
     def get_context_data(self, **kwargs):
         context = super(CompanyCreateView, self).get_context_data(**kwargs)
@@ -89,7 +89,7 @@ class CompanyCreateView(CreateView):
 class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
-    template_name = 'base/form_img.html'
+    template_name = 'base/form.html'
     login_url = "login"
 
     def get_context_data(self, **kwargs):

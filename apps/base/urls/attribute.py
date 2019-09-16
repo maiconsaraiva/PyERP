@@ -5,8 +5,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.attribute import (
-    DeleteAttribute , AttributeCreateView, AttributeDetailView, AttributeListView, AttributeUpdateView)
-
+    AttributeCreateView, AttributeDetailView, AttributeListView,
+    AttributeUpdateView, DeleteAttribute)
 
 urlpatterns = [
     path('attributes', AttributeListView.as_view(), name='attributes'),

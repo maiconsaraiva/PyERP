@@ -5,6 +5,7 @@ from django.urls import reverse
 # Librerias de terceros
 from apps.base.models import PyFather
 
+
 class PyPage(PyFather):
     title = models.CharField('Nombre', max_length=255)
     content = models.TextField()

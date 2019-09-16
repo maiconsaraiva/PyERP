@@ -1,7 +1,8 @@
 # Librerias Django
 from django.urls import path
-from .views.paypal_config import UpdatePaypalConfigView
 
+# Librerias en carpetas locales
+from .views.paypal_config import UpdatePaypalConfigView
 
 # http://www.secnot.com/django-shop-paypal-rest-1.html
 

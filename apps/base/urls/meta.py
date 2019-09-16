@@ -5,8 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.meta import (
-    DeleteMeta , MetaCreateView, MetaDetailView, MetaListView, MetaUpdateView)
-
+    DeleteMeta, MetaCreateView, MetaDetailView, MetaListView, MetaUpdateView)
 
 urlpatterns = [
     path('metas', MetaListView.as_view(), name='metas'),

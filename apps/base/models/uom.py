@@ -8,7 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 from .father import PyFather
 from .product_category_uom import PyProductCategoryUOM
 
-
 TYPE_CHOICE = (
     ("bigger", "Bigger"),
     ('reference', 'Reference'),

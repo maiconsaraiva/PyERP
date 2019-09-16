@@ -1,6 +1,7 @@
 # Librerias Django
 from django.conf.urls import url
 from django.urls import path
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.views.shop import WebProductDetailView, WebProductView
@@ -21,7 +22,8 @@ urlpatterns = [
         'shop/',
         WebProductView.as_view(
             extend_from='home/home.html',
-            url_web_product='home:web-product'
+            url_web_product='home:web-product',
+            header_title=_("Shop")
         ),
         name='web-shop'
     ),
@@ -29,7 +31,8 @@ urlpatterns = [
         'shop/product/<int:pk>/',
         WebProductDetailView.as_view(
             extend_from='home/home.html',
-            url_web_shop='home:web-shop'
+            url_web_shop='home:web-shop',
+            header_title=_("Shop")
         ),
         name='web-product'
     ),

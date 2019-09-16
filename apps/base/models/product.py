@@ -1,7 +1,7 @@
-# Librerias Django
 # Librerias Standard
 import os
 
+# Librerias Django
 from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
@@ -13,9 +13,8 @@ from ..rename_image import RenameImage
 from .father import PyFather
 from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
-from .uom import PyUom
 from .tax import PyTax
-
+from .uom import PyUom
 
 _UNSAVED_FILEFIELD = 'unsaved_filefield'
 
@@ -44,7 +43,6 @@ class PyProduct(PyFather):
     description = models.TextField(_("description"), blank=True, null=True)
     uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
     tax_id = models.ForeignKey(PyTax, null=True, blank=True, on_delete=models.CASCADE)
-
     img = models.ImageField(
         max_length=255,
         storage=RenameImage(),
@@ -68,6 +66,7 @@ class PyProduct(PyFather):
 
     class Meta:
         ordering = ['created_on']
+
 
 @receiver(pre_save, sender=PyProduct)
 def skip_saving_file(sender, instance, **kwargs):

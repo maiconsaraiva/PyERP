@@ -1,22 +1,20 @@
 # Librerias Django
+from django.conf.urls import include
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
-from django.conf.urls import include
 
 # Librerias en carpetas locales
 from ..views import (
     ActivateView, AvatarUpdateView, ChangePasswordForm, ChangePasswordView,
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
     CustomerListView, DeleteCompany, DeletePartner, DeleteUser,
-    DoChangePassword, Install, InstallApps, LogOutModalView, InstallPyERP,
+    DoChangePassword, Install, InstallApps, InstallPyERP, LogOutModalView,
     PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
     PartnerUpdateView, PasswordRecoveryView, ProfileView, ProviderListView,
     SignUpView, UninstallApps, UpdateApps, UpdateBaseConfigView,
     UserCreateView, UserDetailView, UserListView, UserUpdateView, erp_home)
-
-
 from ..views.app import AppView
 from ..views.base_config import LoadData
 from ..views.country import (
@@ -32,9 +30,9 @@ from ..views.log import (
 from ..views.post import (
     DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
 # from .views.logoutmodal import LogOutModalView
-from ..views.product import (
-    DeleteProduct, ProductCreateView, ProductDetailView, ProductListView,
-    ProductUpdateView)
+# from ..views.product import (
+#     DeleteProduct, ProductCreateView, ProductDetailView, ProductListView,
+#     ProductUpdateView)
 from ..views.product_category import (
     DeleteProductCategory, ProductCategoryCreateView,
     ProductCategoryDetailView, ProductCategoryListView,
@@ -77,11 +75,11 @@ urlpatterns = [
     path('user/change-password/<int:pk>', ChangePasswordForm, name='password-change'),
     path('user/change-password-confirm/<int:pk>', DoChangePassword, name='do-change-password'),
 
-    path('products', ProductListView.as_view(), name='products'),
-    path('product/add/', ProductCreateView.as_view(), name='product-add'),
-    path('product/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
-    path('Product/<int:pk>/update', ProductUpdateView.as_view(), name='product-update'),
-    path('Product/<int:pk>/delete/', DeleteProduct, name='product-delete'),
+    # path('products', ProductListView.as_view(), name='products'),
+    # path('product/add/', ProductCreateView.as_view(), name='product-add'),
+    # path('product/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
+    # path('Product/<int:pk>/update', ProductUpdateView.as_view(), name='product-update'),
+    # path('Product/<int:pk>/delete/', DeleteProduct, name='product-delete'),
 
 
     path('countries', CountryListView.as_view(), name='countries'),
@@ -153,6 +151,7 @@ urlpatterns = [
     # ============================ New URLs ============================ #
     path('', include('apps.base.urls.usercustom')),
     path('shop/', include('apps.base.urls.shop')),
+    path('product/', include('apps.base.urls.product')),
     path('wpayment/', include('apps.base.urls.wpayment')),
     path('faq/', include('apps.base.urls.faq')),
     path('parameter/', include('apps.base.urls.parameter')),
@@ -167,5 +166,4 @@ urlpatterns = [
     path('product_category_uom/', include('apps.base.urls.product_category_uom')),
     path('uom/', include('apps.base.urls.uom')),
     path('tax/', include('apps.base.urls.tax')),
-
 ]

@@ -2,9 +2,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
-from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..models.page import PyPage
