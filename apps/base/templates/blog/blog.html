@@ -1,13 +1,6 @@
 {% extends "home/home.html" %}
 {% load erp_tags %}
 {% block content %}
-  <header class="masthead" style="background-color: #EEE;">
-    <div class="container">
-      <div class="intro-text" style="height:100px; padding-top:150px;">
-        <div class="intro-heading text-uppercase">Blog</div>
-      </div>
-    </div>
-  </header>
 
   <!-- Services -->
   <section class="page-section" id="services">
@@ -33,15 +26,15 @@
               <ul class="pagination">
               {% if page_obj.has_previous %}
                   <li>
-                      <span><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></span>
+                      <span><a href="?page={{ page_obj.previous_page_number }}"> Anterior</a>&nbsp;</span>
                   </li>
               {% endif %}
                   <li class="">
-                      <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</span>
+                      <span> Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</span>
                   </li>
               {% if page_obj.has_next %}
                   <li>
-                      <span><a href="?page={{ page_obj.next_page_number }}">Siguiente »</a></span>
+                      <span>&nbsp;<a href="?page={{ page_obj.next_page_number }}">Siguiente »</a></span>
                   </li>
               {% endif %}
               </ul>

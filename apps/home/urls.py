@@ -5,18 +5,34 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.views.shop import WebProductDetailView, WebProductView
+from apps.base.views.blog import PostDetailView, BlogView
 
 # Librerias en carpetas locales
-from .views.views import (
-    BlogView, PostDetailView, UnderConstruction, contact, index)
+from .views.views import (UnderConstruction, contact, index)
 
 app_name = 'home'
 
 urlpatterns = [
     url(r'^$', index, name='home-index'),
 
-    path('blog/', BlogView.as_view(), name='home-blog'),
-    path('blog/post/<int:pk>/', PostDetailView.as_view(), name='post'),
+    path(
+        'blog/',
+        BlogView.as_view(
+            extend_from='home/home.html',
+            url_web_post='home:post',
+            header_title=_("Blog")
+        ),
+        name='home-blog'
+    ),
+    path(
+        'blog/post/<int:pk>/',
+        PostDetailView.as_view(
+            extend_from='home/home.html',
+            url_web_post='home:web-blog',
+            header_title=_("Blog")
+        ),
+        name='post'
+    ),
 
     path(
         'shop/',

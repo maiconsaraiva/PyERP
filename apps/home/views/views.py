@@ -9,7 +9,6 @@ from django.views.generic import DetailView, ListView
 
 # Librerias de terceros
 from apps.base.models import PyPartner, PyProduct
-from apps.base.models.post import PyPost
 
 # from apps.crm.submodels.lead import PyLead
 
@@ -51,32 +50,3 @@ def contact(request):
         email_message.content_subtype = 'html'
         email_message.send()
         return HttpResponse(content='OK')
-
-"""
-BLOG
-"""
-
-POST_FIELDS = [
-    {'string': 'Título', 'field': 'title'},
-    {'string': 'Creado en', 'field': 'created_on'},
-    {'string': 'Contenido', 'field': 'content'},
-]
-
-POST_FIELDS_SHORT = ['title','content','created_on']
-
-class BlogView(ListView):
-    model = PyPost
-    template_name = 'home/blog.html'
-    fields = POST_FIELDS
-    paginate_by = 8
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-class PostDetailView(DetailView):
-    model = PyPost
-    template_name = 'home/post.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
