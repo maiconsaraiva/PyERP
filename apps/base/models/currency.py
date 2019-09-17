@@ -4,6 +4,7 @@ from django.urls import reverse
 
 # Librerias en carpetas locales
 from .father import PyFather
+from .country import PyCountry
 
 POSITION_CHOICE = (
     ("before", "Antes de la Cantidad"),
@@ -15,6 +16,8 @@ class PyCurrency(PyFather):
     name = models.CharField('Nombre', max_length=3)
     alias = models.CharField('Alias', max_length=40)
     symbol = models.CharField('Símbolo', max_length=1)
+    country = models.ForeignKey(PyCountry, on_delete=models.CASCADE)
+    iso = models.CharField(max_length=30)
     position = models.CharField(
         choices=POSITION_CHOICE, max_length=64, default='after')
 

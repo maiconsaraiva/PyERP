@@ -40,7 +40,7 @@
           </div>
           <div class="card-footer">
               {% if user|web_show_price %}
-                    <a href="#" class="btn btn-primary float-right"><i class="fa fa-cart-plus"></i></a>
+                    <a href="#" class="btn btn-primary btn-lg btn-flat float-right"><i class="fa fa-cart-plus"></i> {{ _("Add to cart") }}</a>
               {% endif %}
                     <small class="text-muted"><b>SKU:</b> {{ object.code }}</small> -
                     <small class="text-muted"><b>CÓDIGO BARRA:</b> {{ object.bar_code }}</small>
