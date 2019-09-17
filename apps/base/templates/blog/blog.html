@@ -1,12 +1,10 @@
 {% extends "home/home.html" %}
 {% load erp_tags %}
 {% block content %}
-
   <!-- Services -->
   <section class="page-section" id="services">
     <div class="container">
       <div class="row">
-
         {% for post in object_list %}
         <div class="col-md-6">
           <div style="margin-top:20px;">
@@ -41,4 +39,8 @@
           {% endif %}
         </div>
       </div>
+      </div>
+      <!-- /.row -->
+    </div>
+  </section>
 {% endblock %}
