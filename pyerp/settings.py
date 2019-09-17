@@ -69,6 +69,12 @@ INSTALLED_APPS = [
 
 
 # ========================================================================== #
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'),
+)
+
+
+# ========================================================================== #
 # Se instalan todas las app que estan como plugins en tiempo de arranque
 # Copiar en localsettings.py
 with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
