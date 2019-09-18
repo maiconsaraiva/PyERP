@@ -1,3008 +1,3239 @@
 [
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
+    "pk": 1,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Afganist\u00e1n"
+    }
+},
+{
+    "model": "base.pycountry",
     "pk": 2,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Afgani afgano\u200b",
-        "alias": "AFN ",
-        "symbol": "\u060b",
-        "country": 1,
-        "iso": "AFN ",
-        "position": "1"
+        "company_id": null,
+        "name": "\u00c5land, Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 3,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Lek alban\u00e9s\u200b",
-        "alias": "ALL ",
-        "symbol": "L",
-        "country": 3,
-        "iso": "ALL ",
-        "position": "1"
+        "company_id": null,
+        "name": "Albania"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 4,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 4,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Alemania"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 5,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 5,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Andorra"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 6,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Kwanza angole\u00f1o\u200b",
-        "alias": "AOA ",
-        "symbol": "Kz",
-        "country": 6,
-        "iso": "AOA ",
-        "position": "1"
+        "company_id": null,
+        "name": "Angola"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 7,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar del Caribe Oriental\u200b",
-        "alias": "XCD ",
-        "symbol": "$",
-        "country": 7,
-        "iso": "XCD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Anguila"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 8,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar del Caribe Oriental\u200b",
-        "alias": "XCD ",
-        "symbol": "$",
-        "country": 9,
-        "iso": "XCD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Ant\u00e1rtida"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 9,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Riyal saud\u00ed\u200b",
-        "alias": "SAR ",
-        "symbol": "\u0631.\u0633",
-        "country": 10,
-        "iso": "SAR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Antigua y Barbuda"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 10,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dinar argelino\u200b",
-        "alias": "DZD ",
-        "symbol": "\u062f.\u062c",
-        "country": 11,
-        "iso": "DZD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Arabia Saudita"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 11,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso Argentino\u200b",
-        "alias": "ARS ",
-        "symbol": "$",
-        "country": 12,
-        "iso": "ARS ",
-        "position": "1"
+        "company_id": null,
+        "name": "Argelia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 12,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dram armenio\u200b",
-        "alias": "AMD ",
-        "symbol": "\u058f / \u0564\u0580.",
-        "country": 13,
-        "iso": "AMD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Argentina"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 13,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Flor\u00edn arube\u00f1o\u200b",
-        "alias": "AWG ",
-        "symbol": "\u0192",
-        "country": 14,
-        "iso": "AWG ",
-        "position": "1"
+        "company_id": null,
+        "name": "Armenia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 14,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar australiano\u200b",
-        "alias": "AUD ",
-        "symbol": "$",
-        "country": 15,
-        "iso": "AUD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Aruba"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 15,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 16,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Australia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 16,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar de Barbados\u200b",
-        "alias": "BBD ",
-        "symbol": "$",
-        "country": 20,
-        "iso": "BBD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Austria"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 17,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 22,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Azerbaiy\u00e1n"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 18,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar belice\u00f1o\u200b",
-        "alias": "BZD ",
-        "symbol": "$",
-        "country": 23,
-        "iso": "BZD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bahamas (las)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 19,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar bermude\u00f1o\u200b",
-        "alias": "BMD ",
-        "symbol": "$",
-        "country": 25,
-        "iso": "BMD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bangladesh"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 20,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Marco convertible\u200b",
-        "alias": "BAM ",
-        "symbol": "KM o \u041a\u041c",
-        "country": 29,
-        "iso": "BAM ",
-        "position": "1"
+        "company_id": null,
+        "name": "Barbados"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 21,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Real brasile\u00f1o\u200b",
-        "alias": "BRL ",
-        "symbol": "R$",
-        "country": 31,
-        "iso": "BRL ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bahrein"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 22,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Lev b\u00falgaro\u200b",
-        "alias": "BGN ",
-        "symbol": "\u043b\u0432",
-        "country": 33,
-        "iso": "BGN ",
-        "position": "1"
+        "company_id": null,
+        "name": "B\u00e9lgica"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 23,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Occidental\u200b",
-        "alias": "XOF ",
-        "symbol": "Fr",
-        "country": 34,
-        "iso": "XOF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Belice"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 24,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco de Burundi\u200b",
-        "alias": "BIF ",
-        "symbol": "Fr",
-        "country": 35,
-        "iso": "BIF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Benin"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 25,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Escudo caboverdiano\u200b",
-        "alias": "CVE ",
-        "symbol": "$ o Esc",
-        "country": 37,
-        "iso": "CVE ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bermudas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 26,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Riel camboyano\u200b",
-        "alias": "KHR ",
-        "symbol": "\u17db",
-        "country": 38,
-        "iso": "KHR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Belar\u00fas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 27,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Central\u200b",
-        "alias": "XAF ",
-        "symbol": "Fr",
-        "country": 39,
-        "iso": "XAF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bolivia (Estado Plurinacional de)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 28,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar canadiense\u200b",
-        "alias": "CAD ",
-        "symbol": "$",
-        "country": 40,
-        "iso": "CAD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bonaire, San Eustaquio y Saba"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 29,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Central\u200b",
-        "alias": "XAF ",
-        "symbol": "Fr",
-        "country": 42,
-        "iso": "XAF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bosnia y Herzegovina"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 30,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso chileno\u200b",
-        "alias": "CLP ",
-        "symbol": "$",
-        "country": 43,
-        "iso": "CLP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Botswana"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 31,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Yuan chino\u200b",
-        "alias": "CNY ",
-        "symbol": "\u5143",
-        "country": 44,
-        "iso": "CNY ",
-        "position": "1"
+        "company_id": null,
+        "name": "Brasil"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 32,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 45,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Brunei Darussalam"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 33,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Lira turca\u200b",
-        "alias": "TRY ",
-        "symbol": "\u20a4",
-        "country": 45,
-        "iso": "TRY ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bulgaria"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 34,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso colombiano\u200b",
-        "alias": "COP ",
-        "symbol": "$",
-        "country": 46,
-        "iso": "COP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Burkina Faso"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 35,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Col\u00f3n costarricense\u200b",
-        "alias": "CRC ",
-        "symbol": "\u20a1",
-        "country": 51,
-        "iso": "CRC ",
-        "position": "1"
+        "company_id": null,
+        "name": "Burundi"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 36,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Kuna croata\u200b",
-        "alias": "HRK ",
-        "symbol": "kn",
-        "country": 52,
-        "iso": "HRK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bhut\u00e1n"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 37,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso cubano convertible",
-        "alias": "CUC ",
-        "symbol": "$",
-        "country": 53,
-        "iso": "CUC ",
-        "position": "1"
+        "company_id": null,
+        "name": "Cabo Verde"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 38,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso cubano\u200b",
-        "alias": "CUP ",
-        "symbol": "$",
-        "country": 53,
-        "iso": "CUP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Camboya"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 39,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Corona danesa\u200b",
-        "alias": "DKK ",
-        "symbol": "kr",
-        "country": 55,
-        "iso": "DKK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Camer\u00fan"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 40,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar del Caribe Oriental\u200b",
-        "alias": "XCD ",
-        "symbol": "$",
-        "country": 56,
-        "iso": "XCD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Canad\u00e1"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 41,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso dominicano\u200b",
-        "alias": "DOP ",
-        "symbol": "$",
-        "country": 56,
-        "iso": "DOP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Qatar"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 42,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar estadounidense\u200b",
-        "alias": "USD ",
-        "symbol": "$",
-        "country": 57,
-        "iso": "USD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Chad"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 43,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra egipcia\u200b",
-        "alias": "EGP ",
-        "symbol": "\u00a3 or \u062c.\u0645",
-        "country": 58,
-        "iso": "EGP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Chile"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 44,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Col\u00f3n salvadore\u00f1o\u200b",
-        "alias": "SVC ",
-        "symbol": "\u20a1",
-        "country": 59,
-        "iso": "SVC ",
-        "position": "1"
+        "company_id": null,
+        "name": "China"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 45,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar estadounidense\u200b",
-        "alias": "USD ",
-        "symbol": "$",
-        "country": 59,
-        "iso": "USD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Chipre"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 46,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Nakfa\u200b",
-        "alias": "ERN ",
-        "symbol": "Nfk",
-        "country": 61,
-        "iso": "ERN ",
-        "position": "1"
+        "company_id": null,
+        "name": "Colombia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 47,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 62,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Comoras (las)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 48,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 63,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Corea (la Rep\u00fablica Popular Democr\u00e1tica de)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 49,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 64,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Corea (la Rep\u00fablica de)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 50,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 66,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "C\u00f4te d'Ivoire"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 51,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Corona estonia\u200b",
-        "alias": "EEK ",
-        "symbol": "kr",
-        "country": 66,
-        "iso": "EEK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Costa Rica"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 52,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Birr et\u00edope\u200b",
-        "alias": "ETB ",
-        "symbol": "Br",
-        "country": 67,
-        "iso": "ETB ",
-        "position": "1"
+        "company_id": null,
+        "name": "Croacia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 53,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 69,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Cuba"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 54,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 71,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Cura\u00e7ao"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 55,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Central\u200b",
-        "alias": "XAF ",
-        "symbol": "Fr",
-        "country": 72,
-        "iso": "XAF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Dinamarca"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 56,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Lari georgiano\u200b",
-        "alias": "GEL ",
-        "symbol": "\u10da",
-        "country": 74,
-        "iso": "GEL ",
-        "position": "1"
+        "company_id": null,
+        "name": "Dominica"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 57,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra brit\u00e1nica",
-        "alias": "GBP ",
-        "symbol": "\u00a3",
-        "country": 74,
-        "iso": "GBP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Ecuador"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 58,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Cedi\u200b",
-        "alias": "GHS ",
-        "symbol": "\u20b5",
-        "country": 75,
-        "iso": "GHS ",
-        "position": "1"
+        "company_id": null,
+        "name": "Egipto"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 59,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra gibraltare\u00f1a\u200b",
-        "alias": "GIP ",
-        "symbol": "\u00a3",
-        "country": 76,
-        "iso": "GIP ",
-        "position": "1"
+        "company_id": null,
+        "name": "El Salvador"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 60,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar del Caribe Oriental\u200b",
-        "alias": "XCD ",
-        "symbol": "$",
-        "country": 77,
-        "iso": "XCD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Emiratos \u00c1rabes Unidos (los)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 61,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 78,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Eritrea"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 62,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Corona danesa",
-        "alias": "DKK ",
-        "symbol": "kr",
-        "country": 79,
-        "iso": "DKK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Eslovaquia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 63,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar estadounidense",
-        "alias": "USD ",
-        "symbol": "$",
-        "country": 81,
-        "iso": "USD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Eslovenia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 64,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Quetzal guatemalteco\u200b",
-        "alias": "GTQ ",
-        "symbol": "Q",
-        "country": 82,
-        "iso": "GTQ ",
-        "position": "1"
+        "company_id": null,
+        "name": "Espa\u00f1a"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 65,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra brit\u00e1nican. \u200b",
-        "alias": "GBP ",
-        "symbol": "\u00a3",
-        "country": 84,
-        "iso": "GBP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Estados Unidos de Am\u00e9rica (los)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 66,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco guineano\u200b",
-        "alias": "GNF ",
-        "symbol": "Fr",
-        "country": 85,
-        "iso": "GNF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Estonia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 67,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Occidental\u200b",
-        "alias": "XOF ",
-        "symbol": "Fr",
-        "country": 85,
-        "iso": "XOF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Etiop\u00eda"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 68,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Kina\u200b",
-        "alias": "PGK ",
-        "symbol": "K",
-        "country": 85,
-        "iso": "PGK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Filipinas (las)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 69,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Central\u200b",
-        "alias": "XAF ",
-        "symbol": "Fr",
-        "country": 85,
-        "iso": "XAF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Finlandia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 70,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Central\u200b",
-        "alias": "XAF ",
-        "symbol": "Fr",
-        "country": 86,
-        "iso": "XAF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Fiji"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 71,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar guyan\u00e9s\u200b",
-        "alias": "GYD ",
-        "symbol": "$",
-        "country": 88,
-        "iso": "GYD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Francia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 72,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Gourde haitiano\u200b",
-        "alias": "HTG ",
-        "symbol": "G",
-        "country": 89,
-        "iso": "HTG ",
-        "position": "1"
+        "company_id": null,
+        "name": "Gab\u00f3n"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 73,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Lempira hondure\u00f1o\u200b",
-        "alias": "HNL ",
-        "symbol": "L",
-        "country": 90,
-        "iso": "HNL ",
-        "position": "1"
+        "company_id": null,
+        "name": "Gambia (la)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 74,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar de Hong Kong\u200b",
-        "alias": "HKD ",
-        "symbol": "$",
-        "country": 91,
-        "iso": "HKD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Georgia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 75,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Forinto h\u00fangaro\u200b",
-        "alias": "HUF ",
-        "symbol": "Ft",
-        "country": 92,
-        "iso": "HUF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Ghana"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 76,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia indonesia\u200b",
-        "alias": "IDR ",
-        "symbol": "Rp",
-        "country": 94,
-        "iso": "IDR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Gibraltar"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 77,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 97,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Granada"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 78,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra brit\u00e1nican. \u200b",
-        "alias": "GBP ",
-        "symbol": "\u00a3",
-        "country": 99,
-        "iso": "GBP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Grecia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 79,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Corona islandesa\u200b",
-        "alias": "ISK ",
-        "symbol": "kr",
-        "country": 101,
-        "iso": "ISK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Groenlandia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 80,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar neozeland\u00e9s\u200b",
-        "alias": "NZD ",
-        "symbol": "$",
-        "country": 111,
-        "iso": "NZD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guadeloupe"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 81,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Nuevo sh\u00e9quel\u200b",
-        "alias": "ILS ",
-        "symbol": "\u20aa",
-        "country": 117,
-        "iso": "ILS ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guam"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 82,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 118,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guatemala"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 83,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar jamaiquino\u200b",
-        "alias": "JMD ",
-        "symbol": "$",
-        "country": 119,
-        "iso": "JMD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guayana Francesa"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 84,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Yen\u200b",
-        "alias": "JPY ",
-        "symbol": "\u00a5",
-        "country": 120,
-        "iso": "JPY ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guernsey"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 85,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra brit\u00e1nican. \u200b",
-        "alias": "GBP ",
-        "symbol": "\u00a3",
-        "country": 121,
-        "iso": "GBP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guinea"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 86,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dinar jordano\u200b",
-        "alias": "JOD ",
-        "symbol": "\u062f.\u0627",
-        "country": 122,
-        "iso": "JOD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guinea Ecuatorial"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 87,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Som kirgu\u00eds\u200b",
-        "alias": "KGS ",
-        "symbol": "C",
-        "country": 125,
-        "iso": "KGS ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guinea Bissau"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 88,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar australiano\u200b",
-        "alias": "AUD ",
-        "symbol": "$",
-        "country": 126,
-        "iso": "AUD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Guyana"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 89,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dinar kuwait\u00ed\u200b",
-        "alias": "KWD ",
-        "symbol": "\u062f.\u0643",
-        "country": 127,
-        "iso": "KWD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Hait\u00ed"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 90,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 130,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Honduras"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 91,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra libanesa\u200b",
-        "alias": "LBP ",
-        "symbol": "\u0644.\u0644",
-        "country": 131,
-        "iso": "LBP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Hong Kong"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 92,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar liberiano\u200b",
-        "alias": "LRD ",
-        "symbol": "$",
-        "country": 132,
-        "iso": "LRD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Hungr\u00eda"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 93,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dinar libio\u200b",
-        "alias": "LYD ",
-        "symbol": "\u0644.\u062f",
-        "country": 133,
-        "iso": "LYD ",
-        "position": "1"
+        "company_id": null,
+        "name": "India"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 94,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco suizo\u200b",
-        "alias": "CHF ",
-        "symbol": "Fr",
-        "country": 134,
-        "iso": "CHF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Indonesia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 95,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 135,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Iraq"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 96,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 136,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Ir\u00e1n (Rep\u00fablica Isl\u00e1mica de)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 97,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Pataca macaense\u200b",
-        "alias": "MOP ",
-        "symbol": "P",
-        "country": 137,
-        "iso": "MOP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Irlanda"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 98,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Ariary malgache\u200b",
-        "alias": "MGA ",
-        "symbol": "Ar",
-        "country": 139,
-        "iso": "MGA ",
-        "position": "1"
+        "company_id": null,
+        "name": "Bouvet, Isla"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 99,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Ringgit malayo\u200b",
-        "alias": "MYR ",
-        "symbol": "RM",
-        "country": 140,
-        "iso": "MYR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Isla de Man"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 100,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia de Maldivas\u200b",
-        "alias": "MVR ",
-        "symbol": "\u0783.",
-        "country": 142,
-        "iso": "MVR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Navidad, Isla de"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 101,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Occidental\u200b",
-        "alias": "XOF ",
-        "symbol": "Fr",
-        "country": 143,
-        "iso": "XOF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Islandia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 102,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 144,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Caim\u00e1n, (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 103,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dirham marroqu\u00ed\u200b",
-        "alias": "MAD ",
-        "symbol": "\u062f.\u0645.",
-        "country": 145,
-        "iso": "MAD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Cocos / Keeling, (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 104,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia de Mauricio\u200b",
-        "alias": "MUR ",
-        "symbol": "\u20a8",
-        "country": 147,
-        "iso": "MUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Cook, (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 105,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Uguiya\u200b",
-        "alias": "MRO ",
-        "symbol": "UM",
-        "country": 148,
-        "iso": "MRO ",
-        "position": "1"
+        "company_id": null,
+        "name": "Feroe, (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 106,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso mexicano\u200b",
-        "alias": "MXN ",
-        "symbol": "$",
-        "country": 150,
-        "iso": "MXN ",
-        "position": "1"
+        "company_id": null,
+        "name": "Georgia del Sur (la) y las Islas Sandwich del Sur"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 107,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 153,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Heard (Isla) e Islas McDonald"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 108,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Tugrik mongol\u200b",
-        "alias": "MNT ",
-        "symbol": "\u20ae",
-        "country": 154,
-        "iso": "MNT ",
-        "position": "1"
+        "company_id": null,
+        "name": "Malvinas [Falkland], (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 109,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 155,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Marianas del Norte, (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 110,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar del Caribe Oriental\u200b",
-        "alias": "XCD ",
-        "symbol": "$",
-        "country": 156,
-        "iso": "XCD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Marshall, (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 111,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Metical mozambique\u00f1o\u200b",
-        "alias": "MZN ",
-        "symbol": "MTn",
-        "country": 157,
-        "iso": "MZN ",
-        "position": "1"
+        "company_id": null,
+        "name": "Pitcairn"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 112,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar namibio\u200b",
-        "alias": "NAD ",
-        "symbol": "$",
-        "country": 159,
-        "iso": "NAD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Salom\u00f3n, Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 113,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rand sudafricano\u200b",
-        "alias": "ZAR ",
-        "symbol": "R",
-        "country": 159,
-        "iso": "ZAR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Turcas y Caicos, (las) Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 114,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar australiano\u200b",
-        "alias": "AUD ",
-        "symbol": "$",
-        "country": 160,
-        "iso": "AUD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Islas Ultramarinas Menores de los Estados Unidos (las)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 115,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia india",
-        "alias": "INR ",
-        "symbol": "\u20b9",
-        "country": 161,
-        "iso": "INR ",
-        "position": "1"
+        "company_id": null,
+        "name": "V\u00edrgenes brit\u00e1nicas, Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 116,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia nepal\u00ed\u200b",
-        "alias": "NPR ",
-        "symbol": "\u20a8",
-        "country": 161,
-        "iso": "NPR ",
-        "position": "1"
+        "company_id": null,
+        "name": "V\u00edrgenes de los Estados Unidos, Islas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 117,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "C\u00f3rdoba nicarag\u00fcense\u200b",
-        "alias": "NIO ",
-        "symbol": "C$",
-        "country": 162,
-        "iso": "NIO ",
-        "position": "1"
+        "company_id": null,
+        "name": "Israel"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 118,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Naira\u200b",
-        "alias": "NGN ",
-        "symbol": "\u20a6",
-        "country": 164,
-        "iso": "NGN ",
-        "position": "1"
+        "company_id": null,
+        "name": "Italia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 119,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar neozeland\u00e9s\u200b",
-        "alias": "NZD ",
-        "symbol": "$",
-        "country": 165,
-        "iso": "NZD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Jamaica"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 120,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Corona noruega\u200b",
-        "alias": "NOK ",
-        "symbol": "kr",
-        "country": 167,
-        "iso": "NOK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Jap\u00f3n"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 121,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFP\u200b",
-        "alias": "XPF ",
-        "symbol": "Fr",
-        "country": 168,
-        "iso": "XPF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Jersey"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 122,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rial oman\u00ed\u200b",
-        "alias": "OMR ",
-        "symbol": "\u0631.\u0639.",
-        "country": 170,
-        "iso": "OMR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Jordania"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 123,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia pakistan\u00ed\u200b",
-        "alias": "PKR ",
-        "symbol": "\u20a8",
-        "country": 172,
-        "iso": "PKR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Kazajst\u00e1n"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 124,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar estadounidense\u200b",
-        "alias": "USD ",
-        "symbol": "$",
-        "country": 175,
-        "iso": "USD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Kenya"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 125,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Balboa paname\u00f1o\u200b",
-        "alias": "PAB ",
-        "symbol": "B/.",
-        "country": 175,
-        "iso": "PAB ",
-        "position": "1"
+        "company_id": null,
+        "name": "Kirguist\u00e1n"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 126,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Guaran\u00ed\u200b",
-        "alias": "PYG ",
-        "symbol": "\u20b2",
-        "country": 177,
-        "iso": "PYG ",
-        "position": "1"
+        "company_id": null,
+        "name": "Kiribati"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 127,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Nuevo sol\u200b",
-        "alias": "PEN ",
-        "symbol": "S/.",
-        "country": 178,
-        "iso": "PEN ",
-        "position": "1"
+        "company_id": null,
+        "name": "Kuwait"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 128,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFP\u200b",
-        "alias": "XPF ",
-        "symbol": "Fr",
-        "country": 179,
-        "iso": "XPF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Lao, (la) Rep\u00fablica Democr\u00e1tica Popular"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 129,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Z\u0142oty\u200b",
-        "alias": "PLN ",
-        "symbol": "z\u0142",
-        "country": 180,
-        "iso": "PLN ",
-        "position": "1"
+        "company_id": null,
+        "name": "Lesotho"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 130,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 181,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Letonia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 131,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar estadounidense",
-        "alias": "USD ",
-        "symbol": "$",
-        "country": 182,
-        "iso": "USD ",
-        "position": "1"
+        "company_id": null,
+        "name": "L\u00edbano"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 132,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dinar argelino\u200b",
-        "alias": "DZD ",
-        "symbol": "\u062f.\u062c",
-        "country": 184,
-        "iso": "DZD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Liberia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 133,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dirham marroqu\u00ed\u200b",
-        "alias": "MAD ",
-        "symbol": "\u062f.\u0645.",
-        "country": 184,
-        "iso": "MAD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Libia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 134,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Leu rumano\u200b",
-        "alias": "RON ",
-        "symbol": "L",
-        "country": 192,
-        "iso": "RON ",
-        "position": "1"
+        "company_id": null,
+        "name": "Liechtenstein"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 135,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Tala\u200b",
-        "alias": "WST ",
-        "symbol": "T",
-        "country": 194,
-        "iso": "WST ",
-        "position": "1"
+        "company_id": null,
+        "name": "Lituania"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 136,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar estadounidense",
-        "alias": "USD ",
-        "symbol": "$",
-        "country": 194,
-        "iso": "USD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Luxemburgo"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 137,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar estadounidense",
-        "alias": "USD ",
-        "symbol": "$",
-        "country": 195,
-        "iso": "USD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Macao"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 138,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Euro\u200b",
-        "alias": "EUR ",
-        "symbol": "\u20ac",
-        "country": 198,
-        "iso": "EUR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Macedonia (la ex Rep\u00fablica Yugoslava de)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 139,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar del Caribe Oriental\u200b",
-        "alias": "XCD ",
-        "symbol": "$",
-        "country": 201,
-        "iso": "XCD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Madagascar"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 140,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar del Caribe Oriental\u200b",
-        "alias": "XCD ",
-        "symbol": "$",
-        "country": 203,
-        "iso": "XCD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Malasia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 141,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dobra\u200b",
-        "alias": "STD ",
-        "symbol": "Db",
-        "country": 204,
-        "iso": "STD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Malawi"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 142,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Occidental\u200b",
-        "alias": "XOF ",
-        "symbol": "Fr",
-        "country": 205,
-        "iso": "XOF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Maldivas"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 143,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dinar serbio\u200b",
-        "alias": "RSD ",
-        "symbol": "\u0434\u0438\u043d. or din.",
-        "country": 206,
-        "iso": "RSD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Mal\u00ed"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 144,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia de Seychelles\u200b",
-        "alias": "SCR ",
-        "symbol": "\u20a8",
-        "country": 207,
-        "iso": "SCR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Malta"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 145,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar de Brun\u00e9i",
-        "alias": "BND ",
-        "symbol": "$",
-        "country": 209,
-        "iso": "BND ",
-        "position": "1"
+        "company_id": null,
+        "name": "Marruecos"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 146,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar de Singapur\u200b",
-        "alias": "SGD ",
-        "symbol": "$",
-        "country": 209,
-        "iso": "SGD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Martinique"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 147,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Chel\u00edn somal\u00ed\u200b",
-        "alias": "SOS ",
-        "symbol": "Sh",
-        "country": 212,
-        "iso": "SOS ",
-        "position": "1"
+        "company_id": null,
+        "name": "Mauricio"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 148,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rupia de Sri Lanka\u200b",
-        "alias": "LKR ",
-        "symbol": "Rs",
-        "country": 213,
-        "iso": "LKR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Mauritania"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 149,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rand sudafricano\u200b",
-        "alias": "ZAR ",
-        "symbol": "R",
-        "country": 215,
-        "iso": "ZAR ",
-        "position": "1"
+        "company_id": null,
+        "name": "Mayotte"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 150,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Libra sursudanesa\u200b",
-        "alias": "SSP ",
-        "symbol": "\u00a3",
-        "country": 217,
-        "iso": "SSP ",
-        "position": "1"
+        "company_id": null,
+        "name": "M\u00e9xico"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 151,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Corona sueca\u200b",
-        "alias": "SEK ",
-        "symbol": "kr",
-        "country": 218,
-        "iso": "SEK ",
-        "position": "1"
+        "company_id": null,
+        "name": "Micronesia (Estados Federados de)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 152,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco suizo\u200b",
-        "alias": "CHF ",
-        "symbol": "Fr",
-        "country": 219,
-        "iso": "CHF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Moldova (la Rep\u00fablica de)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 153,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Baht tailand\u00e9s\u200b",
-        "alias": "THB ",
-        "symbol": "\u0e3f",
-        "country": 222,
-        "iso": "THB ",
-        "position": "1"
+        "company_id": null,
+        "name": "M\u00f3naco"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 154,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Somoni tayiko\u200b",
-        "alias": "TJS ",
-        "symbol": "\u0405\u041c",
-        "country": 225,
-        "iso": "TJS ",
-        "position": "1"
+        "company_id": null,
+        "name": "Mongolia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 155,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFA de \u00c1frica Occidental\u200b",
-        "alias": "XOF ",
-        "symbol": "Fr",
-        "country": 229,
-        "iso": "XOF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Montenegro"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 156,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Pa\u02bbanga\u200b",
-        "alias": "TOP ",
-        "symbol": "T$",
-        "country": 231,
-        "iso": "TOP ",
-        "position": "1"
+        "company_id": null,
+        "name": "Montserrat"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 157,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Dinar tunecino\u200b",
-        "alias": "TND ",
-        "symbol": "\u062f.\u062a",
-        "country": 233,
-        "iso": "TND ",
-        "position": "1"
+        "company_id": null,
+        "name": "Mozambique"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 158,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Manat turkmeno\u200b",
-        "alias": "TMM ",
-        "symbol": "m",
-        "country": 234,
-        "iso": "TMM ",
-        "position": "1"
+        "company_id": null,
+        "name": "Myanmar"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 159,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Lira turca\u200b",
-        "alias": "TRY ",
-        "symbol": "TL",
-        "country": 235,
-        "iso": "TRY ",
-        "position": "1"
+        "company_id": null,
+        "name": "Namibia"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 160,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "D\u00f3lar australiano\u200b",
-        "alias": "AUD ",
-        "symbol": "$",
-        "country": 236,
-        "iso": "AUD ",
-        "position": "1"
+        "company_id": null,
+        "name": "Nauru"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 161,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Grivna\u200b",
-        "alias": "UAH ",
-        "symbol": "\u20b4",
-        "country": 237,
-        "iso": "UAH ",
-        "position": "1"
+        "company_id": null,
+        "name": "Nepal"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 162,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Chel\u00edn ugand\u00e9s\u200b",
-        "alias": "UGX ",
-        "symbol": "Sh",
-        "country": 238,
-        "iso": "UGX ",
-        "position": "1"
+        "company_id": null,
+        "name": "Nicaragua"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 163,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Peso uruguayo\u200b",
-        "alias": "UYU ",
-        "symbol": "$",
-        "country": 239,
-        "iso": "UYU ",
-        "position": "1"
+        "company_id": null,
+        "name": "N\u00edger (el)"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 164,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Som uzbeko\u200b",
-        "alias": "UZS ",
-        "symbol": "so\u2019m \u2022 \u0441\u045e\u043c",
-        "country": 240,
-        "iso": "UZS ",
-        "position": "1"
+        "company_id": null,
+        "name": "Nigeria"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 165,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Vatu\u200b",
-        "alias": "VUV ",
-        "symbol": "Vt",
-        "country": 241,
-        "iso": "VUV ",
-        "position": "1"
+        "company_id": null,
+        "name": "Niue"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 166,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Franco CFP\u200b",
-        "alias": "XPF ",
-        "symbol": "Fr",
-        "country": 245,
-        "iso": "XPF ",
-        "position": "1"
+        "company_id": null,
+        "name": "Norfolk, Isla"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 167,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Rial yemen\u00ed\u200b",
-        "alias": "YER ",
-        "symbol": "\ufdfc",
-        "country": 246,
-        "iso": "YER ",
-        "position": "1"
+        "company_id": null,
+        "name": "Noruega"
     }
 },
 {
-    "model": "base.pycurrency",
+    "model": "base.pycountry",
     "pk": 168,
     "fields": {
-        "active": true,
+        "active": null,
         "fc": null,
         "fm": null,
         "uc": null,
         "um": null,
-        "company_id": 1,
-        "name": "Kwacha zambiano\u200b",
-        "alias": "ZMW ",
-        "symbol": "ZK ",
-        "country": 248,
-        "iso": "ZMW ",
-        "position": "1"
+        "company_id": null,
+        "name": "Nueva Caledonia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 169,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Nueva Zelandia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 170,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Om\u00e1n"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 171,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Pa\u00edses Bajos (los)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 172,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Pakist\u00e1n"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 173,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Palau"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 174,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Palestina, Estado de"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 175,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Panam\u00e1"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 176,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Papua Nueva Guinea"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 177,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Paraguay"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 178,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Per\u00fa"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 179,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Polinesia Francesa"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 180,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Polonia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 181,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Portugal"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 182,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Puerto Rico"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 183,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Reino Unido de Gran Breta\u00f1a e Irlanda del Norte (el)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 184,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Sahara Occidental"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 185,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Rep\u00fablica Centroafricana (la)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 186,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Rep\u00fablica Checa (la)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 187,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Congo (el)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 188,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Congo (la Rep\u00fablica Democr\u00e1tica del)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 189,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Dominicana, (la) Rep\u00fablica"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 190,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Reuni\u00f3n"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 191,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Rwanda"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 192,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Rumania"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 193,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Rusia, (la) Federaci\u00f3n de"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 194,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Samoa"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 195,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Samoa Americana"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 196,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Saint Barth\u00e9lemy"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 197,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Saint Kitts y Nevis"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 198,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "San Marino"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 199,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Saint Martin (parte francesa)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 200,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "San Pedro y Miquel\u00f3n"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 201,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "San Vicente y las Granadinas"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 202,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Santa Helena, Ascensi\u00f3n y Trist\u00e1n de Acu\u00f1a"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 203,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Santa Luc\u00eda"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 204,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Santo Tom\u00e9 y Pr\u00edncipe"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 205,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Senegal"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 206,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Serbia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 207,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Seychelles"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 208,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Sierra leona"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 209,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Singapur"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 210,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Sint Maarten (parte neerlandesa)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 211,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Rep\u00fablica \u00c1rabe Siria"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 212,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Somalia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 213,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Sri Lanka"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 214,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Swazilandia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 215,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Sud\u00e1frica"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 216,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Sud\u00e1n (el)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 217,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Sud\u00e1n del Sur"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 218,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Suecia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 219,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Suiza"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 220,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Suriname"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 221,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Svalbard y Jan Mayen"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 222,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Tailandia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 223,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Taiw\u00e1n (Provincia de China)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 224,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Tanzania, Rep\u00fablica Unida de"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 225,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Tayikist\u00e1n"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 226,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Territorio Brit\u00e1nico del Oc\u00e9ano \u00cdndico (el)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 227,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Tierras Australes Francesas (las)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 228,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Timor-Leste"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 229,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Togo"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 230,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Tokelau"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 231,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Tonga"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 232,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Trinidad y Tabago"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 233,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "T\u00fanez"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 234,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Turkmenist\u00e1n"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 235,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Turqu\u00eda"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 236,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Tuvalu"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 237,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Ucrania"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 238,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Uganda"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 239,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Uruguay"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 240,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Uzbekist\u00e1n"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 241,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Vanuatu"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 242,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Santa Sede (la)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 243,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Venezuela (Rep\u00fablica Bolivariana de)"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 244,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Viet Nam"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 245,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Wallis y Futuna"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 246,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Yemen"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 247,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Djibouti"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 248,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Zambia"
+    }
+},
+{
+    "model": "base.pycountry",
+    "pk": 249,
+    "fields": {
+        "active": null,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": null,
+        "name": "Zimbabwe"
     }
 }
 ]
