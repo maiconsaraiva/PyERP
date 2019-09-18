@@ -7,7 +7,6 @@ from django.views.generic import DetailView, ListView
 # Librerias de terceros
 from apps.base.models.post import PyPost
 
-
 POST_FIELDS = [
     {'string': 'Título', 'field': 'title'},
     {'string': 'Creado en', 'field': 'created_on'},

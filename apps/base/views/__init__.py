@@ -1,6 +1,7 @@
 # Librerias Standard
 import json
 import os
+import subprocess
 import sys
 from collections import OrderedDict
 from importlib import reload
@@ -23,7 +24,9 @@ from pyerp.settings import BASE_DIR
 
 # Librerias en carpetas locales
 from ..forms import AvatarForm
-from ..models import PyApp, PyPartner, PyProduct, PyProductCategory, PyUser, PyWebsiteConfig, BaseConfig, PyCompany, PyUser
+from ..models import (
+    BaseConfig, PyApp, PyCompany, PyPartner, PyProduct, PyProductCategory,
+    PyUser, PyWebsiteConfig)
 from .activate import ActivateView
 from .activatelanguage import ActivateLanguageView
 from .avatar import AvatarUpdateView
@@ -180,7 +183,6 @@ def InstallPyERP(self):
 def InstallApps(self, pk):
     plugin = PyApp.objects.get(id=pk)
     plugin.installed = True
-    plugin.save()
     with open('installed_apps.py', 'a+') as installed_apps_file:
         if installed_apps_file.write('apps.{}\n'.format(plugin.name.lower())):
             print('yes')
@@ -197,15 +199,38 @@ def InstallApps(self, pk):
     apps.apps_ready = apps.models_ready = apps.loading = apps.ready = False
     apps.clear_cache()
 
-    # Se recargan todas las aplicaciones ¿como cargar solo una?
-    apps.populate(settings.INSTALLED_APPS)
+    try:
+        # Se recargan todas las aplicaciones ¿como cargar solo una?
+        apps.populate(settings.INSTALLED_APPS)
+    except:
+        # plugin.installed = False
+        print('Fallo el proceso de poblado de la app')
 
-    # Se contruyen las migraciones del plugin
-    call_command('makemigrations', plugin.name.lower(), interactive=False)
+    try:
+        # Se contruyen las migraciones del plugin
+        call_command('makemigrations', plugin.name.lower(), interactive=False)
+    except:
+        # plugin.installed = False
+        print('No hay migración de la app')
 
-    # Se ejecutan las migraciones de la app
-    call_command('migrate', plugin.name.lower(), interactive=False)
+    try:
+        # Se ejecutan las migraciones de la app
+        call_command('migrate', plugin.name.lower(), interactive=False)
+    except:
+        # plugin.installed = False
+        print('No se migro la app')
 
+    try:
+        # Se ejecutan las migraciones de la app
+        call_command('loaddata', '{}.json'.format(plugin.name.lower()), interactive=False)
+    except:
+        # plugin.installed = False
+        print('No se cargaron datos de la app')
+
+    plugin.save()
+
+
+    # subprocess.run[PROJECT_RELOAD]
     # Recargo en memoria la rutas del proyecto
     urlconf = settings.ROOT_URLCONF
     if urlconf in sys.modules:

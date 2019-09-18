@@ -4,11 +4,11 @@ from django.urls import path
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
+from apps.base.views.blog import BlogView, PostDetailView
 from apps.base.views.shop import WebProductDetailView, WebProductView
-from apps.base.views.blog import PostDetailView, BlogView
 
 # Librerias en carpetas locales
-from .views.views import (UnderConstruction, contact, index)
+from .views.views import UnderConstruction, contact, index
 
 app_name = 'home'
 

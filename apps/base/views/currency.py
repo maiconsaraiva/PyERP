@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -10,13 +11,14 @@ from django.views.generic.edit import CreateView, UpdateView
 from ..models import PyCurrency
 
 CURRENCY_FIELDS = [
-    {'string': 'Nombre', 'field': 'name'},
-    {'string': 'Alias', 'field': 'alias'},
-    {'string': 'Símbolo', 'field': 'symbol'},
-    {'string': 'Posición', 'field': 'position'},
+    {'string': _('Country'), 'field': 'country'},
+    {'string': _('Courrency'), 'field': 'name'},
+    {'string': _('Alias'), 'field': 'alias'},
+    {'string': _('Simbol'), 'field': 'symbol'},
+    {'string': _('Position'), 'field': 'position'},
 ]
 
-CURRENCY_SHORT = ['name', 'alias', 'symbol', 'position']
+CURRENCY_SHORT = ['country', 'name', 'alias', 'symbol', 'position']
 
 
 class CurrencyListView(LoginRequiredMixin, ListView):

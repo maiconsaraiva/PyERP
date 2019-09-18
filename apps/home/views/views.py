@@ -2,18 +2,25 @@
 from __future__ import unicode_literals
 
 # Librerias Django
+from django.core import serializers
 from django.core.mail import EmailMessage
 from django.shortcuts import HttpResponse, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, ListView
 
 # Librerias de terceros
-from apps.base.models import PyPartner, PyProduct
+from apps.base.models import PyParameter, PyPartner, PyProduct
 
 # from apps.crm.submodels.lead import PyLead
 
 
 def index(request):
+    web_parameter = {}
+    for parametro in PyParameter.objects.all():
+        web_parameter[parametro.name] = parametro.value
+
+    request.session['web_parameter'] = web_parameter
+
     return render(request, 'home/index.html')
 
 def post(request):
