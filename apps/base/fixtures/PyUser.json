@@ -1,0 +1,48 @@
+[
+{
+    "model": "base.pyuser",
+    "pk": 1,
+    "fields": {
+        "date_joined": "2019-09-18T18:19:12.917Z",
+        "password": "pbkdf2_sha256$150000$Jc7cRhwKIsml$BXcf8hj8GqJg70MxBs62zVQaKUD0aXHsr8HlQ4Z9mFQ=",
+        "last_login": "2019-09-18T18:19:12.918Z",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@pyerp.cl",
+        "telefono": null,
+        "celular": null,
+        "fecha_nacimiento": null,
+        "sexo": null,
+        "avatar": "avatar/default_avatar.png",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "base.pyuser",
+    "pk": 2,
+    "fields": {
+        "date_joined": "2019-09-18T18:19:37.028Z",
+        "password": "pbkdf2_sha256$150000$1xUbJ5Pg8lEG$aY3Mm2cG2/H5gf9Uu2HOJJEXANOSRtSDxDCydGS/LI4=",
+        "last_login": "2019-09-18T18:19:37.028Z",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "username": "demo",
+        "first_name": "",
+        "last_name": "",
+        "email": "demo@pyerp.cl",
+        "telefono": null,
+        "celular": null,
+        "fecha_nacimiento": null,
+        "sexo": null,
+        "avatar": "avatar/default_avatar.png",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

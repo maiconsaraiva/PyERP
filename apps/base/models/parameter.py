@@ -8,8 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from .father import PyFather
 
 ALPHANUMERIC = RegexValidator(
-    r'^[0-9a-z]*$',
-    _('Only lowercase alphanumeric characters are allowed.')
+    r'^[0-9a-z_]*$',
+    _('Only lowercase alphanumeric characters and underscore are allowed.')
 )
 
 

@@ -8,7 +8,7 @@ from apps.base.views.blog import BlogView, PostDetailView
 from apps.base.views.shop import WebProductDetailView, WebProductView
 
 # Librerias en carpetas locales
-from .views.views import UnderConstruction, contact, IndexView
+from .views.views import IndexView, UnderConstruction, contact
 
 app_name = 'home'
 

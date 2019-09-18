@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.views.generic import DetailView, ListView, TemplateView
 
 # Librerias de terceros
-from apps.base.models import PyWParameter, PyPartner, PyProduct
+from apps.base.models import PyPartner, PyProduct, PyWParameter
 
 # from apps.crm.submodels.lead import PyLead
 

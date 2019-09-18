@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 # Librerias Django
 from django.views.generic import DetailView, ListView
 
-# Librerias de terceros
-from ..models.post import PyPost
+# Librerias en carpetas locales
 from ..models import PyWParameter
+from ..models.post import PyPost
 
 POST_FIELDS = [
     {'string': 'Título', 'field': 'title'},

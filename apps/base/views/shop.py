@@ -5,9 +5,8 @@ from __future__ import unicode_literals
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 
-# Librerias de terceros
-from ..models import PyProduct
-from ..models import PyWParameter
+# Librerias en carpetas locales
+from ..models import PyProduct, PyWParameter
 
 # Tienda de Productos
 
