@@ -54,17 +54,6 @@ INSTALLED_APPS = [
 
     # Local Apps
     'apps.base',
-    # 'apps.erp',
-    # 'apps.home',
-    # 'apps.base',
-    # 'apps.sale',
-    # 'apps.account',
-    # 'apps.crm',
-    # 'apps.website',
-    # 'apps.payroll',
-    # 'apps.pos',
-    # 'apps.marketing',
-    # 'apps.project',
 ]
 
 

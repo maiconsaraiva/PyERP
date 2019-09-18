@@ -40,7 +40,7 @@ class PyUser(AbstractUser):
     is_active = models.BooleanField(_("Active"), default=False)
     username = models.CharField(_("User name"), max_length=150, db_index=True, unique=True)
     first_name = models.CharField(_("Name"), max_length=30)
-    last_name = models.CharField(_("Last name"), max_length=30)
+    last_name = models.CharField(_("Last name"), max_length=30, blank=True, null=True)
     email = models.CharField(_("Email"), max_length=254, null=False, db_index=True, unique=True)
     telefono = models.CharField(_("Phone"), max_length=255, blank=True, null=True)
     celular = models.CharField(_("Mobile Phone"), max_length=255, blank=True, null=True)
