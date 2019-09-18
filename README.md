@@ -14,6 +14,7 @@ virtualenv env --python=python3
 source env/bin/activate
 cd pyerp
 pip3 install -r requirements.txt
+python manage.py init_pyerp
 python manage.py runserver
 ```
     
