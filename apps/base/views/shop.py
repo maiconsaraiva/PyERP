@@ -6,7 +6,8 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 
 # Librerias de terceros
-from apps.base.models import PyProduct
+from ..models import PyProduct
+from ..models import PyWParameter
 
 # Tienda de Productos
 
@@ -38,6 +39,11 @@ class WebProductView(ListView):
         context['extend_from'] = self.extend_from
         context['url_web_product'] = self.url_web_product
         context['header_title'] = self.header_title
+        web_parameter = {}
+        for parametro in PyWParameter.objects.all():
+            web_parameter[parametro.name] = parametro.value
+
+        context['web_parameter'] = web_parameter
 
         return context
 
@@ -56,5 +62,10 @@ class WebProductDetailView(DetailView):
         context['extend_from'] = self.extend_from
         context['url_web_shop'] = self.url_web_shop
         context['header_title'] = self.header_title
+        web_parameter = {}
+        for parametro in PyWParameter.objects.all():
+            web_parameter[parametro.name] = parametro.value
+
+        context['web_parameter'] = web_parameter
 
         return context

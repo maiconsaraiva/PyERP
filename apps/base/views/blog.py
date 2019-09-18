@@ -5,7 +5,8 @@ from __future__ import unicode_literals
 from django.views.generic import DetailView, ListView
 
 # Librerias de terceros
-from apps.base.models.post import PyPost
+from ..models.post import PyPost
+from ..models import PyWParameter
 
 POST_FIELDS = [
     {'string': 'Título', 'field': 'title'},
@@ -29,6 +30,11 @@ class BlogView(ListView):
         context['extend_from'] = self.extend_from
         context['url_web_post'] = self.url_web_post
         context['header_title'] = self.header_title
+        web_parameter = {}
+        for parametro in PyWParameter.objects.all():
+            web_parameter[parametro.name] = parametro.value
+
+        context['web_parameter'] = web_parameter
 
         return context
 
@@ -44,5 +50,10 @@ class PostDetailView(DetailView):
         context['extend_from'] = self.extend_from
         context['url_web_post'] = self.url_web_post
         context['header_title'] = self.header_title
+        web_parameter = {}
+        for parametro in PyWParameter.objects.all():
+            web_parameter[parametro.name] = parametro.value
+
+        context['web_parameter'] = web_parameter
 
         return context

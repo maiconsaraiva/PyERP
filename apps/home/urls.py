@@ -8,12 +8,12 @@ from apps.base.views.blog import BlogView, PostDetailView
 from apps.base.views.shop import WebProductDetailView, WebProductView
 
 # Librerias en carpetas locales
-from .views.views import UnderConstruction, contact, index
+from .views.views import UnderConstruction, contact, IndexView
 
 app_name = 'home'
 
 urlpatterns = [
-    url(r'^$', index, name='home-index'),
+    path('', IndexView.as_view(), name='home-index'),
 
     path(
         'blog/',
