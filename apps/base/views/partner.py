@@ -135,7 +135,7 @@ def DeletePartner(self, pk):
 
 
 class PartnerAutoComplete(autocomplete.Select2QuerySetView):
-    """Servicio de auto completado para el modelo Taxonomia (sub especie)
+    """Servicio de auto completado para el modelo PyPartner
     """
 
     def get_queryset(self):

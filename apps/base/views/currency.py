@@ -1,11 +1,13 @@
 # Librerias Django
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+
+# Librerias de terceros
+from dal import autocomplete
 
 # Librerias en carpetas locales
 from ..models import PyCurrency
@@ -21,7 +23,7 @@ CURRENCY_FIELDS = [
 CURRENCY_SHORT = ['country', 'name', 'alias', 'symbol', 'position']
 
 
-class CurrencyListView(LoginRequiredMixin, ListView):
+class CurrencyListView(ListView):
     model = PyCurrency
     template_name = 'base/list.html'
     login_url = "login"
@@ -35,7 +37,7 @@ class CurrencyListView(LoginRequiredMixin, ListView):
         return context
 
 
-class CurrencyDetailView(LoginRequiredMixin, DetailView):
+class CurrencyDetailView(DetailView):
     model = PyCurrency
     template_name = 'base/detail.html'
     login_url = "login"
@@ -50,7 +52,7 @@ class CurrencyDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CurrencyCreateView(LoginRequiredMixin, CreateView):
+class CurrencyCreateView(CreateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'
@@ -64,7 +66,7 @@ class CurrencyCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class CurrencyUpdateView(LoginRequiredMixin, UpdateView):
+class CurrencyUpdateView(UpdateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'
@@ -78,8 +80,22 @@ class CurrencyUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="base:login")
+
 def DeleteCurrency(self, pk):
     currency = PyCurrency.objects.get(id=pk)
     currency.delete()
     return redirect(reverse('base:currencies'))
+
+
+class CurrencyAutoComplete(autocomplete.Select2QuerySetView):
+    """Servicio de auto completado para el modelo PyCurrency
+    """
+
+    def get_queryset(self):
+
+        queryset = PyCurrency.objects.all()
+
+        if self.q:
+            queryset = queryset.filter(Q(name__icontains=self.q) | Q(country__name__icontains=self.q))
+
+        return queryset

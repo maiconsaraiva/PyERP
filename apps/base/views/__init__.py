@@ -165,17 +165,17 @@ def UpdateApps(self):
     return redirect(reverse('base:apps'))
 
 
-def InstallPyERP(self):
-    count_pw = BaseConfig.objects.all().count()
-    if count_pw > 0:
-        print("=== Ya Instalado ====")
-    else:
-        print("=== Se Instalo ====")
-        PyWebsiteConfig().save()
-        BaseConfig().save()
-        PyCompany().save()
+# def InstallPyERP(self):
+#     count_pw = BaseConfig.objects.all().count()
+#     if count_pw > 0:
+#         print("=== Ya Instalado ====")
+#     else:
+#         print("=== Se Instalo ====")
+#         PyWebsiteConfig().save()
+#         BaseConfig().save()
+#         PyCompany().save()
 
-    return redirect(reverse('base:login'))
+#     return redirect(reverse('base:login'))
 
 
 

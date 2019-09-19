@@ -22,9 +22,6 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    # path('', include('apps.base.home_urls')),
-    # path('base/', include('apps.base.urls')),
-    # path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
     path(
         '<language_code>/language/activate/',
