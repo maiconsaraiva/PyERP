@@ -19,6 +19,10 @@
     <!-- Custom styles for this template -->
     <link href="{{ STATIC_URL }}css/agency.css" rel="stylesheet">
 
+    {% block meta %}
+
+    {% endblock %}
+
     {% if user|web_under_construction %}
       <meta http-equiv="Refresh" content="0; url={% url 'home:under-construction' %}">
     {% endif %}

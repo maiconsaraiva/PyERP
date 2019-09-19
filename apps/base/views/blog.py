@@ -8,6 +8,13 @@ from django.views.generic import DetailView, ListView
 from ..models import PyWParameter
 from ..models.post import PyPost
 
+
+def _web_parameter():
+    web_parameter = {}
+    for parametro in PyWParameter.objects.all():
+        web_parameter[parametro.name] = parametro.value
+    return web_parameter
+
 POST_FIELDS = [
     {'string': 'Título', 'field': 'title'},
     {'string': 'Creado en', 'field': 'created_on'},
@@ -30,11 +37,7 @@ class BlogView(ListView):
         context['extend_from'] = self.extend_from
         context['url_web_post'] = self.url_web_post
         context['header_title'] = self.header_title
-        web_parameter = {}
-        for parametro in PyWParameter.objects.all():
-            web_parameter[parametro.name] = parametro.value
-
-        context['web_parameter'] = web_parameter
+        context['web_parameter'] = _web_parameter()
 
         return context
 
