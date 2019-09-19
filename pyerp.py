@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 
+# Librerias Standard
 import argparse
 import os
+
 
 def activate(string):
     print("Activando Ambiente")
@@ -39,4 +41,3 @@ def main():
         print("depuración activada!!!")
 
 if __name__ == "__main__":main()
-
