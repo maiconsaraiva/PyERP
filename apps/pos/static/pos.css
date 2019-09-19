@@ -38,6 +38,10 @@ body{
         padding : 10px;
       }
 
+.sql-inter-dow{
+    min-height: 290px;
+}
+
 .white-area{
         min-height: 290px;
         background-color:#fff;
@@ -110,4 +114,13 @@ body{
             background-color: #eee;
         }
 
+.sql-inter-dow-b2{
+            position: absolute;
+			bottom:25px;
+}
+
+
+.sql-inter-dow-b2 .btn{
+      padding: 1.35rem;
+}
 
