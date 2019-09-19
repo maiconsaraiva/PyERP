@@ -174,23 +174,41 @@ class AvatarForm(ModelForm):
 class InitForm(forms.ModelForm):
     """Fromulario para la inicializacion de PyERP
     """
+    user= forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': _('Admin user name')
+            }
+        )
+    )
+    password = forms.CharField(
+        max_length=100,
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': _('Admin Password')
+            }
+        )
+    )
+
     class Meta:
         model = PyCompany
         fields = [
             'name',
             'country',
-            'currency_id',
+            'user',
+            'password'
         ]
         labels = {
             'name': _('Company Name'),
             'country': _('Country'),
-            'currency_id': _('Currency'),
+            'user': _('Admin user name'),
+            'password': _('Password'),
         }
         widgets = {
             'name': TextInput(
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': 'Nobre del presupuesto ...',
+                    'data-placeholder': _('Company Name'),
                     'style': 'width: 100%',
                 },
             ),
@@ -202,11 +220,10 @@ class InitForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'currency_id': autocomplete.ModelSelect2(
-                url='base:currency-autocomplete',
+            'user': TextInput(
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': _('Select a currency...'),
+                    'data-placeholder': _('Admin user name'),
                     'style': 'width: 100%',
                 },
             ),

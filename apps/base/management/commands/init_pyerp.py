@@ -51,10 +51,6 @@ class Command(BaseCommand):
             call_command('loaddata', 'PyCurrency')
 
         self.stdout.write(
-            self.style.MIGRATE_HEADING(_('*** Loading PypErp user object...'))
-        )
-
-        self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp backend parameters object...')
             )
