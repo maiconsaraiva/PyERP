@@ -2,16 +2,16 @@
 from __future__ import unicode_literals
 
 # Librerias Django
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 
 # Librerias en carpetas locales
-from ..models.base_config import BaseConfig
 from ..forms import InitForm
+from ..models.base_config import BaseConfig
 from ..models.company import PyCompany
-from ..models.usercustom import PyUser
 from ..models.currency import PyCurrency
+from ..models.usercustom import PyUser
 
 
 def IndexEasy(request):

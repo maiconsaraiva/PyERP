@@ -25,7 +25,7 @@ from pyerp.settings import BASE_DIR
 # Librerias en carpetas locales
 from ..forms import AvatarForm
 from ..models import (
-    BaseConfig, PyApp, PyCompany, PyPartner, PyProduct, PyProductCategory,
+    BaseConfig, PyPlugin, PyCompany, PyPartner, PyProduct, PyProductCategory,
     PyUser, PyWebsiteConfig)
 from .activate import ActivateView
 from .activatelanguage import ActivateLanguageView
@@ -44,10 +44,6 @@ from .profile import ProfileView
 from .signup import SignUpView
 
 ChangePasswordView = cambio_clave
-
-
-def Apps(request):
-    return render(request, 'base/apps.html')
 
 def Install(request):
     return render(request, 'base/install.html')
@@ -144,129 +140,16 @@ def DoChangePassword(self, pk, **kwargs):
 
 
 @login_required(login_url="base:login")
-def UpdateApps(self):
-    FILE_NAME = 'info.json'
-    folder_apps = '{}/apps'.format(settings.BASE_DIR)
-    list_app = listdir(folder_apps)
-    PyApp.objects.all().delete()
-    for folder in list_app:
-        try:
-            for file in listdir(folder_apps + "/" + folder):
-                if file == FILE_NAME:
-                    with open(folder_apps + "/" + folder + "/" + FILE_NAME) as json_file:
-                        data = json.load(json_file)
-                        p = PyApp(name=data['name'], description=data['description'], author=data['author'],
-                                  fa=data['fa'], version=data['version'],
-                                  website=data['website'], color=data['color'])
-                        p.save()
-        except Exception:
-            continue
-
-    return redirect(reverse('base:apps'))
-
-
-# def InstallPyERP(self):
-#     count_pw = BaseConfig.objects.all().count()
-#     if count_pw > 0:
-#         print("=== Ya Instalado ====")
-#     else:
-#         print("=== Se Instalo ====")
-#         PyWebsiteConfig().save()
-#         BaseConfig().save()
-#         PyCompany().save()
-
-#     return redirect(reverse('base:login'))
-
-
-
-@login_required(login_url="base:login")
-def InstallApps(self, pk):
-    plugin = PyApp.objects.get(id=pk)
-    plugin.installed = True
-    with open('installed_apps.py', 'a+') as installed_apps_file:
-        if installed_apps_file.write('apps.{}\n'.format(plugin.name.lower())):
-            print('yes')
-        else:
-            print("no")
-
-    # Como no se cargar una sola app, se leen todas las app que estan
-    # como plugins en tiempo de ejecución al instalar cualquier app
-    with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
-        for line in ins_apps_file.readlines():
-            settings.INSTALLED_APPS += (line.strip().rstrip('\n'), )
-
-    apps.app_configs = OrderedDict()
-    apps.apps_ready = apps.models_ready = apps.loading = apps.ready = False
-    apps.clear_cache()
-
-    try:
-        # Se recargan todas las aplicaciones ¿como cargar solo una?
-        apps.populate(settings.INSTALLED_APPS)
-    except:
-        # plugin.installed = False
-        print('Fallo el proceso de poblado de la app')
-
-    try:
-        # Se contruyen las migraciones del plugin
-        call_command('makemigrations', plugin.name.lower(), interactive=False)
-    except:
-        # plugin.installed = False
-        print('No hay migración de la app')
-
-    try:
-        # Se ejecutan las migraciones de la app
-        call_command('migrate', plugin.name.lower(), interactive=False)
-    except:
-        # plugin.installed = False
-        print('No se migro la app')
-
-    try:
-        # Se ejecutan las migraciones de la app
-        call_command('loaddata', '{}.json'.format(plugin.name.lower()), interactive=False)
-    except:
-        # plugin.installed = False
-        print('No se cargaron datos de la app')
-
-    plugin.save()
-
-
-    # subprocess.run[PROJECT_RELOAD]
-    # Recargo en memoria la rutas del proyecto
-    urlconf = settings.ROOT_URLCONF
-    if urlconf in sys.modules:
-        clear_url_caches()
-        reload(sys.modules[urlconf])
-
-    return redirect(reverse('base:apps'))
-
-
-@login_required(login_url="base:login")
-def UninstallApps(self, pk):
-    app = PyApp.objects.get(id=pk)
-    app.installed = False
-    app.save()
-    app_lists = []
-    with open('installed_apps.py', 'r') as installed_apps_file:
-        app_lists = installed_apps_file.readlines()
-    with open('installed_apps.py', 'w+') as installed_apps_file:
-        for line in app_lists:
-            if 'apps.%s' % app.name.lower() == line.strip():
-                continue
-            installed_apps_file.write(line)
-    return redirect(reverse('base:apps'))
-
-
-@login_required(login_url="base:login")
 def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """
-    count_app = PyApp.objects.all().count()
+    count_plugin = PyPlugin.objects.all().count()
 
-    apps = PyApp.objects.all().filter(installed=True).order_by('sequence')
-    app_list = []
-    if apps:
-        for app in apps:
-            st = app.name + "/menu.html"
+    plugins = PyPlugin.objects.all().filter(installed=True).order_by('sequence')
+    plugin_list = []
+    if plugins:
+        for plugin in plugins:
+            st = plugin.name + "/menu.html"
             app_list.append(st.lower())
 
     partners = PyPartner.objects.all()
@@ -275,6 +158,6 @@ def erp_home(request):
         'providers': partners.filter(provider=True),
         'users': PyUser.objects.all(),
         'products': PyProduct.objects.all(),
-        'app_list': app_list,
-        'count_app': count_app
+        'plugin_list': plugin_list,
+        'count_plugin': count_plugin
     })

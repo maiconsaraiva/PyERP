@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from apps.base.models import PyWebsiteConfig
 
 # Librerias en carpetas locales
-from ..models import PyApp
+from ..models import PyPlugin
 from ..models.base_config import BaseConfig
 
 register = template.Library()
@@ -123,7 +123,7 @@ def currency_position(obj):
 
 @register.filter
 def get_app_list(obj):
-    apps = PyApp.objects.all().filter(installed=True).order_by('sequence')
+    apps = PyPlugin.objects.all().filter(installed=True).order_by('sequence')
     return [app.name.lower() + "/menu.html" for app in apps]
 
 @register.filter
