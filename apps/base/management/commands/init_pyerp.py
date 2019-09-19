@@ -53,8 +53,6 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.MIGRATE_HEADING(_('*** Loading PypErp user object...'))
         )
-        if not PyUser.objects.all().exists():
-            call_command('loaddata', 'PyUser')
 
         self.stdout.write(
             self.style.MIGRATE_HEADING(
