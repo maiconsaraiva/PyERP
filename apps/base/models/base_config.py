@@ -18,3 +18,12 @@ class BaseConfig(models.Model):
 
     def dload_data(self):
         self.load_data = True
+
+    @classmethod
+    def crear(cls, company):
+        """Crea un propietario de manera sencilla
+        """
+        baseconfig = cls(main_company_id=company)
+        baseconfig.save()
+
+        return baseconfig

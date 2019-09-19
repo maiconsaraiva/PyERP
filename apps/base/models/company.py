@@ -10,6 +10,7 @@ from django.urls import reverse
 
 # Librerias en carpetas locales
 from ..rename_image import RenameImage
+from .country import PyCountry
 from .currency import PyCurrency
 from .father import PyFather
 
@@ -29,6 +30,7 @@ class PyCompany(PyFather):
     phone = models.CharField(max_length=20, blank=True)
     email = models.EmailField(max_length=40, blank=True)
 
+    country = models.ForeignKey(PyCountry, null=True, blank=True, on_delete=models.CASCADE)
     currency_id = models.ForeignKey(PyCurrency, null=True, blank=True, on_delete=models.CASCADE)
 
     postal_code = models.CharField(max_length=255, blank=True)
@@ -58,6 +60,15 @@ class PyCompany(PyFather):
 
     def __str__(self):
         return format(self.name)
+
+    @classmethod
+    def crear(cls, name, country, currency):
+        """Crea un propietario de manera sencilla
+        """
+        pycompany = cls(name=name, country=country, currency_id=currency)
+        pycompany.save()
+
+        return pycompany
 
 
 @receiver(pre_save, sender=PyCompany)

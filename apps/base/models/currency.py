@@ -25,4 +25,4 @@ class PyCurrency(PyFather):
         return reverse('base:currency-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.name
+        return "{} ({})".format(self.name, self.country)

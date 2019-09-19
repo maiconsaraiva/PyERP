@@ -13,10 +13,11 @@ from django.forms import (
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
+from dal import autocomplete
 from tempus_dominus.widgets import DatePicker
 
 # Librerias en carpetas locales
-from .models import PyUser
+from .models import PyCompany, PyCountry, PyUser
 
 
 class PerfilForm(ModelForm):
@@ -170,8 +171,43 @@ class AvatarForm(ModelForm):
         )
 
 
-class NameForm(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
-    your_name = forms.CharField(label='Your name', max_length=100)
-    your_name = forms.CharField(label='Your name', max_length=100)
-    your_name = forms.CharField(label='Your name', max_length=100)
+class InitForm(forms.ModelForm):
+    """Fromulario para la inicializacion de PyERP
+    """
+    class Meta:
+        model = PyCompany
+        fields = [
+            'name',
+            'country',
+            'currency_id',
+        ]
+        labels = {
+            'name': _('Company Name'),
+            'country': _('Country'),
+            'currency_id': _('Currency'),
+        }
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': 'Nobre del presupuesto ...',
+                    'style': 'width: 100%',
+                },
+            ),
+            'country': autocomplete.ModelSelect2(
+                url='base:country-autocomplete',
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': _('Select a country...'),
+                    'style': 'width: 100%',
+                },
+            ),
+            'currency_id': autocomplete.ModelSelect2(
+                url='base:currency-autocomplete',
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': _('Select a currency...'),
+                    'style': 'width: 100%',
+                },
+            ),
+        }

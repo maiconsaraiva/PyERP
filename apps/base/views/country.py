@@ -1,11 +1,12 @@
 # Librerias Django
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+
+# Librerias de terceros
+from dal import autocomplete
 
 # Librerias en carpetas locales
 from ..models import PyCountry
@@ -17,10 +18,9 @@ COUNTRY_FIELDS = [
 COUNTRY_SHORT = ['name']
 
 
-class CountryListView(LoginRequiredMixin, ListView):
+class CountryListView(ListView):
     model = PyCountry
     template_name = 'base/list.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryListView, self).get_context_data(**kwargs)
@@ -31,10 +31,9 @@ class CountryListView(LoginRequiredMixin, ListView):
         return context
 
 
-class CountryDetailView(LoginRequiredMixin, DetailView):
+class CountryDetailView(DetailView):
     model = PyCountry
     template_name = 'base/detail.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryDetailView, self).get_context_data(**kwargs)
@@ -46,11 +45,10 @@ class CountryDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CountryCreateView(LoginRequiredMixin, CreateView):
+class CountryCreateView(CreateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryCreateView, self).get_context_data(**kwargs)
@@ -60,11 +58,10 @@ class CountryCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class CountryUpdateView(LoginRequiredMixin, UpdateView):
+class CountryUpdateView(UpdateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(CountryUpdateView, self).get_context_data(**kwargs)
@@ -74,8 +71,21 @@ class CountryUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="base:login")
 def DeleteCountry(self, pk):
     country = PyCountry.objects.get(id=pk)
     country.delete()
     return redirect(reverse('base:countries'))
+
+
+class CountryAutoComplete(autocomplete.Select2QuerySetView):
+    """Servicio de auto completado para el modelo PyCountry
+    """
+
+    def get_queryset(self):
+
+        queryset = PyCountry.objects.all()
+
+        if self.q:
+            queryset = queryset.filter(name__icontains=self.q)
+
+        return queryset

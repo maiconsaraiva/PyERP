@@ -7,32 +7,21 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views import (
-    ActivateView, AvatarUpdateView, ChangePasswordForm, ChangePasswordView,
-    CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
-    CustomerListView, DeleteCompany, DeletePartner, DeleteUser,
-    DoChangePassword, Install, InstallApps, InstallPyERP, LogOutModalView,
+    ChangePasswordForm, CompanyCreateView, CompanyDetailView, CompanyListView,
+    CompanyUpdateView, CustomerListView, DeleteCompany, DeletePartner,
+    DeleteUser, DoChangePassword, Install, InstallApps,
     PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
-    PartnerUpdateView, PasswordRecoveryView, ProfileView, ProviderListView,
-    SignUpView, UninstallApps, UpdateApps, UpdateBaseConfigView,
-    UserCreateView, UserDetailView, UserListView, UserUpdateView, erp_home)
+    PartnerUpdateView, ProviderListView, UninstallApps, UpdateApps,
+    UpdateBaseConfigView, UserCreateView, UserDetailView, UserListView,
+    UserUpdateView, erp_home)
 from ..views.app import AppView
 from ..views.base_config import LoadData
-from ..views.country import (
-    CountryCreateView, CountryDetailView, CountryListView, CountryUpdateView,
-    DeleteCountry)
 from ..views.cron import (
     CronCreateView, CronDetailView, CronListView, CronUpdateView, DeleteCron)
-from ..views.currency import (
-    CurrencyCreateView, CurrencyDetailView, CurrencyListView,
-    CurrencyUpdateView, DeleteCurrency)
 from ..views.log import (
     DeleteLog, LogCreateView, LogDetailView, LogListView, LogUpdateView)
 from ..views.post import (
     DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
-# from .views.logoutmodal import LogOutModalView
-# from ..views.product import (
-#     DeleteProduct, ProductCreateView, ProductDetailView, ProductListView,
-#     ProductUpdateView)
 from ..views.product_category import (
     DeleteProductCategory, ProductCategoryCreateView,
     ProductCategoryDetailView, ProductCategoryListView,
@@ -48,7 +37,7 @@ app_name = 'base'
 urlpatterns = [
     path('', erp_home, name='home'),
     path('install', Install, name='install'),
-    path('install-erp', InstallPyERP, name='install-erp'),
+    # path('install-erp', InstallPyERP, name='install-erp'),
 
 
     path(
@@ -74,19 +63,6 @@ urlpatterns = [
     path('user/<int:pk>/delete/', DeleteUser, name='user-delete'),
     path('user/change-password/<int:pk>', ChangePasswordForm, name='password-change'),
     path('user/change-password-confirm/<int:pk>', DoChangePassword, name='do-change-password'),
-
-    # path('products', ProductListView.as_view(), name='products'),
-    # path('product/add/', ProductCreateView.as_view(), name='product-add'),
-    # path('product/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
-    # path('Product/<int:pk>/update', ProductUpdateView.as_view(), name='product-update'),
-    # path('Product/<int:pk>/delete/', DeleteProduct, name='product-delete'),
-
-
-    path('countries', CountryListView.as_view(), name='countries'),
-    path('country/add/', CountryCreateView.as_view(), name='country-add'),
-    path('country/<int:pk>/', CountryDetailView.as_view(), name='country-detail'),
-    path('country/<int:pk>/update', CountryUpdateView.as_view(), name='country-update'),
-    path('country/<int:pk>/delete/', DeleteCountry, name='country-delete'),
 
     path('companies', CompanyListView.as_view(), name='companies'),
     path('company/add/', CompanyCreateView.as_view(), name='company-add'),
@@ -126,12 +102,6 @@ urlpatterns = [
     path('cron/<int:pk>/update', CronUpdateView.as_view(), name='cron-update'),
     path('cron/<int:pk>/delete/', DeleteCron, name='cron-delete'),
 
-    path('currencies', CurrencyListView.as_view(), name='currencies'),
-    path('currency/add/', CurrencyCreateView.as_view(), name='currency-add'),
-    path('currency/<int:pk>/', CurrencyDetailView.as_view(), name='currency-detail'),
-    path('currency/<int:pk>/update', CurrencyUpdateView.as_view(), name='currency-update'),
-    path('currency/<int:pk>/delete/', DeleteCurrency, name='currency-delete'),
-
     path('post', PostListView.as_view(), name='post-backend'),
     path('post/add/', PostCreateView.as_view(), name='post-add'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
@@ -150,20 +120,22 @@ urlpatterns = [
 
     # ============================ New URLs ============================ #
     path('', include('apps.base.urls.usercustom')),
-    path('shop/', include('apps.base.urls.shop')),
-    path('product/', include('apps.base.urls.product')),
-    path('wpayment/', include('apps.base.urls.wpayment')),
-    path('faq/', include('apps.base.urls.faq')),
-    path('parameter/', include('apps.base.urls.parameter')),
-    path('image/', include('apps.base.urls.image')),
-    path('tag/', include('apps.base.urls.tag')),
-    path('comment/', include('apps.base.urls.comment')),
-    path('page/', include('apps.base.urls.page')),
-    path('wparameter/', include('apps.base.urls.wparameter')),
-    path('meta/', include('apps.base.urls.meta')),
-    path('variant/', include('apps.base.urls.variant')),
     path('attribute/', include('apps.base.urls.attribute')),
+    path('comment/', include('apps.base.urls.comment')),
+    path('country/', include('apps.base.urls.country')),
+    path('currency/', include('apps.base.urls.currency')),
+    path('faq/', include('apps.base.urls.faq')),
+    path('image/', include('apps.base.urls.image')),
+    path('meta/', include('apps.base.urls.meta')),
+    path('page/', include('apps.base.urls.page')),
+    path('parameter/', include('apps.base.urls.parameter')),
+    path('product/', include('apps.base.urls.product')),
     path('product_category_uom/', include('apps.base.urls.product_category_uom')),
-    path('uom/', include('apps.base.urls.uom')),
+    path('shop/', include('apps.base.urls.shop')),
+    path('tag/', include('apps.base.urls.tag')),
     path('tax/', include('apps.base.urls.tax')),
+    path('uom/', include('apps.base.urls.uom')),
+    path('variant/', include('apps.base.urls.variant')),
+    path('wparameter/', include('apps.base.urls.wparameter')),
+    path('wpayment/', include('apps.base.urls.wpayment')),
 ]
