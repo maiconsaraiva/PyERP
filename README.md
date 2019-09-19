@@ -17,6 +17,15 @@ pip3 install -r requirements.txt
 python manage.py init_pyerp
 python manage.py runserver
 ```
+
+# Users
+```
+Name: admin
+password: admin
+
+Name: demo
+password: demo
+```
     
 
 # Modules Status

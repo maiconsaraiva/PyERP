@@ -1,1 +1,1 @@
-apps.home
+apps.pos
