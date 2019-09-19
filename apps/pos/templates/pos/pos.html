@@ -10,14 +10,40 @@
   <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static '/pos.css' %}" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
 
 </head>
  <body class="django-background">
+
+ <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <img src="{{ MEDIA_URL }}{{ user|get_company_logo }}" alt="PyERP"  height="30px">
+          <ul class="navbar-nav mr-auto">
+            <!--
+             <li class="nav-item active">
+              <a class="nav-link" href="#">{{ user }} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            -->
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">{{ user }}</a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-user nav-icon"></i></button>
+            <button class="btn btn-outline-danger my-2 my-sm-0 ml-1" type="submit">Close</button>
+          </form>
+        </div>
+      </nav>
+    </header>
   
   <div class="my-container">
-       <div class="row">
-           <div class="col-sm-4 sql ">
+       <div class="row topbar">
+           <div class="col-sm-4 sql back-gray">
                <div class="sql-inter">
                     <div class="sql-inter-sup" style="margin : 10px;">
                         <div class="row">
@@ -30,8 +56,6 @@
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">2</a>
                                   </li>
                             </ul>
-
-
                         </div>
                         <div style="margin-left:100px;">
                             <a class="btn btn-danger" href="">+</a>
@@ -54,6 +78,31 @@
                                   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                                 </div>
 
+
+   <form name="calculator">
+       <div>
+            <input class="inputs" type="button" value="1">
+            <input class="inputs" type="button" value="2">
+            <input class="inputs" type="button" value="3">
+            <input class="operators" type="button" value="4">
+       </div>
+       <div>
+            <input class="inputs" type="button" value="5">
+            <input class="inputs" type="button" value="6">
+            <input class="inputs" type="button" value="7">
+            <input class="operators" type="button" value="8">
+        </div>
+       <div>
+            <input class="inputs" type="button" value="9">
+            <input class="inputs" type="button" value=".">
+            <input class="inputs" type="button" value="0">
+            <input id="backspace" type="button" value="&lArr;">
+            <input id="clear" type="button" value="c">
+
+        </div>
+
+        </form>
+
                     </div>
                </div>
 
@@ -67,73 +116,22 @@
 
                         <div class="input-group stylish-input-group" style="margin-top:10px;">
                           <input type="text" id="searchProd" class="form-control" placeholder="Search">
-                          <span class="input-group-addon">
-                        </div>
-
+                          <span class="input-group-addon"/>
                     </div>
                     <div class="sql-inter-dow">
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
-                        <div class="product django-background"></div>
+                        <a href="" class="product">
+                            <img src="{% static '/p1.jpg' %}" alt="">
+                            <div class="text-bot">$ 1000.00</div>
+                        </a>
+                        <a href="" class="product">
+                            <img src="{% static '/p2.jpg' %}" alt="">
+                            <div class="text-bot">$ 1000.00</div>
+                        </a>
                     </div>
-
                </div>
            </div>
        </div>
   </div>
-
-  <style>
-    .sql{
-
-      }
-      .sql-inter{
-        margin-top:10px;
-        background-color:#ECF0F1;
-        min-height: 900px;
-        padding-right: 0px !important;
-        padding-left: 0px !important;
-      }
-
-      .sql-inter-sup{
-        min-height: 90px;
-        padding : 10px;
-      }
-
-      .sql-inter-dow{
-        padding : 10px;
-      }
-
-      .white-area{
-        min-height: 290px;
-        background-color:#fff;
-        width: 100%;
-        padding: 5px;
-        text-align: right !important;
-      }
-
-      .product{
-            width: 120px;
-            height: 120px;
-            float:left;
-            margin : 3px;
-      }
-
-
-  </style>
        
     <script src="{% static '/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
