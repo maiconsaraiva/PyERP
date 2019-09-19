@@ -150,7 +150,7 @@ def erp_home(request):
     if plugins:
         for plugin in plugins:
             st = plugin.name + "/menu.html"
-            app_list.append(st.lower())
+            plugin_list.append(st.lower())
 
     partners = PyPartner.objects.all()
     return render(request, "home.html", {

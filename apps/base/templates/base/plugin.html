@@ -1,37 +1,111 @@
-{% extends 'base/dashboard.html' %}
-{% load staticfiles %}
+{% extends "base/dashboard.html" %}
 {% block content %}
-<section class="content">
-  <div style="margin-top: 20px;"></div>
-    <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
+  <div class="container-fluid h-100">
+    {% if plugin_list %}
         <div class="row">
-                  <!-- App -->
-            {% for app in object_list %}
-                  <div class="col-md-4">
-                        <div class="info-box card-primary">
-                          <span style="width: 120px;" class="info-box-icon {{ app.color }} elevation-1"><i class="fas {{ app.fa }}"></i></span>
-                                  <div class="info-box-content">
-                                    <span class="info-box-text"><b>{{ app.name }}</b> | {{ app.version }}</span>
-                                    <span class="info-box-text">
-                                      {{ app.author }} | {{ app.website }}
-                                    </span>
-                                      <span class="info-box-text">{{ app.description }}</span>
-                                      {% if app.installed %}
-                                      <a class="btn btn-danger float-right ml-1" href="{% url 'base:uninstall-plugin' app.id %}">Uninstall</a>
-                                      {% else %}
-                                      <a  class="btn btn-success float-right ml-1" href="{% url 'base:install-plugin' app.id %}">Install</a>
-                                      {% endif %}
-                                      <button class="btn btn-primary float-right" ><i class="fa fa-eye"></i></button>
-                                  </div>
-                        </div>
-                  </div>
-                  <!-- endApp -->
-            {% endfor %}
-
-
+          <!-- App -->
+          {% for app in object_list %}
+            <div class="col-md-4">
+              <div class="info-box plugind-primary">
+                <span style="width: 120px;" class="info-box-icon {{ app.color }} elevation-1"><i class="fas {{ app.fa }}"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text"><b>{{ app.name }}</b> | {{ app.version }}</span>
+                  <span class="info-box-text">
+                    {{ app.author }} | {{ app.name }}
+                  </span>
+                    <span class="info-box-text">{{ app.description }}</span>
+                    {% if app.installed %}
+                      <a class="btn btn-danger float-right ml-1" href="{% url 'base:uninstall-plugin' app.id %}">Uninstall</a>
+                    {% else %}
+                      <a  class="btn btn-success float-right ml-1" href="{% url 'base:install-plugin' app.id %}">Install</a>
+                    {% endif %}
+                    <button class="btn btn-primary float-right" ><i class="fa fa-eye"></i></button>
+                </div>
+              </div>
+            </div>
+            <!-- endApp -->
+          {% endfor %}
+        </div>
+        <div class="row">
+          <div class="col align-self-end">
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
           </div>
-      </div>
-  </section>
+          <div class="col align-self-end">
+            <div class="float-right">
+              {# .... **Now the pagination section** .... #}
+              {% if is_paginated %}
+                <nav aria-label="...">
+                  <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="/base/plugin/?page={{ page_obj.previous_page_number }}">{{ _('Previous') }}</a>
+                      </li>
+                    {% else %}
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">{{ _('Previous') }}</a>
+                      </li>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                      {% ifequal num page_obj.number %}
+                        <li class="page-item active">
+                          <a class="page-link" href="?page={{ num }}">{{ num }} <span class="sr-only">(current)</span></a>
+                        </li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}"> {{ num }}</a></li>
+                      {% endifequal %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="/base/plugin/?page={{ page_obj.next_page_number }}">{{ _('Next') }}</a>
+                      </li>
+                    {% else %}
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">{{ _('Next') }}</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+          <h3>My plugins</h3>
+          <p>No plugins found!!! :(</p>
+      {% endif %}
+  </div><!-- /.container-fluid -->
+{% endblock content %}
+{% block scripts %}
+    <!-- page script -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toastr.options.closeButton = true
+            toastr.options.timeOut = 11000
+            toastr.options.preventDuplicates = true
+            toastr.options.progressBar = true
 
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        toastr.error("{{ error|escape }}")
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    toastr.error("{{ error|escape }}")
+                {% endfor %}
+            {% endif %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'debug' %}toastr.info("{{ message }}"){% endif %}
+                    {% if message.tags == 'info' %}toastr.info("{{ message }}"){% endif %}
+                    {% if message.tags == 'success' %}toastr.success("{{ message }}"){% endif %}
+                    {% if message.tags == 'warning' %}toastr.warning("{{ message }}"){% endif %}
+                    {% if message.tags == 'error' %}toastr.error("{{ message }}"){% endif %}
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
 {% endblock %}

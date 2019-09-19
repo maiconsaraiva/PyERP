@@ -33,7 +33,8 @@ class PluginListView(ListView):
     model = PyPlugin
     template_name = 'base/plugin.html'
     fields = APP_FIELDS
-    paginate_by = 80
+    context_object_name = 'plugin_list'
+    paginate_by = 9
 
 
 # ========================================================================== #
@@ -115,7 +116,6 @@ def PluginInstall(self, pk):
 
     plugin.save()
 
-
     # subprocess.run[PROJECT_RELOAD]
     # Recargo en memoria la rutas del proyecto
     urlconf = settings.ROOT_URLCONF
@@ -126,6 +126,7 @@ def PluginInstall(self, pk):
     return redirect(reverse('base:list-plugin'))
 
 
+# ========================================================================== #
 def PluginUninstall(self, pk):
     app = PyPlugin.objects.get(id=pk)
     app.installed = False
