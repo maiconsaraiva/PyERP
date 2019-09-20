@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 # Librerias Django
-from django.views.generic import DetailView, ListView
 from .web_father import FatherDetailView, FatherListView
 
 # Librerias en carpetas locales

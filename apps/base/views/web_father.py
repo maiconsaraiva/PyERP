@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from ..models import PyWParameter, PyMeta
 
 def _web_parameter():
@@ -13,6 +13,16 @@ def _web_meta():
         cad += '<meta name="'+meta.title+'" content="'+meta.content+'">' + '\n'
     return cad
 
+
+class FatherTemplateView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['web_parameter'] = _web_parameter()
+        context['meta'] = _web_meta()
+        return context
+
+    class Meta:
+        abstract = True
 
 class FatherListView(ListView):
     def get_context_data(self, **kwargs):

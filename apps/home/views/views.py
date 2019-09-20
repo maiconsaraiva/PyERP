@@ -7,6 +7,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import HttpResponse, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, ListView, TemplateView
+from apps.base.views.web_father import FatherTemplateView
 
 # Librerias de terceros
 from apps.base.models import PyPartner, PyProduct, PyWParameter
@@ -21,7 +22,7 @@ def _web_parameter():
     return web_parameter
 
 
-class IndexView(TemplateView):
+class IndexView(FatherTemplateView):
     template_name = 'home/index.html'
 
     def get_context_data(self, **kwargs):
