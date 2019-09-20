@@ -1,3 +1,5 @@
+"""uRLs para base
+"""
 # Librerias Django
 from django.conf.urls import include
 from django.contrib.auth import views as auth_views
@@ -9,12 +11,11 @@ from django.urls import path
 from ..views import (
     ChangePasswordForm, CompanyCreateView, CompanyDetailView, CompanyListView,
     CompanyUpdateView, CustomerListView, DeleteCompany, DeletePartner,
-    DeleteUser, DoChangePassword, Install, InstallApps,
+    DeleteUser, DoChangePassword, Install,
     PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
-    PartnerUpdateView, ProviderListView, UninstallApps, UpdateApps,
-    UpdateBaseConfigView, UserCreateView, UserDetailView, UserListView,
+    PartnerUpdateView, ProviderListView, UpdateBaseConfigView, UserCreateView,
+    UserDetailView, UserListView,
     UserUpdateView, erp_home)
-from ..views.app import AppView
 from ..views.base_config import LoadData
 from ..views.cron import (
     CronCreateView, CronDetailView, CronListView, CronUpdateView, DeleteCron)
@@ -50,11 +51,6 @@ urlpatterns = [
     path('load-data', LoadData, name='load-data'),
 
     path('website-config/<int:pk>', UpdateWebsiteConfigView.as_view(), name='website-config'),
-
-    path('update-app', UpdateApps, name='update-app'),
-    path('install-app/<int:pk>/', InstallApps, name='install-app'),
-    path('uninstall-app/<int:pk>/', UninstallApps, name='uninstall-app'),
-
 
     path('users', UserListView.as_view(), name='users'),
     path('user/add/', UserCreateView.as_view(), name='user-add'),
@@ -109,7 +105,6 @@ urlpatterns = [
     path('post/<int:pk>/delete/', DeletePost, name='post-delete'),
 
 
-    path('apps', AppView.as_view(), name='apps'),
 
     # ====================== Rutas de Auto Completado ====================== #
     path(
@@ -129,6 +124,7 @@ urlpatterns = [
     path('meta/', include('apps.base.urls.meta')),
     path('page/', include('apps.base.urls.page')),
     path('parameter/', include('apps.base.urls.parameter')),
+    path('plugin/', include('apps.base.urls.plugin')),
     path('product/', include('apps.base.urls.product')),
     path('product_category_uom/', include('apps.base.urls.product_category_uom')),
     path('shop/', include('apps.base.urls.shop')),

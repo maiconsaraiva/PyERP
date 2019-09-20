@@ -16,3 +16,9 @@ class PyWebsiteConfig(PyFather):
 
     def get_absolute_url(self):
         return reverse('base:website-config', kwargs={'pk': self.pk})
+
+    @classmethod
+    def create(cls, company):
+        wbaseconfig = cls(company_id=company)
+        wbaseconfig.save()
+        return wbaseconfig

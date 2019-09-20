@@ -3,7 +3,8 @@
 
 # Librerias Standard
 import json
-from os import listdir
+from os import listdir, path
+import subprocess
 
 # Librerias Django
 from django.conf import settings
@@ -13,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.models import (
-    PyApp, PyCountry, PyCurrency, PyParameter, PyUser, PyWParameter)
+    PyPlugin, PyCountry, PyCurrency, PyParameter, PyUser, PyWParameter)
 
 
 class Command(BaseCommand):
@@ -83,27 +84,28 @@ class Command(BaseCommand):
                 _('*** Loading PypErp plugins library...')
             )
         )
-        if not PyApp.objects.all().exists():
+        if not PyPlugin.objects.all().exists():
             FILE_NAME = 'info.json'
             folder_apps = '{}/apps'.format(settings.BASE_DIR)
-            list_app = listdir(folder_apps)
+            plugin_list = tuple(
+                set(name['name'] for name in PyPlugin.objects.all().values('name'))
+            )
             app_counnter = 0
-            for folder in list_app:
-                try:
-                    for file in listdir(folder_apps + "/" + folder):
-                        if file == FILE_NAME:
-                            app_counnter += 1
-                            with open(folder_apps + "/" + folder + "/" + FILE_NAME) as json_file:
-                                data = json.load(json_file)
-                                app_obj = PyApp(
-                                    name=data['name'],
-                                    description=data['description'],
-                                    author=data['author'],
-                                    fa=data['fa'],
-                                    version=data['version'],
-                                    website=data['website'], color=data['color']
-                                )
-                                app_obj.save()
-                except Exception:
-                    continue
+            for folder in listdir(folder_apps):
+                file = folder_apps + "/" + folder + "/" + FILE_NAME
+                if path.isfile(file) and folder not in plugin_list:
+                    app_counnter += 1
+                    with open(file) as json_file:
+                        data = json.load(json_file)
+                        plugin = PyPlugin(
+                            name=data['name'].lower(),
+                            description=data['description'],
+                            author=data['author'],
+                            fa=data['fa'],
+                            version=data['version'],
+                            website=data['website'],
+                            color=data['color']
+                        )
+                        plugin.save()
+            open('installed_apps.py', 'w').close()
             self.stdout.write('Loaded {} plugin(s)'.format(app_counnter))

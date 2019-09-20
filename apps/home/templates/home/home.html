@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <title> {{ user|get_company_name }} | {{ user|get_company_slogan }} </title>
+    {% block meta %}{{ meta|safe }}{% endblock %}
+    <title> {{ user|get_company_name }} | {% if user|get_company_slogan %} {{ user|get_company_slogan }} {% else %} By PyERP {% endif %} </title>
     <!-- Bootstrap core CSS -->
     <link href="{{ STATIC_URL }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -18,6 +18,8 @@
     <link rel="shortcut icon" href="{{ STATIC_URL }}./dist/favicon.png" type="image/x-icon"/>
     <!-- Custom styles for this template -->
     <link href="{{ STATIC_URL }}css/agency.css" rel="stylesheet">
+
+
 
     {% if user|web_under_construction %}
       <meta http-equiv="Refresh" content="0; url={% url 'home:under-construction' %}">

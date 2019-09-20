@@ -7,6 +7,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import HttpResponse, render
 from django.template.loader import render_to_string
 from django.views.generic import DetailView, ListView, TemplateView
+from apps.base.views.web_father import FatherTemplateView
 
 # Librerias de terceros
 from apps.base.models import PyPartner, PyProduct, PyWParameter
@@ -14,38 +15,38 @@ from apps.base.models import PyPartner, PyProduct, PyWParameter
 # from apps.crm.submodels.lead import PyLead
 
 
-class IndexView(TemplateView):
+def _web_parameter():
+    web_parameter = {}
+    for parametro in PyWParameter.objects.all():
+        web_parameter[parametro.name] = parametro.value
+    return web_parameter
+
+
+class IndexView(FatherTemplateView):
     template_name = 'home/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        web_parameter = {}
-        for parametro in PyWParameter.objects.all():
-            web_parameter[parametro.name] = parametro.value
-
-        context['web_parameter'] = web_parameter
-
+        context['web_parameter'] = _web_parameter()
         return context
 
 
 
 def index(request):
     web_parameter = {}
-    for parametro in PyWParameter.objects.all():
-        web_parameter[parametro.name] = parametro.value
-
-    request.session['web_parameter'] = web_parameter
-    # context['web_parameter'] = web_parameter
-
+    context['web_parameter'] = _web_parameter()
     return render(request, 'home/index.html', web_parameter)
 
 def post(request):
+    context['web_parameter'] = _web_parameter()
     return render(request, 'home/post.html')
 
 def license(request):
+    context['web_parameter'] = _web_parameter()
     return render(request, 'home/license.html')
 
 def UnderConstruction(request):
+    context['web_parameter'] = _web_parameter()
     return render(request, 'home/under_construction.html')
 
 

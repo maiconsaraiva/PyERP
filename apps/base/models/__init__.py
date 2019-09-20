@@ -1,3 +1,5 @@
+"""Inicializador del módulo de modelos de base
+"""
 from .base_config import BaseConfig
 from .company import PyCompany
 from .cron import PyCron
@@ -7,10 +9,9 @@ from .log import PyLog
 from .partner import PyPartner
 from .product import PyProduct
 from .product_category import PyProductCategory
-from .app import PyApp
+from .plugin import PyPlugin
 from .father import PyFather
 from .usercustom import PyUser
-from .base_config import BaseConfig
 from .parameter import PyParameter
 
 # Product

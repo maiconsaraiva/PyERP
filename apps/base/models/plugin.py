@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from .father import PyFather
 
 
-class PyApp(PyFather):
+class PyPlugin(PyFather):
     name = models.CharField(_("Name"), max_length=80)
     author = models.CharField(_("Author"), max_length=80)
     description = models.TextField(_("description"), blank=True, null=True)
@@ -23,3 +23,6 @@ class PyApp(PyFather):
 
     def __str__(self):
         return format(self.name)
+
+    class Meta:
+        ordering = ['name']

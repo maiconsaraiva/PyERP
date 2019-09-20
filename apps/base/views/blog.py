@@ -2,11 +2,18 @@
 from __future__ import unicode_literals
 
 # Librerias Django
-from django.views.generic import DetailView, ListView
+from .web_father import FatherDetailView, FatherListView
 
 # Librerias en carpetas locales
 from ..models import PyWParameter
 from ..models.post import PyPost
+
+
+def _web_parameter():
+    web_parameter = {}
+    for parametro in PyWParameter.objects.all():
+        web_parameter[parametro.name] = parametro.value
+    return web_parameter
 
 POST_FIELDS = [
     {'string': 'Título', 'field': 'title'},
@@ -16,7 +23,7 @@ POST_FIELDS = [
 
 POST_FIELDS_SHORT = ['title','content','created_on']
 
-class BlogView(ListView):
+class BlogView(FatherListView):
     model = PyPost
     template_name = 'blog/blog.html'
     fields = POST_FIELDS
@@ -30,15 +37,10 @@ class BlogView(ListView):
         context['extend_from'] = self.extend_from
         context['url_web_post'] = self.url_web_post
         context['header_title'] = self.header_title
-        web_parameter = {}
-        for parametro in PyWParameter.objects.all():
-            web_parameter[parametro.name] = parametro.value
-
-        context['web_parameter'] = web_parameter
 
         return context
 
-class PostDetailView(DetailView):
+class PostDetailView(FatherDetailView):
     model = PyPost
     template_name = 'blog/post.html'
     extend_from = None
@@ -50,10 +52,4 @@ class PostDetailView(DetailView):
         context['extend_from'] = self.extend_from
         context['url_web_post'] = self.url_web_post
         context['header_title'] = self.header_title
-        web_parameter = {}
-        for parametro in PyWParameter.objects.all():
-            web_parameter[parametro.name] = parametro.value
-
-        context['web_parameter'] = web_parameter
-
         return context
