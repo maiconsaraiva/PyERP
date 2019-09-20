@@ -11,6 +11,7 @@ installed_apps.py
 docker-compose.yml
 Dockerfile
 !/media/avatar/default_avatar.png
+/media/avatar/
 !/media/logo/default_logo.png
 !/media/post/default_post.png
 !/media/post/default_product.png
