@@ -15,7 +15,10 @@ Dockerfile
 media/avatar/*
 !media/avatar/default_avatar.png
 
-!/media/logo/default_logo.png
+!media/logo/
+media/logo/*
+!media/logo/default_logo.png
+
 !/media/post/default_post.png
 !/media/post/default_product.png
 
