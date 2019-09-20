@@ -37,9 +37,11 @@ def IndexEasy(request):
             PyWebsiteConfig.create(company_id.id)
             # PyUser.crear(user, password, 1, 1, 1)
 
-            """Leer las datas """
+            """Read Data """
             PyMeta.LoadData(data)
-            PyMeta.LoadData(demo)
+
+            """Read Data Demo """
+            # PyMeta.LoadData(demo)
 
             user = PyUser.objects.create_user(user_name, None, password)
             user.is_staff = True
