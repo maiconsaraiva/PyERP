@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> {{ user|get_company_name }} | {{ user|get_company_slogan }} </title>
+  <title> {{ user|get_company_name }} | {% if user|get_company_slogan %} {{ user|get_company_slogan }} {% else %} By PyERP {% endif %} </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>

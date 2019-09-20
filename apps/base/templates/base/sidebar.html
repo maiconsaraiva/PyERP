@@ -229,7 +229,7 @@
 
                     <li class="nav-item">
                         <a href="{% url 'base:website-config' 1 %}" class="nav-link">
-                            <i class="fa fa-circle nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>{{ _('Web Configurations') }}</p>
                         </a>
                     </li>
@@ -249,10 +249,10 @@
                         <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Plugins') }}<i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{% url 'base:list-plugin' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Plugins') }}</p></a>
+                                <a href="{% url 'base:list-plugin' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Plugins') }}</p></a>
                             </li>
                             <li class="nav-item">
-                              <a href="{% url 'base:update-plugin' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Update') }}</p></a>
+                              <a href="{% url 'base:update-plugin' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Update') }}</p></a>
                             </li>
                         </ul>
                     </li>
@@ -260,27 +260,27 @@
                         <a href="#" class="nav-link"><i class="fa fa-cogs nav-icon"></i><p>{{ _('Configuration') }}<i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{% url 'base:users' %}" class="nav-link"><i class="fa fa-users nav-icon"></i><p>{{ _('Users') }}</p></a>
+                                <a href="{% url 'base:users' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Users') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:companies' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Company') }}</p></a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{% url 'base:base-config' 1 %}" class="nav-link"><i class="fa fa-cog nav-icon"></i><p>{{ _('General') }}</p></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'base:logs' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Log') }}</p></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'base:crons' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Cron') }}</p></a>
+                                <a href="{% url 'base:companies' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Company') }}</p></a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{% url 'base:parameters' %}" class="nav-link"><i class="fa fa-building nav-icon"></i><p>{{ _('Parameters') }}</p></a>
+                                <a href="{% url 'base:base-config' 1 %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('General') }}</p></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{% url 'base:load-data' %}" class="nav-link"><i class="fa fa-database nav-icon"></i><p>{{ _('Load Data') }}</p></a>
+                                <a href="{% url 'base:logs' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Log') }}</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:crons' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Cron') }}</p></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{% url 'base:parameters' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Parameters') }}</p></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'base:load-data' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Load Data') }}</p></a>
                             </li>
                         </ul>
                     </li>

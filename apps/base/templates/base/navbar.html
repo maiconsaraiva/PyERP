@@ -10,7 +10,17 @@
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <li><div class="nav-link"><b>{{ user|get_company_name }}</b></div></li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a class="nav-link" data-toggle="dropdown" href="#">{{ user|get_company_name }}&nbsp;<i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                {% for language_code, language in LANGUAGES %}
+                    {% if LANGUAGE_CODE != language_code %}
+                        <a class="dropdown-item" tabindex="-1"  href="{% url 'activate_language' language_code %}"><img src="{{ MEDIA_URL }}flag/{{ language_code }}.png" data-toggle="tooltip" title="{{ _('Change to') }} {{ language }}" height="20" width="20" class="user-image" alt="{{ _('Change to') }} {{ language }} | ">&nbsp;{{ language }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </li>
+
         <!-- Messages Dropdown Menu -->
         <li class="nav-item d-none d-sm-inline-block">
             <a class="nav-link" data-toggle="dropdown" href="#"><i class="fas fa-globe"></i>&nbsp;{{ _('Language') }}&nbsp;<i class="fas fa-caret-down"></i></a>

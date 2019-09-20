@@ -53,6 +53,7 @@ class PyProduct(PyFather):
     )
 
     web_active = models.BooleanField('Web', default=False)
+    pos_active = models.BooleanField('POS', default=False)
 
     type = models.CharField(_("type"), choices=PRODUCT_CHOICE, max_length=64, default='consu')
 
