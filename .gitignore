@@ -10,6 +10,7 @@ git-completion.bash
 installed_apps.py
 docker-compose.yml
 Dockerfile
+/media/avatar/
 !/media/avatar/default_avatar.png
 !/media/logo/default_logo.png
 !/media/post/default_post.png
