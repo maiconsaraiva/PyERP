@@ -23,6 +23,10 @@ media/logo/*
 media/post/*
 !media/logo/default_post.png
 
+!media/product/
+media/product/*
+!media/product/default_product.png
+
 # Created by https://www.gitignore.io/api/python,django,pycharm
 # Edit at https://www.gitignore.io/?templates=python,django,pycharm
 
