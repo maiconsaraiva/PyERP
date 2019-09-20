@@ -19,8 +19,9 @@ media/avatar/*
 media/logo/*
 !media/logo/default_logo.png
 
-!/media/post/default_post.png
-!/media/post/default_product.png
+!media/post/
+media/post/*
+!media/logo/default_post.png
 
 # Created by https://www.gitignore.io/api/python,django,pycharm
 # Edit at https://www.gitignore.io/?templates=python,django,pycharm
