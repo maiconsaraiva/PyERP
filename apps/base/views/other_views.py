@@ -12,6 +12,7 @@ from ..models.base_config import BaseConfig
 from ..models.company import PyCompany
 from ..models.currency import PyCurrency
 from ..models.usercustom import PyUser
+from ..models.website_config import PyWebsiteConfig
 
 
 def IndexEasy(request):
@@ -28,7 +29,10 @@ def IndexEasy(request):
             currency = PyCurrency.objects.get(country=country)
             user_name = context['form'].cleaned_data.get('user')
             password = context['form'].cleaned_data.get('password')
-            BaseConfig.crear(PyCompany.crear(name, country, currency))
+            company_id = PyCompany.create(name, country, currency)
+
+            BaseConfig.create(company_id)
+            PyWebsiteConfig.create(company_id.id)
             # PyUser.crear(user, password, 1, 1, 1)
             user = PyUser.objects.create_user(user_name, None, password)
             user.is_staff = True

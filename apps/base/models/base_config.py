@@ -20,7 +20,7 @@ class BaseConfig(models.Model):
         self.load_data = True
 
     @classmethod
-    def crear(cls, company):
+    def create(cls, company):
         """Crea un propietario de manera sencilla
         """
         baseconfig = cls(main_company_id=company)
