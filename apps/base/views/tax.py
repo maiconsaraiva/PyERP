@@ -13,9 +13,10 @@ from ..models import PyTax
 TAX_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
     {'string': _("Amount"), 'field': 'amount'},
+    {'string': _("Include Price"), 'field': 'include_price'},
 ]
 
-TAX_SHORT = ['name', 'amount']
+TAX_SHORT = ['name', 'amount', 'include_price']
 
 
 class TaxListView(LoginRequiredMixin, ListView):
