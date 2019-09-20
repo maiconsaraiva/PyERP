@@ -16,6 +16,7 @@ COMPANY_FIELDS = [
     {'string': _("Street"), 'field': 'street'},
     {'string': _("Phone"), 'field': 'phone'},
     {'string': _("Email"), 'field': 'email'},
+    {'string': _("Country"), 'field': 'country'},
     {'string': _("Currency"), 'field': 'currency_id'},
     {'string': _("Slogan"), 'field': 'slogan'},
     {'string': _("Postal Code"), 'field': 'postal_code'},
@@ -37,9 +38,13 @@ COMPANY_FIELDS_SHORT = [
     'latitude',
     'longitude',
 
+    'country',
     'currency_id',
     'slogan',
     'logo',
+
+    'main_color',
+    'font_color',
 
     'description'
 ]
