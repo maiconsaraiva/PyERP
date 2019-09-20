@@ -22,7 +22,7 @@ class PyFather(models.Model):
         toModelName =  cls.__name__
         app_name = cls._meta.app_label
         folder_apps = format(settings.BASE_DIR) + '/apps/' + format(app_name) + '/data'
-        print(folder_apps)
+        """
         # Saber si order.py existe
         order = folder_apps + '/order.py'
         print(order)
@@ -30,6 +30,7 @@ class PyFather(models.Model):
             print("Existe")
         else:
             print("No Existe")
+        """
         for file_csv in listdir(folder_apps):
             if file_csv.endswith(".csv"):
                 route_csv = folder_apps + "/" +file_csv
