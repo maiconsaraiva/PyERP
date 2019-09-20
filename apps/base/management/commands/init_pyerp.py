@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.models import (
-    PyPlugin, PyCountry, PyCurrency, PyParameter, PyUser, PyWParameter)
+    PyPlugin, PyCountry, PyCurrency, PyParameter, PyMeta, PyUser, PyWParameter)
 
 
 class Command(BaseCommand):
@@ -50,6 +50,9 @@ class Command(BaseCommand):
         )
         if not PyCurrency.objects.all().exists():
             call_command('loaddata', 'PyCurrency')
+
+        if not PyMeta.objects.all().exists():
+            call_command('loaddata', 'PyMeta')
 
         self.stdout.write(
             self.style.MIGRATE_HEADING(
