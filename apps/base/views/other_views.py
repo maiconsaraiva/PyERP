@@ -18,7 +18,6 @@ from ..models.meta import PyMeta
 
 
 def IndexEasy(request):
-    PyMeta.LoadData("base", PyMeta)
 
     if BaseConfig.objects.all().exists():
         template = 'base/index.html'
@@ -39,7 +38,8 @@ def IndexEasy(request):
             PyWebsiteConfig.create(company_id.id)
             # PyUser.crear(user, password, 1, 1, 1)
 
-
+            """Leer las datas """
+            PyMeta.LoadData("base", PyMeta)
 
             user = PyUser.objects.create_user(user_name, None, password)
             user.is_staff = True

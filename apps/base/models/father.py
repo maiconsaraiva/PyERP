@@ -15,6 +15,7 @@ class PyFather(models.Model):
     class Meta:
         abstract = True
 
+    @classmethod
     def LoadData(app_name, ToModel):
         folder_apps = format(settings.BASE_DIR) + '/apps/' + format(app_name) + '/data'
         for file_csv in listdir(folder_apps):
@@ -31,6 +32,7 @@ class PyFather(models.Model):
                         if cont < len(mydic):
                             lines += ","
                     lines = "ToModel(" + lines + ")"
+                    print(lines)
                     lines.replace('"','')
                     _Model = eval(lines)
                     _Model.save()
