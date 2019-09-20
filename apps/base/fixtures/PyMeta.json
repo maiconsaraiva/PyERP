@@ -1,0 +1,30 @@
+[
+{
+    "model": "base.pymeta",
+    "pk": 1,
+    "fields": {
+        "active": true,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": 1,
+        "title": "author",
+        "content": "PyERP"
+    }
+},
+    {
+    "model": "base.pymeta",
+    "pk": 2,
+    "fields": {
+        "active": true,
+        "fc": null,
+        "fm": null,
+        "uc": null,
+        "um": null,
+        "company_id": 1,
+        "title": "description",
+        "content": "Web"
+    }
+}
+]
