@@ -13,9 +13,12 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Librerias en carpetas locales
 from ..rename_image import RenameImage
+from ..models import PyPartner
 
 
 def image_path(instance, filename):
@@ -61,3 +64,9 @@ class PyUser(AbstractUser):
         verbose_name = _('Person')
         verbose_name_plural = _('People')
         db_table = 'auth_user'
+
+
+@receiver(post_save, sender=PyUser)
+def create_partner(sender, instance, created, **kwargs):
+    if created:
+        PyPartner.create(instance)

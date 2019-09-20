@@ -27,6 +27,10 @@ class PyPartner(PyFather):
 
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
 
+    pyuser = models.OneToOneField(
+        'base.PyUser', related_name='pypartner_pyuser',
+        on_delete=models.PROTECT, unique=True)
+
     def get_absolute_url(self):
         return reverse('base:partner-detail', kwargs={'pk': self.pk})
 
@@ -36,6 +40,15 @@ class PyPartner(PyFather):
 
     def __repr__(self):
         return self.name
+
+    @classmethod
+    def create(cls, pyuser):
+        """Crea un partner de manera sencilla
+        """
+        pypartner = cls(pyuser=pyuser)
+        pypartner.save()
+
+        return pypartner
 
     class Meta:
         ordering = ['-created_on']
