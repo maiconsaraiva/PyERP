@@ -17,11 +17,11 @@ class PyFather(models.Model):
         abstract = True
 
     @classmethod
-    def LoadData(cls):
+    def LoadData(cls,type):
         ToModel = cls
         toModelName =  cls.__name__
         app_name = cls._meta.app_label
-        folder_apps = format(settings.BASE_DIR) + '/apps/' + format(app_name) + '/data'
+        folder_apps = format(settings.BASE_DIR) + '/apps/' + format(app_name) + '/' + type
         route_csv = folder_apps + '/'+toModelName+'.csv'
         if os.path.isfile(route_csv):
             with open(route_csv) as csv_file:
