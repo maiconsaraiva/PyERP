@@ -38,7 +38,7 @@ def IndexEasy(request):
             # PyUser.crear(user, password, 1, 1, 1)
 
             """Read Data """
-            PyMeta.LoadData(data)
+            PyMeta.LoadData('data')
 
             """Read Data Demo """
             # PyMeta.LoadData(demo)
