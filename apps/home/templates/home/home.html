@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    {% block meta %}{{ meta|safe }}{% endblock %}
     <title> {{ user|get_company_name }} | {{ user|get_company_slogan }} </title>
     <!-- Bootstrap core CSS -->
     <link href="{{ STATIC_URL }}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,9 +19,7 @@
     <!-- Custom styles for this template -->
     <link href="{{ STATIC_URL }}css/agency.css" rel="stylesheet">
 
-    {% block meta %}
 
-    {% endblock %}
 
     {% if user|web_under_construction %}
       <meta http-equiv="Refresh" content="0; url={% url 'home:under-construction' %}">
