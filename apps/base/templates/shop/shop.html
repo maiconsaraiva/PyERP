@@ -2,50 +2,91 @@
 {% load erp_tags %}
 {% block content %}
 
-  <!-- Services -->
-  <section class="page-section" id="services">
+    <!-- Services -->
+<section class="page-section" id="services">
     <div class="container">
-      <div class="row">
-      <div class="col-lg-3">
-        <h1 class="my-4">{{ _("Category") }}</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
-        </div>
-      </div>
-      <!-- /.col-lg-3 -->
-      <div class="col-lg-9">
         <div class="row">
-          {% for product in object_list %}
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="{% url url_web_product product.id %}"><img class="card-img-top" src="{{ product.img.url }}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                {#  <a href="{% url 'base:home-product' product.id %}">{{ product.name }}</a> #}
-                <a href="#">{{ product.name }}</a>
-                </h4>
-                {% if user|web_show_price %}
-                  <h5> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ product.price }} {% else %} {{ product.price }} {{ user|currency_symbol }} {% endif %} </h5>
-                {% endif %}
-                <p class="card-text">{{ product.description }}</p>
-              </div>
-              <div class="card-footer">
-                {% if user|web_show_price %}
-                    <a href="#" class="btn btn-primary float-right"><i class="fa fa-cart-plus"></i></a>
-                {% endif %}
-                    <small class="text-muted"><b>SKU:</b> {{ product.code }}</small>
-              </div>
+        <div class="col-lg-3">
+            <h1 class="my-4">{{ _("Category") }}</h1>
+            <div class="list-group">
+                <a href="#" class="list-group-item">Category 1</a>
+                <a href="#" class="list-group-item">Category 2</a>
+                <a href="#" class="list-group-item">Category 3</a>
             </div>
-          </div>
-          {% endfor %}
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-9">
+            <div class="row">
+                {% for product in object_list %}
+                    <div class=" col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <a href="{% url url_web_product product.id %}"><img class="card-img-top" height="100" src="{{ product.img.url }}" alt=""></a>
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url url_web_product product.id %}">{{ product.name }}</a></h5>
+                                {% if user|web_show_price %}
+                                    <h6> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ product.price }} {% else %} {{ product.price }} {{ user|currency_symbol }} {% endif %} </h6>
+                                {% endif %}
+                                <!--<p class="card-text">{{ product.description }}</p>-->
+                            </div>
+                            <div class="card-footer">
+                                {% if user|web_show_price %}
+                                    <a href="#" class="btn btn-primary float-right"><i class="fa fa-cart-plus"></i></a>
+                                {% endif %}
+                                <small class="text-muted"><b>SKU:</b> {{ product.code }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col d-flex align-items-center mr-auto">
+                    <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                </div>
+                <div class="col">
+                    <div class="float-right">
+                        {# .... **Now the pagination section** .... #}
+                        {% if is_paginated %}
+                            <nav aria-label="...">
+                                <ul class="pagination" style="margin-bottom: 0;">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ _('Previous') }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">{{ _('Previous') }}</a>
+                                        </li>
+                                    {% endif %}
+                                    {% for num in page_obj.paginator.page_range %}
+                                        {% ifequal num page_obj.number %}
+                                            <li class="page-item active">
+                                              <a class="page-link" href="?page={{ num }}">{{ num }} <span class="sr-only">(current)</span></a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ num }}"> {{ num }}</a></li>
+                                        {% endifequal %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ _('Next') }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                          <a class="page-link" href="#" tabindex="-1">{{ _('Next') }}</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                         {% endif %}
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.col-lg-9 -->
         </div>
         <!-- /.row -->
-      </div>
-      <!-- /.col-lg-9 -->
     </div>
-    <!-- /.row -->
-    </div>
-  </section>
+</section>
 {% endblock %}
