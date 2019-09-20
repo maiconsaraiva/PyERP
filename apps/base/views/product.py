@@ -43,6 +43,7 @@ LEAD_FIELDS_SHORT = [
     'cost',
     'type',
     'web_active',
+    'pos_active',
     'img',
     'description',
 ]
