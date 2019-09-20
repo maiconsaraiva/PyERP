@@ -51,9 +51,6 @@ class Command(BaseCommand):
         if not PyCurrency.objects.all().exists():
             call_command('loaddata', 'PyCurrency')
 
-        if not PyMeta.objects.all().exists():
-            call_command('loaddata', 'PyMeta')
-
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp backend parameters object...')

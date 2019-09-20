@@ -18,8 +18,6 @@ from ..models.meta import PyMeta
 
 
 def IndexEasy(request):
-    PyMeta.LoadData('data')
-    PyMeta.LoadData('demo')
     if BaseConfig.objects.all().exists():
         template = 'base/index.html'
     else:
