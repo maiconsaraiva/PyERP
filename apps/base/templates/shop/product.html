@@ -27,7 +27,7 @@
       </div>
       <!-- /.col-lg-3 -->
 
-      <div class="col-lg-9">
+      <div class="col-lg-6 mb-2">
 
         <div class="card mt-4">
           <img class="card-img-top img-fluid" src="{{ object.img.url }}" alt="">
@@ -39,13 +39,13 @@
               <p class="card-text">{{ object.description }}</p>
           </div>
           <div class="card-footer">
-              {% if user|web_show_price %}
-                    <a href="#" class="btn btn-primary btn-lg btn-flat float-right"><i class="fa fa-cart-plus"></i> {{ _("Add to cart") }}</a>
-              {% endif %}
+
                     <small class="text-muted"><b>SKU:</b> {{ object.code }}</small> -
                     <small class="text-muted"><b>CÓDIGO BARRA:</b> {{ object.bar_code }}</small>
               </div>
         </div>
+
+
         <!-- /.card -->
         <!--
         <div class="card card-outline-secondary my-4">
@@ -69,6 +69,14 @@
 
       </div>
       <!-- /.col-lg-9 -->
+
+             <div class="col-lg-3">
+              {% if user|web_show_price %}
+              <div>
+                    <a href="#" class="btn btn-primary btn-lg btn-flat float-right"><i class="fa fa-cart-plus"></i> {{ _("Add to cart") }}</a>
+              </div>
+              {% endif %}
+          </div>
 
     </div>
 
