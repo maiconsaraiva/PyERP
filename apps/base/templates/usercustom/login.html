@@ -76,6 +76,7 @@
                             </div>
                         </div>
                     </form>
+                    {% if user|web_show_register_user %}
                     <div class="row">
                         <div class="col text-center">
                             <a href="/">{{ _('Back') }}</a>&nbsp;|&nbsp;
@@ -83,6 +84,7 @@
                             <a href="{% url 'base:signup' %}">{{ _('Signup') }}</a>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

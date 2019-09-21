@@ -166,3 +166,11 @@ def web_show_price(obj):
         return PyWebsiteConfig.objects.get(pk=1).show_price
     except PyWebsiteConfig.DoesNotExist:
         return None
+
+
+@register.filter
+def web_show_register_user(obj):
+    try:
+        return PyWebsiteConfig.objects.get(pk=1).user_register
+    except PyWebsiteConfig.DoesNotExist:
+        return None

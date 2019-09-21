@@ -13,6 +13,7 @@ class PyWebsiteConfig(PyFather):
     show_price = models.BooleanField(_("Show price"), default=True)
     show_chat = models.BooleanField(_("Show chat"), default=False)
     under_construction = models.BooleanField(_("Under Construction"), default=False)
+    user_register = models.BooleanField(_("User Register"), default=True)
 
     def get_absolute_url(self):
         return reverse('base:website-config', kwargs={'pk': self.pk})
