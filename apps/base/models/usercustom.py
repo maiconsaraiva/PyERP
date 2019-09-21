@@ -4,7 +4,7 @@ Modelo de datos de la app globales
 """
 # Librerias Future
 from __future__ import unicode_literals
-
+from django.urls import reverse
 # Librerias Standard
 import os
 
