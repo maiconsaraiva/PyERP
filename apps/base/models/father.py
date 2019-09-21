@@ -17,6 +17,11 @@ class PyFather(models.Model):
         abstract = True
 
     @classmethod
+    def setSequence(cls):
+        # return PySequence.objects.get(pk=1).show_chat
+        print("Adelantando Sequencia")
+
+    @classmethod
     def LoadData(cls,type,company_id):
         ToModel = cls
         toModelName =  cls.__name__

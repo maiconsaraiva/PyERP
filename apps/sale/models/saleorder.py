@@ -20,7 +20,7 @@ SALE_STATE = (
 class PySaleOrder(PyFather):
     """Modelo de la orden de pago
     """
-    name = models.CharField(_('Name'), max_length=80)
+    name = models.CharField(_('Name'), max_length=80, default='New')
     partner_id = models.ForeignKey(
         PyPartner,
         null=True,
@@ -53,6 +53,11 @@ class PySaleOrder(PyFather):
         max_length=64,
         default='draft'
     )
+
+    def save(self):
+        if self.name == 'New':
+            self.setSequence()
+        super(PySaleOrder, self).save()
 
 
 # ========================================================================== #
