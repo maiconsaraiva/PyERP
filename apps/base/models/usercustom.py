@@ -65,6 +65,9 @@ class PyUser(AbstractUser):
         verbose_name_plural = _('People')
         db_table = 'auth_user'
 
+    def get_absolute_url(self):
+        return reverse('base:user-detail', kwargs={'pk': self.pk})
+
 
 @receiver(post_save, sender=PyUser)
 def create_partner(sender, instance, created, **kwargs):
