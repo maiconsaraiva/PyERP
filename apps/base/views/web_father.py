@@ -1,5 +1,9 @@
-from django.views.generic import ListView, DetailView, TemplateView
-from ..models import PyWParameter, PyMeta
+# Librerias Django
+from django.views.generic import DetailView, ListView, TemplateView
+
+# Librerias en carpetas locales
+from ..models import PyMeta, PyWParameter
+
 
 def _web_parameter():
     web_parameter = {}

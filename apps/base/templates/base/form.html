@@ -5,6 +5,18 @@
 {% bootstrap_javascript jquery='full' %}
 {% bootstrap_messages %}
 
+{% block head %}
+    <style>
+        .select2-container .select2-search--inline .select2-search__field {
+            margin-top: 0px;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            margin-top: 0px;
+        }
+
+    </style>
+{% endblock %}
 {% block content %}
 <div class="card card-primary card-outline mt-2">
     <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
@@ -43,6 +55,7 @@
                 {%endif%}
             {% endfor %}
         </div>
+        {{ form.media.js }}
     </form>
 </div>
 {% endblock %}

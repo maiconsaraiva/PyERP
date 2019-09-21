@@ -42,7 +42,7 @@ class PyProduct(PyFather):
     web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(_("description"), blank=True, null=True)
     uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
-    tax_id = models.ForeignKey(PyTax, null=True, blank=True, on_delete=models.CASCADE)
+    tax = models.ManyToManyField(PyTax)
     img = models.ImageField(
         max_length=255,
         storage=RenameImage(),
@@ -65,8 +65,13 @@ class PyProduct(PyFather):
     def __str__(self):
         return format(self.name)
 
+    @classmethod
+    def suma(cls):
+        return cls.__name__
+
     class Meta:
         ordering = ['created_on']
+
 
 
 @receiver(pre_save, sender=PyProduct)

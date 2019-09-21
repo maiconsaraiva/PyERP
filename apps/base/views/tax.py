@@ -1,11 +1,12 @@
 # Librerias Django
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+
+# Librerias de terceros
+from dal import autocomplete
 
 # Librerias en carpetas locales
 from ..models import PyTax
@@ -19,10 +20,9 @@ TAX_FIELDS = [
 TAX_SHORT = ['name', 'amount', 'include_price']
 
 
-class TaxListView(LoginRequiredMixin, ListView):
+class TaxListView(ListView):
     model = PyTax
     template_name = 'base/list.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaxListView, self).get_context_data(**kwargs)
@@ -33,10 +33,9 @@ class TaxListView(LoginRequiredMixin, ListView):
         return context
 
 
-class TaxDetailView(LoginRequiredMixin, DetailView):
+class TaxDetailView(DetailView):
     model = PyTax
     template_name = 'base/detail.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaxDetailView, self).get_context_data(**kwargs)
@@ -48,11 +47,10 @@ class TaxDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class TaxCreateView(LoginRequiredMixin, CreateView):
+class TaxCreateView(CreateView):
     model = PyTax
     fields = TAX_SHORT
     template_name = 'base/form.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaxCreateView, self).get_context_data(**kwargs)
@@ -62,11 +60,10 @@ class TaxCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class TaxUpdateView(LoginRequiredMixin, UpdateView):
+class TaxUpdateView(UpdateView):
     model = PyTax
     fields = TAX_SHORT
     template_name = 'base/form.html'
-    login_url = "login"
 
     def get_context_data(self, **kwargs):
         context = super(TaxUpdateView, self).get_context_data(**kwargs)
@@ -76,8 +73,22 @@ class TaxUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-@login_required(login_url="base:login")
 def DeleteTax(self, pk):
     tax = PyFaq.objects.get(id=pk)
     tax.delete()
     return redirect(reverse('base:taxs'))
+
+
+# ========================================================================== #
+class TaxAutoComplete(autocomplete.Select2QuerySetView):
+    """Servicio de auto completado para el modelo PyPartner
+    """
+
+    def get_queryset(self):
+
+        queryset = PyTax.objects.all()
+
+        if self.q:
+            queryset = queryset.filter(name__icontains=self.q)
+
+        return queryset

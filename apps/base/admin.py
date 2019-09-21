@@ -10,7 +10,7 @@ from django.contrib.auth.models import Permission
 # Librerias en carpetas locales
 from .forms import PersonaChangeForm, PersonaCreationForm
 from .models import (
-    PyPlugin, PyCompany, PyCountry, PyPartner, PyProduct, PyProductCategory,
+    PyCompany, PyCountry, PyPartner, PyPlugin, PyProduct, PyProductCategory,
     PyUser, PyWebsiteConfig, PyWPayment)
 from .models.base_config import BaseConfig
 

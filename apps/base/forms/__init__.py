@@ -17,7 +17,7 @@ from dal import autocomplete
 from tempus_dominus.widgets import DatePicker
 
 # Librerias en carpetas locales
-from .models import PyCompany, PyCountry, PyUser
+from ..models import PyCompany, PyCountry, PyUser
 
 
 class PerfilForm(ModelForm):

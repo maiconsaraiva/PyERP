@@ -10,12 +10,9 @@ from django.urls import path
 # Librerias en carpetas locales
 from ..views import (
     ChangePasswordForm, CompanyCreateView, CompanyDetailView, CompanyListView,
-    CompanyUpdateView, CustomerListView, DeleteCompany, DeletePartner,
-    DeleteUser, DoChangePassword, Install,
-    PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
-    PartnerUpdateView, ProviderListView, UpdateBaseConfigView, UserCreateView,
-    UserDetailView, UserListView,
-    UserUpdateView, erp_home)
+    CompanyUpdateView, CustomerListView, DeleteCompany, DeleteUser,
+    DoChangePassword, Install, ProviderListView, UpdateBaseConfigView,
+    UserCreateView, UserDetailView, UserListView, UserUpdateView, erp_home)
 from ..views.base_config import LoadData
 from ..views.cron import (
     CronCreateView, CronDetailView, CronListView, CronUpdateView, DeleteCron)
@@ -69,11 +66,6 @@ urlpatterns = [
     path('partners', CustomerListView.as_view(), name='partners'),
     path('provider', ProviderListView.as_view(), name='provider'),
 
-    path('partner/add/', PartnerCreateView.as_view(), name='partner-add'),
-    path('partner/<int:pk>/', PartnerDetailView.as_view(), name='partner-detail'),
-    path('partner/<int:pk>/update', PartnerUpdateView.as_view(), name='partner-update'),
-    path('partner/<int:pk>/delete/', DeletePartner, name='partner-delete'),
-
     path('product-category', ProductCategoryListView.as_view(), name='product-category'),
     path('product-category/add/', ProductCategoryCreateView.as_view(), name='product-category-add'),
     path('product-category/<int:pk>/', ProductCategoryDetailView.as_view(), name='product-category-detail'),
@@ -106,13 +98,6 @@ urlpatterns = [
 
 
 
-    # ====================== Rutas de Auto Completado ====================== #
-    path(
-        'partner/partner-autocomplete',
-        PartnerAutoComplete.as_view(),
-        name='partners-autocomplete'
-    ),
-
     # ============================ New URLs ============================ #
     path('', include('apps.base.urls.usercustom')),
     path('attribute/', include('apps.base.urls.attribute')),
@@ -124,6 +109,7 @@ urlpatterns = [
     path('meta/', include('apps.base.urls.meta')),
     path('page/', include('apps.base.urls.page')),
     path('parameter/', include('apps.base.urls.parameter')),
+    path('partner/', include('apps.base.urls.partner')),
     path('plugin/', include('apps.base.urls.plugin')),
     path('product/', include('apps.base.urls.product')),
     path('product_category_uom/', include('apps.base.urls.product_category_uom')),

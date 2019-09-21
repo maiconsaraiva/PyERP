@@ -7,9 +7,11 @@ localsettings.py
 __pycache__
 **/migrations/*
 git-completion.bash
+django_bash_completion.bash
 installed_apps.py
 docker-compose.yml
 Dockerfile
+bin/
 
 !media/avatar/
 media/avatar/*

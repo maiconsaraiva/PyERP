@@ -4,14 +4,14 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 # Librerias en carpetas locales
-from ..views import (
-    ActivateView, AvatarUpdateView, ChangePasswordView, LogOutModalView,
-    PasswordRecoveryView, ProfileView, SignUpView)
+from ..views.usercustom import (
+    ActivateUserView, AvatarUpdateView, LogOutModalView, PasswordRecoveryView,
+    ProfileView, SignUpView, cambio_clave)
 
 urlpatterns = [
     # ================= Rutas de Auto Gestion de Usuarios ================== #
     path('signup', SignUpView.as_view(), name='signup'),
-    path('activate/<uidb64>/<token>', ActivateView.as_view(), name='activar'),
+    path('activate/<uidb64>/<token>', ActivateUserView.as_view(), name='activar'),
     path(
         'login/',
         LoginView.as_view(
@@ -30,7 +30,7 @@ urlpatterns = [
     path('profile', login_required(ProfileView.as_view()), name='profile'),
     path(
         'changepasword',
-        login_required(ChangePasswordView),
+        login_required(cambio_clave),
         name='change-password'
         ),
     path(

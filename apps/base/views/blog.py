@@ -1,12 +1,10 @@
 # Librerias Future
 from __future__ import unicode_literals
 
-# Librerias Django
-from .web_father import FatherDetailView, FatherListView
-
 # Librerias en carpetas locales
 from ..models import PyWParameter
 from ..models.post import PyPost
+from .web_father import FatherDetailView, FatherListView
 
 
 def _web_parameter():

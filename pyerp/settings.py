@@ -253,6 +253,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # practica tener un localsettings para configuraciones locales, y no meter claves
 # ni cosas delicadas en éste settings.py
 try:
-    from localsetings import *
+    from localsettings import A
 except ImportError:
     _logger.warning('No hay localsettings, trabajando con settings global.')

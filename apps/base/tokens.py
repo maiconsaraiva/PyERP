@@ -5,7 +5,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils import six
 
 
-class AccountActivacionTokenGenerator(PasswordResetTokenGenerator):
+class TokenGenerator(PasswordResetTokenGenerator):
     """Esta clase genera un token que se envía en correo para validadar el
     registro del usuario
     """
@@ -15,17 +15,6 @@ class AccountActivacionTokenGenerator(PasswordResetTokenGenerator):
             six.text_type(user.is_active)
         )
 
-ACCOUNT_ACTIVATION_TOKEN = AccountActivacionTokenGenerator()
+ACCOUNT_ACTIVATION_TOKEN = TokenGenerator()
 
-
-class PasswordRecoveryTokenGenerator(PasswordResetTokenGenerator):
-    """Esta clase genera un token que se envía en correo para recuperar la
-    contraseña del usuario
-    """
-    def _make_hash_value(self, user, timestamp):
-        return (
-            six.text_type(user.pk) + six.text_type(timestamp) +
-            six.text_type(user.password)
-        )
-
-PASSWORD_RECOVERY_TOKEN = PasswordRecoveryTokenGenerator()
+PASSWORD_RECOVERY_TOKEN = TokenGenerator()

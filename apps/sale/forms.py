@@ -35,7 +35,7 @@ class SaleOrderForm(ModelForm):
                 },
             ),
             'partner_id': autocomplete.ModelSelect2(
-                url='base:country-autocomplete',
+                url='base:partner-autocomplete',
                 attrs={
                     'class': 'form-control',
                     'data-placeholder': 'Seleccione un cliente ...',

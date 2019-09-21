@@ -1,12 +1,3 @@
-# Librerias Standard
-import json
-import os
-import subprocess
-import sys
-from collections import OrderedDict
-from importlib import reload
-from os import listdir
-
 # Librerias Django
 from django.apps import apps
 from django.conf import settings
@@ -25,25 +16,20 @@ from pyerp.settings import BASE_DIR
 # Librerias en carpetas locales
 from ..forms import AvatarForm
 from ..models import (
-    BaseConfig, PyPlugin, PyCompany, PyPartner, PyProduct, PyProductCategory,
+    BaseConfig, PyCompany, PyPartner, PyPlugin, PyProduct, PyProductCategory,
     PyUser, PyWebsiteConfig)
-from .activate import ActivateView
 from .activatelanguage import ActivateLanguageView
-from .avatar import AvatarUpdateView
 from .base_config import UpdateBaseConfigView
 from .company import (
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
     DeleteCompany)
-from .logoutmodal import LogOutModalView
 from .partner import (
     CustomerListView, DeletePartner, PartnerAutoComplete, PartnerCreateView,
     PartnerDetailView, PartnerUpdateView, ProviderListView)
-from .passwordchange import cambio_clave
-from .passwordreset import PasswordRecoveryView
-from .profile import ProfileView
-from .signup import SignUpView
+from .usercustom import (
+    ActivateUserView, AvatarUpdateView, LogOutModalView, PasswordRecoveryView,
+    ProfileView, SignUpView, cambio_clave)
 
-ChangePasswordView = cambio_clave
 
 def Install(request):
     return render(request, 'base/install.html')

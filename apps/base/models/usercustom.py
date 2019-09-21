@@ -11,14 +11,14 @@ import os
 # Librerias Django
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..rename_image import RenameImage
 from ..models import PyPartner
+from ..rename_image import RenameImage
 
 
 def image_path(instance, filename):
