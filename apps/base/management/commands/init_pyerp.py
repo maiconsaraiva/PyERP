@@ -24,36 +24,46 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
+        # ================================================================== #
         self.stdout.write(
             self.style.MIGRATE_HEADING(_('*** Generating base migrations...'))
         )
         call_command('makemigrations', 'base', interactive=False)
 
+        # ================================================================== #
         self.stdout.write(
             self.style.MIGRATE_HEADING(_('*** Migrating the base database...'))
         )
         call_command('migrate', interactive=False)
 
+        # ================================================================== #
+        self.stdout.write(
+            self.style.MIGRATE_HEADING(
+                _('*** Loading PypErp useanonimous object...')
+            )
+        )
+        if not PyUser.objects.all().exists():
+            call_command('loaddata', 'PyUser')
+
+        # ================================================================== #
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp country object...')
             )
         )
-
         if not PyCountry.objects.all().exists():
             call_command('loaddata', 'PyCountry')
 
-
+        # ================================================================== #
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp currency object...')
             )
         )
-
         if not PyCurrency.objects.all().exists():
             call_command('loaddata', 'PyCurrency')
 
-
+        # ================================================================== #
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp backend parameters object...')
@@ -65,6 +75,7 @@ class Command(BaseCommand):
         )
         self.stdout.write('Installed 1 object(s)')
 
+        # ================================================================== #
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp web parameter object...')
@@ -76,12 +87,7 @@ class Command(BaseCommand):
         )
         self.stdout.write('Installed 1 object(s)')
 
-        self.stdout.write(
-            self.style.SUCCESS('PyErp has been successfully installed. Run ') +
-            self.style.MIGRATE_LABEL('python manage.py runserver ') +
-            self.style.SUCCESS('to start the development server.')
-        )
-
+        # ================================================================== #
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp plugins library...')
@@ -112,3 +118,10 @@ class Command(BaseCommand):
                         plugin.save()
             open('installed_apps.py', 'w').close()
             self.stdout.write('Loaded {} plugin(s)'.format(app_counnter))
+
+        # ================================================================== #
+        self.stdout.write(
+            self.style.SUCCESS('PyErp has been successfully installed. Run ') +
+            self.style.MIGRATE_LABEL('python manage.py runserver ') +
+            self.style.SUCCESS('to start the development server.')
+        )
