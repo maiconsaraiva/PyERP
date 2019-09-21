@@ -120,4 +120,5 @@ urlpatterns = [
     path('variant/', include('apps.base.urls.variant')),
     path('wparameter/', include('apps.base.urls.wparameter')),
     path('wpayment/', include('apps.base.urls.wpayment')),
+    path('sequence/', include('apps.base.urls.sequence')),
 ]

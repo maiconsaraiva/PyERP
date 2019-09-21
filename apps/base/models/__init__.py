@@ -32,4 +32,5 @@ from .meta import PyMeta
 from .variant import PyVariant
 from .attribute import PyAttribute
 from .tax import PyTax
+from .sequence import PySequence
 
