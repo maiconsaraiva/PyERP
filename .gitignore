@@ -17,10 +17,6 @@ bin/
 media/avatar/*
 !media/avatar/default_avatar.png
 
-!media/logo/
-media/logo/*
-!media/logo/default_logo.png
-
 !media/post/
 media/post/*
 !media/logo/default_post.png
