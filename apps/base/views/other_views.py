@@ -40,7 +40,7 @@ def IndexEasy(request):
             # PyUser.crear(user, password, 1, 1, 1)
 
             """Read Data """
-            PyMeta.LoadData('data')
+            PyMeta.LoadData('data', company_id.id)
 
             """Read Data Demo """
             # PyMeta.LoadData(demo)

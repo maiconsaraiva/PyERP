@@ -17,7 +17,7 @@ class PyFather(models.Model):
         abstract = True
 
     @classmethod
-    def LoadData(cls,type):
+    def LoadData(cls,type,company_id):
         ToModel = cls
         toModelName =  cls.__name__
         app_name = cls._meta.app_label
@@ -35,7 +35,10 @@ class PyFather(models.Model):
                         lines += key + "=" + "'" + value + "'"
                         if cont < len(mydic):
                             lines += ","
-                    lines = "ToModel(" + lines + ")"
+                    lines = "ToModel(" + lines
+                    lines = lines + ",company_id='" + str(company_id) + "')"
+                    # ToModel(title='description',id='2',content='Web')
+                    print(lines)
                     lines.replace('"', '')
                     _Model = eval(lines)
                     _Model.save()
