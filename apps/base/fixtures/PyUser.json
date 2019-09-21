@@ -21,7 +21,7 @@
         "groups": [],
         "user_permissions": []
     }
-},,
+},
 {
     "model": "base.pypartner",
     "pk": 1,
