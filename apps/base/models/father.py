@@ -42,3 +42,6 @@ class PyFather(models.Model):
                     lines.replace('"', '')
                     _Model = eval(lines)
                     _Model.save()
+        else:
+            print('No Existe')
+            print(route_csv)
