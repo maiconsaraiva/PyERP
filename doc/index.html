@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
 
-    <title>Item Name | Documentation by Author Name</title>
+    <title>PyERP | Documentation by PyERP</title>
 
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
@@ -52,7 +52,7 @@
                     <div class="col-md-12">
                         <div class="big-title text-center">
                             <h1>PyERP</h1>
-                            <p class="lead">ERP Django / template documentation version 1.19</p>
+                            <p class="lead">ERP Django / template documentation version 1.00</p>
                         </div>
                         <!-- end title -->
                     </div>
@@ -70,29 +70,16 @@
                 <div class="col-md-3">
                     <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
                         <ul class="nav">
-                            <li><a href="#line1">Comandos</a></li>
-                            <li><a href="#line2">How to Install WordPress</a></li>
-                            <!--
-                            <li><a href="#line3">How to Install Theme</a></li>
-                            <li><a href="#line4">Necessary Plugins</a></li>
-                            <li><a href="#line5">Creating Blog Pages</a></li>
-                            <li><a href="#line6">Revolution Slider</a></li>
-                            <li><a href="#line7">How to Use Option Panel</a>
-                                <ul class="nav">
-                                    <li><a href="#line7_1">General Options</a></li>
-                                    <li><a href="#line7_2">Style Options</a></li>
-                                    <li><a href="#line7_3">Header Options</a></li>
-                                    <li><a href="#line7_4">Font Options</a></li>
-                                    <li><a href="#line7_5">Slider Options</a></li>
-                                    <li><a href="#line7_6">Page Options</a></li>
-                                    <li><a href="#line7_7">Import & Export</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#line8">Support Desk</a></li>
-                            <li><a href="#line9">Files & Sources</a></li>
-                            <li><a href="#line10">Version History (Changelog)</a></li>
-                            <li><a href="#line11">Copyright and license</a></li>
-                        -->
+                            <li><a href="#commands">Commands</a></li>
+                             <li><a href="#commands-server">Commands Server</a></li>
+                            <li><a href="#commands-pyerp">How to Install PyERP</a></li>
+                            <li><a href="#shell">Shell Djando </a></li>
+                            <li><a href="#translations">Translations</a></li>
+                            <li><a href="#github">GitHub</a></li>
+                            <li><a href="#pip">PIP</a></li>
+                            <li><a href="#rsync">RSYNC</a></li>
+                            <li><a href="#django-models">Django Models</a></li>
+                        </ul>
                         </ul>
                     </nav >
                 </div>
@@ -135,11 +122,12 @@
                         </div>
                     </section>
 
-                    <section id="line1" class="section">
+					<!-- ##########################  -->
+                    <section id="commands" class="section">
 
                         <div class="row">
                             <div class="col-md-12 left-align">
-                                <h2 class="dark-text">Comandos <a href="#top">#back to top</a><hr></h2>
+                                <h2 class="dark-text">Commands <a href="#top">#back to top</a><hr></h2>
                             </div>
                             <!-- end col -->
                         </div>
@@ -151,15 +139,10 @@
                                 <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                             -->
 
-                                <h4>Comandos de Django</h4>
-                                 <p>Ejecutar Servidor</p>
+                                <h4>Main commands for Django</h4>
+                                 <p>Run in the server</p>
                                  <pre class="brush: html; highlight: [2,4]">
                                 		python manage.py runserver
-                           		</pre>
-
-                           		<pre class="brush: html; highlight: [2,4]">
-                                		python manage.py migrate
-										python manage.py makemigrations
                            		</pre>
 
                            		<pre class="brush: html; highlight: [2,4]">
@@ -174,7 +157,18 @@
 										pip freeze
                            		</pre>
 
-                                <p>Our you can use the grid system with 2 columns like this;</p>
+                           		<pre class="brush: html; highlight: [2,4]">                                
+										cd pyerp
+										git pull
+										./manage.py collectstatic
+                           		</pre>
+
+                           		<p>Error Run</p>
+                           		<pre class="brush: html; highlight: [2,4]">                                
+										python manage.py migrate --run-syncdb
+                           		</pre>
+
+                                <p>**</p>
                          </pre>
                             </div>
                             <!-- end col -->
@@ -182,7 +176,361 @@
                         <!-- end row -->
 
                     </section>
-                    <!-- end section -->
+                    <!-- ##########################  -->
+
+                    <!-- ##########################  -->
+                    <section id="commands-server" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Commands Server<a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main commands for Django in Server</h4>
+                                 <p>Restart Django</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		source /home/django/.venv/bin/activate
+										manage.py collectstatic
+										supervisor ctl restart django_app
+                           		</pre>
+
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		python manage.py migrate --run-syncdb
+                           		</pre>
+
+                                <p>**</p>
+                         </pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
+
+
+                    <!-- ##########################  -->
+                    <section id="commands-pyerp" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Install PyERP <a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main commands for Install PyERP</h4>
+                                 <p>Run in the server</p>
+
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		git clone https://github.com/falconsoft3d/pyerp
+										virtualenv env --python=python3
+										source env/bin/activate
+										cd pyerp
+										pip3 install -r requirements.txt
+										python manage.py init_pyerp
+										python manage.py runserver
+                           		</pre>
+                                <p>**</p>
+                         	</pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
+
+
+                    <!-- ##########################  -->
+                    <section id="shell" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Shell Django <a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main commands for Shell Django</h4>
+                                 <p>Run in the server</p>
+
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		python manage.py shell
+                                		from apps.base.models.father import PyFather
+                                		PyFather.setSequence()
+                           		</pre>
+                                <p>**</p>
+                         	</pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
+
+
+                    <!-- ##########################  -->
+                    <section id="translations" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Translations in Django <a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main Translations</h4>
+
+                                 <p> Translation in the Templates</p>
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		{{ _('Project') }}
+                           		</pre>
+
+                           		<p> Translation in the Models</p>
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		name = models.CharField(_("Name"), max_length=80)
+                           		</pre>
+
+                           		<p> Translation in the Views</p>
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		COUNTRY_FIELDS = [{'string': _("Name"), 'field': 'name'},]
+                           		</pre>
+
+                           		<p> Translation Run in Django</p>
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		django-admin makemessages -l es_ES
+                           		</pre>
+
+                                <p>**</p>
+                         	</pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
+
+
+                    <!-- ##########################  -->
+                    <section id="github" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">GitHub<a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main commands for github</h4>
+                                 <p>Run in the server</p>
+
+                                 <p>Look the Branch</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		git branch
+                           		</pre>
+
+                           		<p>Create Branch</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		git checkout -b branchname
+                           		</pre>
+
+                           		<p>Delete Branch</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		git checkout -d branchname
+                           		</pre>
+
+                           		<p>Merge Branch</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		git checkout master
+										git merge branchname
+                           		</pre>
+
+                           		<pre class="brush: html; highlight: [2,4]">
+                                		git checkout -b fixing_url_name_space
+										git pull origin fixing_url_name_space
+										git add .
+										git commit -m "Cambios en Rama"
+										git push origin fixing_url_name_space)
+                           		</pre>
+                                <p>**</p>
+                         	</pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
+
+
+                    <!-- ##########################  -->
+                    <section id="pip" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">PIP<a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main commands for PIP</h4>
+                                 <p>Run in the server</p>
+
+                                 <p>Look the Branch</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		pip freeze > requirements.txt
+                           		</pre>
+                                <p>**</p>
+                         	</pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
+
+
+                     <!-- ##########################  -->
+                    <section id="rsync" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">RSYNC<a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main commands for RSYNC</h4>
+                                 <p>Run in the server</p>
+
+                                 <p>Look the Branch</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		rsync -av db.sqlite3 root@ipdelservidor:/home/django/pyerp
+                           		</pre>
+                                <p>**</p>
+                         	</pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
+
+
+                    <!-- ##########################  -->
+                    <section id="django-models" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Django Models<a href="#top">#back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                            	<!--
+                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            -->
+
+                                <h4>Main commands for Django Models</h4>
+
+                                 <p>Type fields Django</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		nombre = models.CharField(max_length=50)
+									    edad_aproximada = models.IntegerField()
+									    fecha_rescate = models.DateField()
+									    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
+									    vacuna = models.ManyToManyField(Vacuna, blank=True)
+									    active = models.BooleanField(default=True, blank=True, null=True)
+									    content = models.TextField()
+                           		</pre>
+                                <p>**</p>
+
+                                <p>Class Sample</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		class Vacuna(models.Model):
+										    nombre = models.CharField(max_length=50)
+
+
+										class Mascota(models.Model):
+										    nombre = models.CharField(max_length=50)
+										    sexo = models.CharField(max_length=10)
+										    edad_aproximada = models.IntegerField()
+										    fecha_rescate = models.DateField()
+										    
+										    # Relacion Unos a Varios
+										    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
+										    
+										    # Relacion de Muchos es a Muchos
+										    vacuna = models.ManyToManyField(Vacuna, blank=True)
+                           		</pre>
+                                <p>**</p>
+                         	</pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </section>
+                    <!-- ##########################  -->
 
                
                 </div>

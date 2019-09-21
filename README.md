@@ -53,46 +53,6 @@ password: demo
 | 20 | [bim](https://github.com/falconsoft3d/pyerp/tree/master/apps/bim) | - | [bim](https://github.com/falconsoft3d/pyerp/projects/2) | - | - | [falconsoft3d](https://github.com/falconsoft3d) | Construction Project Management Software  |
 | 21 | [marketplace](https://github.com/falconsoft3d/pyerp/tree/master/apps/marketplace) | - | - | - | - | [falconsoft3d](https://github.com/falconsoft3d) | - |
 
-# Rules for Developers
-1- all apps with namespace urls.py
-```
-app_name = 'crm'
-```
-2- Translation
-Translation in the Templates
-```
-<p>{{ _('Project') }}</p>
-```
-Traslation in the models
-```
-name = models.CharField(_("Name"), max_length=80)
-```
-Traslation in the Views
-```
-COUNTRY_FIELDS = [
-    {'string': _("Name"), 'field': 'name'},
-]
-```
-3- Alls Apps need this file
-info.json
-```
-{
-	"name": "Chat",
-	"version":"1.0.0.1",
-	"author": "YnexT SpA",
-	"website": "www.ynext.cl",
-	"category": "Accounting",
-	"summary": "Account",
-	"depends": "",
-	"description": "Demo Hello",
-	"external_dependencies":"",
-	"type":"public",
-	"color":"bg-success",
-	"fa":"fa-comments",
-	"sequence":"10"
-}
-
-```
 
 # Feedback and Support
 We welcome your feedback and support, raise issues if you want to see a new feature or report a bug.
