@@ -15,6 +15,8 @@ from ..models.usercustom import PyUser
 from ..models.website_config import PyWebsiteConfig
 
 from ..models.meta import PyMeta
+from ..models.country import PyCountry
+
 
 
 def IndexEasy(request):
@@ -51,7 +53,7 @@ def IndexEasy(request):
             user.last_name = 'User'
             user.save()
 
-            return HttpResponseRedirect(reverse_lazy('home:home_easy'))
+            return HttpResponseRedirect(reverse_lazy('base:login'))
     else:
         context['form'] = InitForm()
 
