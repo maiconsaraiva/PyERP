@@ -1,2 +1,0 @@
-apps.home
-apps.sale
