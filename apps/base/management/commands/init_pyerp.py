@@ -3,7 +3,6 @@
 
 # Librerias Standard
 import json
-import subprocess
 from os import listdir, path
 
 # Librerias Django
@@ -40,24 +39,20 @@ class Command(BaseCommand):
                 _('*** Loading PypErp country object...')
             )
         )
+
         if not PyCountry.objects.all().exists():
             call_command('loaddata', 'PyCountry')
+
 
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 _('*** Loading PypErp currency object...')
             )
         )
+
         if not PyCurrency.objects.all().exists():
             call_command('loaddata', 'PyCurrency')
 
-        self.stdout.write(
-            self.style.MIGRATE_HEADING(
-                _('*** Loading PypErp meta object...')
-            )
-        )
-        if not PyMeta.objects.all().exists():
-            call_command('loaddata', 'PyMeta')
 
         self.stdout.write(
             self.style.MIGRATE_HEADING(

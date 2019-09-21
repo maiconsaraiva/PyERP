@@ -14,6 +14,10 @@ from ..models.currency import PyCurrency
 from ..models.usercustom import PyUser
 from ..models.website_config import PyWebsiteConfig
 
+from ..models.meta import PyMeta
+from ..models.country import PyCountry
+
+
 
 def IndexEasy(request):
     if BaseConfig.objects.all().exists():
@@ -34,6 +38,13 @@ def IndexEasy(request):
             BaseConfig.create(company_id)
             PyWebsiteConfig.create(company_id.id)
             # PyUser.crear(user, password, 1, 1, 1)
+
+            """Read Data """
+            PyMeta.LoadData('data', company_id.id)
+
+            """Read Data Demo """
+            # PyMeta.LoadData(demo)
+
             user = PyUser.objects.create_user(user_name, None, password)
             user.is_staff = True
             user.is_superuser = True
@@ -42,7 +53,7 @@ def IndexEasy(request):
             user.last_name = 'User'
             user.save()
 
-            return HttpResponseRedirect(reverse_lazy('home:home_easy'))
+            return HttpResponseRedirect(reverse_lazy('base:login'))
     else:
         context['form'] = InitForm()
 
