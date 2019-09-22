@@ -20,7 +20,7 @@ PARTNER_FIELDS = [
     {'string': _("Email"), 'field': 'email'},
     {'string': _("For Invoice"), 'field': 'for_invoice'},
     {'string': _("Note"), 'field': 'note'},
-    {'string': _("Email"), 'field': 'not_email'},
+    {'string': _("No Email"), 'field': 'not_email'},
     {'string': _("Parent"), 'field': 'parent_id'},
     {'string': _("Type"), 'field': 'type'},
 ]
