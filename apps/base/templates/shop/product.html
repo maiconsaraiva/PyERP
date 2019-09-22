@@ -9,11 +9,6 @@
 
 
       <div class="col-lg-6 mb-2">
-
-
-
-
-
         <div class="mt-4">
           <img style="padding:2px;" class="card-img-top img-fluid" src="{{ object.img.url }}" alt="">
           <div class="card-body">
@@ -30,16 +25,28 @@
                  <p class="card-text">{{ object.description }}</p>
 
                  {% if user|web_show_price %}
-                    <h5>{% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %}</h5>
-                    <input type="number" value="1" min="0" max="1000" step="10"/>
+                 <div class="row">
+                        <div class="col-lg-6">
+                             <h5>{% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="number" value="1" min="0" max="1000" step="10"/>
+                        </div>
+                    </div>
+
+
                     <hr>
-                     <a href="#" class="btn btn-primary"><i class="fa fa-cart-plus"></i> {{ _("Add to cart") }}</a>
-                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="alert alert-success" role="alert">{{ _("NOT AVAILABLE") }}</div>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="#" class="btn btn-primary float-right"><i class="fa fa-cart-plus"></i> {{ _("Add to cart") }}</a>
+                        </div>
+                    </div>
                  {% endif %}
 
-                 <div class="alert alert-success" role="alert">
-                          NO DISPONIBLE
-                 </div>
+
                  <hr>
                  <small class="text-muted"><b>SKU:</b> {{ object.code }}</small> -
                  <small class="text-muted"><b>{{ _('BAR CODE') }}:</b> {{ object.bar_code }}</small>
