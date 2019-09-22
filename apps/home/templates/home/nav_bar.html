@@ -42,7 +42,10 @@
             <a class="nav-link js-scroll-trigger" href="{% url 'home:web-shop' %}">{{ _("Shop") }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'home:web-shop' %}"><i class="fa fa-shopping-cart"></i></a>
+            <a class="nav-link js-scroll-trigger" href="{% url 'home:web-shop' %}"><i class="fa fa-shopping-cart"></i>
+              <b><sup class="cart_quantity" style="display: inline;">0</sup></b>
+            </a>
+
           </li>
           {% endif %}
 
