@@ -74,4 +74,4 @@ class PyUser(AbstractUser):
 def create_partner(sender, instance, created, **kwargs):
     print(instance)
     if created:
-        PyPartner.create(instance)
+        PyPartner(name=self.username).save()

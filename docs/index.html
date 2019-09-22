@@ -510,6 +510,30 @@
                                         plugin.save()
                            		</pre>
 
+                                <p>Name of Record</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		    def __str__(self):
+                                                return format(self.name)
+                           		</pre>
+
+                                <p>Name of Record</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		    def __str__(self):
+                                                return format(self.name)
+                           		</pre>
+
+                                <p>Overwrite Method Save</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                		    def save(self):
+                                                if self.name == 'New':
+                                                    self.setSequence()
+                                                super(PySaleOrder, self).save()
+
+                           		</pre>
+
+
+
+
 
 
                                 <p>Class Sample</p>
