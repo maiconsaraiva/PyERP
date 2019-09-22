@@ -6,32 +6,15 @@
     <div class="container">
          <div class="row">
 
-      <div class="col-lg-3">
-        <h1 class="my-4"><a href="{% url 'home:web-shop' %}">Tienda</a></h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item active">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
-        </div>
-      </div>
-      <!-- /.col-lg-3 -->
 
       <div class="col-lg-6 mb-2">
 
-        <div class="card mt-4">
-          <img class="card-img-top img-fluid" src="{{ object.img.url }}" alt="">
+        <div class="mt-4">
+          <img style="padding:2px;" class="card-img-top img-fluid" src="{{ object.img.url }}" alt="">
           <div class="card-body">
-            <h3 class="card-title">{{ object.name }}</h3>
-                {% if user|web_show_price %}
-                    <h5>{% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %}</h5>
-                {% endif %}
-              <p class="card-text">{{ object.description }}</p>
+                <small class="text-muted"><b>SKU:</b> {{ object.code }}</small> -
+                <small class="text-muted"><b>CÓDIGO BARRA:</b> {{ object.bar_code }}</small>
           </div>
-          <div class="card-footer">
-
-                    <small class="text-muted"><b>SKU:</b> {{ object.code }}</small> -
-                    <small class="text-muted"><b>CÓDIGO BARRA:</b> {{ object.bar_code }}</small>
-              </div>
         </div>
 
 
@@ -59,12 +42,16 @@
       </div>
       <!-- /.col-lg-9 -->
 
-             <div class="col-lg-3">
-              {% if user|web_show_price %}
-              <div>
-                    <a href="#" class="btn btn-primary btn-lg btn-flat float-right"><i class="fa fa-cart-plus"></i> {{ _("Add to cart") }}</a>
-              </div>
-              {% endif %}
+             <div class="col-lg-6   ">
+              <h3 class="card-title">{{ object.name }}</h3>
+
+                 <p class="card-text">{{ object.description }}</p>
+                 {% if user|web_show_price %}
+                    <h5>{% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %}</h5>
+                    <input type="number" value="1" min="0" max="1000" step="10"/>
+                    <hr>
+                    <a href="#" class="btn btn-primary"><i class="fa fa-cart-plus"></i> {{ _("Add to cart") }}</a>
+                 {% endif %}
           </div>
 
     </div>
