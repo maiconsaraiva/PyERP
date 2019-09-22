@@ -113,8 +113,10 @@
         </div>
       </div>
     </div>
-  </footer>
 
+
+
+  </footer>
 
 
   <!-- Bootstrap core JavaScript -->
@@ -136,4 +138,13 @@
       $("input[type='number']").inputSpinner()
   </script>
 
+    {% if user|get_company_whatsapp %}
+    <div class="chatbot" style="bottom:10px; left:10px; position: fixed; z-index: 99999999;">
+       <div class="ccw_style9 animated no-animation ccw-no-hover-an">
+          <a target="_blank" href="https://wa.me/{{user|get_company_whatsapp }}" class="img-icon-a nofocus">
+             <img class="img-icon ccw-analytics" id="style-9" data-ccw="style-9" style="height: 48px;" src="{{ STATIC_URL }}/img/whatsapp-icon-square.svg" alt="WhatsApp chat"/>
+           </a>
+       </div>
+	</div>
+    {% endif %}
 

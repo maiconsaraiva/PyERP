@@ -35,8 +35,10 @@ class ProductForm(forms.ModelForm):
             'type',
             'web_active',
             'pos_active',
+            'youtube_video',
             'img',
             'description',
+            'features',
         ]
         widgets = {
             'tax': autocomplete.ModelSelect2Multiple(

@@ -103,6 +103,13 @@ def get_company_linkedin(obj):
     except BaseConfig.DoesNotExist:
         return None
 
+@register.filter
+def get_company_whatsapp(obj):
+    try:
+        return BaseConfig.objects.get(pk=1).main_company_id.social_whatsapp
+    except BaseConfig.DoesNotExist:
+        return None
+
 
 
 @register.filter

@@ -34,6 +34,7 @@ COMPANY_FIELDS_SHORT = [
     'social_instagram',
     'social_linkedin',
     'social_youtube',
+    'social_whatsapp',
 
     'latitude',
     'longitude',

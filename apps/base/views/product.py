@@ -22,6 +22,7 @@ PRODUCT_FIELDS = [
     {'string': _("Price"), 'field': 'price'},
     {'string': _("Cost"), 'field': 'cost'},
     {'string': _("Type"), 'field': 'type'},
+    {'string': _("Youtube Video"), 'field': 'youtube_video'},
 ]
 
 LEAD_FIELDS_SHORT = [
@@ -40,6 +41,7 @@ LEAD_FIELDS_SHORT = [
     'pos_active',
     'share',
     'img',
+    'youtube_video',
     'description',
 ]
 

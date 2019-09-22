@@ -39,6 +39,7 @@ class PyCompany(PyFather):
     social_instagram = models.CharField(max_length=255, blank=True)
     social_linkedin = models.CharField(max_length=255, blank=True)
     social_youtube = models.CharField(max_length=255, blank=True)
+    social_whatsapp = models.CharField(max_length=255, blank=True)
 
     main_color = models.CharField(max_length=20, blank=True, default="#fff")
     font_color = models.CharField(max_length=20, blank=True, default="#6c757d")

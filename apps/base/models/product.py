@@ -38,13 +38,15 @@ class PyProduct(PyFather):
     code = models.CharField(_("Code"), max_length=80, blank=True)
     bar_code = models.CharField(_("Bar Code"), max_length=80, blank=True)
     price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2, default=1)
-    cost = models.DecimalField(_("cost"), max_digits=10, decimal_places=2, default=0)
+    cost = models.DecimalField(_("Cost"), max_digits=10, decimal_places=2, default=0)
     category_id = models.ForeignKey(PyProductCategory, null=True, blank=True, on_delete=models.CASCADE)
     web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
-    description = models.TextField(_("description"), blank=True, null=True)
+    description = models.TextField(_("Description"), blank=True, null=True)
+    features = models.TextField(_("Features"), blank=True, null=True)
     uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
     brand_id = models.ForeignKey(PyProductBrand, null=True, blank=True, on_delete=models.CASCADE)
     tax = models.ManyToManyField(PyTax, null=True, blank=True)
+    youtube_video = models.CharField(null=True, blank=True, max_length=300)
     img = models.ImageField(
         max_length=255,
         storage=RenameImage(),
