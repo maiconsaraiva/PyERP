@@ -8,21 +8,21 @@
     </a>
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="{% url 'base:channel' %}" class="nav-link">
+        <a href="{% url 'base:channels' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
-          <p>Canales de Venta</p>
+          <p>{{ _('Channels') }}</p>
         </a>
       </li>
         <li class="nav-item">
-        <a href="{% url 'base:campaign' %}" class="nav-link">
+        <a href="{% url 'marketing:campaign' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
-          <p>Campañas</p>
+          <p>{{ _('Campaigns') }}</p>
         </a>
       </li>
         <li class="nav-item">
-        <a href="{% url 'base:mform' %}" class="nav-link">
+        <a href="{% url 'marketing:mform' %}" class="nav-link">
           <i class="far fa-circle nav-icon"></i>
-          <p>Formularios</p>
+          <p>{{ _('Forms') }}</p>
         </a>
       </li>
     </ul>

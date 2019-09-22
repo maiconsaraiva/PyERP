@@ -32,8 +32,8 @@ class MformListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(MformListView, self).get_context_data(**kwargs)
         context['title'] = 'Formularios'
-        context['detail_url'] = 'base:mform-detail'
-        context['add_url'] = 'base:mform-add'
+        context['detail_url'] = 'marketing:mform-detail'
+        context['add_url'] = 'marketing:mform-add'
         context['fields'] = MFORM_FIELDS_VIEW
         return context
 
@@ -43,9 +43,9 @@ class MformDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(MformDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:mform', 'name': 'Formulario'}]
-        context['update_url'] = 'base:mform-update'
-        context['delete_url'] = 'base:mform-delete'
+        context['breadcrumbs'] = [{'url': 'marketing:mform', 'name': 'Formulario'}]
+        context['update_url'] = 'marketing:mform-update'
+        context['delete_url'] = 'marketing:mform-delete'
         context['fields'] = MFORM_FIELDS_VIEW
         return context
 
@@ -58,8 +58,8 @@ class MformCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(MformCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Crear Formulario'
-        context['breadcrumbs'] = [{'url': 'base:mform', 'name': 'Formulario'}]
-        context['back_url'] = reverse('base:mform')
+        context['breadcrumbs'] = [{'url': 'marketing:mform', 'name': 'Formulario'}]
+        context['back_url'] = reverse('marketing:mform')
         return context
 
 class MformUpdateView(LoginRequiredMixin, UpdateView):
@@ -71,8 +71,8 @@ class MformUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(MformUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:mform', 'name': 'Formulario'}]
-        context['back_url'] = reverse('base:mform-detail', kwargs={'pk': context['object'].pk})
+        context['breadcrumbs'] = [{'url': 'marketing:mform', 'name': 'Formulario'}]
+        context['back_url'] = reverse('marketing:mform-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
@@ -80,4 +80,4 @@ class MformUpdateView(LoginRequiredMixin, UpdateView):
 def DeleteMform(self, pk):
     mform = PyMform.objects.get(id=pk)
     mform.delete()
-    return redirect(reverse('base:mform'))
+    return redirect(reverse('marketing:mform'))

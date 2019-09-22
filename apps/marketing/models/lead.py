@@ -4,7 +4,7 @@ from django.db import models
 # Librerias en carpetas locales
 from ...crm.submodels.lead import PyLead
 from .campaign import PyCampaign
-from .channel import PyChannel
+from apps.base.models import PyChannel
 
 
 class MarketingLead(PyLead):

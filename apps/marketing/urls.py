@@ -5,17 +5,12 @@ from django.urls import path
 # Librerias en carpetas locales
 from .views import (
     CampaignCreateView, CampaignDetailView, CampaignListView,
-    CampaignUpdateView, ChannelCreateView, ChannelDetailView, ChannelListView,
-    ChannelUpdateView, DeleteCampaign, DeleteChannel, DeleteMform,
+    CampaignUpdateView, DeleteCampaign, DeleteMform,
     MformCreateView, MformDetailView, MformListView, MformUpdateView)
 
-urlpatterns = [
-    path('channel', ChannelListView.as_view(), name='channel'),
-    path('channel/add/', ChannelCreateView.as_view(), name='channel-add'),
-    path('channel/<int:pk>/', ChannelDetailView.as_view(), name='channel-detail'),
-    path('channel/<int:pk>/update', ChannelUpdateView.as_view(), name='channel-update'),
-    path('channel/<int:pk>/delete/', DeleteChannel, name='channel-delete'),
+app_name = 'marketing'
 
+urlpatterns = [
     path('campaign', CampaignListView.as_view(), name='campaign'),
     path('campaign/add/', CampaignCreateView.as_view(), name='campaign-add'),
     path('campaign/<int:pk>/', CampaignDetailView.as_view(), name='campaign-detail'),
