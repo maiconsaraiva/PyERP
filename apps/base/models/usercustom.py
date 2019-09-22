@@ -69,9 +69,6 @@ class PyUser(AbstractUser):
     def get_absolute_url(self):
         return reverse('base:user-detail', kwargs={'pk': self.pk})
 
-
-@receiver(post_save, sender=PyUser)
-def create_partner(sender, instance, created, **kwargs):
-    print(instance)
-    if created:
-        PyPartner(name=self.username).save()
+    def save(self):
+        PyPartner(name=self.username, email=self.email).save()
+        super(PyUser, self).save()
