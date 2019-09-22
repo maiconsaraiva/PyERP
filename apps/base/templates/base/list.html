@@ -8,7 +8,7 @@
 {% block content %}
     <div class="card card-primary card-outline mt-2">
         <div class="card-header">
-            <a href="{% url add_url %}" class="btn btn-primary">{{ _("Create") }}</a>
+            <a href="{% url add_url %}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ _("Create") }}</a>
             <a href="{% url add_url %}" class="btn btn-light"><i class="fa fa-file-excel"></i> {{ _("Export") }}</a>
             <a href="{% url add_url %}" class="btn btn-light"><i class="fa fa-file-excel"></i> {{ _("Import") }}</a>
         </div>

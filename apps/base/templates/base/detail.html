@@ -4,8 +4,8 @@
 {% block content %}
 <div class="card card-primary card-outline mt-2">
     <div class="card-header">
-        <a href="{% url update_url object.pk %}" class="btn btn-success">{{ _("Edit") }}</a>
-        <a href="{% url delete_url object.pk %}" class="btn btn-danger">{{ _("Delete") }}</a>
+        <a href="{% url update_url object.pk %}" class="btn btn-success"><i class="fa fa-pen"></i>  {{ _("Edit") }}</a>
+        <a href="{% url delete_url object.pk %}" class="btn btn-danger"><i class="fa fa-trash"></i> {{ _("Delete") }}</a>
         {% for btn in buttons %}
         <a href="{{ btn.act }}" class="btn btn-{{btn.class}} float-right">{{btn.name}}</a>
         {% endfor %}
