@@ -21,7 +21,10 @@
 
              <div class="col-lg-6">
               <h3 class="card-title">{{ object.name }}</h3>
+                 <small class="text-muted"><b>SKU:</b> {{ object.code }}</small> -
+                 <small class="text-muted"><b>{{ _('BAR CODE') }}:</b> {{ object.bar_code }}</small>
 
+                 <hr>
                  <p class="card-text">{{ object.description }}</p>
 
                  {% if user|web_show_price %}
@@ -30,7 +33,7 @@
                              <h5>{% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %}</h5>
                         </div>
                         <div class="col-lg-6">
-                            <input type="number" value="1" min="0" max="1000" step="10"/>
+                            <input type="number" value="1" min="0" max="1000" step="1"/>
                         </div>
                     </div>
 
@@ -45,11 +48,6 @@
                         </div>
                     </div>
                  {% endif %}
-
-
-                 <hr>
-                 <small class="text-muted"><b>SKU:</b> {{ object.code }}</small> -
-                 <small class="text-muted"><b>{{ _('BAR CODE') }}:</b> {{ object.bar_code }}</small>
           </div>
 
     </div>
