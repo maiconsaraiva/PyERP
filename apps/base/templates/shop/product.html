@@ -28,14 +28,28 @@
                   <small class="text-muted">( {{ object.brand_id.name }} )</small>
                   {% endif %}
               </h3>
-                 {% if object.code %}
+                 <div class="row">
+                    <div class="col-lg-8">
+                        {% if object.code %}
                     <small class="text-muted"><b>SKU:</b> {{ object.code }}</small>
-                 {% else %}
+                    {% else %}
                     <small class="text-muted"><b>SKU:</b> {{ object.id }}</small>
-                 {% endif %}
-                 {% if object.bar_code %}
-                    <small class="text-muted"><b>{{ _('BAR CODE') }}:</b> {{ object.bar_code }}</small>
-                 {% endif %}
+                    {% endif %}
+                    {% if object.bar_code %}
+                        <small class="text-muted"><b>{{ _('BAR CODE') }}:</b> {{ object.bar_code }}</small>
+                    {% endif %}
+                    </div>
+                    <div class="col-lg-4">
+                                                        <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+
+                             </div>
+                        </div>
+                  <style>
+                     .gold{
+                            color: #FFBF00;
+                        }
+                 </style>
+
 
                  <hr>
                  <p class="card-text">{{ object.description|linebreaks }}</p>
