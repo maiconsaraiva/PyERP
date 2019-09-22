@@ -17,7 +17,7 @@
                         {% for field in fields %}
                         <th>{{ field.string }}</th>
                         {% endfor %}
-                        <th>{{ _('Actions') }}</th>
+                        <th style="width: 50px;">{{ _('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,6 @@
                         <td>{{ object|get_obj_attr:field.field }}</td>
                         {% endfor %}
                         <td class="text-center">
-                            <button onclick="" data-toggle="tooltip" title="Ver" type="button" class="btn btn-default btn-sm"><span class="fa fa-eye"></span></button>
                             <a href="{% url edit_url object.pk %}" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="fa fa-pen"></a>
                             <button onclick="return abrir_modal('{% url delete_url object.pk %}')" data-toggle="tooltip" title="Ver" type="button" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button>
                         </td>
@@ -50,8 +49,6 @@
 <script>
     $(function () {
         $("#list_table").DataTable({
-            dom: 'Bfrtip',
-            buttons: ['csv' ,'pdf'],
         });
     });
 </script>
