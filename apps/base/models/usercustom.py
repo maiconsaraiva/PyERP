@@ -72,5 +72,6 @@ class PyUser(AbstractUser):
 
 @receiver(post_save, sender=PyUser)
 def create_partner(sender, instance, created, **kwargs):
+    print(instance)
     if created:
         PyPartner.create(instance)
