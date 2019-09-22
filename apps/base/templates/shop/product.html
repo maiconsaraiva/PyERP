@@ -20,7 +20,11 @@
       <!-- /.col-lg-9 -->
 
              <div class="col-lg-6">
-              <h3 class="card-title">{{ object.name }}</h3>
+              <h3 class="card-title">{{ object.name }}
+                  {% if object.brand_id.name %}
+                  <small class="text-muted">( {{ object.brand_id.name }} )</small>
+                  {% endif %}
+              </h3>
                  {% if object.code %}
                     <small class="text-muted"><b>SKU:</b> {{ object.code }}</small>
                  {% else %}
