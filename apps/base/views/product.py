@@ -22,7 +22,6 @@ PRODUCT_FIELDS = [
     {'string': _("Price"), 'field': 'price'},
     {'string': _("Cost"), 'field': 'cost'},
     {'string': _("Type"), 'field': 'type'},
-    {'string': _("Created On"), 'field': 'created_on'},
 ]
 
 LEAD_FIELDS_SHORT = [

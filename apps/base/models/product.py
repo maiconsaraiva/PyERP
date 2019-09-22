@@ -63,17 +63,12 @@ class PyProduct(PyFather):
     def get_absolute_url(self):
         return reverse('base:product-detail', kwargs={'pk': self.pk})
 
-    created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
-
     def __str__(self):
         return format(self.name)
 
     @classmethod
     def suma(cls):
         return cls.__name__
-
-    class Meta:
-        ordering = ['created_on']
 
 
 

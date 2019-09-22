@@ -2,6 +2,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from .country import PyCountry
 
 # Librerias en carpetas locales
 from .father import PyFather
@@ -17,6 +18,8 @@ class PyPartner(PyFather):
     name = models.CharField(_("Name"), max_length=40)
     street = models.CharField(_("Street"), max_length=100, blank=True)
     street_2 = models.CharField(_("Street Other"), max_length=100, blank=True)
+    country_id = models.ForeignKey(PyCountry, null=True, blank=True, on_delete=models.CASCADE)
+
     city = models.CharField(_("City"), max_length=50, blank=True)
     phone = models.CharField(_("Phone"), max_length=20, blank=True)
     email = models.EmailField(_("Email"), max_length=40, blank=True)

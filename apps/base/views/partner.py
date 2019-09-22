@@ -16,6 +16,7 @@ from ..models import PyLog, PyPartner
 PARTNER_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
     {'string': _("Street"), 'field': 'street'},
+    {'string': _("Country"), 'field': 'country_id'},
     {'string': _("Phone"), 'field': 'phone'},
     {'string': _("Email"), 'field': 'email'},
     {'string': _("For Invoice"), 'field': 'for_invoice'},
@@ -25,7 +26,7 @@ PARTNER_FIELDS = [
     {'string': _("Type"), 'field': 'type'},
 ]
 
-PARTNER_FIELDS_SHORT = ['name', 'street', 'email', 'phone', 'note', 'customer', 'provider', 'for_invoice', 'not_email','parent_id','type']
+PARTNER_FIELDS_SHORT = ['name', 'street', 'country_id', 'email', 'phone', 'note', 'customer', 'provider', 'for_invoice', 'not_email','parent_id','type']
 
 
 class CustomerListView(LoginRequiredMixin, ListView):
