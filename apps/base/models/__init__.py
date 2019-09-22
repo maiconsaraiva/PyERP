@@ -8,7 +8,6 @@ from .country import PyCountry
 from .log import PyLog
 from .partner import PyPartner
 from .product import PyProduct
-from .product_category import PyProductCategory
 from .plugin import PyPlugin
 from .father import PyFather
 from .usercustom import PyUser
@@ -17,6 +16,8 @@ from .parameter import PyParameter
 # Product
 from .product_category_uom import PyProductCategoryUOM
 from .uom import PyUom
+from .product_category import PyProductCategory
+from .product_brand import PyProductBrand
 
 # Website
 from .product_webcategory import PyProductWebCategory

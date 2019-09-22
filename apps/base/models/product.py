@@ -13,6 +13,7 @@ from ..rename_image import RenameImage
 from .father import PyFather
 from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
+from .product_brand import PyProductBrand
 from .tax import PyTax
 from .uom import PyUom
 
@@ -42,7 +43,8 @@ class PyProduct(PyFather):
     web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(_("description"), blank=True, null=True)
     uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
-    tax = models.ManyToManyField(PyTax)
+    brand_id = models.ForeignKey(PyProductBrand, null=True, blank=True, on_delete=models.CASCADE)
+    tax = models.ManyToManyField(PyTax, null=True, blank=True)
     img = models.ImageField(
         max_length=255,
         storage=RenameImage(),

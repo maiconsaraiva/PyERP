@@ -17,12 +17,12 @@ PRODUCT_FIELDS = [
     {'string': _("UOM"), 'field': 'uom_id'},
     {'string': _("Tax"), 'field': 'tax'},
     {'string': _("Category"), 'field': 'category_id'},
+    {'string': _("Brand"), 'field': 'brand_id'},
     {'string': _("Web Category"), 'field': 'web_category_id'},
     {'string': _("Price"), 'field': 'price'},
     {'string': _("Cost"), 'field': 'cost'},
     {'string': _("Type"), 'field': 'type'},
     {'string': _("Created On"), 'field': 'created_on'},
-    {'string': _("Descriptions"), 'field': 'description'},
 ]
 
 LEAD_FIELDS_SHORT = [
@@ -31,6 +31,7 @@ LEAD_FIELDS_SHORT = [
     'category_id',
     'tax',
     'web_category_id',
+    'brand_id',
     'code',
     'bar_code',
     'price',

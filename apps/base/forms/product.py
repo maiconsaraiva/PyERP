@@ -27,6 +27,7 @@ class ProductForm(forms.ModelForm):
             'category_id',
             'tax',
             'web_category_id',
+            'brand_id',
             'code',
             'bar_code',
             'price',
