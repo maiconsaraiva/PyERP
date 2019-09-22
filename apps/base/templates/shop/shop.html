@@ -17,22 +17,27 @@
         <!-- /.col-lg-3 -->
         <div class="col-lg-9">
             <div class="row">
-                {% for product in object_list %}
+                {% for object in object_list %}
                     <div class=" col-lg-3 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="{% url url_web_product product.id %}"><img class="card-img-top" height="100" src="{{ product.img.url }}" alt=""></a>
+                        <div class="h-100">
+                            <a href="{% url url_web_product object.id %}">
+                                <img style="padding:2px;" class="card-img-top" height="100" src="{{ object.img.url }}" alt="">
+                            </a>
                             <div class="card-body">
-                                <h5 class="card-title"><a href="{% url url_web_product product.id %}">{{ product.name }}</a></h5>
+                                <h5 class="card-title"><a href="{% url url_web_product object.id %}">{{ object.name }}</a></h5>
                                 {% if user|web_show_price %}
-                                    <h6> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ product.price }} {% else %} {{ product.price }} {{ user|currency_symbol }} {% endif %} </h6>
+                                    <h6 style="color:red;"> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %} </h6>
                                 {% endif %}
-                                <!--<p class="card-text">{{ product.description }}</p>-->
                             </div>
-                            <div class="card-footer">
-                                {% if user|web_show_price %}
-                                    <a href="#" class="btn btn-primary float-right"><i class="fa fa-cart-plus"></i></a>
-                                {% endif %}
-                                <small class="text-muted"><b>SKU:</b> {{ product.code }}</small>
+                            <div>
+                                {% if object.code %}
+                                 <small class="text-muted"><b>SKU:</b> {{ object.code }}</small>
+                                 {% else %}
+                                    <small class="text-muted"><b>SKU:</b> {{ object.id }}</small>
+                                 {% endif %}
+                                 {% if object.bar_code %}
+                                    <small class="text-muted"><b>{{ _('BAR CODE') }}:</b> {{ object.bar_code }}</small>
+                                 {% endif %}
                             </div>
                         </div>
                     </div>
