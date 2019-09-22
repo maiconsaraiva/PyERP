@@ -122,4 +122,5 @@ urlpatterns = [
     path('wpayment/', include('apps.base.urls.wpayment')),
     path('sequence/', include('apps.base.urls.sequence')),
     path('product_brand/', include('apps.base.urls.product_brand')),
+    path('channel/', include('apps.base.urls.channel')),
 ]

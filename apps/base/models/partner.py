@@ -6,51 +6,31 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from .father import PyFather
 
+TYPE_CHOICE = (
+    ("company", _("Company")),
+    ("individual", _("Individual")),
+    ("address", _("Address")),
+    ("contact", _("Contact")),
+)
 
 class PyPartner(PyFather):
-    name = models.CharField('Nombre', max_length=40)
-    street = models.CharField('Calle', max_length=100, blank=True)
-    street_2 = models.CharField('Calle 2', max_length=100, blank=True)
-    city = models.CharField('Ciudad', max_length=50, blank=True)
-    phone = models.CharField('Teléfono', max_length=20, blank=True)
-    email = models.EmailField('Correo', max_length=40, blank=True)
-    customer = models.BooleanField('Es cliente', default=True)
-    provider = models.BooleanField('Es proveedor', default=True)
-    for_invoice = models.BooleanField('Para Facturar', default=True)
+    name = models.CharField(_("Name"), max_length=40)
+    street = models.CharField(_("Street"), max_length=100, blank=True)
+    street_2 = models.CharField(_("Street Other"), max_length=100, blank=True)
+    city = models.CharField(_("City"), max_length=50, blank=True)
+    phone = models.CharField(_("Phone"), max_length=20, blank=True)
+    email = models.EmailField(_("Email"), max_length=40, blank=True)
+    customer = models.BooleanField(_("Customer"), default=True)
+    provider = models.BooleanField(_("Provider"), default=True)
+    for_invoice = models.BooleanField(_("For Invoice"), default=True)
     note = models.TextField(blank=True, null=True)
+    not_email = models.BooleanField(_("No Email"), default=False)
+    parent_id = models.ForeignKey('self', null=True, blank=True, default=None, on_delete=models.CASCADE)
 
-    not_email = models.BooleanField('No Email', default=False)
-
-    created_by = models.ForeignKey(
-        'base.PyUser', related_name='pypartner_created_by',
-        on_delete=models.SET_NULL, null=True)
-
-    created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
-
-    """
-    pyuser = models.OneToOneField(
-        'base.PyUser', related_name='pypartner_pyuser',
-        on_delete=models.PROTECT, unique=True)
-        """
+    type = models.CharField(_("type"), choices=TYPE_CHOICE, max_length=64, default='company')
 
     def get_absolute_url(self):
         return reverse('base:partner-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        # %s%s' % (self.rut and ('[%s] ' % self.rut) or '', self.name)
         return self.name
-
-    def __repr__(self):
-        return self.name
-
-    @classmethod
-    def create(cls, pyuser):
-        """Crea un partner de manera sencilla
-        """
-        pypartner = cls(pyuser=pyuser)
-        pypartner.save()
-
-        return pypartner
-
-    class Meta:
-        ordering = ['-created_on']

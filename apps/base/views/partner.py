@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from dal import autocomplete
@@ -13,18 +14,18 @@ from dal import autocomplete
 from ..models import PyLog, PyPartner
 
 PARTNER_FIELDS = [
-    {'string': 'Nombre', 'field': 'name'},
-    {'string': 'Dirección', 'field': 'street'},
-    {'string': 'Teléfono', 'field': 'phone'},
-    {'string': 'Email', 'field': 'email'},
-    {'string': 'Para Facturar', 'field': 'for_invoice'},
-    {'string': 'Creado por', 'field': 'created_by'},
-    {'string': 'Creado', 'field': 'created_on'},
-    {'string': 'Notas', 'field': 'note'},
-    {'string': 'No Email', 'field': 'not_email'},
+    {'string': _("Name"), 'field': 'name'},
+    {'string': _("Street"), 'field': 'street'},
+    {'string': _("Phone"), 'field': 'phone'},
+    {'string': _("Email"), 'field': 'email'},
+    {'string': _("For Invoice"), 'field': 'for_invoice'},
+    {'string': _("Note"), 'field': 'note'},
+    {'string': _("Email"), 'field': 'not_email'},
+    {'string': _("Parent"), 'field': 'parent_id'},
+    {'string': _("Type"), 'field': 'type'},
 ]
 
-PARTNER_FIELDS_SHORT = ['name', 'street', 'email', 'phone', 'note', 'customer', 'provider', 'for_invoice', 'not_email']
+PARTNER_FIELDS_SHORT = ['name', 'street', 'email', 'phone', 'note', 'customer', 'provider', 'for_invoice', 'not_email','parent_id','type']
 
 
 class CustomerListView(LoginRequiredMixin, ListView):

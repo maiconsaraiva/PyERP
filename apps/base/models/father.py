@@ -14,6 +14,9 @@ class PyFather(models.Model):
     company_id = models.IntegerField(null=True, blank=True)
 
     class Meta:
+        ordering = ['id']
+
+    class Meta:
         abstract = True
 
     @classmethod
