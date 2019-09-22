@@ -23,7 +23,6 @@ PRODUCT_FIELDS = [
     {'string': _("Type"), 'field': 'type'},
     {'string': _("Created On"), 'field': 'created_on'},
     {'string': _("Descriptions"), 'field': 'description'},
-
 ]
 
 LEAD_FIELDS_SHORT = [
@@ -39,6 +38,7 @@ LEAD_FIELDS_SHORT = [
     'type',
     'web_active',
     'pos_active',
+    'share',
     'img',
     'description',
 ]

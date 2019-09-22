@@ -11,7 +11,7 @@ class UpdateBaseConfigView(LoginRequiredMixin, UpdateView):
     login_url = "login"
     model = BaseConfig
     template_name = 'base/form.html'
-    fields = ['online', 'open_menu', 'main_company_id']
+    fields = ['online', 'open_menu', 'main_company_id', 'type_share']
 
 
 def LoadData(LoginRequiredMixin, request):

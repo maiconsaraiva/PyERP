@@ -13,9 +13,9 @@ POSITION_CHOICE = (
 
 
 class PyCurrency(PyFather):
-    name = models.CharField('Nombre', max_length=3)
+    name = models.CharField('Nombre', max_length=40)
     alias = models.CharField('Alias', max_length=40)
-    symbol = models.CharField('Símbolo', max_length=1)
+    symbol = models.CharField('Símbolo', max_length=3)
     country = models.ForeignKey(PyCountry, on_delete=models.CASCADE)
     iso = models.CharField(max_length=30)
     position = models.CharField(

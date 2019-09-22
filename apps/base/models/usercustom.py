@@ -50,6 +50,7 @@ class PyUser(AbstractUser):
     fecha_nacimiento = models.DateField(_("Birthdate"), blank=True, null=True)
     sexo = models.CharField(_("Sex"), max_length=255, choices=SEXO_CHOICES, blank=True, null=True)
     avatar = models.ImageField(max_length=255, storage=RenameImage(), upload_to=image_path, blank=True, null=True, default='avatar/default_avatar.png')
+    partner_id = models.ForeignKey(PyPartner, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
