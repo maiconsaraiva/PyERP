@@ -34,7 +34,7 @@ class PluginListView(ListView):
     template_name = 'base/plugin.html'
     fields = APP_FIELDS
     context_object_name = 'plugin_list'
-    paginate_by = 9
+    paginate_by = 15
 
 
 # ========================================================================== #
