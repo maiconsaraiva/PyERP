@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyAttribute
@@ -18,7 +17,7 @@ ATTRIBUTE_FIELDS = [
 ATTRIBUTE_SHORT = ['name','variant_id']
 
 
-class AttributeListView(LoginRequiredMixin, ListView):
+class AttributeListView(LoginRequiredMixin, FatherListView):
     model = PyAttribute
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class AttributeListView(LoginRequiredMixin, ListView):
         return context
 
 
-class AttributeDetailView(LoginRequiredMixin, DetailView):
+class AttributeDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyAttribute
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class AttributeDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class AttributeCreateView(LoginRequiredMixin, CreateView):
+class AttributeCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyAttribute
     fields = ATTRIBUTE_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class AttributeCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class AttributeUpdateView(LoginRequiredMixin, UpdateView):
+class AttributeUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyAttribute
     fields = ATTRIBUTE_SHORT
     template_name = 'base/form.html'

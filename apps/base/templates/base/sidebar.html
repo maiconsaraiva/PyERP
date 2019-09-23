@@ -31,7 +31,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item has-treeview">
-                    <a style="color:#6c6565;" href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
+                    <a href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
                 </li>
 
        <!-- PARTNER -->
@@ -259,7 +259,7 @@
                     <!-- Configuracion Begin Sección solo para los administrdores -->
                     <!-- Apps Begin -->
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Plugins') }}<i class="fas fa-angle-left right"></i></p></a>
+                        <a href="#" class="nav-link"><i class="fa fa-microchip nav-icon"></i><p>{{ _('Plugins') }} <i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{% url 'base:list-plugin' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Plugins') }}</p></a>

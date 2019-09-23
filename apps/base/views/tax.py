@@ -2,8 +2,7 @@
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias de terceros
 from dal import autocomplete
@@ -20,7 +19,7 @@ TAX_FIELDS = [
 TAX_SHORT = ['name', 'amount', 'include_price']
 
 
-class TaxListView(ListView):
+class TaxListView(FatherListView):
     model = PyTax
     template_name = 'base/list.html'
 
@@ -33,7 +32,7 @@ class TaxListView(ListView):
         return context
 
 
-class TaxDetailView(DetailView):
+class TaxDetailView(FatherDetailView):
     model = PyTax
     template_name = 'base/detail.html'
 
@@ -47,7 +46,7 @@ class TaxDetailView(DetailView):
         return context
 
 
-class TaxCreateView(CreateView):
+class TaxCreateView(FatherCreateView):
     model = PyTax
     fields = TAX_SHORT
     template_name = 'base/form.html'
@@ -60,7 +59,7 @@ class TaxCreateView(CreateView):
         return context
 
 
-class TaxUpdateView(UpdateView):
+class TaxUpdateView(FatherUpdateView):
     model = PyTax
     fields = TAX_SHORT
     template_name = 'base/form.html'

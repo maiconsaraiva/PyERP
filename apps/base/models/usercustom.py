@@ -69,6 +69,7 @@ class PyUser(AbstractUser):
     def get_absolute_url(self):
         return reverse('base:user-detail', kwargs={'pk': self.pk})
 
+    """
     def save(self):
         PyPartner(name=self.username, email=self.email).save()
-        super(PyUser, self).save()
+        super(PyUser, self).save()"""

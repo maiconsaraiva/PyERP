@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models.post import PyPost
@@ -18,7 +17,7 @@ POST_FIELDS = [
 
 POST_FIELDS_SHORT = ['title', 'keywords', 'content', 'img', ]
 
-class PostListView(ListView):
+class PostListView(FatherListView):
     model = PyPost
     template_name = 'base/list.html'
 
@@ -30,7 +29,7 @@ class PostListView(ListView):
         context['fields'] = POST_FIELDS
         return context
 
-class PostDetailView(DetailView):
+class PostDetailView(FatherDetailView):
     model = PyPost
     template_name = 'base/detail.html'
     def get_context_data(self, **kwargs):
@@ -43,7 +42,7 @@ class PostDetailView(DetailView):
         return context
 
 
-class PostCreateView(CreateView):
+class PostCreateView(FatherCreateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -57,7 +56,7 @@ class PostCreateView(CreateView):
         return context
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(FatherUpdateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
     template_name = 'base/form.html'

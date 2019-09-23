@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyWPayment
@@ -18,7 +17,7 @@ WPAYMENT_FIELDS = [
 WPAYMENT_SHORT = ['name','web_active']
 
 
-class WPaymentListView(LoginRequiredMixin, ListView):
+class WPaymentListView(LoginRequiredMixin, FatherListView):
     model = PyWPayment
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class WPaymentListView(LoginRequiredMixin, ListView):
         return context
 
 
-class WPaymentDetailView(LoginRequiredMixin, DetailView):
+class WPaymentDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyWPayment
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class WPaymentDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class WPaymentCreateView(LoginRequiredMixin, CreateView):
+class WPaymentCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyWPayment
     fields = WPAYMENT_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class WPaymentCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class WPaymentUpdateView(LoginRequiredMixin, UpdateView):
+class WPaymentUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyWPayment
     fields = WPAYMENT_SHORT
     template_name = 'base/form.html'

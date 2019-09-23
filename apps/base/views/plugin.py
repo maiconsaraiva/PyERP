@@ -11,7 +11,7 @@ from django.apps import apps
 from django.conf import settings
 from django.shortcuts import redirect
 from django.urls import clear_url_caches, reverse
-from django.views.generic import ListView
+from .web_father import FatherListView
 
 # Librerias en carpetas locales
 from ...base.models import PyPlugin
@@ -29,7 +29,7 @@ def Apps(request):
     return render(request, 'base/plugin.html')
 
 
-class PluginListView(ListView):
+class PluginListView(FatherListView):
     model = PyPlugin
     template_name = 'base/plugin.html'
     fields = APP_FIELDS

@@ -21,12 +21,12 @@
                     <div class=" col-lg-3 col-md-6 mb-4">
                         <div class="h-100">
                             <a href="{% url url_web_product object.id %}">
-                                <img style="padding:2px;" class="card-img-top" height="100" src="{{ object.img.url }}" alt="">
+                                <img style="padding:2px;" class="card-img-top" src="{{ object.img.url }}" alt="">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title"><a href="{% url url_web_product object.id %}">{{ object.name }}</a></h5>
                                 {% if user|web_show_price %}
-                                    <h6 style="color:red;"> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %} </h6>
+                                    <h6 class="product-title" style="color:red;"> {% if user|currency_position == 'before' %} {{ user|currency_symbol }} {{ object.price }} {% else %} {{ object.price }} {{ user|currency_symbol }} {% endif %} </h6>
                                 {% endif %}
                             </div>
                             <div>

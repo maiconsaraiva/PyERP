@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyVariant
@@ -17,7 +16,7 @@ VARIANT_FIELDS = [
 VARIANT_SHORT = ['name']
 
 
-class VariantListView(LoginRequiredMixin, ListView):
+class VariantListView(LoginRequiredMixin, FatherListView):
     model = PyVariant
     template_name = 'base/list.html'
     login_url = "login"
@@ -31,7 +30,7 @@ class VariantListView(LoginRequiredMixin, ListView):
         return context
 
 
-class VariantDetailView(LoginRequiredMixin, DetailView):
+class VariantDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyVariant
     template_name = 'base/detail.html'
     login_url = "login"
@@ -46,7 +45,7 @@ class VariantDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class VariantCreateView(LoginRequiredMixin, CreateView):
+class VariantCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyVariant
     fields = VARIANT_SHORT
     template_name = 'base/form.html'
@@ -60,7 +59,7 @@ class VariantCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class VariantUpdateView(LoginRequiredMixin, UpdateView):
+class VariantUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyVariant
     fields = VARIANT_SHORT
     template_name = 'base/form.html'

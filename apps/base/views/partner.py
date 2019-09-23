@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
@@ -29,7 +28,7 @@ PARTNER_FIELDS = [
 PARTNER_FIELDS_SHORT = ['name', 'street', 'country_id', 'email', 'phone', 'note', 'customer', 'provider', 'for_invoice', 'not_email','parent_id','type']
 
 
-class CustomerListView(LoginRequiredMixin, ListView):
+class CustomerListView(LoginRequiredMixin, FatherListView):
     model = PyPartner
     template_name = 'base/list.html'
     queryset = PyPartner.objects.all()
@@ -44,7 +43,7 @@ class CustomerListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ProviderListView(LoginRequiredMixin, ListView):
+class ProviderListView(LoginRequiredMixin, FatherListView):
     model = PyPartner
     template_name = 'base/list.html'
     queryset = PyPartner.objects.filter(provider=True).all()
@@ -59,7 +58,7 @@ class ProviderListView(LoginRequiredMixin, ListView):
         return context
 
 
-class PartnerDetailView(LoginRequiredMixin, DetailView):
+class PartnerDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyPartner
     template_name = 'base/detail.html'
     login_url = "login"
@@ -74,7 +73,7 @@ class PartnerDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class PartnerCreateView(LoginRequiredMixin, CreateView):
+class PartnerCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyPartner
     fields = ['name', 'email', 'phone', 'customer', 'provider']
     template_name = 'base/form.html'
@@ -97,7 +96,7 @@ class PartnerCreateView(LoginRequiredMixin, CreateView):
         return form"""
 
 
-class PartnerUpdateView(UpdateView):
+class PartnerUpdateView(FatherUpdateView):
     model = PyPartner
     fields = PARTNER_FIELDS_SHORT
     template_name = 'base/form.html'

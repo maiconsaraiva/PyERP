@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyChannel
@@ -18,7 +17,7 @@ CHANNEL_FIELDS = [
 CHANNEL_SHORT = ['name','code']
 
 
-class ChannelListView(LoginRequiredMixin, ListView):
+class ChannelListView(LoginRequiredMixin, FatherListView):
     model = PyChannel
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class ChannelListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ChannelDetailView(LoginRequiredMixin, DetailView):
+class ChannelDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyChannel
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class ChannelDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class ChannelCreateView(LoginRequiredMixin, CreateView):
+class ChannelCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyChannel
     fields = CHANNEL_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class ChannelCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class ChannelUpdateView(LoginRequiredMixin, UpdateView):
+class ChannelUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyChannel
     fields = CHANNEL_SHORT
     template_name = 'base/form.html'

@@ -5,8 +5,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ...base.models import PyCompany
@@ -51,7 +50,7 @@ COMPANY_FIELDS_SHORT = [
 ]
 
 
-class CompanyListView(ListView):
+class CompanyListView(FatherListView):
     model = PyCompany
     template_name = 'base/list.html'
 
@@ -64,7 +63,7 @@ class CompanyListView(ListView):
         return context
 
 
-class CompanyDetailView(LoginRequiredMixin, DetailView):
+class CompanyDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCompany
     template_name = 'base/detail.html'
     login_url = "login"
@@ -79,7 +78,7 @@ class CompanyDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CompanyCreateView(CreateView):
+class CompanyCreateView(FatherCreateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -92,7 +91,7 @@ class CompanyCreateView(CreateView):
         return context
 
 
-class CompanyUpdateView(LoginRequiredMixin, UpdateView):
+class CompanyUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'

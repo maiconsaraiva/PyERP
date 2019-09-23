@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyWParameter
@@ -18,7 +17,7 @@ WPARAMETER_FIELDS = [
 WPARAMETER_SHORT = ['name', 'value']
 
 
-class WParameterListView(LoginRequiredMixin, ListView):
+class WParameterListView(LoginRequiredMixin, FatherListView):
     model = PyWParameter
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class WParameterListView(LoginRequiredMixin, ListView):
         return context
 
 
-class WParameterDetailView(LoginRequiredMixin, DetailView):
+class WParameterDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyWParameter
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class WParameterDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class WParameterCreateView(LoginRequiredMixin, CreateView):
+class WParameterCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyWParameter
     fields = WPARAMETER_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class WParameterCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class WParameterUpdateView(LoginRequiredMixin, UpdateView):
+class WParameterUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyWParameter
     fields = WPARAMETER_SHORT
     template_name = 'base/form.html'

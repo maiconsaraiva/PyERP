@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyFaq
@@ -18,7 +17,7 @@ FAQ_FIELDS = [
 FAQ_SHORT = ['name', 'content']
 
 
-class FaqListView(LoginRequiredMixin, ListView):
+class FaqListView(LoginRequiredMixin, FatherListView):
     model = PyFaq
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class FaqListView(LoginRequiredMixin, ListView):
         return context
 
 
-class FaqDetailView(LoginRequiredMixin, DetailView):
+class FaqDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyFaq
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class FaqDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class FaqCreateView(LoginRequiredMixin, CreateView):
+class FaqCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyFaq
     fields = FAQ_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class FaqCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class FaqUpdateView(LoginRequiredMixin, UpdateView):
+class FaqUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyFaq
     fields = FAQ_SHORT
     template_name = 'base/form.html'

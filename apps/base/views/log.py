@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyLog
@@ -19,7 +18,7 @@ LOG_FIELDS = [
 LOG_SHORT = ['name', 'note']
 
 
-class LogListView(LoginRequiredMixin, ListView):
+class LogListView(LoginRequiredMixin, FatherListView):
     model = PyLog
     template_name = 'base/list.html'
     login_url = "login"
@@ -33,7 +32,7 @@ class LogListView(LoginRequiredMixin, ListView):
         return context
 
 
-class LogDetailView(LoginRequiredMixin, DetailView):
+class LogDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyLog
     template_name = 'base/detail.html'
     login_url = "login"
@@ -48,7 +47,7 @@ class LogDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class LogCreateView(LoginRequiredMixin, CreateView):
+class LogCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyLog
     fields = LOG_SHORT
     template_name = 'base/form.html'
@@ -62,7 +61,7 @@ class LogCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class LogUpdateView(LoginRequiredMixin, UpdateView):
+class LogUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyLog
     fields = LOG_SHORT
     template_name = 'base/form.html'

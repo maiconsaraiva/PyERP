@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models.meta import PyMeta
@@ -16,7 +15,7 @@ META_FIELDS = [
 
 META_FIELDS_SHORT = ['title','content']
 
-class MetaListView(ListView):
+class MetaListView(FatherListView):
     model = PyMeta
     template_name = 'base/list.html'
 
@@ -28,7 +27,7 @@ class MetaListView(ListView):
         context['fields'] = META_FIELDS
         return context
 
-class MetaDetailView(DetailView):
+class MetaDetailView(FatherDetailView):
     model = PyMeta
     template_name = 'base/detail.html'
     def get_context_data(self, **kwargs):
@@ -41,7 +40,7 @@ class MetaDetailView(DetailView):
         return context
 
 
-class MetaCreateView(CreateView):
+class MetaCreateView(FatherCreateView):
     model = PyMeta
     fields = META_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -55,7 +54,7 @@ class MetaCreateView(CreateView):
         return context
 
 
-class MetaUpdateView(UpdateView):
+class MetaUpdateView(FatherUpdateView):
     model = PyMeta
     fields = META_FIELDS_SHORT
     template_name = 'base/form.html'

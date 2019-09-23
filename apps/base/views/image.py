@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyImage
@@ -18,7 +17,7 @@ IMAGE_FIELDS = [
 IMAGE_SHORT = ['name', 'content']
 
 
-class ImageListView(LoginRequiredMixin, ListView):
+class ImageListView(LoginRequiredMixin, FatherListView):
     model = PyImage
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class ImageListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ImageDetailView(LoginRequiredMixin, DetailView):
+class ImageDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyImage
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class ImageDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class ImageCreateView(LoginRequiredMixin, CreateView):
+class ImageCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyImage
     fields = IMAGE_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class ImageCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class ImageUpdateView(LoginRequiredMixin, UpdateView):
+class ImageUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyImage
     fields = IMAGE_SHORT
     template_name = 'base/form.html'

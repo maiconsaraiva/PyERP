@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyUom
@@ -21,7 +20,7 @@ UOM_FIELDS = [
 UOM_SHORT = ['name','ratio','rouding','type','category_id']
 
 
-class UomListView(LoginRequiredMixin, ListView):
+class UomListView(LoginRequiredMixin, FatherListView):
     model = PyUom
     template_name = 'base/list.html'
     login_url = "login"
@@ -35,7 +34,7 @@ class UomListView(LoginRequiredMixin, ListView):
         return context
 
 
-class UomDetailView(LoginRequiredMixin, DetailView):
+class UomDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyUom
     template_name = 'base/detail.html'
     login_url = "login"
@@ -50,7 +49,7 @@ class UomDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class UomCreateView(LoginRequiredMixin, CreateView):
+class UomCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyUom
     fields = UOM_SHORT
     template_name = 'base/form.html'
@@ -64,7 +63,7 @@ class UomCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class UomUpdateView(LoginRequiredMixin, UpdateView):
+class UomUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyUom
     fields = UOM_SHORT
     template_name = 'base/form.html'

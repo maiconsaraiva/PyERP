@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias de terceros
 from dal import autocomplete
@@ -18,7 +18,7 @@ COUNTRY_FIELDS = [
 COUNTRY_SHORT = ['name']
 
 
-class CountryListView(ListView):
+class CountryListView(FatherListView):
     model = PyCountry
     template_name = 'base/list.html'
 
@@ -31,7 +31,7 @@ class CountryListView(ListView):
         return context
 
 
-class CountryDetailView(DetailView):
+class CountryDetailView(FatherDetailView):
     model = PyCountry
     template_name = 'base/detail.html'
 
@@ -45,7 +45,7 @@ class CountryDetailView(DetailView):
         return context
 
 
-class CountryCreateView(CreateView):
+class CountryCreateView(FatherCreateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'
@@ -58,7 +58,7 @@ class CountryCreateView(CreateView):
         return context
 
 
-class CountryUpdateView(UpdateView):
+class CountryUpdateView(FatherUpdateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'

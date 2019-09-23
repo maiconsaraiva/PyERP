@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyProductCategoryUOM
@@ -16,7 +15,7 @@ CATEGORY_UOM_FIELDS = [
 CATEGORY_UOM_FIELDS_SHORT = ['name']
 
 
-class ProductCategoryUOMListView(LoginRequiredMixin, ListView):
+class ProductCategoryUOMListView(LoginRequiredMixin, FatherListView):
     model = PyProductCategoryUOM
     template_name = 'base/list.html'
     login_url = "login"
@@ -30,7 +29,7 @@ class ProductCategoryUOMListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ProductCategoryUOMDetailView(LoginRequiredMixin, DetailView):
+class ProductCategoryUOMDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyProductCategoryUOM
     template_name = 'base/detail.html'
     login_url = "login"
@@ -45,7 +44,7 @@ class ProductCategoryUOMDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class ProductCategoryUOMCreateView(LoginRequiredMixin, CreateView):
+class ProductCategoryUOMCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyProductCategoryUOM
     fields = CATEGORY_UOM_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -59,7 +58,7 @@ class ProductCategoryUOMCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class ProductCategoryUOMUpdateView(LoginRequiredMixin, UpdateView):
+class ProductCategoryUOMUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyProductCategoryUOM
     fields = CATEGORY_UOM_FIELDS_SHORT
     template_name = 'base/form.html'

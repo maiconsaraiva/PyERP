@@ -30,6 +30,14 @@ from .usercustom import (
     ActivateUserView, AvatarUpdateView, LogOutModalView, PasswordRecoveryView,
     ProfileView, SignUpView, cambio_clave)
 
+from .wparameter import PyWParameter
+
+
+def _web_parameter():
+    web_parameter = {}
+    for parametro in PyWParameter.objects.all():
+        web_parameter[parametro.name] = parametro.value
+    return web_parameter
 
 def Install(request):
     return render(request, 'base/install.html')
@@ -130,7 +138,6 @@ def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """
     count_plugin = PyPlugin.objects.all().count()
-
     plugins = PyPlugin.objects.all().filter(installed=True).order_by('sequence')
     plugin_list = []
     if plugins:
@@ -145,5 +152,6 @@ def erp_home(request):
         'users': PyUser.objects.all(),
         'products': PyProduct.objects.all(),
         'plugin_list': plugin_list,
-        'count_plugin': count_plugin
+        'count_plugin': count_plugin,
+        'web_parameter':_web_parameter()
     })

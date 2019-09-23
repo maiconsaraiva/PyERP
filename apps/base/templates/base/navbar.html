@@ -11,7 +11,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block">
-            <a class="nav-link" data-toggle="dropdown" href="#">{{ user|get_company_name }}&nbsp;<i class="fas fa-caret-down"></i></a>
+            {% if  web_parameter.show_bar_company == 'True' %}
+                <a class="nav-link" data-toggle="dropdown" href="#">{{ user|get_company_name }}&nbsp;<i class="fas fa-caret-down"></i></a>
+            {% endif %}
+
+            {% if  web_parameter.show_bar_language == 'True' %}
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 {% for language_code, language in LANGUAGES %}
                     {% if LANGUAGE_CODE != language_code %}
@@ -19,9 +23,10 @@
                     {% endif %}
                 {% endfor %}
             </div>
+            {% endif %}
         </li>
 
-        <!-- Messages Dropdown Menu -->
+        {% if  web_parameter.show_bar_language == 'True' %}
         <li class="nav-item d-none d-sm-inline-block">
             <a class="nav-link" data-toggle="dropdown" href="#"><i class="fas fa-globe"></i>&nbsp;{{ _('Language') }}&nbsp;<i class="fas fa-caret-down"></i></a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -32,6 +37,8 @@
                 {% endfor %}
             </div>
         </li>
+        {% endif %}
+        {% if  web_parameter.show_online_company == 'True' %}
         <li class="nav-item d-none d-sm-inline-block">
             <div class="nav-link" title="Modo Online">
                 {% if user|get_online %}
@@ -41,6 +48,7 @@
                 {% endif %}
             </div>
         </li>
+        {% endif %}
         <li class="nav-item d-none d-sm-inline-block">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>{{ _('Close') }}</a>
         </li>

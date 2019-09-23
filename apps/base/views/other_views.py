@@ -17,6 +17,7 @@ from ..models.website_config import PyWebsiteConfig
 from ..models.meta import PyMeta
 from ..models.country import PyCountry
 from ..models.sequence import PySequence
+from ..models.wparameter import PyWParameter
 
 
 
@@ -43,6 +44,7 @@ def IndexEasy(request):
             """Read Data """
             PyMeta.LoadData('data', company_id.id)
             PySequence.LoadData('data', company_id.id)
+            PyWParameter.LoadData('data', company_id.id)
 
             """Read Data Demo """
             # PyMeta.LoadData(demo)

@@ -11,9 +11,6 @@ a:hover {
   color: #777;
 }
 
-.text-primary {
-  color: #fed136 !important;
-}
 
 h1,
 h2,
@@ -86,14 +83,6 @@ img::-moz-selection {
 .btn-primary:active, .btn-primary:focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
   box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
-}
-
-#mainNav {
-  background-color: #EEE;
-}
-
-#mainNav a{
-  color: #777 !important;
 }
 
 #mainNav .navbar-toggler {
@@ -433,7 +422,6 @@ header.masthead .intro-text .intro-heading {
   color: white;
   border: 7px solid #e9ecef;
   border-radius: 100%;
-  background-color: #092e20;
 }
 
 .timeline > li .timeline-image h4 {
@@ -580,10 +568,6 @@ section#contact {
   /* background-image: url("../img/map-image.png"); */
   background-repeat: no-repeat;
   background-position: center;
-}
-
-section#contact .section-heading {
-  color: #000;
 }
 
 section#contact .form-group {

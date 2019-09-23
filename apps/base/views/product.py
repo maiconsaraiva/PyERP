@@ -3,8 +3,7 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models.product import PyProduct
@@ -46,7 +45,7 @@ LEAD_FIELDS_SHORT = [
 ]
 
 
-class ProductListView(ListView):
+class ProductListView(FatherListView):
     model = PyProduct
     template_name = 'base/list.html'
 
@@ -59,7 +58,7 @@ class ProductListView(ListView):
         return context
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(FatherDetailView):
     model = PyProduct
     template_name = 'base/detail.html'
 
@@ -74,7 +73,7 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(FatherCreateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm
@@ -88,7 +87,7 @@ class ProductCreateView(CreateView):
         return context
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(FatherUpdateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm

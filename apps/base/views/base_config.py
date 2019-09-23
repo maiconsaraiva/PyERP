@@ -1,13 +1,13 @@
 # Librerias Django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic.edit import UpdateView
+from .web_father import FatherUpdateView
 
 # Librerias en carpetas locales
 from ..models.base_config import BaseConfig
 
 
-class UpdateBaseConfigView(LoginRequiredMixin, UpdateView):
+class UpdateBaseConfigView(LoginRequiredMixin, FatherUpdateView):
     login_url = "login"
     model = BaseConfig
     template_name = 'base/form.html'

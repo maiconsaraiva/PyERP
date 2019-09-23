@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyCron
@@ -22,7 +21,7 @@ CRON_FIELDS = [
 CRON_SHORT = ['name', 'active', 'interval_type', 'model_name', 'function', 'number_call']
 
 
-class CronListView(LoginRequiredMixin, ListView):
+class CronListView(LoginRequiredMixin, FatherListView):
     model = PyCron
     template_name = 'base/list.html'
     login_url = "login"
@@ -36,7 +35,7 @@ class CronListView(LoginRequiredMixin, ListView):
         return context
 
 
-class CronDetailView(LoginRequiredMixin, DetailView):
+class CronDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCron
     template_name = 'base/detail.html'
     login_url = "login"
@@ -51,7 +50,7 @@ class CronDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CronCreateView(LoginRequiredMixin, CreateView):
+class CronCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCron
     fields = CRON_SHORT
     template_name = 'base/form.html'
@@ -65,7 +64,7 @@ class CronCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class CronUpdateView(LoginRequiredMixin, UpdateView):
+class CronUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCron
     fields = CRON_SHORT
     template_name = 'base/form.html'

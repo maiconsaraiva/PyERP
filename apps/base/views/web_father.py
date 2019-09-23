@@ -1,9 +1,12 @@
 # Librerias Django
 from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..models import PyMeta, PyWParameter
+from ..models import PyMeta, PyWParameter, PyPlugin
 
+def _count_plugin():
+    return PyPlugin.objects.all().count()
 
 def _web_parameter():
     web_parameter = {}
@@ -23,6 +26,7 @@ class FatherTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
         context['meta'] = _web_meta()
+        context['count_plugin']= _count_plugin
         return context
 
     class Meta:
@@ -33,6 +37,7 @@ class FatherListView(ListView):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
         context['meta'] = _web_meta()
+        context['count_plugin'] = _count_plugin
         return context
 
     class Meta:
@@ -43,6 +48,30 @@ class FatherDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
         context['meta'] = _web_meta()
+        context['count_plugin'] = _count_plugin
+        return context
+
+    class Meta:
+        abstract = True
+
+class FatherUpdateView(UpdateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['web_parameter'] = _web_parameter()
+        context['meta'] = _web_meta()
+        context['count_plugin'] = _count_plugin
+        return context
+
+    class Meta:
+        abstract = True
+
+
+class FatherCreateView(CreateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['web_parameter'] = _web_parameter()
+        context['meta'] = _web_meta()
+        context['count_plugin'] = _count_plugin
         return context
 
     class Meta:

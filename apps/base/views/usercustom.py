@@ -16,8 +16,9 @@ from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import (
-    CreateView, RedirectView, TemplateView, UpdateView)
+from django.views.generic import (RedirectView, TemplateView)
+
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias de terceros
 import requests
@@ -67,7 +68,7 @@ class ActivateUserView(RedirectView):
 
 
 # ========================================================================== #
-class AvatarUpdateView(UpdateView):
+class AvatarUpdateView(FatherUpdateView):
     """Vista para editarar las sale
     """
     model = PyUser
@@ -290,7 +291,7 @@ class PasswordRecoveryView(PasswordResetView):
 
 
 # ========================================================================== #
-class ProfileView(UpdateView):
+class ProfileView(FatherUpdateView):
     """Vista para editarar las sale
     """
     model = PyUser
@@ -343,7 +344,7 @@ class ProfileView(UpdateView):
 
 
 ##############################################################################
-class SignUpView(CreateView):
+class SignUpView(FatherCreateView):
     """Esta clase sirve registrar a los usuarios en el sistema
     """
     model = PyUser

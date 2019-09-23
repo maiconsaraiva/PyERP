@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
@@ -17,7 +16,7 @@ BRAND_FIELDS = [
 BRAND_FIELDS_SHORT = ['name']
 
 
-class ProductBrandListView(LoginRequiredMixin, ListView):
+class ProductBrandListView(LoginRequiredMixin, FatherListView):
     model = PyProductBrand
     template_name = 'base/list.html'
     login_url = "login"
@@ -31,7 +30,7 @@ class ProductBrandListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ProductBrandDetailView(LoginRequiredMixin, DetailView):
+class ProductBrandDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyProductBrand
     template_name = 'base/detail.html'
     login_url = "login"
@@ -46,7 +45,7 @@ class ProductBrandDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class ProductBrandCreateView(LoginRequiredMixin, CreateView):
+class ProductBrandCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyProductBrand
     fields = BRAND_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -60,7 +59,7 @@ class ProductBrandCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class ProductBrandUpdateView(LoginRequiredMixin, UpdateView):
+class ProductBrandUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyProductBrand
     fields = BRAND_FIELDS_SHORT
     template_name = 'base/form.html'

@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyParameter
@@ -18,7 +17,7 @@ PARAMETER_FIELDS = [
 PARAMETER_SHORT = ['name', 'value']
 
 
-class ParameterListView(LoginRequiredMixin, ListView):
+class ParameterListView(LoginRequiredMixin, FatherListView):
     model = PyParameter
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class ParameterListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ParameterDetailView(LoginRequiredMixin, DetailView):
+class ParameterDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyParameter
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class ParameterDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class ParameterCreateView(LoginRequiredMixin, CreateView):
+class ParameterCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyParameter
     fields = PARAMETER_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class ParameterCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class ParameterUpdateView(LoginRequiredMixin, UpdateView):
+class ParameterUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyParameter
     fields = PARAMETER_SHORT
     template_name = 'base/form.html'

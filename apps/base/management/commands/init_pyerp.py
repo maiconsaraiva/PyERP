@@ -42,8 +42,6 @@ class Command(BaseCommand):
                 _('*** Loading PypErp useanonimous object...')
             )
         )
-        if not PyUser.objects.all().exists():
-            call_command('loaddata', 'PyUser')
 
         # ================================================================== #
         self.stdout.write(

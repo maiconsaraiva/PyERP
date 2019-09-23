@@ -3,8 +3,7 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias de terceros
 from dal import autocomplete
@@ -23,7 +22,7 @@ CURRENCY_FIELDS = [
 CURRENCY_SHORT = ['country', 'name', 'alias', 'symbol', 'position']
 
 
-class CurrencyListView(ListView):
+class CurrencyListView(FatherListView):
     model = PyCurrency
     template_name = 'base/list.html'
     login_url = "login"
@@ -37,7 +36,7 @@ class CurrencyListView(ListView):
         return context
 
 
-class CurrencyDetailView(DetailView):
+class CurrencyDetailView(FatherDetailView):
     model = PyCurrency
     template_name = 'base/detail.html'
     login_url = "login"
@@ -52,7 +51,7 @@ class CurrencyDetailView(DetailView):
         return context
 
 
-class CurrencyCreateView(CreateView):
+class CurrencyCreateView(FatherCreateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'
@@ -66,7 +65,7 @@ class CurrencyCreateView(CreateView):
         return context
 
 
-class CurrencyUpdateView(UpdateView):
+class CurrencyUpdateView(FatherUpdateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'

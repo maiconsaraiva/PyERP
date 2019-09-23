@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyProductCategory
@@ -17,7 +16,7 @@ CATEGORY_FIELDS = [
 CATEGORY_FIELDS_SHORT = ['name', 'parent_id']
 
 
-class ProductCategoryListView(LoginRequiredMixin, ListView):
+class ProductCategoryListView(LoginRequiredMixin, FatherListView):
     model = PyProductCategory
     template_name = 'base/list.html'
     login_url = "login"
@@ -31,7 +30,7 @@ class ProductCategoryListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ProductCategoryDetailView(LoginRequiredMixin, DetailView):
+class ProductCategoryDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyProductCategory
     template_name = 'base/detail.html'
     login_url = "login"
@@ -46,7 +45,7 @@ class ProductCategoryDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class ProductCategoryCreateView(LoginRequiredMixin, CreateView):
+class ProductCategoryCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyProductCategory
     fields = CATEGORY_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -60,7 +59,7 @@ class ProductCategoryCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
+class ProductCategoryUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyProductCategory
     fields = CATEGORY_FIELDS_SHORT
     template_name = 'base/form.html'

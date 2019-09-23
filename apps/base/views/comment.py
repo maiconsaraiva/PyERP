@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyComment
@@ -18,7 +17,7 @@ COMMENT_FIELDS = [
 COMMENT_SHORT = ['name', 'comment']
 
 
-class CommentListView(LoginRequiredMixin, ListView):
+class CommentListView(LoginRequiredMixin, FatherListView):
     model = PyComment
     template_name = 'base/list.html'
     login_url = "login"
@@ -32,7 +31,7 @@ class CommentListView(LoginRequiredMixin, ListView):
         return context
 
 
-class CommentDetailView(LoginRequiredMixin, DetailView):
+class CommentDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyComment
     template_name = 'base/detail.html'
     login_url = "login"
@@ -47,7 +46,7 @@ class CommentDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CommentCreateView(LoginRequiredMixin, CreateView):
+class CommentCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyComment
     fields = COMMENT_SHORT
     template_name = 'base/form.html'
@@ -61,7 +60,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class CommentUpdateView(LoginRequiredMixin, UpdateView):
+class CommentUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyComment
     fields = COMMENT_SHORT
     template_name = 'base/form.html'

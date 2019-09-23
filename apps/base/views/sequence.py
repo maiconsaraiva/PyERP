@@ -4,8 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PySequence
@@ -22,7 +21,7 @@ SEQ_FIELDS = [
 SEQ_SHORT = ['name', 'model', 'prefix', 'padding', 'increment', 'next_number']
 
 
-class SequenceListView(LoginRequiredMixin, ListView):
+class SequenceListView(LoginRequiredMixin, FatherListView):
     model = PySequence
     template_name = 'base/list.html'
     login_url = "login"
@@ -36,7 +35,7 @@ class SequenceListView(LoginRequiredMixin, ListView):
         return context
 
 
-class SequenceDetailView(LoginRequiredMixin, DetailView):
+class SequenceDetailView(LoginRequiredMixin, FatherDetailView):
     model = PySequence
     template_name = 'base/detail.html'
     login_url = "login"
@@ -51,7 +50,7 @@ class SequenceDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class SequenceCreateView(LoginRequiredMixin, CreateView):
+class SequenceCreateView(LoginRequiredMixin, FatherCreateView):
     model = PySequence
     fields = SEQ_SHORT
     template_name = 'base/form.html'
@@ -65,7 +64,7 @@ class SequenceCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class SequenceUpdateView(LoginRequiredMixin, UpdateView):
+class SequenceUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PySequence
     fields = SEQ_SHORT
     template_name = 'base/form.html'
