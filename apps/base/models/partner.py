@@ -39,10 +39,10 @@ class PyPartner(PyFather):
         return self.name
 
     @classmethod
-    def create(cls, email):
+    def create(cls, name, email):
         """Crea un partner de manera sencilla
         """
-        pypartner = cls(email=email)
+        pypartner = cls(name=name, email=email)
         pypartner.save()
 
         return pypartner

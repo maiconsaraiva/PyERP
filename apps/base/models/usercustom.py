@@ -71,11 +71,14 @@ class PyUser(AbstractUser, PyFather):
         return reverse('base:user-detail', kwargs={'pk': self.pk})
 
     @classmethod
-    def create(cls, email, password, is_superuser, is_staff, is_active, active_company):
+    def create(cls, first_name, last_name, email, password, is_superuser, is_staff, is_active, active_company):
         """Crea un partner de manera sencilla
         """
-        partner = PyPartner.create(email)
+        partner_name = '{} {}'.format(first_name, last_name)
+        partner = PyPartner.create(partner_name, email)
         pyuser = cls(
+            first_name=first_name,
+            last_name=last_name,
             email=email,
             password=password,
             is_superuser=is_superuser,

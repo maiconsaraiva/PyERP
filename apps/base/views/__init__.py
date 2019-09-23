@@ -3,6 +3,7 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.core.management import call_command
 from django.shortcuts import redirect, render
 from django.urls import clear_url_caches, reverse, reverse_lazy
@@ -17,7 +18,7 @@ from pyerp.settings import BASE_DIR
 from ..forms import AvatarForm
 from ..models import (
     BaseConfig, PyCompany, PyPartner, PyPlugin, PyProduct, PyProductCategory,
-    PyUser, PyWebsiteConfig)
+    PyUser, PyWebsiteConfig, PyUser)
 from .activatelanguage import ActivateLanguageView
 from .base_config import UpdateBaseConfigView
 from .company import (
@@ -53,7 +54,6 @@ class UserListView(ListView):
         context['detail_url'] = 'base:user-detail'
         context['add_url'] = 'base:user-add'
         context['fields'] = [
-            {'string': _('User Name'), 'field': 'username'},
             {'string': _('Name'), 'field': 'first_name'},
             {'string': _('Last name'), 'field': 'last_name'},
             {'string': _('Email'), 'field': 'email'},
@@ -67,12 +67,11 @@ class UserDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].username
+        context['title'] = context['object'].email
         context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
         context['update_url'] = 'base:user-update'
         context['delete_url'] = 'base:user-delete'
         context['fields'] = [
-            {'string': _('User Name'), 'field': 'username'},
             {'string': _('Name'), 'field': 'first_name'},
             {'string': _('Last name'), 'field': 'last_name'},
             {'string': _('Email'), 'field': 'email'},
@@ -89,8 +88,9 @@ class UserDetailView(DetailView):
 
 class UserCreateView(CreateView):
     model = PyUser
-    fields = ['username', 'email', 'first_name', 'last_name', 'password']
+    fields = ['email', 'first_name', 'last_name', 'password']
     template_name = 'base/form.html'
+    success_url = 'base:user-detail'
 
     def get_context_data(self, **kwargs):
         context = super(UserCreateView, self).get_context_data(**kwargs)
@@ -99,15 +99,26 @@ class UserCreateView(CreateView):
         context['back_url'] = reverse('base:users')
         return context
 
+    def form_valid(self, form):
+        first_name = form.cleaned_data.get('first_name')
+        last_name = form.cleaned_data.get('last_name')
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        company = self.request.user.active_company
+        self.object = PyUser.create(first_name, last_name, email, password, 0, 0, 1, company)
+        url = reverse_lazy(self.get_success_url(), kwargs={'pk': self.object.pk})
+
+        return HttpResponseRedirect(url)
+
 
 class UserUpdateView(UpdateView):
     model = PyUser
-    fields = ['username', 'email', 'first_name', 'last_name']
+    fields = ['email', 'first_name', 'last_name', 'partner_id']
     template_name = 'base/form.html'
 
     def get_context_data(self, **kwargs):
         context = super(UserUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].username
+        context['title'] = context['object'].email
         context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
         context['back_url'] = reverse('base:user-detail', kwargs={'pk': context['object'].pk})
         return context
