@@ -10,6 +10,7 @@ from django.urls import clear_url_caches, reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias de terceros
 from pyerp.settings import BASE_DIR
@@ -44,7 +45,7 @@ def Install(request):
     return render(request, 'base/install.html')
 
 
-class UserListView(ListView):
+class UserListView(FatherListView):
     model = PyUser
     template_name = 'base/list.html'
 
@@ -61,7 +62,7 @@ class UserListView(ListView):
         return context
 
 
-class UserDetailView(DetailView):
+class UserDetailView(FatherDetailView):
     model = PyUser
     template_name = 'base/detail.html'
 
@@ -86,7 +87,7 @@ class UserDetailView(DetailView):
         return context
 
 
-class UserCreateView(CreateView):
+class UserCreateView(FatherCreateView):
     model = PyUser
     fields = ['email', 'first_name', 'last_name', 'password']
     template_name = 'base/form.html'
@@ -111,7 +112,7 @@ class UserCreateView(CreateView):
         return HttpResponseRedirect(url)
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(FatherUpdateView):
     model = PyUser
     fields = ['email', 'first_name', 'last_name', 'partner_id']
     template_name = 'base/form.html'
