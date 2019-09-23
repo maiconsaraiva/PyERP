@@ -5,6 +5,7 @@
 <div class="card card-primary card-outline mt-2">
     <div class="card-header">
         <a href="{% url update_url object.pk %}" class="btn btn-success"><i class="fa fa-pen"></i>  {{ _("Edit") }}</a>
+        <a href="{% url update_url object.pk %}" class="btn btn-warning"><i class="fa fa-copy"></i>  {{ _("Duplicate") }}</a>
         <a href="{% url delete_url object.pk %}" class="btn btn-danger"><i class="fa fa-trash"></i> {{ _("Delete") }}</a>
         {% for btn in breadcrumbs %}
         <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fa fa-home"></i> {{ btn.name }}</a>
@@ -35,6 +36,13 @@
     $('.btn-danger').click(function (event) {
         event.preventDefault();
         if (confirm('{{ _("Are you sure you want to delete the form?") }}')){
+            window.location = $(this)[0].href;
+        }
+    });
+
+    $('.btn-warning').click(function (event) {
+        event.preventDefault();
+        if (confirm('{{ _("Are you sure you want to duplicate the form?") }}')){
             window.location = $(this)[0].href;
         }
     });
