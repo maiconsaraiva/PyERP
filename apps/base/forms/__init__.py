@@ -84,7 +84,7 @@ class PersonaChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = PyUser
         fields = (
-            'username',
+            'email',
             'is_superuser',
             'is_staff',
             'is_active',
@@ -148,13 +148,9 @@ class PersonaCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = PyUser
         fields = (
-            'username',
             'email',
         )
         widgets = {
-            'username': TextInput(
-                attrs={'class': 'form-control', 'placeholder': _('User')}
-            ),
             'email': EmailInput(
                 attrs={'class': 'form-control', 'placeholder': _('Email')}
             ),
@@ -174,10 +170,10 @@ class AvatarForm(ModelForm):
 class InitForm(forms.ModelForm):
     """Fromulario para la inicializacion de PyERP
     """
-    user= forms.CharField(
-        widget=forms.TextInput(
+    email = forms.EmailField(
+        widget=forms.EmailInput(
             attrs={
-                'placeholder': _('Admin user name')
+                'placeholder': _('Admin email')
             }
         )
     )
@@ -195,13 +191,13 @@ class InitForm(forms.ModelForm):
         fields = [
             'name',
             'country',
-            'user',
+            'email',
             'password'
         ]
         labels = {
             'name': _('Company Name'),
             'country': _('Country'),
-            'user': _('Admin user name'),
+            'email': _('Admin user email'),
             'password': _('Password'),
         }
         widgets = {
@@ -220,10 +216,10 @@ class InitForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'user': TextInput(
+            'email': EmailInput(
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': _('Admin user name'),
+                    'data-placeholder': _('Admin user email'),
                     'style': 'width: 100%',
                 },
             ),

@@ -26,7 +26,7 @@ def image_path(instance, filename):
     return os.path.join('avatar', str(instance.pk) + '.' + filename.rsplit('.', 1)[1])
 
 
-class PyUser(AbstractUser,PyFather):
+class PyUser(AbstractUser, PyFather):
     '''Modelo de los usuarios
     '''
     SEXO_CHOICES = (
@@ -37,12 +37,16 @@ class PyUser(AbstractUser,PyFather):
         ('V', 'V'),
         ('E', 'E'),
     )
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
     password = models.CharField(_("Password"), max_length=128)
     last_login = models.DateTimeField(_("Last login"), default=timezone.now)
     is_superuser = models.BooleanField(_("Super Admin"), default=False, db_index=True)
     is_staff = models.BooleanField(_("Staff"), default=False, db_index=True)
     is_active = models.BooleanField(_("Active"), default=False)
-    username = models.CharField(_("User name"), max_length=150, db_index=True, unique=True)
+    username = None
+    # username = models.CharField(_("User name"), max_length=150, db_index=True, unique=True)
     first_name = models.CharField(_("Name"), max_length=30)
     last_name = models.CharField(_("Last name"), max_length=30, blank=True, null=True)
     email = models.CharField(_("Email"), max_length=254, null=False, db_index=True, unique=True)
@@ -52,6 +56,7 @@ class PyUser(AbstractUser,PyFather):
     sexo = models.CharField(_("Sex"), max_length=255, choices=SEXO_CHOICES, blank=True, null=True)
     avatar = models.ImageField(max_length=255, storage=RenameImage(), upload_to=image_path, blank=True, null=True, default='avatar/default_avatar.png')
     partner_id = models.ForeignKey(PyPartner, null=True, blank=True, on_delete=models.CASCADE)
+    active_company = models.ForeignKey('base.PyCompany', on_delete=models.PROTECT)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -62,15 +67,30 @@ class PyUser(AbstractUser,PyFather):
     def get_short_name(self):
         return '%s %s' % (self.first_name, self.last_name)
 
+    def get_absolute_url(self):
+        return reverse('base:user-detail', kwargs={'pk': self.pk})
+
+    @classmethod
+    def create(cls, email, password, is_superuser, is_staff, is_active, active_company):
+        """Crea un partner de manera sencilla
+        """
+        partner = PyPartner.create(email)
+        pyuser = cls(
+            email=email,
+            password=password,
+            is_superuser=is_superuser,
+            is_staff=is_staff,
+            is_active=is_active,
+            active_company=active_company,
+            company_id=active_company.id,
+            partner_id=partner,
+        )
+        pyuser.set_password(password)
+        pyuser.save()
+
+        return pyuser
+
     class Meta:
         verbose_name = _('Person')
         verbose_name_plural = _('People')
         db_table = 'auth_user'
-
-    def get_absolute_url(self):
-        return reverse('base:user-detail', kwargs={'pk': self.pk})
-
-    """
-    def save(self):
-        PyPartner(name=self.username, email=self.email).save()
-        super(PyUser, self).save()"""

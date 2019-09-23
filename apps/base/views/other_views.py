@@ -34,31 +34,36 @@ def IndexEasy(request):
             name = context['form'].cleaned_data.get('name')
             country = context['form'].cleaned_data.get('country')
             currency = PyCurrency.objects.get(country=country)
-            user_name = context['form'].cleaned_data.get('user')
+            email = context['form'].cleaned_data.get('email')
             password = context['form'].cleaned_data.get('password')
-            company_id = PyCompany.create(name, country, currency)
+            company = PyCompany.create(name, country, currency)
 
-            BaseConfig.create(company_id)
-            PyWebsiteConfig.create(company_id.id)
-            # PyUser.crear(user, password, 1, 1, 1)
+            BaseConfig.create(company)
+            PyWebsiteConfig.create(company.id)
+
+            # Creo el usuario admin y automaticamente se crea su partner
+            PyUser.create(email, password, 1, 1, 1, company)
+
+            # Creo el usuario anonimous y su partner
+            PyUser.create('anonimous@pyerp.cl', password, 0, 0, 0, company)
 
             """Read Data """
-            PyMeta.LoadData('data', company_id.id)
-            PySequence.LoadData('data', company_id.id)
-            PyWParameter.LoadData('data', company_id.id)
-            PyUser.LoadData('data', company_id.id)
-            PyPartner.LoadData('data', company_id.id)
+            PyMeta.LoadData('data', company.id)
+            PySequence.LoadData('data', company.id)
+            PyWParameter.LoadData('data', company.id)
+            # PyUser.LoadData('data', company.id)
+            PyPartner.LoadData('data', company.id)
 
             """Read Data Demo """
             # PyMeta.LoadData(demo)
 
-            user = PyUser.objects.create_user(user_name, None, password)
-            user.is_staff = True
-            user.is_superuser = True
-            user.is_active = True
-            user.first_name = 'Admin'
-            user.last_name = 'User'
-            user.save()
+            # user = PyUser.objects.create_user(user_name, None, password)
+            # user.is_staff = True
+            # user.is_superuser = True
+            # user.is_active = True
+            # user.first_name = 'Admin'
+            # user.last_name = 'User'
+            # user.save()
 
             return HttpResponseRedirect(reverse_lazy('base:login'))
     else:

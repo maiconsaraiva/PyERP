@@ -45,7 +45,7 @@ class PyProduct(PyFather):
     features = models.TextField(_("Features"), blank=True, null=True)
     uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
     brand_id = models.ForeignKey(PyProductBrand, null=True, blank=True, on_delete=models.CASCADE)
-    tax = models.ManyToManyField(PyTax, null=True, blank=True)
+    tax = models.ManyToManyField(PyTax)
     youtube_video = models.CharField(null=True, blank=True, max_length=300)
     img = models.ImageField(
         max_length=255,

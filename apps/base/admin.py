@@ -73,7 +73,7 @@ class PersonaAdmin(UserAdmin):
 
     search_fields = ('email',)
     list_filter = ('is_staff', 'is_superuser')
-    list_display = ('__str__', 'username', 'email',)
+    list_display = ('__str__', 'email',)
     # list_select_related = ()
     show_full_result_count = False
     actions_selection_counter = False

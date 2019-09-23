@@ -265,7 +265,7 @@ class PasswordRecoveryView(PasswordResetView):
                     }
                 )
 
-                message_body = _('You received this email because you requested that your password be reset to "%(app_name)s".\n\nPlease go to the following link to recover your password:\n\nhttp://%(domain)s%(url)s\n\nThe credentials of this link last for one (1) day.\n\nBest regards.\n\nThe %(app_name)s team.') % {'app_name': settings.APP_NAME, 'user': user.username, 'domain': current_site.domain, 'url': url}
+                message_body = _('You received this email because you requested that your password be reset to "%(app_name)s".\n\nPlease go to the following link to recover your password:\n\nhttp://%(domain)s%(url)s\n\nThe credentials of this link last for one (1) day.\n\nBest regards.\n\nThe %(app_name)s team.') % {'app_name': settings.APP_NAME, 'user': user.enail, 'domain': current_site.domain, 'url': url}
                 message_body = message_body.replace("  ", "")
 
                 user.email_user(subject, message_body)
@@ -392,7 +392,7 @@ class SignUpView(FatherCreateView):
             }
         )
 
-        message_body = _('Thank you for registering in %(app_name)s, your username is: %(user)s.\n\nPlease go to the following link to confirm your registration and activate your account:\n\nhttp://%(domain)s%(url)s\n\nThe credentials of this link last for one (1) day.\n\nBest regards.\n\nThe %(app_name)s team.') % {'app_name': settings.APP_NAME, 'user': self.object.username, 'domain': current_site.domain, 'url': url}
+        message_body = _('Thank you for registering in %(app_name)s, your username is: %(user)s.\n\nPlease go to the following link to confirm your registration and activate your account:\n\nhttp://%(domain)s%(url)s\n\nThe credentials of this link last for one (1) day.\n\nBest regards.\n\nThe %(app_name)s team.') % {'app_name': settings.APP_NAME, 'user': self.object.email, 'domain': current_site.domain, 'url': url}
         message_body = message_body.replace("  ", "")
 
         self.object.email_user(subject, message_body)

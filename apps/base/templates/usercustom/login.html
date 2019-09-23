@@ -58,8 +58,18 @@
                         {% if next != '' %}
                             <input type="hidden" name="next" value="{{ next }}">
                         {% endif %}
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    {{ error|escape }}
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                        {% endif %}
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control django-font-g" name="username" required id="id_username" placeholder="{{ _('User') }}">
+                            <input type="email" class="form-control django-font-g" name="username" required id="id_username" placeholder="{{ _('Email') }}">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>

@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.models import (
-    PyCountry, PyCurrency, PyMeta, PyParameter, PyPlugin, PyUser, PyWParameter)
+    PyCountry, PyCurrency, PyParameter, PyPlugin, PyWParameter)
 
 
 class Command(BaseCommand):
@@ -35,13 +35,6 @@ class Command(BaseCommand):
             self.style.MIGRATE_HEADING(_('*** Migrating the base database...'))
         )
         call_command('migrate', interactive=False)
-
-        # ================================================================== #
-        self.stdout.write(
-            self.style.MIGRATE_HEADING(
-                _('*** Loading PypErp useanonimous object...')
-            )
-        )
 
         # ================================================================== #
         self.stdout.write(
