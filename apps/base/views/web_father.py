@@ -3,7 +3,7 @@ from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..models import PyMeta, PyWParameter, PyPlugin
+from ..models import PyMeta, PyWParameter, PyPlugin, PyParameter
 
 def _count_plugin():
     return PyPlugin.objects.all().count()
@@ -13,6 +13,14 @@ def _web_parameter():
     for parametro in PyWParameter.objects.all():
         web_parameter[parametro.name] = parametro.value
     return web_parameter
+
+def _parameter():
+    parameter = {}
+    for parametro in PyParameter.objects.all():
+        parameter[parametro.name] = parametro.value
+    return parameter
+
+
 
 def _web_meta():
     cad = ''
@@ -25,6 +33,7 @@ class FatherTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
+        context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin']= _count_plugin
         return context
@@ -36,6 +45,7 @@ class FatherListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
+        context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
         return context
@@ -47,6 +57,7 @@ class FatherDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
+        context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
         return context
@@ -58,6 +69,7 @@ class FatherUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
+        context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
         return context
@@ -70,6 +82,7 @@ class FatherCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['web_parameter'] = _web_parameter()
+        context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
         return context

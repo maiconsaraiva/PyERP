@@ -10,3 +10,6 @@ id,name,value
 8,show_bar_company,True
 9,show_bar_language,True
 10,show_online_company,True
+11,show_btn_export,True
+12,show_btn_import,True
+13,show_btn_mass,True
