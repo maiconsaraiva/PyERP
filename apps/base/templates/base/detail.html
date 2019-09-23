@@ -6,8 +6,8 @@
     <div class="card-header">
         <a href="{% url update_url object.pk %}" class="btn btn-success"><i class="fa fa-pen"></i>  {{ _("Edit") }}</a>
         <a href="{% url delete_url object.pk %}" class="btn btn-danger"><i class="fa fa-trash"></i> {{ _("Delete") }}</a>
-        {% for btn in buttons %}
-        <a href="{{ btn.act }}" class="btn btn-{{btn.class}} float-right">{{btn.name}}</a>
+        {% for btn in breadcrumbs %}
+        <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fa fa-home"></i> {{ btn.name }}</a>
         {% endfor %}
     </div>
     <div class="card-body">

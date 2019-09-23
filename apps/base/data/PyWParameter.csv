@@ -4,8 +4,8 @@ id,name,value
 2,font_color_strong,#0C4B33
 3,title_home,We have worked 39 days of this ERP 10%
 4,title_home_link,t.me/pyerp
-5,backend_background_color,#C9F0DD
-6,backend_font_color,#0C4B33
+5,backend_background_color,#ddeaf2
+6,backend_font_color,#19435b
 7,show_footer,True
 8,show_bar_company,True
 9,show_bar_language,True
@@ -13,3 +13,4 @@ id,name,value
 11,show_btn_export,True
 12,show_btn_import,True
 13,show_btn_mass,True
+14,custome_title,PyERP (We Make Your Day Easy)

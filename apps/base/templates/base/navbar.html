@@ -7,6 +7,11 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
+        {% if web_parameter.custome_title %}
+        <li>
+            <a class="nav-link" href="">{{  web_parameter.custome_title }}</a>
+        </li>
+        {% endif %}
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">

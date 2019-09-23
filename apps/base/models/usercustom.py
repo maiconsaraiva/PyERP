@@ -15,6 +15,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from apps.base.models import PyFather
 
 # Librerias en carpetas locales
 from ..models import PyPartner
@@ -25,7 +26,7 @@ def image_path(instance, filename):
     return os.path.join('avatar', str(instance.pk) + '.' + filename.rsplit('.', 1)[1])
 
 
-class PyUser(AbstractUser):
+class PyUser(AbstractUser,PyFather):
     '''Modelo de los usuarios
     '''
     SEXO_CHOICES = (
