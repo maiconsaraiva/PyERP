@@ -3,10 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyProductCategory
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 CATEGORY_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},

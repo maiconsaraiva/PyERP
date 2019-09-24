@@ -1,14 +1,12 @@
 # Librerias Django
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
-from ...base.models import PyCompany
+from ..models import PyCompany, PyUser
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 COMPANY_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -50,7 +48,8 @@ COMPANY_FIELDS_SHORT = [
 ]
 
 
-class CompanyListView(LoginRequiredMixin, FatherListView):
+# ========================================================================== #
+class CompanyListView(FatherListView):
     model = PyCompany
     template_name = 'base/list.html'
 
@@ -63,7 +62,8 @@ class CompanyListView(LoginRequiredMixin, FatherListView):
         return context
 
 
-class CompanyDetailView(LoginRequiredMixin, FatherDetailView):
+# ========================================================================== #
+class CompanyDetailView(FatherDetailView):
     model = PyCompany
     template_name = 'base/detail.html'
     login_url = "login"
@@ -78,7 +78,8 @@ class CompanyDetailView(LoginRequiredMixin, FatherDetailView):
         return context
 
 
-class CompanyCreateView(LoginRequiredMixin, FatherCreateView):
+# ========================================================================== #
+class CompanyCreateView(FatherCreateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -91,7 +92,8 @@ class CompanyCreateView(LoginRequiredMixin, FatherCreateView):
         return context
 
 
-class CompanyUpdateView(LoginRequiredMixin, FatherUpdateView):
+# ========================================================================== #
+class CompanyUpdateView(FatherUpdateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -105,8 +107,19 @@ class CompanyUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
+# ========================================================================== #
+def change_active_company(request, company):
+    user = PyUser.objects.get(pk=request.user.pk)
+    user.active_company = PyCompany.objects.get(pk=company)
+    user.save()
+    print('Usuario: {}, Compañía: {}'.format(user, company))
+
+    return redirect(reverse('base:home'))
+
+
+# ========================================================================== #
 def DeleteCompany(self, pk):
     company = PyCompany.objects.get(id=pk)
     company.delete()
+
     return redirect(reverse('base:companies'))

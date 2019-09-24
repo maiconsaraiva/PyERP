@@ -150,21 +150,21 @@
 										python manage.py makemigrations
                            		</pre>
 
-                                <pre class="brush: html; highlight: [2,4]">                                
+                                <pre class="brush: html; highlight: [2,4]">
 										python manage.py createsuperuser
 										python manage.py startproject mysite
 										python manage.py startapp moviesmfh
 										pip freeze
                            		</pre>
 
-                           		<pre class="brush: html; highlight: [2,4]">                                
+                           		<pre class="brush: html; highlight: [2,4]">
 										cd pyerp
 										git pull
 										./manage.py collectstatic
                            		</pre>
 
                            		<p>Error Run</p>
-                           		<pre class="brush: html; highlight: [2,4]">                                
+                           		<pre class="brush: html; highlight: [2,4]">
 										python manage.py migrate --run-syncdb
                            		</pre>
 
@@ -497,7 +497,7 @@
                                 		nombre = models.CharField(max_length=50)
 									    edad_aproximada = models.IntegerField()
 									    fecha_rescate = models.DateField()
-									    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
+									    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.PROTECT)
 									    vacuna = models.ManyToManyField(Vacuna, blank=True)
 									    active = models.BooleanField(default=True, blank=True, null=True)
 									    content = models.TextField()
@@ -565,10 +565,10 @@
 										    sexo = models.CharField(max_length=10)
 										    edad_aproximada = models.IntegerField()
 										    fecha_rescate = models.DateField()
-										    
+
 										    # Relacion Unos a Varios
-										    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
-										    
+										    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.PROTECT)
+
 										    # Relacion de Muchos es a Muchos
 										    vacuna = models.ManyToManyField(Vacuna, blank=True)
                            		</pre>
@@ -582,7 +582,7 @@
                     </section>
                     <!-- ##########################  -->
 
-               
+
                 </div>
                 <!-- // end .col -->
 

@@ -4,10 +4,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
 from ..models import PyImage
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 IMAGE_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

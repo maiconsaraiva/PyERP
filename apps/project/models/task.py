@@ -20,7 +20,7 @@ TASK_STATE = (
 class PyTask(PyFather):
     name = models.CharField('Nombre', max_length=80)
     note = models.TextField(blank=True, null=True)
-    project_id = models.ForeignKey(PyProject, null=True, blank=True, on_delete=models.CASCADE)
+    project_id = models.ForeignKey(PyProject, null=True, blank=True, on_delete=models.PROTECT)
 
     state = models.CharField(
         choices=TASK_STATE, max_length=64, default='nuevo')

@@ -16,7 +16,7 @@ class PyCurrency(PyFather):
     name = models.CharField('Nombre', max_length=40)
     alias = models.CharField('Alias', max_length=40)
     symbol = models.CharField('Símbolo', max_length=3)
-    country = models.ForeignKey(PyCountry, on_delete=models.CASCADE)
+    country = models.ForeignKey(PyCountry, on_delete=models.PROTECT)
     iso = models.CharField(max_length=30)
     position = models.CharField(
         choices=POSITION_CHOICE, max_length=64, default='after')

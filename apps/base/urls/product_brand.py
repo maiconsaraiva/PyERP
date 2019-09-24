@@ -3,9 +3,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.product_brand import (
-    DeleteProductBrand, ProductBrandCreateView,
-    ProductBrandDetailView, ProductBrandListView,
-    ProductBrandUpdateView)
+    DeleteProductBrand, ProductBrandCreateView, ProductBrandDetailView,
+    ProductBrandListView, ProductBrandUpdateView)
 
 urlpatterns = [
     path('product-brand', ProductBrandListView.as_view(), name='product-brand'),

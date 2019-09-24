@@ -5,8 +5,8 @@ from django.urls import path
 # Librerias en carpetas locales
 from .views import (
     CampaignCreateView, CampaignDetailView, CampaignListView,
-    CampaignUpdateView, DeleteCampaign, DeleteMform,
-    MformCreateView, MformDetailView, MformListView, MformUpdateView)
+    CampaignUpdateView, DeleteCampaign, DeleteMform, MformCreateView,
+    MformDetailView, MformListView, MformUpdateView)
 
 app_name = 'marketing'
 

@@ -1,14 +1,15 @@
 # Librerias Django
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias en carpetas locales
-from ..models.product import PyProduct
 from ..forms.product import ProductForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from ..models.product import PyProduct
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 PRODUCT_FIELDS = [
     {'string': _("Code"), 'field': 'code'},

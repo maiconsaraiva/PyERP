@@ -1,10 +1,10 @@
 # Librerias Django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from .web_father import FatherUpdateView
 
 # Librerias en carpetas locales
 from ..models.base_config import BaseConfig
+from .web_father import FatherUpdateView
 
 
 class UpdateBaseConfigView(LoginRequiredMixin, FatherUpdateView):

@@ -13,7 +13,7 @@ from .campaign import PyCampaign
 
 class PyMform(PyFather):
     name = models.CharField('Nombre', max_length=255)
-    campaign_id = models.ForeignKey(PyCampaign, null=True, blank=True, on_delete=models.CASCADE)
+    campaign_id = models.ForeignKey(PyCampaign, null=True, blank=True, on_delete=models.PROTECT)
 
     def get_absolute_url(self):
         return reverse('marketing:mform-detail', kwargs={'pk': self.pk})

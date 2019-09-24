@@ -3,11 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..models import PyProductBrand
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 BRAND_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

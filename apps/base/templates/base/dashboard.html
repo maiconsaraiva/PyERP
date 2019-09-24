@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="{% static '/plugins/fontawesome-free/css/all.min.css' %}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ STATIC_URL }}plugins/toastr/toastr.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="{% static '/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
   <!-- Select2 -->
@@ -112,8 +114,10 @@
 <script src="{% static '/plugins/fastclick/fastclick.js' %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static '/dist/js/adminlte.min.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static '/dist/js/demo.js' %}"></script>
+<!-- Toastr -->
+<script src="{{ STATIC_URL }}plugins/toastr/toastr.min.js"></script>
+
+
 <!-- Page script -->
 <script>
   $(function () {
@@ -181,6 +185,34 @@
         });
         return false;
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        toastr.options.closeButton = true
+        toastr.options.timeOut = 11000
+        toastr.options.preventDuplicates = true
+        toastr.options.progressBar = true
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    toastr.error("{{ error|escape }}")
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                toastr.error("{{ error|escape }}")
+            {% endfor %}
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'debug' %}toastr.info("{{ message }}"){% endif %}
+                {% if message.tags == 'info' %}toastr.info("{{ message }}"){% endif %}
+                {% if message.tags == 'success' %}toastr.success("{{ message }}"){% endif %}
+                {% if message.tags == 'warning' %}toastr.warning("{{ message }}"){% endif %}
+                {% if message.tags == 'error' %}toastr.error("{{ message }}"){% endif %}
+            {% endfor %}
+        {% endif %}
+    });
 </script>
 {% block scripts %}
 {% endblock %}

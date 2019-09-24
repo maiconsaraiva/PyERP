@@ -9,14 +9,13 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views import (
-    ChangePasswordForm, CompanyCreateView, CompanyDetailView, CompanyListView,
-    CompanyUpdateView, CustomerListView, DeleteCompany, DeleteUser,
-    DoChangePassword, Install, ProviderListView, UpdateBaseConfigView,
-    UserCreateView, UserDetailView, UserListView, UserUpdateView)
-from ..views.home import erp_home
+    ChangePasswordForm, CustomerListView, DeleteUser, DoChangePassword,
+    Install, ProviderListView, UpdateBaseConfigView, UserCreateView,
+    UserDetailView, UserListView, UserUpdateView)
 from ..views.base_config import LoadData
 from ..views.cron import (
     CronCreateView, CronDetailView, CronListView, CronUpdateView, DeleteCron)
+from ..views.home import erp_home
 from ..views.log import (
     DeleteLog, LogCreateView, LogDetailView, LogListView, LogUpdateView)
 from ..views.post import (
@@ -58,12 +57,6 @@ urlpatterns = [
     path('user/change-password/<int:pk>', ChangePasswordForm, name='password-change'),
     path('user/change-password-confirm/<int:pk>', DoChangePassword, name='do-change-password'),
 
-    path('companies', CompanyListView.as_view(), name='companies'),
-    path('company/add/', CompanyCreateView.as_view(), name='company-add'),
-    path('company/<int:pk>/', CompanyDetailView.as_view(), name='company-detail'),
-    path('company/<int:pk>/update', CompanyUpdateView.as_view(), name='company-update'),
-    path('company/<int:pk>/delete/', DeleteCompany, name='company-delete'),
-
     path('partners', CustomerListView.as_view(), name='partners'),
     path('provider', ProviderListView.as_view(), name='provider'),
 
@@ -98,11 +91,13 @@ urlpatterns = [
     path('post/<int:pk>/delete/', DeletePost, name='post-delete'),
 
 
-
     # ============================ New URLs ============================ #
     path('', include('apps.base.urls.usercustom')),
     path('attribute/', include('apps.base.urls.attribute')),
+    path('bi/', include('apps.base.urls.bi')),
+    path('channel/', include('apps.base.urls.channel')),
     path('comment/', include('apps.base.urls.comment')),
+    path('company/', include('apps.base.urls.company')),
     path('country/', include('apps.base.urls.country')),
     path('currency/', include('apps.base.urls.currency')),
     path('faq/', include('apps.base.urls.faq')),
@@ -113,7 +108,9 @@ urlpatterns = [
     path('partner/', include('apps.base.urls.partner')),
     path('plugin/', include('apps.base.urls.plugin')),
     path('product/', include('apps.base.urls.product')),
+    path('product_brand/', include('apps.base.urls.product_brand')),
     path('product_category_uom/', include('apps.base.urls.product_category_uom')),
+    path('sequence/', include('apps.base.urls.sequence')),
     path('shop/', include('apps.base.urls.shop')),
     path('tag/', include('apps.base.urls.tag')),
     path('tax/', include('apps.base.urls.tax')),
@@ -121,8 +118,4 @@ urlpatterns = [
     path('variant/', include('apps.base.urls.variant')),
     path('wparameter/', include('apps.base.urls.wparameter')),
     path('wpayment/', include('apps.base.urls.wpayment')),
-    path('sequence/', include('apps.base.urls.sequence')),
-    path('product_brand/', include('apps.base.urls.product_brand')),
-    path('channel/', include('apps.base.urls.channel')),
-    path('bi/', include('apps.base.urls.bi')),
 ]

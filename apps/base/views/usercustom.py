@@ -16,9 +16,7 @@ from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import (RedirectView, TemplateView)
-
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
+from django.views.generic import RedirectView, TemplateView
 
 # Librerias de terceros
 import requests
@@ -29,6 +27,8 @@ from ..forms import (
     PersonaCreationForm)
 from ..models import PyUser
 from ..tokens import ACCOUNT_ACTIVATION_TOKEN, PASSWORD_RECOVERY_TOKEN
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 
 # ========================================================================== #

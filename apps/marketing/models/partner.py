@@ -13,5 +13,5 @@ class MarketingPartner(PyPartner):
     class Meta:
         app_label = 'base'
 
-    channel_id = models.ForeignKey(PyChannel, null=True, blank=True, on_delete=models.CASCADE)
-    campaign_id = models.ForeignKey(PyCampaign, null=True, blank=True, on_delete=models.CASCADE)
+    channel_id = models.ForeignKey(PyChannel, null=True, blank=True, on_delete=models.PROTECT)
+    campaign_id = models.ForeignKey(PyCampaign, null=True, blank=True, on_delete=models.PROTECT)

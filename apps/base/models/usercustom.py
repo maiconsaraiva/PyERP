@@ -4,7 +4,7 @@ Modelo de datos de la app globales
 """
 # Librerias Future
 from __future__ import unicode_literals
-from django.urls import reverse
+
 # Librerias Standard
 import os
 
@@ -13,8 +13,11 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+
+# Librerias de terceros
 from apps.base.models import PyFather
 
 # Librerias en carpetas locales
@@ -55,11 +58,11 @@ class PyUser(AbstractUser, PyFather):
     fecha_nacimiento = models.DateField(_("Birthdate"), blank=True, null=True)
     sexo = models.CharField(_("Sex"), max_length=255, choices=SEXO_CHOICES, blank=True, null=True)
     avatar = models.ImageField(max_length=255, storage=RenameImage(), upload_to=image_path, blank=True, null=True, default='avatar/default_avatar.png')
-    partner_id = models.ForeignKey(PyPartner, null=True, blank=True, on_delete=models.CASCADE)
+    partner_id = models.ForeignKey(PyPartner, null=True, blank=True, on_delete=models.PROTECT)
     active_company = models.ForeignKey('base.PyCompany', on_delete=models.PROTECT)
 
     def __str__(self):
-        return '%s %s' % (self.first_name, self.last_name)
+        return '{} {}'.format(self.first_name, self.last_name)
 
     def get_full_name(self):
         return '%s %s' % (self.first_name, self.last_name)

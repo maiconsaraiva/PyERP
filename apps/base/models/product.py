@@ -11,9 +11,9 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from ..rename_image import RenameImage
 from .father import PyFather
+from .product_brand import PyProductBrand
 from .product_category import PyProductCategory
 from .product_webcategory import PyProductWebCategory
-from .product_brand import PyProductBrand
 from .tax import PyTax
 from .uom import PyUom
 
@@ -39,12 +39,12 @@ class PyProduct(PyFather):
     bar_code = models.CharField(_("Bar Code"), max_length=80, blank=True)
     price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2, default=1)
     cost = models.DecimalField(_("Cost"), max_digits=10, decimal_places=2, default=0)
-    category_id = models.ForeignKey(PyProductCategory, null=True, blank=True, on_delete=models.CASCADE)
-    web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.CASCADE)
+    category_id = models.ForeignKey(PyProductCategory, null=True, blank=True, on_delete=models.PROTECT)
+    web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.PROTECT)
     description = models.TextField(_("Description"), blank=True, null=True)
     features = models.TextField(_("Features"), blank=True, null=True)
-    uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.CASCADE)
-    brand_id = models.ForeignKey(PyProductBrand, null=True, blank=True, on_delete=models.CASCADE)
+    uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.PROTECT)
+    brand_id = models.ForeignKey(PyProductBrand, null=True, blank=True, on_delete=models.PROTECT)
     tax = models.ManyToManyField(PyTax)
     youtube_video = models.CharField(null=True, blank=True, max_length=300)
     img = models.ImageField(

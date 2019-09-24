@@ -1,9 +1,12 @@
 # Librerias Django
-from django.db import models
-from os import listdir, path
-from django.conf import settings
+# Librerias Standard
 import csv
 import os
+from os import listdir, path
+
+from django.conf import settings
+from django.db import models
+
 
 class PyFather(models.Model):
     active = models.BooleanField(default=True, blank=True, null=True)

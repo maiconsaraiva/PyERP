@@ -1,15 +1,16 @@
 # Librerias Django
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias de terceros
 from dal import autocomplete
 
 # Librerias en carpetas locales
 from ..models import PyTax
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 TAX_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

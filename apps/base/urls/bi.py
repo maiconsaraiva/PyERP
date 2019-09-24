@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.bi import (
-    DeleteBi, BiCreateView, BiDetailView, BiListView, BiUpdateView)
+    BiCreateView, BiDetailView, BiListView, BiUpdateView, DeleteBi)
 
 urlpatterns = [
     path('bi', BiListView.as_view(), name='bi'),

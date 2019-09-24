@@ -9,13 +9,13 @@ from os import listdir, path
 # Librerias Django
 from django.apps import apps
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import clear_url_caches, reverse
-from .web_father import FatherListView
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias en carpetas locales
 from ...base.models import PyPlugin
+from .web_father import FatherListView
 
 APP_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},

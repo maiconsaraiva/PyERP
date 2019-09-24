@@ -1,16 +1,17 @@
 # Librerias Django
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias de terceros
 from dal import autocomplete
 
 # Librerias en carpetas locales
 from ..models import PyCurrency
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 CURRENCY_FIELDS = [
     {'string': _('Country'), 'field': 'country'},

@@ -25,7 +25,7 @@ class PySaleOrder(PyFather):
         PyPartner,
         null=True,
         blank=True,
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT
     )
     date_order = models.DateTimeField(auto_now_add=True, null=True)
     amount_untaxec = models.DecimalField(
@@ -66,11 +66,11 @@ class PySaleOrderDetail(PyFather):
     """
     sale_order = models.ForeignKey(
         PySaleOrder,
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT
     )
     product = models.ForeignKey(
         PyProduct,
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT
     )
     description = models.TextField(blank=True, null=True)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -80,13 +80,13 @@ class PySaleOrderDetail(PyFather):
     #     PyMesureUnit,
     #     null=True,
     #     blank=True,
-    #     on_delete=models.CASCADE
+    #     on_delete=models.PROTECT
     # )
     # product_tax = models.ForeignKey(
     #     PyProductTax,
     #     null=True,
     #     blank=True,
-    #     on_delete=models.CASCADE
+    #     on_delete=models.PROTECT
     # )
     amount_untaxed = models.DecimalField(
         max_digits=10,

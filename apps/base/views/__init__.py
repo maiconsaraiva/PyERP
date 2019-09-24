@@ -3,14 +3,13 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 from django.core.management import call_command
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import clear_url_caches, reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
 
 # Librerias de terceros
 from pyerp.settings import BASE_DIR
@@ -19,19 +18,19 @@ from pyerp.settings import BASE_DIR
 from ..forms import AvatarForm
 from ..models import (
     BaseConfig, PyCompany, PyPartner, PyPlugin, PyProduct, PyProductCategory,
-    PyUser, PyWebsiteConfig, PyUser)
+    PyUser, PyWebsiteConfig)
 from .activatelanguage import ActivateLanguageView
 from .base_config import UpdateBaseConfigView
 from .company import (
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
-    DeleteCompany)
+    DeleteCompany, change_active_company)
 from .partner import (
-    CustomerListView, DeletePartner, PartnerAutoComplete, PartnerCreateView,
-    PartnerDetailView, PartnerUpdateView, ProviderListView)
+    CustomerListView, ProviderListView)
 from .usercustom import (
     ActivateUserView, AvatarUpdateView, LogOutModalView, PasswordRecoveryView,
     ProfileView, SignUpView, cambio_clave)
-
+from .web_father import (
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 from .wparameter import PyWParameter
 
 
