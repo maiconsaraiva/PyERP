@@ -3,7 +3,7 @@ from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..models import PyMeta, PyWParameter, PyPlugin, PyParameter
+from ..models import PyMeta, PyWParameter, PyPlugin, PyParameter, PyCompany
 
 def _count_plugin():
     return PyPlugin.objects.all().count()
@@ -36,6 +36,7 @@ class FatherTemplateView(TemplateView):
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin']= _count_plugin
+        context['company'] = PyCompany.objects.all()
         return context
 
     class Meta:
@@ -48,6 +49,7 @@ class FatherListView(ListView):
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
+        context['company'] = PyCompany.objects.all()
         return context
 
     class Meta:
@@ -60,6 +62,7 @@ class FatherDetailView(DetailView):
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
+        context['company'] = PyCompany.objects.all()
         return context
 
     class Meta:
@@ -72,6 +75,7 @@ class FatherUpdateView(UpdateView):
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
+        context['company'] = PyCompany.objects.all()
         return context
 
     class Meta:
@@ -85,6 +89,7 @@ class FatherCreateView(CreateView):
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
+        context['company'] = PyCompany.objects.all()
         return context
 
     class Meta:

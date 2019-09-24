@@ -18,7 +18,8 @@
     </style>
 {% endblock %}
 {% block content %}
-<div class="card card-primary card-outline mt-2">
+<div class="row" style="padding:10px;" >
+<div class="card card-primary card-outline col-12">
     <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
         <div class="card-header" style="background-color:#ffffff;">
             <a href="{{ back_url }}" class="btn btn-danger">{{ _("Discard") }}</a>
@@ -57,5 +58,6 @@
         </div>
         {{ form.media.js }}
     </form>
+</div>
 </div>
 {% endblock %}

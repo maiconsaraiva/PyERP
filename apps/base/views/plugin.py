@@ -35,7 +35,7 @@ class PluginListView(LoginRequiredMixin, FatherListView):
     template_name = 'base/plugin.html'
     fields = APP_FIELDS
     context_object_name = 'plugin_list'
-    paginate_by = 15
+    paginate_by = 12
 
 
 # ========================================================================== #

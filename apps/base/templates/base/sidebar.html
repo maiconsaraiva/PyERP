@@ -16,17 +16,7 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            {% if request.user.is_authenticated %}
-                <div class="image">
-                    <a style="color:#fff;" href="{% url 'base:profile' %}" class="d-block"><img src="{{ request.user.avatar.url }}" id="user_avatar" class="img-circle" alt="{{ request.user }}"></a>
-                </div>
-                <div class="info">
-                    <a href="{% url 'base:profile' %}" class="d-block">{{ user }}</a>
-                </div>
-            {% endif %}
-        </div>
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

@@ -1,9 +1,9 @@
 {% extends "base/dashboard.html" %}
 {% block content %}
             <div class="container-fluid">
-                <div class="row mt-2">
+                <div class="row">
                     {% for bi in bi %}
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 mt-2">
                         <div class="small-box" style="background-color:{{ bi.color }}; color:{{ bi.font_color }};">
                             <div class="inner">
                                 <h3>{{ bi.id }}</h3>

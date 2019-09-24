@@ -31,7 +31,7 @@ def erp_home(request):
         for bi in bi_list:
             if bi.model:
                 from ..models import PyPartner
-                print(bi.model)
+                # print(bi.model)
     value = {
         'bi':bi_list,
         'web_parameter': _web_parameter()
@@ -40,5 +40,5 @@ def erp_home(request):
     for val in value['bi']:
         print val"""
 
-    print(value)
+    # print(value)
     return render(request, "home.html", value)
