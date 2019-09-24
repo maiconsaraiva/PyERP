@@ -143,27 +143,3 @@ def DoChangePassword(self, pk, **kwargs):
     else:
         return render(self, 'base/change_password.html', {'pk': pk, 'error': 'Las contraseñas no coinciden.'})
     return redirect(reverse('base:user-detail', kwargs={'pk': pk}))
-
-
-@login_required(login_url="base:login")
-def erp_home(request):
-    """Vista para renderizar el dasboard del erp
-    """
-    count_plugin = PyPlugin.objects.all().count()
-    plugins = PyPlugin.objects.all().filter(installed=True).order_by('sequence')
-    plugin_list = []
-    if plugins:
-        for plugin in plugins:
-            st = plugin.name + "/menu.html"
-            plugin_list.append(st.lower())
-
-    partners = PyPartner.objects.all()
-    return render(request, "home.html", {
-        'customers': partners.filter(customer=True),
-        'providers': partners.filter(provider=True),
-        'users': PyUser.objects.all(),
-        'products': PyProduct.objects.all(),
-        'plugin_list': plugin_list,
-        'count_plugin': count_plugin,
-        'web_parameter':_web_parameter()
-    })

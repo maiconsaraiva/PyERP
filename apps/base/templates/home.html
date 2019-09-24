@@ -2,22 +2,22 @@
 {% block content %}
             <div class="container-fluid">
                 <div class="row mt-2">
+                    {% for bi in bi %}
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-info">
+                        <div class="small-box" style="background-color:{{ bi.color }}; color:{{ bi.font_color }};">
                             <div class="inner">
-                                <h3>{{ customers.count }}</h3>
-                                <p>{{ _('Customers') }}</p>
+                                <h3>{{ bi.id }}</h3>
+                                <p>{{ bi.name }}</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="fa {{ bi.icon }}"></i>
                             </div>
                             <a href="{% url 'base:partners' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
+                    {% endfor %}
+                    <!--
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ providers.count }}</h3>
@@ -29,9 +29,7 @@
                             <a href="{% url 'base:provider' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
                                 <h3>{{ users.count }}</h3>
@@ -43,9 +41,7 @@
                             <a href="{% url 'base:users' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
                                 <h3>{{ products.count }}</h3>
@@ -57,9 +53,9 @@
                             <a href="{% url 'base:products' %}" class="small-box-footer">{{ _('More Informations') }} <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
+                    -->
                   </div>
-            </div><!-- /.container-fluid -->
+            </div>
 {% endblock content %}
 {% block javascripts %}
     <!-- page script -->

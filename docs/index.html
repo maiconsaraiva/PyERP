@@ -533,6 +533,23 @@
                            		</pre>
 
 
+                                <p>SQL</p>
+                                 <pre class="brush: html; highlight: [2,4]">
+                                	count_plugin = PyPlugin.objects.all().count()
+                                    plugins = PyPlugin.objects.all().filter(installed=True).order_by('sequence')
+                                    customers = partners.filter(customer=True)
+                                    products = PyProduct.objects.all()
+
+                                    count_plugin = PyPlugin.objects.all().count()
+                                    plugins = PyPlugin.objects.all().filter(installed=True).order_by('sequence')
+                                    plugin_list = []
+                                    if plugins:
+                                        for plugin in plugins:
+                                            st = plugin.name + "/menu.html"
+                                            plugin_list.append(st.lower())
+                           		</pre>
+
+
 
 
 

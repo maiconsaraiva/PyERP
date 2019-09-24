@@ -15,10 +15,13 @@ BI_FIELDS = [
     {'string': _("Model"), 'field': 'model'},
     {'string': _("Parameter"), 'field': 'parameter'},
     {'string': _("Color"), 'field': 'color'},
+    {'string': _("Font Color"), 'field': 'font_color'},
     {'string': _("Icon"), 'field': 'icon'},
+    {'string': _("Dashboard"), 'field': 'dashboard'},
+    {'string': _("Url"), 'field': 'url'},
 ]
 
-BI_SHORT = ['name', 'type', 'model', 'parameter', 'color', 'icon']
+BI_SHORT = ['name', 'type', 'model', 'parameter', 'color', 'font_color', 'icon', 'dashboard','url']
 
 
 class BiListView(LoginRequiredMixin, FatherListView):
@@ -71,7 +74,7 @@ class BiUpdateView(LoginRequiredMixin, FatherUpdateView):
     login_url = "login"
 
     def get_context_data(self, **kwargs):
-        context = super(LogUpdateView, self).get_context_data(**kwargs)
+        context = super(BiUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
         context['breadcrumbs'] = [{'url': 'base:bi', 'name': 'Bi'}]
         context['back_url'] = reverse('base:bi-detail', kwargs={'pk': context['object'].pk})

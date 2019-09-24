@@ -12,7 +12,8 @@ from ..views import (
     ChangePasswordForm, CompanyCreateView, CompanyDetailView, CompanyListView,
     CompanyUpdateView, CustomerListView, DeleteCompany, DeleteUser,
     DoChangePassword, Install, ProviderListView, UpdateBaseConfigView,
-    UserCreateView, UserDetailView, UserListView, UserUpdateView, erp_home)
+    UserCreateView, UserDetailView, UserListView, UserUpdateView)
+from ..views.home import erp_home
 from ..views.base_config import LoadData
 from ..views.cron import (
     CronCreateView, CronDetailView, CronListView, CronUpdateView, DeleteCron)
