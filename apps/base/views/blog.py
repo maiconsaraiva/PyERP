@@ -6,7 +6,6 @@ from ..models import PyWParameter
 from ..models.post import PyPost
 from .web_father import FatherDetailView, FatherListView
 
-
 def _web_parameter():
     web_parameter = {}
     for parametro in PyWParameter.objects.all():

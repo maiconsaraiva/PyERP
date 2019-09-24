@@ -50,7 +50,7 @@ COMPANY_FIELDS_SHORT = [
 ]
 
 
-class CompanyListView(FatherListView):
+class CompanyListView(LoginRequiredMixin, FatherListView):
     model = PyCompany
     template_name = 'base/list.html'
 
@@ -78,7 +78,7 @@ class CompanyDetailView(LoginRequiredMixin, FatherDetailView):
         return context
 
 
-class CompanyCreateView(FatherCreateView):
+class CompanyCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'

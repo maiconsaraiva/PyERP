@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias en carpetas locales
 from ..models.page import PyPage
@@ -17,7 +18,7 @@ PAGE_FIELDS = [
 
 PAGE_FIELDS_SHORT = ['title','content','keywords']
 
-class PageListView(FatherListView):
+class PageListView(LoginRequiredMixin, FatherListView):
     model = PyPage
     template_name = 'base/list.html'
 
@@ -29,7 +30,7 @@ class PageListView(FatherListView):
         context['fields'] = PAGE_FIELDS
         return context
 
-class PageDetailView(FatherDetailView):
+class PageDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyPage
     template_name = 'base/detail.html'
     def get_context_data(self, **kwargs):
@@ -42,7 +43,7 @@ class PageDetailView(FatherDetailView):
         return context
 
 
-class PageCreateView(FatherCreateView):
+class PageCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyPage
     fields = PAGE_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -56,7 +57,7 @@ class PageCreateView(FatherCreateView):
         return context
 
 
-class PageUpdateView(FatherUpdateView):
+class PageUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyPage
     fields = PAGE_FIELDS_SHORT
     template_name = 'base/form.html'

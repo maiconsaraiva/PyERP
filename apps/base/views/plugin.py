@@ -12,6 +12,7 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.urls import clear_url_caches, reverse
 from .web_father import FatherListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias en carpetas locales
 from ...base.models import PyPlugin
@@ -29,7 +30,7 @@ def Apps(request):
     return render(request, 'base/plugin.html')
 
 
-class PluginListView(FatherListView):
+class PluginListView(LoginRequiredMixin, FatherListView):
     model = PyPlugin
     template_name = 'base/plugin.html'
     fields = APP_FIELDS

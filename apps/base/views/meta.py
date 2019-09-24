@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias en carpetas locales
 from ..models.meta import PyMeta
@@ -15,7 +16,7 @@ META_FIELDS = [
 
 META_FIELDS_SHORT = ['title','content']
 
-class MetaListView(FatherListView):
+class MetaListView(LoginRequiredMixin, FatherListView):
     model = PyMeta
     template_name = 'base/list.html'
 
@@ -40,7 +41,7 @@ class MetaDetailView(FatherDetailView):
         return context
 
 
-class MetaCreateView(FatherCreateView):
+class MetaCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyMeta
     fields = META_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -54,7 +55,7 @@ class MetaCreateView(FatherCreateView):
         return context
 
 
-class MetaUpdateView(FatherUpdateView):
+class MetaUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyMeta
     fields = META_FIELDS_SHORT
     template_name = 'base/form.html'

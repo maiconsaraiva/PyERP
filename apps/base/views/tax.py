@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias de terceros
 from dal import autocomplete
@@ -19,7 +20,7 @@ TAX_FIELDS = [
 TAX_SHORT = ['name', 'amount', 'include_price']
 
 
-class TaxListView(FatherListView):
+class TaxListView(LoginRequiredMixin, FatherListView):
     model = PyTax
     template_name = 'base/list.html'
 
@@ -32,7 +33,7 @@ class TaxListView(FatherListView):
         return context
 
 
-class TaxDetailView(FatherDetailView):
+class TaxDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyTax
     template_name = 'base/detail.html'
 
@@ -46,7 +47,7 @@ class TaxDetailView(FatherDetailView):
         return context
 
 
-class TaxCreateView(FatherCreateView):
+class TaxCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyTax
     fields = TAX_SHORT
     template_name = 'base/form.html'
@@ -59,7 +60,7 @@ class TaxCreateView(FatherCreateView):
         return context
 
 
-class TaxUpdateView(FatherUpdateView):
+class TaxUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyTax
     fields = TAX_SHORT
     template_name = 'base/form.html'

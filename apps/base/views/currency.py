@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias de terceros
 from dal import autocomplete
@@ -22,7 +23,7 @@ CURRENCY_FIELDS = [
 CURRENCY_SHORT = ['country', 'name', 'alias', 'symbol', 'position']
 
 
-class CurrencyListView(FatherListView):
+class CurrencyListView(LoginRequiredMixin, FatherListView):
     model = PyCurrency
     template_name = 'base/list.html'
     login_url = "login"
@@ -36,7 +37,7 @@ class CurrencyListView(FatherListView):
         return context
 
 
-class CurrencyDetailView(FatherDetailView):
+class CurrencyDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCurrency
     template_name = 'base/detail.html'
     login_url = "login"
@@ -51,7 +52,7 @@ class CurrencyDetailView(FatherDetailView):
         return context
 
 
-class CurrencyCreateView(FatherCreateView):
+class CurrencyCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'
@@ -65,7 +66,7 @@ class CurrencyCreateView(FatherCreateView):
         return context
 
 
-class CurrencyUpdateView(FatherUpdateView):
+class CurrencyUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCurrency
     fields = CURRENCY_SHORT
     template_name = 'base/form.html'
@@ -89,7 +90,6 @@ def DeleteCurrency(self, pk):
 class CurrencyAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyCurrency
     """
-
     def get_queryset(self):
 
         queryset = PyCurrency.objects.all()

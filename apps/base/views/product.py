@@ -8,6 +8,7 @@ from .web_father import FatherDetailView, FatherListView, FatherUpdateView, Fath
 # Librerias en carpetas locales
 from ..models.product import PyProduct
 from ..forms.product import ProductForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 PRODUCT_FIELDS = [
     {'string': _("Code"), 'field': 'code'},
@@ -45,7 +46,7 @@ LEAD_FIELDS_SHORT = [
 ]
 
 
-class ProductListView(FatherListView):
+class ProductListView(LoginRequiredMixin, FatherListView):
     model = PyProduct
     template_name = 'base/list.html'
 
@@ -58,7 +59,7 @@ class ProductListView(FatherListView):
         return context
 
 
-class ProductDetailView(FatherDetailView):
+class ProductDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyProduct
     template_name = 'base/detail.html'
 
@@ -73,7 +74,7 @@ class ProductDetailView(FatherDetailView):
         return context
 
 
-class ProductCreateView(FatherCreateView):
+class ProductCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm
@@ -87,7 +88,7 @@ class ProductCreateView(FatherCreateView):
         return context
 
 
-class ProductUpdateView(FatherUpdateView):
+class ProductUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm

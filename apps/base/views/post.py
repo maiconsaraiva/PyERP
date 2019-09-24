@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias en carpetas locales
 from ..models.post import PyPost
@@ -17,7 +18,7 @@ POST_FIELDS = [
 
 POST_FIELDS_SHORT = ['title', 'keywords', 'content', 'img', ]
 
-class PostListView(FatherListView):
+class PostListView(LoginRequiredMixin, FatherListView):
     model = PyPost
     template_name = 'base/list.html'
 
@@ -29,7 +30,7 @@ class PostListView(FatherListView):
         context['fields'] = POST_FIELDS
         return context
 
-class PostDetailView(FatherDetailView):
+class PostDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyPost
     template_name = 'base/detail.html'
     def get_context_data(self, **kwargs):
@@ -42,7 +43,7 @@ class PostDetailView(FatherDetailView):
         return context
 
 
-class PostCreateView(FatherCreateView):
+class PostCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -56,7 +57,7 @@ class PostCreateView(FatherCreateView):
         return context
 
 
-class PostUpdateView(FatherUpdateView):
+class PostUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
     template_name = 'base/form.html'

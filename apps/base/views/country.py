@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from .web_father import FatherDetailView, FatherListView, FatherUpdateView, FatherCreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias de terceros
 from dal import autocomplete
@@ -18,7 +19,7 @@ COUNTRY_FIELDS = [
 COUNTRY_SHORT = ['name']
 
 
-class CountryListView(FatherListView):
+class CountryListView(LoginRequiredMixin, FatherListView):
     model = PyCountry
     template_name = 'base/list.html'
 
@@ -31,7 +32,7 @@ class CountryListView(FatherListView):
         return context
 
 
-class CountryDetailView(FatherDetailView):
+class CountryDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCountry
     template_name = 'base/detail.html'
 
@@ -45,7 +46,7 @@ class CountryDetailView(FatherDetailView):
         return context
 
 
-class CountryCreateView(FatherCreateView):
+class CountryCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'
@@ -58,7 +59,7 @@ class CountryCreateView(FatherCreateView):
         return context
 
 
-class CountryUpdateView(FatherUpdateView):
+class CountryUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCountry
     fields = COUNTRY_SHORT
     template_name = 'base/form.html'

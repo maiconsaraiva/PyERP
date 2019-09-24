@@ -96,7 +96,7 @@ class PartnerCreateView(LoginRequiredMixin, FatherCreateView):
         return form"""
 
 
-class PartnerUpdateView(FatherUpdateView):
+class PartnerUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyPartner
     fields = PARTNER_FIELDS_SHORT
     template_name = 'base/form.html'
