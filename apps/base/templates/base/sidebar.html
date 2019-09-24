@@ -251,6 +251,27 @@
               </li>
               <!-- END WEBSITE -->
 
+
+                <!-- WEBSITE -->
+        <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-brain nav-icon"></i>
+                  <p>
+                    {{ _('Business Intelligence') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:bi' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Business Intelligence') }}</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!-- END WEBSITE -->
+
                 {% for app in app_list|get_app_list %}
                     {% include app %}
                 {% endfor %}

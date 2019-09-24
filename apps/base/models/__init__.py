@@ -35,3 +35,4 @@ from .attribute import PyAttribute
 from .tax import PyTax
 from .sequence import PySequence
 from .channel import PyChannel
+from .bi import PyBi
