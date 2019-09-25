@@ -116,7 +116,7 @@ def change_active_company(request, company):
     user.save()
     print('Usuario: {}, Compañía: {}'.format(user, company))
 
-    return redirect(reverse('base:home'))
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 # ========================================================================== #

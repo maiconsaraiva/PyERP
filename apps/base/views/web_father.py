@@ -55,6 +55,12 @@ class FatherListView(ListView):
         context['company'] = PyCompany.objects.filter(active=True)
         return context
 
+    def get_queryset(self):
+        queryset = self.model.objects.filter(
+            company_id=self.request.user.active_company_id
+        )
+        return queryset
+
     class Meta:
         abstract = True
 
@@ -94,6 +100,14 @@ class FatherCreateView(CreateView):
         context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
         return context
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save(commit=False)
+        self.object.uc = self.request.user.pk
+        self.object.company_id = self.request.user.active_company_id
+        self.object.save()
+        return super().form_valid(form)
 
     class Meta:
         abstract = True

@@ -46,6 +46,7 @@ LEAD_FIELDS_SHORT = [
     'img',
     'youtube_video',
     'description',
+    'company_id',
 ]
 
 
@@ -100,6 +101,7 @@ class ProductUpdateView(LoginRequiredMixin, FatherUpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProductUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
+        context['form'] = self.get_form()
         context['breadcrumbs'] = [{'url': 'base:products', 'name': 'Productos'}]
         context['back_url'] = reverse('base:product-detail', kwargs={'pk': context['object'].pk})
         return context
