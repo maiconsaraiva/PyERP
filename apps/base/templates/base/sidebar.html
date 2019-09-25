@@ -7,7 +7,7 @@
     {% else %}
             <a href="/" class="brand-link">
     {% endif %}
-        <img src="{{ MEDIA_URL }}{{ user|get_company_logo }}" alt="PyERP" class="logo_company" style="opacity: .8; margin-left: 0px;" width="100%" >
+        <img src="{{ MEDIA_URL }}{{ user.active_company.logo }}" alt="PyERP" class="logo_company" style="opacity: .8; margin-left: 0px;" width="100%" >
     </a>
 
         <style>
@@ -17,12 +17,110 @@
     <!-- Sidebar -->
     <div class="sidebar">
 
+
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
                 <li class="nav-item has-treeview">
                     <a href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
                 </li>
+
+                <!-- PARTNER -->
+        <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-envelope-open-text nav-icon"></i>
+                  <p>
+                    {{ _('Email') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:emails' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Inbox') }}</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'base:emails' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Sent') }}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+         <!-- END PARTNER -->
+
+                <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="far fa-comment-alt nav-icon"></i>
+                  <p>
+                    {{ _('Messages') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:messages' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Message') }}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-calendar-week nav-icon"></i>
+                  <p>
+                    {{ _('Calendar') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:events' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Event') }}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+               <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-sticky-note nav-icon"></i>
+                  <p>
+                    {{ _('Notes') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:notes' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Notes') }}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+
+
+         <!-- END PARTNER -->
+
+
 
        <!-- PARTNER -->
         <li class="nav-item has-treeview">
@@ -280,6 +378,27 @@
                             </li>
                         </ul>
                     </li>
+
+             <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-paperclip nav-icon" ></i>
+                  <p>
+                    {{ _('Files') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:files' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Files') }}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link"><i class="fa fa-cogs nav-icon"></i><p>{{ _('Configuration') }}<i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">

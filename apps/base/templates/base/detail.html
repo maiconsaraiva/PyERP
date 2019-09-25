@@ -2,14 +2,40 @@
 {% load erp_tags %}
 
 {% block content %}
-<div class="row" style="padding:10px;">
-<div class="card card-primary card-outline col-12">
+<div class="row" style="padding:5px;">
+<div class="card card-outline col-12">
     <div class="card-header">
-        <a href="{% url update_url object.pk %}" class="btn btn-success"><i class="fa fa-pen"></i>  {{ _("Edit") }}</a>
-        <a href="{% url update_url object.pk %}" class="btn btn-warning"><i class="fa fa-copy"></i>  {{ _("Duplicate") }}</a>
-        <a href="{% url delete_url object.pk %}" class="btn btn-danger"><i class="fa fa-trash"></i> {{ _("Delete") }}</a>
         {% for btn in breadcrumbs %}
-        <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fa fa-home"></i> {{ btn.name }}</a>
+        <a title=" {{ _('Back') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
+        {% endfor %}
+
+        <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
+        <a title=" {{ _('Delete') }}" href="{% url delete_url object.pk %}" class="btn btn-light"><i class="fas fa-trash"></i></a>
+
+        {% for btn in breadcrumbs %}
+        <a title=" {{ _('Archive') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-archive"></i></a>
+        {% endfor %}
+
+
+
+
+        <a title=" {{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
+
+        {% for btn in breadcrumbs %}
+        <!-- <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fas fa-undo-alt"></i></a> -->
+        <div class="float-right state-bar no_active_bar">
+            <style>
+                .active_bar{
+                   font-weight: bold;
+                }
+                .no_active_bar{
+                    color:#777;
+                }
+            </style>
+                <span class="active_bar">{{ _('Active') }}</span>
+            <i class="fas fa-chevron-right ml-2"></i>
+                <span class="ml-2">{{ _('Archived') }}</span>
+        </div>
         {% endfor %}
     </div>
     <div class="card-body">
@@ -30,8 +56,34 @@
         <div class="row">
         </div>
     </div>
+
+
 </div>
+
+
 </div>
+
+<ul class="timeline">
+
+    <!-- /.timeline-label -->
+
+    <!-- timeline item -->
+    <li>
+        <!-- timeline icon -->
+        <i class="fas fa-info fa-log"></i>
+        <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> <span style="font-size:0.7rem;">{{ object.fc }}</span> </span>
+
+            <h3 class="timeline-header"><a href="#" class="log-a" style="color:#ADB5BD;">Create</a> ...</h3>
+
+            <div class="timeline-body">
+                Date: {{ object.fc }}
+            </div>
+        </div>
+    </li>
+
+</ul>
+
 {% endblock %}
 {% block scripts %}
 <script>

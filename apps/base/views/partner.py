@@ -26,7 +26,9 @@ PARTNER_FIELDS = [
     {'string': _("Type"), 'field': 'type'},
 ]
 
-PARTNER_FIELDS_SHORT = ['name', 'street', 'country_id', 'email', 'phone', 'note', 'customer', 'provider', 'for_invoice', 'not_email','parent_id','type']
+PARTNER_FIELDS_SHORT = ['name', 'street', 'country_id', 'email', 'phone', 'note',
+                        'customer', 'provider', 'for_invoice', 'not_email','parent_id',
+                        'type','active']
 
 
 class CustomerListView(FatherListView):

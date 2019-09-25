@@ -20,26 +20,58 @@
             <a title=" {{ _('Massive Edition') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-exclamation"></i></a>
             {% endif %}
         </div>
-        <div class="card-body">
-            <table id="list_table" class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        {% for field in fields %}
-                        <th>{{ field.string }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for object in object_list %}
-                        <tr data-row-location="{% url detail_url object.pk %}" style="cursor: pointer;">
-                            {% for field in fields %}
-                            <td>{{ object|get_obj_attr:field.field }}</td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
 
-                </tbody>
-            </table>
+        <style type="text/css">
+
+        	.note-ul {
+		        	font-family:arial,sans-serif;
+					  font-size:100%;
+					  color:#fff;
+				}
+
+		   .note-ul,li{
+			  list-style:none;
+			}
+			.note-ul{
+			  overflow:hidden;
+			}
+			.note-ul li{
+			  margin:1em;
+			  float:left;
+			}
+			.note-ul li a{
+			  text-decoration:none;
+			  color:#000;
+			  
+			  display:block;
+			  height:15em;
+			  width:15em;
+			  padding:1em;
+			  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+			  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+			  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+			}
+			.note-ul li h2{
+			  font-size:140%;
+			  font-weight:bold;
+			  padding-bottom:10px;
+			}
+			.note-ul li p{
+			  font-family:"Reenie Beanie",arial,sans-serif;
+			}
+			       </style>
+
+        <div class="card-body">
+		           <ul class="note-ul">
+		           	{% for object in object_list %}
+				    <li>
+				      <a style="background:{{ object.color }};"href="{% url detail_url object.pk %}">
+				        <h2 style="padding-bottom: 0px;">{{ object.name }}</h2><span style="font-size:0.7rem; opacity: 0.5;">{{ object.fc }}</span>
+				        <p>{{ object.note }}</p>
+				      </a>
+				    </li>
+				    {% endfor %}
+		  		</ul>
         </div>
     </div>
     </div>

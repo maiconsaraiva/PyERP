@@ -118,4 +118,9 @@ urlpatterns = [
     path('variant/', include('apps.base.urls.variant')),
     path('wparameter/', include('apps.base.urls.wparameter')),
     path('wpayment/', include('apps.base.urls.wpayment')),
+    path('email/', include('apps.base.urls.email')),
+    path('file/', include('apps.base.urls.file')),
+    path('message/', include('apps.base.urls.message')),
+    path('note/', include('apps.base.urls.note')),
+    path('event/', include('apps.base.urls.event')),
 ]
