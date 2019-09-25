@@ -23,6 +23,21 @@
 
         {% for btn in breadcrumbs %}
         <!-- <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fas fa-undo-alt"></i></a> -->
+        <div class="float-right state-bar no_active_bar">
+            <style>
+                .active_bar{
+                   font-weight: bold;
+                }
+                .no_active_bar{
+                    color:#777;
+                }
+            </style>
+                <span>Uno</span>
+            <i class="fas fa-chevron-right ml-2"></i>
+                <span class="ml-2 active_bar"> Dos </span>
+            <i class="fas fa-chevron-right ml-2"></i>
+                <span class="ml-2"> Tres </span>
+        </div>
         {% endfor %}
     </div>
     <div class="card-body">

@@ -7,7 +7,7 @@
     {% else %}
             <a href="/" class="brand-link">
     {% endif %}
-        <img src="{{ MEDIA_URL }}{{ user|get_company_logo }}" alt="PyERP" class="logo_company" style="opacity: .8; margin-left: 0px;" width="100%" >
+        <img src="{{ MEDIA_URL }}{{ user.active_company.logo }}" alt="PyERP" class="logo_company" style="opacity: .8; margin-left: 0px;" width="100%" >
     </a>
 
         <style>
