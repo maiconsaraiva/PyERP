@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="{% static 'plugins/datatables/extensions/Buttons/css/buttons.dataTables.min.css' %}">
 {% endblock %}
 {% block content %}
-<div class="row" style="padding:10px;">
-    <div class="card card-primary card-outline lg col-12">
+<div class="row" style="padding:5px;">
+    <div class="card card-outline lg col-12">
         <div class="card-header">
             <a title=" {{ _('Create') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-plus"></i></a>
             {% if  web_parameter.show_btn_export == 'True' %}

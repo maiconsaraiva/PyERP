@@ -34,7 +34,15 @@
 
 {% if  web_parameter.backend_background_color %}
 <style>
+      .btn-light{
+          color: {{ web_parameter.backend_font_color }};
+      }
+
       .navbar-light .navbar-nav .nav-link {
+          color: {{ web_parameter.backend_font_color }};
+      }
+
+      .navbar-light .navbar-nav .nav-link:hover {
           color: {{ web_parameter.backend_font_color }};
       }
 
