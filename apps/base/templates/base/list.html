@@ -31,13 +31,11 @@
                 </thead>
                 <tbody>
                     {% for object in object_list %}
-                        {% if object.active %}
                         <tr data-row-location="{% url detail_url object.pk %}" style="cursor: pointer;">
                             {% for field in fields %}
                             <td>{{ object|get_obj_attr:field.field }}</td>
                             {% endfor %}
                         </tr>
-                        {% endif %}
                     {% endfor %}
 
                 </tbody>
