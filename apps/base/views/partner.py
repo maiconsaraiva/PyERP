@@ -8,10 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyPartner
+from ..models import PyLog, PyPartner
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 PARTNER_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -130,14 +129,9 @@ class PartnerUpdateView(FatherUpdateView):
         return form"""
 
 
-def DeletePartner(request, pk):
+class PartnerDeleteView(FatherDeleteView):
     model = PyPartner
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:partners'))
+    success_url = 'base:partners'
 
 
 class PartnerAutoComplete(autocomplete.Select2QuerySetView):

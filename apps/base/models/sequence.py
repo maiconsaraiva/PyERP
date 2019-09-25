@@ -21,3 +21,7 @@ class PySequence(PyFather):
 
     def __str__(self):
         return format(self.name)
+
+    class Meta:
+        verbose_name = _("Sequence")
+        verbose_name_plural = _("PySequence")

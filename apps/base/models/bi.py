@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-# Librerias de terceros
+# Librerias en carpetas locales
 from ..models.father import PyFather
 
 TYPE = (
@@ -27,3 +27,7 @@ class PyBi(PyFather):
 
     def __str__(self):
         return format(self.name)
+
+    class Meta:
+        verbose_name = _("Bi")
+        verbose_name_plural = _("Bi")

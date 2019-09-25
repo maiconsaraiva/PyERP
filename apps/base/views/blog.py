@@ -2,8 +2,7 @@
 from __future__ import unicode_literals
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyWParameter
+from ..models import PyLog, PyWParameter
 from ..models.post import PyPost
 from .web_father import FatherDetailView, FatherListView
 

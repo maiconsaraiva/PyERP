@@ -6,7 +6,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.partner import (
-    DeletePartner, PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
+    PartnerDeleteView, PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
     PartnerUpdateView)
 
 urlpatterns = [
@@ -27,7 +27,7 @@ urlpatterns = [
     ),
     path(
         '<int:pk>/delete/',
-        login_required(DeletePartner),
+        login_required(PartnerDeleteView.as_view()),
         name='partner-delete'
     ),
 

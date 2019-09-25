@@ -10,10 +10,9 @@ from django.utils.translation import ugettext_lazy as _
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyCurrency
+from ..models import PyCurrency, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 CURRENCY_FIELDS = [
     {'string': _('Country'), 'field': 'country'},
@@ -84,10 +83,9 @@ class CurrencyUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-def DeleteCurrency(self, pk):
-    currency = PyCurrency.objects.get(id=pk)
-    currency.delete()
-    return redirect(reverse('base:currencies'))
+class CurrencyDeleteView(FatherDeleteView):
+    model = PyCurrency
+    success_url = 'base:currencies'
 
 
 class CurrencyAutoComplete(autocomplete.Select2QuerySetView):

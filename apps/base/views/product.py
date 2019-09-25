@@ -1,17 +1,15 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
 from ..forms.product import ProductForm
-from ..models import PyProduct
+from ..models import PyLog, PyProduct
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 PRODUCT_FIELDS = [
     {'string': _("Code"), 'field': 'code'},
@@ -50,7 +48,8 @@ LEAD_FIELDS_SHORT = [
 ]
 
 
-class ProductListView(LoginRequiredMixin, FatherListView):
+# ========================================================================== #
+class ProductListView(FatherListView):
     model = PyProduct
     template_name = 'base/list.html'
 
@@ -63,7 +62,8 @@ class ProductListView(LoginRequiredMixin, FatherListView):
         return context
 
 
-class ProductDetailView(LoginRequiredMixin, FatherDetailView):
+# ========================================================================== #
+class ProductDetailView(FatherDetailView):
     model = PyProduct
     template_name = 'base/detail.html'
 
@@ -78,7 +78,8 @@ class ProductDetailView(LoginRequiredMixin, FatherDetailView):
         return context
 
 
-class ProductCreateView(LoginRequiredMixin, FatherCreateView):
+# ========================================================================== #
+class ProductCreateView(FatherCreateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm
@@ -92,7 +93,8 @@ class ProductCreateView(LoginRequiredMixin, FatherCreateView):
         return context
 
 
-class ProductUpdateView(LoginRequiredMixin, FatherUpdateView):
+# ========================================================================== #
+class ProductUpdateView(FatherUpdateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm
@@ -107,11 +109,23 @@ class ProductUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-def DeleteProduct(request, pk):
+# ========================================================================== #
+class ProductUpdateView(FatherUpdateView):
     model = PyProduct
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:products'))
+    # fields = LEAD_FIELDS_SHORT
+    form_class = ProductForm
+    template_name = 'base/form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductUpdateView, self).get_context_data(**kwargs)
+        context['title'] = context['object'].name
+        context['form'] = self.get_form()
+        context['breadcrumbs'] = [{'url': 'base:products', 'name': 'Productos'}]
+        context['back_url'] = reverse('base:product-detail', kwargs={'pk': context['object'].pk})
+        return context
+
+
+# ========================================================================== #
+class ProductDeleteView(FatherDeleteView):
+    success_url = 'base:products'
+    model = PyProduct

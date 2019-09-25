@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyFaq
+from ..models import PyFaq, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 FAQ_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -77,8 +76,7 @@ class FaqUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteFaq(self, pk):
-    faq = PyFaq.objects.get(id=pk)
-    faq.delete()
-    return redirect(reverse('base:faqs'))
+
+class FaqDeleteView(FatherDeleteView):
+    model = PyFaq
+    success_url = 'base:faqs'

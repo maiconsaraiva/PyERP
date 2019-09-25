@@ -24,14 +24,14 @@ from .activatelanguage import ActivateLanguageView
 from .base_config import UpdateBaseConfigView
 from .company import (
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
-    DeleteCompany, change_active_company)
+    CompanyDeleteView, change_active_company)
 from .partner import (
     CustomerListView, ProviderListView)
 from .usercustom import (
     ActivateUserView, AvatarUpdateView, LogOutModalView, PasswordRecoveryView,
     ProfileView, SignUpView, cambio_clave)
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 from .wparameter import PyWParameter
 
 
@@ -125,11 +125,10 @@ class UserUpdateView(FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteUser(self, pk):
-    user = PyUser.objects.get(id=pk)
-    user.delete()
-    return redirect(reverse('base:users'))
+
+class UserDeleteView(FatherDeleteView):
+    model = PyUser
+    success_url = 'base:users'
 
 
 def ChangePasswordForm(self, pk):

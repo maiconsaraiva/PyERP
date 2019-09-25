@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.wpayment import (
-    DeleteWPayment, WPaymentCreateView, WPaymentDetailView, WPaymentListView,
+    WPaymentDeleteView, WPaymentCreateView, WPaymentDetailView, WPaymentListView,
     WPaymentUpdateView)
 
 urlpatterns = [
@@ -13,5 +13,5 @@ urlpatterns = [
     path('wpayment/add/', WPaymentCreateView.as_view(), name='wpayment-add'),
     path('wpayment/<int:pk>/', WPaymentDetailView.as_view(), name='wpayment-detail'),
     path('wpayment/<int:pk>/update', WPaymentUpdateView.as_view(), name='wpayment-update'),
-    path('wpayment/<int:pk>/delete/', DeleteWPayment, name='wpayment-delete'),
+    path('wpayment/<int:pk>/delete/', WPaymentDeleteView.as_view(), name='wpayment-delete'),
 ]

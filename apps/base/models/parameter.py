@@ -27,6 +27,8 @@ class PyParameter(PyFather):
 
     class Meta:
         ordering = ['-id']
+        verbose_name = _("Parameter")
+        verbose_name_plural = _("PyParameter")
 
     def __str__(self):
         return format(self.name)

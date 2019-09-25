@@ -1,29 +1,25 @@
-<div class="modal fade show" id="modal-danger" style="display: block; padding-right: 12px;" aria-modal="true">
-    <div class="modal-dialog">
-        <div class="modal-content bg-danger">
-            <div class="modal-header">
-                <h4 class="modal-title">{{ title }}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                {% if not detail %}
-                    {{ delete_message|safe }}
-                    <p>{{ _('If you wish to continue press "Delete", keep in mind that this action is irreversible.') }}</p>
-                    <p>{{ _('Press "Cancel" to cancel the action.') }}</p>
-                {% else %}
-                    {{ cant_delete_message|safe }}
-                {% endif %}
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline-light" type="button" data-dismiss="modal">{{ _('Cancel') }}</button>
-                {% if not detail %}
-                    <form class="form-horizontal" role="form" method="post">
-                    <form method="post" class="form">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-light">{{ _('Delete') }}</button>
-                    </form>
-                {% endif %}
-            </div>
+<!--<div class="modal fade show" id="modal-danger" style="display: block; padding-right: 12px;" aria-modal="true">-->
+<div class="modal fade show" id="modal-sm" style="display: block;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title">{{ title }}</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="small text-justify">{{ delete_message|safe }}</p>
+            <p class="small text-justify">{{ _('If you wish to continue press <u>"Delete"</u>, keep in mind that this action is irreversible.') }}</p>
+            <p class="small text-justify">{{ _('Press <u>"Cancel"</u> to cancel the action.') }}</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+            <form method="post" role="form" action="{% url action_url object.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger">{{ _('Delete') }}</button>
+            </form>
+        </div>
         </div>
         <!-- /.modal-content -->
     </div>

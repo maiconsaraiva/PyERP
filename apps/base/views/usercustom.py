@@ -4,8 +4,8 @@ Vistas de la aplicación globales
 """
 
 # Librerias Django
-from django.contrib import messages
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordResetView
@@ -22,14 +22,13 @@ from django.views.generic import RedirectView, TemplateView
 import requests
 
 # Librerias en carpetas locales
-from ..models import PyLog
 from ..forms import (
     AvatarForm, PasswordRecoveryForm, PasswordSetForm, PerfilForm,
     PersonaCreationForm)
-from ..models import PyUser
+from ..models import PyLog, PyUser
 from ..tokens import ACCOUNT_ACTIVATION_TOKEN, PASSWORD_RECOVERY_TOKEN
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 
 # ========================================================================== #

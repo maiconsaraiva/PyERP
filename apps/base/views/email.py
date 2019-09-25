@@ -1,16 +1,13 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyEmail
+from ..models import PyEmail, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 EMAIL_FIELDS = [
     {'string': _("Title"), 'field': 'title'},
@@ -22,7 +19,7 @@ EMAIL_FIELDS = [
 EMAIL_SHORT = ['title', 'content', 'partner_id', 'type']
 
 
-class EmailListView(LoginRequiredMixin, FatherListView):
+class EmailListView(FatherListView):
     model = PyEmail
     template_name = 'base/list.html'
     login_url = "login"
@@ -36,7 +33,7 @@ class EmailListView(LoginRequiredMixin, FatherListView):
         return context
 
 
-class EmailDetailView(LoginRequiredMixin, FatherDetailView):
+class EmailDetailView(FatherDetailView):
     model = PyEmail
     template_name = 'base/detail.html'
     login_url = "login"
@@ -51,7 +48,7 @@ class EmailDetailView(LoginRequiredMixin, FatherDetailView):
         return context
 
 
-class EmailCreateView(LoginRequiredMixin, FatherCreateView):
+class EmailCreateView(FatherCreateView):
     model = PyEmail
     fields = EMAIL_SHORT
     template_name = 'base/form.html'
@@ -65,7 +62,7 @@ class EmailCreateView(LoginRequiredMixin, FatherCreateView):
         return context
 
 
-class EmailUpdateView(LoginRequiredMixin, FatherUpdateView):
+class EmailUpdateView(FatherUpdateView):
     model = PyEmail
     fields = EMAIL_SHORT
     template_name = 'base/form.html'
@@ -79,12 +76,6 @@ class EmailUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteEmail(request, pk):
+class EmailDeleteView(FatherDeleteView):
     model = PyEmail
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:emails'))
+    success_url = 'base:emails'

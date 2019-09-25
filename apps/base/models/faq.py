@@ -17,3 +17,7 @@ class PyFaq(PyFather):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("Faq")
+        verbose_name_plural = _("Faqs")

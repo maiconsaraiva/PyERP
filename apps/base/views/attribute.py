@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyAttribute
+from ..models import PyAttribute, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 ATTRIBUTE_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -77,11 +76,6 @@ class AttributeUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-def DeleteAttribute(request, pk):
+class AttributeDeleteView(FatherDeleteView):
     model = PyAttribute
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:attributes'))
+    success_url = 'base:attributes'

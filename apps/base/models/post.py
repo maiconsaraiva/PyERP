@@ -6,6 +6,7 @@ from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.models import PyFather
@@ -27,6 +28,10 @@ class Category(models.Model):
     description = models.CharField(max_length=500)
     is_active = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = _("")
+        verbose_name_plural = _("")
+
 class PyPost(PyFather):
     title = models.CharField('Nombre', max_length=255)
     content = models.TextField()
@@ -46,6 +51,10 @@ class PyPost(PyFather):
 
     def __str__(self):
         return format(self.title)
+
+    class Meta:
+        verbose_name = _("Post")
+        verbose_name_plural = _("PyPost")
 
 
 @receiver(pre_save, sender=PyPost)

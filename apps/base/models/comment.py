@@ -18,3 +18,7 @@ class PyComment(PyFather):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("Comment")
+        verbose_name_plural = _("PyComment")

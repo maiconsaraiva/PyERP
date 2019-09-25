@@ -7,7 +7,7 @@ from django.urls import path
 # Librerias en carpetas locales
 from ..views.country import (
     CountryAutoComplete, CountryCreateView, CountryDetailView, CountryListView,
-    CountryUpdateView, DeleteCountry)
+    CountryUpdateView, CountryDeleteView)
 
 urlpatterns = [
     path(
@@ -32,7 +32,7 @@ urlpatterns = [
     ),
     path(
         '<int:pk>/delete/',
-        login_required(DeleteCountry),
+        login_required(CountryDeleteView.as_view()),
         name='country-delete'
     ),
 

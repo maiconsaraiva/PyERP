@@ -6,7 +6,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.tax import (
-    DeleteTax, TaxAutoComplete, TaxCreateView, TaxDetailView, TaxListView,
+    TaxDeleteView, TaxAutoComplete, TaxCreateView, TaxDetailView, TaxListView,
     TaxUpdateView)
 
 urlpatterns = [
@@ -32,7 +32,7 @@ urlpatterns = [
     ),
     path(
         '<int:pk>/delete/',
-        login_required(DeleteTax),
+        login_required(TaxDeleteView.as_view()),
         name='tax-delete'
     ),
 

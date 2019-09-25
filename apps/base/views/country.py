@@ -10,10 +10,9 @@ from django.views.generic import DetailView, ListView
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyCountry
+from ..models import PyCountry, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 COUNTRY_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -75,10 +74,9 @@ class CountryUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-def DeleteCountry(self, pk):
-    country = PyCountry.objects.get(id=pk)
-    country.delete()
-    return redirect(reverse('base:countries'))
+class CountryDeleteView(FatherDeleteView):
+    model = PyCountry
+    success_url = 'base:countries'
 
 
 class CountryAutoComplete(autocomplete.Select2QuerySetView):

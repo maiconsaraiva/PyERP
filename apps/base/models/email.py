@@ -5,8 +5,8 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from .father import PyFather
 from ..models import PyPartner
+from .father import PyFather
 
 TYPE_CHOICE = (
     ("received", "Received"),
@@ -25,3 +25,7 @@ class PyEmail(PyFather):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("Email")
+        verbose_name_plural = _("Emails")

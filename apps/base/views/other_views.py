@@ -8,8 +8,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 # Librerias en carpetas locales
-from ..models import PyLog
 from ..forms import InitForm
+from ..models import PyLog
 from ..models.base_config import BaseConfig
 from ..models.bi import PyBi
 from ..models.company import PyCompany

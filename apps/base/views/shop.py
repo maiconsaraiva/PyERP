@@ -6,8 +6,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyProduct, PyWParameter
+from ..models import PyLog, PyProduct, PyWParameter
 from .web_father import FatherDetailView, FatherListView
 
 # Tienda de Productos

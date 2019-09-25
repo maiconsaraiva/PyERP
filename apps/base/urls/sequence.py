@@ -6,7 +6,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.sequence import (
-    DeleteSequence, SequenceCreateView, SequenceDetailView, SequenceListView,
+    SequenceDeleteView, SequenceCreateView, SequenceDetailView, SequenceListView,
     SequenceUpdateView)
 
 urlpatterns = [
@@ -27,6 +27,6 @@ urlpatterns = [
         name='sequence-update'),
     path(
         '<int:pk>/delete/',
-        login_required(DeleteSequence),
+        login_required(SequenceDeleteView.as_view()),
         name='sequence-delete'),
 ]

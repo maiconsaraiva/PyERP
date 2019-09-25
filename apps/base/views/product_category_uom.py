@@ -6,10 +6,9 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyProductCategoryUOM
+from ..models import PyLog, PyProductCategoryUOM
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 CATEGORY_UOM_FIELDS = [
     {'string': 'Name', 'field': 'name'},
@@ -75,12 +74,7 @@ class ProductCategoryUOMUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteProductCategoryUOM(request, pk):
+
+class ProductCategoryUOMDeleteView(FatherDeleteView):
     model = PyProductCategoryUOM
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:product-category-uom'))
+    success_url = 'base:product-category-uom'

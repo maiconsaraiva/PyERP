@@ -26,3 +26,5 @@ class PyPlugin(PyFather):
 
     class Meta:
         ordering = ['name']
+        verbose_name = _("Plugin")
+        verbose_name_plural = _("PyPlugin")

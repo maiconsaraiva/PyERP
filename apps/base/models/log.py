@@ -19,3 +19,7 @@ class PyLog(PyFather):
 
     class Meta:
         ordering = ['-created_on']
+
+    class Meta:
+        verbose_name = _("Log")
+        verbose_name_plural = _("PyLog")

@@ -5,10 +5,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyCompany, PyUser
+from ..models import PyCompany, PyLog, PyUser
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 COMPANY_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -114,14 +113,10 @@ def change_active_company(request, company):
     user = PyUser.objects.get(pk=request.user.pk)
     user.active_company = PyCompany.objects.get(pk=company)
     user.save()
-    print('Usuario: {}, Compañía: {}'.format(user, company))
-
     return redirect(request.META.get('HTTP_REFERER'))
 
 
 # ========================================================================== #
-def DeleteCompany(self, pk):
-    company = PyCompany.objects.get(id=pk)
-    company.delete()
-
-    return redirect(reverse('base:companies'))
+class CompanyDeleteView(FatherDeleteView):
+    success_url = 'base:companies'
+    model = PyCompany
