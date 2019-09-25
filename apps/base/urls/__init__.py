@@ -122,4 +122,5 @@ urlpatterns = [
     path('file/', include('apps.base.urls.file')),
     path('message/', include('apps.base.urls.message')),
     path('note/', include('apps.base.urls.note')),
+    path('event/', include('apps.base.urls.event')),
 ]

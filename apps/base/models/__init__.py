@@ -39,3 +39,4 @@ from .email import PyEmail
 from .file import PyFile
 from .message import PyMessage
 from .note import PyNote
+from .event import PyEvent

@@ -75,6 +75,27 @@
                 </ul>
               </li>
 
+
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-calendar-week nav-icon"></i>
+                  <p>
+                    {{ _('Calendar') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:events' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Event') }}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
                <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="fas fa-sticky-note nav-icon"></i>
