@@ -41,8 +41,33 @@ class PyCompany(PyFather):
     social_youtube = models.CharField(max_length=255, blank=True)
     social_whatsapp = models.CharField(max_length=255, blank=True)
 
-    main_color = models.CharField(max_length=20, blank=True, default="#563D7C")
-    font_color = models.CharField(max_length=20, blank=True, default="#cbbde2")
+    def giveme_main_color():
+        count = PyCompany.objects.all().count()
+        if count == 0:
+            return "#563D7C"
+        elif count == 1:
+            return "#026AA7"
+        elif count == 2:
+            return "#01363D"
+        else:
+            return "#fff"
+
+    def giveme_font_color():
+        count = PyCompany.objects.all().count()
+        if count == 0:
+            return "#cbbde2"
+        elif count == 1:
+            return "#CCE1ED"
+        elif count == 2:
+            return "#30AABC"
+        else:
+            return "#777"
+
+    main_color = models.CharField(max_length=20, blank=True, default=giveme_main_color)
+    font_color = models.CharField(max_length=20, blank=True, default=giveme_font_color)
+
+
+
 
     slogan = models.CharField('Eslogan', max_length=250, blank=True)
     logo = models.ImageField(
