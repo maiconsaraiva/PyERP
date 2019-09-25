@@ -39,8 +39,8 @@ class FileDetailView(LoginRequiredMixin, FatherDetailView):
     login_url = "login"
 
     def get_context_data(self, **kwargs):
-        context = super(FilelDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].title
+        context = super(FileDetailView, self).get_context_data(**kwargs)
+        context['title'] = context['object'].name
         context['breadcrumbs'] = [{'url': 'base:files', 'name': 'Files'}]
         context['update_url'] = 'base:file-update'
         context['delete_url'] = 'base:file-delete'
