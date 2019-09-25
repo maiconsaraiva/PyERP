@@ -32,11 +32,9 @@
                     color:#777;
                 }
             </style>
-                <span>Uno</span>
+                <span class="active_bar">{{ _('Active') }}</span>
             <i class="fas fa-chevron-right ml-2"></i>
-                <span class="ml-2 active_bar"> Dos </span>
-            <i class="fas fa-chevron-right ml-2"></i>
-                <span class="ml-2"> Tres </span>
+                <span class="ml-2">{{ _('Archived') }}</span>
         </div>
         {% endfor %}
     </div>

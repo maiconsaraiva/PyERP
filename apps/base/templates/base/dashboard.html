@@ -74,6 +74,10 @@
     [class*=sidebar-light] .brand-link{
         border-bottom: {{ user.active_company.font_color }};
     }
+
+    .show>.nav-link {
+       color: {{ user.active_company.font_color }} important;
+    }
 </style>
 {% endif %}
 
