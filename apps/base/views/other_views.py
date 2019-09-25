@@ -2,11 +2,13 @@
 from __future__ import unicode_literals
 
 # Librerias Django
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..forms import InitForm
 from ..models.base_config import BaseConfig
 from ..models.bi import PyBi

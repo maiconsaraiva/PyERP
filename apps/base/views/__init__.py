@@ -15,6 +15,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from pyerp.settings import BASE_DIR
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..forms import AvatarForm
 from ..models import (
     BaseConfig, PyCompany, PyPartner, PyPlugin, PyProduct, PyProductCategory,

@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -6,6 +7,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyChannel
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
@@ -75,8 +77,11 @@ class ChannelUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteChannel(self, pk):
-    channel = PyChannel.objects.get(id=pk)
-    channel.delete()
+def DeleteChannel(request, pk):
+    model = PyChannel
+    eval(model.objects.get(id=pk).delete())
+    PyLog(
+        name=model._meta.object_name,
+        note='{}Delete:'.format(model._meta.verbose_name)
+    ).save()
     return redirect(reverse('base:channels'))

@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -9,6 +10,7 @@ from django.views.generic import DetailView, ListView
 from dal import autocomplete
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyCountry
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)

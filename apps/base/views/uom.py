@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -6,6 +7,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyUom
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
@@ -43,7 +45,7 @@ class UomDetailView(LoginRequiredMixin, FatherDetailView):
     def get_context_data(self, **kwargs):
         context = super(UomDetailView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:Uoms', 'name': 'Uoms'}]
+        context['breadcrumbs'] = [{'url': 'base:uoms', 'name': 'Uoms'}]
         context['update_url'] = 'base:uom-update'
         context['delete_url'] = 'base:uom-delete'
         context['fields'] = UOM_FIELDS
@@ -79,7 +81,11 @@ class UomUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 @login_required(login_url="base:login")
-def DeleteUom(self, pk):
-    uom = PyUom.objects.get(id=pk)
-    uom.delete()
+def DeleteUom(request, pk):
+    model = PyUom
+    eval(model.objects.get(id=pk).delete())
+    PyLog(
+        name=model._meta.object_name,
+        note='{}Delete:'.format(model._meta.verbose_name)
+    ).save()
     return redirect(reverse('base:uoms'))

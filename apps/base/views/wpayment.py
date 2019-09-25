@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -6,6 +7,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyWPayment
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)

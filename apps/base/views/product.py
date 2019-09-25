@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import redirect
@@ -6,8 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..forms.product import ProductForm
-from ..models.product import PyProduct
+from ..models import PyProduct
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
@@ -44,6 +46,7 @@ LEAD_FIELDS_SHORT = [
     'img',
     'youtube_video',
     'description',
+    'company_id',
 ]
 
 
@@ -98,12 +101,17 @@ class ProductUpdateView(LoginRequiredMixin, FatherUpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProductUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].name
+        context['form'] = self.get_form()
         context['breadcrumbs'] = [{'url': 'base:products', 'name': 'Productos'}]
         context['back_url'] = reverse('base:product-detail', kwargs={'pk': context['object'].pk})
         return context
 
 
-def DeleteProduct(self, pk):
-    product = PyProduct.objects.get(id=pk)
-    product.delete()
+def DeleteProduct(request, pk):
+    model = PyProduct
+    eval(model.objects.get(id=pk).delete())
+    PyLog(
+        name=model._meta.object_name,
+        note='{}Delete:'.format(model._meta.verbose_name)
+    ).save()
     return redirect(reverse('base:products'))

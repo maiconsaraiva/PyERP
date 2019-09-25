@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -6,6 +7,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyMessage
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
@@ -14,7 +16,7 @@ MESSAGE_FIELDS = [
     {'string': _("Message"), 'field': 'message'},
 ]
 
-MESSAGE_SHORT = ['name', 'Message', 'message']
+MESSAGE_SHORT = ['message', 'user_id']
 
 
 class MessageListView(LoginRequiredMixin, FatherListView):
@@ -26,7 +28,7 @@ class MessageListView(LoginRequiredMixin, FatherListView):
         context = super(MessageListView, self).get_context_data(**kwargs)
         context['title'] = 'message'
         context['detail_url'] = 'base:message-detail'
-        context['add_url'] = 'base:file-add'
+        context['add_url'] = 'base:message-add'
         context['fields'] = MESSAGE_FIELDS
         return context
 
@@ -75,7 +77,11 @@ class MessageUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 @login_required(login_url="base:login")
-def DeleteMessage(self, pk):
-    messages = PyMessage.objects.get(id=pk)
-    messages.delete()
+def DeleteMessage(request, pk):
+    model = PyMessage
+    eval(model.objects.get(id=pk).delete())
+    PyLog(
+        name=model._meta.object_name,
+        note='{}Delete:'.format(model._meta.verbose_name)
+    ).save()
     return redirect(reverse('base:messages'))

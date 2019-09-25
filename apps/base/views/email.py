@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -6,6 +7,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyEmail
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
@@ -78,7 +80,11 @@ class EmailUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 @login_required(login_url="base:login")
-def DeleteEmail(self, pk):
-    email = PyEmail.objects.get(id=pk)
-    email.delete()
+def DeleteEmail(request, pk):
+    model = PyEmail
+    eval(model.objects.get(id=pk).delete())
+    PyLog(
+        name=model._meta.object_name,
+        note='{}Delete:'.format(model._meta.verbose_name)
+    ).save()
     return redirect(reverse('base:emails'))

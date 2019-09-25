@@ -1,15 +1,15 @@
 # Librerias Django
-from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.db.models import ProtectedError
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyLog, PyPartner
+from ..models import PyLog
+from ..models import PyPartner
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
@@ -31,7 +31,6 @@ PARTNER_FIELDS_SHORT = ['name', 'street', 'country_id', 'email', 'phone', 'note'
                         'type','active']
 
 
-# ========================================================================== #
 class CustomerListView(FatherListView):
     model = PyPartner
     template_name = 'base/list.html'
@@ -47,7 +46,6 @@ class CustomerListView(FatherListView):
         return context
 
 
-# ========================================================================== #
 class ProviderListView(FatherListView):
     model = PyPartner
     template_name = 'base/list.html'
@@ -63,7 +61,6 @@ class ProviderListView(FatherListView):
         return context
 
 
-# ========================================================================== #
 class PartnerDetailView(FatherDetailView):
     model = PyPartner
     template_name = 'base/detail.html'
@@ -79,7 +76,6 @@ class PartnerDetailView(FatherDetailView):
         return context
 
 
-# ========================================================================== #
 class PartnerCreateView(FatherCreateView):
     model = PyPartner
     fields = ['name', 'email', 'phone', 'customer', 'provider']
@@ -103,7 +99,6 @@ class PartnerCreateView(FatherCreateView):
         return form"""
 
 
-# ========================================================================== #
 class PartnerUpdateView(FatherUpdateView):
     model = PyPartner
     fields = PARTNER_FIELDS_SHORT
@@ -135,39 +130,16 @@ class PartnerUpdateView(FatherUpdateView):
         return form"""
 
 
-# ========================================================================== #
 def DeletePartner(request, pk):
-    partner = PyPartner.objects.get(id=pk)
-    try:
-        partner.delete()
-        PyLog(name='Partner', note='PartnerDelete:').save()
-    except ProtectedError:
-        messages.error(
-            request,
-            _('The record cannot be deleted, certain information on system depends on this.')
-        )
+    model = PyPartner
+    eval(model.objects.get(id=pk).delete())
+    PyLog(
+        name=model._meta.object_name,
+        note='{}Delete:'.format(model._meta.verbose_name)
+    ).save()
     return redirect(reverse('base:partners'))
 
-# class PartnerDeleteView(DeleteView):
-#     model = PyPartner
-#     template_name = 'base/delete.html'
-#     success_url = reverse_lazy('base:partners')
 
-#     def delete(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         success_url = self.get_success_url()
-#         try:
-#             self.object.delete()
-#         except ProtectedError:
-#             messages.error(
-#                 self.request,
-#                 _('The record cannot be deleted, certain information on system depends on this.')
-#             )
-
-#         return HttpResponseRedirect(success_url)
-
-
-# ========================================================================== #
 class PartnerAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyPartner
     """
