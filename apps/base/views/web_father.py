@@ -87,6 +87,13 @@ class FatherUpdateView(UpdateView):
         context['company'] = PyCompany.objects.filter(active=True)
         return context
 
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save(commit=False)
+        self.object.um = self.request.user.pk
+        self.object.save()
+        return super().form_valid(form)
+
     class Meta:
         abstract = True
 
