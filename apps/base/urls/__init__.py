@@ -120,4 +120,5 @@ urlpatterns = [
     path('wpayment/', include('apps.base.urls.wpayment')),
     path('email/', include('apps.base.urls.email')),
     path('file/', include('apps.base.urls.file')),
+    path('message/', include('apps.base.urls.message')),
 ]

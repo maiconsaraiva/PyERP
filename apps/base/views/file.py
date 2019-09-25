@@ -19,13 +19,13 @@ FILE_FIELDS = [
 FILE_SHORT = ['name', 'note', 'user_id']
 
 
-class FilelListView(LoginRequiredMixin, FatherListView):
+class FileListView(LoginRequiredMixin, FatherListView):
     model = PyFile
     template_name = 'base/list.html'
     login_url = "login"
 
     def get_context_data(self, **kwargs):
-        context = super(FilelListView, self).get_context_data(**kwargs)
+        context = super(FileListView, self).get_context_data(**kwargs)
         context['title'] = 'Files'
         context['detail_url'] = 'base:file-detail'
         context['add_url'] = 'base:file-add'
@@ -62,14 +62,14 @@ class FileCreateView(LoginRequiredMixin, FatherCreateView):
         return context
 
 
-class FilelUpdateView(LoginRequiredMixin, FatherUpdateView):
+class FileUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyFile
     fields = FILE_SHORT
     template_name = 'base/form.html'
     login_url = "login"
 
     def get_context_data(self, **kwargs):
-        context = super(FilelUpdateView, self).get_context_data(**kwargs)
+        context = super(FileUpdateView, self).get_context_data(**kwargs)
         context['title'] = context['object'].title
         context['breadcrumbs'] = [{'url': 'base:files', 'name': 'Files'}]
         context['back_url'] = reverse('base:file-detail', kwargs={'pk': context['object'].pk})

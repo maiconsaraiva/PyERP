@@ -56,25 +56,28 @@
          <!-- END PARTNER -->
 
 
-                <li class="nav-item has-treeview">
+                 <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
-                  <i class="fas fa-paperclip nav-icon" ></i>
+                  <i class="far fa-comment-alt nav-icon"></i>
                   <p>
-                    {{ _('Files') }}
+                    {{ _('Message') }}
                     <i class="fas fa-angle-left right"></i>
                   </p>
 
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{% url 'base:files' %}" class="nav-link">
+                    <a href="{% url 'base:messages' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>{{ _('Files') }}</p>
+                      <p>{{ _('Message') }}</p>
                     </a>
                   </li>
 
                 </ul>
               </li>
+
+
+
          <!-- END PARTNER -->
 
 
@@ -335,6 +338,27 @@
                             </li>
                         </ul>
                     </li>
+
+             <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-paperclip nav-icon" ></i>
+                  <p>
+                    {{ _('Files') }}
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{% url 'base:files' %}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>{{ _('Files') }}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link"><i class="fa fa-cogs nav-icon"></i><p>{{ _('Configuration') }}<i class="fas fa-angle-left right"></i></p></a>
                         <ul class="nav nav-treeview">
