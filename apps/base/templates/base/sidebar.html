@@ -17,9 +17,16 @@
     <!-- Sidebar -->
     <div class="sidebar">
 
+
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item has-treeview">
+                    <a href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
+                </li>
+
                 <!-- PARTNER -->
         <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
@@ -70,9 +77,7 @@
               </li>
          <!-- END PARTNER -->
 
-                <li class="nav-item has-treeview">
-                    <a href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
-                </li>
+
 
        <!-- PARTNER -->
         <li class="nav-item has-treeview">

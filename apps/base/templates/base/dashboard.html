@@ -76,8 +76,14 @@
     }
 
     .show>.nav-link {
-       color: {{ user.active_company.font_color }} important;
+       color: {{ user.active_company.font_color }} !important;
     }
+
+    .fa-log {
+        background: {{ user.active_company.main_color }} !important;
+        color : {{ user.active_company.font_color }};
+    }
+
 </style>
 {% endif %}
 
