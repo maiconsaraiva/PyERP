@@ -3,13 +3,26 @@
 
 {% block content %}
 <div class="row" style="padding:10px;">
-<div class="card card-primary card-outline col-12">
+<div class="card card-outline col-12">
     <div class="card-header">
-        <a href="{% url update_url object.pk %}" class="btn btn-success"><i class="fa fa-pen"></i>  {{ _("Edit") }}</a>
-        <a href="{% url update_url object.pk %}" class="btn btn-warning"><i class="fa fa-copy"></i>  {{ _("Duplicate") }}</a>
-        <a href="{% url delete_url object.pk %}" class="btn btn-danger"><i class="fa fa-trash"></i> {{ _("Delete") }}</a>
         {% for btn in breadcrumbs %}
-        <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fa fa-home"></i> {{ btn.name }}</a>
+        <a title=" {{ _('Back') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
+        {% endfor %}
+
+        <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
+        <a title=" {{ _('Delete') }}" href="{% url delete_url object.pk %}" class="btn btn-light"><i class="fas fa-trash"></i></a>
+
+        {% for btn in breadcrumbs %}
+        <a title=" {{ _('Archive') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-archive"></i></a>
+        {% endfor %}
+
+
+
+
+        <a title=" {{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
+
+        {% for btn in breadcrumbs %}
+        <!-- <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fas fa-undo-alt"></i></a> -->
         {% endfor %}
     </div>
     <div class="card-body">

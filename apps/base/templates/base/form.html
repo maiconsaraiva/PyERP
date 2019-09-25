@@ -22,10 +22,8 @@
 <div class="card card-primary card-outline col-12">
     <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
         <div class="card-header" style="background-color:#ffffff;">
-            <a href="{{ back_url }}" class="btn btn-danger">{{ _("Discard") }}</a>
-            <button type="submit" class="btn btn-primary">
-                {{ _("Save") }}
-            </button>
+            <a title=" {{ _('Back') }}" href="{{ back_url }}" class="btn"><i class="fas fa-arrow-left"></i></a>
+            <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
         </div>
         <div class="card-body">
             {% csrf_token %}

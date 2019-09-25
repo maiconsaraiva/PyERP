@@ -9,15 +9,15 @@
 <div class="row" style="padding:10px;">
     <div class="card card-primary card-outline lg col-12">
         <div class="card-header">
-            <a href="{% url add_url %}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ _("Create") }}</a>
+            <a title=" {{ _('Create') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-plus"></i></a>
             {% if  web_parameter.show_btn_export == 'True' %}
-                <a href="{% url add_url %}" class="btn btn-light"><i class="fa fa-file-excel"></i> {{ _("Export") }}</a>
+            <a title=" {{ _('Create') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-file-excel"></i></a>
             {% endif %}
             {% if  web_parameter.show_btn_import == 'True' %}
-                <a href="{% url add_url %}" class="btn btn-light"><i class="fa fa-file-excel"></i> {{ _("Import") }}</a>
+             <a title=" {{ _('Import') }}" href="{% url add_url %}" class="btn btn-light"><i class="fas fa-upload"></i></i></a>
             {% endif %}
             {% if  web_parameter.show_btn_mass == 'True' %}
-                <a href="{% url add_url %}" class="btn btn-light"><i class="fa fa-exclamation"></i> {{ _("Massive Edition") }}</a>
+            <a title=" {{ _('Massive Edition') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-exclamation"></i></a>
             {% endif %}
         </div>
         <div class="card-body">

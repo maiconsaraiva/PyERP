@@ -34,6 +34,10 @@
 
 {% if  web_parameter.backend_background_color %}
 <style>
+      .navbar-light .navbar-nav .nav-link {
+          color: {{ web_parameter.backend_font_color }};
+      }
+
     .main-sidebar, .main-header, .main-footer{
       background-color: {{ web_parameter.backend_background_color }};
       color: {{ web_parameter.backend_font_color }};
