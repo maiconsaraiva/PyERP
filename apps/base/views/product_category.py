@@ -6,10 +6,9 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyProductCategory
+from ..models import PyLog, PyProductCategory
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 CATEGORY_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},
@@ -76,12 +75,7 @@ class ProductCategoryUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteProductCategory(request, pk):
+
+class ProductCategoryDeleteView(FatherDeleteView):
     model = PyProductCategory
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:product-category'))
+    success_url = 'base:product-category'

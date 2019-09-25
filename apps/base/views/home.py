@@ -4,10 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Librerias en carpetas locales
-from ..models import PyLog
+from ..models import PyCompany, PyLog
 from .bi import PyBi
 from .wparameter import PyWParameter
-from ..models import PyCompany
 
 
 def _web_parameter():
@@ -16,7 +15,7 @@ def _web_parameter():
         web_parameter[parametro.name] = parametro.value
     return web_parameter
 
-@login_required(login_url="base:login")
+
 def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """

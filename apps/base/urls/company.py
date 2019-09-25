@@ -7,7 +7,7 @@ from django.urls import path
 # Librerias en carpetas locales
 from ..views.company import (
     CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
-    DeleteCompany, change_active_company)
+    CompanyDeleteView, change_active_company)
 
 urlpatterns = [
     path(
@@ -32,7 +32,7 @@ urlpatterns = [
     ),
     path(
         '<int:pk>/delete/',
-        login_required(DeleteCompany),
+        login_required(CompanyDeleteView.as_view()),
         name='company-delete'
     ),
     path(

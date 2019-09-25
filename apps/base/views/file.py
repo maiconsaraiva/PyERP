@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from ..models import PyFile
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 FILE_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -76,8 +76,7 @@ class FileUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteFile(self, pk):
-    file = PyFile.objects.get(id=pk)
-    file.delete()
-    return redirect(reverse('base:files'))
+
+class FileDeleteView(FatherDeleteView):
+    model = PyFile
+    success_url = 'base:files'

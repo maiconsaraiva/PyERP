@@ -9,23 +9,23 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views import (
-    ChangePasswordForm, CustomerListView, DeleteUser, DoChangePassword,
+    ChangePasswordForm, CustomerListView, UserDeleteView, DoChangePassword,
     Install, ProviderListView, UpdateBaseConfigView, UserCreateView,
     UserDetailView, UserListView, UserUpdateView)
 from ..views.base_config import LoadData
 from ..views.cron import (
-    CronCreateView, CronDetailView, CronListView, CronUpdateView, DeleteCron)
+    CronCreateView, CronDetailView, CronListView, CronUpdateView, CronDeleteView)
 from ..views.home import erp_home
 from ..views.log import (
-    DeleteLog, LogCreateView, LogDetailView, LogListView, LogUpdateView)
+    LogDeleteView, LogCreateView, LogDetailView, LogListView, LogUpdateView)
 from ..views.post import (
-    DeletePost, PostCreateView, PostDetailView, PostListView, PostUpdateView)
+    PostDeleteView, PostCreateView, PostDetailView, PostListView, PostUpdateView)
 from ..views.product_category import (
-    DeleteProductCategory, ProductCategoryCreateView,
+    ProductCategoryDeleteView, ProductCategoryCreateView,
     ProductCategoryDetailView, ProductCategoryListView,
     ProductCategoryUpdateView)
 from ..views.product_webcategory import (
-    DeleteProductWebCategory, ProductWebCategoryCreateView,
+    ProductWebCategoryDeleteView, ProductWebCategoryCreateView,
     ProductWebCategoryDetailView, ProductWebCategoryListView,
     ProductWebCategoryUpdateView)
 from ..views.website_config import UpdateWebsiteConfigView
@@ -53,7 +53,7 @@ urlpatterns = [
     path('user/add/', UserCreateView.as_view(), name='user-add'),
     path('user/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
     path('user/<int:pk>/update', UserUpdateView.as_view(), name='user-update'),
-    path('user/<int:pk>/delete/', DeleteUser, name='user-delete'),
+    path('user/<int:pk>/delete/', UserDeleteView.as_view(), name='user-delete'),
     path('user/change-password/<int:pk>', ChangePasswordForm, name='password-change'),
     path('user/change-password-confirm/<int:pk>', DoChangePassword, name='do-change-password'),
 
@@ -64,31 +64,31 @@ urlpatterns = [
     path('product-category/add/', ProductCategoryCreateView.as_view(), name='product-category-add'),
     path('product-category/<int:pk>/', ProductCategoryDetailView.as_view(), name='product-category-detail'),
     path('product-category/<int:pk>/update', ProductCategoryUpdateView.as_view(), name='product-category-update'),
-    path('product-category/<int:pk>/delete/', DeleteProductCategory, name='product-category-delete'),
+    path('product-category/<int:pk>/delete/', ProductCategoryDeleteView.as_view(), name='product-category-delete'),
 
     path('product-webcategory', ProductWebCategoryListView.as_view(), name='product-webcategory'),
     path('product-webcategory/add/', ProductWebCategoryCreateView.as_view(), name='product-webcategory-add'),
     path('product-webcategory/<int:pk>/', ProductWebCategoryDetailView.as_view(), name='product-webcategory-detail'),
     path('product-webcategory/<int:pk>/update', ProductWebCategoryUpdateView.as_view(), name='product-webcategory-update'),
-    path('product-webcategory/<int:pk>/delete/', DeleteProductWebCategory, name='product-webcategory-delete'),
+    path('product-webcategory/<int:pk>/delete/', ProductWebCategoryDeleteView.as_view(), name='product-webcategory-delete'),
 
     path('logs', LogListView.as_view(), name='logs'),
     path('log/add/', LogCreateView.as_view(), name='log-add'),
     path('log/<int:pk>/', LogDetailView.as_view(), name='log-detail'),
     path('log/<int:pk>/update', LogUpdateView.as_view(), name='log-update'),
-    path('log/<int:pk>/delete/', DeleteLog, name='log-delete'),
+    path('log/<int:pk>/delete/', LogDeleteView.as_view(), name='log-delete'),
 
     path('crons', CronListView.as_view(), name='crons'),
     path('cron/add/', CronCreateView.as_view(), name='cron-add'),
     path('cron/<int:pk>/', CronDetailView.as_view(), name='cron-detail'),
     path('cron/<int:pk>/update', CronUpdateView.as_view(), name='cron-update'),
-    path('cron/<int:pk>/delete/', DeleteCron, name='cron-delete'),
+    path('cron/<int:pk>/delete/', CronDeleteView.as_view(), name='cron-delete'),
 
     path('post', PostListView.as_view(), name='post-backend'),
     path('post/add/', PostCreateView.as_view(), name='post-add'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
-    path('post/<int:pk>/delete/', DeletePost, name='post-delete'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
 
 
     # ============================ New URLs ============================ #

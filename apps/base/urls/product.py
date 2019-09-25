@@ -4,7 +4,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.product import (
-    DeleteProduct, ProductCreateView, ProductDetailView, ProductListView,
+    ProductDeleteView, ProductCreateView, ProductDetailView, ProductListView,
     ProductUpdateView)
 
 urlpatterns = [
@@ -26,7 +26,7 @@ urlpatterns = [
     ),
     path(
         '<int:pk>/delete/',
-        login_required(DeleteProduct),
+        login_required(ProductDeleteView.as_view()),
         name='product-delete'
     ),
 ]

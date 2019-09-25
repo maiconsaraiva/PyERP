@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyComment
+from ..models import PyComment, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 COMMENT_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -77,8 +76,7 @@ class CommentUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteComment(self, pk):
-    comment = PyFaq.objects.get(id=pk)
-    comment.delete()
-    return redirect(reverse('base:comments'))
+
+class CommentDeleteView(FatherDeleteView):
+    model = PyComment
+    success_url = 'base:comments'

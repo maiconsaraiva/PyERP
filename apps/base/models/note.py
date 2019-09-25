@@ -7,7 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from .father import PyFather
 
-
 COLOR_CHOICE = (
     ("#ffc", "yellow"),
     ('#cfc', 'green'),
@@ -24,3 +23,7 @@ class PyNote(PyFather):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("Note")
+        verbose_name_plural = _("")

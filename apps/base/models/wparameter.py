@@ -28,6 +28,8 @@ class PyWParameter(PyFather):
 
     class Meta:
         ordering = ['-id']
+        verbose_name = _("WParameter")
+        verbose_name_plural = _("PyWParameters")
 
     def __str__(self):
         return format(self.name)

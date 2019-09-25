@@ -9,10 +9,9 @@ from django.utils.translation import ugettext_lazy as _
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyTax
+from ..models import PyLog, PyTax
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 TAX_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -76,10 +75,9 @@ class TaxUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-def DeleteTax(self, pk):
-    tax = PyFaq.objects.get(id=pk)
-    tax.delete()
-    return redirect(reverse('base:taxs'))
+class TaxDeleteView(FatherDeleteView):
+    model = PyTax
+    success_url = 'base:taxs'
 
 
 # ========================================================================== #

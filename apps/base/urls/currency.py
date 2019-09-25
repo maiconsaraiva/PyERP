@@ -7,7 +7,7 @@ from django.urls import path
 # Librerias en carpetas locales
 from ..views.currency import (
     CurrencyAutoComplete, CurrencyCreateView, CurrencyDetailView,
-    CurrencyListView, CurrencyUpdateView, DeleteCurrency)
+    CurrencyListView, CurrencyUpdateView, CurrencyDeleteView)
 
 urlpatterns = [
     path(
@@ -32,7 +32,7 @@ urlpatterns = [
     ),
     path(
         '<int:pk>/delete/',
-        login_required(DeleteCurrency),
+        login_required(CurrencyDeleteView.as_view()),
         name='currency-delete'
     ),
 

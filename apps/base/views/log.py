@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from ..models import PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 LOG_FIELDS = [
     {'string': _("Created On"), 'field': 'created_on'},
@@ -77,12 +77,7 @@ class LogUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteLog(request, pk):
+
+class LogDeleteView(FatherDeleteView):
     model = PyLog
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:logs'))
+    success_url = 'base:logs'

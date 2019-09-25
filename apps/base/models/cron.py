@@ -30,3 +30,5 @@ class PyCron(PyFather):
 
     class Meta:
         ordering = ['-created_on']
+        verbose_name = _("Cron")
+        verbose_name_plural = _("Crons")

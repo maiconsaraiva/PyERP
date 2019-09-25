@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PySequence
+from ..models import PyLog, PySequence
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 SEQ_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -81,8 +80,7 @@ class SequenceUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteSequence(self, pk):
-    sequences = PySequence.objects.get(id=pk)
-    sequences.delete()
-    return redirect(reverse('base:sequences'))
+
+class SequenceDeleteView(FatherDeleteView):
+    model = PySequence
+    success_url = 'base:sequences'

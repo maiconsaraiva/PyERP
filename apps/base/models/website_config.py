@@ -23,3 +23,7 @@ class PyWebsiteConfig(PyFather):
         wbaseconfig = cls(company_id=company)
         wbaseconfig.save()
         return wbaseconfig
+
+    class Meta:
+        verbose_name = _("WebsiteConfig")
+        verbose_name_plural = _("PyWebsiteConfig")

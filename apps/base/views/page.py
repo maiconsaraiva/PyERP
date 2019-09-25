@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import PyLog
 from ..models.page import PyPage
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 PAGE_FIELDS = [
             {'string': _("Title"), 'field': 'title'},
@@ -73,8 +73,7 @@ class PageUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeletePage(self, pk):
-    page = PyPage.objects.get(id=pk)
-    page.delete()
-    return redirect(reverse('base:page-backend'))
+
+class PageDeleteView(FatherDeleteView):
+    model = PyPage
+    success_url = 'base:page-backend'

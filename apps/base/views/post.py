@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import PyLog
 from ..models.post import PyPost
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 POST_FIELDS = [
             {'string': _("Title"), 'field': 'title'},
@@ -73,8 +73,7 @@ class PostUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeletePost(self, pk):
-    post = PyPost.objects.get(id=pk)
-    post.delete()
-    return redirect(reverse('base:post-backend'))
+
+class PostDeleteView(FatherDeleteView):
+    model = PyPost
+    success_url = 'base:post-backend'

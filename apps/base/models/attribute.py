@@ -18,3 +18,7 @@ class PyAttribute(PyFather):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("Attribute")
+        verbose_name_plural = _("PyAttribute")

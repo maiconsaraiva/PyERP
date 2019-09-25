@@ -7,6 +7,7 @@ from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..rename_image import RenameImage
@@ -73,6 +74,10 @@ class PyCompany(PyFather):
         pycompany.save()
 
         return pycompany
+
+    class Meta:
+        verbose_name = _("Company")
+        verbose_name_plural = _("PyCompany")
 
 
 @receiver(pre_save, sender=PyCompany)

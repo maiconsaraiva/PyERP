@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyChannel
+from ..models import PyChannel, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 CHANNEL_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -77,11 +76,6 @@ class ChannelUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-def DeleteChannel(request, pk):
+class ChannelDeleteView(FatherDeleteView):
     model = PyChannel
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:channels'))
+    success_url = 'base:channels'

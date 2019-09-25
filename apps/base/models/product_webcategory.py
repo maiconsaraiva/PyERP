@@ -1,6 +1,7 @@
 # Librerias Django
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from .father import PyFather
@@ -16,3 +17,7 @@ class PyProductWebCategory(PyFather):
 
     def get_absolute_url(self):
         return reverse('base:product-webcategory-detail', kwargs={'pk': self.pk})
+
+    class Meta:
+        verbose_name = _("ProductWebCategory")
+        verbose_name_plural = _("PyProductWebCategory")

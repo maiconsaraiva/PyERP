@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyTag
+from ..models import PyLog, PyTag
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 TAG_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -76,8 +75,7 @@ class TagUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteTag(self, pk):
-    tag = PyTag.objects.get(id=pk)
-    tag.delete()
-    return redirect(reverse('base:tags'))
+
+class TagDeleteView(FatherDeleteView):
+    model = PyTag
+    success_url = 'base:tags'

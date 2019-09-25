@@ -1,6 +1,7 @@
 # Librerias Django
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from .country import PyCountry
@@ -26,3 +27,7 @@ class PyCurrency(PyFather):
 
     def __str__(self):
         return "{} ({})".format(self.name, self.country)
+
+    class Meta:
+        verbose_name = _("Currency")
+        verbose_name_plural = _("Currencies")

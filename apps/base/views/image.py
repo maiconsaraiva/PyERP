@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyImage
+from ..models import PyImage, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 IMAGE_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -77,8 +76,7 @@ class ImageUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteImage(self, pk):
-    image = PyImage.objects.get(id=pk)
-    image.delete()
-    return redirect(reverse('base:images'))
+
+class ImageDeleteView(FatherDeleteView):
+    model = PyImage
+    success_url = 'base:images'

@@ -10,13 +10,11 @@
         {% endfor %}
 
         <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
-        <a title=" {{ _('Delete') }}" href="{% url delete_url object.pk %}" class="btn btn-light"><i class="fas fa-trash"></i></a>
+        <button onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
 
         {% for btn in breadcrumbs %}
         <a title=" {{ _('Archive') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-archive"></i></a>
         {% endfor %}
-
-
 
 
         <a title=" {{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
@@ -46,7 +44,7 @@
                     <div class="row">
                         <label for="{{field.field}}" class="col-3 col-form-label">{{field.string}}</label>
                         <div class="col-9">
-                            <input type="text" readonly class="form-control-plaintext" id="{{field.field}}" value="{{ object|get_obj_attr:field.field }}"/> 
+                            <input type="text" readonly class="form-control-plaintext" id="{{field.field}}" value="{{ object|get_obj_attr:field.field }}"/>
                         </div>
                     </div>
                 </div>

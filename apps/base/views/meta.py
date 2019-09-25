@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import PyLog
 from ..models.meta import PyMeta
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 META_FIELDS = [
             {'string': _("Title"), 'field': 'title'},
@@ -71,8 +71,7 @@ class MetaUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteMeta(self, pk):
-    meta = PyMeta.objects.get(id=pk)
-    meta.delete()
-    return redirect(reverse('base:metas'))
+
+class MetaDeleteView(FatherDeleteView):
+    model = PyMeta
+    success_url = 'base:metas'

@@ -5,8 +5,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from .father import PyFather
 from ..models import PyUser
+from .father import PyFather
+
 
 class PyFile(PyFather):
     name = models.CharField(_("Name"), max_length=255)
@@ -18,3 +19,7 @@ class PyFile(PyFather):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("File")
+        verbose_name_plural = _("Files")

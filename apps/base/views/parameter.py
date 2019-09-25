@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyParameter
+from ..models import PyLog, PyParameter
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 PARAMETER_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -77,8 +76,7 @@ class ParameterUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteParameter(self, pk):
-    parameter = PyParameter.objects.get(id=pk)
-    parameter.delete()
-    return redirect(reverse('base:parameters'))
+
+class ParameterDeleteView(FatherDeleteView):
+    model = PyParameter
+    success_url = 'base:parameters'

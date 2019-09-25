@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyUom
+from ..models import PyLog, PyUom
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 UOM_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -80,12 +79,7 @@ class UomUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteUom(request, pk):
+
+class UomDeleteView(FatherDeleteView):
     model = PyUom
-    eval(model.objects.get(id=pk).delete())
-    PyLog(
-        name=model._meta.object_name,
-        note='{}Delete:'.format(model._meta.verbose_name)
-    ).save()
-    return redirect(reverse('base:uoms'))
+    success_url = 'base:uoms'

@@ -7,10 +7,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
-from ..models import PyBi
+from ..models import PyBi, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
+    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
 BI_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -84,8 +83,7 @@ class BiUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteBi(self, pk):
-    bi = PyBi.objects.get(id=pk)
-    bi.delete()
-    return redirect(reverse('base:bi'))
+
+class BiDeleteView(FatherDeleteView):
+    model = PyBi
+    success_url = 'base:bi'

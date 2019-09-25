@@ -72,6 +72,10 @@ class PyProduct(PyFather):
     def suma(cls):
         return cls.__name__
 
+    class Meta:
+        verbose_name = _("Product")
+        verbose_name_plural = _("Products")
+
 
 
 @receiver(pre_save, sender=PyProduct)

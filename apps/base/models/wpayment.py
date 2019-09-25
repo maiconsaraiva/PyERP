@@ -17,3 +17,7 @@ class PyWPayment(PyFather):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("WPayment")
+        verbose_name_plural = _("PyWPayment")
