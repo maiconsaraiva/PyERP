@@ -35,3 +35,5 @@ from .variant import PyVariant
 from .website_config import PyWebsiteConfig
 from .wparameter import PyWParameter
 from .wpayment import PyWPayment
+from .email import PyEmail
+from .file import PyFile
