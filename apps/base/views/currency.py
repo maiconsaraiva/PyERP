@@ -1,4 +1,5 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import redirect
@@ -9,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from dal import autocomplete
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyCurrency
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)

@@ -44,5 +44,8 @@ class PyPartner(PyFather):
         """
         pypartner = cls(name=name, email=email)
         pypartner.save()
-
         return pypartner
+
+    class Meta:
+        verbose_name = _('Partner')
+        verbose_name_plural = _('Partners')

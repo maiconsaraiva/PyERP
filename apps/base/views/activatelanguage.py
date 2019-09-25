@@ -7,6 +7,7 @@ Vistas de la aplicación globales
 from urllib.parse import urlparse
 
 # Librerias Django
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import resolve, reverse
 from django.utils import translation

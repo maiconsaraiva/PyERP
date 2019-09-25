@@ -1,9 +1,11 @@
 # Librerias Django
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyCompany, PyUser
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)

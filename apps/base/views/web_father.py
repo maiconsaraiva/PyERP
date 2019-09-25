@@ -1,8 +1,10 @@
 # Librerias Django
+from django.contrib import messages
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models import PyCompany, PyMeta, PyParameter, PyPlugin, PyWParameter
 
 

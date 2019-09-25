@@ -1,8 +1,10 @@
 # Librerias Django
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
 # Librerias en carpetas locales
+from ..models import PyLog
 from ..models.website_config import PyWebsiteConfig
 from .web_father import FatherUpdateView
 
