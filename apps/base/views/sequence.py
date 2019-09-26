@@ -9,6 +9,8 @@ from ..models import PySequence
 from .web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
 
+from ..models import PySequence
+
 SEQ_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
     {'string': _("Prefix"), 'field': 'prefix'},
@@ -87,53 +89,30 @@ class SequenceDeleteView(FatherDeleteView):
 
 # ========================================================================== #
 SELECT = """
-             SELECT last
-               FROM sequences_sequence
-              WHERE name = %s
+    SELECT last
+    FROM sequences_sequence
+    WHERE name = %s
 """
 
 POSTGRESQL_UPSERT = """
     INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
     ON CONFLICT (name)
-        DO UPDATE SET last = sequences_sequence.last + %s
-            RETURNING last;
+    DO UPDATE SET last = sequences_sequence.last + %s
+    RETURNING last;
 """
 
 MYSQL_UPSERT = """
     INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
     ON DUPLICATE KEY
-        UPDATE last = sequences_sequence.last + %s
+    UPDATE last = sequences_sequence.last + %s
 """
-
-
-def get_last_value(name='default', *, using=None,):
-    """
-    Return the last value for a given sequence.
-    """
-    # Inner import because models cannot be imported before their application.
-    from ..models import PySequence
-
-    if using is None:
-        using = router.db_for_read(PySequence)
-
-    connection = connections[using]
-
-    with connection.cursor() as cursor:
-        cursor.execute(SELECT, [name])
-        result = cursor.fetchone()
-
-    return None if result is None else result[0]
-
 
 def get_next_value(name='default', prefix='default', padding=4, initial=1, increment=1, reset=None, *, nowait=False, using=None):
     """
     Return the next value for a given sequence.
     """
-    # Inner import because models cannot be imported before their application.
-    from ..models import PySequence
-
     try:
         sequence = PySequence.objects.get(name=name)
         prefix = sequence.prefix
@@ -179,11 +158,9 @@ def get_next_value(name='default', prefix='default', padding=4, initial=1, incre
                 )
                 cursor.execute(SELECT, [name])
                 result = cursor.fetchone()
-
         return '{}{}'.format(prefix, str(result[0]).zfill(padding))
 
     else:
-
         # Default, ORM-based implementation for all other cases.
         with transaction.atomic(using=using, savepoint=False):
             sequence, created = (

@@ -21,6 +21,14 @@
                 {% endif %}
             </div>
             <div class="card-body">
+                {% if object %}
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-xl-2 col-form-label">{{ _("Name:") }}</label>
+                        <div class="col-sm-9 col-xl-10">
+                            <h4>{{ object.name }}</h4>
+                        </div>
+                    </div>
+                {% endif %}
                 {% csrf_token %}
                 {% for campo in form %}
                     <div class="form-group row">
