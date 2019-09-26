@@ -4,7 +4,6 @@
 import logging
 
 # Librerias Django
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -15,10 +14,11 @@ from ..forms import SaleOrderForm
 from ..models import PySaleOrder
 
 LOGGER = logging.getLogger(__name__)
+from apps.base.views.web_father import FatherCreateView
 
 
 # ========================================================================== #
-class SaleOrderAddView(LoginRequiredMixin, CreateView):
+class SaleOrderAddView(FatherCreateView):
     """Vista para agregar las sale
     """
     model = PySaleOrder
@@ -36,7 +36,10 @@ class SaleOrderAddView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        self.object = form.save()
+        self.object = form.save(commit=False)
+        self.object.uc = self.request.user.pk
+        self.object.company_id = self.request.user.active_company_id
+        self.object.save()
         url = reverse_lazy(self.get_success_url(), kwargs={'pk': self.object.pk})
 
         return HttpResponseRedirect(url)
