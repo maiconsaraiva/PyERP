@@ -41,6 +41,7 @@ LEAD_FIELDS_SHORT = [
     'web_active',
     'pos_active',
     'share',
+    'featured',
     'img',
     'youtube_video',
     'description',
