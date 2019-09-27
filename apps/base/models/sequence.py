@@ -31,7 +31,7 @@ class PySequence(PyFather):
         null=True,
         blank=True
     )
-    last = models.PositiveIntegerField(verbose_name=_("last"))
+    next_seq = models.PositiveIntegerField(verbose_name=_("Next"))
 
     class Meta:
         verbose_name = _("sequence")

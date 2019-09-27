@@ -18,10 +18,10 @@ SEQ_FIELDS = [
     {'string': _("Initial"), 'field': 'initial'},
     {'string': _("Increment"), 'field': 'increment'},
     {'string': _("Reset"), 'field': 'reset'},
-    {'string': _("Last"), 'field': 'last'},
+    {'string': _("Next"), 'field': 'next_seq'},
 ]
 
-SEQ_SHORT = ['name', 'prefix', 'padding', 'initial', 'increment', 'reset', 'last']
+SEQ_SHORT = ['name', 'prefix', 'padding', 'initial', 'increment', 'reset', 'next_seq']
 
 
 class SequenceListView(FatherListView):
@@ -89,24 +89,24 @@ class SequenceDeleteView(FatherDeleteView):
 
 # ========================================================================== #
 SELECT = """
-    SELECT last
+    SELECT next_seq
     FROM sequences_sequence
     WHERE name = %s
 """
 
 POSTGRESQL_UPSERT = """
-    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
+    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, next_seq)
     VALUES (%s, %s, %s, %s, %s, %s, %s)
     ON CONFLICT (name)
-    DO UPDATE SET last = sequences_sequence.last + %s
-    RETURNING last;
+    DO UPDATE SET next_seq = sequences_sequence.next_seq + %s
+    RETURNING next_seq;
 """
 
 MYSQL_UPSERT = """
-    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
+    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, next_seq)
     VALUES (%s, %s, %s, %s, %s, %s, %s)
     ON DUPLICATE KEY
-    UPDATE last = sequences_sequence.last + %s
+    UPDATE next_seq = sequences_sequence.next_seq + %s
 """
 
 def get_next_value(name='default', prefix='default', padding=4, initial=1, increment=1, reset=None, *, nowait=False, using=None):
@@ -174,14 +174,14 @@ def get_next_value(name='default', prefix='default', padding=4, initial=1, incre
                         'initial': initial,
                         'increment': increment,
                         'reset': reset,
-                        'last': initial
+                        'next_seq': initial
                     }
                 )
             )
             if not created:
-                sequence.last += increment
-                if reset is not None and sequence.last >= reset:
-                    sequence.last = initial
+                if reset is not None and sequence.next_seq >= reset:
+                    sequence.next_seq = initial
                 sequence.save()
+                sequence.next_seq += increment
 
-            return '{}{}'.format(prefix, str(sequence.last).zfill(padding))
+            return '{}{}'.format(prefix, str(sequence.next_seq).zfill(padding))
