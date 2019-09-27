@@ -11,7 +11,8 @@ from dal import autocomplete
 # Librerias en carpetas locales
 from ..models import PyLog, PyTax
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 TAX_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

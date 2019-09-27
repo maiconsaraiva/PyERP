@@ -5,8 +5,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.wpayment import (
-    WPaymentDeleteView, WPaymentCreateView, WPaymentDetailView, WPaymentListView,
-    WPaymentUpdateView)
+    WPaymentCreateView, WPaymentDeleteView, WPaymentDetailView,
+    WPaymentListView, WPaymentUpdateView)
 
 urlpatterns = [
     path('wpayments', WPaymentListView.as_view(), name='wpayments'),

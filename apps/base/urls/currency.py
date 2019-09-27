@@ -6,8 +6,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.currency import (
-    CurrencyAutoComplete, CurrencyCreateView, CurrencyDetailView,
-    CurrencyListView, CurrencyUpdateView, CurrencyDeleteView)
+    CurrencyAutoComplete, CurrencyCreateView, CurrencyDeleteView,
+    CurrencyDetailView, CurrencyListView, CurrencyUpdateView)
 
 urlpatterns = [
     path(

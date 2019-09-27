@@ -1,15 +1,14 @@
 # Librerias Django
 from django.contrib import messages
+from django.db import connections, router, transaction
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.db import connections, router, transaction
 
 # Librerias en carpetas locales
 from ..models import PySequence
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
-
-from ..models import PySequence
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 SEQ_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

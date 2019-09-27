@@ -10,7 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import PyLog
 from ..models.post import PyPost
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 POST_FIELDS = [
             {'string': _("Title"), 'field': 'title'},

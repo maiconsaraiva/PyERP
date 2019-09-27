@@ -5,7 +5,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.note import (
-    NoteDeleteView, NoteCreateView, NoteDetailView, NoteListView, NoteUpdateView)
+    NoteCreateView, NoteDeleteView, NoteDetailView, NoteListView,
+    NoteUpdateView)
 
 urlpatterns = [
     path('notes', NoteListView.as_view(), name='notes'),

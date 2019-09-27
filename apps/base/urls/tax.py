@@ -6,7 +6,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.tax import (
-    TaxDeleteView, TaxAutoComplete, TaxCreateView, TaxDetailView, TaxListView,
+    TaxAutoComplete, TaxCreateView, TaxDeleteView, TaxDetailView, TaxListView,
     TaxUpdateView)
 
 urlpatterns = [

@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.message import (
-    MessageDeleteView, MessageCreateView, MessageDetailView, MessageListView,
+    MessageCreateView, MessageDeleteView, MessageDetailView, MessageListView,
     MessageUpdateView)
 
 urlpatterns = [

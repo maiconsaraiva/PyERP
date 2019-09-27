@@ -8,7 +8,16 @@
 {% block content %}
     <div class="card card-primary card-outline mt-2">
         <div class="card-header">
-            <a href="{% url add_url %}" class="btn btn-primary">{{ _('Add') }}</a>
+            <a title=" {{ _('Create') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-plus"></i></a>
+            {% if  web_parameter.show_btn_export == 'True' %}
+            <a title=" {{ _('Create') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-file-excel"></i></a>
+            {% endif %}
+            {% if  web_parameter.show_btn_import == 'True' %}
+             <a title=" {{ _('Import') }}" href="{% url add_url %}" class="btn btn-light"><i class="fas fa-upload"></i></i></a>
+            {% endif %}
+            {% if  web_parameter.show_btn_mass == 'True' %}
+            <a title=" {{ _('Massive Edition') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-exclamation"></i></a>
+            {% endif %}
         </div>
         <div class="card-body">
             <table id="list_table" class="table table-bordered table-striped table-hover">

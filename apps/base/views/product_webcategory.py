@@ -9,7 +9,8 @@ from django.urls import reverse
 from ...base.models import PyProductWebCategory
 from ..models import PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 CATEGORY_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},

@@ -1,10 +1,10 @@
 # Librerias Django
 from django.contrib import messages
-from django.views.generic import DeleteView, DetailView, ListView, TemplateView
-from django.views.generic.edit import CreateView, UpdateView
-from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import DeleteView, DetailView, ListView, TemplateView
+from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
 from ..models import (

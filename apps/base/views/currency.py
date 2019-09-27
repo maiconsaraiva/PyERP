@@ -12,7 +12,8 @@ from dal import autocomplete
 # Librerias en carpetas locales
 from ..models import PyCurrency, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 CURRENCY_FIELDS = [
     {'string': _('Country'), 'field': 'country'},

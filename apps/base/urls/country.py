@@ -6,8 +6,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.country import (
-    CountryAutoComplete, CountryCreateView, CountryDetailView, CountryListView,
-    CountryUpdateView, CountryDeleteView)
+    CountryAutoComplete, CountryCreateView, CountryDeleteView,
+    CountryDetailView, CountryListView, CountryUpdateView)
 
 urlpatterns = [
     path(

@@ -6,8 +6,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.partner import (
-    PartnerDeleteView, PartnerAutoComplete, PartnerCreateView, PartnerDetailView,
-    PartnerUpdateView)
+    PartnerAutoComplete, PartnerCreateView, PartnerDeleteView,
+    PartnerDetailView, PartnerUpdateView)
 
 urlpatterns = [
     path(

@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.product_category_uom import (
-    ProductCategoryUOMDeleteView, ProductCategoryUOMCreateView,
+    ProductCategoryUOMCreateView, ProductCategoryUOMDeleteView,
     ProductCategoryUOMDetailView, ProductCategoryUOMListView,
     ProductCategoryUOMUpdateView)
 

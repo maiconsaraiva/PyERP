@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.tag import (
-    TagDeleteView, TagCreateView, TagDetailView, TagListView, TagUpdateView)
+    TagCreateView, TagDeleteView, TagDetailView, TagListView, TagUpdateView)
 
 urlpatterns = [
     path('tags', TagListView.as_view(), name='tags'),

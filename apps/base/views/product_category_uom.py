@@ -8,7 +8,8 @@ from django.urls import reverse
 # Librerias en carpetas locales
 from ..models import PyLog, PyProductCategoryUOM
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 CATEGORY_UOM_FIELDS = [
     {'string': 'Name', 'field': 'name'},

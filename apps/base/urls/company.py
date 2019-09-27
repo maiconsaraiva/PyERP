@@ -6,8 +6,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.company import (
-    CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
-    CompanyDeleteView, change_active_company)
+    CompanyCreateView, CompanyDeleteView, CompanyDetailView, CompanyListView,
+    CompanyUpdateView, change_active_company)
 
 urlpatterns = [
     path(

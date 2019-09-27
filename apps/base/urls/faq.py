@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.faq import (
-    FaqDeleteView, FaqCreateView, FaqDetailView, FaqListView, FaqUpdateView)
+    FaqCreateView, FaqDeleteView, FaqDetailView, FaqListView, FaqUpdateView)
 
 urlpatterns = [
     path('faqs', FaqListView.as_view(), name='faqs'),

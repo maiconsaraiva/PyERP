@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.uom import (
-    UomDeleteView, UomCreateView, UomDetailView, UomListView, UomUpdateView)
+    UomCreateView, UomDeleteView, UomDetailView, UomListView, UomUpdateView)
 
 urlpatterns = [
     path('', UomListView.as_view(), name='uoms'),

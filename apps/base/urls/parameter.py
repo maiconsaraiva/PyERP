@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.parameter import (
-    ParameterDeleteView, ParameterCreateView, ParameterDetailView,
+    ParameterCreateView, ParameterDeleteView, ParameterDetailView,
     ParameterListView, ParameterUpdateView)
 
 urlpatterns = [

@@ -5,7 +5,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.page import (
-    PageDeleteView, PageCreateView, PageDetailView, PageListView, PageUpdateView)
+    PageCreateView, PageDeleteView, PageDetailView, PageListView,
+    PageUpdateView)
 
 urlpatterns = [
     path('page-backend', PageListView.as_view(), name='page-backend'),

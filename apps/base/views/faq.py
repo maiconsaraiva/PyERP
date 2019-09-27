@@ -9,7 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from ..models import PyFaq, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 FAQ_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

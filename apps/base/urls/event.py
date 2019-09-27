@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.event import (
-    EventDeleteView, EventCreateView, EventDetailView, EventListView,
+    EventCreateView, EventDeleteView, EventDetailView, EventListView,
     EventUpdateView)
 
 urlpatterns = [

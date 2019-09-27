@@ -9,7 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from ..models import PyLog, PyNote
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 NOTE_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

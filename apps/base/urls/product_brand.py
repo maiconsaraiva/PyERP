@@ -3,7 +3,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.product_brand import (
-    ProductBrandDeleteView, ProductBrandCreateView, ProductBrandDetailView,
+    ProductBrandCreateView, ProductBrandDeleteView, ProductBrandDetailView,
     ProductBrandListView, ProductBrandUpdateView)
 
 urlpatterns = [

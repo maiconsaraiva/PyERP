@@ -1,7 +1,7 @@
 # Librerias Django
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from .father import PyFather

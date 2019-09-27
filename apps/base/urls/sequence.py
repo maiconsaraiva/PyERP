@@ -6,8 +6,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.sequence import (
-    SequenceDeleteView, SequenceCreateView, SequenceDetailView, SequenceListView,
-    SequenceUpdateView)
+    SequenceCreateView, SequenceDeleteView, SequenceDetailView,
+    SequenceListView, SequenceUpdateView)
 
 urlpatterns = [
     path('',
