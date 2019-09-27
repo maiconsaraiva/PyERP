@@ -110,14 +110,6 @@ def get_company_whatsapp(obj):
     except BaseConfig.DoesNotExist:
         return None
 
-
-
-@register.filter
-def get_sidebar_collapse(obj):
-    return BaseConfig.objects.get(pk=1).open_menu
-
-
-
 @register.filter
 def currency_symbol(obj):
     return BaseConfig.objects.get(pk=1).main_company_id.currency_id.symbol
