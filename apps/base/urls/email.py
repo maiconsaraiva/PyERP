@@ -6,7 +6,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.email import (
-    EmailDeleteView, EmailCreateView, EmailDetailView, EmailListView,
+    EmailCreateView, EmailDeleteView, EmailDetailView, EmailListView,
     EmailUpdateView)
 
 urlpatterns = [

@@ -1,15 +1,14 @@
 # Librerias Django
 from django.contrib import messages
+from django.db import connections, router, transaction
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.db import connections, router, transaction
 
 # Librerias en carpetas locales
 from ..models import PySequence
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
-
-from ..models import PySequence
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 SEQ_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -18,10 +17,10 @@ SEQ_FIELDS = [
     {'string': _("Initial"), 'field': 'initial'},
     {'string': _("Increment"), 'field': 'increment'},
     {'string': _("Reset"), 'field': 'reset'},
-    {'string': _("Next"), 'field': 'next_seq'},
+    {'string': _("Next"), 'field': 'next_val'},
 ]
 
-SEQ_SHORT = ['name', 'prefix', 'padding', 'initial', 'increment', 'reset', 'next_seq']
+SEQ_SHORT = ['name', 'prefix', 'padding', 'initial', 'increment', 'reset', 'next_val']
 
 
 class SequenceListView(FatherListView):
@@ -89,99 +88,63 @@ class SequenceDeleteView(FatherDeleteView):
 
 # ========================================================================== #
 SELECT = """
-    SELECT next_seq
+    SELECT last
     FROM sequences_sequence
     WHERE name = %s
 """
 
 POSTGRESQL_UPSERT = """
-    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, next_seq)
+    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
     VALUES (%s, %s, %s, %s, %s, %s, %s)
     ON CONFLICT (name)
-    DO UPDATE SET next_seq = sequences_sequence.next_seq + %s
-    RETURNING next_seq;
+    DO UPDATE SET (last = sequences_sequence.last + %s, nex_val = sequences_sequence.last + 1 + %s)
+    RETURNING last;
 """
 
 MYSQL_UPSERT = """
-    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, next_seq)
+    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
     VALUES (%s, %s, %s, %s, %s, %s, %s)
     ON DUPLICATE KEY
-    UPDATE next_seq = sequences_sequence.next_seq + %s
+    UPDATE (last = sequences_sequence.last + %s, next_val = sequences_sequence.last + 1 + %s)
 """
 
 def get_next_value(name='default', prefix='default', padding=4, initial=1, increment=1, reset=None, *, nowait=False, using=None):
     """
     Return the next value for a given sequence.
     """
-    try:
-        sequence = PySequence.objects.get(name=name)
-        prefix = sequence.prefix
-        initial = sequence.initial
-        increment = sequence.increment
-        reset = sequence.reset
-        padding = sequence.padding
-    except PySequence.DoesNotExist:
-        sequence = None
-
     if reset is not None:
         assert initial < reset
 
     if using is None:
         using = router.db_for_write(PySequence)
 
-    connection = connections[using]
-
-    if (connection.vendor == 'postgresql' and getattr(connection, 'pg_version', 0) >= 90500 and reset is None and not nowait):
-
-        # PostgreSQL ≥ 9.5 supports "upsert".
-        # This is about 3x faster as the naive implementation.
-
-        with connection.cursor() as cursor:
-            cursor.execute(
-                POSTGRESQL_UPSERT,
-                [name, prefix, padding, initial, increment, reset, initial]
+    with transaction.atomic(using=using, savepoint=False):
+        sequence, created = (
+            PySequence.objects.select_for_update(
+                nowait=nowait
+            ).get_or_create(
+                name=name,
+                defaults={
+                    'prefix': prefix,
+                    'padding': padding,
+                    'initial': initial,
+                    'increment': increment,
+                    'reset': reset,
+                    'last': initial,
+                    'next_val': initial + 1
+                }
             )
-            result = cursor.fetchone()
+        )
+        if not created:
+            if (sequence.last + 1) != sequence.next_val:
+                sequence.last = sequence.next_val
+            else:
+                sequence.last += increment
 
-        return '{}{}'.format(prefix, str(result[0]).zfill(padding))
+            sequence.next_val = sequence.last + 1
 
-    elif (connection.vendor == 'mysql' and reset is None and not nowait):
+            if reset is not None and sequence.last >= reset:
+                sequence.last = initial
 
-        # MySQL supports "upsert" but not "returning".
-        # This is about 2x faster as the naive implementation.
-
-        with transaction.atomic(using=using, savepoint=False):
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    MYSQL_UPSERT,
-                    [name, prefix, padding, initial, increment, reset, initial]
-                )
-                cursor.execute(SELECT, [name])
-                result = cursor.fetchone()
-        return '{}{}'.format(prefix, str(result[0]).zfill(padding))
-
-    else:
-        # Default, ORM-based implementation for all other cases.
-        with transaction.atomic(using=using, savepoint=False):
-            sequence, created = (
-                PySequence.objects.select_for_update(
-                    nowait=nowait
-                ).get_or_create(
-                    name=name,
-                    defaults={
-                        'prefix': prefix,
-                        'padding': padding,
-                        'initial': initial,
-                        'increment': increment,
-                        'reset': reset,
-                        'next_seq': initial
-                    }
-                )
-            )
-            if not created:
-                if reset is not None and sequence.next_seq >= reset:
-                    sequence.next_seq = initial
-                sequence.save()
-                sequence.next_seq += increment
-
-            return '{}{}'.format(prefix, str(sequence.next_seq).zfill(padding))
+            sequence.save()
+        return '{}{}'.format(prefix, str(sequence.last).zfill(padding))

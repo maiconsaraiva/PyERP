@@ -5,8 +5,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.channel import (
-    ChannelCreateView, ChannelDetailView, ChannelListView, ChannelUpdateView,
-    ChannelDeleteView)
+    ChannelCreateView, ChannelDeleteView, ChannelDetailView, ChannelListView,
+    ChannelUpdateView)
 
 urlpatterns = [
     path('channels', ChannelListView.as_view(), name='channels'),

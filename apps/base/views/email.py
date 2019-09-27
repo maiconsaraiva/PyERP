@@ -7,7 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 # Librerias en carpetas locales
 from ..models import PyEmail, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 EMAIL_FIELDS = [
     {'string': _("Title"), 'field': 'title'},

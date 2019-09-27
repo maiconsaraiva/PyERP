@@ -3,7 +3,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.variant import (
-    VariantDeleteView, VariantCreateView, VariantDetailView, VariantListView,
+    VariantCreateView, VariantDeleteView, VariantDetailView, VariantListView,
     VariantUpdateView)
 
 urlpatterns = [

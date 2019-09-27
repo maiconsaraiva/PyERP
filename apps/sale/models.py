@@ -9,7 +9,6 @@ from django.utils.translation import ugettext_lazy as _
 from apps.base.models import PyFather, PyPartner, PyProduct
 from apps.base.views.sequence import get_next_value
 
-
 SALE_STATE = (
         (_('draft'), "Borrador"),
         (_('open'), 'Consumible'),

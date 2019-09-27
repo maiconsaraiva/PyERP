@@ -10,7 +10,8 @@ from dal import autocomplete
 # Librerias en carpetas locales
 from ..models import PyLog, PyPartner
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 PARTNER_FIELDS = [
     {'string': _("Name"), 'field': 'name'},

@@ -5,8 +5,8 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.comment import (
-    CommentCreateView, CommentDetailView, CommentListView, CommentUpdateView,
-    CommentDeleteView)
+    CommentCreateView, CommentDeleteView, CommentDetailView, CommentListView,
+    CommentUpdateView)
 
 urlpatterns = [
     path('comments', CommentListView.as_view(), name='comments'),

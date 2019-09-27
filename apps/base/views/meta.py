@@ -10,7 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import PyLog
 from ..models.meta import PyMeta
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 META_FIELDS = [
             {'string': _("Title"), 'field': 'title'},

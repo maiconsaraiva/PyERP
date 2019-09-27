@@ -10,7 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import PyLog
 from ..models.page import PyPage
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 PAGE_FIELDS = [
             {'string': _("Title"), 'field': 'title'},

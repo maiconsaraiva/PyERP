@@ -8,7 +8,8 @@ from django.urls import reverse
 # Librerias en carpetas locales
 from ..models import PyCron, PyLog
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 CRON_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},

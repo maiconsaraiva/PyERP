@@ -5,7 +5,7 @@ from django.urls import path
 
 # Librerias en carpetas locales
 from ..views.image import (
-    ImageDeleteView, ImageCreateView, ImageDetailView, ImageListView,
+    ImageCreateView, ImageDeleteView, ImageDetailView, ImageListView,
     ImageUpdateView)
 
 urlpatterns = [
