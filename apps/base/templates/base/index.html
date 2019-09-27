@@ -69,21 +69,15 @@
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#services">Services</a>
                 </li>
-                <!--
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#pricing">Pricing</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#request">Request</a>
-                </li>
-                -->
-
                 <!-- Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link page-scroll" href="#about" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">About</a>
                 </li>
                 <!-- end of dropdown menu -->
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" target="_blank"  href="https://falconsoft3d.github.io/pyerp/">Help</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#contact">Contact</a>
@@ -116,7 +110,7 @@
                     <div class="col-lg-6">
                         <div class="text-container">
                             <h1><span class="turquoise">PyERP</span> Django ERP</h1>
-                            <a href="https://github.com/falconsoft3d/pyerp"> <h3><span class="turquoise">github.com/falconsoft3d/pyerp</span></h3></a>
+                            <a target="_blank" href="https://github.com/falconsoft3d/pyerp"> <h3><span class="turquoise">github.com/falconsoft3d/pyerp</span></h3></a>
                             <p class="p-large">Marlon Falcón Hernández, mfalcon@ynext.cl</p>
 
                             <a class="btn-solid-lg page-scroll" href="{% url 'base:home' %}">Login</a>
@@ -132,60 +126,6 @@
         </div> <!-- end of header-content -->
     </header> <!-- end of header -->
     <!-- end of header -->
-
-
-    <!-- Customers
-    <div class="slider-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h5>Trusted By</h5>
-
-                    <!-- Image Slider
-                    <div class="slider-container">
-                        <div class="swiper-container image-slider">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="{% static 'home/images/customer-logo-1.png' %}"  alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="{% static 'home/images/customer-logo-2.png' %}" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="{% static 'home/images/customer-logo-3.png' %}" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="{% static 'home/images/customer-logo-4.png' %}" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="{% static 'home/images/customer-logo-5.png' %}" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="{% static 'home/images/customer-logo-6.png' %}" alt="alternative">
-                                    </div>
-                                </div>
-                            </div> <!-- end of swiper-wrapper -->
-                        </div> <!-- end of swiper container -->
-                    </div> <!-- end of slider-container -->
-                    <!-- end of image slider -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of slider-1 -->
-    <!-- end of customers -->
-
 
     <!-- Services -->
     <div id="services" class="cards-1">
@@ -259,41 +199,6 @@
     <!-- end of details 1 -->
 
 
-    <!-- Details 2
-    <div class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="image-container">
-                        <img class="img-fluid" src="{% static 'home/images/details-2-office-worker.svg' %}" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h2>Search For Optimization Wherever Is Possible</h2>
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="media">
-                                <i class="fas fa-check"></i>
-                                <div class="media-body">Basically we'll teach you step by step what you need to do</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-check"></i>
-                                <div class="media-body">In order to develop your company and reach new heights</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-check"></i>
-                                <div class="media-body">Everyone will be pleased from stakeholders to employees</div>
-                            </li>
-                        </ul>
-                        <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox-2">LIGHTBOX</a>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of details 2 -->
-
-    <!-- Details Lightboxes -->
     <!-- Details Lightbox 1 -->
 	<div id="details-lightbox-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="container">
@@ -379,213 +284,6 @@
         </div> <!-- end of container -->
     </div> <!-- end of lightbox-basic -->
     <!-- end of details lightbox 2 -->
-    <!-- end of details lightboxes -->
-
-
-    <!-- Pricing
-    <div id="pricing" class="cards-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Multiple Pricing Options</h2>
-                    <p class="p-heading p-large">We've prepared pricing plans for all budgets so you can get started right away. They're great for small companies and large organizations</p>
-                </div> <!-- end of col -->
-            </div> <!-- end of row
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- Card
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">STARTER</div>
-                            <div class="card-subtitle">Just to see what can be achieved</div>
-                            <hr class="cell-divide-hr">
-                            <div class="price">
-                                <span class="currency">$</span><span class="value">199</span>
-                                <div class="frequency">monthly</div>
-                            </div>
-                            <hr class="cell-divide-hr">
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Improve Your Email Marketing</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">User And Admin Rights Control</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">List Building And Cleaning</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">Collected Data Management</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">More Planning And Evaluation</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="#request">REQUEST</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card
-                    <!-- end of card
-
-                    <!-- Card
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">MEDIUM</div>
-                            <div class="card-subtitle">Very appropriate for the short term</div>
-                            <hr class="cell-divide-hr">
-                            <div class="price">
-                                <span class="currency">$</span><span class="value">299</span>
-                                <div class="frequency">monthly</div>
-                            </div>
-                            <hr class="cell-divide-hr">
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Improve Your Email Marketing</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">User And Admin Rights Control</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">List Building And Cleaning</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Collected Data Management</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">More Planning And Evaluation</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="#request">REQUEST</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card
-                    <!-- end of card
-
-                    <!-- Card
-                    <div class="card">
-                        <div class="label">
-                            <p class="best-value">Best Value</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">COMPLETE</div>
-                            <div class="card-subtitle">Must have for large companies</div>
-                            <hr class="cell-divide-hr">
-                            <div class="price">
-                                <span class="currency">$</span><span class="value">399</span>
-                                <div class="frequency">monthly</div>
-                            </div>
-                            <hr class="cell-divide-hr">
-                            <ul class="list-unstyled li-space-lg">
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Improve Your Email Marketing</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">User And Admin Rights Control</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">List Building And Cleaning</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Collected Data Management</div>
-                                </li>
-                                <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">More Planning And Evaluation</div>
-                                </li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <a class="btn-solid-reg page-scroll" href="#request">REQUEST</a>
-                            </div>
-                        </div>
-                    </div> <!-- end of card -->
-                    <!-- end of card -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of cards-2 -->
-    <!-- end of pricing -->
-
-
-    <!-- Request
-    <div id="request" class="form-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h2>Fill The Following Form To Request A Meeting</h2>
-                        <p>Evolo is one of the easiest and feature packed marketing automation apps in the market. Discover what it can do for your business organization right away.</p>
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="media">
-                                <i class="fas fa-check"></i>
-                                <div class="media-body"><strong class="blue">Automate your marketing</strong> activities and get results today</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-check"></i>
-                                <div class="media-body"><strong class="blue">Interact with all your</strong> targeted customers at a personal level</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-check"></i>
-                                <div class="media-body"><strong class="blue">Convince them to buy</strong> your company's awesome products</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-check"></i>
-                                <div class="media-body"><strong class="blue">Save precious time</strong> and invest it where you need it the most</div>
-                            </li>
-                        </ul>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col
-                <div class="col-lg-6">
-
-                    <!-- Request Form
-                    <div class="form-container">
-                        <form id="requestForm" data-toggle="validator" data-focus="false">
-                            <div class="form-group">
-                                <input type="text" class="form-control-input" id="rname" name="rname" required>
-                                <label class="label-control" for="rname">Full name</label>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control-input" id="remail" name="remail" required>
-                                <label class="label-control" for="remail">Email</label>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control-input" id="rphone" name="rphone" required>
-                                <label class="label-control" for="rphone">Phone</label>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control-select" id="rselect" required>
-                                    <option class="select-option" value="" disabled selected>Interested in...</option>
-                                    <option class="select-option" value="Personal Loan">Starter</option>
-                                    <option class="select-option" value="Car Loan">Medium</option>
-                                    <option class="select-option" value="House Loan">Complete</option>
-                                </select>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group checkbox">
-                                <input type="checkbox" id="rterms" value="Agreed-to-Terms" name="rterms" required>I agree with Evolo's stated <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms & Conditions</a>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control-submit-button">REQUEST</button>
-                            </div>
-                            <div class="form-message">
-                                <div id="rmsgSubmit" class="h3 text-center hidden"></div>
-                            </div>
-                        </form>
-                    </div> <!-- end of form-container -->
-                    <!-- end of request form -->
-
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of form-1 -->
-    <!-- end of request -->
-
 
     <!-- Video -->
     <div class="basic-3">
@@ -726,78 +424,6 @@
                     </div> <!-- end of team-member -->
                     <!-- end of team member -->
 
-                    <!-- Team Member
-                    <div class="team-member">
-                        <div class="image-wrapper">
-                            <img class="img-fluid" src="{% static 'home/images/team-member-2.svg' %}" alt="alternative">
-                        </div> <!-- end of image wrapper
-                        <p class="p-large"><strong>Chris Brown</strong></p>
-                        <p class="job-title">Online Marketer</p>
-                        <span class="social-icons">
-                            <span class="fa-stack">
-                                <a href="#your-link">
-                                    <i class="fas fa-circle fa-stack-2x facebook"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x"></i>
-                                </a>
-                            </span>
-                            <span class="fa-stack">
-                                <a href="#your-link">
-                                    <i class="fas fa-circle fa-stack-2x twitter"></i>
-                                    <i class="fab fa-twitter fa-stack-1x"></i>
-                                </a>
-                            </span>
-                        </span> <!-- end of social-icons
-                    </div> <!-- end of team-member
-                    <!-- end of team member
-
-                    <!-- Team Member
-                    <div class="team-member">
-                        <div class="image-wrapper">
-                            <img class="img-fluid" src="{% static 'home/images/team-member-3.svg' %}"alt="alternative">
-                        </div> <!-- end of image wrapper
-                        <p class="p-large"><strong>Sheila Zimerman</strong></p>
-                        <p class="job-title">Software Engineer</p>
-                        <span class="social-icons">
-                            <span class="fa-stack">
-                                <a href="#your-link">
-                                    <i class="fas fa-circle fa-stack-2x facebook"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x"></i>
-                                </a>
-                            </span>
-                            <span class="fa-stack">
-                                <a href="#your-link">
-                                    <i class="fas fa-circle fa-stack-2x twitter"></i>
-                                    <i class="fab fa-twitter fa-stack-1x"></i>
-                                </a>
-                            </span>
-                        </span> <!-- end of social-icons
-                    </div> <!-- end of team-member -->
-                    <!-- end of team member -->
-
-                    <!-- Team Member
-                    <div class="team-member">
-                        <div class="image-wrapper">
-                            <img class="img-fluid" src="{% static 'home/images/team-member-4.svg' %}" alt="alternative">
-                        </div> <!-- end of image wrapper
-                        <p class="p-large"><strong>Mary Villalonga</strong></p>
-                        <p class="job-title">Product Manager</p>
-                        <span class="social-icons">
-                            <span class="fa-stack">
-                                <a href="#your-link">
-                                    <i class="fas fa-circle fa-stack-2x facebook"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x"></i>
-                                </a>
-                            </span>
-                            <span class="fa-stack">
-                                <a href="#your-link">
-                                    <i class="fas fa-circle fa-stack-2x twitter"></i>
-                                    <i class="fab fa-twitter fa-stack-1x"></i>
-                                </a>
-                            </span>
-                        </span> <!-- end of social-icons
-                    </div> <!-- end of team-member -->
-                    <!-- end of team member -->
-
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
@@ -816,48 +442,7 @@
             <div class="row">
 
                 <div class="col-lg-12">
-                    <!--
-                    <div class="map-responsive">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.507640204439!3d37.757814996609724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sro!4v1498231462606" allowfullscreen></iframe>
-                    </div>
 
-                </div> <!-- end of col -->
-               <!--  <div class="col-lg-6">
-
-                    <p class="address">Don't hesitate to give us a call or send us a contact form message</p>
-                    <p><i class="fas fa-map-marker-alt"></i>Santiago de Chile, Chile</p>
-                    <p><i class="fas fa-phone"></i><a class="turquoise" href="tel:56942994534">+56942994534</a></p>
-                    <p><i class="fas fa-envelope"></i><a class="turquoise" href="mailto:mfalcon@ynext.cl">mfalcon@ynext.cl</a></p>-->
-
-                    <!-- Contact Form
-                    <form id="contactForm" data-toggle="validator" data-focus="false">
-                        <div class="form-group">
-                            <input type="text" class="form-control-input" id="cname" required>
-                            <label class="label-control" for="cname">Name</label>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control-input" id="cemail" required>
-                            <label class="label-control" for="cemail">Email</label>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control-textarea" id="cmessage" required></textarea>
-                            <label class="label-control" for="cmessage">Your message</label>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group checkbox">
-                            <input type="checkbox" id="cterms" value="Agreed-to-Terms" required>I have read and agree with Evolo's stated <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms Conditions</a>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">SUBMIT MESSAGE</button>
-                        </div>
-                        <div class="form-message">
-                            <div id="cmsgSubmit" class="h3 text-center hidden"></div>
-                        </div>
-                    </form>
-                    end of contact form -->
 
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
@@ -882,7 +467,7 @@
                         <ul class="list-unstyled li-space-lg">
                             <li class="media">
                                 <i class="fas fa-square"></i>
-                                <div class="media-body">Github <a class="turquoise" href="https://github.com/falconsoft3d/pyerp">github.com/falconsoft3d/pyerp</a></div>
+                                <div class="media-body">Github <a class="turquoise" target="_blank" href="https://github.com/falconsoft3d/pyerp">github.com/falconsoft3d/pyerp</a></div>
                             </li>
                         </ul>
                     </div>
@@ -891,38 +476,18 @@
                     <div class="footer-col last">
                         <h4>Social Media</h4>
                         <span class="fa-stack">
-                            <a href="https://www.facebook.com/Pyerp-100686811301733/">
+                            <a target="_blank" href="https://www.facebook.com/Pyerp-100686811301733/">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-facebook-f fa-stack-1x"></i>
                             </a>
                         </span>
                         <span class="fa-stack">
-                            <a href="https://t.me/pyerp">
+                            <a target="_blank" href="https://t.me/pyerp">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fab fa-telegram fa-stack-1x"></i>
                             </a>
                         </span>
-                        <!--
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-google-plus-g fa-stack-1x"></i>
-                            </a>
-                        </span>
 
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-instagram fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        -->
                     </div>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
