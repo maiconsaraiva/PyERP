@@ -123,4 +123,5 @@ urlpatterns = [
     path('message/', include('apps.base.urls.message')),
     path('note/', include('apps.base.urls.note')),
     path('event/', include('apps.base.urls.event')),
+    path('menu/', include('apps.base.urls.menu')),
 ]
