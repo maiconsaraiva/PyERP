@@ -33,7 +33,7 @@ from ..views.website_config import UpdateWebsiteConfigView
 app_name = 'base'
 
 urlpatterns = [
-    path('', erp_home, name='home'),
+    path('', login_required(erp_home), name='home'),
     path('install', Install, name='install'),
     # path('install-erp', InstallPyERP, name='install-erp'),
 
