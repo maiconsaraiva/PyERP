@@ -17,23 +17,14 @@ class SaleOrderForm(ModelForm):
     class Meta:
         model = PySaleOrder
         fields = [
-            'name',
             'partner_id',
             'description',
         ]
         labels = {
-            'name': 'Nombre',
             'partner_id': 'Cliente',
             'description': 'Descripción',
         }
         widgets = {
-            'name': TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Nobre del presupuesto ...',
-                    'style': 'width: 100%',
-                },
-            ),
             'partner_id': autocomplete.ModelSelect2(
                 url='base:partner-autocomplete',
                 attrs={

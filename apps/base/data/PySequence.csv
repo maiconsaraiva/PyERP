@@ -1,2 +1,0 @@
-id,name,prefix,padding,increment,next_number,model
-1,Sale Order,SO,1,1,1,PySaleOrder

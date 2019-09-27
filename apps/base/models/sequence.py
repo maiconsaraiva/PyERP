@@ -1,5 +1,4 @@
 # Librerias Django
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -9,19 +8,38 @@ from .father import PyFather
 
 
 class PySequence(PyFather):
-    name = models.CharField(_("Name"), max_length=100)
-    prefix = models.CharField(_("Prefix"), max_length=40)
-    padding = models.DecimalField(_("Padding"), max_digits=10, decimal_places=2, default=1)
-    increment = models.DecimalField(_("Increment"), max_digits=10, decimal_places=2, default=1)
-    next_number = models.DecimalField(_("Next Number"), max_digits=10, decimal_places=2, default=1)
-    model = models.CharField(_("Model"), max_length=100)
+    name = models.CharField(
+        verbose_name=_("name"),
+        max_length=100,
+        unique=True
+    )
+    prefix = models.CharField(_("Prefix"), max_length=40, default='default')
+    padding = models.PositiveIntegerField(
+        verbose_name=_("padding"),
+        default=4
+    )
+    initial = models.PositiveIntegerField(
+        verbose_name=_("initial"),
+        default=1
+    )
+    increment = models.PositiveIntegerField(
+        verbose_name=_("increment"),
+        default=1
+    )
+    reset = models.PositiveIntegerField(
+        verbose_name=_("reset"),
+        null=True,
+        blank=True
+    )
+    next_seq = models.PositiveIntegerField(verbose_name=_("Next"))
+
+    class Meta:
+        verbose_name = _("sequence")
+        verbose_name_plural = _("sequences")
+
+    def __str__(self):
+        return "name={}, prefix={}, last={}".format(
+            repr(self.name), repr(self.prefix), repr(self.last))
 
     def get_absolute_url(self):
         return reverse('base:sequence-detail', kwargs={'pk': self.pk})
-
-    def __str__(self):
-        return format(self.name)
-
-    class Meta:
-        verbose_name = _("Sequence")
-        verbose_name_plural = _("PySequence")

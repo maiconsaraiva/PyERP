@@ -7,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.models import PyFather, PyPartner, PyProduct
+from apps.base.views.sequence import get_next_value
+
 
 SALE_STATE = (
         (_('draft'), "Borrador"),
@@ -20,7 +22,7 @@ SALE_STATE = (
 class PySaleOrder(PyFather):
     """Modelo de la orden de pago
     """
-    name = models.CharField(_('Name'), max_length=80, default='New')
+    name = models.CharField(_('Name'), max_length=80, editable=False)
     partner_id = models.ForeignKey(
         PyPartner,
         null=True,
@@ -55,8 +57,7 @@ class PySaleOrder(PyFather):
     )
 
     def save(self):
-        if self.name == 'New':
-            self.setSequence()
+        self.name = get_next_value(self._meta.object_name, 'SO')
         super(PySaleOrder, self).save()
 
 
