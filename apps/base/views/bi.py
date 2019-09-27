@@ -1,13 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyBi, PyLog
+from ..models import PyBi
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -85,6 +83,6 @@ class BiUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class BiDeleteView(FatherDeleteView):
+class BiDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyBi
     success_url = 'base:bi'

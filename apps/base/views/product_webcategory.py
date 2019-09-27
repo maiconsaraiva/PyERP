@@ -1,13 +1,10 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 
 # Librerias en carpetas locales
 from ...base.models import PyProductWebCategory
-from ..models import PyLog
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -78,6 +75,6 @@ class ProductWebCategoryUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class ProductWebCategoryDeleteView(FatherDeleteView):
+class ProductWebCategoryDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyProductWebCategory
     success_url = 'base:product-webcategory'

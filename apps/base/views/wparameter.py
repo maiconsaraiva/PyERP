@@ -1,13 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog, PyWParameter
+from ..models import PyWParameter
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -78,6 +76,6 @@ class WParameterUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class WParameterDeleteView(FatherDeleteView):
+class WParameterDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyWParameter
     success_url = 'base:wparameters'

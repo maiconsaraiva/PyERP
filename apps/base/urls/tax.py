@@ -1,7 +1,6 @@
 """uRLs para tax
 """
 # Librerias Django
-from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 # Librerias en carpetas locales
@@ -9,37 +8,15 @@ from ..views.tax import (
     TaxAutoComplete, TaxCreateView, TaxDeleteView, TaxDetailView, TaxListView,
     TaxUpdateView)
 
+app_name = 'PyTax'
+
 urlpatterns = [
-    path(
-        '',
-        login_required(TaxListView.as_view()),
-        name='taxs'
-    ),
-    path(
-        'add/',
-        login_required(TaxCreateView.as_view()),
-        name='tax-add'
-    ),
-    path(
-        '<int:pk>/',
-        login_required(TaxDetailView.as_view()),
-        name='tax-detail'
-    ),
-    path(
-        '<int:pk>/update',
-        login_required(TaxUpdateView.as_view()),
-        name='tax-update'
-    ),
-    path(
-        '<int:pk>/delete/',
-        login_required(TaxDeleteView.as_view()),
-        name='tax-delete'
-    ),
+    path('', TaxListView.as_view(), name='list'),
+    path('add/', TaxCreateView.as_view(), name='add'),
+    path('<int:pk>/', TaxDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', TaxUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', TaxDeleteView.as_view(), name='delete'),
 
     # ====================== Rutas de Auto Completado ====================== #
-    path(
-        'tax-autocomplete',
-        login_required(TaxAutoComplete.as_view()),
-        name='tax-autocomplete'
-    ),
+    path('autocomplete', TaxAutoComplete.as_view(), name='autocomplete'),
 ]

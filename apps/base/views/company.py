@@ -1,11 +1,12 @@
 # Librerias Django
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyCompany, PyLog, PyUser
+from ..models import PyCompany, PyUser
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -51,7 +52,7 @@ COMPANY_FIELDS_SHORT = [
 
 
 # ========================================================================== #
-class CompanyListView(FatherListView):
+class CompanyListView(LoginRequiredMixin, FatherListView):
     model = PyCompany
     template_name = 'base/list.html'
 
@@ -65,7 +66,7 @@ class CompanyListView(FatherListView):
 
 
 # ========================================================================== #
-class CompanyDetailView(FatherDetailView):
+class CompanyDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCompany
     template_name = 'base/detail.html'
     login_url = "login"
@@ -81,7 +82,7 @@ class CompanyDetailView(FatherDetailView):
 
 
 # ========================================================================== #
-class CompanyCreateView(FatherCreateView):
+class CompanyCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -95,7 +96,7 @@ class CompanyCreateView(FatherCreateView):
 
 
 # ========================================================================== #
-class CompanyUpdateView(FatherUpdateView):
+class CompanyUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCompany
     fields = COMPANY_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -118,6 +119,6 @@ def change_active_company(request, company):
 
 
 # ========================================================================== #
-class CompanyDeleteView(FatherDeleteView):
+class CompanyDeleteView(LoginRequiredMixin, FatherDeleteView):
     success_url = 'base:companies'
     model = PyCompany

@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
 from ..models import (
-    PyCompany, PyLog, PyMeta, PyParameter, PyPlugin, PyWParameter)
+    PyCompany, PyMeta, PyParameter, PyPlugin, PyWParameter)
 
 
 def _count_plugin():

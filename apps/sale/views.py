@@ -40,7 +40,7 @@ LEAD_FIELDS_SHORT = ['name', 'partner_id', 'state']
 
 
 # ========================================================================== #
-class SaleOrderListView(FatherListView):
+class SaleOrderListView(LoginRequiredMixin, FatherListView):
     """Lista de las ordenes de venta
     """
     model = PySaleOrder

@@ -2,7 +2,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -10,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyCurrency, PyLog
+from ..models import PyCurrency
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -84,7 +83,7 @@ class CurrencyUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class CurrencyDeleteView(FatherDeleteView):
+class CurrencyDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyCurrency
     success_url = 'base:currencies'
 

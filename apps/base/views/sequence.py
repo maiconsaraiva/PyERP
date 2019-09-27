@@ -1,6 +1,7 @@
 # Librerias Django
 from django.contrib import messages
-from django.db import connections, router, transaction
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import router, transaction
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,7 +24,7 @@ SEQ_FIELDS = [
 SEQ_SHORT = ['name', 'prefix', 'padding', 'initial', 'increment', 'reset', 'next_val']
 
 
-class SequenceListView(FatherListView):
+class SequenceListView(LoginRequiredMixin, FatherListView):
     model = PySequence
     template_name = 'base/list.html'
     login_url = "login"
@@ -37,7 +38,7 @@ class SequenceListView(FatherListView):
         return context
 
 
-class SequenceDetailView(FatherDetailView):
+class SequenceDetailView(LoginRequiredMixin, FatherDetailView):
     model = PySequence
     template_name = 'base/detail.html'
     login_url = "login"
@@ -52,7 +53,7 @@ class SequenceDetailView(FatherDetailView):
         return context
 
 
-class SequenceCreateView(FatherCreateView):
+class SequenceCreateView(LoginRequiredMixin, FatherCreateView):
     model = PySequence
     fields = SEQ_SHORT
     template_name = 'base/form.html'
@@ -66,7 +67,7 @@ class SequenceCreateView(FatherCreateView):
         return context
 
 
-class SequenceUpdateView(FatherUpdateView):
+class SequenceUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PySequence
     fields = SEQ_SHORT
     template_name = 'base/form.html'
@@ -81,33 +82,12 @@ class SequenceUpdateView(FatherUpdateView):
 
 
 # ========================================================================== #
-class SequenceDeleteView(FatherDeleteView):
+class SequenceDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PySequence
     success_url = 'base:sequences'
 
 
 # ========================================================================== #
-SELECT = """
-    SELECT last
-    FROM sequences_sequence
-    WHERE name = %s
-"""
-
-POSTGRESQL_UPSERT = """
-    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
-    VALUES (%s, %s, %s, %s, %s, %s, %s)
-    ON CONFLICT (name)
-    DO UPDATE SET (last = sequences_sequence.last + %s, nex_val = sequences_sequence.last + 1 + %s)
-    RETURNING last;
-"""
-
-MYSQL_UPSERT = """
-    INSERT INTO sequences_sequence (name, prefix, padding, initial, increment, reset, last)
-    VALUES (%s, %s, %s, %s, %s, %s, %s)
-    ON DUPLICATE KEY
-    UPDATE (last = sequences_sequence.last + %s, next_val = sequences_sequence.last + 1 + %s)
-"""
-
 def get_next_value(name='default', prefix='default', padding=4, initial=1, increment=1, reset=None, *, nowait=False, using=None):
     """
     Return the next value for a given sequence.

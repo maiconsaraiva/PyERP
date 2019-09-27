@@ -1,7 +1,6 @@
 # Librerias Django
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyLog, PyTax
+from ..models import PyTax
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -76,7 +75,7 @@ class TaxUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-class TaxDeleteView(FatherDeleteView):
+class TaxDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyTax
     success_url = 'base:taxs'
 

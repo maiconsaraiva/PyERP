@@ -6,10 +6,12 @@ from ..views.variant import (
     VariantCreateView, VariantDeleteView, VariantDetailView, VariantListView,
     VariantUpdateView)
 
+app_name = 'PyVariant'
+
 urlpatterns = [
-    path('variants', VariantListView.as_view(), name='variants'),
-    path('variant/add/', VariantCreateView.as_view(), name='variant-add'),
-    path('variant/<int:pk>/', VariantDetailView.as_view(), name='variant-detail'),
-    path('variant/<int:pk>/update', VariantUpdateView.as_view(), name='variant-update'),
-    path('variant/<int:pk>/delete/', VariantDeleteView.as_view(), name='variant-delete'),
+    path('list', VariantListView.as_view(), name='list'),
+    path('add/', VariantCreateView.as_view(), name='add'),
+    path('<int:pk>/', VariantDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', VariantUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', VariantDeleteView.as_view(), name='delete'),
 ]

@@ -8,10 +8,12 @@ from ..views.channel import (
     ChannelCreateView, ChannelDeleteView, ChannelDetailView, ChannelListView,
     ChannelUpdateView)
 
+app_name = 'PyChannel'
+
 urlpatterns = [
-    path('channels', ChannelListView.as_view(), name='channels'),
-    path('channel/add/', ChannelCreateView.as_view(), name='channel-add'),
-    path('channel/<int:pk>/', ChannelDetailView.as_view(), name='channel-detail'),
-    path('channel/<int:pk>/update', ChannelUpdateView.as_view(), name='channel-update'),
-    path('channel/<int:pk>/delete/', ChannelDeleteView.as_view(), name='channel-delete'),
+    path('', ChannelListView.as_view(), name='list'),
+    path('add/', ChannelCreateView.as_view(), name='add'),
+    path('<int:pk>/', ChannelDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', ChannelUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', ChannelDeleteView.as_view(), name='delete'),
 ]

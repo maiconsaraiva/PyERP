@@ -8,10 +8,12 @@ from ..views.file import (
     FileCreateView, FileDeleteView, FileDetailView, FileListView,
     FileUpdateView)
 
+app_name = 'PyFile'
+
 urlpatterns = [
-    path('files', FileListView.as_view(), name='files'),
-    path('file/add/', FileCreateView.as_view(), name='file-add'),
-    path('file/<int:pk>/', FileDetailView.as_view(), name='file-detail'),
-    path('file/<int:pk>/update', FileUpdateView.as_view(), name='file-update'),
-    path('file/<int:pk>/delete/', FileDeleteView.as_view(), name='file-delete'),
+    path('', FileListView.as_view(), name='list'),
+    path('add/', FileCreateView.as_view(), name='add'),
+    path('<int:pk>/', FileDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', FileUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', FileDeleteView.as_view(), name='delete'),
 ]

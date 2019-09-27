@@ -16,7 +16,6 @@ from django.urls import clear_url_caches, reverse
 
 # Librerias en carpetas locales
 from ...base.models import PyPlugin
-from ..models import PyLog
 from .web_father import FatherListView
 
 APP_FIELDS = [

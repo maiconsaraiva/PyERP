@@ -1,7 +1,6 @@
 """uRLs para company
 """
 # Librerias Django
-from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 # Librerias en carpetas locales
@@ -9,35 +8,13 @@ from ..views.company import (
     CompanyCreateView, CompanyDeleteView, CompanyDetailView, CompanyListView,
     CompanyUpdateView, change_active_company)
 
+app_name = 'PyCompany'
+
 urlpatterns = [
-    path(
-        '',
-        login_required(CompanyListView.as_view()),
-        name='companies'
-    ),
-    path(
-        'add/',
-        login_required(CompanyCreateView.as_view()),
-        name='company-add'
-    ),
-    path(
-        '<int:pk>/',
-        login_required(CompanyDetailView.as_view()),
-        name='company-detail'
-    ),
-    path(
-        '<int:pk>/update',
-        login_required(CompanyUpdateView.as_view()),
-        name='company-update'
-    ),
-    path(
-        '<int:pk>/delete/',
-        login_required(CompanyDeleteView.as_view()),
-        name='company-delete'
-    ),
-    path(
-        '<int:company>/change-company/',
-        login_required(change_active_company),
-        name='change-company'
-    ),
+    path('', CompanyListView.as_view(), name='list'),
+    path('add/', CompanyCreateView.as_view(), name='add'),
+    path('<int:pk>/', CompanyDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', CompanyUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', CompanyDeleteView.as_view(), name='delete'),
+    path('<int:company>/change/', change_active_company, name='change'),
 ]

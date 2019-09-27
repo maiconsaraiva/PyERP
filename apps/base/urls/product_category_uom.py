@@ -9,10 +9,12 @@ from ..views.product_category_uom import (
     ProductCategoryUOMDetailView, ProductCategoryUOMListView,
     ProductCategoryUOMUpdateView)
 
+app_name = 'PyProductCategoryUOM'
+
 urlpatterns = [
-    path('product-category-uom', ProductCategoryUOMListView.as_view(), name='product-category-uom'),
-    path('product-category-uom/add/', ProductCategoryUOMCreateView.as_view(), name='product-category-uom-add'),
-    path('product-category-uom/<int:pk>/', ProductCategoryUOMDetailView.as_view(), name='product-category-uom-detail'),
-    path('product-category-uom/<int:pk>/update', ProductCategoryUOMUpdateView.as_view(), name='product-category-uom-update'),
-    path('product-category-uom/<int:pk>/delete/', ProductCategoryUOMDeleteView.as_view(), name='product-category-uom-delete'),
+    path('', ProductCategoryUOMListView.as_view(), name='list'),
+    path('add/', ProductCategoryUOMCreateView.as_view(), name='add'),
+    path('int:pk>/', ProductCategoryUOMDetailView.as_view(), name='product-category-uom-detail'),
+    path('<int:pk>/update', ProductCategoryUOMUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', ProductCategoryUOMDeleteView.as_view(), name='delete'),
 ]

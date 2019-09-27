@@ -1,13 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyEvent, PyLog
+from ..models import PyEvent
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -79,6 +77,6 @@ class EventUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class EventDeleteView(FatherDeleteView):
+class EventDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyEvent
     success_url = 'base:events'

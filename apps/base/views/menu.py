@@ -1,14 +1,14 @@
 # Librerias Django
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
 from ..models import PyMenu
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 MENU_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
@@ -78,6 +78,6 @@ class MenuUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class MenuDeleteView(FatherDeleteView):
+class MenuDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyMenu
     success_url = 'base:menus'

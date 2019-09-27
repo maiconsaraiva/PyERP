@@ -1,8 +1,9 @@
 # Librerias Future
 from __future__ import unicode_literals
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias en carpetas locales
-from ..models import PyLog, PyWParameter
+from ..models import PyWParameter
 from ..models.post import PyPost
 from .web_father import FatherDetailView, FatherListView
 
@@ -38,7 +39,7 @@ class BlogView(FatherListView):
 
         return context
 
-class PostDetailView(FatherDetailView):
+class PostDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyPost
     template_name = 'blog/post.html'
     extend_from = None

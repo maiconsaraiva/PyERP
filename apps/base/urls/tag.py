@@ -7,10 +7,12 @@ from django.urls import path
 from ..views.tag import (
     TagCreateView, TagDeleteView, TagDetailView, TagListView, TagUpdateView)
 
+app_name = 'PyTag'
+
 urlpatterns = [
-    path('tags', TagListView.as_view(), name='tags'),
-    path('tag/add/', TagCreateView.as_view(), name='tag-add'),
-    path('tag/<int:pk>/', TagDetailView.as_view(), name='tag-detail'),
-    path('tag/<int:pk>/update', TagUpdateView.as_view(), name='tag-update'),
-    path('tag/<int:pk>/delete/', TagDeleteView.as_view(), name='tag-delete'),
+    path('', TagListView.as_view(), name='list'),
+    path('add/', TagCreateView.as_view(), name='add'),
+    path('<int:pk>/', TagDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', TagUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', TagDeleteView.as_view(), name='delete'),
 ]

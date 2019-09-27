@@ -8,10 +8,12 @@ from ..views.parameter import (
     ParameterCreateView, ParameterDeleteView, ParameterDetailView,
     ParameterListView, ParameterUpdateView)
 
+app_name = 'PyParameter'
+
 urlpatterns = [
-    path('parameters', ParameterListView.as_view(), name='parameters'),
-    path('parameter/add/', ParameterCreateView.as_view(), name='parameter-add'),
-    path('parameter/<int:pk>/', ParameterDetailView.as_view(), name='parameter-detail'),
-    path('parameter/<int:pk>/update', ParameterUpdateView.as_view(), name='parameter-update'),
-    path('parameter/<int:pk>/delete/', ParameterDeleteView.as_view(), name='parameter-delete'),
+    path('', ParameterListView.as_view(), name='list'),
+    path('add/', ParameterCreateView.as_view(), name='add'),
+    path('<int:pk>/', ParameterDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', ParameterUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', ParameterDeleteView.as_view(), name='delete'),
 ]

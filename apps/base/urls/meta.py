@@ -8,10 +8,12 @@ from ..views.meta import (
     MetaCreateView, MetaDeleteView, MetaDetailView, MetaListView,
     MetaUpdateView)
 
+app_name = 'PyMeta'
+
 urlpatterns = [
-    path('metas', MetaListView.as_view(), name='metas'),
-    path('meta/add/', MetaCreateView.as_view(), name='meta-add'),
-    path('meta/<int:pk>/', MetaDetailView.as_view(), name='meta-detail'),
-    path('meta/<int:pk>/update', MetaUpdateView.as_view(), name='meta-update'),
-    path('meta/<int:pk>/delete/', MetaDeleteView.as_view(), name='meta-delete'),
+    path('', MetaListView.as_view(), name='list'),
+    path('add/', MetaCreateView.as_view(), name='add'),
+    path('<int:pk>/', MetaDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', MetaUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', MetaDeleteView.as_view(), name='delete'),
 ]

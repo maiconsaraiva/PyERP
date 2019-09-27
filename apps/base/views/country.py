@@ -1,16 +1,14 @@
 # Librerias Django
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, ListView
 
 # Librerias de terceros
 from dal import autocomplete
 
 # Librerias en carpetas locales
-from ..models import PyCountry, PyLog
+from ..models import PyCountry
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -75,7 +73,7 @@ class CountryUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-class CountryDeleteView(FatherDeleteView):
+class CountryDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyCountry
     success_url = 'base:countries'
 

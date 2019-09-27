@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 # Librerias Django
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias en carpetas locales
-from ..models import PyLog, PyProduct, PyWParameter
+from ..models import PyProduct, PyWParameter
 from .web_father import FatherDetailView, FatherListView
 
 # Tienda de Productos
@@ -21,7 +21,7 @@ PRODUCT_FIELDS = [
 ]
 
 
-class WebProductView(FatherListView):
+class WebProductListView(LoginRequiredMixin, FatherListView):
     """ Despleiga todos los poductos de la tienda con la posibilidad de
     filtralos por categoria
     """
@@ -42,7 +42,7 @@ class WebProductView(FatherListView):
         return context
 
 
-class WebProductDetailView(FatherDetailView):
+class WebProductDetailView(LoginRequiredMixin, FatherDetailView):
     """Detalle del producto
     """
     model = PyProduct

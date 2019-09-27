@@ -8,10 +8,12 @@ from ..views.wpayment import (
     WPaymentCreateView, WPaymentDeleteView, WPaymentDetailView,
     WPaymentListView, WPaymentUpdateView)
 
+app_name = 'PyWPayment'
+
 urlpatterns = [
-    path('wpayments', WPaymentListView.as_view(), name='wpayments'),
-    path('wpayment/add/', WPaymentCreateView.as_view(), name='wpayment-add'),
-    path('wpayment/<int:pk>/', WPaymentDetailView.as_view(), name='wpayment-detail'),
-    path('wpayment/<int:pk>/update', WPaymentUpdateView.as_view(), name='wpayment-update'),
-    path('wpayment/<int:pk>/delete/', WPaymentDeleteView.as_view(), name='wpayment-delete'),
+    path('', WPaymentListView.as_view(), name='list'),
+    path('add/', WPaymentCreateView.as_view(), name='add'),
+    path('<int:pk>/', WPaymentDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', WPaymentUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', WPaymentDeleteView.as_view(), name='delete'),
 ]

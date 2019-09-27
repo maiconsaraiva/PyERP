@@ -1,13 +1,10 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
 from ..models.meta import PyMeta
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
@@ -19,6 +16,7 @@ META_FIELDS = [
         ]
 
 META_FIELDS_SHORT = ['title','content']
+
 
 class MetaListView(LoginRequiredMixin, FatherListView):
     model = PyMeta
@@ -32,7 +30,7 @@ class MetaListView(LoginRequiredMixin, FatherListView):
         context['fields'] = META_FIELDS
         return context
 
-class MetaDetailView(FatherDetailView):
+class MetaDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyMeta
     template_name = 'base/detail.html'
     def get_context_data(self, **kwargs):
@@ -73,6 +71,6 @@ class MetaUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class MetaDeleteView(FatherDeleteView):
+class MetaDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyMeta
     success_url = 'base:metas'

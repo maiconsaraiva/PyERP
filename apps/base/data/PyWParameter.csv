@@ -19,5 +19,4 @@ id,name,value
 19,show_bi,True
 20,show_file,True
 21,show_location,True
-22,show_location,True
 23,get_sidebar_collapse,True

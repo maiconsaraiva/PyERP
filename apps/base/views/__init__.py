@@ -1,5 +1,6 @@
 # Librerias Django
 from django.apps import apps
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
@@ -15,23 +16,22 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from pyerp.settings import BASE_DIR
 
 # Librerias en carpetas locales
-from ..models import PyLog
 from ..forms import AvatarForm
 from ..models import (
-    BaseConfig, PyCompany, PyPartner, PyPlugin, PyProduct, PyProductCategory,
-    PyUser, PyWebsiteConfig)
+    BaseConfig, PyCompany, PyLog, PyPartner, PyPlugin, PyProduct,
+    PyProductCategory, PyUser, PyWebsiteConfig)
 from .activatelanguage import ActivateLanguageView
 from .base_config import UpdateBaseConfigView
 from .company import (
-    CompanyCreateView, CompanyDetailView, CompanyListView, CompanyUpdateView,
-    CompanyDeleteView, change_active_company)
-from .partner import (
-    CustomerListView, ProviderListView)
+    CompanyCreateView, CompanyDeleteView, CompanyDetailView, CompanyListView,
+    CompanyUpdateView, change_active_company)
+from .partner import CustomerListView, ProviderListView
 from .usercustom import (
     ActivateUserView, AvatarUpdateView, LogOutModalView, PasswordRecoveryView,
     ProfileView, SignUpView, cambio_clave)
 from .web_father import (
-    FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView, FatherDeleteView)
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 from .wparameter import PyWParameter
 
 
@@ -45,7 +45,7 @@ def Install(request):
     return render(request, 'base/install.html')
 
 
-class UserListView(FatherListView):
+class UserListView(LoginRequiredMixin, FatherListView):
     model = PyUser
     template_name = 'base/list.html'
 
@@ -62,7 +62,7 @@ class UserListView(FatherListView):
         return context
 
 
-class UserDetailView(FatherDetailView):
+class UserDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyUser
     template_name = 'base/detail.html'
 
@@ -87,7 +87,7 @@ class UserDetailView(FatherDetailView):
         return context
 
 
-class UserCreateView(FatherCreateView):
+class UserCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyUser
     fields = ['email', 'first_name', 'last_name', 'password']
     template_name = 'base/form.html'
@@ -112,7 +112,7 @@ class UserCreateView(FatherCreateView):
         return HttpResponseRedirect(url)
 
 
-class UserUpdateView(FatherUpdateView):
+class UserUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyUser
     fields = ['email', 'first_name', 'last_name', 'partner_id']
     template_name = 'base/form.html'
@@ -126,7 +126,7 @@ class UserUpdateView(FatherUpdateView):
 
 
 
-class UserDeleteView(FatherDeleteView):
+class UserDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyUser
     success_url = 'base:users'
 

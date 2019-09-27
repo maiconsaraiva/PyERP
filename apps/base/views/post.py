@@ -1,13 +1,10 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog
 from ..models.post import PyPost
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
@@ -22,6 +19,8 @@ POST_FIELDS = [
 
 POST_FIELDS_SHORT = ['title', 'keywords', 'content', 'img', ]
 
+
+# ========================================================================== #
 class PostListView(LoginRequiredMixin, FatherListView):
     model = PyPost
     template_name = 'base/list.html'
@@ -34,6 +33,8 @@ class PostListView(LoginRequiredMixin, FatherListView):
         context['fields'] = POST_FIELDS
         return context
 
+
+# ========================================================================== #
 class PostDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyPost
     template_name = 'base/detail.html'
@@ -47,6 +48,7 @@ class PostDetailView(LoginRequiredMixin, FatherDetailView):
         return context
 
 
+# ========================================================================== #
 class PostCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
@@ -61,6 +63,7 @@ class PostCreateView(LoginRequiredMixin, FatherCreateView):
         return context
 
 
+# ========================================================================== #
 class PostUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyPost
     fields = POST_FIELDS_SHORT
@@ -74,7 +77,7 @@ class PostUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-
-class PostDeleteView(FatherDeleteView):
+# ========================================================================== #
+class PostDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyPost
     success_url = 'base:post-backend'

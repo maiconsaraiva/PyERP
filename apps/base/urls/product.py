@@ -1,5 +1,4 @@
 # Librerias Django
-from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 # Librerias en carpetas locales
@@ -7,26 +6,12 @@ from ..views.product import (
     ProductCreateView, ProductDeleteView, ProductDetailView, ProductListView,
     ProductUpdateView)
 
+app_name = 'PyProduct'
+
 urlpatterns = [
-    path('', login_required(ProductListView.as_view()), name='products'),
-    path(
-        'add/',
-        login_required(ProductCreateView.as_view()),
-        name='product-add'
-    ),
-    path(
-        '<int:pk>/',
-        login_required(ProductDetailView.as_view()),
-        name='product-detail'
-    ),
-    path(
-        '<int:pk>/update',
-        login_required(ProductUpdateView.as_view()),
-        name='product-update'
-    ),
-    path(
-        '<int:pk>/delete/',
-        login_required(ProductDeleteView.as_view()),
-        name='product-delete'
-    ),
+    path('', ProductListView.as_view(), name='list'),
+    path('add/', ProductCreateView.as_view(), name='add'),
+    path('<int:pk>/', ProductDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', ProductUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', ProductDeleteView.as_view(), name='delete'),
 ]

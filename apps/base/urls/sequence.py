@@ -1,7 +1,6 @@
 """uRLs para tax
 """
 # Librerias Django
-from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 # Librerias en carpetas locales
@@ -9,24 +8,12 @@ from ..views.sequence import (
     SequenceCreateView, SequenceDeleteView, SequenceDetailView,
     SequenceListView, SequenceUpdateView)
 
+app_name = 'PySequence'
+
 urlpatterns = [
-    path('',
-        login_required(SequenceListView.as_view()),
-        name='sequences'),
-    path(
-        'add/',
-        login_required(SequenceCreateView.as_view()),
-        name='sequence-add'),
-    path(
-        '<int:pk>/',
-        login_required(SequenceDetailView.as_view()),
-        name='sequence-detail'),
-    path(
-        '<int:pk>/update',
-        login_required(SequenceUpdateView.as_view()),
-        name='sequence-update'),
-    path(
-        '<int:pk>/delete/',
-        login_required(SequenceDeleteView.as_view()),
-        name='sequence-delete'),
+    path('', SequenceListView.as_view(), name='list'),
+    path('add/', SequenceCreateView.as_view(), name='add'),
+    path('<int:pk>/', SequenceDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', SequenceUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', SequenceDeleteView.as_view(), name='delete'),
 ]

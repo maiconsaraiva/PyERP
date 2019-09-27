@@ -6,6 +6,7 @@ Vistas de la aplicación globales
 # Librerias Django
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordResetView
@@ -25,7 +26,7 @@ import requests
 from ..forms import (
     AvatarForm, PasswordRecoveryForm, PasswordSetForm, PerfilForm,
     PersonaCreationForm)
-from ..models import PyLog, PyUser
+from ..models import PyUser
 from ..tokens import ACCOUNT_ACTIVATION_TOKEN, PASSWORD_RECOVERY_TOKEN
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
@@ -69,7 +70,7 @@ class ActivateUserView(RedirectView):
 
 
 # ========================================================================== #
-class AvatarUpdateView(FatherUpdateView):
+class AvatarUpdateView(LoginRequiredMixin, FatherUpdateView):
     """Vista para editarar las sale
     """
     model = PyUser

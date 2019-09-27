@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
 # Librerias en carpetas locales
-from ..models import PyLog
 from ..models.base_config import BaseConfig
 from .web_father import FatherUpdateView
 

@@ -1,11 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyEmail, PyLog
+from ..models import PyEmail
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -20,7 +20,7 @@ EMAIL_FIELDS = [
 EMAIL_SHORT = ['title', 'content', 'partner_id', 'type']
 
 
-class EmailListView(FatherListView):
+class EmailListView(LoginRequiredMixin, FatherListView):
     model = PyEmail
     template_name = 'base/list.html'
     login_url = "login"
@@ -34,7 +34,7 @@ class EmailListView(FatherListView):
         return context
 
 
-class EmailDetailView(FatherDetailView):
+class EmailDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyEmail
     template_name = 'base/detail.html'
     login_url = "login"
@@ -49,7 +49,7 @@ class EmailDetailView(FatherDetailView):
         return context
 
 
-class EmailCreateView(FatherCreateView):
+class EmailCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyEmail
     fields = EMAIL_SHORT
     template_name = 'base/form.html'
@@ -63,7 +63,7 @@ class EmailCreateView(FatherCreateView):
         return context
 
 
-class EmailUpdateView(FatherUpdateView):
+class EmailUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyEmail
     fields = EMAIL_SHORT
     template_name = 'base/form.html'
@@ -77,6 +77,6 @@ class EmailUpdateView(FatherUpdateView):
         return context
 
 
-class EmailDeleteView(FatherDeleteView):
+class EmailDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyEmail
     success_url = 'base:emails'

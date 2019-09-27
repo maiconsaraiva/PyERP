@@ -10,11 +10,17 @@ from .company import PyCompany
 from .country import PyCountry
 from .cron import PyCron
 from .currency import PyCurrency
+from .email import PyEmail
+from .event import PyEvent
 from .faq import PyFaq
 from .father import PyFather
+from .file import PyFile
 from .image import PyImage
 from .log import PyLog
+from .menu import PyMenu
+from .message import PyMessage
 from .meta import PyMeta
+from .note import PyNote
 from .page import PyPage
 from .parameter import PyParameter
 from .partner import PyPartner
@@ -35,9 +41,3 @@ from .variant import PyVariant
 from .website_config import PyWebsiteConfig
 from .wparameter import PyWParameter
 from .wpayment import PyWPayment
-from .email import PyEmail
-from .file import PyFile
-from .message import PyMessage
-from .note import PyNote
-from .event import PyEvent
-from .menu import PyMenu

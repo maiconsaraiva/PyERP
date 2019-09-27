@@ -8,6 +8,8 @@ from ..views.comment import (
     CommentCreateView, CommentDeleteView, CommentDetailView, CommentListView,
     CommentUpdateView)
 
+app_name = 'PyComment'
+
 urlpatterns = [
     path('comments', CommentListView.as_view(), name='comments'),
     path('comment/add/', CommentCreateView.as_view(), name='comment-add'),

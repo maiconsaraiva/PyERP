@@ -1,10 +1,9 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Librerias en carpetas locales
-from ..models import PyCompany, PyLog
+from ..models import PyCompany
 from .bi import PyBi
 from .wparameter import PyWParameter
 

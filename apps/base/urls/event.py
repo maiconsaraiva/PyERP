@@ -8,10 +8,12 @@ from ..views.event import (
     EventCreateView, EventDeleteView, EventDetailView, EventListView,
     EventUpdateView)
 
+app_name = 'PyEvent'
+
 urlpatterns = [
-    path('events', EventListView.as_view(), name='events'),
-    path('event/add/', EventCreateView.as_view(), name='event-add'),
-    path('event/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
-    path('event/<int:pk>/update', EventUpdateView.as_view(), name='event-update'),
-    path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event-delete'),
+    path('', EventListView.as_view(), name='list'),
+    path('add/', EventCreateView.as_view(), name='add'),
+    path('<int:pk>/', EventDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', EventUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', EventDeleteView.as_view(), name='delete'),
 ]

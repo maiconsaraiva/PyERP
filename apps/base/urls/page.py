@@ -8,10 +8,12 @@ from ..views.page import (
     PageCreateView, PageDeleteView, PageDetailView, PageListView,
     PageUpdateView)
 
+app_name = 'PyPage'
+
 urlpatterns = [
-    path('page-backend', PageListView.as_view(), name='page-backend'),
-    path('page/add/', PageCreateView.as_view(), name='page-add'),
-    path('page/<int:pk>/', PageDetailView.as_view(), name='page-detail'),
-    path('page/<int:pk>/update', PageUpdateView.as_view(), name='page-update'),
-    path('page/<int:pk>/delete/', PageDeleteView.as_view(), name='page-delete'),
+    path('', PageListView.as_view(), name='list'),
+    path('add/', PageCreateView.as_view(), name='add'),
+    path('<int:pk>/', PageDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', PageUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', PageDeleteView.as_view(), name='delete'),
 ]

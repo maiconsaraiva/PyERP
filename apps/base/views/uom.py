@@ -1,13 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyLog, PyUom
+from ..models import PyUom
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -80,7 +78,6 @@ class UomUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-
-class UomDeleteView(FatherDeleteView):
+class UomDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyUom
     success_url = 'base:uoms'

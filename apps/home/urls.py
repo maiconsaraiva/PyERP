@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros
 from apps.base.views.blog import BlogView, PostDetailView
-from apps.base.views.shop import WebProductDetailView, WebProductView
+from apps.base.views.shop import WebProductDetailView, WebProductListView
 
 # Librerias en carpetas locales
 from .views.views import IndexView, UnderConstruction, contact
@@ -36,7 +36,7 @@ urlpatterns = [
 
     path(
         'shop/',
-        WebProductView.as_view(
+        WebProductListView.as_view(
             extend_from='home/home.html',
             url_web_product='home:web-product',
             header_title=_("Shop")

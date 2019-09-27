@@ -1,5 +1,6 @@
 # Librerias Django
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -50,7 +51,7 @@ LEAD_FIELDS_SHORT = [
 
 
 # ========================================================================== #
-class ProductListView(FatherListView):
+class ProductListView(LoginRequiredMixin, FatherListView):
     model = PyProduct
     template_name = 'base/list.html'
 
@@ -64,7 +65,7 @@ class ProductListView(FatherListView):
 
 
 # ========================================================================== #
-class ProductDetailView(FatherDetailView):
+class ProductDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyProduct
     template_name = 'base/detail.html'
 
@@ -80,7 +81,7 @@ class ProductDetailView(FatherDetailView):
 
 
 # ========================================================================== #
-class ProductCreateView(FatherCreateView):
+class ProductCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm
@@ -95,7 +96,7 @@ class ProductCreateView(FatherCreateView):
 
 
 # ========================================================================== #
-class ProductUpdateView(FatherUpdateView):
+class ProductUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyProduct
     # fields = LEAD_FIELDS_SHORT
     form_class = ProductForm
@@ -111,22 +112,6 @@ class ProductUpdateView(FatherUpdateView):
 
 
 # ========================================================================== #
-class ProductUpdateView(FatherUpdateView):
-    model = PyProduct
-    # fields = LEAD_FIELDS_SHORT
-    form_class = ProductForm
-    template_name = 'base/form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['form'] = self.get_form()
-        context['breadcrumbs'] = [{'url': 'base:products', 'name': 'Productos'}]
-        context['back_url'] = reverse('base:product-detail', kwargs={'pk': context['object'].pk})
-        return context
-
-
-# ========================================================================== #
-class ProductDeleteView(FatherDeleteView):
+class ProductDeleteView(LoginRequiredMixin, FatherDeleteView):
     success_url = 'base:products'
     model = PyProduct

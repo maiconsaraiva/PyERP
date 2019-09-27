@@ -8,10 +8,12 @@ from ..views.message import (
     MessageCreateView, MessageDeleteView, MessageDetailView, MessageListView,
     MessageUpdateView)
 
+app_name = 'PyMessage'
+
 urlpatterns = [
-    path('messages', MessageListView.as_view(), name='messages'),
-    path('message/add/', MessageCreateView.as_view(), name='message-add'),
-    path('message/<int:pk>/', MessageDetailView.as_view(), name='message-detail'),
-    path('message/<int:pk>/update', MessageUpdateView.as_view(), name='message-update'),
-    path('message/<int:pk>/delete/', MessageDeleteView.as_view(), name='message-delete'),
+    path('', MessageListView.as_view(), name='list'),
+    path('add/', MessageCreateView.as_view(), name='add'),
+    path('<int:pk>/', MessageDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', MessageUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', MessageDeleteView.as_view(), name='delete'),
 ]

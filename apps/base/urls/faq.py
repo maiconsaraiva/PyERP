@@ -7,10 +7,12 @@ from django.urls import path
 from ..views.faq import (
     FaqCreateView, FaqDeleteView, FaqDetailView, FaqListView, FaqUpdateView)
 
+app_name = 'PyFaq'
+
 urlpatterns = [
-    path('faqs', FaqListView.as_view(), name='faqs'),
-    path('faq/add/', FaqCreateView.as_view(), name='faq-add'),
-    path('faq/<int:pk>/', FaqDetailView.as_view(), name='faq-detail'),
-    path('faq/<int:pk>/update', FaqUpdateView.as_view(), name='faq-update'),
-    path('faq/<int:pk>/delete/', FaqDeleteView.as_view(), name='faq-delete'),
+    path('', FaqListView.as_view(), name='list'),
+    path('add/', FaqCreateView.as_view(), name='add'),
+    path('<int:pk>/', FaqDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', FaqUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', FaqDeleteView.as_view(), name='delete'),
 ]

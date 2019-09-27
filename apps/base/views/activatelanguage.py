@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 
 # Librerias Django
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import resolve, reverse
 from django.utils import translation
@@ -15,7 +16,7 @@ from django.views.generic.base import View
 
 
 # ========================================================================== #
-class ActivateLanguageView(View):
+class ActivateLanguageView(LoginRequiredMixin, View):
     ''' Clase para la activación de un lenguaje
     '''
     language_code = ''

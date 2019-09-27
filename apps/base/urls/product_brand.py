@@ -6,10 +6,12 @@ from ..views.product_brand import (
     ProductBrandCreateView, ProductBrandDeleteView, ProductBrandDetailView,
     ProductBrandListView, ProductBrandUpdateView)
 
+app_name = 'PyProductBrand'
+
 urlpatterns = [
-    path('product-brand', ProductBrandListView.as_view(), name='product-brand'),
-    path('product-brand/add/', ProductBrandCreateView.as_view(), name='product-brand-add'),
-    path('product-brand/<int:pk>/', ProductBrandDetailView.as_view(), name='product-brand-detail'),
-    path('product-brand/<int:pk>/update', ProductBrandUpdateView.as_view(), name='product-brand-update'),
-    path('product-brand/<int:pk>/delete/', ProductBrandDeleteView.as_view(), name='product-brand-delete'),
+    path('', ProductBrandListView.as_view(), name='list'),
+    path('add/', ProductBrandCreateView.as_view(), name='add'),
+    path('<int:pk>/', ProductBrandDetailView.as_view(), name='detail'),
+    path('<int:pk>/update', ProductBrandUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', ProductBrandDeleteView.as_view(), name='delete'),
 ]

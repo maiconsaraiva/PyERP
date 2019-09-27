@@ -1,13 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyChannel, PyLog
+from ..models import PyChannel
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -77,6 +75,6 @@ class ChannelUpdateView(LoginRequiredMixin, FatherUpdateView):
         return context
 
 
-class ChannelDeleteView(FatherDeleteView):
+class ChannelDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyChannel
     success_url = 'base:channels'

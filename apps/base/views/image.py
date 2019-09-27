@@ -1,13 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyImage, PyLog
+from ..models import PyImage
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -78,6 +76,6 @@ class ImageUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class ImageDeleteView(FatherDeleteView):
+class ImageDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyImage
     success_url = 'base:images'

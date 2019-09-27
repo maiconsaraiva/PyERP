@@ -7,6 +7,8 @@ from django.urls import path
 from ..views.bi import (
     BiCreateView, BiDeleteView, BiDetailView, BiListView, BiUpdateView)
 
+app_name = 'PyBi'
+
 urlpatterns = [
     path('bi', BiListView.as_view(), name='bi'),
     path('bi/add/', BiCreateView.as_view(), name='bi-add'),

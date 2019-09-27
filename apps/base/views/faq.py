@@ -1,13 +1,11 @@
 # Librerias Django
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
-from ..models import PyFaq, PyLog
+from ..models import PyFaq
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -78,6 +76,6 @@ class FaqUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 
 
-class FaqDeleteView(FatherDeleteView):
+class FaqDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyFaq
     success_url = 'base:faqs'
