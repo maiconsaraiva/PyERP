@@ -11,7 +11,7 @@ id,name,value
 11,show_btn_export,True
 12,show_btn_import,True
 13,show_btn_mass,True
-14,custome_title,PyERP (We Make Your Day Easy)
+14,custome_title,PyERP
 15,show_email,False
 16,show_message,False
 17,show_calendar,False
