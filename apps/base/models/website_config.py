@@ -22,6 +22,9 @@ class PyWebsiteConfig(PyFather):
         wbaseconfig.save()
         return wbaseconfig
 
+    def get_absolute_url(self):
+        return reverse('base:website-config', kwargs={'pk': self.pk})
+
     class Meta:
         verbose_name = _("WebsiteConfig")
         verbose_name_plural = _("PyWebsiteConfig")

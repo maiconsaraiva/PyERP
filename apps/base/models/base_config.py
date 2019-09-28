@@ -24,6 +24,9 @@ class BaseConfig(models.Model):
     def dload_data(self):
         self.load_data = True
 
+    def get_absolute_url(self):
+        return reverse('base:base-config', kwargs={'pk': self.pk})
+
     @classmethod
     def create(cls, company):
         """Crea un propietario de manera sencilla
