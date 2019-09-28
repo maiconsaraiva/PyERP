@@ -14,8 +14,6 @@ class PyMenu(PyFather):
     link = models.CharField(_("link"), max_length=100)
     sequence = models.IntegerField(null=True, blank=True)
 
-    def get_absolute_url(self):
-        return reverse('base:menu-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _("Menu")

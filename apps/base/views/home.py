@@ -1,5 +1,5 @@
 # Librerias Django
-from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Librerias en carpetas locales
@@ -14,7 +14,7 @@ def _web_parameter():
         web_parameter[parametro.name] = parametro.value
     return web_parameter
 
-
+@login_required()
 def erp_home(request):
     """Vista para renderizar el dasboard del erp
     """

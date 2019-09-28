@@ -4,11 +4,10 @@
 from django.urls import path
 
 # Librerias en carpetas locales
+from ..views import CustomerListView
 from ..views.partner import (
     PartnerAutoComplete, PartnerCreateView, PartnerDeleteView,
     PartnerDetailView, PartnerUpdateView)
-
-from ..views import CustomerListView
 
 app_name = 'PyPartner'
 

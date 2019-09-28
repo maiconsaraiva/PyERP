@@ -11,8 +11,6 @@ from .father import PyFather
 class PyVariant(PyFather):
     name = models.CharField(_("Name"), max_length=255)
 
-    def get_absolute_url(self):
-        return reverse('base:variant-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

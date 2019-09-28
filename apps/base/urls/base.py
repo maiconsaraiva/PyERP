@@ -4,8 +4,7 @@
 from django.urls import path
 
 # Librerias en carpetas locales
-from ..views import (
-    Install, ProviderListView, UpdateBaseConfigView)
+from ..views import Install, ProviderListView, UpdateBaseConfigView
 from ..views.base_config import LoadData
 from ..views.home import erp_home
 from ..views.website_config import UpdateWebsiteConfigView

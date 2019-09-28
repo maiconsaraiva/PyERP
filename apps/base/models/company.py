@@ -67,9 +67,6 @@ class PyCompany(PyFather):
     main_color = models.CharField(max_length=20, blank=True, default=giveme_main_color)
     font_color = models.CharField(max_length=20, blank=True, default=giveme_font_color)
 
-
-
-
     slogan = models.CharField('Eslogan', max_length=250, blank=True)
     logo = models.ImageField(
         max_length=255,
@@ -85,8 +82,6 @@ class PyCompany(PyFather):
 
     description = models.TextField(null=True, blank=True)
 
-    def get_absolute_url(self):
-        return reverse('base:company-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return '{}'.format(self.name)

@@ -25,7 +25,7 @@ urlpatterns = [
         name='login'),
     path(
         'logout',
-        LogoutView.as_view(next_page='base:login'),
+        LogoutView.as_view(next_page='PyUser:login'),
         name='logout'
     ),
     path('logoutmodal/', LogOutModalView.as_view(), name='logout-modal'),

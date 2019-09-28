@@ -22,8 +22,6 @@ class PyCurrency(PyFather):
     position = models.CharField(
         choices=POSITION_CHOICE, max_length=64, default='after')
 
-    def get_absolute_url(self):
-        return reverse('base:currency-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "{} ({})".format(self.name, self.country)

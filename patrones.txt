@@ -12,3 +12,7 @@
 
 # para reemplazar las url que eliminan
 (path\('<int:pk>/delete/', .*DeleteView.*, name=')(.*)('\),)
+
+
+
+(return reverse\('base:)(.*)(', kwargs=\{'pk': self\.pk\}\))

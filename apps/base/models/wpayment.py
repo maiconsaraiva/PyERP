@@ -12,8 +12,6 @@ class PyWPayment(PyFather):
     name = models.CharField(_("Name"), max_length=40)
     web_active = models.BooleanField(_("Web Active"), default=True)
 
-    def get_absolute_url(self):
-        return reverse('base:wpayment-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

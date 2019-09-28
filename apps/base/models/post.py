@@ -46,8 +46,6 @@ class PyPost(PyFather):
         default='post/default_post.png'
     )
 
-    def get_absolute_url(self):
-        return reverse('base:post-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.title)

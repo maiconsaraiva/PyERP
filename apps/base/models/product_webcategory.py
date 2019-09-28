@@ -15,8 +15,6 @@ class PyProductWebCategory(PyFather):
     def __str__(self):
         return '%s%s' % (self.parent_id and ('[%s] ' % self.parent_id) or '', self.name)
 
-    def get_absolute_url(self):
-        return reverse('base:product-webcategory-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _("ProductWebCategory")

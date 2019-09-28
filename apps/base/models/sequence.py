@@ -42,5 +42,3 @@ class PySequence(PyFather):
         return "name={}, prefix={}, last={}".format(
             repr(self.name), repr(self.prefix), repr(self.last))
 
-    def get_absolute_url(self):
-        return reverse('base:sequence-detail', kwargs={'pk': self.pk})

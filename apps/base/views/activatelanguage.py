@@ -7,7 +7,6 @@ Vistas de la aplicación globales
 from urllib.parse import urlparse
 
 # Librerias Django
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import resolve, reverse

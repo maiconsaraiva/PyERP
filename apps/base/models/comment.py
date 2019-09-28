@@ -13,8 +13,6 @@ class PyComment(PyFather):
     comment = models.TextField(_("Comment"))
     email = models.EmailField('Correo', max_length=40, blank=True)
 
-    def get_absolute_url(self):
-        return reverse('base:comment-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

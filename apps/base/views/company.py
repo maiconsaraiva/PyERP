@@ -1,8 +1,7 @@
 # Librerias Django
-from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
@@ -11,7 +10,7 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-COMPANY_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
     {'string': _("Street"), 'field': 'street'},
     {'string': _("Phone"), 'field': 'phone'},
@@ -22,31 +21,26 @@ COMPANY_FIELDS = [
     {'string': _("Postal Code"), 'field': 'postal_code'},
 ]
 
-COMPANY_FIELDS_SHORT = [
+OBJECT_FORM_FIELDS = [
     'name',
     'street',
     'city',
     'phone',
     'email',
     'postal_code',
-
     'social_facebook',
     'social_instagram',
     'social_linkedin',
     'social_youtube',
     'social_whatsapp',
-
     'latitude',
     'longitude',
-
     'country',
     'currency_id',
     'slogan',
     'logo',
-
     'main_color',
     'font_color',
-
     'description'
 ]
 
@@ -55,62 +49,32 @@ COMPANY_FIELDS_SHORT = [
 class CompanyListView(LoginRequiredMixin, FatherListView):
     model = PyCompany
     template_name = 'base/list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CompanyListView, self).get_context_data(**kwargs)
-        context['title'] = 'Compañías'
-        context['detail_url'] = 'base:company-detail'
-        context['add_url'] = 'base:company-add'
-        context['fields'] = COMPANY_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 # ========================================================================== #
 class CompanyDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCompany
     template_name = 'base/detail.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(CompanyDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:companies', 'name': 'Compañia'}]
-        context['update_url'] = 'base:company-update'
-        context['delete_url'] = 'base:company-delete'
-        context['fields'] = COMPANY_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 # ========================================================================== #
 class CompanyCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCompany
-    fields = COMPANY_FIELDS_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CompanyCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Crear Compañía'
-        context['breadcrumbs'] = [{'url': 'base:companies', 'name': 'Compañías'}]
-        context['back_url'] = reverse('base:companies')
-        return context
 
 
 # ========================================================================== #
 class CompanyUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCompany
-    fields = COMPANY_FIELDS_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(CompanyUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:companies', 'name': 'Compañías'}]
-        context['back_url'] = reverse('base:company-detail', kwargs={'pk': context['object'].pk})
-        return context
 
 
 # ========================================================================== #
+@login_required()
 def change_active_company(request, company):
     user = PyUser.objects.get(pk=request.user.pk)
     user.active_company = PyCompany.objects.get(pk=company)
@@ -120,5 +84,4 @@ def change_active_company(request, company):
 
 # ========================================================================== #
 class CompanyDeleteView(LoginRequiredMixin, FatherDeleteView):
-    success_url = 'base:companies'
     model = PyCompany

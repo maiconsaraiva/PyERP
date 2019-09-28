@@ -1,9 +1,9 @@
 # Librerias Django
 from django.apps import apps
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.management import call_command
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
@@ -50,7 +50,7 @@ class UserListView(LoginRequiredMixin, FatherListView):
     template_name = 'base/list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(UserListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'Usuarios'
         context['detail_url'] = 'base:user-detail'
         context['add_url'] = 'base:user-add'
@@ -67,7 +67,7 @@ class UserDetailView(LoginRequiredMixin, FatherDetailView):
     template_name = 'base/detail.html'
 
     def get_context_data(self, **kwargs):
-        context = super(UserDetailView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = context['object'].email
         context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
         context['update_url'] = 'base:user-update'
@@ -94,7 +94,7 @@ class UserCreateView(LoginRequiredMixin, FatherCreateView):
     success_url = 'base:user-detail'
 
     def get_context_data(self, **kwargs):
-        context = super(UserCreateView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'Crear Usuario'
         context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
         context['back_url'] = reverse('base:users')
@@ -118,7 +118,7 @@ class UserUpdateView(LoginRequiredMixin, FatherUpdateView):
     template_name = 'base/form.html'
 
     def get_context_data(self, **kwargs):
-        context = super(UserUpdateView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = context['object'].email
         context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
         context['back_url'] = reverse('base:user-detail', kwargs={'pk': context['object'].pk})

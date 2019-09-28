@@ -8,7 +8,7 @@ urlpatterns = [
     # ============================ New URLs ============================ #
     path('', include('apps.base.urls.usercustom')),
     path('attribute/', include('apps.base.urls.attribute')),
-    path('', include('apps.base.urls.base')),
+    path('base/', include('apps.base.urls.base')),
     path('bi/', include('apps.base.urls.bi')),
     path('channel/', include('apps.base.urls.channel')),
     path('comment/', include('apps.base.urls.comment')),

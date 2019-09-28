@@ -1,7 +1,5 @@
 # Librerias Django
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
@@ -10,71 +8,36 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-FILE_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
     {'string': _("Note"), 'field': 'note'},
     {'string': _("User"), 'field': 'user_id'},
 ]
 
-FILE_SHORT = ['name', 'note', 'user_id']
+OBJECT_FORM_FIELDS = ['name', 'note', 'user_id']
 
 
 class FileListView(LoginRequiredMixin, FatherListView):
     model = PyFile
     template_name = 'base/list.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(FileListView, self).get_context_data(**kwargs)
-        context['title'] = 'Files'
-        context['detail_url'] = 'base:file-detail'
-        context['add_url'] = 'base:file-add'
-        context['fields'] = FILE_FIELDS
-        return context
-
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 class FileDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyFile
     template_name = 'base/detail.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(FileDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:files', 'name': 'Files'}]
-        context['update_url'] = 'base:file-update'
-        context['delete_url'] = 'base:file-delete'
-        context['fields'] = FILE_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class FileCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyFile
-    fields = FILE_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(FileCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Create File'
-        context['breadcrumbs'] = [{'url': 'base:files', 'name': 'Files'}]
-        context['back_url'] = reverse('base:files')
-        return context
 
 
 class FileUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyFile
-    fields = FILE_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(FileUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'base:files', 'name': 'Files'}]
-        context['back_url'] = reverse('base:file-detail', kwargs={'pk': context['object'].pk})
-        return context
-
 
 
 class FileDeleteView(LoginRequiredMixin, FatherDeleteView):

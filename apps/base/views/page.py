@@ -1,7 +1,5 @@
 # Librerias Django
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias en carpetas locales
@@ -10,68 +8,38 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-PAGE_FIELDS = [
+OBJECT_LIST_FIELDS = [
             {'string': _("Title"), 'field': 'title'},
             {'string': _("Created on"), 'field': 'created_on'},
             {'string': _("Keywords"), 'field': 'keywords'},
 
         ]
 
-PAGE_FIELDS_SHORT = ['title','content','keywords']
+OBJECT_FORM_FIELDS = ['title', 'content', 'keywords']
+
 
 class PageListView(LoginRequiredMixin, FatherListView):
     model = PyPage
     template_name = 'base/list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(PageListView, self).get_context_data(**kwargs)
-        context['title'] = 'Pages'
-        context['detail_url'] = 'base:page-detail'
-        context['add_url'] = 'base:page-add'
-        context['fields'] = PAGE_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 class PageDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyPage
     template_name = 'base/detail.html'
-    def get_context_data(self, **kwargs):
-        context = super(PageDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'base:page-backend', 'name': 'Pages'}]
-        context['update_url'] = 'base:page-update'
-        context['delete_url'] = 'base:page-delete'
-        context['fields'] = PAGE_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class PageCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyPage
-    fields = PAGE_FIELDS_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    success_url = reverse_lazy('base:page-backend')
-
-    def get_context_data(self, **kwargs):
-        context = super(PageCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Create Page'
-        context['breadcrumbs'] = [{'url': 'base:page-backend', 'name': 'Page'}]
-        context['back_url'] = reverse('base:page-backend')
-        return context
 
 
 class PageUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyPage
-    fields = PAGE_FIELDS_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(PageUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'base:page-backend', 'name': 'Page'}]
-        context['back_url'] = reverse('base:page-detail', kwargs={'pk': context['object'].pk})
-        return context
-
 
 
 class PageDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyPage
-    success_url = 'base:page-backend'

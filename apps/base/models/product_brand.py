@@ -13,8 +13,6 @@ class PyProductBrand(PyFather):
     def __str__(self):
         return format(self.name)
 
-    def get_absolute_url(self):
-        return reverse('base:product-brand-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _("ProductBrand")

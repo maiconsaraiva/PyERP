@@ -15,8 +15,6 @@ class PyWebsiteConfig(PyFather):
     under_construction = models.BooleanField(_("Under Construction"), default=False)
     user_register = models.BooleanField(_("User Register"), default=True)
 
-    def get_absolute_url(self):
-        return reverse('base:website-config', kwargs={'pk': self.pk})
 
     @classmethod
     def create(cls, company):

@@ -9,7 +9,6 @@ from os import listdir, path
 # Librerias Django
 from django.apps import apps
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import clear_url_caches, reverse
@@ -18,14 +17,12 @@ from django.urls import clear_url_caches, reverse
 from ...base.models import PyPlugin
 from .web_father import FatherListView
 
-APP_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},
     {'string': 'Author', 'field': 'author'},
     {'string': 'Description', 'field': 'description'},
     {'string': 'Installed', 'field': 'installed'},
 ]
-
-
 
 def Apps(request):
     return render(request, 'base/plugin.html')
@@ -34,7 +31,7 @@ def Apps(request):
 class PluginListView(LoginRequiredMixin, FatherListView):
     model = PyPlugin
     template_name = 'base/plugin.html'
-    fields = APP_FIELDS
+    fields = OBJECT_LIST_FIELDS
     context_object_name = 'plugin_list'
     paginate_by = 12
 
@@ -65,7 +62,7 @@ def PluginUpdate(self):
                 )
                 plugin.save()
 
-    return redirect(reverse('base:list-plugin'))
+    return redirect(reverse('PyPlugin:list'))
 
 
 
@@ -125,7 +122,7 @@ def PluginInstall(self, pk):
         clear_url_caches()
         reload(sys.modules[urlconf])
 
-    return redirect(reverse('base:list-plugin'))
+    return redirect(reverse('PyPlugin:list'))
 
 
 # ========================================================================== #
@@ -141,4 +138,4 @@ def PluginUninstall(self, pk):
             if 'apps.%s' % app.name.lower() == line.strip():
                 continue
             installed_apps_file.write(line)
-    return redirect(reverse('base:list-plugin'))
+    return redirect(reverse('PyPlugin:list'))

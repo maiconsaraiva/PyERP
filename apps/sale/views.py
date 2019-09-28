@@ -2,6 +2,7 @@
 """
 # Librerias Standard
 import logging
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Librerias Django
 from django.db.models import Q

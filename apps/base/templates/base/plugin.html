@@ -14,9 +14,9 @@
                   </span>
                     <span class="info-box-text">{{ app.description }}</span>
                     {% if app.installed %}
-                      <a class="btn btn-danger float-right ml-1" href="{% url 'base:uninstall-plugin' app.id %}"><i class="fa fa-arrow-up"> Uninstall</i></a>
+                      <a class="btn btn-danger float-right ml-1" href="{% url 'PyPlugin:delete' app.id %}"><i class="fa fa-arrow-up"> Uninstall</i></a>
                     {% else %}
-                      <a  class="btn btn-success float-right ml-1" href="{% url 'base:install-plugin' app.id %}"><i class="fa fa-arrow-down"> Install</i></a>
+                      <a  class="btn btn-success float-right ml-1" href="{% url 'PyPlugin:create' app.id %}"><i class="fa fa-arrow-down"> Install</i></a>
                     {% endif %}
                     <a class="btn btn-primary float-right ml-1" target="_blank" href="http://{{ app.website }}"><i class="fa fa-eye"> View</i></a>
                 </div>

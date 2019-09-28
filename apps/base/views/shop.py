@@ -11,7 +11,7 @@ from .web_father import FatherDetailView, FatherListView
 
 # Tienda de Productos
 
-PRODUCT_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},
     {'string': 'Descripción', 'field': 'description'},
     {'string': 'Precio', 'field': 'price'},
@@ -27,7 +27,7 @@ class WebProductListView(LoginRequiredMixin, FatherListView):
     """
     model = PyProduct
     template_name = 'shop/shop.html'
-    fields = PRODUCT_FIELDS
+    fields = OBJECT_LIST_FIELDS
     paginate_by = 8
     extend_from = None
     url_web_product = None

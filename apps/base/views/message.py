@@ -10,69 +10,34 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-MESSAGE_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': _("Message"), 'field': 'message'},
 ]
 
-MESSAGE_SHORT = ['message', 'user_id']
+OBJECT_FORM_FIELDS = ['message', 'user_id']
 
 
 class MessageListView(LoginRequiredMixin, FatherListView):
     model = PyMessage
     template_name = 'base/list.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(MessageListView, self).get_context_data(**kwargs)
-        context['title'] = 'message'
-        context['detail_url'] = 'base:message-detail'
-        context['add_url'] = 'base:message-add'
-        context['fields'] = MESSAGE_FIELDS
-        return context
-
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 class MessageDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyMessage
     template_name = 'base/detail.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(MessageDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].message
-        context['breadcrumbs'] = [{'url': 'base:messages', 'name': 'Messages'}]
-        context['update_url'] = 'base:message-update'
-        context['delete_url'] = 'base:message-delete'
-        context['fields'] = MESSAGE_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class MessageCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyMessage
-    fields = MESSAGE_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(MessageCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Create Message'
-        context['breadcrumbs'] = [{'url': 'base:messages', 'name': 'Messages'}]
-        context['back_url'] = reverse('base:messages')
-        return context
 
 
 class MessageUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyMessage
-    fields = MESSAGE_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(MessageUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].title
-        context['breadcrumbs'] = [{'url': 'base:messages', 'name': 'Messages'}]
-        context['back_url'] = reverse('base:message-detail', kwargs={'pk': context['object'].pk})
-        return context
-
 
 
 class MessageDeleteView(LoginRequiredMixin, FatherDeleteView):

@@ -25,8 +25,6 @@ class PyCron(PyFather):
     number_call = models.IntegerField('Número de llamadas', default=-1)
     created_on = models.DateTimeField(_("Created on"), auto_now_add=True)
 
-    def get_absolute_url(self):
-        return reverse('base:cron-detail', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-created_on']

@@ -22,8 +22,6 @@ class PyParameter(PyFather):
         )
     value = models.CharField(_('Value'), max_length=255)
 
-    def get_absolute_url(self):
-        return reverse('base:parameter-detail', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-id']

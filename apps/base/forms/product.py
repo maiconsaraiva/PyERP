@@ -42,7 +42,7 @@ class ProductForm(forms.ModelForm):
         ]
         widgets = {
             'tax': autocomplete.ModelSelect2Multiple(
-                url='base:tax-autocomplete',
+                url='PyTax:autocomplete',
                 attrs={
                     'data-placeholder': _('Select taxes...'),
                     'style': 'padding: 0 .75rem',

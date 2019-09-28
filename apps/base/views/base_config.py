@@ -9,7 +9,6 @@ from .web_father import FatherUpdateView
 
 
 class UpdateBaseConfigView(LoginRequiredMixin, FatherUpdateView):
-    login_url = "login"
     model = BaseConfig
     template_name = 'base/form.html'
     fields = ['online', 'open_menu', 'main_company_id', 'type_share']

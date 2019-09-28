@@ -13,8 +13,6 @@ class PyCountry(PyFather):
     def __str__(self):
         return format(self.name)
 
-    def get_absolute_url(self):
-        return reverse('base:country-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _("Country")

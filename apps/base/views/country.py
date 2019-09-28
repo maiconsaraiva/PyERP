@@ -13,80 +13,45 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-COUNTRY_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
 ]
 
-COUNTRY_SHORT = ['name']
+OBJECT_FORM_FIELDS = ['name']
 
 
 class CountryListView(LoginRequiredMixin, FatherListView):
     model = PyCountry
     template_name = 'base/list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CountryListView, self).get_context_data(**kwargs)
-        context['title'] = _("Countries")
-        context['detail_url'] = 'base:country-detail'
-        context['add_url'] = 'base:country-add'
-        context['fields'] = COUNTRY_FIELDS
-        return context
-
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 class CountryDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCountry
     template_name = 'base/detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CountryDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:countries', 'name': _("Countries")}]
-        context['update_url'] = 'base:country-update'
-        context['delete_url'] = 'base:country-delete'
-        context['fields'] = COUNTRY_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class CountryCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCountry
-    fields = COUNTRY_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CountryCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Country Create'
-        context['breadcrumbs'] = [{'url': 'base:countries', 'name': _("Countries")}]
-        context['back_url'] = reverse('base:countries')
-        return context
 
 
 class CountryUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCountry
-    fields = COUNTRY_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CountryUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:countries', 'name': _("Countries")}]
-        context['back_url'] = reverse('base:country-detail', kwargs={'pk': context['object'].pk})
-        return context
 
 
 class CountryDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyCountry
-    success_url = 'base:countries'
 
 
 class CountryAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyCountry
     """
-
     def get_queryset(self):
-
         queryset = PyCountry.objects.all()
-
         if self.q:
             queryset = queryset.filter(name__icontains=self.q)
-
         return queryset

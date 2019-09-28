@@ -10,7 +10,7 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-CRON_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': 'Nombre', 'field': 'name'},
     {'string': 'Activo', 'field': 'active'},
     {'string': 'Ejecutar Cada', 'field': 'interval_type'},
@@ -20,67 +20,31 @@ CRON_FIELDS = [
     {'string': 'Creado en', 'field': 'created_on'},
 ]
 
-CRON_SHORT = ['name', 'active', 'interval_type', 'model_name', 'function', 'number_call']
+OBJECT_FORM_FIELDS = ['name', 'active', 'interval_type', 'model_name', 'function', 'number_call']
 
 
 class CronListView(LoginRequiredMixin, FatherListView):
     model = PyCron
     template_name = 'base/list.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(CronListView, self).get_context_data(**kwargs)
-        context['title'] = 'Crons'
-        context['detail_url'] = 'base:cron-detail'
-        context['add_url'] = 'base:cron-add'
-        context['fields'] = CRON_FIELDS
-        return context
-
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 class CronDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyCron
     template_name = 'base/detail.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(CronDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:crons', 'name': 'Crons'}]
-        context['update_url'] = 'base:cron-update'
-        context['delete_url'] = 'base:cron-delete'
-        context['fields'] = CRON_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class CronCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyCron
-    fields = CRON_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(CronCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Crear Cron'
-        context['breadcrumbs'] = [{'url': 'base:crons', 'name': 'Crons'}]
-        context['back_url'] = reverse('base:crons')
-        return context
 
 
 class CronUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyCron
-    fields = CRON_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(CronUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:crons', 'name': 'Crons'}]
-        context['back_url'] = reverse('base:cron-detail', kwargs={'pk': context['object'].pk})
-        return context
-
 
 
 class CronDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyCron
-    success_url = 'base:crons'

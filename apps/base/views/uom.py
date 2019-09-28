@@ -10,7 +10,7 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-UOM_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
     {'string': _("Ratio"), 'field': 'ratio'},
     {'string': _("Rouding"), 'field': 'rouding'},
@@ -18,66 +18,31 @@ UOM_FIELDS = [
     {'string': _("Category"), 'field': 'category_id'},
 ]
 
-UOM_SHORT = ['name','ratio','rouding','type','category_id']
+OBJECT_FORM_FIELDS = ['name', 'ratio', 'rouding', 'type', 'category_id']
 
 
 class UomListView(LoginRequiredMixin, FatherListView):
     model = PyUom
     template_name = 'base/list.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(UomListView, self).get_context_data(**kwargs)
-        context['title'] = 'Uoms'
-        context['detail_url'] = 'base:uom-detail'
-        context['add_url'] = 'base:uom-add'
-        context['fields'] = UOM_FIELDS
-        return context
-
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 class UomDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyUom
     template_name = 'base/detail.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(UomDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:uoms', 'name': 'Uoms'}]
-        context['update_url'] = 'base:uom-update'
-        context['delete_url'] = 'base:uom-delete'
-        context['fields'] = UOM_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class UomCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyUom
-    fields = UOM_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(UomCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Create UOM'
-        context['breadcrumbs'] = [{'url': 'base:uoms', 'name': 'Uoms'}]
-        context['back_url'] = reverse('base:uoms')
-        return context
 
 
 class UomUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyUom
-    fields = UOM_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(UomUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:uoms', 'name': 'Uoms'}]
-        context['back_url'] = reverse('base:uom-detail', kwargs={'pk': context['object'].pk})
-        return context
 
 
 class UomDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyUom
-    success_url = 'base:uoms'

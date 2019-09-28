@@ -70,8 +70,6 @@ class PyUser(AbstractUser, PyFather):
     def get_short_name(self):
         return '%s %s' % (self.first_name, self.last_name)
 
-    def get_absolute_url(self):
-        return reverse('base:user-detail', kwargs={'pk': self.pk})
 
     @classmethod
     def create(cls, first_name, last_name, email, password, is_superuser, is_staff, is_active, active_company):

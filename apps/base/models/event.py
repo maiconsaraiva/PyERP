@@ -13,8 +13,6 @@ class PyEvent(PyFather):
     note = models.TextField(_("Note"))
     begin_date = models.DateTimeField(blank=True, null=True)
 
-    def get_absolute_url(self):
-        return reverse('base:event-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

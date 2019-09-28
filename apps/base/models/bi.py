@@ -20,10 +20,8 @@ class PyBi(PyFather):
     font_color = models.CharField(_("Font Color"), null=True, blank=True, max_length=50, default="white")
     icon = models.CharField(_("Icon"), null=True, blank=True, max_length=50, default="ion-person-add")
     dashboard = models.CharField(_("Dashboard"), null=True, blank=True, max_length=50, default="home")
-    url = models.CharField(_("URL"), null=True, blank=True, max_length=50, default="base:partners")
+    url = models.CharField(_("URL"), null=True, blank=True, max_length=50, default="PyPartner:list")
 
-    def get_absolute_url(self):
-        return reverse('base:bi-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

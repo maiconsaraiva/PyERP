@@ -63,8 +63,6 @@ class PyProduct(PyFather):
 
     type = models.CharField(_("type"), choices=PRODUCT_CHOICE, max_length=64, default='consu')
 
-    def get_absolute_url(self):
-        return reverse('base:product-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)

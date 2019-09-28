@@ -26,7 +26,7 @@ class SaleOrderForm(ModelForm):
         }
         widgets = {
             'partner_id': autocomplete.ModelSelect2(
-                url='base:partner-autocomplete',
+                url='PyPartner:autocomplete',
                 attrs={
                     'class': 'form-control',
                     'data-placeholder': 'Seleccione un cliente ...',
@@ -104,7 +104,7 @@ class SaleOrderDetailForm(ModelForm):
             #     },
             # ),
             # 'product_tax': autocomplete.ModelSelect2(
-            #     url='product-tax-autocomplete',
+            #     url='PyTax:autocomplete',
             #     attrs={
             #         'class': 'form-control',
             #         'data-placeholder': 'Seleccione un Impuesto ...',

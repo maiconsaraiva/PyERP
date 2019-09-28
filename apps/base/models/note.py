@@ -18,8 +18,6 @@ class PyNote(PyFather):
     note = models.TextField(_("Note"))
     color = models.CharField(_("Color"), choices=COLOR_CHOICE, max_length=64, default='yellow')
 
-    def get_absolute_url(self):
-        return reverse('base:note-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

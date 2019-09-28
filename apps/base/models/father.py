@@ -7,6 +7,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import ProtectedError
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 
 class PyFather(models.Model):
@@ -20,6 +21,9 @@ class PyFather(models.Model):
     class Meta:
         ordering = ['id']
         abstract = True
+
+    def get_absolute_url(self):
+        return reverse('{}:detail'.format(self._meta.object_name), kwargs={'pk': self.pk})
 
     def delete(self, *args, **kwargs):
         try:

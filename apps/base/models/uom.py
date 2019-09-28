@@ -22,8 +22,6 @@ class PyUom(PyFather):
     type = models.CharField(_("type"), choices=TYPE_CHOICE, max_length=64, default='consu')
     category_id = models.ForeignKey(PyProductCategoryUOM, null=True, blank=True, on_delete=models.PROTECT)
 
-    def get_absolute_url(self):
-        return reverse('base:uom-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

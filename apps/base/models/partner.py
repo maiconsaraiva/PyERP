@@ -32,9 +32,6 @@ class PyPartner(PyFather):
 
     type = models.CharField(_("type"), choices=TYPE_CHOICE, max_length=64, default='company')
 
-    def get_absolute_url(self):
-        return reverse('base:partner-detail', kwargs={'pk': self.pk})
-
     def __str__(self):
         return self.name
 

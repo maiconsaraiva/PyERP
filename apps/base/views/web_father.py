@@ -7,12 +7,12 @@ from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..models import (
-    PyCompany, PyMeta, PyParameter, PyPlugin, PyWParameter)
+from ..models import PyCompany, PyMeta, PyParameter, PyPlugin, PyWParameter
 
 
 def _count_plugin():
     return PyPlugin.objects.all().count()
+
 
 def _web_parameter():
     web_parameter = {}
@@ -20,11 +20,13 @@ def _web_parameter():
         web_parameter[parametro.name] = parametro.value
     return web_parameter
 
+
 def _parameter():
     parameter = {}
     for parametro in PyParameter.objects.all():
         parameter[parametro.name] = parametro.value
     return parameter
+
 
 def _web_meta():
     cad = ''
@@ -50,7 +52,7 @@ class FatherTemplateView(TemplateView):
 
 # ========================================================================== #
 class FatherListView(ListView):
-    exlude_from_filter = (
+    EXLUDE_FROM_FILTER = (
         'PyCompany',
         'PyCountry',
         'PyCourrency',
@@ -60,15 +62,20 @@ class FatherListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
         context['web_parameter'] = _web_parameter()
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
+        context['title'] = '{}'.format(verbose_name)
+        context['detail_url'] = '{}:detail'.format(object_name)
+        context['add_url'] = '{}:add'.format(object_name)
         return context
 
     def get_queryset(self):
-        if self.model._meta.object_name in self.exlude_from_filter:
+        if self.model._meta.object_name in self.EXLUDE_FROM_FILTER:
             queryset = self.model.objects.all()
         else:
             queryset = self.model.objects.filter(
@@ -82,36 +89,24 @@ class FatherListView(ListView):
 
 # ========================================================================== #
 class FatherDetailView(DetailView):
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
         context['web_parameter'] = _web_parameter()
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
+        context['title'] = '{}'.format(verbose_name)
+        context['breadcrumbs'] = [{
+            'url': '{}:list'.format(object_name),
+            'name': '{}'.format(verbose_name)
+        }]
+        context['update_url'] = '{}:update'.format(object_name)
+        context['delete_url'] = '{}:delete'.format(object_name)
         return context
-
-    class Meta:
-        abstract = True
-
-
-# ========================================================================== #
-class FatherUpdateView(UpdateView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['web_parameter'] = _web_parameter()
-        context['parameter'] = _parameter()
-        context['meta'] = _web_meta()
-        context['count_plugin'] = _count_plugin
-        context['company'] = PyCompany.objects.filter(active=True)
-        return context
-
-    def form_valid(self, form):
-        """If the form is valid, save the associated model."""
-        self.object = form.save(commit=False)
-        self.object.um = self.request.user.pk
-        self.object.save()
-        return super().form_valid(form)
 
     class Meta:
         abstract = True
@@ -121,11 +116,19 @@ class FatherUpdateView(UpdateView):
 class FatherCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
         context['web_parameter'] = _web_parameter()
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
         context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
+        context['title'] = '{}'.format(verbose_name)
+        context['breadcrumbs'] = [{
+            'url': '{}:list'.format(object_name),
+            'name': '{}'.format(verbose_name)
+        }]
+        context['back_url'] = reverse_lazy('{}:list'.format(object_name))
         return context
 
     def form_valid(self, form):
@@ -141,16 +144,53 @@ class FatherCreateView(CreateView):
 
 
 # ========================================================================== #
+class FatherUpdateView(UpdateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
+        context['web_parameter'] = _web_parameter()
+        context['parameter'] = _parameter()
+        context['meta'] = _web_meta()
+        context['count_plugin'] = _count_plugin
+        context['company'] = PyCompany.objects.filter(active=True)
+        context['title'] = '{}'.format(verbose_name)
+        context['breadcrumbs'] = [{
+            'url': '{}:list'.format(object_name),
+            'name': '{}'.format(verbose_name)
+        }]
+        context['back_url'] = reverse_lazy(
+            '{}:detail'.format(object_name),
+            kwargs={'pk': context['object'].pk}
+        )
+        return context
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save(commit=False)
+        self.object.um = self.request.user.pk
+        self.object.save()
+        return super().form_valid(form)
+
+    class Meta:
+        abstract = True
+
+
+# ========================================================================== #
 class FatherDeleteView(DeleteView):
     template_name = 'base/delete.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        obj_name = self.model._meta.verbose_name
-        context['title'] = _("Delete %(obj_name)s") % {"obj_name": obj_name}
-        context['delete_message'] = _("Are you sure to delete <strong>%(obj_name)s</strong>?") % {"obj_name": obj_name}
-        context['action_url'] = 'base:{}-delete'.format(obj_name.lower())
+        object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
+        context['title'] = _("Delete %(obj_name)s") % {"obj_name": verbose_name}
+        context['delete_message'] = _("Are you sure to delete <strong>%(obj_name)s</strong>?") % {"obj_name": verbose_name}
+        context['action_url'] = '{}:delete'.format(object_name)
         return context
+
+    def get_success_url(self):
+        return '{}:list'.format(self.model._meta.object_name)
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()

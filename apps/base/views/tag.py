@@ -10,69 +10,34 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 
-TAG_FIELDS = [
+OBJECT_LIST_FIELDS = [
     {'string': _("Name"), 'field': 'name'},
 ]
 
-TAG_SHORT = ['name']
+OBJECT_FORM_FIELDS = ['name']
 
 
 class TagListView(LoginRequiredMixin, FatherListView):
     model = PyTag
     template_name = 'base/list.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(TagListView, self).get_context_data(**kwargs)
-        context['title'] = 'Tags'
-        context['detail_url'] = 'base:tag-detail'
-        context['add_url'] = 'base:tag-add'
-        context['fields'] = TAG_FIELDS
-        return context
-
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 class TagDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyTag
     template_name = 'base/detail.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(TagDetailView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:tags', 'name': 'Tags'}]
-        context['update_url'] = 'base:tag-update'
-        context['delete_url'] = 'base:tag-delete'
-        context['fields'] = TAG_FIELDS
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class TagCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyTag
-    fields = TAG_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(TagCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Create Tag'
-        context['breadcrumbs'] = [{'url': 'base:tags', 'name': 'Tags'}]
-        context['back_url'] = reverse('base:tags')
-        return context
 
 
 class TagUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyTag
-    fields = TAG_SHORT
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    login_url = "login"
-
-    def get_context_data(self, **kwargs):
-        context = super(TagUpdateView, self).get_context_data(**kwargs)
-        context['title'] = context['object'].name
-        context['breadcrumbs'] = [{'url': 'base:tags', 'name': 'Tags'}]
-        context['back_url'] = reverse('base:tag-detail', kwargs={'pk': context['object'].pk})
-        return context
-
 
 
 class TagDeleteView(LoginRequiredMixin, FatherDeleteView):

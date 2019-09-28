@@ -13,8 +13,6 @@ class PyPage(PyFather):
     created_on = models.DateTimeField(auto_now_add=True)
     keywords = models.CharField('Keywords', max_length=20, blank=True)
 
-    def get_absolute_url(self):
-        return reverse('base:page-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.title)

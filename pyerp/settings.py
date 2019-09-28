@@ -169,9 +169,9 @@ DATABASES = {
 establece las rutas para algunas funciones.
 """
 AUTH_USER_MODEL = 'base.PyUser'
-LOGIN_URL = 'base:login'
+LOGIN_URL = 'PyUser:login'
 LOGIN_REDIRECT_URL = 'base:home'
-LOGOUT_REDIRECT_URL = 'base:login'
+LOGOUT_REDIRECT_URL = 'PyUser:login'
 
 
 # Password validation

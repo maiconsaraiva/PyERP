@@ -18,8 +18,6 @@ class PyPlugin(PyFather):
     version = models.CharField(_("Version"), blank=True, null=True, max_length=20)
     sequence = models.IntegerField(_("Sequence"), default=100)
 
-    def get_absolute_url(self):
-        return reverse('base:lead-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return format(self.name)
