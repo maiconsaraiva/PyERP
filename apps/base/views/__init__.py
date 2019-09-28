@@ -113,7 +113,6 @@ class UserUpdateView(LoginRequiredMixin, FatherUpdateView):
         url = reverse_lazy(self.get_success_url(), kwargs={'pk': self.object.pk})
 
 
-
 class UserDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyUser
 

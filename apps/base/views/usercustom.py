@@ -64,7 +64,7 @@ class ActivateUserView(RedirectView):
     """Esta clase activa a la persona cuando confirma el link enviado desde
     su correo
     """
-    url = 'base:login'
+    url = 'PyUser:login'
 
     def get(self, request, *args, **kwargs):
         uidb64 = self.kwargs['uidb64']
@@ -101,7 +101,7 @@ class AvatarUpdateView(LoginRequiredMixin, FatherUpdateView):
     """
     model = PyUser
     form_class = AvatarForm
-    success_url = reverse_lazy('base:profile')
+    success_url = reverse_lazy('PyUser:profile')
 
     def get_object(self, queryset=None):
         """
@@ -155,7 +155,7 @@ class AvatarUpdateView(LoginRequiredMixin, FatherUpdateView):
             if form.is_valid():
                 form.save()
 
-        return redirect('base:profile')
+        return redirect('PyUser:profile')
 
 
 # ========================================================================== #
@@ -176,7 +176,7 @@ def cambio_clave(request):
             update_session_auth_hash(request, user)  # Importante!
             messages.success(request, _('Your password change was successfully \
                 processed'))
-            return redirect('base:profile')
+            return redirect('PyUser:profile')
     else:
         context['form'] = PasswordChangeForm(request.user)
     return render(
@@ -200,7 +200,7 @@ class PasswordRecoveryView(PasswordResetView):
     contraseña
     2.- Despliega un formulario para recuperar la contraseña
     """
-    success_url = 'base:login'
+    success_url = 'PyUser:login'
     template_name = 'usercustom/password_reset_form.html'
     extra_context = {}
 
@@ -210,7 +210,7 @@ class PasswordRecoveryView(PasswordResetView):
             # Formulario para escribir la nueva contraseña
             context['form'] = PasswordSetForm()
             context['url_action'] = reverse_lazy(
-                'base:password-set',
+                'PyUser:password-set',
                 kwargs={
                     'uidb64': self.kwargs['uidb64'],
                     'token': self.kwargs['token']
@@ -219,7 +219,7 @@ class PasswordRecoveryView(PasswordResetView):
         else:
             # Fromulario para solicitar el link de recuperación de contraseña
             context['form'] = PasswordRecoveryForm()
-            context['url_action'] = reverse_lazy('base:password-recovery')
+            context['url_action'] = reverse_lazy('PyUser:password-recovery')
 
         return context
 
@@ -293,7 +293,7 @@ class PasswordRecoveryView(PasswordResetView):
                 }
 
                 url = reverse_lazy(
-                    'base:password-set',
+                    'PyUser:password-set',
                     kwargs={
                         'uidb64': urlsafe_base64_encode(force_bytes(user.pk)),
                         'token': PASSWORD_RECOVERY_TOKEN.make_token(user)
@@ -321,7 +321,7 @@ class PasswordRecoveryView(PasswordResetView):
                 )
 
                 return HttpResponseRedirect(
-                    reverse_lazy('base:password-recovery')
+                    reverse_lazy('PyUser:password-recovery')
                 )
 
 
@@ -333,7 +333,7 @@ class ProfileView(FatherUpdateView):
     form_class = PerfilForm
     template_name = 'usercustom/profile.html'
     success_message = _('Your profile was updated successfully')
-    success_url = reverse_lazy('base:profile')
+    success_url = reverse_lazy('PyUser:profile')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -386,7 +386,7 @@ class SignUpView(FatherCreateView):
     form_class = PersonaCreationForm
     template_name = 'usercustom/signup.html'
     extra_context = {}
-    success_url = 'base:login'
+    success_url = 'PyUser:login'
     success_message = _('Your account was created successfully. A link was sent to your email that you must sign in to confirm your sign up.')
 
     def post(self, request, *args, **kwargs):
@@ -420,7 +420,7 @@ class SignUpView(FatherCreateView):
         subject = _('%(app_name)s sign up') % {'app_name': settings.APP_NAME}
 
         url = reverse_lazy(
-            'base:activar',
+            'PyUser:activar',
             kwargs={
                 'uidb64': urlsafe_base64_encode(force_bytes(self.object.pk)),
                 'token': ACCOUNT_ACTIVATION_TOKEN.make_token(self.object)
