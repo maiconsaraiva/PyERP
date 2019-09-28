@@ -209,7 +209,7 @@ class InitForm(forms.ModelForm):
                 },
             ),
             'country': autocomplete.ModelSelect2(
-                url='base:country-autocomplete',
+                url='PyCountry:autocomplete',
                 attrs={
                     'class': 'form-control',
                     'data-placeholder': _('Select a country...'),
