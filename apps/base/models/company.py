@@ -53,6 +53,17 @@ class PyCompany(PyFather):
         else:
             return "#fff"
 
+    def giveme_content_wrapper_color():
+        count = PyCompany.objects.all().count()
+        if count == 0:
+            return "#f4f6f9"
+        elif count == 1:
+            return "#f4f6f9"
+        elif count == 2:
+            return "#f4f6f9"
+        else:
+            return "#f4f6f9"
+
     def giveme_font_color():
         count = PyCompany.objects.all().count()
         if count == 0:
@@ -65,6 +76,7 @@ class PyCompany(PyFather):
             return "#777"
 
     main_color = models.CharField(max_length=20, blank=True, default=giveme_main_color)
+    content_wrapper_color = models.CharField(max_length=20, blank=True, default=giveme_content_wrapper_color)
     font_color = models.CharField(max_length=20, blank=True, default=giveme_font_color)
 
     slogan = models.CharField('Eslogan', max_length=250, blank=True)

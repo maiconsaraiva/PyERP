@@ -40,6 +40,7 @@ OBJECT_FORM_FIELDS = [
     'slogan',
     'logo',
     'main_color',
+    'content_wrapper_color',
     'font_color',
     'description'
 ]
