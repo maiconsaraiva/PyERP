@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'dal_select2',
     'bootstrap4',
     'tempus_dominus',
+    'rest_framework',
 
     # Local Apps
     'apps.base',
@@ -256,3 +257,12 @@ try:
     from .localsettings import *
 except ImportError:
     _logger.warning('No hay localsettings, trabajando con settings global.')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', )
+}
