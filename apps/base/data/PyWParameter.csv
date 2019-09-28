@@ -6,7 +6,7 @@ id,name,value
 4,title_home_link,t.me/pyerp
 7,show_footer,True
 8,show_bar_company,True
-9,show_bar_language,True
+9,show_bar_language,False
 10,show_online_company,True
 11,show_btn_export,True
 12,show_btn_import,True
@@ -19,4 +19,4 @@ id,name,value
 19,show_bi,False
 20,show_file,False
 21,show_location,False
-22,get_sidebar_collapse,False
+22,get_sidebar_collapse,True

@@ -60,8 +60,6 @@ class PyFather(models.Model):
                             lines += ","
                     lines = "ToModel(" + lines
                     lines = lines + ",company_id='" + str(company_id) + "')"
-                    # ToModel(title='description',id='2',content='Web')
-                    print(lines)
                     lines.replace('"', '')
                     _Model = eval(lines)
                     _Model.save()

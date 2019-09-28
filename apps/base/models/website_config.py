@@ -13,7 +13,7 @@ class PyWebsiteConfig(PyFather):
     show_price = models.BooleanField(_("Show price"), default=True)
     show_chat = models.BooleanField(_("Show chat"), default=False)
     under_construction = models.BooleanField(_("Under Construction"), default=False)
-    user_register = models.BooleanField(_("User Register"), default=True)
+    user_register = models.BooleanField(_("User Register"), default=False)
 
 
     @classmethod

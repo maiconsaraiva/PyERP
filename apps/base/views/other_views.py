@@ -20,6 +20,7 @@ from ..models.sequence import PySequence
 from ..models.usercustom import PyUser
 from ..models.website_config import PyWebsiteConfig
 from ..models.wparameter import PyWParameter
+from ..models.parameter import PyParameter
 
 
 def IndexEasy(request):
@@ -51,6 +52,7 @@ def IndexEasy(request):
             PyMeta.LoadData('data', company.id)
             PySequence.LoadData('data', company.id)
             PyWParameter.LoadData('data', company.id)
+            PyParameter.LoadData('data', company.id)
             PyPartner.LoadData('data', company.id)
             PyBi.LoadData('data', company.id)
 
