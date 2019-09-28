@@ -50,7 +50,7 @@ OBJECT_LIST_FIELDS = [
     {'string': _('Email'), 'field': 'email'},
 ]
 
-OBJECT_FORM_FIELDS = ['email', 'first_name', 'last_name', 'password']
+OBJECT_FORM_FIELDS = ['email', 'first_name', 'last_name']
 
 
 class UserListView(LoginRequiredMixin, FatherListView):
