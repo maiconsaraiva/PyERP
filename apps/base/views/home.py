@@ -30,8 +30,4 @@ def erp_home(request):
         'web_parameter': _web_parameter(),
         'company': PyCompany.objects.filter(active=True)
     }
-    # for val in value['bi']:
-    #     print val"""
-
-    # print(value)
     return render(request, "home.html", value)
