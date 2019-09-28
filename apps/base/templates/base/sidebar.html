@@ -10,9 +10,9 @@
         <img src="{{ MEDIA_URL }}{{ user.active_company.logo }}" alt="PyERP" class="logo_company" style="opacity: .8; margin-left: 0px;" width="100%" >
     </a>
 
-        <style>
-            .logo_company:hover {filter: grayscale(80%);}
-        </style>
+    <style>
+        .logo_company:hover {filter: grayscale(80%);}
+    </style>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -27,7 +27,7 @@
                     <a href="{% url 'base:home' %}" class="nav-link"><i class="fa fa-home nav-icon"></i><p>{{ _('Home') }}</p></a>
                 </li>
 
-        {% if web_parameter.email %}
+        {% if web_parameter.show_email == 'True' %}
         <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="fa fa-envelope-open-text nav-icon"></i>
@@ -45,7 +45,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{% url 'Pylist:list' %}" class="nav-link">
+                    <a href="{% url 'PyEmail:list' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>{{ _('Sent') }}</p>
                     </a>
@@ -56,7 +56,7 @@
         {% endif %}
 
 
-        {% if web_parameter.email %}
+        {% if web_parameter.show_email == 'True' %}
                 <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="far fa-comment-alt nav-icon"></i>
@@ -68,7 +68,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{% url 'Pymessage:list' %}" class="nav-link">
+                    <a href="{% url 'PyMessage:list' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>{{ _('Message') }}</p>
                     </a>
@@ -78,7 +78,7 @@
               </li>
          {% endif %}
 
-        {% if web_parameter.calendar %}
+        {% if web_parameter.show_calendar == 'True' %}
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="fas fa-calendar-week nav-icon"></i>
@@ -90,7 +90,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{% url 'Pyevent:list' %}" class="nav-link">
+                    <a href="{% url 'PyEvent:list' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>{{ _('Event') }}</p>
                     </a>
@@ -100,7 +100,7 @@
               </li>
         {% endif %}
 
-        {% if web_parameter.note %}
+         {% if web_parameter.show_note == 'True' %}
                <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="fas fa-sticky-note nav-icon"></i>
@@ -112,7 +112,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{% url 'Pynote:list' %}" class="nav-link">
+                    <a href="{% url 'PyNote:list' %}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>{{ _('Notes') }}</p>
                     </a>
@@ -120,7 +120,7 @@
 
                 </ul>
               </li>
-        {% endif %}
+            {% endif %}
 
 
 
@@ -218,7 +218,7 @@
               </li>
             <!-- END PRODUCT -->
 
-        {% if web_parameter.file %}
+        {% if web_parameter.show_location == 'True' %}
         <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="fa fa-building nav-icon"></i>
@@ -239,9 +239,6 @@
                     <li class="nav-item">
                         <a href="{% url 'PyTax:list' %}" class="nav-link"><i class="far fa-circle nav-icon"></i><p>{{ _('Taxs') }}</p></a>
                     </li>
-
-
-
                 </ul>
               </li>
             {% endif %}
@@ -349,7 +346,7 @@
               <!-- END WEBSITE -->
 
 
-             {% if web_parameter.note %}
+             {% if web_parameter.show_bi == 'True' %}
              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="fa fa-brain nav-icon"></i>
@@ -388,7 +385,7 @@
                         </ul>
                     </li>
 
-             {% if web_parameter.file %}
+             {% if web_parameter.show_file == 'True' %}
              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="fas fa-paperclip nav-icon" ></i>
@@ -442,7 +439,6 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- Configuracion Begin Sección solo para los administrdores End -->
                 {% endif %}
             </ul>
         </nav>

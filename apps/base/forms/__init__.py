@@ -28,26 +28,17 @@ class PerfilForm(ModelForm):
         fields = (
             'first_name',
             'last_name',
-            # 'email_secundario',
             'celular',
-            'fecha_nacimiento',
-            'sexo',
         )
         labels = {
             'first_name': _('Name'),
             'last_name': _('Last Name'),
-            # 'email_secundario': _('Secondary email'),
             'celular': _('Mobile Phone'),
-            'fecha_nacimiento': _('Birthdate'),
-            'sexo': _('Sex'),
         }
         widgets = {
             'first_name': TextInput(attrs={'class': 'form-control'}),
             'last_name': TextInput(attrs={'class': 'form-control'}),
-            # 'email_secundario': TextInput(attrs={'class': 'form-control'}),
             'celular': TextInput(attrs={'class': 'form-control'}),
-            'fecha_nacimiento': DatePicker(attrs={'class': 'form-control'}),
-            'sexo': Select(attrs={'class': 'form-control select2'}),
         }
 
     # def clean_telefono(self):
