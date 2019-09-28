@@ -3,7 +3,7 @@
 <aside class="main-sidebar sidebar-light elevation-1">
     <!-- Brand Logo -->
     {% if user.is_superuser %}
-    <a href="{% url 'base:base-config' 1 %}" class="brand-link">
+    <a href="{% url 'PyCompany:list' %}" class="brand-link">
     {% else %}
             <a href="/" class="brand-link">
     {% endif %}
