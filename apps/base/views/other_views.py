@@ -65,7 +65,7 @@ def IndexEasy(request):
             # user.last_name = 'User'
             # user.save()
 
-            return HttpResponseRedirect(reverse_lazy('base:login'))
+            return HttpResponseRedirect(reverse_lazy('PyUser:login'))
     else:
         context['form'] = InitForm()
 
