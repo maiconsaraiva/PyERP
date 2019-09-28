@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'tempus_dominus',
     'rest_framework',
+    'rest_framework.authtoken',
 
     # Local Apps
     'apps.base',

@@ -43,7 +43,7 @@ def IndexEasy(request):
             PyWebsiteConfig.create(company.id)
 
             # Creo el usuario admin y automaticamente se crea su partner
-            PyUser.create('Admin', 'User', email, password, 1, 1, 1, company)
+            PyUser.create(email, 'User', email, password, 1, 1, 1, company)
 
             # Creo el usuario anonimous y su partner
             PyUser.create('Anonimous', 'User', 'anonimous@pyerp.cl', password, 0, 0, 0, company)
