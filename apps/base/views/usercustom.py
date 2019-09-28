@@ -31,6 +31,32 @@ from ..tokens import ACCOUNT_ACTIVATION_TOKEN, PASSWORD_RECOVERY_TOKEN
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
+from ..models import PyCompany, PyMeta, PyParameter, PyPlugin, PyWParameter
+
+
+def _count_plugin():
+    return PyPlugin.objects.all().count()
+
+
+def _web_parameter():
+    web_parameter = {}
+    for parametro in PyWParameter.objects.all():
+        web_parameter[parametro.name] = parametro.value
+    return web_parameter
+
+
+def _parameter():
+    parameter = {}
+    for parametro in PyParameter.objects.all():
+        parameter[parametro.name] = parametro.value
+    return parameter
+
+
+def _web_meta():
+    cad = ''
+    for meta in PyMeta.objects.all():
+        cad += '<meta name="'+meta.title+'" content="'+meta.content+'">' + '\n'
+    return cad
 
 
 # ========================================================================== #
@@ -136,8 +162,15 @@ class AvatarUpdateView(LoginRequiredMixin, FatherUpdateView):
 def cambio_clave(request):
     """Esta función es para el cambio de clave del usuario
     """
+    context = {}
+    context['web_parameter'] = _web_parameter()
+    context['parameter'] = _parameter()
+    context['meta'] = _web_meta()
+    context['count_plugin']= _count_plugin
+    context['company'] = PyCompany.objects.filter(active=True)
+
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        context['form'] = PasswordChangeForm(request.user, request.POST)
         if form.is_valid() and user.pk != 1:
             user = form.save()
             update_session_auth_hash(request, user)  # Importante!
@@ -145,11 +178,11 @@ def cambio_clave(request):
                 processed'))
             return redirect('base:profile')
     else:
-        form = PasswordChangeForm(request.user)
+        context['form'] = PasswordChangeForm(request.user)
     return render(
         request,
         'usercustom/password_change_form.html',
-        {'form': form}
+        context
     )
 
 

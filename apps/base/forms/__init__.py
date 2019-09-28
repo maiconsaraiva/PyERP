@@ -50,32 +50,32 @@ class PerfilForm(ModelForm):
             'sexo': Select(attrs={'class': 'form-control select2'}),
         }
 
-    def clean_telefono(self):
-        """
-        Validamos que el teléfono cumpla con el formato
-        """
-        diccionario_limpio = self.cleaned_data
-        telefono = diccionario_limpio.get('telefono')
-        patron = re.compile('^\+58\s\(\d{3}\)\s\d{3}\-\d{2}\-\d{2}$')
-        if telefono:
-            if patron.match(telefono) is None:
-                raise forms.ValidationError("El número de teléfono local debe\
-                                                cumplir con la forma +58 (999)\
-                                                999-99-99")
-        return telefono
+    # def clean_telefono(self):
+    #     """
+    #     Validamos que el teléfono cumpla con el formato
+    #     """
+    #     diccionario_limpio = self.cleaned_data
+    #     telefono = diccionario_limpio.get('telefono')
+    #     patron = re.compile('^\+58\s\(\d{3}\)\s\d{3}\-\d{2}\-\d{2}$')
+    #     if telefono:
+    #         if patron.match(telefono) is None:
+    #             raise forms.ValidationError("El número de teléfono local debe\
+    #                                             cumplir con la forma +58 (999)\
+    #                                             999-99-99")
+    #     return telefono
 
-    def clean_celular(self):
-        """
-        Validamos que el celular cumpla con el formato
-        """
-        diccionario_limpio = self.cleaned_data
-        celular = diccionario_limpio.get('celular')
-        patron = re.compile('^\+58\s\(\d{3}\)\s\d{3}\-\d{2}\-\d{2}$')
-        if celular:
-            if patron.match(celular) is None:
-                raise forms.ValidationError(
-                    "El número de teléfono celular debe cumplir con la forma +58 (999) 999-99-99")
-        return celular
+    # def clean_celular(self):
+    #     """
+    #     Validamos que el celular cumpla con el formato
+    #     """
+    #     diccionario_limpio = self.cleaned_data
+    #     celular = diccionario_limpio.get('celular')
+    #     patron = re.compile('^\+58\s\(\d{3}\)\s\d{3}\-\d{2}\-\d{2}$')
+    #     if celular:
+    #         if patron.match(celular) is None:
+    #             raise forms.ValidationError(
+    #                 "El número de teléfono celular debe cumplir con la forma +58 (999) 999-99-99")
+    #     return celular
 
 
 class PersonaChangeForm(UserChangeForm):

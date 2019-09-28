@@ -1,7 +1,7 @@
 # Librerias Django
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
@@ -128,7 +128,12 @@ class FatherCreateView(CreateView):
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
         }]
-        context['back_url'] = reverse_lazy('{}:list'.format(object_name))
+
+        try:
+            context['back_url'] = reverse('{}:list'.format(object_name))
+        except:
+            pass
+
         return context
 
     def form_valid(self, form):

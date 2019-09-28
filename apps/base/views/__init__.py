@@ -44,42 +44,35 @@ def _web_parameter():
 def Install(request):
     return render(request, 'base/install.html')
 
+OBJECT_LIST_FIELDS = [
+    {'string': _('Name'), 'field': 'first_name'},
+    {'string': _('Last name'), 'field': 'last_name'},
+    {'string': _('Email'), 'field': 'email'},
+]
+
+OBJECT_FORM_FIELDS = ['email', 'first_name', 'last_name', 'password']
+
 
 class UserListView(LoginRequiredMixin, FatherListView):
     model = PyUser
     template_name = 'base/list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Usuarios'
-        context['detail_url'] = 'base:user-detail'
-        context['add_url'] = 'base:user-add'
-        context['fields'] = [
-            {'string': _('Name'), 'field': 'first_name'},
-            {'string': _('Last name'), 'field': 'last_name'},
-            {'string': _('Email'), 'field': 'email'},
-        ]
-        return context
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 class UserDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyUser
     template_name = 'base/detail.html'
+    extra_context = {'fields': OBJECT_LIST_FIELDS}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = context['object'].email
-        context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
-        context['update_url'] = 'base:user-update'
-        context['delete_url'] = 'base:user-delete'
-        context['fields'] = [
-            {'string': _('Name'), 'field': 'first_name'},
-            {'string': _('Last name'), 'field': 'last_name'},
-            {'string': _('Email'), 'field': 'email'},
-        ]
+        context['breadcrumbs'] = [{'url': 'PyUser:list', 'name': 'Usuarios'}]
+        context['update_url'] = 'PyUser:update'
+        context['delete_url'] = 'PyUser:delete'
         context['buttons'] = [
             {
-                'act': reverse('base:password-change', kwargs={'pk': context['object'].pk}),
+                'act': reverse('PyUser:password-change', kwargs={'pk': context['object'].pk}),
                 'name': 'Cambiar contraseña',
                 'class': 'success'
             }
@@ -89,16 +82,9 @@ class UserDetailView(LoginRequiredMixin, FatherDetailView):
 
 class UserCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyUser
-    fields = ['email', 'first_name', 'last_name', 'password']
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
-    success_url = 'base:user-detail'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Crear Usuario'
-        context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
-        context['back_url'] = reverse('base:users')
-        return context
+    success_url = 'PyUser:detail'
 
     def form_valid(self, form):
         first_name = form.cleaned_data.get('first_name')
@@ -114,31 +100,34 @@ class UserCreateView(LoginRequiredMixin, FatherCreateView):
 
 class UserUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyUser
-    fields = ['email', 'first_name', 'last_name', 'partner_id']
+    fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = context['object'].email
-        context['breadcrumbs'] = [{'url': 'base:users', 'name': 'Usuarios'}]
-        context['back_url'] = reverse('base:user-detail', kwargs={'pk': context['object'].pk})
-        return context
+    def form_valid(self, form):
+        first_name = form.cleaned_data.get('first_name')
+        last_name = form.cleaned_data.get('last_name')
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        company = self.request.user.active_company
+        self.object = PyUser.create(first_name, last_name, email, password, 0, 0, 1, company)
+        url = reverse_lazy(self.get_success_url(), kwargs={'pk': self.object.pk})
 
 
 
 class UserDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyUser
-    success_url = 'base:users'
 
 
+@login_required()
 def ChangePasswordForm(self, pk):
     return render(self, 'base/change_password.html', {'pk': pk})
 
 
+@login_required()
 def DoChangePassword(self, pk, **kwargs):
     user = PyUser.objects.get(id=pk)
     if user and self.POST['new_password1'] == self.POST['new_password2']:
         user.set_password(self.POST['new_password1'])
     else:
         return render(self, 'base/change_password.html', {'pk': pk, 'error': 'Las contraseñas no coinciden.'})
-    return redirect(reverse('base:user-detail', kwargs={'pk': pk}))
+    return redirect(reverse('PyUser:user-detail', kwargs={'pk': pk}))
