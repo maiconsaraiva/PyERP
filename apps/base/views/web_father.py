@@ -159,10 +159,13 @@ class FatherUpdateView(UpdateView):
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
         }]
-        context['back_url'] = reverse_lazy(
-            '{}:detail'.format(object_name),
-            kwargs={'pk': context['object'].pk}
-        )
+        try:
+            context['back_url'] = reverse(
+                '{}:detail'.format(object_name),
+                kwargs={'pk': context['object'].pk}
+            )
+        except:
+            pass
         return context
 
     def form_valid(self, form):

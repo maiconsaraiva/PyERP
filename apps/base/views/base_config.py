@@ -1,5 +1,4 @@
 # Librerias Django
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
@@ -12,6 +11,7 @@ class UpdateBaseConfigView(LoginRequiredMixin, FatherUpdateView):
     model = BaseConfig
     template_name = 'base/form.html'
     fields = ['online', 'open_menu', 'main_company_id', 'type_share']
+
 
 
 def LoadData(LoginRequiredMixin, request):
