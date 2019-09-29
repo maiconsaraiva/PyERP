@@ -8,18 +8,12 @@
         {% for btn in breadcrumbs %}
         <a title=" {{ _('Back') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
         {% endfor %}
-
         <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
-        <button onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
-
-
-
-
-        <a title=" {{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
-
+        <button title="{{ _('Delete') }}" onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
+        <a title="{{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
         {% for btn in breadcrumbs %}
-        <!-- <a href="{% url btn.url %}" class="btn btn-primary float-right"><i class="fas fa-undo-alt"></i></a> -->
         <div class="float-right state-bar no_active_bar">
+
             <style>
                 .active_bar{
                    font-weight: bold;
@@ -27,20 +21,32 @@
                 .no_active_bar{
                     color:#777;
                 }
+
+                .btn-manger {
+                   color: {{ user.active_company.font_color }};
+                   background-color: {{ user.active_company.main_color }};
+                }
             </style>
                 <span class="active_bar">{{ _('Active') }}</span>
             <i class="fas fa-chevron-right ml-2"></i>
                 <span class="ml-2">{{ _('Archived') }}</span>
+
+            <a title=" {{ _('Before') }}" href="{% url update_url object.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
+            <a title=" {{ _('Next') }}" href="{% url update_url object.pk %}" class="btn btn-light btn-manger"> <i class="fas fa-chevron-right"></i></a>
+
         </div>
         {% endfor %}
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6">
+                {% if object.img %}
+                        <img class="img img-responsive" border="1" name="image" src="{{ object.img.url }}" style="width: 90px; height: 90px;">
+                {% endif %}
             </div>
             <div class="col-sm-6">
                 {% for btn in breadcrumbs %}
-                    <a title=" {{ _('Archive') }}" href="{% url btn.url %}" class="float-right btn btn-light"><i class="fas fa-archive"></i></a>
+                    <a title=" {{ _('Archive') }}" href="{% url btn.url %}" class="float-right btn btn-light"><i class="fas fa-archive"> {{ _('Active') }} </i></a>
                 {% endfor %}
             </div>
         </div>
@@ -69,10 +75,6 @@
 </div>
 
 <ul class="timeline">
-
-    <!-- /.timeline-label -->
-
-    <!-- timeline item -->
     <li>
         <!-- timeline icon -->
         <i class="fas fa-edit fa-log"></i>
