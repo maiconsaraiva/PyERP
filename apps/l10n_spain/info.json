@@ -9,8 +9,8 @@
 	"description": "l10n_spain",
 	"external_dependencies":"",
 	"type":"public",
-	"color":"bg-blue",
-	"fa":"fa fa-trophy",
+	"color":"white",
+	"fa":"none",
 	"sequence":"1"
 
 }

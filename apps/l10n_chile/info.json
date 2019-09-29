@@ -9,8 +9,8 @@
 	"description": "l10n_chile",
 	"external_dependencies":"",
 	"type":"public",
-	"color":"bg-red",
-	"fa":"fa fa-trophy",
+	"color":"white",
+	"fa":"none",
 	"sequence":"1"
 
 }

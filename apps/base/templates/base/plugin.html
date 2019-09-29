@@ -2,11 +2,11 @@
 {% block content %}
     {% if plugin_list %}
         <div class="row" style="padding:10px;">
-          <!-- App -->
           {% for app in object_list %}
             <div class="col-md-4">
               <div class="info-box plugind-primary">
-                <span style="width: 120px;" class="info-box-icon {{ app.color }} elevation-1"><i class="fas {{ app.fa }}"></i></span>
+                <span style="width: 120px; background-size: 120px 120px; background-image: url('{{ MEDIA_URL }}/plugin/{{ app.name }}.png');"
+                        class="info-box-icon {{ app.color }} elevation-1"><i class="fas {{ app.fa }}"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text"><b>{{ app.name }}</b> | {{ app.version }}</span>
                   <span class="info-box-text">

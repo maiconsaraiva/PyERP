@@ -9,8 +9,8 @@
 	"description": "Payment Paypal",
 	"external_dependencies":"",
 	"type":"public",
-	"color":"bg-dark",
-	"fa":"fa fa-trophy",
+	"color":"white",
+	"fa":"none",
 	"sequence":"1"
 
 }
