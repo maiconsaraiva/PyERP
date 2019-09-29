@@ -26,6 +26,7 @@ OBJECT_LIST_FIELDS = [
 
 OBJECT_FORM_FIELDS = [
     'name',
+    'img',
     'street',
     'country_id',
     'email',

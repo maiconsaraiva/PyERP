@@ -1,7 +1,12 @@
+import os
+
 # Librerias Django
 from django.db import models
+from django.db.models.signals import post_save, pre_save
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.dispatch import receiver
+from ..rename_image import RenameImage
 
 # Librerias en carpetas locales
 from .country import PyCountry
@@ -13,6 +18,13 @@ TYPE_CHOICE = (
     ("address", _("Address")),
     ("contact", _("Contact")),
 )
+
+_UNSAVED_FILEFIELD = 'unsaved_filefield'
+
+
+def image_path(instance, filename):
+    root, ext = os.path.splitext(filename)
+    return "partner/{id}{ext}".format(id=instance.pk, ext=ext)
 
 class PyPartner(PyFather):
     name = models.CharField(_("Name"), max_length=40)
@@ -30,6 +42,15 @@ class PyPartner(PyFather):
     not_email = models.BooleanField(_("No Email"), default=False)
     parent_id = models.ForeignKey('self', null=True, blank=True, default=None, on_delete=models.PROTECT)
 
+    img = models.ImageField(
+        max_length=255,
+        storage=RenameImage(),
+        upload_to=image_path,
+        blank=True,
+        null=True,
+        default='partner/default_partner.png'
+    )
+
     type = models.CharField(_("type"), choices=TYPE_CHOICE, max_length=64, default='company')
 
     def __str__(self):
@@ -46,3 +67,21 @@ class PyPartner(PyFather):
     class Meta:
         verbose_name = _('Partner')
         verbose_name_plural = _('Partners')
+
+
+@receiver(pre_save, sender=PyPartner)
+def skip_saving_file(sender, instance, **kwargs):
+    if not instance.pk and not hasattr(instance, _UNSAVED_FILEFIELD):
+        setattr(instance, _UNSAVED_FILEFIELD, instance.img)
+        instance.img = 'partner/default_partner.png'
+
+
+@receiver(post_save, sender=PyPartner)
+def save_file(sender, instance, created, **kwargs):
+    if created and hasattr(instance, _UNSAVED_FILEFIELD):
+        instance.img = getattr(instance, _UNSAVED_FILEFIELD)
+        instance.save()
+        instance.__dict__.pop(_UNSAVED_FILEFIELD)
+    if not instance.img or instance.img is None:
+        instance.img = 'partner/default_partner.png'
+        instance.save()
