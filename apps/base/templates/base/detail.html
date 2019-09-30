@@ -27,9 +27,11 @@
                    background-color: {{ user.active_company.main_color }};
                 }
             </style>
+            <!--
                 <span class="active_bar">{{ _('Active') }}</span>
             <i class="fas fa-chevron-right ml-2"></i>
                 <span class="ml-2">{{ _('Archived') }}</span>
+                -->
             {% if before %}
                 <a title=" {{ _('Before') }}" href="{% url detail_url before.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
             {% else %}
