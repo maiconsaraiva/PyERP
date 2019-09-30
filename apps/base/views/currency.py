@@ -54,7 +54,7 @@ class CurrencyAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyCurrency
     """
     def get_queryset(self):
-        queryset = PyCurrency.objects.all()
+        queryset = PyCurrency.objects.all(active=True)
         if self.q:
             queryset = queryset.filter(Q(name__icontains=self.q) | Q(country__name__icontains=self.q))
         return queryset

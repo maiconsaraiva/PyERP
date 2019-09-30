@@ -30,10 +30,16 @@
                 <span class="active_bar">{{ _('Active') }}</span>
             <i class="fas fa-chevron-right ml-2"></i>
                 <span class="ml-2">{{ _('Archived') }}</span>
-
-            <a title=" {{ _('Before') }}" href="{% url update_url object.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
-            <a title=" {{ _('Next') }}" href="{% url update_url object.pk %}" class="btn btn-light btn-manger"> <i class="fas fa-chevron-right"></i></a>
-
+            {% if before %}
+                <a title=" {{ _('Before') }}" href="{% url detail_url before.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
+            {% else %}
+                <a title=" {{ _('Before') }}" href="#" class="btn disabled btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
+            {% endif %}
+            {% if next %}
+                <a title=" {{ _('Next') }}" href="{% url detail_url next.pk %}" class="btn btn-light btn-manger"> <i class="fas fa-chevron-right"></i></a>
+            {% else %}
+                <a title=" {{ _('Next') }}" href="#" class="btn disabled btn-manger"> <i class="fas fa-chevron-right"></i></a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -45,9 +51,14 @@
                 {% endif %}
             </div>
             <div class="col-sm-6">
-                {% for btn in breadcrumbs %}
-                    <a title=" {{ _('Archive') }}" href="{% url btn.url %}" class="float-right btn btn-light"><i class="fas fa-archive"> {{ _('Active') }} </i></a>
-                {% endfor %}
+                <!--{% for btn in breadcrumbs %}
+
+                {% endfor %}-->
+                <form class="form-horizontal" method="post" role="form" action="{% if object.active %} {% url 'base:inactivar-objeto' %} {% else %} {% url 'base:activar-objeto' %} {% endif %}">
+                    {% csrf_token %}
+                    {{ activate_form }}
+                    <button title=" {{ _('Save') }}" type="submit" class="float-right btn btn-light"><i class="fas fa-archive"> {% if object.active %} {{ _('Inactivate') }} {% else %} {{ _('Activate') }} {% endif %} </i></button>
+                </form>
             </div>
         </div>
         <form>

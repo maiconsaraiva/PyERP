@@ -32,7 +32,7 @@ class WebProductListView(LoginRequiredMixin, FatherListView):
     extend_from = None
     url_web_product = None
     header_title = None
-    queryset = PyProduct.objects.filter(web_active='True')
+    queryset = PyProduct.objects.filter(web_active='True', active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

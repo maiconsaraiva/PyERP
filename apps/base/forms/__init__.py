@@ -215,3 +215,10 @@ class InitForm(forms.ModelForm):
                 },
             ),
         }
+
+
+class ActivateForm(forms.Form):
+    """Para activar o desactivar un objeto en PyERP
+    """
+    object_name = forms.CharField(max_length=100, widget=forms.HiddenInput)
+    object_pk = forms.IntegerField(widget=forms.HiddenInput)

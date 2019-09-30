@@ -51,7 +51,7 @@ class CountryAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyCountry
     """
     def get_queryset(self):
-        queryset = PyCountry.objects.all()
+        queryset = PyCountry.objects.all(active=True)
         if self.q:
             queryset = queryset.filter(name__icontains=self.q)
         return queryset

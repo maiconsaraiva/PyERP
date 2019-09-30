@@ -19,7 +19,7 @@ class PyFather(models.Model):
     company_id = models.IntegerField(null=True, blank=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['pk']
         abstract = True
 
     def get_absolute_url(self):

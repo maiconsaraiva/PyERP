@@ -7,7 +7,8 @@ from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..models import PyCompany, PyMeta, PyParameter, PyPlugin, PyWParameter
+from ..models import *
+from ..forms import ActivateForm
 
 
 def _count_plugin():
@@ -76,10 +77,11 @@ class FatherListView(ListView):
 
     def get_queryset(self):
         if self.model._meta.object_name in self.EXLUDE_FROM_FILTER:
-            queryset = self.model.objects.all()
+            queryset = self.model.objects.filter(active=True)
         else:
             queryset = self.model.objects.filter(
-                company_id=self.request.user.active_company_id
+                company_id=self.request.user.active_company_id,
+                active=True
             )
         return queryset
 
@@ -106,6 +108,17 @@ class FatherDetailView(DetailView):
         }]
         context['update_url'] = '{}:update'.format(object_name)
         context['delete_url'] = '{}:delete'.format(object_name)
+        context['detail_url'] = '{}:detail'.format(object_name)
+        context['next'] = self.model.objects.filter(
+            pk__gt=self.kwargs['pk']).first()
+        context['before'] = self.model.objects.filter(
+            pk__lt=self.kwargs['pk']).last()
+        context['activate_form'] = ActivateForm(
+            initial={
+                'object_name': object_name,
+                'object_pk': self.kwargs['pk']
+            }
+        )
         return context
 
     class Meta:
@@ -208,3 +221,29 @@ class FatherDeleteView(DeleteView):
 
     class Meta:
         abstract = True
+
+
+# ========================================================================== #
+def inactivar_objeto(request):
+    if request.method == 'POST':
+        form = ActivateForm(request.POST)
+        if form.is_valid():
+            object_name = form.cleaned_data['object_name']
+            object_pk = form.cleaned_data['object_pk']
+            object_to = eval('{}.objects.get(pk={})'.format(object_name, object_pk))
+            object_to.active = False
+            object_to.save()
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+
+# ========================================================================== #
+def activar_objeto(request):
+    if request.method == 'POST':
+        form = ActivateForm(request.POST)
+        if form.is_valid():
+            object_name = form.cleaned_data['object_name']
+            object_pk = form.cleaned_data['object_pk']
+            object_to = eval('{}.objects.get(pk={})'.format(object_name, object_pk))
+            object_to.active = True
+            object_to.save()
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))

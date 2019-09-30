@@ -54,7 +54,7 @@ class ProviderListView(LoginRequiredMixin, FatherListView):
     model = PyPartner
     template_name = 'base/list.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
-    queryset = PyPartner.objects.filter(provider=True).all()
+    queryset = PyPartner.objects.filter(provider=True, active=True).all()
 
 
 # ========================================================================== #
@@ -90,5 +90,5 @@ class PartnerAutoComplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         queryset = PyPartner.objects.all()
         if self.q:
-            queryset = queryset.filter(name__icontains=self.q)
+            queryset = queryset.filter(name__icontains=self.q, active=True)
         return queryset

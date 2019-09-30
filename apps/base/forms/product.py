@@ -4,8 +4,6 @@ Formularios
 """
 # Librerias Django
 from django import forms
-from django.forms import (
-    EmailInput, ModelForm, PasswordInput, Select, TextInput)
 from django.utils.translation import ugettext_lazy as _
 
 # Librerias de terceros

@@ -52,7 +52,7 @@ class TaxAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyPartner
     """
     def get_queryset(self):
-        queryset = PyTax.objects.all()
+        queryset = PyTax.objects.all(active=True)
         if self.q:
             queryset = queryset.filter(name__icontains=self.q)
         return queryset

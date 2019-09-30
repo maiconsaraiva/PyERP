@@ -8,6 +8,7 @@ from ..views import Install, ProviderListView, UpdateBaseConfigView
 from ..views.base_config import LoadData
 from ..views.home import erp_home
 from ..views.website_config import UpdateWebsiteConfigView
+from ..views.web_father import inactivar_objeto, activar_objeto
 
 app_name = 'base'
 
@@ -18,7 +19,14 @@ urlpatterns = [
     path('config/<int:pk>', UpdateBaseConfigView.as_view(), name='base-config'),
     path('load-data', LoadData, name='load-data'),
 
-    path('website-config/<int:pk>', UpdateWebsiteConfigView.as_view(), name='website-config'),
+    path(
+        'website-config/<int:pk>',
+        UpdateWebsiteConfigView.as_view(),
+        name='website-config'
+    ),
 
     path('provider', ProviderListView.as_view(), name='provider'),
+
+    path('activar-objeto', activar_objeto, name='activar-objeto'),
+    path('inactivar-objeto', inactivar_objeto, name='inactivar-objeto'),
 ]
