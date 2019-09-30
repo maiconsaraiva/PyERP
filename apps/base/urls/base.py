@@ -7,15 +7,14 @@ from django.urls import path
 from ..views import Install, ProviderListView, UpdateBaseConfigView
 from ..views.base_config import LoadData
 from ..views.home import erp_home
+from ..views.web_father import active_object, inactive_object
 from ..views.website_config import UpdateWebsiteConfigView
-from ..views.web_father import inactivar_objeto, activar_objeto
 
 app_name = 'base'
 
 urlpatterns = [
     path('', erp_home, name='home'),
     path('install', Install, name='install'),
-    # path('install-erp', InstallPyERP, name='install-erp'),
     path('config/<int:pk>', UpdateBaseConfigView.as_view(), name='base-config'),
     path('load-data', LoadData, name='load-data'),
 
@@ -27,6 +26,6 @@ urlpatterns = [
 
     path('provider', ProviderListView.as_view(), name='provider'),
 
-    path('activar-objeto', activar_objeto, name='activar-objeto'),
-    path('inactivar-objeto', inactivar_objeto, name='inactivar-objeto'),
+    path('active_object', active_object, name='active-object'),
+    path('inactive_object', inactive_object, name='inactive-object'),
 ]

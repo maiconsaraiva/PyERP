@@ -41,4 +41,3 @@ class PySequence(PyFather):
     def __str__(self):
         return "name={}, prefix={}, last={}".format(
             repr(self.name), repr(self.prefix), repr(self.last))
-

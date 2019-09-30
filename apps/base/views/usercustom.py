@@ -26,12 +26,12 @@ import requests
 from ..forms import (
     AvatarForm, PasswordRecoveryForm, PasswordSetForm, PerfilForm,
     PersonaCreationForm)
-from ..models import PyUser
+from ..models import (
+    PyCompany, PyMeta, PyParameter, PyPlugin, PyUser, PyWParameter)
 from ..tokens import ACCOUNT_ACTIVATION_TOKEN, PASSWORD_RECOVERY_TOKEN
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
-from ..models import PyCompany, PyMeta, PyParameter, PyPlugin, PyWParameter
 
 
 def _count_plugin():

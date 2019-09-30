@@ -15,12 +15,12 @@ from ..models.company import PyCompany
 from ..models.country import PyCountry
 from ..models.currency import PyCurrency
 from ..models.meta import PyMeta
+from ..models.parameter import PyParameter
 from ..models.partner import PyPartner
 from ..models.sequence import PySequence
 from ..models.usercustom import PyUser
 from ..models.website_config import PyWebsiteConfig
 from ..models.wparameter import PyWParameter
-from ..models.parameter import PyParameter
 
 
 def IndexEasy(request):

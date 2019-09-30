@@ -1,14 +1,14 @@
 # Librerias Django
 from django.contrib import messages
-from django.http import HttpResponseRedirect, Http404
-from django.urls import reverse_lazy, reverse
+from django.http import Http404, HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Librerias en carpetas locales
-from ..models import *
 from ..forms import ActivateForm
+from ..models import *
 
 
 def _count_plugin():
@@ -243,7 +243,7 @@ class FatherDeleteView(DeleteView):
 
 
 # ========================================================================== #
-def inactivar_objeto(request):
+def inactive_object(request):
     if request.method == 'POST':
         form = ActivateForm(request.POST)
         if form.is_valid():
@@ -256,7 +256,7 @@ def inactivar_objeto(request):
 
 
 # ========================================================================== #
-def activar_objeto(request):
+def active_object(request):
     if request.method == 'POST':
         form = ActivateForm(request.POST)
         if form.is_valid():
