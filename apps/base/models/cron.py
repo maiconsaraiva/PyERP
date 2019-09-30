@@ -7,11 +7,12 @@ from django.utils.translation import ugettext_lazy as _
 from .father import PyFather
 
 CRON_CHOICE = (
-    ("minutes", "Almacenable"),
-    ('hours', 'Horas'),
-    ('work_day', 'Días laborales'),
-    ('weeks', 'Semanas'),
-    ('month', 'Meses'),
+    ("minutes", "Minutes"),
+    ('hours', 'Hours'),
+    ('day', 'Day'),
+    ('work_day', 'Work Day'),
+    ('weeks', 'Weeks'),
+    ('month', 'Month'),
 )
 
 
