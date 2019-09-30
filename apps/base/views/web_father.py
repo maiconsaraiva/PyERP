@@ -1,6 +1,6 @@
 # Librerias Django
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse_lazy, reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
@@ -110,9 +110,15 @@ class FatherDetailView(DetailView):
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
         context['next'] = self.model.objects.filter(
-            pk__gt=self.kwargs['pk']).first()
+            pk__gt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).first()
         context['before'] = self.model.objects.filter(
-            pk__lt=self.kwargs['pk']).last()
+            pk__lt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).last()
         context['activate_form'] = ActivateForm(
             initial={
                 'object_name': object_name,
@@ -120,6 +126,19 @@ class FatherDetailView(DetailView):
             }
         )
         return context
+
+    def get_object(self, queryset=None):
+        queryset = self.get_queryset()
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        queryset = queryset.filter(pk=pk, company_id=self.request.user.active_company_id)
+
+        try:
+            # Get the single item from the filtered queryset
+            obj = queryset.get()
+        except queryset.model.DoesNotExist:
+            raise Http404(_("No %(verbose_name)s found matching the query") %
+                        {'verbose_name': queryset.model._meta.verbose_name})
+        return obj
 
     class Meta:
         abstract = True
