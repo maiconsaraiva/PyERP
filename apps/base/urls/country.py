@@ -1,8 +1,10 @@
 """uRLs para gestionar los paises
 """
+# Django Library
 # Librerias Django
 from django.urls import path
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..views.country import (
     CountryAutoComplete, CountryCreateView, CountryDeleteView,

@@ -1,12 +1,15 @@
 # Librerias Future
+# Furture Library
 from __future__ import unicode_literals
 
+# Django Library
 # Librerias Django
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..forms import InitForm
 from ..models.base_config import BaseConfig

@@ -1,11 +1,14 @@
 # Librerias Django
+# Django Library
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.base.models import PyFather, PyPartner
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .stage import PyStage
 

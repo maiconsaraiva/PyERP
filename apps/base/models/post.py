@@ -1,6 +1,8 @@
 # Librerias Standard
+# Standard Library
 import os
 
+# Django Library
 # Librerias Django
 from django.db import models
 from django.db.models.signals import post_save, pre_save
@@ -8,9 +10,11 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.base.models import PyFather
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..rename_image import RenameImage
 

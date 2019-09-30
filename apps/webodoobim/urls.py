@@ -1,7 +1,9 @@
 # Librerias Django
+# Django Library
 from django.conf.urls import url
 from django.urls import path
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .views.views import about, blog, contact, index, services
 

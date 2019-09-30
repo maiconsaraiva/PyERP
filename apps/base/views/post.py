@@ -1,9 +1,11 @@
 # Librerias Django
+# Django Library
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models.post import PyPost
 from .web_father import (

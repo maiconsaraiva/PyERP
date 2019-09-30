@@ -3,9 +3,11 @@
 Vistas de la aplicación globales
 """
 
+# Standard Library
 # Librerias Standard
 from urllib.parse import urlparse
 
+# Django Library
 # Librerias Django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect

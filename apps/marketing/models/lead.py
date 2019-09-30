@@ -1,9 +1,12 @@
 # Librerias Django
+# Django Library
 from django.db import models
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.base.models import PyChannel
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ...crm.submodels.lead import PyLead
 from .campaign import PyCampaign

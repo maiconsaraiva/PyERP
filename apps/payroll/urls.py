@@ -1,12 +1,15 @@
 # Librerias Django
+# Django Library
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.payroll.views.employee import (
     DeleteEmployee, EmployeeCreateView, EmployeeDetailView, EmployeeListView,
     EmployeeUpdateView)
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .views.department import (
     DeleteDepartment, DepartmentCreateView, DepartmentDetailView,

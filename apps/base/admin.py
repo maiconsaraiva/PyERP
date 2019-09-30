@@ -1,12 +1,14 @@
 """
 Sección administrativa
 """
+# Django Library
 # Librerias Django
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Permission
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .forms import PersonaChangeForm, PersonaCreationForm
 from .models import (

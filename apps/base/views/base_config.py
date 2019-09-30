@@ -1,7 +1,9 @@
 # Librerias Django
+# Django Library
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models.base_config import BaseConfig
 from .web_father import FatherUpdateView

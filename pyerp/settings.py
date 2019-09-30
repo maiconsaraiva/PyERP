@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+# Standard Library
 # Librerias Standard
 import logging
 import os
 
+# Django Library
 # Librerias Django
 from django.utils.translation import ugettext_lazy as _
 

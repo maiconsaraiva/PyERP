@@ -1,8 +1,10 @@
 """uRLs para partner
 """
+# Django Library
 # Librerias Django
 from django.urls import path
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..views import CustomerListView
 from ..views.partner import (

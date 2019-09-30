@@ -7,9 +7,11 @@ For more information on this file, see
 https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 """
 
+# Standard Library
 # Librerias Standard
 import os
 
+# Django Library
 # Librerias Django
 from django.core.wsgi import get_wsgi_application
 

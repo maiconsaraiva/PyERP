@@ -1,4 +1,5 @@
 # Librerias Django
+# Django Library
 from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -6,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..forms import ActivateForm
 from ..models import *

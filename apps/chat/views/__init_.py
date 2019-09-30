@@ -1,11 +1,14 @@
 # Librerias Django
 # Librerias Standard
+# Standard Library
 import datetime
 import json
 
+# Django Library
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponse, render
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models.visitor import PyChatHistory, PyVisitor
 

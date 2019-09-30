@@ -1,9 +1,11 @@
 # Librerias Django
+# Django Library
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models import PyCron
 from .web_father import (

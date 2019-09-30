@@ -1,4 +1,5 @@
 # Librerias Standard
+# Standard Library
 import json
 import subprocess
 import sys
@@ -6,6 +7,7 @@ from collections import OrderedDict
 from importlib import reload
 from os import listdir, path
 
+# Django Library
 # Librerias Django
 from django.apps import apps
 from django.conf import settings
@@ -13,6 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import clear_url_caches, reverse
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ...base.models import PyPlugin
 from .web_father import FatherListView

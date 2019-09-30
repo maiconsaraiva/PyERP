@@ -1,6 +1,8 @@
 # Librerias Django
+# Django Library
 from django.urls import path
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .views.paypal_config import UpdatePaypalConfigView
 

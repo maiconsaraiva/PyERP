@@ -1,8 +1,10 @@
 """uRLs para gestionar los plugin
 """
+# Django Library
 # Librerias Django
 from django.urls import path
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..views.plugin import (
     PluginInstall, PluginListView, PluginUninstall, PluginUpdate)

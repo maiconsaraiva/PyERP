@@ -1,11 +1,14 @@
 """Formularios del modulo sale
 """
+# Django Library
 # Librerias Django
 from django.forms import HiddenInput, ModelForm, NumberInput, TextInput
 
+# Thirdparty Library
 # Librerias de terceros
 from dal import autocomplete
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .models import PySaleOrder, PySaleOrderDetail
 

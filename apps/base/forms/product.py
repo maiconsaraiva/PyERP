@@ -2,13 +2,16 @@
 """
 Formularios
 """
+# Django Library
 # Librerias Django
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
 # Librerias de terceros
 from dal import autocomplete
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models.product import PyProduct
 

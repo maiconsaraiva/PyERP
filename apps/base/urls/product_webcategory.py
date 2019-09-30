@@ -1,8 +1,10 @@
 """uRLs para base
 """
+# Django Library
 # Librerias Django
 from django.urls import path
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..views.product_webcategory import (
     ProductWebCategoryCreateView, ProductWebCategoryDeleteView,

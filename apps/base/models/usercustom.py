@@ -2,12 +2,15 @@
 """
 Modelo de datos de la app globales
 """
+# Furture Library
 # Librerias Future
 from __future__ import unicode_literals
 
+# Standard Library
 # Librerias Standard
 import os
 
+# Django Library
 # Librerias Django
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -17,9 +20,11 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.base.models import PyFather
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models import PyPartner
 from ..rename_image import RenameImage

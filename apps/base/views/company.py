@@ -1,9 +1,11 @@
 # Librerias Django
+# Django Library
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models import PyCompany, PyUser
 from .web_father import (

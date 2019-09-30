@@ -1,9 +1,9 @@
-# Librerias Django
+# Django Library
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-# Librerias en carpetas locales
+# Localfolder Library
 from .father import PyFather
 
 CRON_CHOICE = (

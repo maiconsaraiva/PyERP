@@ -1,8 +1,10 @@
 # Librerias Django
 # Librerias Standard
+# Standard Library
 import csv
 import os
 
+# Django Library
 from django.conf import settings
 from django.db import models
 from django.db.models import ProtectedError

@@ -1,4 +1,5 @@
 # Librerias Django
+# Django Library
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,6 +9,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models.stage import PyStage
 

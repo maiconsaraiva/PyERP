@@ -1,7 +1,9 @@
 # Librerias Django
+# Django Library
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 
+# Thirdparty Library
 # Librerias de terceros
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes

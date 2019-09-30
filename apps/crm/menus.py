@@ -1,6 +1,8 @@
 # Librerias Django
+# Django Library
 from django.core.urlresolvers import reverse
 
+# Thirdparty Library
 # Librerias de terceros
 from menu import Menu, MenuItem
 

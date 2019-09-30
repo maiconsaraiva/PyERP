@@ -21,10 +21,12 @@ consultas a la API de pagos (payment) de Flow. Ejemplos de uso::
     res = cliente.payment.get_order('SALE-ORDER-1')
     print res.json().get('status')
 """
+# Standard Library
 # Librerias Standard
 import hashlib
 import hmac
 
+# Thirdparty Library
 # Librerias de terceros
 import requests
 

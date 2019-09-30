@@ -1,8 +1,10 @@
 """Sub Vistas del módulo
 """
+# Standard Library
 # Librerias Standard
 import logging
 
+# Django Library
 # Librerias Django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -11,11 +13,13 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DeleteView, UpdateView
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.base.models import PyProduct
 from apps.base.views.web_father import FatherCreateView, FatherListView
 from dal import autocomplete
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .forms import SaleOrderDetailForm, SaleOrderForm
 from .models import PySaleOrder, PySaleOrderDetail

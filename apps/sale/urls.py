@@ -1,8 +1,10 @@
 """Rutas del módulo de ordenes de venta
 """
+# Django Library
 # Librerias Django
 from django.urls import path
 
+# Localfolder Library
 # Librerias en carpetas locales
 from .reports.saleorderpdf import sale_order_pdf
 from .views import (

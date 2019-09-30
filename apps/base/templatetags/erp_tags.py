@@ -1,13 +1,16 @@
 
 """
 """
+# Django Library
 # Librerias Django
 from django import template
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.base.models import PyWebsiteConfig
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..models import PyPlugin
 from ..models.base_config import BaseConfig

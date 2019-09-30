@@ -1,5 +1,6 @@
 """Rutas de PyErp
 """
+# Django Library
 # Librerias Django
 from django.conf import settings
 from django.conf.urls import include
@@ -8,6 +9,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.static import serve
 
+# Thirdparty Library
 # Librerias de terceros
 from apps.base.views import ActivateLanguageView
 from pyerp.settings import BASE_DIR

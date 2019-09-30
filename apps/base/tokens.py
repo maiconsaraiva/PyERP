@@ -1,5 +1,6 @@
 """Generador del tokens para el registro de usuarios
 """
+# Django Library
 # Librerias Django
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils import six

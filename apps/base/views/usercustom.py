@@ -3,6 +3,7 @@
 Vistas de la aplicación globales
 """
 
+# Django Library
 # Librerias Django
 from django.conf import settings
 from django.contrib import messages
@@ -19,9 +20,11 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView, TemplateView
 
+# Thirdparty Library
 # Librerias de terceros
 import requests
 
+# Localfolder Library
 # Librerias en carpetas locales
 from ..forms import (
     AvatarForm, PasswordRecoveryForm, PasswordSetForm, PerfilForm,
