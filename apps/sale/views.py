@@ -79,13 +79,13 @@ class SaleOrderAddView(FatherCreateView):
 
     def form_valid(self, form):
         context = self.get_context_data()
-        titles = context['titles']
+        producto = context['producto']
         with transaction.atomic():
             form.instance.uc = self.request.user.pk
             self.object = form.save()
-            if titles.is_valid():
-                titles.instance = self.object
-                titles.save()
+            if producto.is_valid():
+                producto.instance = self.object
+                producto.save()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -113,12 +113,17 @@ class SaleOrderEditView(FatherUpdateView):
         context = super(SaleOrderEditView, self).get_context_data(**kwargs)
         context['title'] = _('Sale Order Edit')
         context['action_url'] = 'PySaleOrder:update'
-        context['back_url'] = 'PySaleOrder:list'
+        # context['back_url'] = 'PySaleOrder:list'
         context['print_url'] = 'PySaleOrder:sale-order-pdf'
         context['product_add_url'] = 'PySaleOrder:sale-order-detail-add'
         context['product_edit_url'] = 'PySaleOrder:sale-order-detail-edit'
         context['product_delete_url'] = 'PySaleOrder:sale-order-detail-delete'
         context['breadcrumbs'] = [{'url': 'PySaleOrder:sale-order', 'name': _('Sales')}]
+        if self.request.POST:
+            context['producto'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
+        else:
+            context['producto'] = PRODUCT_FORMSET(instance=self.object)
+        return context
         context['fields'] = OBJECT_FORM_FIELDS
         context['object_list'] = PySaleOrderDetail.objects.filter(
             sale_order=_pk
