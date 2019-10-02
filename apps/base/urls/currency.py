@@ -1,11 +1,9 @@
 """uRLs para gestionar las monedas
 """
 # Django Library
-# Librerias Django
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..views.currency import (
     CurrencyAutoComplete, CurrencyCreateView, CurrencyDeleteView,
     CurrencyDetailView, CurrencyListView, CurrencyUpdateView)

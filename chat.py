@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-# Librerias Standard
 # Standard Library
 from datetime import datetime
 
 # Thirdparty Library
-# Librerias de terceros
 import eventlet
 import requests
 import socketio

@@ -1,9 +1,7 @@
-# Librerias Django
 # Django Library
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..views.product import (
     ProductCreateView, ProductDeleteView, ProductDetailView, ProductListView,
     ProductUpdateView)

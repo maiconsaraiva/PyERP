@@ -1,10 +1,8 @@
-# Librerias Standard
 # Standard Library
 import glob
 import os
 
 # Django Library
-# Librerias Django
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 

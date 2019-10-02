@@ -4,7 +4,6 @@ Vistas de la aplicación globales
 """
 
 # Django Library
-# Librerias Django
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -21,11 +20,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView, TemplateView
 
 # Thirdparty Library
-# Librerias de terceros
 import requests
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..forms import (
     AvatarForm, PasswordRecoveryForm, PasswordSetForm, PerfilForm,
     PersonaCreationForm)

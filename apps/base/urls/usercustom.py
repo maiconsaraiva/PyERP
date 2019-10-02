@@ -1,10 +1,8 @@
-# Librerias Django
 # Django Library
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..views import (
     ChangePasswordForm, DoChangePassword, UserCreateView, UserDeleteView,
     UserDetailView, UserListView, UserUpdateView)

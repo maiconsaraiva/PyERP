@@ -2,21 +2,21 @@
 """
 Formularios para la app globales
 """
-# Librerias Standard
+# Standard Library
 import re
 
-# Librerias Django
+# Django Library
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.forms import (
     EmailInput, ModelForm, PasswordInput, Select, TextInput)
 from django.utils.translation import ugettext_lazy as _
 
-# Librerias de terceros
+# Thirdparty Library
 from dal import autocomplete
 from tempus_dominus.widgets import DatePicker
 
-# Librerias en carpetas locales
+# Localfolder Library
 from ..models import PyCompany, PyCountry, PyUser
 
 

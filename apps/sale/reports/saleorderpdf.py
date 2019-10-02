@@ -1,19 +1,16 @@
 """PDF para la sale order
 """
 # Standard Library
-# Librerias Standard
 import io
 import locale
 
 # Django Library
-# Librerias Django
 from django.conf import settings
 from django.http import FileResponse, HttpResponse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-# Librerias de terceros
 from apps.sale.models import PySaleOrder, PySaleOrderDetail
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter

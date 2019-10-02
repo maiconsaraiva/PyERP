@@ -19,43 +19,43 @@
 {% endblock %}
 {% block content %}
 <div class="row" style="padding:5px;" >
-<div class="card card-outline col-12">
-    <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
-        <div class="card-header" style="background-color:#ffffff;">
-            <a title=" {{ _('Back') }}" href="{{ back_url }}" class="btn"><i class="fas fa-arrow-left"></i></a>
-            <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
-        </div>
-        <div class="card-body">
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in form.visible_fields %}
-                {% if forloop.counter0|divisibleby:"2" or forloop.counter0 == 0 %}
-                    <div class="row">
-                {%endif%}
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        {% bootstrap_field field %}
-                    </div>
-                <!-- /.col -->
-                </div>
-                {% if forloop.counter|divisibleby:"2" %}
-                    </div>
-                    <!-- /.row -->
-                {% elif forloop.last %}
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                            </div>
-                        <!-- /.col -->
+    <div class="card card-outline col-12">
+        <form class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+            <div class="card-header" style="background-color:#ffffff;">
+                <a title=" {{ _('Back') }}" href="{{ back_url }}" class="btn"><i class="fas fa-arrow-left"></i></a>
+                <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {% if forloop.counter0|divisibleby:"2" or forloop.counter0 == 0 %}
+                        <div class="row">
+                    {%endif%}
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {% bootstrap_field field %}
                         </div>
+                    <!-- /.col -->
                     </div>
-                    <!-- /.row -->
-                {%endif%}
-            {% endfor %}
-        </div>
-        {{ form.media.js }}
-    </form>
-</div>
+                    {% if forloop.counter|divisibleby:"2" %}
+                        </div>
+                        <!-- /.row -->
+                    {% elif forloop.last %}
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                </div>
+                            <!-- /.col -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    {%endif%}
+                {% endfor %}
+            </div>
+            {{ form.media.js }}
+        </form>
+    </div>
 </div>
 {% endblock %}

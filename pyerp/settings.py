@@ -11,12 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 # Standard Library
-# Librerias Standard
 import logging
 import os
 
 # Django Library
-# Librerias Django
 from django.utils.translation import ugettext_lazy as _
 
 _logger = logging.getLogger(__name__)

@@ -1,32 +1,31 @@
 """Rutas del módulo de ordenes de venta
 """
 # Django Library
-# Librerias Django
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from .reports.saleorderpdf import sale_order_pdf
 from .views import (
     ProductAutoComplete, SaleOrderAddView, SaleOrderDeleteView,
     SaleOrderDetailAddView, SaleOrderDetailDeleteView, SaleOrderDetailEditView,
-    SaleOrderEditView, SaleOrderListView)
+    SaleOrderDetailView, SaleOrderEditView, SaleOrderListView)
 
-app_name = 'sale'
+app_name = 'PySaleOrder'
 
 urlpatterns = [
     # ========================== Sale Orders URL's ========================= #
-    path('sale-order', SaleOrderListView.as_view(), name='sale-order'),
-    path('sale-order/add/', SaleOrderAddView.as_view(), name='sale-order-add'),
+    path('sale-order', SaleOrderListView.as_view(), name='list'),
+    path('sale-order/<int:pk>/>', SaleOrderDetailView.as_view(), name='detail'),
+    path('sale-order/add/', SaleOrderAddView.as_view(), name='add'),
     path(
         'sale-order/edit/<int:pk>',
         SaleOrderEditView.as_view(),
-        name='sale-order-edit'
+        name='update'
     ),
     path(
         'sale-order/delete/<int:pk>',
         SaleOrderDeleteView.as_view(),
-        name='sale-order-delete'
+        name='delete'
     ),
     # ====================== Sale Orders Detail URL's ====================== #
     path(

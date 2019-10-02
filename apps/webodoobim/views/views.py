@@ -1,9 +1,7 @@
-# Librerias Future
 # Furture Library
 from __future__ import unicode_literals
 
 # Django Library
-# Librerias Django
 from django.core.mail import EmailMessage
 from django.shortcuts import HttpResponse, render
 from django.template.loader import render_to_string

@@ -1,4 +1,3 @@
-# Librerias Django
 # Django Library
 from django.urls import path
 

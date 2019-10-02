@@ -1,4 +1,4 @@
-# Librerias Django
+# Django Library
 from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import authenticate
@@ -12,10 +12,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-# Librerias de terceros
+# Thirdparty Library
 from pyerp.settings import BASE_DIR
 
-# Librerias en carpetas locales
+# Localfolder Library
 from ..forms import AvatarForm
 from ..models import (
     BaseConfig, PyCompany, PyLog, PyPartner, PyPlugin, PyProduct,

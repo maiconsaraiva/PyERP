@@ -1,16 +1,13 @@
-# Librerias Django
 # Django Library
 from django.conf.urls import url
 from django.urls import path
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-# Librerias de terceros
 from apps.base.views.blog import BlogView, PostDetailView
 from apps.base.views.shop import WebProductDetailView, WebProductListView
 
 # Localfolder Library
-# Librerias en carpetas locales
 from .views.views import IndexView, UnderConstruction, contact
 
 app_name = 'home'

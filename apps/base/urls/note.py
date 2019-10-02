@@ -1,11 +1,9 @@
 """The store routes
 """
 # Django Library
-# Librerias Django
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..views.note import (
     NoteCreateView, NoteDeleteView, NoteDetailView, NoteListView,
     NoteUpdateView)

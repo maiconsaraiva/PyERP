@@ -1,5 +1,3 @@
-# Librerias Django
-# Librerias Standard
 # Standard Library
 import csv
 import os

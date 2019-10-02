@@ -1,11 +1,9 @@
-# Librerias Django
 # Django Library
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from .views import (
     chat_home, get_by_sid, get_client_name, get_history, register_message)
 from .views.trigger import (

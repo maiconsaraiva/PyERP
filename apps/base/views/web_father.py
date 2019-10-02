@@ -1,4 +1,3 @@
-# Librerias Django
 # Django Library
 from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
@@ -8,7 +7,6 @@ from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..forms import ActivateForm
 from ..models import *
 
@@ -55,6 +53,7 @@ class FatherTemplateView(TemplateView):
 
 # ========================================================================== #
 class FatherListView(ListView):
+    template_name = 'base/list.html'
     EXLUDE_FROM_FILTER = (
         'PyCompany',
         'PyCountry',
@@ -93,6 +92,7 @@ class FatherListView(ListView):
 
 # ========================================================================== #
 class FatherDetailView(DetailView):
+    template_name = 'base/detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

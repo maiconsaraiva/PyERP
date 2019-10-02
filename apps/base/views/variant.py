@@ -1,4 +1,3 @@
-# Librerias Django
 # Django Library
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,7 +5,6 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..models import PyVariant
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,

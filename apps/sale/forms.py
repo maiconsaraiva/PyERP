@@ -1,15 +1,13 @@
 """Formularios del modulo sale
 """
 # Django Library
-# Librerias Django
 from django.forms import HiddenInput, ModelForm, NumberInput, TextInput
+from django.forms.models import inlineformset_factory
 
 # Thirdparty Library
-# Librerias de terceros
 from dal import autocomplete
 
 # Localfolder Library
-# Librerias en carpetas locales
 from .models import PySaleOrder, PySaleOrderDetail
 
 
@@ -52,6 +50,7 @@ class SaleOrderDetailForm(ModelForm):
     """
     class Meta:
         model = PySaleOrderDetail
+        exclude = ()
         fields = [
             'sale_order',
             'product',
@@ -75,15 +74,15 @@ class SaleOrderDetailForm(ModelForm):
         }
         widgets = {
             'sale_order': HiddenInput(),
-            'product': autocomplete.ModelSelect2(
-                url='sale:product-autocomplete',
-                forward=('sale_order',),
-                attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Seleccione un producto ...',
-                    'style': 'width: 100%',
-                },
-            ),
+            # 'product': autocomplete.ModelSelect2(
+            #     url='PySaleOrder:product-autocomplete',
+            #     forward=('sale_order',),
+            #     attrs={
+            #         'class': 'form-control',
+            #         'data-placeholder': 'Seleccione un producto ...',
+            #         'style': 'width: 100%',
+            #     },
+            # ),
             'description': TextInput(
                 attrs={
                     'class': 'form-control',
@@ -136,3 +135,12 @@ class SaleOrderDetailForm(ModelForm):
             #     },
             # ),
         }
+
+
+PRODUCT_FORMSET = inlineformset_factory(
+    PySaleOrder, PySaleOrderDetail,
+    form=SaleOrderDetailForm,
+    # fields=['product', 'description'],
+    extra=1,
+    can_delete=True
+)

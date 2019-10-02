@@ -1,11 +1,9 @@
 """uRLs para tax
 """
 # Django Library
-# Librerias Django
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..views.tax import (
     TaxAutoComplete, TaxCreateView, TaxDeleteView, TaxDetailView, TaxListView,
     TaxUpdateView)

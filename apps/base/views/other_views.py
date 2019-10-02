@@ -1,29 +1,16 @@
-# Librerias Future
 # Furture Library
 from __future__ import unicode_literals
 
 # Django Library
-# Librerias Django
-from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..forms import InitForm
-from ..models.base_config import BaseConfig
-from ..models.bi import PyBi
-from ..models.company import PyCompany
-from ..models.country import PyCountry
-from ..models.currency import PyCurrency
-from ..models.meta import PyMeta
-from ..models.parameter import PyParameter
-from ..models.partner import PyPartner
-from ..models.sequence import PySequence
-from ..models.usercustom import PyUser
-from ..models.website_config import PyWebsiteConfig
-from ..models.wparameter import PyWParameter
+from ..models import (
+    BaseConfig, PyBi, PyCompany, PyCurrency, PyMeta, PyParameter, PyPartner,
+    PySequence, PyUser, PyWebsiteConfig, PyWParameter)
 
 
 def IndexEasy(request):
