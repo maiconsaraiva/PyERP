@@ -300,7 +300,7 @@ class PasswordRecoveryView(PasswordResetView):
                     }
                 )
 
-                message_body = _('You received this email because you requested that your password be reset to "%(app_name)s".\n\nPlease go to the following link to recover your password:\n\nhttp://%(domain)s%(url)s\n\nThe credentials of this link last for one (1) day.\n\nBest regards.\n\nThe %(app_name)s team.') % {'app_name': settings.APP_NAME, 'user': user.enail, 'domain': current_site.domain, 'url': url}
+                message_body = _('You received this email because you requested that your password be reset to "%(app_name)s".\n\nPlease go to the following link to recover your password:\n\nhttp://%(domain)s%(url)s\n\nThe credentials of this link last for one (1) day.\n\nBest regards.\n\nThe %(app_name)s team.') % {'app_name': settings.APP_NAME, 'user': user.email, 'domain': current_site.domain, 'url': url}
                 message_body = message_body.replace("  ", "")
 
                 user.email_user(subject, message_body)

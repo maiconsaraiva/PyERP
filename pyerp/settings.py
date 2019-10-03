@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third-Party Apps
+    'crispy_forms',
     'dal',
     'dal_select2',
     'bootstrap4',

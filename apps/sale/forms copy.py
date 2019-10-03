@@ -11,6 +11,12 @@ from dal import autocomplete
 from .models import PySaleOrder, PySaleOrderDetail
 
 
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder, Submit
+from .custom_layout_object import *
+
+
 # ========================================================================== #
 class SaleOrderForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
@@ -43,6 +49,29 @@ class SaleOrderForm(forms.ModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = True
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-3 create-label'
+        self.helper.field_class = 'col-md-9'
+        self.helper.layout = Layout(
+            Div(
+                Field('product'),
+                Field('description'),
+                Field('quantity'),
+                Field('amount_untaxed'),
+                Field('discount'),
+                Fieldset(
+                    'Add product',
+                    Formset('product')
+                ),
+                HTML("<br>"),
+                ButtonHolder(Submit('submit', 'save')),
+            )
+        )
+
 
 # ========================================================================== #
 class SaleOrderDetailForm(forms.ModelForm):
@@ -52,7 +81,7 @@ class SaleOrderDetailForm(forms.ModelForm):
         model = PySaleOrderDetail
         exclude = ()
         fields = [
-            # 'sale_order_id',
+            'sale_order',
             'product',
             'description',
             'quantity',
@@ -145,56 +174,8 @@ class SaleOrderDetailForm(forms.ModelForm):
 
 PRODUCT_FORMSET = inlineformset_factory(
     PySaleOrder, PySaleOrderDetail,
-    # form=SaleOrderDetailForm,
+    form=SaleOrderDetailForm,
     # fields=['product', 'description'],
-    fields=[
-        'sale_order_id',
-        'product',
-        'description',
-        'quantity',
-        # 'measure_unit',
-        # 'product_tax',
-        'amount_untaxed',
-        'discount',
-        # 'amount_total',
-    ],
-    widgets={
-        'product': forms.Select(
-            attrs={
-                'class': 'form-control  form-control-sm custom-select custom-select-sm',
-                'data-placeholder': 'Seleccione un producto ...',
-                'style': 'width: 100%',
-            },
-        ),
-        'description': forms.TextInput(
-            attrs={
-                'class': 'form-control form-control-sm',
-                'placeholder': 'Descripción del producto ...',
-                'style': 'width: 100%',
-            },
-        ),
-        'quantity': forms.NumberInput(
-            attrs={
-                'class': 'form-control form-control-sm',
-                'data-placeholder': 'Cantidad del producto ...',
-                'style': 'width: 100%',
-            },
-        ),
-        'amount_untaxed': forms.NumberInput(
-            attrs={
-                'class': 'form-control form-control-sm',
-                'data-placeholder': 'Precio del producto ...',
-                'style': 'width: 100%',
-            },
-        ),
-        'discount': forms.NumberInput(
-            attrs={
-                'class': 'form-control form-control-sm',
-                'data-placeholder': 'Descuento ...',
-                'style': 'width: 100%',
-            },
-        ),
-    },
-    extra=0,
+    extra=1,
     can_delete=True
 )

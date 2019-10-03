@@ -19,7 +19,7 @@
                     {% if object %}
                         <div class="form-group row">
                             <label class="col-sm-3 col-xl-2 col-form-label">{{ _("Name:") }}</label>
-                            <div class="col-sm-9 col-xl-10">
+                            <div class="col-sm-9 col-xl-5">
                                 <h4>{{ object.name }}</h4>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                     {% for campo in form %}
                         <div class="form-group row">
                             <label for="{{ campo.id_for_label }}" class="col-sm-3 col-xl-2 col-form-label">{{ campo.label }}</label>
-                            <div class="col-sm-9 col-xl-10">
+                            <div class="col-sm-9 col-xl-5">
                                 {{ campo }}
                                 <span class="help-block">
                                     {% for error in campo.errors %}
@@ -40,13 +40,12 @@
                             </div>
                         </div>
                     {% endfor %}
+                    <table class="table table-sm table-borderless table-striped">
+                        {{ products.management_form }}
 
-                    <table class="table">
-                        {{ producto.management_form }}
-
-                        {% for form in producto.forms %}
+                        {% for form in products.forms %}
                             {% if forloop.first %}
-                                <thead>
+                                <thead class="thead-light">
                                     <tr>
                                         {% for field in form.visible_fields %}
                                             <th>{{ field.label|capfirst }}</th>
@@ -54,7 +53,7 @@
                                     </tr>
                                 </thead>
                             {% endif %}
-                            <tr class="{% cycle 'row1' 'row2' %} formset_row">
+                            <tr class="{% cycle 'table-info' 'table-light' %} formset_row">
                                 {% for field in form.visible_fields %}
                                     <td>
                                         {# Include the hidden fields in the form #}
@@ -70,7 +69,6 @@
                             </tr>
                         {% endfor %}
                     </table>
-
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -117,7 +115,24 @@
     $('.formset_row').formset({
         addText: 'add product',
         deleteText: 'remove',
-        prefix: 'familymember_set'
+        /* esta linea es super importante debe ser el mismo prefijo que pinta el formulario*/
+        prefix: 'pysaleorderdetail_set'
     });
+    $(function () {
+        var formCount = $('#pysaleorderdetail_set-TOTAL_FORMS').val();
+        //Initialize Select2 Elements
+        $('#id_tipo_procedencia').select2();
+
+        //Initialize Select2 Elements cuando se carga y recarga la página
+        for (i = 0; i < formCount; i++) {
+            $('#id_gruporacial_set-' + i + '-raza').select2();
+            $('#id_gruporacial_set-' + i + '-porcentaje').inputmask({
+                regex: "^([1-9]|[1-9][0-9]|10[0])$",
+                rightAlign: true,
+                showMaskOnHover: false,
+                showMaskOnFocus: false
+            });
+        }
+    })
 </script>
 {% endblock %}

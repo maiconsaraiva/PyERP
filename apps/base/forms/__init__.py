@@ -8,8 +8,6 @@ import re
 # Django Library
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.forms import (
-    EmailInput, ModelForm, PasswordInput, Select, TextInput)
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
@@ -20,7 +18,7 @@ from tempus_dominus.widgets import DatePicker
 from ..models import PyCompany, PyCountry, PyUser
 
 
-class PerfilForm(ModelForm):
+class PerfilForm(forms.ModelForm):
     """Clase para actualizar el perfil del usuario en el sistema
     """
     class Meta:
@@ -36,9 +34,9 @@ class PerfilForm(ModelForm):
             'celular': _('Mobile Phone'),
         }
         widgets = {
-            'first_name': TextInput(attrs={'class': 'form-control'}),
-            'last_name': TextInput(attrs={'class': 'form-control'}),
-            'celular': TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'celular': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
     # def clean_telefono(self):
@@ -87,7 +85,7 @@ class PersonaChangeForm(UserChangeForm):
 
 
 # ========================================================================== #
-class PasswordRecoveryForm(ModelForm):
+class PasswordRecoveryForm(forms.ModelForm):
     """Para enviar el correo de recuperacion de la cuenta
     """
     class Meta():
@@ -96,7 +94,7 @@ class PasswordRecoveryForm(ModelForm):
             'email',
         )
         widgets = {
-            'email': EmailInput(
+            'email': forms.EmailInput(
                 attrs={'class': 'form-control', 'placeholder': _('Email')}
             ),
         }
@@ -107,12 +105,12 @@ class PasswordSetForm(forms.Form):
     """Para enviar el correo de recuperacion de la cuenta
     """
     password1 = forms.CharField(
-        widget=PasswordInput(
+        widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': _('Password')}
         )
     )
     password2 = forms.CharField(
-        widget=PasswordInput(
+        widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': _('Retype password')}
         )
     )
@@ -142,13 +140,13 @@ class PersonaCreationForm(UserCreationForm):
             'email',
         )
         widgets = {
-            'email': EmailInput(
+            'email': forms.EmailInput(
                 attrs={'class': 'form-control', 'placeholder': _('Email')}
             ),
         }
 
 
-class AvatarForm(ModelForm):
+class AvatarForm(forms.ModelForm):
     """Clase para actualizar el perfil del usuario en el sistema
     """
     class Meta:
@@ -192,7 +190,7 @@ class InitForm(forms.ModelForm):
             'password': _('Password'),
         }
         widgets = {
-            'name': TextInput(
+            'name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'data-placeholder': _('Company Name'),
@@ -207,7 +205,7 @@ class InitForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'email': EmailInput(
+            'email': forms.EmailInput(
                 attrs={
                     'class': 'form-control',
                     'data-placeholder': _('Admin user email'),

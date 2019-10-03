@@ -72,20 +72,20 @@ class SaleOrderAddView(FatherCreateView):
         # context['back_url'] = 'PySaleOrder:list'
         context['breadcrumbs'] = [{'url': 'PySaleOrder:sale-order', 'name': _('Sales')}]
         if self.request.POST:
-            context['products'] = PRODUCT_FORMSET(self.request.POST)
+            context['producto'] = PRODUCT_FORMSET(self.request.POST)
         else:
-            context['products'] = PRODUCT_FORMSET()
+            context['producto'] = PRODUCT_FORMSET()
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        product = context['products']
+        producto = context['producto']
         with transaction.atomic():
             form.instance.uc = self.request.user.pk
             self.object = form.save()
-            if product.is_valid():
-                product.instance = self.object
-                product.save()
+            if producto.is_valid():
+                producto.instance = self.object
+                producto.save()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -106,11 +106,11 @@ class SaleOrderEditView(FatherUpdateView):
     """
     model = PySaleOrder
     form_class = SaleOrderForm
-    template_name = 'sale/saleorderform.html'
+    template_name = 'sale/collection_create.html'
 
     def get_context_data(self, **kwargs):
         _pk = self.kwargs.get(self.pk_url_kwarg)
-        context = super().get_context_data(**kwargs)
+        context = super(SaleOrderEditView, self).get_context_data(**kwargs)
         context['title'] = _('Sale Order Edit')
         context['action_url'] = 'PySaleOrder:update'
         # context['back_url'] = 'PySaleOrder:list'
@@ -120,11 +120,9 @@ class SaleOrderEditView(FatherUpdateView):
         context['product_delete_url'] = 'PySaleOrder:sale-order-detail-delete'
         context['breadcrumbs'] = [{'url': 'PySaleOrder:sale-order', 'name': _('Sales')}]
         if self.request.POST:
-            context['form'] = SaleOrderForm(self.request.POST, instance=self.object)
-            context['products'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
+            context['producto'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
         else:
-            context['form'] = SaleOrderForm(instance=self.object)
-            context['products'] = PRODUCT_FORMSET(instance=self.object)
+            context['producto'] = PRODUCT_FORMSET(instance=self.object)
         return context
         context['fields'] = OBJECT_FORM_FIELDS
         context['object_list'] = PySaleOrderDetail.objects.filter(
@@ -141,19 +139,25 @@ class SaleOrderEditView(FatherUpdateView):
 
     def form_valid(self, form):
         context = self.get_context_data()
-        products = context['products']
+        producto = context['producto']
         with transaction.atomic():
-            form.instance.um = self.request.user.pk
-            if form.is_valid() and products.is_valid():
-                self.object = form.save()
-                products.instance = self.object
-                products.save()
-                return super().form_valid(form)
-            else:
-                return super().form_invalid(form)
+            form.instance.uc = self.request.user.pk
+            self.object = form.save()
+            if producto.is_valid():
+                producto.instance = self.object
+                producto.save()
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('PySaleOrder:detail', kwargs={'pk': self.object.pk})
+
+    # def form_valid(self, form):
+    #     self.object = form.save()
+    #     url = reverse_lazy(
+    #         self.get_success_url(),
+    #         kwargs={'pk': self.object.pk}
+    #     )
+    #     return HttpResponseRedirect(url)
 
 
 # ========================================================================== #
@@ -186,6 +190,116 @@ class SaleOrderDeleteView(DeleteView):
 
 
 # ========================================================================== #
+class SaleOrderDetailAddView(CreateView):
+    """Vista para agregar las sale
+    """
+    model = PySaleOrderDetail
+    form_class = SaleOrderDetailForm
+    template_name = 'sale/saleordermodalform.html'
+    success_url = 'PySaleOrder:update'
+
+    def get_context_data(self, **kwargs):
+        context = super(SaleOrderDetailAddView, self).get_context_data(**kwargs)
+        context['title'] = _('Add Product to the Sales Order')
+        context['action_url'] = reverse_lazy(
+            'PySaleOrder:sale-order-detail-add',
+            kwargs={'saleorder_pk': self.kwargs['saleorder_pk']}
+        )
+        context['sale_order_pk'] = self.kwargs['saleorder_pk']
+        return context
+
+    def get_initial(self):
+        initial = super(SaleOrderDetailAddView, self).get_initial()
+        initial.update({'sale_order': self.kwargs['saleorder_pk']})
+        return initial
+
+    def form_valid(self, form):
+        """To Do:
+            1.-Validar que la "order sale" este habilitada para poderle
+            agregar más productos.
+            2.- Otras validaciones concernientes a los calculos y la
+            aplicación de impuestos y esas cosas.
+        """
+        _sale_order_pk = self.kwargs['saleorder_pk']
+        self.object = form.save(commit=False)
+        self.object.sale_order_id = _sale_order_pk
+        self.object.amount_total = (
+            self.object.amount_untaxed * self.object.quantity
+        ) - self.object.discount
+        self.object.save()
+        url = reverse_lazy(
+            self.get_success_url(),
+            kwargs={'pk': _sale_order_pk}
+        )
+        return HttpResponseRedirect(url)
+
+
+# ========================================================================== #
+class SaleOrderDetailDeleteView(DeleteView):
+    """Vista para eliminar los productos de la sale order
+    """
+    model = PySaleOrderDetail
+    template_name = 'sale/saleorderdelete.html'
+    success_url = 'PySaleOrder:update'
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        self.object = self.get_object()
+        context = super(SaleOrderDetailDeleteView, self).get_context_data(**kwargs)
+        context['title'] = _('Remove Product from the Sales Order')
+        context['action_url'] = 'PySaleOrder:sale-order-detail-delete'
+        context['delete_message'] = '<p>¿Está seguro de eliminar el producto <strong>' + self.object.product.name + '</strong> de la orden de compras?</p>'
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        url = reverse_lazy(
+            self.get_success_url(),
+            kwargs={'pk': self.object.sale_order.pk}
+        )
+        print(url)
+        self.object.delete()
+        return HttpResponseRedirect(url)
+
+
+# ========================================================================== #
+class SaleOrderDetailEditView(UpdateView):
+    """Vista para editarar los productos de los sale
+    """
+    model = PySaleOrderDetail
+    form_class = SaleOrderDetailForm
+    template_name = 'sale/saleordermodalform.html'
+    success_url = 'PySaleOrder:update'
+
+    def get_context_data(self, **kwargs):
+        context = super(SaleOrderDetailEditView, self).get_context_data(**kwargs)
+        context['title'] = _('Edit Product of the Sales Order')
+        context['action_url'] = reverse_lazy(
+            'PySaleOrder:sale-order-detail-edit',
+            kwargs={'pk': self.kwargs['pk']}
+        )
+        return context
+
+    def form_valid(self, form):
+        """To Do:
+            1.- Validar que la "order sale" este habilitada para poderle
+            hacer modificaciones a los productos.
+            2.- Otras validaciones concernientes a los calculos y la
+            aplicación de impuestos y esas cosas.
+        """
+        self.object = form.save(commit=False)
+        self.object.amount_total = (
+            self.object.amount_untaxed * self.object.quantity
+        ) - self.object.discount
+        self.object.save()
+        url = reverse_lazy(
+            self.get_success_url(),
+            kwargs={'pk': self.object.sale_order.pk}
+        )
+        return HttpResponseRedirect(url)
+
+
+# ========================================================================== #
 class ProductAutoComplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
 
@@ -194,22 +308,3 @@ class ProductAutoComplete(autocomplete.Select2QuerySetView):
         if self.q:
             queryset = queryset.filter(name__icontains=self.q)
         return queryset
-
-
-from django.shortcuts import render, redirect
-
-def manage_sale(request):
-    context = {}
-    if request.method == 'POST':
-        context['form'] = SaleOrderForm(request.POST)
-        context['products'] = PRODUCT_FORMSET(request.POST)
-        if context['form'].is_valid() and context['products'].is_valid():
-            so = context['form'].save(commit=False)
-            with transaction.atomic():
-                so.save()
-                context['products'].instance = so
-                context['products'].save()
-    else:
-        context['form'] = SaleOrderForm()
-        context['products'] = PRODUCT_FORMSET()
-    return render(request, "sale/saleorderform.html", context)

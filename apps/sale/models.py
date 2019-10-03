@@ -64,7 +64,7 @@ class PySaleOrder(PyFather):
 class PySaleOrderDetail(PyFather):
     """Modelo del detalle de la orden de pago
     """
-    sale_order = models.ForeignKey(
+    sale_order_id = models.ForeignKey(
         PySaleOrder,
         on_delete=models.PROTECT
     )
@@ -105,34 +105,34 @@ class PySaleOrderDetail(PyFather):
         default=0
     )
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['sale_order', 'product'],
-                name='product_order_unique'
-            )
-        ]
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(
+    #             fields=['sale_order', 'product'],
+    #             name='product_order_unique'
+    #         )
+    #     ]
 
 
-# ========================================================================== #
-@receiver(post_save, sender=PySaleOrderDetail)
-def post_save_sale_order(sender, instance, created, **kwargs):
-    _sale_order = PySaleOrder.objects.get(pk=instance.sale_order.pk)
-    _amount_untaxec = sender.objects.filter(sale_order=instance.sale_order.pk).aggregate(Sum('amount_total'))
-    if _amount_untaxec['amount_total__sum']:
-        _sale_order.amount_untaxec = _amount_untaxec['amount_total__sum']
-    else:
-        _sale_order.amount_untaxec = 0
-    _sale_order.save()
+# # ========================================================================== #
+# @receiver(post_save, sender=PySaleOrderDetail)
+# def post_save_sale_order(sender, instance, created, **kwargs):
+#     _sale_order = PySaleOrder.objects.get(pk=instance.sale_order.pk)
+#     _amount_untaxec = sender.objects.filter(sale_order=instance.sale_order.pk).aggregate(Sum('amount_total'))
+#     if _amount_untaxec['amount_total__sum']:
+#         _sale_order.amount_untaxec = _amount_untaxec['amount_total__sum']
+#     else:
+#         _sale_order.amount_untaxec = 0
+#     _sale_order.save()
 
 
-# ========================================================================== #
-@receiver(post_delete, sender=PySaleOrderDetail)
-def post_delete_sale_order(sender, instance, **kwargs):
-    _sale_order = PySaleOrder.objects.get(pk=instance.sale_order.pk)
-    _amount_untaxec = sender.objects.filter(sale_order=instance.sale_order.pk).aggregate(Sum('amount_total'))
-    if _amount_untaxec['amount_total__sum']:
-        _sale_order.amount_untaxec = _amount_untaxec['amount_total__sum']
-    else:
-        _sale_order.amount_untaxec = 0
-    _sale_order.save()
+# # ========================================================================== #
+# @receiver(post_delete, sender=PySaleOrderDetail)
+# def post_delete_sale_order(sender, instance, **kwargs):
+#     _sale_order = PySaleOrder.objects.get(pk=instance.sale_order.pk)
+#     _amount_untaxec = sender.objects.filter(sale_order=instance.sale_order.pk).aggregate(Sum('amount_total'))
+#     if _amount_untaxec['amount_total__sum']:
+#         _sale_order.amount_untaxec = _amount_untaxec['amount_total__sum']
+#     else:
+#         _sale_order.amount_untaxec = 0
+#     _sale_order.save()
