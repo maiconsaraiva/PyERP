@@ -6,8 +6,8 @@ from django.urls import path
 # Localfolder Library
 from .reports.saleorderpdf import sale_order_pdf
 from .views import (
-    ProductAutoComplete, SaleOrderAddView, SaleOrderDeleteView,
-    SaleOrderDetailView, SaleOrderEditView, SaleOrderListView)
+    SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailView,
+    SaleOrderEditView, SaleOrderListView)
 
 app_name = 'PySaleOrder'
 
@@ -31,11 +31,5 @@ urlpatterns = [
         'sale-order-pdf/<int:pk>',
         sale_order_pdf,
         name='sale-order-pdf'
-    ),
-    # ==================== Auto completado de Productos ==================== #
-    path(
-        'product-autocomplete',
-        ProductAutoComplete.as_view(),
-        name='product-autocomplete'
     ),
 ]

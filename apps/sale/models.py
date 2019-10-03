@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-from apps.base.models import PyFather, PyPartner, PyProduct
+from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
 from apps.base.views.sequence import get_next_value
 
 SALE_STATE = (
@@ -29,7 +29,7 @@ class PySaleOrder(PyFather):
         on_delete=models.PROTECT
     )
     date_order = models.DateTimeField(auto_now_add=True, null=True)
-    amount_untaxec = models.DecimalField(
+    amount_untaxed = models.DecimalField(
         _('Net Amount'),
         max_digits=10,
         decimal_places=2,
@@ -68,27 +68,22 @@ class PySaleOrderDetail(PyFather):
         PySaleOrder,
         on_delete=models.PROTECT
     )
-    product = models.ForeignKey(
+    product_id = models.ForeignKey(
         PyProduct,
         on_delete=models.PROTECT
     )
     description = models.TextField(blank=True, null=True)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    """Pendientes estos dos modelos por incluir no se donde
-    """
-    # measure_unit = models.ForeignKey(
-    #     PyMesureUnit,
-    #     null=True,
-    #     blank=True,
-    #     on_delete=models.PROTECT
-    # )
-    # product_tax = models.ForeignKey(
-    #     PyProductTax,
-    #     null=True,
-    #     blank=True,
-    #     on_delete=models.PROTECT
-    # )
+    uom_id = models.ForeignKey(
+        PyUom,
+        verbose_name=_('Uom'),
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT
+    )
+    tax_id = models.ManyToManyField(PyTax, verbose_name=_('Tax'), blank=True)
     amount_untaxed = models.DecimalField(
+        _('Amount un'),
         max_digits=10,
         decimal_places=2,
         default=0
@@ -105,34 +100,27 @@ class PySaleOrderDetail(PyFather):
         default=0
     )
 
-    # class Meta:
-    #     constraints = [
-    #         models.UniqueConstraint(
-    #             fields=['sale_order', 'product'],
-    #             name='product_order_unique'
-    #         )
-    #     ]
 
 
-# # ========================================================================== #
-# @receiver(post_save, sender=PySaleOrderDetail)
-# def post_save_sale_order(sender, instance, created, **kwargs):
-#     _sale_order = PySaleOrder.objects.get(pk=instance.sale_order.pk)
-#     _amount_untaxec = sender.objects.filter(sale_order=instance.sale_order.pk).aggregate(Sum('amount_total'))
-#     if _amount_untaxec['amount_total__sum']:
-#         _sale_order.amount_untaxec = _amount_untaxec['amount_total__sum']
-#     else:
-#         _sale_order.amount_untaxec = 0
-#     _sale_order.save()
+# ========================================================================== #
+@receiver(post_save, sender=PySaleOrderDetail)
+def post_save_sale_order(sender, instance, created, **kwargs):
+    _sale_order = PySaleOrder.objects.get(pk=instance.sale_order_id.pk)
+    _amount_untaxed = sender.objects.filter(sale_order_id=instance.sale_order_id.pk).aggregate(Sum('amount_total'))
+    if _amount_untaxed['amount_total__sum']:
+        _sale_order.amount_untaxed = _amount_untaxed['amount_total__sum']
+    else:
+        _sale_order.amount_untaxed = 0
+    _sale_order.save()
 
 
-# # ========================================================================== #
-# @receiver(post_delete, sender=PySaleOrderDetail)
-# def post_delete_sale_order(sender, instance, **kwargs):
-#     _sale_order = PySaleOrder.objects.get(pk=instance.sale_order.pk)
-#     _amount_untaxec = sender.objects.filter(sale_order=instance.sale_order.pk).aggregate(Sum('amount_total'))
-#     if _amount_untaxec['amount_total__sum']:
-#         _sale_order.amount_untaxec = _amount_untaxec['amount_total__sum']
-#     else:
-#         _sale_order.amount_untaxec = 0
-#     _sale_order.save()
+# ========================================================================== #
+@receiver(post_delete, sender=PySaleOrderDetail)
+def post_delete_sale_order(sender, instance, **kwargs):
+    _sale_order = PySaleOrder.objects.get(pk=instance.sale_order_id.pk)
+    _amount_untaxed = sender.objects.filter(sale_order_id=instance.sale_order_id.pk).aggregate(Sum('amount_total'))
+    if _amount_untaxed['amount_total__sum']:
+        _sale_order.amount_untaxed = _amount_untaxed['amount_total__sum']
+    else:
+        _sale_order.amount_untaxed = 0
+    _sale_order.save()

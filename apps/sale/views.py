@@ -5,18 +5,16 @@ import logging
 
 # Django Library
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DeleteView, UpdateView
-from django.db import transaction
 
 # Thirdparty Library
-from apps.base.models import PyProduct
 from apps.base.views.web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
-from dal import autocomplete
 
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, SaleOrderDetailForm, SaleOrderForm
@@ -183,33 +181,3 @@ class SaleOrderDeleteView(DeleteView):
         if not detail:
             self.object.delete()
         return HttpResponseRedirect(success_url)
-
-
-# ========================================================================== #
-class ProductAutoComplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-
-        queryset = PyProduct.objects.filter(active=True)
-
-        if self.q:
-            queryset = queryset.filter(name__icontains=self.q)
-        return queryset
-
-
-from django.shortcuts import render, redirect
-
-def manage_sale(request):
-    context = {}
-    if request.method == 'POST':
-        context['form'] = SaleOrderForm(request.POST)
-        context['products'] = PRODUCT_FORMSET(request.POST)
-        if context['form'].is_valid() and context['products'].is_valid():
-            so = context['form'].save(commit=False)
-            with transaction.atomic():
-                so.save()
-                context['products'].instance = so
-                context['products'].save()
-    else:
-        context['form'] = SaleOrderForm()
-        context['products'] = PRODUCT_FORMSET()
-    return render(request, "sale/saleorderform.html", context)

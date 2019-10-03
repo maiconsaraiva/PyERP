@@ -2,7 +2,9 @@
 """
 # Django Library
 from django import forms
-from django.forms.models import inlineformset_factory
+from django.forms.formsets import DELETION_FIELD_NAME
+from django.forms.models import BaseInlineFormSet, inlineformset_factory
+from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from dal import autocomplete
@@ -19,11 +21,10 @@ class SaleOrderForm(forms.ModelForm):
         model = PySaleOrder
         fields = [
             'partner_id',
-            'description',
         ]
         labels = {
             'partner_id': 'Cliente',
-            'description': 'Descripción',
+            # 'description': 'Descripción',
         }
         widgets = {
             'partner_id': autocomplete.ModelSelect2(
@@ -34,13 +35,13 @@ class SaleOrderForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'description': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Descripción del presupuesto ...',
-                    'style': 'width: 100%',
-                },
-            ),
+            # 'description': forms.TextInput(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'data-placeholder': 'Descripción del presupuesto ...',
+            #         'style': 'width: 100%',
+            #     },
+            # ),
         }
 
 
@@ -53,7 +54,7 @@ class SaleOrderDetailForm(forms.ModelForm):
         exclude = ()
         fields = [
             # 'sale_order_id',
-            'product',
+            'product_id',
             'description',
             'quantity',
             # 'measure_unit',
@@ -62,33 +63,23 @@ class SaleOrderDetailForm(forms.ModelForm):
             'discount',
             # 'amount_total',
         ]
-        labels = {
-            'product': 'Producto',
-            'description': 'Descripción',
-            'quantity': 'Cantidad',
-            # 'measure_unit': 'Unidad',
-            # 'product_tax': 'Impuesto',
-            'amount_untaxed': 'Precio',
-            'discount': 'Descuento',
-            # 'amount_total': 'Sub total',
-        }
         widgets = {
             'sale_order': forms.HiddenInput(),
-            # 'product': autocomplete.ModelSelect2(
-            #     url='PySaleOrder:product-autocomplete',
-            #     attrs={
-            #         'class': 'form-control',
-            #         'data-placeholder': 'Seleccione un producto ...',
-            #         'style': 'width: 100%',
-            #     },
-            # ),
-            'product': forms.Select(
+            'product': autocomplete.ModelSelect2(
+                url='PyProduct:autocomplete',
                 attrs={
-                    'class': 'form-control select2',
+                    'class': 'form-control',
                     'data-placeholder': 'Seleccione un producto ...',
                     'style': 'width: 100%',
                 },
             ),
+            # 'product_id': forms.Select(
+            #     attrs={
+            #         'class': 'form-control select2',
+            #         'data-placeholder': 'Seleccione un producto ...',
+            #         'style': 'width: 100%',
+            #     },
+            # ),
             'description': forms.TextInput(
                 attrs={
                     'class': 'form-control',
@@ -111,14 +102,13 @@ class SaleOrderDetailForm(forms.ModelForm):
             #         'style': 'width: 100%',
             #     },
             # ),
-            # 'product_tax': autocomplete.ModelSelect2(
-            #     url='PyTax:autocomplete',
-            #     attrs={
-            #         'class': 'form-control',
-            #         'data-placeholder': 'Seleccione un Impuesto ...',
-            #         'style': 'width: 100%',
-            #     },
-            # ),
+            'tax_id': autocomplete.ModelSelect2Multiple(
+                url='PyTax:autocomplete',
+                attrs={
+                    'data-placeholder': _('Select taxes...'),
+                    'style': 'padding: 0 .75rem',
+                },
+            ),
             'amount_untaxed': forms.NumberInput(
                 attrs={
                     'class': 'form-control',
@@ -143,29 +133,42 @@ class SaleOrderDetailForm(forms.ModelForm):
         }
 
 
+class BaseProductFormSet(BaseInlineFormSet):
+    def add_fields(self, form, index):
+        super().add_fields(form, index)
+        form.fields[DELETION_FIELD_NAME].label = ''
+
+
 PRODUCT_FORMSET = inlineformset_factory(
     PySaleOrder, PySaleOrderDetail,
     # form=SaleOrderDetailForm,
-    # fields=['product', 'description'],
     fields=[
         'sale_order_id',
-        'product',
+        'product_id',
         'description',
         'quantity',
-        # 'measure_unit',
-        # 'product_tax',
+        'uom_id',
         'amount_untaxed',
+        'tax_id',
         'discount',
-        # 'amount_total',
+        'amount_total',
     ],
     widgets={
-        'product': forms.Select(
+        'product_id': autocomplete.ModelSelect2(
+            url='PyProduct:autocomplete',
             attrs={
-                'class': 'form-control  form-control-sm custom-select custom-select-sm',
+                'class': 'form-control',
                 'data-placeholder': 'Seleccione un producto ...',
                 'style': 'width: 100%',
             },
         ),
+        # 'product_id': forms.Select(
+        #     attrs={
+        #         'class': 'form-control custom-select',
+        #         'data-placeholder': 'Seleccione un producto ...',
+        #         'style': 'width: 100%',
+        #     },
+        # ),
         'description': forms.TextInput(
             attrs={
                 'class': 'form-control form-control-sm',
@@ -180,6 +183,13 @@ PRODUCT_FORMSET = inlineformset_factory(
                 'style': 'width: 100%',
             },
         ),
+        'uom_id': forms.Select(
+            attrs={
+                'class': 'custom-select custom-select-sm',
+                'data-placeholder': 'Cantidad del producto ...',
+                'style': 'width: 100%',
+            },
+        ),
         'amount_untaxed': forms.NumberInput(
             attrs={
                 'class': 'form-control form-control-sm',
@@ -187,6 +197,22 @@ PRODUCT_FORMSET = inlineformset_factory(
                 'style': 'width: 100%',
             },
         ),
+        # 'tax_id': autocomplete.ModelSelect2Multiple(
+        #     url='PyTax:autocomplete',
+        #     attrs={
+        #         'class': 'form-control  custom-select custom-select-sm',
+        #         'data-placeholder': _('Select taxes...'),
+        #         'style': 'padding: 0 .75rem; width: 100%',
+        #     },
+        # ),
+        'tax_id': autocomplete.ModelSelect2Multiple(
+                url='PyTax:autocomplete',
+                attrs={
+                    'class': 'form-control  custom-select custom-select-sm',
+                    'data-placeholder': _('Select taxes...'),
+                    'style': 'padding: 0 .75rem; width: 100%',
+                },
+            ),
         'discount': forms.NumberInput(
             attrs={
                 'class': 'form-control form-control-sm',
@@ -194,7 +220,15 @@ PRODUCT_FORMSET = inlineformset_factory(
                 'style': 'width: 100%',
             },
         ),
+        'amount_total': forms.NumberInput(
+            attrs={
+                'class': 'form-control form-control-sm',
+                'data-placeholder': 'Descuento ...',
+                'style': 'width: 100%',
+            },
+        ),
     },
+    formset=BaseProductFormSet,
     extra=0,
     can_delete=True
 )

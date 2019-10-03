@@ -2,6 +2,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
+from dal import autocomplete
+
 # Localfolder Library
 from ..forms.product import ProductForm
 from ..models import PyProduct
@@ -78,3 +81,14 @@ class ProductUpdateView(LoginRequiredMixin, FatherUpdateView):
 # ========================================================================== #
 class ProductDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyProduct
+
+
+# ========================================================================== #
+class ProductAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        queryset = PyProduct.objects.filter(active=True)
+
+        if self.q:
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset

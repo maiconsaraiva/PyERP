@@ -5,16 +5,14 @@ from django import forms
 from django.forms.models import inlineformset_factory
 
 # Thirdparty Library
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import (
+    HTML, ButtonHolder, Div, Field, Fieldset, Layout, Submit)
 from dal import autocomplete
 
 # Localfolder Library
-from .models import PySaleOrder, PySaleOrderDetail
-
-
-
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder, Submit
 from .custom_layout_object import *
+from .models import PySaleOrder, PySaleOrderDetail
 
 
 # ========================================================================== #

@@ -155,7 +155,7 @@ def sale_order_pdf(request, pk):
     # Footer de la tabla
     _data_foot = []
     _data_foot.append(
-        ["", "Subtotal:", "$ " + locale.format('%.2f', _sale_order.amount_untaxec, grouping=True, monetary=True)]
+        ["", "Subtotal:", "$ " + locale.format('%.2f', _sale_order.amount_untaxed, grouping=True, monetary=True)]
     )
     _data_foot.append(
         ["", "IVA:", "$" + "???"]

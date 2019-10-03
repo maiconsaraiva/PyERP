@@ -1,8 +1,6 @@
 # Django Library
 from django.contrib import admin
 
-
-
 # Localfolder Library
 from .models import PySaleOrder, PySaleOrderDetail
 
