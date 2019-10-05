@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Localfolder Library
-from .models import PySaleOrder, PySaleOrderDetail
+from apps.sale.models import PySaleOrder, PySaleOrderDetail
 
 # Register your models here.
 

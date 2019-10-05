@@ -17,12 +17,12 @@ urlpatterns = [
     path('sale-order/<int:pk>', SaleOrderDetailView.as_view(), name='detail'),
     path('sale-order/add/', SaleOrderAddView.as_view(), name='add'),
     path(
-        'sale-order/edit/<int:pk>',
+        'sale-order/<int:pk>/edit/',
         SaleOrderEditView.as_view(),
         name='update'
     ),
     path(
-        'sale-order/delete/<int:pk>',
+        'sale-order/<int:pk>/delete/',
         SaleOrderDeleteView.as_view(),
         name='delete'
     ),

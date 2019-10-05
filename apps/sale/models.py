@@ -1,8 +1,5 @@
 # Django Library
 from django.db import models
-from django.db.models import Sum
-from django.db.models.signals import post_delete, post_save
-from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
@@ -55,9 +52,10 @@ class PySaleOrder(PyFather):
         default='draft'
     )
 
-    def save(self):
-        self.name = get_next_value(self._meta.object_name, 'SO')
-        super(PySaleOrder, self).save()
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.name = get_next_value(self._meta.object_name, 'SO')
+        super().save(*args, **kwargs)
 
 
 # ========================================================================== #
@@ -100,27 +98,19 @@ class PySaleOrderDetail(PyFather):
         default=0
     )
 
+    class Meta:
+        ordering = ['pk']
+        verbose_name = _('Sale')
 
+    @classmethod
+    def post_save_prueba(self):
+        sale_order = PySaleOrder.objects.get(pk=1)
+        # amount_untaxed = 0
 
-# ========================================================================== #
-@receiver(post_save, sender=PySaleOrderDetail)
-def post_save_sale_order(sender, instance, created, **kwargs):
-    _sale_order = PySaleOrder.objects.get(pk=instance.sale_order_id.pk)
-    _amount_untaxed = sender.objects.filter(sale_order_id=instance.sale_order_id.pk).aggregate(Sum('amount_total'))
-    if _amount_untaxed['amount_total__sum']:
-        _sale_order.amount_untaxed = _amount_untaxed['amount_total__sum']
-    else:
-        _sale_order.amount_untaxed = 0
-    _sale_order.save()
+        # for product in sender.objects.filter(sale_order_id=sale_order.pk):
+        #     amount_untaxed += (product.quantity * product.amount_untaxed) - product.discount
 
-
-# ========================================================================== #
-@receiver(post_delete, sender=PySaleOrderDetail)
-def post_delete_sale_order(sender, instance, **kwargs):
-    _sale_order = PySaleOrder.objects.get(pk=instance.sale_order_id.pk)
-    _amount_untaxed = sender.objects.filter(sale_order_id=instance.sale_order_id.pk).aggregate(Sum('amount_total'))
-    if _amount_untaxed['amount_total__sum']:
-        _sale_order.amount_untaxed = _amount_untaxed['amount_total__sum']
-    else:
-        _sale_order.amount_untaxed = 0
-    _sale_order.save()
+        # PySaleOrder.objects.filter(pk=instance.sale_order_id.pk).update(description=124)
+        sale_order.amount_untaxed = 100  # amount_untaxed
+        sale_order.save()
+        print("Ño e la madre 2")

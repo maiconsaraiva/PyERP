@@ -126,7 +126,7 @@ class SaleOrderEditView(FatherUpdateView):
         return context
         context['fields'] = OBJECT_FORM_FIELDS
         context['object_list'] = PySaleOrderDetail.objects.filter(
-            sale_order=_pk
+            sale_order_id=_pk
         ).only(
             "product",
             "description",
@@ -143,9 +143,10 @@ class SaleOrderEditView(FatherUpdateView):
         with transaction.atomic():
             form.instance.um = self.request.user.pk
             if form.is_valid() and products.is_valid():
-                self.object = form.save()
+                self.object = form.save(commit=False)
                 products.instance = self.object
                 products.save()
+                self.object.save()
                 return super().form_valid(form)
             else:
                 return super().form_invalid(form)
@@ -160,24 +161,24 @@ class SaleOrderDeleteView(DeleteView):
     """
     model = PySaleOrder
     template_name = 'sale/saleorderdelete.html'
-    success_url = reverse_lazy('PySaleOrder:sale-order')
+    success_url = reverse_lazy('PySaleOrder:list')
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         self.object = self.get_object()
         context = super(SaleOrderDeleteView, self).get_context_data(**kwargs)
         context['title'] = 'ELiminar Orden de Venta'
-        context['action_url'] = 'PySaleOrder:sale-order-delete'
+        context['action_url'] = 'PySaleOrder:delete'
         context['delete_message'] = '<p>¿Está seguro de eliminar la orden de compras <strong>' + self.object.name + '</strong>?</p>'
         context['cant_delete_message'] = '<p>La orden de compras <strong>' + self.object.name + '</strong>, no puede ser eliminada ya que posee un detalle que debe eliminar antes.</p>'
-        context['detail'] = PySaleOrderDetail.objects.filter(sale_order=pk).exists()
+        context['detail'] = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
         return context
 
     def delete(self, request, *args, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         self.object = self.get_object()
         success_url = self.get_success_url()
-        detail = PySaleOrderDetail.objects.filter(sale_order=pk).exists()
+        detail = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
         if not detail:
             self.object.delete()
         return HttpResponseRedirect(success_url)

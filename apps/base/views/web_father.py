@@ -132,7 +132,12 @@ class FatherDetailView(DetailView):
     def get_object(self, queryset=None):
         queryset = self.get_queryset()
         pk = self.kwargs.get(self.pk_url_kwarg)
-        queryset = queryset.filter(pk=pk, company_id=self.request.user.active_company_id)
+        queryset = queryset.filter(
+            pk=pk,
+            active=True,
+            company_id=self.request.user.active_company_id
+        )
+        queryset = queryset.filter(pk=pk)
 
         try:
             # Get the single item from the filtered queryset

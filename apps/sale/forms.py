@@ -106,7 +106,6 @@ class SaleOrderDetailForm(forms.ModelForm):
                 url='PyTax:autocomplete',
                 attrs={
                     'data-placeholder': _('Select taxes...'),
-                    'style': 'padding: 0 .75rem',
                 },
             ),
             'amount_untaxed': forms.NumberInput(
@@ -159,7 +158,7 @@ PRODUCT_FORMSET = inlineformset_factory(
             attrs={
                 'class': 'form-control',
                 'data-placeholder': 'Seleccione un producto ...',
-                'style': 'width: 100%',
+                'style': 'width: 80%',
             },
         ),
         # 'product_id': forms.Select(
@@ -223,12 +222,12 @@ PRODUCT_FORMSET = inlineformset_factory(
         'amount_total': forms.NumberInput(
             attrs={
                 'class': 'form-control form-control-sm',
-                'data-placeholder': 'Descuento ...',
+                'data-placeholder': 'Total ...',
                 'style': 'width: 100%',
             },
         ),
     },
     formset=BaseProductFormSet,
-    extra=0,
+    extra=1,
     can_delete=True
 )
