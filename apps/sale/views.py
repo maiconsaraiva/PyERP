@@ -70,9 +70,24 @@ class SaleOrderAddView(FatherCreateView):
         # context['back_url'] = 'PySaleOrder:list'
         context['breadcrumbs'] = [{'url': 'PySaleOrder:sale-order', 'name': _('Sales')}]
         if self.request.POST:
-            context['products'] = PRODUCT_FORMSET(self.request.POST)
+            context['form'] = SaleOrderForm(self.request.POST)
+            context['products'] = PRODUCT_FORMSET(
+                self.request.POST,
+                initial=[
+                    {
+                        'save_aux': False
+                    }
+                ]
+            )
         else:
-            context['products'] = PRODUCT_FORMSET()
+            context['form'] = SaleOrderForm()
+            context['products'] = PRODUCT_FORMSET(
+                initial=[
+                    {
+                        'save_aux': False
+                    }
+                ]
+            )
         return context
 
     def form_valid(self, form):
@@ -119,10 +134,25 @@ class SaleOrderEditView(FatherUpdateView):
         context['breadcrumbs'] = [{'url': 'PySaleOrder:sale-order', 'name': _('Sales')}]
         if self.request.POST:
             context['form'] = SaleOrderForm(self.request.POST, instance=self.object)
-            context['products'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
+            context['products'] = PRODUCT_FORMSET(
+                self.request.POST,
+                instance=self.object,
+                initial=[
+                    {
+                        'save_aux': False
+                    }
+                ]
+            )
         else:
             context['form'] = SaleOrderForm(instance=self.object)
-            context['products'] = PRODUCT_FORMSET(instance=self.object)
+            context['products'] = PRODUCT_FORMSET(
+                instance=self.object,
+                initial=[
+                    {
+                        'save_aux': False
+                    }
+                ]
+            )
         return context
         context['fields'] = OBJECT_FORM_FIELDS
         context['object_list'] = PySaleOrderDetail.objects.filter(

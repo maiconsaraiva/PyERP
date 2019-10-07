@@ -53,7 +53,6 @@ class SaleOrderDetailForm(forms.ModelForm):
         model = PySaleOrderDetail
         exclude = ()
         fields = [
-            # 'sale_order_id',
             'product_id',
             'description',
             'quantity',
@@ -142,17 +141,18 @@ PRODUCT_FORMSET = inlineformset_factory(
     PySaleOrder, PySaleOrderDetail,
     # form=SaleOrderDetailForm,
     fields=[
-        'sale_order_id',
         'product_id',
         'description',
         'quantity',
         'uom_id',
-        'amount_untaxed',
+        'price',
         'tax_id',
         'discount',
         'amount_total',
+        'save_aux',
     ],
     widgets={
+        'save_aux': forms.HiddenInput(),
         'product_id': autocomplete.ModelSelect2(
             url='PyProduct:autocomplete',
             attrs={
@@ -189,7 +189,7 @@ PRODUCT_FORMSET = inlineformset_factory(
                 'style': 'width: 100%',
             },
         ),
-        'amount_untaxed': forms.NumberInput(
+        'price': forms.NumberInput(
             attrs={
                 'class': 'form-control form-control-sm',
                 'data-placeholder': 'Precio del producto ...',

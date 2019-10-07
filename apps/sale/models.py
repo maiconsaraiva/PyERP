@@ -27,13 +27,27 @@ class PySaleOrder(PyFather):
     )
     date_order = models.DateTimeField(auto_now_add=True, null=True)
     amount_untaxed = models.DecimalField(
-        _('Net Amount'),
+        _('Amount un'),
         max_digits=10,
         decimal_places=2,
         default=0
     )
-    amount_taxt = models.DecimalField(
-        _('Total taxes'),
+    amount_tax_iva = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    amount_tax_other = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    amount_tax_total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    amount_exempt = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0
@@ -79,6 +93,12 @@ class PySaleOrderDetail(PyFather):
         blank=True,
         on_delete=models.PROTECT
     )
+    price = models.DecimalField(
+        _('Price'),
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
     tax_id = models.ManyToManyField(PyTax, verbose_name=_('Tax'), blank=True)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
@@ -86,7 +106,22 @@ class PySaleOrderDetail(PyFather):
         decimal_places=2,
         default=0
     )
-    amount_taxt = models.DecimalField(
+    amount_tax_iva = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    amount_tax_other = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    amount_tax_total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    amount_exempt = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0
@@ -97,20 +132,21 @@ class PySaleOrderDetail(PyFather):
         decimal_places=2,
         default=0
     )
+    save_aux = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['pk']
         verbose_name = _('Sale')
 
-    @classmethod
-    def post_save_prueba(self):
-        sale_order = PySaleOrder.objects.get(pk=1)
-        # amount_untaxed = 0
+    # @classmethod
+    # def post_save_prueba(self):
+    #     sale_order = PySaleOrder.objects.get(pk=1)
+    #     # amount_untaxed = 0
 
-        # for product in sender.objects.filter(sale_order_id=sale_order.pk):
-        #     amount_untaxed += (product.quantity * product.amount_untaxed) - product.discount
+    #     # for product in sender.objects.filter(sale_order_id=sale_order.pk):
+    #     #     amount_untaxed += (product.quantity * product.amount_untaxed) - product.discount
 
-        # PySaleOrder.objects.filter(pk=instance.sale_order_id.pk).update(description=124)
-        sale_order.amount_untaxed = 100  # amount_untaxed
-        sale_order.save()
-        print("Ño e la madre 2")
+    #     # PySaleOrder.objects.filter(pk=instance.sale_order_id.pk).update(description=124)
+    #     sale_order.amount_untaxed = 100  # amount_untaxed
+    #     sale_order.save()
+    #     print("Ño e la madre 2")
