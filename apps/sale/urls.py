@@ -28,8 +28,8 @@ urlpatterns = [
     ),
     # ====================== Sale Orders Reports URL's ===================== #
     path(
-        'sale-order-pdf/<int:pk>',
+        'pdf/<int:pk>',
         sale_order_pdf,
-        name='sale-order-pdf'
+        name='pdf'
     ),
 ]

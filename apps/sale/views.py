@@ -6,18 +6,17 @@ import logging
 # Django Library
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import DeleteView
 
 # Thirdparty Library
 from apps.base.views.web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 # Localfolder Library
-from .forms import PRODUCT_FORMSET, SaleOrderDetailForm, SaleOrderForm
+from .forms import PRODUCT_FORMSET, SaleOrderForm
 from .models import PySaleOrder, PySaleOrderDetail
 
 LOGGER = logging.getLogger(__name__)
@@ -29,6 +28,15 @@ OBJECT_LIST_FIELDS = [
     # {'string': 'Precio', 'field': 'amount_untaxed', 'align': 'text-right'},
     # {'string': 'Descuento', 'field': 'discount', 'align': 'text-right'},
     {'string': _('Status'), 'field': 'state'},
+]
+
+DETAIL_OBJECT_LIST_FIELDS = [
+    {'string': _('Description'), 'field': 'product_id', 'align': 'text-left'},
+    {'string': _('Quantity'), 'field': 'quantity', 'align': 'text-center'},
+    {'string': ('Price'), 'field': 'price', 'align': 'text-right'},
+    {'string': _('Discount'), 'field': 'discount', 'align': 'text-right'},
+    {'string': _('Tax'), 'field': 'tax_id', 'align': 'text-left'},
+    {'string': _('Sub Total'), 'field': 'amount_total', 'align': 'text-right'},
 ]
 
 OBJECT_FORM_FIELDS = [
@@ -51,11 +59,26 @@ class SaleOrderListView(LoginRequiredMixin, FatherListView):
 # ========================================================================== #
 class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
     model = PySaleOrder
-    extra_context = {'fields': OBJECT_LIST_FIELDS}
+    template_name = 'sale/detail.html'
+    extra_context = {
+        'master_fields': OBJECT_LIST_FIELDS,
+        'detail_fields': DETAIL_OBJECT_LIST_FIELDS
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        object_name = self.model._meta.object_name
+        context['print_url'] = '{}:pdf'.format(object_name)
+        context['detail'] = PySaleOrderDetail.objects.filter(
+            active=True,
+            company_id=self.request.user.active_company_id,
+            sale_order_id=self.object.pk
+        )
+        return context
 
 
 # ========================================================================== #
-class SaleOrderAddView(FatherCreateView):
+class SaleOrderAddView(LoginRequiredMixin, FatherCreateView):
     """Vista para agregar las sale
     """
     model = PySaleOrder
@@ -65,29 +88,11 @@ class SaleOrderAddView(FatherCreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = _('Sale Order Add')
         context['action_url'] = 'PySaleOrder:sale-order-add'
-        # context['back_url'] = 'PySaleOrder:list'
-        context['breadcrumbs'] = [{'url': 'PySaleOrder:sale-order', 'name': _('Sales')}]
         if self.request.POST:
-            context['form'] = SaleOrderForm(self.request.POST)
-            context['products'] = PRODUCT_FORMSET(
-                self.request.POST,
-                initial=[
-                    {
-                        'save_aux': False
-                    }
-                ]
-            )
+            context['products'] = PRODUCT_FORMSET(self.request.POST)
         else:
-            context['form'] = SaleOrderForm()
-            context['products'] = PRODUCT_FORMSET(
-                initial=[
-                    {
-                        'save_aux': False
-                    }
-                ]
-            )
+            context['products'] = PRODUCT_FORMSET()
         return context
 
     def form_valid(self, form):
@@ -104,17 +109,9 @@ class SaleOrderAddView(FatherCreateView):
     def get_success_url(self):
         return reverse_lazy('PySaleOrder:detail', kwargs={'pk': self.object.pk})
 
-    # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-    #     self.object.uc = self.request.user.pk
-    #     self.object.company_id = self.request.user.active_company_id
-    #     self.object.save()
-    #     url = reverse_lazy(self.get_success_url(), kwargs={'pk': self.object.pk})
-    #     return HttpResponseRedirect(url)
-
 
 # ========================================================================== #
-class SaleOrderEditView(FatherUpdateView):
+class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
     """Vista para editarar las sale
     """
     model = PySaleOrder
@@ -124,47 +121,15 @@ class SaleOrderEditView(FatherUpdateView):
     def get_context_data(self, **kwargs):
         _pk = self.kwargs.get(self.pk_url_kwarg)
         context = super().get_context_data(**kwargs)
-        context['title'] = _('Sale Order Edit')
+        object_name = self.model._meta.object_name
         context['action_url'] = 'PySaleOrder:update'
-        # context['back_url'] = 'PySaleOrder:list'
-        context['print_url'] = 'PySaleOrder:sale-order-pdf'
-        context['product_add_url'] = 'PySaleOrder:sale-order-detail-add'
-        context['product_edit_url'] = 'PySaleOrder:sale-order-detail-edit'
-        context['product_delete_url'] = 'PySaleOrder:sale-order-detail-delete'
-        context['breadcrumbs'] = [{'url': 'PySaleOrder:sale-order', 'name': _('Sales')}]
+        context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = SaleOrderForm(self.request.POST, instance=self.object)
-            context['products'] = PRODUCT_FORMSET(
-                self.request.POST,
-                instance=self.object,
-                initial=[
-                    {
-                        'save_aux': False
-                    }
-                ]
-            )
+            context['products'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
         else:
             context['form'] = SaleOrderForm(instance=self.object)
-            context['products'] = PRODUCT_FORMSET(
-                instance=self.object,
-                initial=[
-                    {
-                        'save_aux': False
-                    }
-                ]
-            )
-        return context
-        context['fields'] = OBJECT_FORM_FIELDS
-        context['object_list'] = PySaleOrderDetail.objects.filter(
-            sale_order_id=_pk
-        ).only(
-            "product",
-            "description",
-            "quantity",
-            "amount_untaxed",
-            "discount",
-            "amount_total"
-        )
+            context['products'] = PRODUCT_FORMSET(instance=self.object)
         return context
 
     def form_valid(self, form):
@@ -186,7 +151,7 @@ class SaleOrderEditView(FatherUpdateView):
 
 
 # ========================================================================== #
-class SaleOrderDeleteView(DeleteView):
+class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
     """Vista para eliminar las sale
     """
     model = PySaleOrder

@@ -66,6 +66,11 @@ class PySaleOrder(PyFather):
         default='draft'
     )
 
+    class Meta:
+        ordering = ['pk']
+        verbose_name = _('Sale order')
+        verbose_name_plural = _('Sale orders')
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.name = get_next_value(self._meta.object_name, 'SO')
@@ -85,10 +90,15 @@ class PySaleOrderDetail(PyFather):
         on_delete=models.PROTECT
     )
     description = models.TextField(blank=True, null=True)
-    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    quantity = models.DecimalField(
+        _('Qty.'),
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
     uom_id = models.ForeignKey(
         PyUom,
-        verbose_name=_('Uom'),
+        verbose_name=_('UOM'),
         null=True,
         blank=True,
         on_delete=models.PROTECT
@@ -128,25 +138,13 @@ class PySaleOrderDetail(PyFather):
     )
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     amount_total = models.DecimalField(
+        _('Total'),
         max_digits=10,
         decimal_places=2,
         default=0
     )
-    save_aux = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['pk']
-        verbose_name = _('Sale')
-
-    # @classmethod
-    # def post_save_prueba(self):
-    #     sale_order = PySaleOrder.objects.get(pk=1)
-    #     # amount_untaxed = 0
-
-    #     # for product in sender.objects.filter(sale_order_id=sale_order.pk):
-    #     #     amount_untaxed += (product.quantity * product.amount_untaxed) - product.discount
-
-    #     # PySaleOrder.objects.filter(pk=instance.sale_order_id.pk).update(description=124)
-    #     sale_order.amount_untaxed = 100  # amount_untaxed
-    #     sale_order.save()
-    #     print("Ño e la madre 2")
+        verbose_name = _('Sale order detail')
+        verbose_name_plural = _('Sale orders detail')

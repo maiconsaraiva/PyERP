@@ -33,11 +33,11 @@ def sale_order_pdf(request, pk):
     _sale_order = PySaleOrder.objects.get(pk=pk)
 
     # Los productos de la orden ya en una matriz
-    _products = PySaleOrderDetail.objects.filter(sale_order=pk).only(
-        "product",
+    _products = PySaleOrderDetail.objects.filter(sale_order_id=pk).only(
+        "product_id",
         "description",
         "quantity",
-        "amount_untaxed",
+        "price",
         "discount",
         "amount_total"
     )
@@ -116,7 +116,7 @@ def sale_order_pdf(request, pk):
         for _product in _products:
             _data_table.append(
                 [
-                    _product.product,
+                    _product.product_id,
                     # _product.description,
                     str(_product.quantity) + ' Units',
                     _product.amount_untaxed,
@@ -155,32 +155,41 @@ def sale_order_pdf(request, pk):
     # Footer de la tabla
     _data_foot = []
     _data_foot.append(
-        ["", "Subtotal:", "$ " + locale.format('%.2f', _sale_order.amount_untaxed, grouping=True, monetary=True)]
+        ["", _('Net Amount or Affection') + ":", "$ " + locale.format('%.2f', _sale_order.amount_untaxed, grouping=True, monetary=True)]
     )
     _data_foot.append(
-        ["", "IVA:", "$" + "???"]
+        ["", _('Exempt Amount') + ":", "$ " + locale.format('%.2f', _sale_order.amount_exempt, grouping=True, monetary=True)]
     )
     _data_foot.append(
-        ["", "Total:", "$" + "???"]
+        ["", _('I.V.A') + ":", "$ " + locale.format('%.2f', _sale_order.amount_tax_iva, grouping=True, monetary=True)]
+    )
+    _data_foot.append(
+        ["", _('Other taxes') + ":", "$ " + locale.format('%.2f', _sale_order.amount_tax_other, grouping=True, monetary=True)]
+    )
+    _data_foot.append(
+        ["", _('Total taxes') + ":", "$ " + locale.format('%.2f', _sale_order.amount_tax_total, grouping=True, monetary=True)]
+    )
+    _data_foot.append(
+        ["", _('Total') + ":", "$ " + locale.format('%.2f', _sale_order.amount_total, grouping=True, monetary=True)]
     )
 
-    _high = _high - (18 * 3)
+    _high = _high - (18 * 7)
     # Imprimir cuerpo la tabla
     table = Table(
         _data_foot,
-        colWidths=[13*cm, 3*cm, 3.5*cm]
+        colWidths=[11*cm, 5*cm, 3.5*cm]
     )
     table.setStyle(
         TableStyle([
             # ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
             # ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-            ('LINEBELOW', (1, 0), (2, 0), 1.5, colors.black),
-            ('LINEBELOW', (1, 1), (2, 1), 0.5, colors.black),
-            ('LINEBELOW', (1, 2), (2, 2), 1.5, colors.black),
+            # ('LINEBELOW', (1, 0), (2, 0), 1.5, colors.black),
+            # ('LINEBELOW', (1, 0), (2, 2), 0.5, colors.black),
+            ('LINEBELOW', (1, 3), (2, 3), 1, colors.black),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             # ('ALIGN', (0, 0), (0, -1), 'CENTER'),
             ('ALIGN', (1, 0), (-1, -1), 'RIGHT'),
-            ('FONTNAME', (1, 0), (1, 0), 'Helvetica-Bold'),
+            ('FONTNAME', (1, 0), (1, 5), 'Helvetica-Bold'),
             ('FONTSIZE', (0, 0), (-1, -1), 10),
             ('FONTNAME', (1, 2), (1, 2), 'Helvetica-Bold'),
         ])

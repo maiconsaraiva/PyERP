@@ -146,19 +146,18 @@ PRODUCT_FORMSET = inlineformset_factory(
         'quantity',
         'uom_id',
         'price',
-        'tax_id',
         'discount',
+        'tax_id',
         'amount_total',
-        'save_aux',
     ],
     widgets={
         'save_aux': forms.HiddenInput(),
         'product_id': autocomplete.ModelSelect2(
             url='PyProduct:autocomplete',
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'data-placeholder': 'Seleccione un producto ...',
-                'style': 'width: 80%',
+                'style': 'width: 100%',
             },
         ),
         # 'product_id': forms.Select(
@@ -171,7 +170,7 @@ PRODUCT_FORMSET = inlineformset_factory(
         'description': forms.TextInput(
             attrs={
                 'class': 'form-control form-control-sm',
-                'placeholder': 'Descripción del producto ...',
+                'placeholder': _('Description'),
                 'style': 'width: 100%',
             },
         ),
@@ -191,7 +190,7 @@ PRODUCT_FORMSET = inlineformset_factory(
         ),
         'price': forms.NumberInput(
             attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm text-right',
                 'data-placeholder': 'Precio del producto ...',
                 'style': 'width: 100%',
             },
@@ -214,16 +213,17 @@ PRODUCT_FORMSET = inlineformset_factory(
             ),
         'discount': forms.NumberInput(
             attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm text-right',
                 'data-placeholder': 'Descuento ...',
                 'style': 'width: 100%',
             },
         ),
-        'amount_total': forms.NumberInput(
+        'amount_total': forms.TextInput(
             attrs={
-                'class': 'form-control form-control-sm',
+                'class': 'form-control form-control-sm text-right',
                 'data-placeholder': 'Total ...',
                 'style': 'width: 100%',
+                'readonly': True,
             },
         ),
     },
