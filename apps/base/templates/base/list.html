@@ -1,4 +1,5 @@
 {% extends "base/dashboard.html" %}
+{% load humanize %}
 {% load static %}
 {% load erp_tags %}
 {% block head %}
@@ -33,7 +34,13 @@
                     {% for object in object_list %}
                         <tr data-row-location="{% url detail_url object.pk %}" style="cursor: pointer;">
                             {% for field in fields %}
-                            <td>{{ object|get_obj_attr:field.field }}</td>
+                                <td class="{{ field.align }}">
+                                    {% if  field.humanize %}
+                                        {{ object|get_obj_attr:field.field|intcomma }}
+                                    {% else %}
+                                        {{ object|get_obj_attr:field.field }}
+                                    {% endif %}
+                                </td>
                             {% endfor %}
                         </tr>
                     {% endfor %}

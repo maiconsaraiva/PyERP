@@ -25,18 +25,25 @@ OBJECT_LIST_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
     {'string': _('Partner'), 'field': 'partner_id'},
     {'string': ('Date'), 'field': 'date_order'},
-    # {'string': 'Precio', 'field': 'amount_untaxed', 'align': 'text-right'},
-    # {'string': 'Descuento', 'field': 'discount', 'align': 'text-right'},
+    {'string': ('Net Amount'), 'field': 'amount_untaxed', 'align': 'text-right', 'humanize': True},
+    {'string': ('Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
+    {'string': _('Status'), 'field': 'state'},
+]
+
+OBJECT_DETAIL_FIELDS = [
+    {'string': _('Name'), 'field': 'name'},
+    {'string': _('Partner'), 'field': 'partner_id'},
+    {'string': ('Date'), 'field': 'date_order'},
     {'string': _('Status'), 'field': 'state'},
 ]
 
 DETAIL_OBJECT_LIST_FIELDS = [
-    {'string': _('Description'), 'field': 'product_id', 'align': 'text-left'},
-    {'string': _('Quantity'), 'field': 'quantity', 'align': 'text-center'},
-    {'string': ('Price'), 'field': 'price', 'align': 'text-right'},
-    {'string': _('Discount'), 'field': 'discount', 'align': 'text-right'},
-    {'string': _('Tax'), 'field': 'tax_id', 'align': 'text-left'},
-    {'string': _('Sub Total'), 'field': 'amount_total', 'align': 'text-right'},
+    {'string': _('Description'), 'field': 'product_id'},
+    {'string': _('Quantity'), 'field': 'quantity', 'align': 'text-center', 'humanize': True},
+    {'string': ('Price'), 'field': 'price', 'align': 'text-right', 'humanize': True},
+    {'string': _('Discount'), 'field': 'discount', 'align': 'text-right', 'humanize': True},
+    {'string': _('Tax'), 'field': 'tax_id'},
+    {'string': _('Sub Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
 ]
 
 OBJECT_FORM_FIELDS = [
@@ -61,7 +68,7 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
     model = PySaleOrder
     template_name = 'sale/detail.html'
     extra_context = {
-        'master_fields': OBJECT_LIST_FIELDS,
+        'master_fields': OBJECT_DETAIL_FIELDS,
         'detail_fields': DETAIL_OBJECT_LIST_FIELDS
     }
 

@@ -90,10 +90,14 @@
                                     <td class="{{ field.align }}">
                                         {% if field.field == 'tax_id' %}
                                             {% for tax in object.tax_id.all %}
-                                                <span class="right badge badge-info">{{ tax }}</span>
+                                                <span class="right badge badge-primary">{{ tax }}</span>
                                             {% endfor %}
                                         {% else %}
-                                            {{ object|get_obj_attr:field.field|intcomma }}
+                                            {% if  field.humanize %}
+                                                {{ object|get_obj_attr:field.field|intcomma }}
+                                            {% else %}
+                                                {{ object|get_obj_attr:field.field }}
+                                            {% endif %}
                                         {% endif %}
                                     </td>
                                 {% endfor %}
@@ -136,8 +140,6 @@
             </div>
         </div>
         <!-- /.card-footer -->
-
-
     </div>
 </div>
 
