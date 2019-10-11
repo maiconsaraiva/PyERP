@@ -199,13 +199,12 @@
     */
     //$("[id^='id_pysaleorderdetail_set-'][id$='-tax_id']").select2()
 
-
     /*Gestión de los formset
     */
     $(function() {
         $('.formset_row').formset({
             prefix: '{{ products.prefix }}',
-            clone: false,
+            clone: true,
             addText: '{{ _("add product") }}',
             deleteText: '<li class="fa fa-trash" style="padding: 3px;"></li>',
             added:function(row) {
@@ -330,8 +329,8 @@
                 document.getElementById('id_pysaleorderdetail_set-' + index + '-description').value = product_fields.description;
                 document.getElementById('id_pysaleorderdetail_set-' + index + '-uom_id').value = product_fields.uom_id;
                 document.getElementById('id_pysaleorderdetail_set-' + index + '-price').value = product_fields.price;
-                //$('#id_pysaleorderdetail_set-' + index + '-tax_id').select2().val(product_fields.tax).trigger('change')
-                $('#id_pysaleorderdetail_set-' + index + '-tax_id').val(product_fields.tax).trigger('change')
+                document.getElementById('id_pysaleorderdetail_set-' + index + '-doscount').value = 0;
+                $('#id_pysaleorderdetail_set-' + index + '-tax_id').select2().val(product_fields.tax).trigger('change')
             }
         });
 

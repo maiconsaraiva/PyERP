@@ -192,6 +192,7 @@ PRODUCT_FORMSET = inlineformset_factory(
                 'class': 'form-control form-control-sm text-right',
                 'data-placeholder': 'Precio del producto ...',
                 'style': 'width: 80px',
+                'value': 0,
             },
         ),
         'discount': forms.NumberInput(
@@ -205,7 +206,7 @@ PRODUCT_FORMSET = inlineformset_factory(
             attrs={
                 'class': 'form-control  custom-select custom-select-sm',
                 'data-placeholder': _('Select taxes...'),
-                'style': 'width: 280px',
+                'style': 'width: 200px',
             },
         ),
         # 'tax_id': autocomplete.ModelSelect2Multiple(
