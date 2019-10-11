@@ -6,10 +6,12 @@ import logging
 # Django Library
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
+from django.shortcuts import render
+from django.core import serializers
 
 # Thirdparty Library
 from apps.base.views.web_father import (
@@ -18,6 +20,7 @@ from apps.base.views.web_father import (
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, SaleOrderForm
 from .models import PySaleOrder, PySaleOrderDetail
+from apps.base.models import PyProduct, PyTax
 
 LOGGER = logging.getLogger(__name__)
 
@@ -184,3 +187,22 @@ class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
         if not detail:
             self.object.delete()
         return HttpResponseRedirect(success_url)
+
+
+# ========================================================================== #
+def load_product(request):
+    context = {}
+    product_id = request.GET.get('product')
+    product = PyProduct.objects.filter(pk=product_id)
+    context['product'] = serializers.serialize('json', product)
+    return JsonResponse(data=context, safe=False)
+
+
+# ========================================================================== #
+def load_tax(request):
+    context = {}
+    tax_id = request.GET.getlist('tax[]')
+    print("Aqui voy {}".format(tax_id))
+    tax = PyTax.objects.filter(pk__in=tax_id)
+    context['tax'] = serializers.serialize('json', tax)
+    return JsonResponse(data=context, safe=False)

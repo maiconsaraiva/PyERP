@@ -151,48 +151,61 @@ PRODUCT_FORMSET = inlineformset_factory(
         'amount_total',
     ],
     widgets={
-        'save_aux': forms.HiddenInput(),
-        'product_id': autocomplete.ModelSelect2(
-            url='PyProduct:autocomplete',
+        'product_id': forms.Select(
             attrs={
                 'class': 'form-control form-control-sm',
-                'data-placeholder': 'Seleccione un producto ...',
-                'style': 'width: 100%',
+                'data-placeholder': _('Select a product ...'),
+                'style': 'width: 180px',
             },
         ),
-        # 'product_id': forms.Select(
+        # 'product_id': autocomplete.ModelSelect2(
+        #     url='PyProduct:autocomplete',
         #     attrs={
-        #         'class': 'form-control custom-select',
-        #         'data-placeholder': 'Seleccione un producto ...',
-        #         'style': 'width: 100%',
+        #         'class': 'form-control form-control-sm',
+        #         'data-placeholder': _('Select a product ...'),
+        #         'style': 'width: 180px',
         #     },
         # ),
         'description': forms.TextInput(
             attrs={
                 'class': 'form-control form-control-sm',
                 'placeholder': _('Description'),
-                'style': 'width: 100%',
+                'style': 'width: 180px',
             },
         ),
         'quantity': forms.NumberInput(
             attrs={
                 'class': 'form-control form-control-sm',
-                'data-placeholder': 'Cantidad del producto ...',
-                'style': 'width: 100%',
+                'data-placeholder': _('Product quantity ...'),
+                'style': 'width: 80px',
             },
         ),
         'uom_id': forms.Select(
             attrs={
                 'class': 'custom-select custom-select-sm',
-                'data-placeholder': 'Cantidad del producto ...',
-                'style': 'width: 100%',
+                'data-placeholder': _('Unit measurement ...'),
+                'style': 'width: 80px',
             },
         ),
         'price': forms.NumberInput(
             attrs={
                 'class': 'form-control form-control-sm text-right',
                 'data-placeholder': 'Precio del producto ...',
-                'style': 'width: 100%',
+                'style': 'width: 80px',
+            },
+        ),
+        'discount': forms.NumberInput(
+            attrs={
+                'class': 'form-control form-control-sm text-right',
+                'data-placeholder': 'Descuento ...',
+                'style': 'width: 80px',
+            },
+        ),
+        'tax_id': forms.SelectMultiple(
+            attrs={
+                'class': 'form-control  custom-select custom-select-sm',
+                'data-placeholder': _('Select taxes...'),
+                'style': 'width: 280px',
             },
         ),
         # 'tax_id': autocomplete.ModelSelect2Multiple(
@@ -200,30 +213,15 @@ PRODUCT_FORMSET = inlineformset_factory(
         #     attrs={
         #         'class': 'form-control  custom-select custom-select-sm',
         #         'data-placeholder': _('Select taxes...'),
-        #         'style': 'padding: 0 .75rem; width: 100%',
+        #         'style': 'width: 280px',
         #     },
         # ),
-        'tax_id': autocomplete.ModelSelect2Multiple(
-                url='PyTax:autocomplete',
-                attrs={
-                    'class': 'form-control  custom-select custom-select-sm',
-                    'data-placeholder': _('Select taxes...'),
-                    'style': 'padding: 0 .75rem; width: 100%',
-                },
-            ),
-        'discount': forms.NumberInput(
-            attrs={
-                'class': 'form-control form-control-sm text-right',
-                'data-placeholder': 'Descuento ...',
-                'style': 'width: 100%',
-            },
-        ),
         'amount_total': forms.TextInput(
             attrs={
                 'class': 'form-control form-control-sm text-right',
                 'data-placeholder': 'Total ...',
-                'style': 'width: 100%',
-                'readonly': True,
+                'style': 'width: 80px',
+                # 'readonly': True,
             },
         ),
     },

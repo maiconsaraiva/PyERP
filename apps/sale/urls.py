@@ -7,7 +7,7 @@ from django.urls import path
 from .reports.saleorderpdf import sale_order_pdf
 from .views import (
     SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailView,
-    SaleOrderEditView, SaleOrderListView)
+    SaleOrderEditView, SaleOrderListView, load_product, load_tax)
 
 app_name = 'PySaleOrder'
 
@@ -26,6 +26,11 @@ urlpatterns = [
         SaleOrderDeleteView.as_view(),
         name='delete'
     ),
+
+    # ======================== Sale Orders AJAX URL's ====================== #
+    path('sale-order/load-product/', load_product, name='ajax_load_product'),
+    path('sale-order/load-tax/', load_tax, name='ajax_load_tax'),
+
     # ====================== Sale Orders Reports URL's ===================== #
     path(
         'pdf/<int:pk>',
