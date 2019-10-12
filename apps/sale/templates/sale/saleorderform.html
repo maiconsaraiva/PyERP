@@ -9,8 +9,9 @@
 {% load static %}
 {% load erp_tags %}
 {% block head %}
+<link rel="stylesheet" href="{% static '/bootstrap-select-1.13.9/dist/css/bootstrap-select.min.css' %}">
 <style>
-    .table .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    /*.table .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
         padding: 3px 12px;
         height: calc(1.8125rem + 2px);
         -moz-appearance: textfield;
@@ -44,15 +45,64 @@
         font-size: 75%;
     }
     .select2-container--default .select2-search--inline .select2-search__field {
+        background: transparent;
+        border: none;
+        outline: 0;
+        box-shadow: none;
+        -webkit-appearance: textfield;
+            font-size: 75%;
 
-    background: transparent;
-    border: none;
-    outline: 0;
-    box-shadow: none;
-    -webkit-appearance: textfield;
-        font-size: 75%;
+    }*/
+    .bootstrap-select > .dropdown-toggle {
+        height: calc(1.8125rem + 2px);
+        position: relative;
+        width: 100%;
+        text-align: right;
+        white-space: nowrap;
+        display: -webkit-inline-box;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        background-color: transparent;
+        border: 0px solid transparent;
+    }
+    .bootstrap-select .dropdown-toggle .filter-option {
+        height: calc(1.8125rem + 2px);
+    }
+    .badge {
+        font-size: 65%;
+        font-weight: bold;
+    }
+    .dropdown-toggle::after {
+        display: inline-block;
+        margin-left: .255em;
+        vertical-align: .255em;
+        content: "";
+        border-top: .0px solid;
+        border-right: .3em solid transparent;
+        border-bottom: 0;
+        border-left: .3em solid transparent;
 
-}
+    }
+    .dropup .dropdown-toggle::after {
+
+        display: inline-block;
+        margin-left: .255em;
+        vertical-align: .255em;
+        content: "";
+        border-top: 0;
+        border-right: .3em solid transparent;
+        border-bottom: 0;
+        border-left: .3em solid transparent;
+    }
     .table-sm td, .table-sm th {
         padding: 0rem;
         padding-top: 0rem;
@@ -190,9 +240,17 @@
             </div>
             <!-- /.card -->
         </form>
+        <select class="selectpicker" multiple title="Choose one of the following...">
+            <option data-content="<span class='badge badge-primary'>Mustard</span>">Mustard</option>
+            <option data-content="<span class='badge badge-primary'>Ketchup</span>">Ketchup</option>
+            <option data-content="<span class='badge badge-primary'>Relish</span>">Relish</option>
+            <option data-content="data-content=<span class='badge badge-primary'>I.V.A.</span>">I.V.A.</option>
+        </select>
     </div>
 {% endblock %}
 {% block scripts %}
+<script src="{% static '/bootstrap-select-1.13.9/dist/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static '/bootstrap-select-1.13.9/dist/js/i18n/defaults-es_ES.min.js' %}"></script>
 <script src="{% static 'formset/jquery.formset.js' %}"></script>
 <script type="text/javascript">
     /*Convierto todos los multiselect del formset en select2
@@ -205,16 +263,21 @@
     $(function() {
         $('.formset_row').formset({
             prefix: '{{ products.prefix }}',
-            clone: false,
+            clone: true,
             addText: '{{ _("add product") }}',
             deleteText: '<li class="fa fa-trash" style="padding: 3px;"></li>',
             added:function(row) {
                 var formCount = $('#id_pysaleorderdetail_set-TOTAL_FORMS').val();
-                $('span .select2-selection--single:odd', row || null).css("display", "none");
-                $('span .select2-selection--multiple:odd', row || null).css("display", "none");
+                /*Rendering de new formset added
+                */
+                $('span .selectpicker:odd', row || null).css("display", "none");
+                $('#id_pysaleorderdetail_set-' + (formCount-1) + '-tax_id').selectpicker('refresh');
+
                 /*Initial values for the formset added
                 */
+                document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-product_id').value = "";
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-quantity').value = 0;
+                document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-uom_id').value = "";
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-price').value = 0;
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-discount').value = 0;
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-amount_total').value = 0;
@@ -331,7 +394,8 @@
                 document.getElementById('id_pysaleorderdetail_set-' + index + '-uom_id').value = product_fields.uom_id;
                 document.getElementById('id_pysaleorderdetail_set-' + index + '-price').value = product_fields.price;
                 //$('#id_pysaleorderdetail_set-' + index + '-tax_id').select2().val(product_fields.tax).trigger('change')
-                $('#id_pysaleorderdetail_set-' + index + '-tax_id').val(product_fields.tax).trigger('change')
+                //$('#id_pysaleorderdetail_set-' + index + '-tax_id').val(product_fields.tax).trigger('change')
+                $('#id_pysaleorderdetail_set-' + index + '-tax_id').selectpicker('val', product_fields.tax);
             }
         });
 
