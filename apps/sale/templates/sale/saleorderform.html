@@ -268,11 +268,8 @@
             deleteText: '<li class="fa fa-trash" style="padding: 3px;"></li>',
             added:function(row) {
                 var formCount = $('#id_pysaleorderdetail_set-TOTAL_FORMS').val();
-                /*Rendering de new formset added
-                */
+                $("[id^='id_pysaleorderdetail_set-'][id$='-tax_id']").selectpicker('render');
                 $('span .selectpicker:odd', row || null).css("display", "none");
-                $('#id_pysaleorderdetail_set-' + (formCount-1) + '-tax_id').selectpicker('refresh');
-
                 /*Initial values for the formset added
                 */
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-product_id').value = "";
@@ -281,7 +278,10 @@
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-price').value = 0;
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-discount').value = 0;
                 document.getElementById('id_pysaleorderdetail_set-' + (formCount-1) + '-amount_total').value = 0;
-            }
+            },
+            removed: function() {
+                RecalculateProduct()
+            },
         });
     });
 
@@ -306,59 +306,60 @@
         var t_amount_total = 0
 
         for (i = 0; i < formCount; i++) {
+            var formset_row = document.getElementById('id_pysaleorderdetail_set-' + i + '-id').closest('tr');
+            console.log(formset_row.style.display)
+            if(formset_row.style.display != "none"){
+                price = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-price').value);
+                quantity = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-quantity').value);
+                descount = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-discount').value);
+                amount_untaxed += (quantity * price) - descount;
 
-            price = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-price').value);
-            quantity = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-quantity').value);
-            descount = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-discount').value);
-            amount_untaxed += (quantity * price) - descount;
-
-            tax = $("#id_pysaleorderdetail_set-" + i + "-tax_id").val()
-            $.ajax({
-                async: false,
-                url: url,
-                data: {
-                    'tax': tax,
-                },
-                success: function (data) {
-                    taxes = JSON.parse(data['tax']);
-                }
-            });
-
-            if (taxes.length > 0){
-                for (j = 0; j < taxes.length; j++) {
-                    var object = taxes[j]
-                    var tax_fields = object.fields;
-                    if (object.pk == 1){
-                        amount_tax_iva = (amount_untaxed * tax_fields.amount)/100
+                tax = $("#id_pysaleorderdetail_set-" + i + "-tax_id").val()
+                $.ajax({
+                    async: false,
+                    url: url,
+                    data: {
+                        'tax': tax,
+                    },
+                    success: function (data) {
+                        taxes = JSON.parse(data['tax']);
                     }
-                    else{
-                        amount_tax_other += (amount_untaxed * tax_fields.amount)/100
+                });
 
+                if (taxes.length > 0){
+                    for (j = 0; j < taxes.length; j++) {
+                        var object = taxes[j]
+                        var tax_fields = object.fields;
+                        if (object.pk == 1){
+                            amount_tax_iva = (amount_untaxed * tax_fields.amount)/100
+                        }
+                        else{
+                            amount_tax_other += (amount_untaxed * tax_fields.amount)/100
+
+                        }
                     }
                 }
+                else{
+                    amount_exempt = amount_untaxed
+                }
+                amount_total = amount_untaxed + amount_tax_iva + amount_tax_other
+                if (i < formCount){
+                    document.getElementById('id_pysaleorderdetail_set-' + i + '-amount_total').value = amount_total.toFixed(2);
+                }
+
+                t_amount_untaxed += amount_untaxed
+                t_amount_tax_iva += amount_tax_iva
+                t_amount_tax_other += amount_tax_other
+                t_amount_tax_total += amount_tax_iva + amount_tax_other
+                t_amount_exempt += amount_exempt
+                t_amount_total += amount_total
+
+                amount_untaxed = 0
+                amount_exempt = 0
+                amount_tax_iva = 0
+                amount_tax_other = 0
+                amount_total = 0
             }
-            else{
-                amount_exempt = amount_untaxed
-            }
-            amount_total = amount_untaxed + amount_tax_iva + amount_tax_other
-            if (i < formCount){
-                document.getElementById('id_pysaleorderdetail_set-' + i + '-amount_total').value = amount_total.toFixed(2);
-            }
-
-            t_amount_untaxed += amount_untaxed
-            t_amount_tax_iva += amount_tax_iva
-            t_amount_tax_other += amount_tax_other
-            t_amount_tax_total += amount_tax_iva + amount_tax_other
-            t_amount_exempt += amount_exempt
-            t_amount_total += amount_total
-
-            amount_untaxed = 0
-            amount_exempt = 0
-            amount_tax_iva = 0
-            amount_tax_other = 0
-            amount_total = 0
-
-
         }
         document.getElementById("t_amount_untaxed").innerHTML = "$ " + t_amount_untaxed.toFixed(2);
         document.getElementById("t_amount_exempt").innerHTML = "$ " + t_amount_exempt.toFixed(2);
@@ -366,7 +367,6 @@
         document.getElementById("t_amount_tax_other").innerHTML = "$ " + t_amount_tax_other.toFixed(2);
         document.getElementById("t_amount_tax_total").innerHTML = "$ " + t_amount_tax_total.toFixed(2);
         document.getElementById("t_amount_total").innerHTML = "$ " + t_amount_total.toFixed(2);
-
     }
 
 
