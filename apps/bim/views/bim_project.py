@@ -1,4 +1,3 @@
-# Librerias Django
 # Django Library
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,7 +8,6 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..models.bim_project import PyBimProject
 
 PROJECT_BIM_FIELDS = [

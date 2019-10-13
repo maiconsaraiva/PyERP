@@ -1,11 +1,9 @@
-# Librerias Django
 # Django Library
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ...base.models import PyProductWebCategory
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,

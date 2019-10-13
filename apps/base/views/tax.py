@@ -1,14 +1,11 @@
-# Librerias Django
 # Django Library
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-# Librerias de terceros
 from dal import autocomplete
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..models import PyTax
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
@@ -55,7 +52,7 @@ class TaxAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyPartner
     """
     def get_queryset(self):
-        queryset = PyTax.objects.all(active=True)
+        queryset = PyTax.objects.filter(active=True)
         if self.q:
             queryset = queryset.filter(name__icontains=self.q)
         return queryset

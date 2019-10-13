@@ -1,59 +1,40 @@
 """Rutas del módulo de ordenes de venta
 """
 # Django Library
-# Librerias Django
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from .reports.saleorderpdf import sale_order_pdf
 from .views import (
-    ProductAutoComplete, SaleOrderAddView, SaleOrderDeleteView,
-    SaleOrderDetailAddView, SaleOrderDetailDeleteView, SaleOrderDetailEditView,
-    SaleOrderEditView, SaleOrderListView)
+    SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailView,
+    SaleOrderEditView, SaleOrderListView, load_product, load_tax)
 
-app_name = 'sale'
+app_name = 'PySaleOrder'
 
 urlpatterns = [
     # ========================== Sale Orders URL's ========================= #
-    path('sale-order', SaleOrderListView.as_view(), name='sale-order'),
-    path('sale-order/add/', SaleOrderAddView.as_view(), name='sale-order-add'),
+    path('sale-order', SaleOrderListView.as_view(), name='list'),
+    path('sale-order/<int:pk>', SaleOrderDetailView.as_view(), name='detail'),
+    path('sale-order/add/', SaleOrderAddView.as_view(), name='add'),
     path(
-        'sale-order/edit/<int:pk>',
+        'sale-order/<int:pk>/edit/',
         SaleOrderEditView.as_view(),
-        name='sale-order-edit'
+        name='update'
     ),
     path(
-        'sale-order/delete/<int:pk>',
+        'sale-order/<int:pk>/delete/',
         SaleOrderDeleteView.as_view(),
-        name='sale-order-delete'
+        name='delete'
     ),
-    # ====================== Sale Orders Detail URL's ====================== #
-    path(
-        'sale-order-detail/add/<int:saleorder_pk>',
-        SaleOrderDetailAddView.as_view(),
-        name='sale-order-detail-add'
-    ),
-    path(
-        'sale-order-detail/edit/<int:pk>',
-        SaleOrderDetailEditView.as_view(),
-        name='sale-order-detail-edit'
-    ),
-    path(
-        'sale-order-detail/delete/<int:pk>',
-        SaleOrderDetailDeleteView.as_view(),
-        name='sale-order-detail-delete'
-    ),
+
+    # ======================== Sale Orders AJAX URL's ====================== #
+    path('sale-order/load-product/', load_product, name='ajax_load_product'),
+    path('sale-order/load-tax/', load_tax, name='ajax_load_tax'),
+
     # ====================== Sale Orders Reports URL's ===================== #
     path(
-        'sale-order-pdf/<int:pk>',
+        'pdf/<int:pk>',
         sale_order_pdf,
-        name='sale-order-pdf'
-    ),
-    # ==================== Auto completado de Productos ==================== #
-    path(
-        'product-autocomplete',
-        ProductAutoComplete.as_view(),
-        name='product-autocomplete'
+        name='pdf'
     ),
 ]

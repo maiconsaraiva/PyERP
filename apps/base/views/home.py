@@ -1,10 +1,8 @@
-# Librerias Django
 # Django Library
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..models import PyCompany
 from .bi import PyBi
 from .wparameter import PyWParameter

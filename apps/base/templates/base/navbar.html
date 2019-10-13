@@ -27,7 +27,6 @@
         </li>
         {% endif %}
 
-        {% if  web_parameter.show_bar_language == 'True' %}
         <li class="nav-item d-none d-sm-inline-block">
             <a class="nav-link" data-toggle="dropdown" href="#"><i class="fas fa-globe"></i>&nbsp;{{ _('Language') }}&nbsp;<i class="fas fa-caret-down"></i></a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -38,7 +37,6 @@
                 {% endfor %}
             </div>
         </li>
-        {% endif %}
         {% if  web_parameter.show_online_company == 'True' %}
         <li class="nav-item d-none d-sm-inline-block">
             <div class="nav-link" title="Modo Online">

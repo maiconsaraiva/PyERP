@@ -1,14 +1,11 @@
-# Librerias Future
 # Furture Library
 from __future__ import unicode_literals
 
 # Django Library
-# Librerias Django
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..models import PyProduct, PyWParameter
 from .web_father import FatherDetailView, FatherListView
 

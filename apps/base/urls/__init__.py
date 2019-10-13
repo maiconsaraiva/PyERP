@@ -1,6 +1,6 @@
 """uRLs para base
 """
-# Librerias Django
+# Django Library
 from django.conf.urls import include
 from django.urls import path
 

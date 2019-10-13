@@ -1,11 +1,9 @@
 """uRLs para base
 """
 # Django Library
-# Librerias Django
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..views import Install, ProviderListView, UpdateBaseConfigView
 from ..views.base_config import LoadData
 from ..views.home import erp_home

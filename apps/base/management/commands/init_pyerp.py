@@ -2,19 +2,16 @@
 """
 
 # Standard Library
-# Librerias Standard
 import json
 from os import listdir, path
 
 # Django Library
-# Librerias Django
 from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-# Librerias de terceros
 from apps.base.models import (
     PyCountry, PyCurrency, PyParameter, PyPlugin, PyWParameter)
 

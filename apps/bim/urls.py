@@ -1,10 +1,8 @@
-# Librerias Django
 # Django Library
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # Localfolder Library
-# Librerias en carpetas locales
 from .views.bim_budget import (
     BimBudgetCreateView, BimBudgetDetailView, BimBudgetListView,
     BimBudgetUpdateView, DeleteBimBudget)

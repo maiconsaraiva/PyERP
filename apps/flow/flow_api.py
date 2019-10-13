@@ -22,12 +22,10 @@ consultas a la API de pagos (payment) de Flow. Ejemplos de uso::
     print res.json().get('status')
 """
 # Standard Library
-# Librerias Standard
 import hashlib
 import hmac
 
 # Thirdparty Library
-# Librerias de terceros
 import requests
 
 

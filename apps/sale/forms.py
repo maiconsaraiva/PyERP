@@ -1,31 +1,30 @@
 """Formularios del modulo sale
 """
 # Django Library
-# Librerias Django
-from django.forms import HiddenInput, ModelForm, NumberInput, TextInput
+from django import forms
+from django.forms.formsets import DELETION_FIELD_NAME
+from django.forms.models import BaseInlineFormSet, inlineformset_factory
+from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-# Librerias de terceros
 from dal import autocomplete
 
 # Localfolder Library
-# Librerias en carpetas locales
 from .models import PySaleOrder, PySaleOrderDetail
 
 
 # ========================================================================== #
-class SaleOrderForm(ModelForm):
+class SaleOrderForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
     """
     class Meta:
         model = PySaleOrder
         fields = [
             'partner_id',
-            'description',
         ]
         labels = {
             'partner_id': 'Cliente',
-            'description': 'Descripción',
+            # 'description': 'Descripción',
         }
         widgets = {
             'partner_id': autocomplete.ModelSelect2(
@@ -36,103 +35,129 @@ class SaleOrderForm(ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'description': TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Descripción del presupuesto ...',
-                    'style': 'width: 100%',
-                },
-            ),
+            # 'description': forms.TextInput(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'data-placeholder': 'Descripción del presupuesto ...',
+            #         'style': 'width: 100%',
+            #     },
+            # ),
         }
 
 
 # ========================================================================== #
-class SaleOrderDetailForm(ModelForm):
+
+
+class CustomSelect(forms.SelectMultiple):
+    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
+        options = super(CustomSelect, self).create_option(name, value, label, selected, index, subindex=None, attrs=None)
+        options['attrs']['data-content'] = """<span class='badge badge-primary'>{}</span>""".format(label)
+        return options
+
+
+class SaleOrderDetailForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
     """
     class Meta:
         model = PySaleOrderDetail
+        exclude = ()
         fields = [
-            'sale_order',
-            'product',
+            'product_id',
             'description',
             'quantity',
-            # 'measure_unit',
-            # 'product_tax',
-            'amount_untaxed',
+            'uom_id',
+            'price',
             'discount',
-            # 'amount_total',
+            'tax_id',
+            'amount_total',
         ]
-        labels = {
-            'product': 'Producto',
-            'description': 'Descripción',
-            'quantity': 'Cantidad',
-            # 'measure_unit': 'Unidad',
-            # 'product_tax': 'Impuesto',
-            'amount_untaxed': 'Precio',
-            'discount': 'Descuento',
-            # 'amount_total': 'Sub total',
-        }
         widgets = {
-            'sale_order': HiddenInput(),
-            'product': autocomplete.ModelSelect2(
-                url='sale:product-autocomplete',
-                forward=('sale_order',),
+            'product_id': forms.Select(
                 attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Seleccione un producto ...',
-                    'style': 'width: 100%',
+                    'class': 'form-control form-control-sm',
+                    'data-placeholder': _('Select a product ...'),
+                    'style': 'width: 180px',
                 },
             ),
-            'description': TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Descripción del producto ...',
-                    'style': 'width: 100%',
-                },
-            ),
-            'quantity': NumberInput(
-                attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Cantidad del producto ...',
-                    'style': 'width: 100%',
-                },
-            ),
-            # 'measure_unit': autocomplete.ModelSelect2(
-            #     url='measure-unit-autocomplete',
+            # 'product_id': autocomplete.ModelSelect2(
+            #     url='PyProduct:autocomplete',
             #     attrs={
-            #         'class': 'form-control',
-            #         'data-placeholder': 'Seleccione un unidad ...',
-            #         'style': 'width: 100%',
+            #         'class': 'form-control form-control-sm',
+            #         'data-placeholder': _('Select a product ...'),
+            #         'style': 'width: 180px',
             #     },
             # ),
-            # 'product_tax': autocomplete.ModelSelect2(
+            'description': forms.TextInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'placeholder': _('Description'),
+                    'style': 'width: 180px',
+                },
+            ),
+            'quantity': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'data-placeholder': _('Product quantity ...'),
+                    'style': 'width: 80px',
+                },
+            ),
+            'uom_id': forms.Select(
+                attrs={
+                    'class': 'custom-select custom-select-sm',
+                    'data-placeholder': _('Unit measurement ...'),
+                    'style': 'width: 80px',
+                },
+            ),
+            'price': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm text-right',
+                    'data-placeholder': 'Precio del producto ...',
+                    'style': 'width: 80px',
+                    'value': 0,
+                },
+            ),
+            'discount': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm text-right',
+                    'data-placeholder': 'Descuento ...',
+                    'style': 'width: 80px',
+                },
+            ),
+            'tax_id': CustomSelect(
+                attrs={
+                    'class': 'selectpicker',
+                    'data-placeholder': _('Select taxes...'),
+                    'style': 'width: 200px',
+                },
+            ),
+            # 'tax_id': autocomplete.ModelSelect2Multiple(
             #     url='PyTax:autocomplete',
             #     attrs={
-            #         'class': 'form-control',
-            #         'data-placeholder': 'Seleccione un Impuesto ...',
-            #         'style': 'width: 100%',
+            #         'class': 'form-control  custom-select custom-select-sm',
+            #         'data-placeholder': _('Select taxes...'),
+            #         'style': 'width: 280px',
             #     },
             # ),
-            'amount_untaxed': NumberInput(
+            'amount_total': forms.TextInput(
                 attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Precio del producto ...',
-                    'style': 'width: 100%',
+                    'class': 'form-control form-control-sm text-right',
+                    'data-placeholder': 'Total ...',
+                    'style': 'width: 80px',
+                    # 'readonly': True,
                 },
             ),
-            'discount': NumberInput(
-                attrs={
-                    'class': 'form-control',
-                    'data-placeholder': 'Descuento ...',
-                    'style': 'width: 100%',
-                },
-            ),
-            # 'amount_total': NumberInput(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'data-placeholder': 'Sub total ...',
-            #         'style': 'width: 100%',
-            #     },
-            # ),
         }
+
+
+class BaseProductFormSet(BaseInlineFormSet):
+    def add_fields(self, form, index):
+        super().add_fields(form, index)
+        form.fields[DELETION_FIELD_NAME].label = ''
+
+PRODUCT_FORMSET = inlineformset_factory(
+    PySaleOrder, PySaleOrderDetail,
+    form=SaleOrderDetailForm,
+    formset=BaseProductFormSet,
+    extra=0,
+    can_delete=True
+)

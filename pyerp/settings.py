@@ -11,15 +11,17 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 # Standard Library
-# Librerias Standard
 import logging
 import os
 
 # Django Library
-# Librerias Django
 from django.utils.translation import ugettext_lazy as _
 
 _logger = logging.getLogger(__name__)
+
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s -%(filename)s:%(lineno)d - %(message)s')
+logging.debug('hello world!')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,8 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     # Third-Party Apps
+    'crispy_forms',
     'dal',
     'dal_select2',
     'bootstrap4',

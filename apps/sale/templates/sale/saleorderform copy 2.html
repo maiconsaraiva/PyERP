@@ -1,0 +1,216 @@
+{% extends "base/dashboard.html" %}
+{% load humanize %}
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+{% load static %}
+{% load erp_tags %}
+{% block head %}
+<style>
+    .table .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+        padding: 3px 12px;
+        height: calc(1.8125rem + 2px);
+        -moz-appearance: textfield;
+        background-color: transparent;
+        border: 0px solid transparent;
+    }
+    .table .select2-container--default .select2-selection--single .select2-selection__clear {
+        color: transparent;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        border-style: None;
+
+    }
+    .select2-container--default .select2-selection--multiple {
+        padding: 0px 0px;
+        min-height: calc(1.8125rem + 2px);
+        -moz-appearance: textfield;
+        background-color: transparent;
+        border: 0px solid transparent;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__clear {
+        margin-right: 30px;
+        color: transparent;
+    }
+    .table-sm td, .table-sm th {
+        padding: 0rem;
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+    }
+    .form-control {
+        -moz-appearance: textfield;
+        background-color: transparent;
+        border: 0px solid transparent;
+    }
+    .form-control-sm {
+        font-size: 75%;
+    }
+    .form-control:disabled, .form-control[readonly] {
+        background-color: transparent;
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .custom-select {
+        -moz-appearance: textfield;
+        background-color: transparent;
+        border: 0px solid transparent;
+        box-shadow: None;
+        background: None;
+        padding: 0;
+    }
+    .dataTable th:last-child, td {
+        padding-bottom: 0px !important;
+        padding-top: 0px !important;
+        color: transparent;
+    }
+</style>
+{% endblock %}
+{% block content %}
+    <div class="row" style="padding:5px;" >
+        <div class="card card-outline col-12">
+            <form method="post" class="form">
+                <div class="card-header">
+                    <a title=" {{ _('Back') }}" href="{{ back_url }}" class="btn"><i class="fas fa-arrow-left"></i></a>
+                    <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
+                    {% if object %}
+                        <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if object %}
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-xl-2 col-form-label">{{ _("Name:") }}</label>
+                            <div class="col-sm-10 col-xl-5">
+                                <h4>{{ object.name }}</h4>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% csrf_token %}
+                    {% for campo in form %}
+                        <div class="form-group row">
+                            <label for="{{ campo.id_for_label }}" class="col-sm-3 col-xl-2 col-form-label">{{ campo.label }}</label>
+                            <div class="col-sm-9 col-xl-5">
+                                {{ campo }}
+                                <span class="help-block">
+                                    {% for error in campo.errors %}
+                                        <ul>
+                                            <li class="text-red">{{ error }}</li>
+                                        </ul>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <table class="table table-sm table-borderless table-striped">
+                        {{ products.management_form }}
+
+                        {% for form in products.forms %}
+                            {% if forloop.first %}
+                                <thead class="thead-light">
+                                    <tr>
+                                        {% for field in form.visible_fields %}
+                                            <th>{{ field.label|capfirst }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                            {% endif %}
+                            <tr class="{% cycle 'table-light' 'table-info' %} formset_row">
+                                {% for field in form.visible_fields %}
+                                    <td class="align-middle">
+                                        {# Include the hidden fields in the form #}
+                                        {% if forloop.first %}
+                                            {% for hidden in form.hidden_fields %}
+                                                {{ hidden }}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {{ field }}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_exempt|intcomma }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('IVA:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_tax_iva|intcomma }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_tax_other|intcomma }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_tax_total|intcomma  }}</div>
+                    </div>
+                    <hr class="style1">
+                    <div class="row">
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ {{ object.amount_total|intcomma }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Margin:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ ???</div>
+                    </div>
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </form>
+    </div>
+    {{ form.media.js }}
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'formset/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.formset_row').formset({
+            prefix: '{{ products.prefix }}',
+            clone: false,
+            addText: '{{ _("add product") }}',
+            deleteText: '<li class="fa fa-trash" style="padding: 3px;"></li>',
+            added:function(row) {
+                $('span .select2-selection--single:odd', row || null).css("display", "none");
+                $('span .select2-selection--multiple:odd', row || null).css("display", "none");
+            }
+        });
+        $( ".add-row" ).click(function() {
+            var formCount = $('#id_pysaleorderdetail_set-TOTAL_FORMS').val();
+            for (i = 0; i < formCount; i++) {
+                alert($('#id_pysaleorderdetail_set-' + i + '-quantity').val());
+            }
+        });
+    });
+
+    $("[id^='id_pysaleorderdetail_set']").on("change", function () {
+        alert("Campiando el producto")
+        var formCount = $('#id_pysaleorderdetail_set-TOTAL_FORMS').val();
+        t_amount_untax = 0
+        for (i = 0; i < formCount; i++) {
+            amount_untax = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-price').value)
+            quantity = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-quantity').value)
+            descount = parseFloat(document.getElementById('id_pysaleorderdetail_set-' + i + '-discount').value)
+            t_amount_untax = t_amount_untax + (quantity * amount_untax) - descount
+            document.getElementById('id_pysaleorderdetail_set-' + i + '-amount_total').value = ((quantity * amount_untax) - descount).toFixed(2)
+        }
+        document.getElementById("amount_untaxed").innerHTML = "$ " + t_amount_untax.toFixed(2);
+    });
+
+
+</script>
+{% endblock %}

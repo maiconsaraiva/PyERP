@@ -5,7 +5,7 @@
           {% for app in object_list %}
             <div class="col-md-4">
               <div class="info-box plugind-primary">
-                <span style="width: 120px; background-size: 120px 120px; background-image: url('{{ MEDIA_URL }}/plugin/{{ app.name }}.png');"
+                <span style="width: 120px; background-size: 120px 120px; background-image: url('{{ MEDIA_URL }}plugin/{{ app.name }}.png');"
                         class="info-box-icon {{ app.color }} elevation-1"><i class="fas {{ app.fa }}"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text"><b>{{ app.name }}</b> | {{ app.version }}</span>
@@ -39,7 +39,7 @@
                   <ul class="pagination">
                     {% if page_obj.has_previous %}
                       <li class="page-item">
-                        <a class="page-link" href="/base/plugin/?page={{ page_obj.previous_page_number }}">{{ _('Previous') }}</a>
+                        <a class="page-link" href="/plugin/?page={{ page_obj.previous_page_number }}">{{ _('Previous') }}</a>
                       </li>
                     {% else %}
                       <li class="page-item disabled">
@@ -57,7 +57,7 @@
                     {% endfor %}
                     {% if page_obj.has_next %}
                       <li class="page-item">
-                        <a class="page-link" href="/base/plugin/?page={{ page_obj.next_page_number }}">{{ _('Next') }}</a>
+                        <a class="page-link" href="/plugin/?page={{ page_obj.next_page_number }}">{{ _('Next') }}</a>
                       </li>
                     {% else %}
                       <li class="page-item disabled">

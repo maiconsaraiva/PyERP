@@ -1,6 +1,6 @@
 """Inicializador del módulo de modelos de base
 """
-# Librerias en carpetas locales
+# Localfolder Library
 from .attribute import PyAttribute
 from .base_config import BaseConfig
 from .bi import PyBi

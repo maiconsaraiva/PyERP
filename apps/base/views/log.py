@@ -1,12 +1,8 @@
-# Librerias Django
 # Django Library
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Localfolder Library
-# Librerias en carpetas locales
 from ..models import PyLog
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
@@ -25,6 +21,7 @@ class LogListView(LoginRequiredMixin, FatherListView):
     model = PyLog
     template_name = 'base/list.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
+
 
 class LogDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyLog

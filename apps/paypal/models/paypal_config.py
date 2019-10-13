@@ -1,4 +1,3 @@
-# Librerias Django
 # Django Library
 from django.db import models
 from django.urls import reverse
