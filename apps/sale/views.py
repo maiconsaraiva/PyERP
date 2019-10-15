@@ -5,16 +5,15 @@ import logging
 
 # Django Library
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponseGone
-from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
 from django.shortcuts import redirect
 from django.core import serializers
-
-from django.views.generic import RedirectView
 
 # Thirdparty Library
 from apps.base.views.web_father import (
@@ -161,6 +160,10 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
                 else:
                     return super().form_invalid(form)
         else:
+            messages.warning(
+                self.request,
+                _('The current order %(order)s status does not allow updates.') % {'order': self.object.name}
+            )
             return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
@@ -182,8 +185,9 @@ class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
         context['title'] = 'ELiminar Orden de Venta'
         context['action_url'] = 'PySaleOrder:delete'
         context['delete_message'] = '<p>¿Está seguro de eliminar la orden de compras <strong>' + self.object.name + '</strong>?</p>'
-        context['cant_delete_message'] = '<p>La orden de compras <strong>' + self.object.name + '</strong>, no puede ser eliminada ya que posee un detalle que debe eliminar antes.</p>'
-        context['detail'] = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
+        context['cant_delete_message'] = '<p>La orden de compras <strong>' + self.object.name + '</strong>, no puede ser eliminada.</p>'
+        # context['detail'] = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
+        context['detail'] = True
         return context
 
     def delete(self, request, *args, **kwargs):
