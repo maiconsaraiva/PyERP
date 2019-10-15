@@ -2,6 +2,15 @@
 {% load humanize %}
 {% load erp_tags %}
 
+{% block head %}
+<style>
+    .list-inline-item:not(:last-child) {
+
+    margin-right: .0rem;
+
+}
+</style>
+{% endblock %}
 {% block content %}
 <div class="row" style="padding:5px;">
     <div class="card card-outline col-12">
@@ -46,6 +55,15 @@
                     {% endif %}
                 </div>
             {% endfor %}
+            <div class="float-right">
+                <ul class="list-inline">
+                    <li class="list-inline-item {% if object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</li>
+                    <li class="list-inline-item {% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;"> > {{ _("Sale Order") }}</li>
+                    {% if object.state == 2 %}
+                        <li class="list-inline-item" style="color: #563D7C;"><strong> > {{ _("Cancelled") }}</strong></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
         <div class="card-body">
             <div class="row">
