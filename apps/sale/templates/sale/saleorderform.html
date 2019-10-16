@@ -132,24 +132,11 @@
         background: None;
         padding: 0;
     }
-    .dataTable th:last-child, td {
+    th:last-child, td {
         padding-bottom: 0px !important;
         padding-top: 0px !important;
         color: transparent;
     }
-    .bc-icons-2 .breadcrumb-item + .breadcrumb-item::before {
-        background-color: #f8f9fa;
-        content: none;
-    }
-    .bc-icons-2 .breadcrumb-item.active {
-        background-color: #f8f9fa;
-        color: #563D7C;
-    }
-    .list-inline-item:not(:last-child) {
-
-    margin-right: .0rem;
-
-}
 </style>
 {% endblock %}
 {% block content %}
@@ -161,16 +148,16 @@
                     <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
                     {% if object %}
                         <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
-                    {% endif %}
-                    {% if object.state == 0 %}
-                        <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:confirm' object.pk %}" class="btn btn-light">{{ _("Confirm") }}</a>
-                    {% endif %}
-                    {% if object.state != 2 %}
-                        <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:cancel' object.pk %}" class="btn btn-light">{{ _("Cancel") }}</a>
+                            {% if object.state == 0 %}
+                                <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:confirm' object.pk %}" class="btn btn-light">{{ _("Confirm") }}</a>
+                            {% endif %}
+                            {% if object.state != 2 %}
+                                <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:cancel' object.pk %}" class="btn btn-light">{{ _("Cancel") }}</a>
+                            {% endif %}
                     {% endif %}
                     <div class="float-right">
                         <ul class="list-inline">
-                            <li class="list-inline-item {% if object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</li>
+                            <li class="list-inline-item {% if object and object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</li>
                             <li class="list-inline-item {% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;"> > {{ _("Sale Order") }}</li>
                             {% if object.state == 2 %}
                                 <li class="list-inline-item" style="color: #563D7C;"><strong> > {{ _("Cancelled") }}</strong></li>
@@ -205,7 +192,7 @@
                             </div>
                         {% endif %}
                     {% endfor %}
-                    <table class="table table-sm table-borderless table-striped">
+                    <table class="table table-bordered table-sm table-borderless table-striped">
                         {{ products.management_form }}
 
                         {% for form in products.forms %}
@@ -218,7 +205,7 @@
                                     </tr>
                                 </thead>
                             {% endif %}
-                            <tr class="{% cycle 'table-light' 'table-info' %} formset_row">
+                            <tr class="formset_row">
                                 {% for field in form.visible_fields %}
                                     <td class="align-middle">
                                         {# Include the hidden fields in the form #}
