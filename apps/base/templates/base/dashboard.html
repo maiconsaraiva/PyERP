@@ -88,6 +88,15 @@
         color : {{ user.active_company.font_color }};
     }
 
+    .badge-primary{
+        background: {{ user.active_company.main_color }} !important;
+        color : {{ user.active_company.font_color }};
+    }
+
+    .add-row, .delete-row .fa-trash{
+        color: {{ user.active_company.main_color }} !important;
+    }
+
 </style>
 {% endif %}
 
