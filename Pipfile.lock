@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ac562fb9fe8dcfbf110c6d650ad82a8e3d9085a875b8c7dbf2516ff2171a6265"
+            "sha256": "9ec11baf561e413a5ae55f567a4ccd78684c1b087f2b0b804b50aac7a4d6f84d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -83,6 +83,13 @@
             ],
             "index": "pypi",
             "version": "==0.0.16"
+        },
+        "django-dynamic-formsets": {
+            "hashes": [
+                "sha256:12c49d762a90e1af6b6ca5373777d93fd259fe7ee074ff67a5af5deb9549952b"
+            ],
+            "index": "pypi",
+            "version": "==0.0.8"
         },
         "django-image-cropping": {
             "hashes": [

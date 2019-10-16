@@ -160,6 +160,6 @@ PRODUCT_FORMSET = inlineformset_factory(
     PySaleOrder, PySaleOrderDetail,
     form=SaleOrderDetailForm,
     formset=BaseProductFormSet,
-    extra=0,
+    extra=1,
     can_delete=True
 )

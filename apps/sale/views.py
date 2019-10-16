@@ -138,10 +138,10 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = SaleOrderForm(self.request.POST, instance=self.object)
-            context['products'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
+            context['products'] = PRODUCT_FORMSET(self.request.POST, extra=1, instance=self.object)
         else:
             context['form'] = SaleOrderForm(instance=self.object)
-            context['products'] = PRODUCT_FORMSET(instance=self.object)
+            context['products'] = PRODUCT_FORMSET(instance=self.object, extra=1)
         return context
 
     def form_valid(self, form):
