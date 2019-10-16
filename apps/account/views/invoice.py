@@ -21,7 +21,7 @@ from apps.base.views.web_father import (
 
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, SaleOrderForm
-from .models import PySaleOrder, PySaleOrderDetail
+from .models import PyInvoice, PyInvoice
 from apps.base.models import PyProduct, PyTax
 
 LOGGER = logging.getLogger(__name__)
@@ -32,17 +32,18 @@ OBJECT_LIST_FIELDS = [
     {'string': ('Date'), 'field': 'date_order'},
     {'string': ('Net Amount'), 'field': 'amount_untaxed', 'align': 'text-right', 'humanize': True},
     {'string': ('Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
+    {'string': _('Status'), 'field': 'state'},
 ]
 
 OBJECT_DETAIL_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
     {'string': _('Partner'), 'field': 'partner_id'},
     {'string': ('Date'), 'field': 'date_order'},
+    {'string': _('Status'), 'field': 'state'},
 ]
 
 DETAIL_OBJECT_LIST_FIELDS = [
-    {'string': _('Product'), 'field': 'product_id'},
-    {'string': _('Description'), 'field': 'description'},
+    {'string': _('Description'), 'field': 'product_id'},
     {'string': _('Quantity'), 'field': 'quantity', 'align': 'text-center', 'humanize': True},
     {'string': ('Price'), 'field': 'price', 'align': 'text-right', 'humanize': True},
     {'string': _('Discount'), 'field': 'discount', 'align': 'text-right', 'humanize': True},
@@ -52,9 +53,10 @@ DETAIL_OBJECT_LIST_FIELDS = [
 
 OBJECT_FORM_FIELDS = [
     {'string': _('Client'), 'field': 'partner_id'},
+    {'string': _('Estatus'), 'field': 'state'},
 ]
 
-LEAD_FIELDS_SHORT = ['name', 'partner_id']
+LEAD_FIELDS_SHORT = ['name', 'partner_id', 'state']
 
 
 # ========================================================================== #
@@ -78,17 +80,6 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         object_name = self.model._meta.object_name
-        verbose_name = self.model._meta.verbose_name
-        context['breadcrumbs'] = [
-            {
-                'url': '{}:list'.format(object_name),
-                'name': '{}'.format(verbose_name)
-            },
-            {
-                'url': False,
-                'name': self.object.name
-            }
-        ]
         context['print_url'] = '{}:pdf'.format(object_name)
         context['detail'] = PySaleOrderDetail.objects.filter(
             active=True,
@@ -147,7 +138,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = SaleOrderForm(self.request.POST, instance=self.object)
-            context['products'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
+            context['products'] = PRODUCT_FORMSET(self.request.POST, extra=1, instance=self.object)
         else:
             context['form'] = SaleOrderForm(instance=self.object)
             context['products'] = PRODUCT_FORMSET(instance=self.object)
@@ -231,21 +222,24 @@ def load_tax(request):
 
 # ========================================================================== #
 @login_required()
-def sale_order_state(request, pk, state):
-    sale_order = PySaleOrder.objects.get(pk=pk)
-    sale_order.state = state
+def sale_order_confirm(request, pk):
+    so_id = pk
+    sale_order = PySaleOrder.objects.get(pk=so_id)
+    sale_order.state = 3
     sale_order.save()
     return redirect(
-        reverse_lazy('PySaleOrder:detail', kwargs={'pk': pk})
+        reverse_lazy('PySaleOrder:detail', kwargs={'pk': so_id})
     )
 
 
 # ========================================================================== #
 @login_required()
-def sale_order_active(request, pk, active):
-    sale_order = PySaleOrder.objects.get(pk=pk)
-    sale_order.active = active
+def sale_order_cancel(request, pk):
+    so_id = pk
+    sale_order = PySaleOrder.objects.get(pk=so_id)
+    sale_order.state = 2
     sale_order.save()
+    print("cooooooño")
     return redirect(
-        reverse_lazy('PySaleOrder:list')
+        reverse_lazy('PySaleOrder:detail', kwargs={'pk': so_id})
     )

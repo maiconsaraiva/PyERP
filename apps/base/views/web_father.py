@@ -7,6 +7,7 @@ from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Localfolder Library
+from apps.sale.models import *
 from ..forms import ActivateForm
 from ..models import *
 
@@ -108,6 +109,7 @@ class FatherDetailView(DetailView):
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
         }]
+        context['list_url'] = '{}:list'.format(object_name)
         context['update_url'] = '{}:update'.format(object_name)
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)

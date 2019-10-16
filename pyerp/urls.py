@@ -16,6 +16,7 @@ from pyerp.settings import BASE_DIR
 
 urlpatterns = [
     path('', include('apps.base.home_urls')),
+    path('', include('apps.sale.urls')),
     path('admin/', admin.site.urls),
     path('', include('apps.base.urls')),
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT, }),

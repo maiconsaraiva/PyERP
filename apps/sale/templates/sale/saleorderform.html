@@ -148,12 +148,12 @@
                     <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
                     {% if object %}
                         <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
-                            {% if object.state == 0 %}
-                                <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:confirm' object.pk %}" class="btn btn-light">{{ _("Confirm") }}</a>
-                            {% endif %}
-                            {% if object.state != 2 %}
-                                <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:cancel' object.pk %}" class="btn btn-light">{{ _("Cancel") }}</a>
-                            {% endif %}
+                        {% if object.state == 0 %}
+                            <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:confirm' object.pk %}" class="btn btn-light">{{ _("Confirm") }}</a>
+                        {% endif %}
+                        {% if object.state != 2 %}
+                            <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:cancel' object.pk %}" class="btn btn-light">{{ _("Cancel") }}</a>
+                        {% endif %}
                     {% endif %}
                     <div class="float-right">
                         <ul class="list-inline">

@@ -13,8 +13,7 @@ class UpdateBaseConfigView(LoginRequiredMixin, FatherUpdateView):
     fields = ['online', 'open_menu', 'main_company_id', 'type_share']
 
 
-
-def LoadData(LoginRequiredMixin, request):
+def LoadData(request):
     state = BaseConfig.objects.get(pk=1).load_data
     if state:
         print("Ya existe Data")

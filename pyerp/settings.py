@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 
     # Local Apps
     'apps.base',
+    'apps.sale',
 ]
 
 

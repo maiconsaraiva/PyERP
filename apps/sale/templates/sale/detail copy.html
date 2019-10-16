@@ -5,59 +5,44 @@
 {% block head %}
 <style>
     .list-inline-item:not(:last-child) {
-        margin-right: .0rem;
-    }
-    .breadcrumb {
-        padding: .75rem 1rem .75rem 0rem;
-        background-color: Transparent;
-    }
-    .card-header {
-        border-bottom: none;
-    }
-    .breadcrumb-item a {
-        color: #563D7C;
-        font-weight: bold;
-    }
+
+    margin-right: .0rem;
+
+}
 </style>
 {% endblock %}
 {% block content %}
 <div class="row" style="padding:5px;">
     <div class="card card-outline col-12">
         <div class="card-header">
-            <div class=" col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        {% for btn in breadcrumbs %}
-                            {% if btn.url %}
-                                <li class="breadcrumb-item"><a href="{% url btn.url %}">{{ btn.name }}</a></li>
-                            {% else %}
-                                <li class="breadcrumb-item active" aria-current="page">{{ btn.name }}</li>
-                            {% endif %}
-                        {% endfor %}
-                    </ol>
-                </nav>
-            </div>
-            <div class="d-flex">
-                <div>
-                    <a title=" {{ _('Back') }}" href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
-                    <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
-                    <button title="{{ _('Delete') }}" onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
-                    <a title="{{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
-                    <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
-                </div>
-                <div class="ml-auto state-bar no_active_bar">
+            {% for btn in breadcrumbs %}
+                <a title=" {{ _('Back') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
+            {% endfor %}
+            <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
+            <button title="{{ _('Delete') }}" onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
+            <a title="{{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
+            <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
+            {% for btn in breadcrumbs %}
+                <div class="float-right state-bar no_active_bar">
+
                     <style>
                         .active_bar{
-                            font-weight: bold;
+                        font-weight: bold;
                         }
                         .no_active_bar{
                             color:#777;
                         }
+
                         .btn-manger {
-                            color: {{ user.active_company.font_color }};
-                            background-color: {{ user.active_company.main_color }};
+                        color: {{ user.active_company.font_color }};
+                        background-color: {{ user.active_company.main_color }};
                         }
                     </style>
+                    <!--
+                        <span class="active_bar">{{ _('Active') }}</span>
+                    <i class="fas fa-chevron-right ml-2"></i>
+                        <span class="ml-2">{{ _('Archived') }}</span>
+                        -->
                     {% if before %}
                         <a title=" {{ _('Before') }}" href="{% url detail_url before.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
                     {% else %}
@@ -69,30 +54,16 @@
                         <a title=" {{ _('Next') }}" href="#" class="btn disabled btn-manger"> <i class="fas fa-chevron-right"></i></a>
                     {% endif %}
                 </div>
-            </div>
-            <hr class="style1">
-            <div class="d-flex align-items-center">
-                <div>
-                    {% if object.state == 0 %}
-                        <a title="{{ _('Confirm') }}" href="{% url 'PySaleOrder:state' object.pk 3 %}" class="btn btn-light">{{ _("Confirm") }}</a>
-                    {% endif %}
-                    {% if object.state != 2 %}
-                        <a title="{{ _('Cancel') }}" href="{% url 'PySaleOrder:state' object.pk 2 %}" class="btn btn-light">{{ _("Cancel") }}</a>
-                    {% endif %}
-                    {% if object.state == 2 or object.state == 3 %}
-                        <a title="{{ _('Draft') }}" href="{% url 'PySaleOrder:state' object.pk 0 %}" class="btn btn-light">{{ _("Draft") }}</a>
-                    {% endif %}
-                    <a title="_('Inactivate') }}" href="{% url 'PySaleOrder:active' object.pk 0 %}" class="btn btn-light">{{ _('Inactivate') }}</a>
-                </div>
-                <div class="ml-auto">
-                    <span class="{% if object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</span> >
-                    <span class="{% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Sale Order") }}</span>
+            {% endfor %}
+            <div class="float-right">
+                <ul class="list-inline">
+                    <li class="list-inline-item {% if object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</li>
+                    <li class="list-inline-item {% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;"> > {{ _("Sale Order") }}</li>
                     {% if object.state == 2 %}
-                        > <span class="font-weight-bold" style="color: #563D7C;">{{ _("Cancelled") }}</span>
+                        <li class="list-inline-item" style="color: #563D7C;"><strong> > {{ _("Cancelled") }}</strong></li>
                     {% endif %}
-                </div>
+                </ul>
             </div>
-            <hr class="style1">
         </div>
         <div class="card-body">
             <div class="row">
@@ -100,6 +71,13 @@
                     {% if object.img %}
                             <img class="img img-responsive" border="1" name="image" src="{{ object.img.url }}" style="width: 90px; height: 90px;">
                     {% endif %}
+                </div>
+                <div class="col-sm-6">
+                    <form class="form-horizontal" method="post" role="form" action="{% if object.active %} {% url 'base:inactive-object' %} {% else %} {% url 'base:active-object' %} {% endif %}">
+                        {% csrf_token %}
+                        {{ activate_form }}
+                        <button title=" {{ _('Save') }}" type="submit" class="float-right btn btn-light"><i class="fas fa-archive"> {% if object.active %} {{ _('Inactivate') }} {% else %} {{ _('Activate') }} {% endif %} </i></button>
+                    </form>
                 </div>
             </div>
             <div class="form-row">

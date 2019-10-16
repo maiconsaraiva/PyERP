@@ -2,7 +2,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import router, transaction
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Localfolder Library
@@ -28,6 +27,7 @@ class SequenceListView(LoginRequiredMixin, FatherListView):
     model = PySequence
     template_name = 'base/list.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
+
 
 class SequenceDetailView(LoginRequiredMixin, FatherDetailView):
     model = PySequence

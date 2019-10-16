@@ -66,7 +66,7 @@ class PyInvoice(PyFather):
     description = models.TextField(_('Description'), blank=True, null=True)
     state = models.IntegerField(
         _('Status'),
-        choices=SALE_STATE,
+        choices=INVOICE_STATE,
         default='draft'
     )
     note = models.TextField(_('NOte'), blank=True, null=True)
