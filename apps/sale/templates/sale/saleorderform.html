@@ -108,7 +108,7 @@
         padding-top: 0rem;
         padding-bottom: 0rem;
     }
-    .form-control {
+    .table .form-control {
         -moz-appearance: textfield;
         background-color: transparent;
         border: 0px solid transparent;
@@ -137,6 +137,19 @@
         padding-top: 0px !important;
         color: transparent;
     }
+    .bc-icons-2 .breadcrumb-item + .breadcrumb-item::before {
+        background-color: #f8f9fa;
+        content: none;
+    }
+    .bc-icons-2 .breadcrumb-item.active {
+        background-color: #f8f9fa;
+        color: #563D7C;
+    }
+    .list-inline-item:not(:last-child) {
+
+    margin-right: .0rem;
+
+}
 </style>
 {% endblock %}
 {% block content %}
@@ -149,6 +162,21 @@
                     {% if object %}
                         <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
                     {% endif %}
+                    {% if object.state == 0 %}
+                        <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:confirm' object.pk %}" class="btn btn-light">{{ _("Confirm") }}</a>
+                    {% endif %}
+                    {% if object.state != 2 %}
+                        <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:cancel' object.pk %}" class="btn btn-light">{{ _("Cancel") }}</a>
+                    {% endif %}
+                    <div class="float-right">
+                        <ul class="list-inline">
+                            <li class="list-inline-item {% if object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</li>
+                            <li class="list-inline-item {% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;"> > {{ _("Sale Order") }}</li>
+                            {% if object.state == 2 %}
+                                <li class="list-inline-item" style="color: #563D7C;"><strong> > {{ _("Cancelled") }}</strong></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
                 <div class="card-body">
                     {% if object %}
@@ -160,20 +188,22 @@
                         </div>
                     {% endif %}
                     {% csrf_token %}
-                    {% for campo in form %}
-                        <div class="form-group row">
-                            <label for="{{ campo.id_for_label }}" class="col-sm-3 col-xl-2 col-form-label">{{ campo.label }}</label>
-                            <div class="col-sm-9 col-xl-5">
-                                {{ campo }}
-                                <span class="help-block">
-                                    {% for error in campo.errors %}
-                                        <ul>
-                                            <li class="text-red">{{ error }}</li>
-                                        </ul>
-                                    {% endfor %}
-                                </span>
+                    {% for field in form %}
+                        {% if field.auto_id != "id_note" %}
+                            <div class="form-group row">
+                                <label for="{{ field.id_for_label }}" class="col-sm-3 col-xl-2 col-form-label">{{ field.label }}</label>
+                                <div class="col-sm-9 col-xl-5">
+                                    {{ field }}
+                                    <span class="help-block">
+                                        {% for error in field.errors %}
+                                            <ul>
+                                                <li class="text-red">{{ error }}</li>
+                                            </ul>
+                                        {% endfor %}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                     <table class="table table-sm table-borderless table-striped">
                         {{ products.management_form }}
@@ -206,6 +236,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
+
                     <div class="row">
                         <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
@@ -231,9 +262,15 @@
                         <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total:') }}</div>
                         <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
                     </div>
-                    <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Margin:') }}</div>
-                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right">$ ???</div>
+                    <hr class="style1">
+                    <div class="form-group row">
+                        <label for="id_note" class="col-sm-3 col-xl-2 col-form-label">Note</label>
+                        <div class="col-sm-9 col-xl-10">
+                            <textarea name="note" cols="400" rows="1" class="form-control" data-placeholder="Descripción del presupuesto ..." style="width: 100%" id="id_note"></textarea>
+                            <span class="help-block">
+
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <!-- /.card-footer -->
@@ -263,7 +300,7 @@
     $(function() {
         $('.formset_row').formset({
             prefix: '{{ products.prefix }}',
-            clone: true,
+            clone: false,
             addText: '{{ _("add product") }}',
             deleteText: '<li class="fa fa-trash" style="padding: 3px;"></li>',
             added:function(row) {

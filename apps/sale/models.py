@@ -7,10 +7,10 @@ from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
 from apps.base.views.sequence import get_next_value
 
 SALE_STATE = (
-        (_('draft'), "Borrador"),
-        (_('open'), 'Consumible'),
-        (_('cancel'), 'Servicio'),
-        (_('confirmed'), 'confirmada')
+        (0, _('draft')),
+        (1, _('open')),
+        (2, _('cancel')),
+        (3, _('confirmed'))
     )
 
 
@@ -59,12 +59,13 @@ class PySaleOrder(PyFather):
         default=0
     )
     description = models.TextField(_('Description'), blank=True, null=True)
-    state = models.CharField(
+    state = models.IntegerField(
         _('Status'),
         choices=SALE_STATE,
-        max_length=64,
         default='draft'
     )
+    note = models.TextField(_('NOte'), blank=True, null=True)
+    date_confirm = models.DateTimeField(null=True)
 
     class Meta:
         ordering = ['pk']

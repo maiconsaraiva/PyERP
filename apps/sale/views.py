@@ -5,12 +5,14 @@ import logging
 
 # Django Library
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.core import serializers
 
 # Thirdparty Library
@@ -145,16 +147,24 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         products = context['products']
-        with transaction.atomic():
-            form.instance.um = self.request.user.pk
-            if form.is_valid() and products.is_valid():
-                self.object = form.save(commit=False)
-                products.instance = self.object
-                products.save()
-                self.object.save()
-                return super().form_valid(form)
-            else:
-                return super().form_invalid(form)
+        if self.object.state == 0:
+            print(self.object.state)
+            with transaction.atomic():
+                form.instance.um = self.request.user.pk
+                if form.is_valid() and products.is_valid():
+                    self.object = form.save(commit=False)
+                    products.instance = self.object
+                    products.save()
+                    self.object.save()
+                    return super().form_valid(form)
+                else:
+                    return super().form_invalid(form)
+        else:
+            messages.warning(
+                self.request,
+                _('The current order %(order)s status does not allow updates.') % {'order': self.object.name}
+            )
+            return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse_lazy('PySaleOrder:detail', kwargs={'pk': self.object.pk})
@@ -171,25 +181,27 @@ class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         self.object = self.get_object()
-        context = super(SaleOrderDeleteView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'ELiminar Orden de Venta'
         context['action_url'] = 'PySaleOrder:delete'
         context['delete_message'] = '<p>¿Está seguro de eliminar la orden de compras <strong>' + self.object.name + '</strong>?</p>'
-        context['cant_delete_message'] = '<p>La orden de compras <strong>' + self.object.name + '</strong>, no puede ser eliminada ya que posee un detalle que debe eliminar antes.</p>'
-        context['detail'] = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
+        context['cant_delete_message'] = '<p>La orden de compras <strong>' + self.object.name + '</strong>, no puede ser eliminada.</p>'
+        # context['detail'] = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
+        context['detail'] = True
         return context
 
     def delete(self, request, *args, **kwargs):
-        pk = self.kwargs.get(self.pk_url_kwarg)
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        detail = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
-        if not detail:
-            self.object.delete()
-        return HttpResponseRedirect(success_url)
+        # pk = self.kwargs.get(self.pk_url_kwarg)
+        # self.object = self.get_object()
+        # success_url = self.get_success_url()
+        # detail = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
+        # if not detail:
+        #     self.object.delete()
+        return HttpResponseRedirect(self.success_url)
 
 
 # ========================================================================== #
+@login_required()
 def load_product(request):
     context = {}
     product_id = request.GET.get('product')
@@ -199,10 +211,35 @@ def load_product(request):
 
 
 # ========================================================================== #
+@login_required()
 def load_tax(request):
     context = {}
     tax_id = request.GET.getlist('tax[]')
-    print("Aqui voy {}".format(tax_id))
     tax = PyTax.objects.filter(pk__in=tax_id)
     context['tax'] = serializers.serialize('json', tax)
     return JsonResponse(data=context, safe=False)
+
+
+# ========================================================================== #
+@login_required()
+def sale_order_confirm(request, pk):
+    so_id = pk
+    sale_order = PySaleOrder.objects.get(pk=so_id)
+    sale_order.state = 3
+    sale_order.save()
+    return redirect(
+        reverse_lazy('PySaleOrder:detail', kwargs={'pk': so_id})
+    )
+
+
+# ========================================================================== #
+@login_required()
+def sale_order_cancel(request, pk):
+    so_id = pk
+    sale_order = PySaleOrder.objects.get(pk=so_id)
+    sale_order.state = 2
+    sale_order.save()
+    print("cooooooño")
+    return redirect(
+        reverse_lazy('PySaleOrder:detail', kwargs={'pk': so_id})
+    )

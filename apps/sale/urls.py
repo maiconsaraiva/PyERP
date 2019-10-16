@@ -7,7 +7,9 @@ from django.urls import path
 from .reports.saleorderpdf import sale_order_pdf
 from .views import (
     SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailView,
-    SaleOrderEditView, SaleOrderListView, load_product, load_tax)
+    SaleOrderEditView, SaleOrderListView, load_product, load_tax,
+    sale_order_confirm,
+    sale_order_cancel)
 
 app_name = 'PySaleOrder'
 
@@ -25,6 +27,12 @@ urlpatterns = [
         'sale-order/<int:pk>/delete/',
         SaleOrderDeleteView.as_view(),
         name='delete'
+    ),
+    path(
+        'sale-order-confirm/<int:pk>', sale_order_confirm, name='confirm'
+    ),
+    path(
+        'sale-order-cancel/<int:pk>', sale_order_cancel, name='cancel'
     ),
 
     # ======================== Sale Orders AJAX URL's ====================== #

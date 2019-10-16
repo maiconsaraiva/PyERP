@@ -21,9 +21,11 @@ class SaleOrderForm(forms.ModelForm):
         model = PySaleOrder
         fields = [
             'partner_id',
+            'note'
         ]
         labels = {
-            'partner_id': 'Cliente',
+            'partner_id': _('Client',),
+            'note': _('Note')
             # 'description': 'Descripción',
         }
         widgets = {
@@ -35,13 +37,13 @@ class SaleOrderForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            # 'description': forms.TextInput(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'data-placeholder': 'Descripción del presupuesto ...',
-            #         'style': 'width: 100%',
-            #     },
-            # ),
+            'note': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': 'Descripción del presupuesto ...',
+                    'style': 'width: 100%',
+                },
+            ),
         }
 
 
@@ -91,7 +93,7 @@ class SaleOrderDetailForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'placeholder': _('Description'),
-                    'style': 'width: 180px',
+                    'style': 'width: 150px',
                 },
             ),
             'quantity': forms.NumberInput(
@@ -127,7 +129,7 @@ class SaleOrderDetailForm(forms.ModelForm):
                 attrs={
                     'class': 'selectpicker',
                     'data-placeholder': _('Select taxes...'),
-                    'style': 'width: 200px',
+                    'style': 'width: 150px',
                 },
             ),
             # 'tax_id': autocomplete.ModelSelect2Multiple(
