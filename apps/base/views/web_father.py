@@ -273,3 +273,10 @@ def active_object(request):
             object_to.active = True
             object_to.save()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+
+
+"""Las vistas que se declaran a contiuación corresponde a un intento por
+estandarizar el CRUD los modulos que involucran un maestro detalle:Sale Order,
+Invoice y otras
+"""

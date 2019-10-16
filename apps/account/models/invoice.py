@@ -4,9 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
+from apps.sale.models import PySaleOrder
 from apps.base.views.sequence import get_next_value
 
-SALE_STATE = (
+INVOICE_STATE = (
         (0, _('draft')),
         (1, _('open')),
         (2, _('cancel')),
@@ -15,7 +16,7 @@ SALE_STATE = (
 
 
 # ========================================================================== #
-class PySaleOrder(PyFather):
+class PyInvoice(PyFather):
     """Modelo de la orden de pago
     """
     name = models.CharField(_('Name'), max_length=80, editable=False)
@@ -25,7 +26,11 @@ class PySaleOrder(PyFather):
         blank=True,
         on_delete=models.PROTECT
     )
-    date_order = models.DateTimeField(auto_now_add=True, null=True)
+    sale_order_id = models.ForeignKey(
+        PySaleOrder,
+        on_delete=models.PROTECT
+    )
+    date_invoice = models.DateTimeField(auto_now_add=True, null=True)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
         max_digits=10,
@@ -62,7 +67,7 @@ class PySaleOrder(PyFather):
     state = models.IntegerField(
         _('Status'),
         choices=SALE_STATE,
-        default=0
+        default='draft'
     )
     note = models.TextField(_('NOte'), blank=True, null=True)
     date_confirm = models.DateTimeField(null=True)
@@ -79,11 +84,11 @@ class PySaleOrder(PyFather):
 
 
 # ========================================================================== #
-class PySaleOrderDetail(PyFather):
+class PyInvoiceDetail(PyFather):
     """Modelo del detalle de la orden de pago
     """
     sale_order_id = models.ForeignKey(
-        PySaleOrder,
+        PyInvoice,
         on_delete=models.PROTECT
     )
     product_id = models.ForeignKey(
