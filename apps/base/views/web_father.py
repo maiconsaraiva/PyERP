@@ -6,8 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
-# Localfolder Library
+# Thirdparty Library
 from apps.sale.models import *
+
+# Localfolder Library
 from ..forms import ActivateForm
 from ..models import *
 

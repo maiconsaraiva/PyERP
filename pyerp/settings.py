@@ -63,7 +63,6 @@ INSTALLED_APPS = [
 
     # Local Apps
     'apps.base',
-    'apps.sale',
 ]
 
 
@@ -84,7 +83,7 @@ with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
 # ========================================================================== #
 # Para la localizacion i18n de los componentes de fecha y hora de bootstrap
 
-TEMPUS_DOMINUS_LOCALIZE = True
+TEMPUS_DOMINUS_LOCALIZE = False
 
 
 # ========================================================================== #

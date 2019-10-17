@@ -1,11 +1,15 @@
+
+# Standard Library
+from datetime import datetime
+
 # Django Library
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
-from apps.sale.models import PySaleOrder
 from apps.base.views.sequence import get_next_value
+from apps.sale.models import PySaleOrder
 
 INVOICE_STATE = (
         (0, _('draft')),
@@ -30,7 +34,7 @@ class PyInvoice(PyFather):
         PySaleOrder,
         on_delete=models.PROTECT
     )
-    date_invoice = models.DateTimeField(auto_now_add=True, null=True)
+    date_invoice = models.DateTimeField(default=datetime.now(), null=True, blank=True)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
         max_digits=10,
@@ -79,7 +83,7 @@ class PyInvoice(PyFather):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.name = get_next_value(self._meta.object_name, 'SO')
+            self.name = get_next_value(self._meta.object_name, 'INV')
         super().save(*args, **kwargs)
 
 

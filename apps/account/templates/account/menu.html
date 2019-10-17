@@ -1,24 +1,26 @@
 <li class="nav-item has-treeview">
-    <a href="#" class="nav-link">
-      <i class="fa fa-hdd nav-icon"></i>
-      <p>
-        {{ _('Account') }}
-        <i class="fas fa-angle-left right"></i>
-      </p>
-    </a>
-    <ul class="nav nav-treeview">
-      <li class="nav-item">
-        <a href="{% url 'base:accountplan' %}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Plan de Cuentas</p>
-        </a>
-      </li>
-
-        <li class="nav-item">
-        <a href="{% url 'base:account-move' %}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Asientos Contables</p>
-        </a>
-      </li>
-    </ul>
+  <a href="#" class="nav-link">
+    <i class="fa fa-hdd nav-icon"></i>
+    <p>{{ _('Account') }}<i class="fas fa-angle-left right"></i></p>
+  </a>
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
+      <a href="{% url 'PyAccountPlan:list' %}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>{{ _("Account Plans") }}</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'PyAccountMove:list' %}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>{{ _("Account Moves") }}</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'PyInvoice:list' %}" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>{{ _("Invoice") }}</p>
+      </a>
+    </li>
+  </ul>
 </li>

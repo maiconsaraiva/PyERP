@@ -103,18 +103,18 @@
         border-bottom: 0;
         border-left: .3em solid transparent;
     }
-    .table-sm td, .table-sm th {
+    /*.table-sm td, .table-sm th {
         padding: 0rem;
         padding-top: 0rem;
         padding-bottom: 0rem;
-    }
+    }*/
     .table .form-control {
         -moz-appearance: textfield;
         background-color: transparent;
         border: 0px solid transparent;
     }
     .form-control-sm {
-        font-size: 75%;
+        font-size: 100%;
     }
     .form-control:disabled, .form-control[readonly] {
         background-color: transparent;
@@ -132,10 +132,21 @@
         background: None;
         padding: 0;
     }
-    th:last-child, td {
+    .table th:last-child, td {
         padding-bottom: 0px !important;
         padding-top: 0px !important;
-        color: transparent;
+        /*color: transparent;*/
+    }
+    .breadcrumb {
+        padding: .75rem 1rem .75rem 0rem;
+        background-color: Transparent;
+    }
+    .card-header {
+        border-bottom: none;
+    }
+    .breadcrumb-item a {
+        color: #563D7C;
+        font-weight: bold;
     }
 </style>
 {% endblock %}
@@ -144,116 +155,189 @@
         <div class="card card-outline col-12">
             <form method="post" class="form">
                 <div class="card-header">
-                    <a title=" {{ _('Back') }}" href="{{ back_url }}" class="btn"><i class="fas fa-arrow-left"></i></a>
-                    <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
-                    {% if object %}
-                        <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
-                            {% if object.state == 0 %}
-                                <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:confirm' object.pk %}" class="btn btn-light">{{ _("Confirm") }}</a>
-                            {% endif %}
-                            {% if object.state != 2 %}
-                                <a title="{{ _('Print') }}" href="{% url 'PySaleOrder:cancel' object.pk %}" class="btn btn-light">{{ _("Cancel") }}</a>
-                            {% endif %}
-                    {% endif %}
-                    <div class="float-right">
-                        <ul class="list-inline">
-                            <li class="list-inline-item {% if object and object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</li>
-                            <li class="list-inline-item {% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;"> > {{ _("Sale Order") }}</li>
-                            {% if object.state == 2 %}
-                                <li class="list-inline-item" style="color: #563D7C;"><strong> > {{ _("Cancelled") }}</strong></li>
-                            {% endif %}
-                        </ul>
+                    <div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                {% for btn in breadcrumbs %}
+                                    {% if btn.url %}
+                                        <li class="breadcrumb-item"><a href="{% url btn.url %}">{{ btn.name }}</a></li>
+                                    {% else %}
+                                        <li class="breadcrumb-item active" aria-current="page">{{ btn.name }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ol>
+                        </nav>
                     </div>
+                    <div class="d-flex">
+                        <div>
+                            {% if object %}
+                                <a title=" {{ _('Back') }}" href="{% url detail_url object.pk %}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
+                            {% endif %}
+                            <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
+                            {% if object %}
+                                <button title="{{ _('Delete') }}" onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
+                            {% endif %}
+                            {% if object %}
+                                <a title="{{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
+                            {% endif %}
+                            {% if object %}
+                                <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
+                            {% endif %}
+                        </div>
+                        <div class="ml-auto state-bar no_active_bar">
+                            <style>
+                                .active_bar{
+                                    font-weight: bold;
+                                }
+                                .no_active_bar{
+                                    color:#777;
+                                }
+                                .btn-manger {
+                                    color: {{ user.active_company.font_color }};
+                                    background-color: {{ user.active_company.main_color }};
+                                }
+                            </style>
+                            {% if before %}
+                                <a title=" {{ _('Before') }}" href="{% url update_url before.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
+                            {% else %}
+                                <a title=" {{ _('Before') }}" href="#" class="btn disabled btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
+                            {% endif %}
+                            {% if next %}
+                                <a title=" {{ _('Next') }}" href="{% url update_url next.pk %}" class="btn btn-light btn-manger"> <i class="fas fa-chevron-right"></i></a>
+                            {% else %}
+                                <a title=" {{ _('Next') }}" href="#" class="btn disabled btn-manger"> <i class="fas fa-chevron-right"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr class="style1">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            {% if object and object.state == 0 %}
+                                <a title="{{ _('Confirm') }}" href="{% url 'PySaleOrder:state' object.pk 3 %}" class="btn btn-light">{{ _("Confirm") }}</a>
+                            {% endif %}
+                            {% if object and object.state != 2 %}
+                                <a title="{{ _('Cancel') }}" href="{% url 'PySaleOrder:state' object.pk 2 %}" class="btn btn-light">{{ _("Cancel") }}</a>
+                            {% endif %}
+                            {% if object and object.state == 2 or object.state == 3 %}
+                                <a title="{{ _('Draft') }}" href="{% url 'PySaleOrder:state' object.pk 0 %}" class="btn btn-light">{{ _("Draft") }}</a>
+                            {% endif %}
+                            {% if object %}
+                                <a title="_('Inactivate') }}" href="{% url 'PySaleOrder:active' object.pk 0 %}" class="btn btn-light">{{ _('Inactivate') }}</a>
+                            {% endif %}
+                        </div>
+                        <div class="ml-auto">
+                            <span class="{% if object and object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</span>
+                            <i class="fas fa-chevron-right"></i> <span class="{% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Sale Order") }}</span>
+                            {% if object.state == 2 %}
+                                <i class="fas fa-chevron-right"></i> <span class="font-weight-bold" style="color: #563D7C;">{{ _("Cancelled") }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr class="style1">
                 </div>
                 <div class="card-body">
-                    {% if object %}
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-xl-2 col-form-label">{{ _("Name:") }}</label>
-                            <div class="col-sm-10 col-xl-5">
-                                <h4>{{ object.name }}</h4>
-                            </div>
-                        </div>
-                    {% endif %}
-                    {% csrf_token %}
-                    {% for field in form %}
-                        {% if field.auto_id != "id_note" %}
-                            <div class="form-group row">
-                                <label for="{{ field.id_for_label }}" class="col-sm-3 col-xl-2 col-form-label">{{ field.label }}</label>
-                                <div class="col-sm-9 col-xl-5">
-                                    {{ field }}
+                    <div class="form-row">
+                        {% if object %}
+                            <div class="form-group row col-sm-6">
+                                <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="{{ object.name }}" class="form-control"  style="width: 100%"  maxlength="80" disabled >
                                     <span class="help-block">
-                                        {% for error in field.errors %}
-                                            <ul>
-                                                <li class="text-red">{{ error }}</li>
-                                            </ul>
-                                        {% endfor %}
+                                    </span>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="form-group row col-sm-6">
+                                <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="Nuevo" class="form-control"  style="width: 100%"  maxlength="80" disabled >
+                                    <span class="help-block">
                                     </span>
                                 </div>
                             </div>
                         {% endif %}
-                    {% endfor %}
-                    <table class="table table-bordered table-sm table-borderless table-striped">
-                        {{ products.management_form }}
-
-                        {% for form in products.forms %}
-                            {% if forloop.first %}
-                                <thead class="thead-light">
-                                    <tr>
-                                        {% for field in form.visible_fields %}
-                                            <th>{{ field.label|capfirst }}</th>
-                                        {% endfor %}
-                                    </tr>
-                                </thead>
-                            {% endif %}
-                            <tr class="formset_row">
-                                {% for field in form.visible_fields %}
-                                    <td class="align-middle">
-                                        {# Include the hidden fields in the form #}
-                                        {% if forloop.first %}
-                                            {% for hidden in form.hidden_fields %}
-                                                {{ hidden }}
-                                            {% endfor %}
-                                        {% endif %}
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% if field.auto_id != "id_note" %}
+                                <div class="form-group row col-sm-6">
+                                    <label class="col-sm-2 col-xl-2 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    <div class="col-sm-9">
                                         {{ field }}
-                                    </td>
-                                {% endfor %}
-                            </tr>
+                                        <span class="help-block">
+                                            {% for error in field.errors %}
+                                                <ul>
+                                                    <li class="text-red">{{ error }}</li>
+                                                </ul>
+                                            {% endfor %}
+                                        </span>
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endfor %}
-                    </table>
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered table-striped table-borderless">
+                            {{ products.management_form }}
+
+                            {% for form in products.forms %}
+                                {% if forloop.first %}
+                                    <thead>
+                                        <tr>
+                                            {% for field in form.visible_fields %}
+                                                <th>{{ field.label|capfirst }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                {% endif %}
+                                <tr class="formset_row">
+                                    {% for field in form.visible_fields %}
+                                        <td class="align-middle">
+                                            {# Include the hidden fields in the form #}
+                                            {% if forloop.first %}
+                                                {% for hidden in form.hidden_fields %}
+                                                    {{ hidden }}
+                                                {% endfor %}
+                                            {% endif %}
+                                            {{ field }}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
-                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
-                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('IVA:') }}</div>
-                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('IVA:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
-                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div>
                     </div>
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
-                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div>
                     </div>
                     <hr class="style1">
                     <div class="row">
-                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total:') }}</div>
-                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
+                        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total:') }}</div>
+                        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
                     </div>
                     <hr class="style1">
                     <div class="form-group row">
-                        <label for="id_note" class="col-sm-3 col-xl-2 col-form-label">Note</label>
-                        <div class="col-sm-9 col-xl-10">
-                            <textarea name="note" cols="400" rows="1" class="form-control" data-placeholder="Descripción del presupuesto ..." style="width: 100%" id="id_note"></textarea>
+                        <label for="id_note" class="col-1 col-form-label">Note</label>
+                        <div class="col-11">
+                            <textarea name="note" cols="400" rows="1" class="form-control" data-placeholder="Descripción del presupuesto ..." style="width: 100%" id="id_note">{{ object.note}}</textarea>
                             <span class="help-block">
 
                             </span>
@@ -264,12 +348,6 @@
             </div>
             <!-- /.card -->
         </form>
-        <select class="selectpicker" multiple title="Choose one of the following...">
-            <option data-content="<span class='badge badge-primary'>Mustard</span>">Mustard</option>
-            <option data-content="<span class='badge badge-primary'>Ketchup</span>">Ketchup</option>
-            <option data-content="<span class='badge badge-primary'>Relish</span>">Relish</option>
-            <option data-content="data-content=<span class='badge badge-primary'>I.V.A.</span>">I.V.A.</option>
-        </select>
     </div>
 {% endblock %}
 {% block scripts %}
@@ -285,6 +363,7 @@
     /*Gestión de los formset
     */
     $(function() {
+
         $('.formset_row').formset({
             prefix: '{{ products.prefix }}',
             clone: false,

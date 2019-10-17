@@ -4,25 +4,25 @@
 import logging
 
 # Django Library
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import serializers
 from django.db import transaction
 from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
-from django.shortcuts import redirect
-from django.core import serializers
 
 # Thirdparty Library
+from apps.base.models import PyProduct, PyTax
 from apps.base.views.web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 # Localfolder Library
-from .forms import PRODUCT_FORMSET, SaleOrderForm
-from .models import PyInvoice, PyInvoice
-from apps.base.models import PyProduct, PyTax
+from ..forms import PRODUCT_FORMSET, InvoiceForm
+from ..models import PyInvoice, PyInvoiceDetail
 
 LOGGER = logging.getLogger(__name__)
 
@@ -60,17 +60,17 @@ LEAD_FIELDS_SHORT = ['name', 'partner_id', 'state']
 
 
 # ========================================================================== #
-class SaleOrderListView(LoginRequiredMixin, FatherListView):
+class InvoiceListView(LoginRequiredMixin, FatherListView):
     """Lista de las ordenes de venta
     """
-    model = PySaleOrder
+    model = PyInvoice
     # template_name = 'sale/saleorderlist.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 # ========================================================================== #
-class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
-    model = PySaleOrder
+class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
+    model = PyInvoice
     template_name = 'sale/detail.html'
     extra_context = {
         'master_fields': OBJECT_DETAIL_FIELDS,
@@ -81,7 +81,7 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
         context = super().get_context_data(**kwargs)
         object_name = self.model._meta.object_name
         context['print_url'] = '{}:pdf'.format(object_name)
-        context['detail'] = PySaleOrderDetail.objects.filter(
+        context['detail'] = PyInvoiceDetail.objects.filter(
             active=True,
             company_id=self.request.user.active_company_id,
             sale_order_id=self.object.pk
@@ -90,17 +90,17 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
 
 
 # ========================================================================== #
-class SaleOrderAddView(LoginRequiredMixin, FatherCreateView):
+class InvoiceAddView(LoginRequiredMixin, FatherCreateView):
     """Vista para agregar las sale
     """
-    model = PySaleOrder
-    form_class = SaleOrderForm
-    template_name = 'sale/saleorderform.html'
+    model = PyInvoice
+    form_class = InvoiceForm
+    template_name = 'sale/form.html'
     success_url = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['action_url'] = 'PySaleOrder:sale-order-add'
+        context['action_url'] = 'PyInvoice:sale-order-add'
         if self.request.POST:
             context['products'] = PRODUCT_FORMSET(self.request.POST)
         else:
@@ -119,28 +119,28 @@ class SaleOrderAddView(LoginRequiredMixin, FatherCreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('PySaleOrder:detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('PyInvoice:detail', kwargs={'pk': self.object.pk})
 
 
 # ========================================================================== #
-class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
+class InvoiceEditView(LoginRequiredMixin, FatherUpdateView):
     """Vista para editarar las sale
     """
-    model = PySaleOrder
-    form_class = SaleOrderForm
-    template_name = 'sale/saleorderform.html'
+    model = PyInvoice
+    form_class = InvoiceForm
+    template_name = 'sale/form.html'
 
     def get_context_data(self, **kwargs):
         _pk = self.kwargs.get(self.pk_url_kwarg)
         context = super().get_context_data(**kwargs)
         object_name = self.model._meta.object_name
-        context['action_url'] = 'PySaleOrder:update'
+        context['action_url'] = 'PyInvoice:update'
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
-            context['form'] = SaleOrderForm(self.request.POST, instance=self.object)
+            context['form'] = InvoiceForm(self.request.POST, instance=self.object)
             context['products'] = PRODUCT_FORMSET(self.request.POST, extra=1, instance=self.object)
         else:
-            context['form'] = SaleOrderForm(instance=self.object)
+            context['form'] = InvoiceForm(instance=self.object)
             context['products'] = PRODUCT_FORMSET(instance=self.object)
         return context
 
@@ -167,26 +167,26 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
             return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse_lazy('PySaleOrder:detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('PyInvoice:detail', kwargs={'pk': self.object.pk})
 
 
 # ========================================================================== #
-class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
+class InvoiceDeleteView(LoginRequiredMixin, DeleteView):
     """Vista para eliminar las sale
     """
-    model = PySaleOrder
-    template_name = 'sale/saleorderdelete.html'
-    success_url = reverse_lazy('PySaleOrder:list')
+    model = PyInvoice
+    template_name = 'sale/delete.html'
+    success_url = reverse_lazy('PyInvoice:list')
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         self.object = self.get_object()
         context = super().get_context_data(**kwargs)
         context['title'] = 'ELiminar Orden de Venta'
-        context['action_url'] = 'PySaleOrder:delete'
+        context['action_url'] = 'PyInvoice:delete'
         context['delete_message'] = '<p>¿Está seguro de eliminar la orden de compras <strong>' + self.object.name + '</strong>?</p>'
         context['cant_delete_message'] = '<p>La orden de compras <strong>' + self.object.name + '</strong>, no puede ser eliminada.</p>'
-        # context['detail'] = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
+        # context['detail'] = PyInvoiceDetail.objects.filter(sale_order_id=pk).exists()
         context['detail'] = True
         return context
 
@@ -194,7 +194,7 @@ class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
         # pk = self.kwargs.get(self.pk_url_kwarg)
         # self.object = self.get_object()
         # success_url = self.get_success_url()
-        # detail = PySaleOrderDetail.objects.filter(sale_order_id=pk).exists()
+        # detail = PyInvoiceDetail.objects.filter(sale_order_id=pk).exists()
         # if not detail:
         #     self.object.delete()
         return HttpResponseRedirect(self.success_url)
@@ -222,24 +222,21 @@ def load_tax(request):
 
 # ========================================================================== #
 @login_required()
-def sale_order_confirm(request, pk):
-    so_id = pk
-    sale_order = PySaleOrder.objects.get(pk=so_id)
-    sale_order.state = 3
+def invoice_state(request, pk, state):
+    sale_order = PySaleOrder.objects.get(pk=pk)
+    sale_order.state = state
     sale_order.save()
     return redirect(
-        reverse_lazy('PySaleOrder:detail', kwargs={'pk': so_id})
+        reverse_lazy('PySaleOrder:detail', kwargs={'pk': pk})
     )
 
 
 # ========================================================================== #
 @login_required()
-def sale_order_cancel(request, pk):
-    so_id = pk
-    sale_order = PySaleOrder.objects.get(pk=so_id)
-    sale_order.state = 2
+def invoice_active(request, pk, active):
+    sale_order = PySaleOrder.objects.get(pk=pk)
+    sale_order.active = active
     sale_order.save()
-    print("cooooooño")
     return redirect(
-        reverse_lazy('PySaleOrder:detail', kwargs={'pk': so_id})
+        reverse_lazy('PySaleOrder:list')
     )

@@ -1,9 +1,14 @@
 # Django Library
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+
+# Thirdparty Library
+from apps.base.views.web_father import (
+    FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
+    FatherUpdateView)
 
 # Localfolder Library
 from ..models.accountmove import PyAccountMove
@@ -53,6 +58,7 @@ class AccountMoveCreateView(CreateView):
         context['back_url'] = reverse('base:account-move')
         return context
 
+
 class AccountMoveUpdateView(UpdateView):
     model = PyAccountMove
     fields = ACCOUNTMOVE_FIELDS_SHORT
@@ -66,8 +72,5 @@ class AccountMoveUpdateView(UpdateView):
         return context
 
 
-@login_required(login_url="base:login")
-def DeleteAccountMove(self, pk):
-    accountmove = PyAccountMove.objects.get(id=pk)
-    accountmove.delete()
-    return redirect(reverse('base:account-move'))
+class AccountMoveDeleteView(LoginRequiredMixin, FatherDeleteView):
+    model = PyAccountMove

@@ -4,25 +4,25 @@
 import logging
 
 # Django Library
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import serializers
 from django.db import transaction
 from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
-from django.shortcuts import redirect
-from django.core import serializers
 
 # Thirdparty Library
+from apps.base.models import PyProduct, PyTax
 from apps.base.views.web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, SaleOrderForm
 from .models import PySaleOrder, PySaleOrderDetail
-from apps.base.models import PyProduct, PyTax
 
 LOGGER = logging.getLogger(__name__)
 
@@ -105,7 +105,7 @@ class SaleOrderAddView(LoginRequiredMixin, FatherCreateView):
     """
     model = PySaleOrder
     form_class = SaleOrderForm
-    template_name = 'sale/saleorderform.html'
+    template_name = 'sale/form.html'
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -117,13 +117,8 @@ class SaleOrderAddView(LoginRequiredMixin, FatherCreateView):
             {
                 'url': '{}:list'.format(object_name),
                 'name': '{}'.format(verbose_name)
-            },
-            {
-                'url': False,
-                'name': self.object.name
             }
         ]
-        context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['products'] = PRODUCT_FORMSET(self.request.POST)
         else:
@@ -151,7 +146,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
     """
     model = PySaleOrder
     form_class = SaleOrderForm
-    template_name = 'sale/saleorderform.html'
+    template_name = 'sale/form.html'
 
     def get_context_data(self, **kwargs):
         _pk = self.kwargs.get(self.pk_url_kwarg)
@@ -181,7 +176,6 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
         context = self.get_context_data()
         products = context['products']
         if self.object.state == 0:
-            print(self.object.state)
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and products.is_valid():
@@ -208,7 +202,7 @@ class SaleOrderDeleteView(LoginRequiredMixin, DeleteView):
     """Vista para eliminar las sale
     """
     model = PySaleOrder
-    template_name = 'sale/saleorderdelete.html'
+    template_name = 'sale/delete.html'
     success_url = reverse_lazy('PySaleOrder:list')
 
     def get_context_data(self, **kwargs):

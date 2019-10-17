@@ -1,7 +1,7 @@
 # Django Library
 from django.contrib import admin
 
-# Localfolder Library
+# Thirdparty Library
 from apps.sale.models import PySaleOrder, PySaleOrderDetail
 
 # Register your models here.

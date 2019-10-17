@@ -92,5 +92,3 @@ class ProductAutoComplete(autocomplete.Select2QuerySetView):
         if self.q:
             queryset = queryset.filter(name__icontains=self.q)
         return queryset
-
-

@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     {% if object.img %}
-                            <img class="img img-responsive" border="1" name="image" src="{{ object.img.url }}" style="width: 90px; height: 90px;">
+                        <img class="img img-responsive" border="1" name="image" src="{{ object.img.url }}" style="width: 90px; height: 90px;">
                     {% endif %}
                 </div>
             </div>
@@ -122,6 +122,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% if not detail %}
+                            <tr>
+                                {% for field in detail_fields %}
+                                <td>&nbsp;</td>
+                                {% endfor %}
+                            </tr>
+                        {% endif %}
                         {% for object in detail %}
                             <tr>
                                 {% for field in detail_fields %}
@@ -147,7 +154,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <div class="row">
+            <div class="row parent">
                 <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
                 <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
             </div>
@@ -171,6 +178,15 @@
             <div class="row">
                 <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total:') }}</div>
                 <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_total|intcomma }}</div>
+            </div>
+            <hr class="style1">
+            <div class="row">
+                <div class="form-group row col-sm-12">
+                    <label class="col-1 col-form-label" >{{ _('Note') }}</label>
+                    <div class="col-11">
+                        <textarea name="note" cols="400" rows="1" class="form-control" style="width: 100%" id="id_note" readonly>{{ object.note}}</textarea>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /.card-footer -->

@@ -11,24 +11,24 @@ from dal import autocomplete
 from tempus_dominus.widgets import DatePicker, DateTimePicker, TimePicker
 
 # Localfolder Library
-from .models import PySaleOrder, PySaleOrderDetail
+from .models import PyInvoice, PyInvoiceDetail
 
 
 # ========================================================================== #
-class SaleOrderForm(forms.ModelForm):
+class InvoiceForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
     """
     class Meta:
-        model = PySaleOrder
+        model = PyInvoice
         fields = [
-            'date_order',
+            'date_invoice',
             'partner_id',
             'note'
         ]
         labels = {
             'partner_id': _('Client',),
             'note': _('Note'),
-            'date_order': _('Date')
+            'date_invoice': _('Date')
             # 'description': 'Descripción',
         }
         widgets = {
@@ -40,7 +40,7 @@ class SaleOrderForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'date_order': DateTimePicker(
+            'date_invoice': DateTimePicker(
                 options={
                     'useCurrent': True,
                     'collapse': True,
@@ -75,7 +75,7 @@ class SaleOrderDetailForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
     """
     class Meta:
-        model = PySaleOrderDetail
+        model = PyInvoiceDetail
         exclude = ()
         fields = [
             'product_id',
@@ -171,7 +171,7 @@ class BaseProductFormSet(BaseInlineFormSet):
         form.fields[DELETION_FIELD_NAME].label = ''
 
 PRODUCT_FORMSET = inlineformset_factory(
-    PySaleOrder, PySaleOrderDetail,
+    PyInvoice, PyInvoiceDetail,
     form=SaleOrderDetailForm,
     formset=BaseProductFormSet,
     extra=1,

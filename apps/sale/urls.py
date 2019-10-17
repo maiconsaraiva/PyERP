@@ -8,7 +8,7 @@ from .reports.saleorderpdf import sale_order_pdf
 from .views import (
     SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailView,
     SaleOrderEditView, SaleOrderListView, load_product, load_tax,
-    sale_order_state, sale_order_active)
+    sale_order_active, sale_order_state)
 
 app_name = 'PySaleOrder'
 
