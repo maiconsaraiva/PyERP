@@ -20,12 +20,14 @@ class SaleOrderForm(forms.ModelForm):
     class Meta:
         model = PySaleOrder
         fields = [
+            'date_order',
             'partner_id',
             'note'
         ]
         labels = {
             'partner_id': _('Client',),
-            'note': _('Note')
+            'note': _('Note'),
+            'date_order': _('Date')
             # 'description': 'Descripción',
         }
         widgets = {
@@ -48,8 +50,6 @@ class SaleOrderForm(forms.ModelForm):
 
 
 # ========================================================================== #
-
-
 class CustomSelect(forms.SelectMultiple):
     def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
         options = super(CustomSelect, self).create_option(name, value, label, selected, index, subindex=None, attrs=None)
@@ -78,7 +78,7 @@ class SaleOrderDetailForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'data-placeholder': _('Select a product ...'),
-                    'style': 'width: 180px',
+                    # 'style': 'width: 180px',
                 },
             ),
             # 'product_id': autocomplete.ModelSelect2(
@@ -92,29 +92,29 @@ class SaleOrderDetailForm(forms.ModelForm):
             'description': forms.TextInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'placeholder': _('Description'),
-                    'style': 'width: 150px',
+                    'placeholder': _('----------'),
+                    # 'style': 'width: 150px',
                 },
             ),
             'quantity': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'data-placeholder': _('Product quantity ...'),
-                    'style': 'width: 80px',
+                    # 'style': 'width: 80px',
                 },
             ),
             'uom_id': forms.Select(
                 attrs={
                     'class': 'custom-select custom-select-sm',
                     'data-placeholder': _('Unit measurement ...'),
-                    'style': 'width: 80px',
+                    # 'style': 'width: 80px',
                 },
             ),
             'price': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm text-right',
                     'data-placeholder': 'Precio del producto ...',
-                    'style': 'width: 80px',
+                    # 'style': 'width: 80px',
                     'value': 0,
                 },
             ),
@@ -122,14 +122,14 @@ class SaleOrderDetailForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm text-right',
                     'data-placeholder': 'Descuento ...',
-                    'style': 'width: 80px',
+                    # 'style': 'width: 80px',
                 },
             ),
             'tax_id': CustomSelect(
                 attrs={
                     'class': 'selectpicker',
                     'data-placeholder': _('Select taxes...'),
-                    'style': 'width: 150px',
+                    # 'style': 'width: 150px',
                 },
             ),
             # 'tax_id': autocomplete.ModelSelect2Multiple(
@@ -144,8 +144,8 @@ class SaleOrderDetailForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm text-right',
                     'data-placeholder': 'Total ...',
-                    'style': 'width: 80px',
-                    # 'readonly': True,
+                    # 'style': 'width: 80px',
+                    'readonly': True,
                 },
             ),
         }

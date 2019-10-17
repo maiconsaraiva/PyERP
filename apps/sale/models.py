@@ -1,6 +1,7 @@
 # Django Library
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
 
 # Thirdparty Library
 from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
@@ -25,7 +26,7 @@ class PySaleOrder(PyFather):
         blank=True,
         on_delete=models.PROTECT
     )
-    date_order = models.DateTimeField(auto_now_add=True, null=True)
+    date_order = models.DateTimeField(default=datetime.now(), null=True)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
         max_digits=10,
@@ -88,11 +89,12 @@ class PySaleOrderDetail(PyFather):
     )
     product_id = models.ForeignKey(
         PyProduct,
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        verbose_name=_('Product')
     )
     description = models.TextField(blank=True, null=True)
     quantity = models.DecimalField(
-        _('Qty.'),
+        _('Quantity'),
         max_digits=10,
         decimal_places=2,
         default=0

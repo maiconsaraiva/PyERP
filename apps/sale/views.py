@@ -28,7 +28,7 @@ LOGGER = logging.getLogger(__name__)
 
 OBJECT_LIST_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
-    {'string': _('Partner'), 'field': 'partner_id'},
+    {'string': _('Client'), 'field': 'partner_id'},
     {'string': ('Date'), 'field': 'date_order'},
     {'string': ('Net Amount'), 'field': 'amount_untaxed', 'align': 'text-right', 'humanize': True},
     {'string': ('Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
@@ -36,14 +36,15 @@ OBJECT_LIST_FIELDS = [
 
 OBJECT_DETAIL_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
-    {'string': _('Partner'), 'field': 'partner_id'},
     {'string': ('Date'), 'field': 'date_order'},
+    {'string': _('Client'), 'field': 'partner_id'},
 ]
 
 DETAIL_OBJECT_LIST_FIELDS = [
     {'string': _('Product'), 'field': 'product_id'},
     {'string': _('Description'), 'field': 'description'},
     {'string': _('Quantity'), 'field': 'quantity', 'align': 'text-center', 'humanize': True},
+    {'string': ('UOM'), 'field': 'uom_id', 'align': 'text-left', 'humanize': True},
     {'string': ('Price'), 'field': 'price', 'align': 'text-right', 'humanize': True},
     {'string': _('Discount'), 'field': 'discount', 'align': 'text-right', 'humanize': True},
     {'string': _('Tax'), 'field': 'tax_id'},
@@ -110,6 +111,19 @@ class SaleOrderAddView(LoginRequiredMixin, FatherCreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action_url'] = 'PySaleOrder:sale-order-add'
+        object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
+        context['breadcrumbs'] = [
+            {
+                'url': '{}:list'.format(object_name),
+                'name': '{}'.format(verbose_name)
+            },
+            {
+                'url': False,
+                'name': self.object.name
+            }
+        ]
+        context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['products'] = PRODUCT_FORMSET(self.request.POST)
         else:
@@ -143,7 +157,17 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
         _pk = self.kwargs.get(self.pk_url_kwarg)
         context = super().get_context_data(**kwargs)
         object_name = self.model._meta.object_name
-        context['action_url'] = 'PySaleOrder:update'
+        verbose_name = self.model._meta.verbose_name
+        context['breadcrumbs'] = [
+            {
+                'url': '{}:list'.format(object_name),
+                'name': '{}'.format(verbose_name)
+            },
+            {
+                'url': False,
+                'name': self.object.name
+            }
+        ]
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = SaleOrderForm(self.request.POST, instance=self.object)

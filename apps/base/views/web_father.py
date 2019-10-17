@@ -165,6 +165,10 @@ class FatherCreateView(CreateView):
         context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
         context['title'] = '{}'.format(verbose_name)
+        context['list_url'] = '{}:list'.format(object_name)
+        context['update_url'] = '{}:update'.format(object_name)
+        context['delete_url'] = '{}:delete'.format(object_name)
+        context['detail_url'] = '{}:detail'.format(object_name)
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
@@ -201,6 +205,21 @@ class FatherUpdateView(UpdateView):
         context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
         context['title'] = '{}'.format(verbose_name)
+        context['list_url'] = '{}:list'.format(object_name)
+        context['update_url'] = '{}:update'.format(object_name)
+        context['delete_url'] = '{}:delete'.format(object_name)
+        context['detail_url'] = '{}:detail'.format(object_name)
+        context['action_url'] = '{}:update'.format(object_name)
+        context['next'] = self.model.objects.filter(
+            pk__gt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).first()
+        context['before'] = self.model.objects.filter(
+            pk__lt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).last()
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
