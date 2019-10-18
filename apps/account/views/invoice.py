@@ -28,23 +28,23 @@ LOGGER = logging.getLogger(__name__)
 
 OBJECT_LIST_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
-    {'string': _('Partner'), 'field': 'partner_id'},
-    {'string': ('Date'), 'field': 'date_order'},
+    {'string': _('Client'), 'field': 'partner_id'},
+    {'string': ('Date'), 'field': 'date_invoice'},
     {'string': ('Net Amount'), 'field': 'amount_untaxed', 'align': 'text-right', 'humanize': True},
     {'string': ('Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
-    {'string': _('Status'), 'field': 'state'},
 ]
 
 OBJECT_DETAIL_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
-    {'string': _('Partner'), 'field': 'partner_id'},
-    {'string': ('Date'), 'field': 'date_order'},
-    {'string': _('Status'), 'field': 'state'},
+    {'string': ('Date'), 'field': 'date_invoice'},
+    {'string': _('Client'), 'field': 'partner_id'},
 ]
 
 DETAIL_OBJECT_LIST_FIELDS = [
-    {'string': _('Description'), 'field': 'product_id'},
+    {'string': _('Product'), 'field': 'product_id'},
+    {'string': _('Description'), 'field': 'description'},
     {'string': _('Quantity'), 'field': 'quantity', 'align': 'text-center', 'humanize': True},
+    {'string': ('UOM'), 'field': 'uom_id', 'align': 'text-left', 'humanize': True},
     {'string': ('Price'), 'field': 'price', 'align': 'text-right', 'humanize': True},
     {'string': _('Discount'), 'field': 'discount', 'align': 'text-right', 'humanize': True},
     {'string': _('Tax'), 'field': 'tax_id'},
@@ -53,10 +53,9 @@ DETAIL_OBJECT_LIST_FIELDS = [
 
 OBJECT_FORM_FIELDS = [
     {'string': _('Client'), 'field': 'partner_id'},
-    {'string': _('Estatus'), 'field': 'state'},
 ]
 
-LEAD_FIELDS_SHORT = ['name', 'partner_id', 'state']
+LEAD_FIELDS_SHORT = ['name', 'partner_id']
 
 
 # ========================================================================== #
@@ -64,14 +63,14 @@ class InvoiceListView(LoginRequiredMixin, FatherListView):
     """Lista de las ordenes de venta
     """
     model = PyInvoice
-    # template_name = 'sale/saleorderlist.html'
+    # template_name = 'invoice/saleorderlist.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
 # ========================================================================== #
 class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyInvoice
-    template_name = 'sale/detail.html'
+    template_name = 'invoice/detail.html'
     extra_context = {
         'master_fields': OBJECT_DETAIL_FIELDS,
         'detail_fields': DETAIL_OBJECT_LIST_FIELDS
@@ -80,11 +79,22 @@ class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
+        context['breadcrumbs'] = [
+            {
+                'url': '{}:list'.format(object_name),
+                'name': '{}'.format(verbose_name)
+            },
+            {
+                'url': False,
+                'name': self.object.name
+            }
+        ]
         context['print_url'] = '{}:pdf'.format(object_name)
         context['detail'] = PyInvoiceDetail.objects.filter(
             active=True,
             company_id=self.request.user.active_company_id,
-            sale_order_id=self.object.pk
+            invoice_id=self.object.pk
         )
         return context
 
@@ -95,12 +105,20 @@ class InvoiceAddView(LoginRequiredMixin, FatherCreateView):
     """
     model = PyInvoice
     form_class = InvoiceForm
-    template_name = 'sale/form.html'
+    template_name = 'invoice/form.html'
     success_url = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['action_url'] = 'PyInvoice:sale-order-add'
+        object_name = self.model._meta.object_name
+        verbose_name = self.model._meta.verbose_name
+        context['breadcrumbs'] = [
+            {
+                'url': '{}:list'.format(object_name),
+                'name': '{}'.format(verbose_name)
+            }
+        ]
         if self.request.POST:
             context['products'] = PRODUCT_FORMSET(self.request.POST)
         else:
@@ -128,17 +146,27 @@ class InvoiceEditView(LoginRequiredMixin, FatherUpdateView):
     """
     model = PyInvoice
     form_class = InvoiceForm
-    template_name = 'sale/form.html'
+    template_name = 'invoice/form.html'
 
     def get_context_data(self, **kwargs):
         _pk = self.kwargs.get(self.pk_url_kwarg)
         context = super().get_context_data(**kwargs)
         object_name = self.model._meta.object_name
-        context['action_url'] = 'PyInvoice:update'
+        verbose_name = self.model._meta.verbose_name
+        context['breadcrumbs'] = [
+            {
+                'url': '{}:list'.format(object_name),
+                'name': '{}'.format(verbose_name)
+            },
+            {
+                'url': False,
+                'name': self.object.name
+            }
+        ]
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = InvoiceForm(self.request.POST, instance=self.object)
-            context['products'] = PRODUCT_FORMSET(self.request.POST, extra=1, instance=self.object)
+            context['products'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
         else:
             context['form'] = InvoiceForm(instance=self.object)
             context['products'] = PRODUCT_FORMSET(instance=self.object)
@@ -148,7 +176,6 @@ class InvoiceEditView(LoginRequiredMixin, FatherUpdateView):
         context = self.get_context_data()
         products = context['products']
         if self.object.state == 0:
-            print(self.object.state)
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and products.is_valid():
@@ -175,18 +202,18 @@ class InvoiceDeleteView(LoginRequiredMixin, DeleteView):
     """Vista para eliminar las sale
     """
     model = PyInvoice
-    template_name = 'sale/delete.html'
+    template_name = 'invoice/delete.html'
     success_url = reverse_lazy('PyInvoice:list')
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         self.object = self.get_object()
         context = super().get_context_data(**kwargs)
-        context['title'] = 'ELiminar Orden de Venta'
+        context['title'] = _('Delete Invoice')
         context['action_url'] = 'PyInvoice:delete'
         context['delete_message'] = '<p>¿Está seguro de eliminar la orden de compras <strong>' + self.object.name + '</strong>?</p>'
         context['cant_delete_message'] = '<p>La orden de compras <strong>' + self.object.name + '</strong>, no puede ser eliminada.</p>'
-        # context['detail'] = PyInvoiceDetail.objects.filter(sale_order_id=pk).exists()
+        # context['detail'] = PyInvoiceDetail.objects.filter(invoice_id=pk).exists()
         context['detail'] = True
         return context
 
@@ -194,7 +221,7 @@ class InvoiceDeleteView(LoginRequiredMixin, DeleteView):
         # pk = self.kwargs.get(self.pk_url_kwarg)
         # self.object = self.get_object()
         # success_url = self.get_success_url()
-        # detail = PyInvoiceDetail.objects.filter(sale_order_id=pk).exists()
+        # detail = PyInvoiceDetail.objects.filter(invoice_id=pk).exists()
         # if not detail:
         #     self.object.delete()
         return HttpResponseRedirect(self.success_url)
@@ -223,20 +250,20 @@ def load_tax(request):
 # ========================================================================== #
 @login_required()
 def invoice_state(request, pk, state):
-    sale_order = PySaleOrder.objects.get(pk=pk)
-    sale_order.state = state
-    sale_order.save()
+    invoice = PyInvoice.objects.get(pk=pk)
+    invoice.state = state
+    invoice.save()
     return redirect(
-        reverse_lazy('PySaleOrder:detail', kwargs={'pk': pk})
+        reverse_lazy('PyInvoice:detail', kwargs={'pk': pk})
     )
 
 
 # ========================================================================== #
 @login_required()
 def invoice_active(request, pk, active):
-    sale_order = PySaleOrder.objects.get(pk=pk)
-    sale_order.active = active
-    sale_order.save()
+    invoice = PyInvoice.objects.get(pk=pk)
+    invoice.active = active
+    invoice.save()
     return redirect(
-        reverse_lazy('PySaleOrder:list')
+        reverse_lazy('PyInvoice:list')
     )
