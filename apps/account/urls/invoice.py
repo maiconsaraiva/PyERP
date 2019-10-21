@@ -12,32 +12,20 @@ from ..views import (
 app_name = 'PyInvoice'
 
 urlpatterns = [
-    # ========================== Sale Orders URL's ========================= #
+    # =========================== Invoice URL's ============================ #
     path('', InvoiceListView.as_view(), name='list'),
     path('<int:pk>', InvoiceDetailView.as_view(), name='detail'),
     path('add/', InvoiceAddView.as_view(), name='add'),
-    path(
-        '<int:pk>/edit/',
-        InvoiceEditView.as_view(),
-        name='update'
-    ),
-    path(
-        '<int:pk>/delete/',
-        InvoiceDeleteView.as_view(),
-        name='delete'
-    ),
-    path(
-        'state/<int:pk>/<int:state>', invoice_state, name='state'
-    ),
-    path(
-        'active/<int:pk>/<int:active>', invoice_active, name='active'
-    ),
+    path('<int:pk>/edit/', InvoiceEditView.as_view(), name='update'),
+    path('<int:pk>/delete/', InvoiceDeleteView.as_view(), name='delete'),
+    path('state/<int:pk>/<int:state>', invoice_state, name='state'),
+    path('active/<int:pk>/<int:active>', invoice_active, name='active'),
 
-    # ======================== Sale Orders AJAX URL's ====================== #
+    # ======================== Invoice= AJAX URL's ========================= #
     path('load-product/', load_product, name='ajax_load_product'),
     path('load-tax/', load_tax, name='ajax_load_tax'),
 
-    # ====================== Sale Orders Reports URL's ===================== #
+    # ====================== Invoice= Reports URL's ======================== #
     path(
         'pdf/<int:pk>',
         invoice_pdf,

@@ -2,7 +2,7 @@
 from django.urls import path
 
 # Localfolder Library
-from ..views.accountmove import (
+from ..views import (
     AccountMoveCreateView, AccountMoveDeleteView, AccountMoveDetailView,
     AccountMoveListView, AccountMoveUpdateView)
 

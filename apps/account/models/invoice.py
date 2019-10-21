@@ -1,14 +1,14 @@
-# Django Library
 # Standard Library
 from datetime import datetime
 
+# Django Library
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
-from apps.sale.models import PySaleOrder
 from apps.base.views.sequence import get_next_value
+from apps.sale.models import PySaleOrder
 
 IVOICE_STATE = (
         (0, _('draft')),
@@ -25,8 +25,6 @@ class PyInvoice(PyFather):
     name = models.CharField(_('Name'), max_length=80, editable=False)
     partner_id = models.ForeignKey(
         PyPartner,
-        null=True,
-        blank=True,
         on_delete=models.PROTECT
     )
     sale_order_id = models.ForeignKey(

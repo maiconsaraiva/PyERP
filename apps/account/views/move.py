@@ -11,7 +11,7 @@ from apps.base.views.web_father import (
     FatherUpdateView)
 
 # Localfolder Library
-from ..models.accountmove import PyAccountMove
+from ..models import PyAccountMove
 
 ACCOUNTMOVE_FIELDS = [
             {'string': 'Código', 'field': 'code'},
@@ -22,7 +22,7 @@ ACCOUNTMOVE_FIELDS = [
 ACCOUNTMOVE_FIELDS_SHORT = ['code','name','state']
 
 
-class AccountMoveListView(ListView):
+class AccountMoveListView(LoginRequiredMixin, ListView):
     model = PyAccountMove
     template_name = 'base/list.html'
 
@@ -34,7 +34,7 @@ class AccountMoveListView(ListView):
         context['fields'] = ACCOUNTMOVE_FIELDS
         return context
 
-class AccountMoveDetailView(DetailView):
+class AccountMoveDetailView(LoginRequiredMixin, DetailView):
     model = PyAccountMove
     template_name = 'base/detail.html'
     def get_context_data(self, **kwargs):
@@ -46,7 +46,7 @@ class AccountMoveDetailView(DetailView):
         context['fields'] = ACCOUNTMOVE_FIELDS
         return context
 
-class AccountMoveCreateView(CreateView):
+class AccountMoveCreateView(LoginRequiredMixin, CreateView):
     model = PyAccountMove
     fields = ACCOUNTMOVE_FIELDS_SHORT
     template_name = 'base/form.html'
@@ -59,7 +59,7 @@ class AccountMoveCreateView(CreateView):
         return context
 
 
-class AccountMoveUpdateView(UpdateView):
+class AccountMoveUpdateView(LoginRequiredMixin, UpdateView):
     model = PyAccountMove
     fields = ACCOUNTMOVE_FIELDS_SHORT
     template_name = 'base/form.html'

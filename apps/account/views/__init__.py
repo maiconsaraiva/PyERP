@@ -1,9 +1,11 @@
 """Account views
 """
 # Localfolder Library
-from .accountmove import (
+from .move import (
     AccountMoveCreateView, AccountMoveDeleteView, AccountMoveDetailView,
-    AccountMoveListView, AccountMoveUpdateView)
+    AccountMoveListView, AccountMoveUpdateView, AccountMoveDeleteView)
+from .plan import (AccountPlanCreateView, AccountPlanDeleteView, AccountPlanDetailView,
+    AccountPlanListView, AccountPlanUpdateView, AccountPlanDeleteView)
 from .invoice import (
     InvoiceAddView, InvoiceDeleteView, InvoiceDetailView, InvoiceEditView,
     InvoiceListView, invoice_active, invoice_state, load_product, load_tax)

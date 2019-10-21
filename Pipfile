@@ -44,6 +44,7 @@ PyPDF2 = "==1.26.0"
 django-settings-export = "*"
 django-tempus-dominus = "*"
 django-dynamic-formsets = "*"
+django-taggit = "*"
 
 [requires]
 python_version = "3.7"

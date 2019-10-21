@@ -24,8 +24,6 @@ class PySaleOrder(PyFather):
     name = models.CharField(_('Name'), max_length=80, editable=False)
     partner_id = models.ForeignKey(
         PyPartner,
-        null=True,
-        blank=True,
         on_delete=models.PROTECT
     )
     date_order = models.DateTimeField(default=datetime.now(), null=True, blank=True)
