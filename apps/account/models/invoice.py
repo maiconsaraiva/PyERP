@@ -10,7 +10,7 @@ from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
 from apps.base.views.sequence import get_next_value
 from apps.sale.models import PySaleOrder
 
-IVOICE_STATE = (
+INVOICE_STATE = (
         (0, _('draft')),
         (1, _('open')),
         (2, _('cancel')),
@@ -69,7 +69,7 @@ class PyInvoice(PyFather):
     description = models.TextField(_('Description'), blank=True, null=True)
     state = models.IntegerField(
         _('Status'),
-        choices=IVOICE_STATE,
+        choices=INVOICE_STATE,
         default=0
     )
     note = models.TextField(_('Note'), blank=True, null=True)

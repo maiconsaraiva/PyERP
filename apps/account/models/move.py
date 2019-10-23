@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from apps.base.models import PyCompany, PyFather
+from apps.base.views.sequence import get_next_value
 from taggit.managers import TaggableManager
 
 # Localfolder Library
@@ -25,8 +26,11 @@ ACCOUNT_MOVE_STATE = (
 # ========================================================================== #
 class PyAccountMove(PyFather):
     name = models.CharField(_('Name'), max_length=80)
-    state = models.CharField(
-        choices=ACCOUNT_MOVE_STATE, max_length=64, default='draft')
+    state = models.IntegerField(
+        _('Status'),
+        choices=ACCOUNT_MOVE_STATE,
+        default=0
+    )
     journal_id = models.ForeignKey(PyJournal, on_delete=models.PROTECT)
     date_move = models.DateTimeField(
         default=datetime.now(),
@@ -59,6 +63,13 @@ class PyAccountMove(PyFather):
         default=0
     )
 
+    def save(self, *args, **kwargs):
+        self.name = get_next_value(self._meta.object_name, 'ACC')
+
+        if not self.date_move or self.date_move == "":
+            self.date_move = datetime.now()
+        super().save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('PyAccountMove:detail', kwargs={'pk': self.pk})
 
@@ -74,6 +85,7 @@ class PyAccountMove(PyFather):
 class PyAccountMoveDetail(PyFather):
     """Modelo del detalle de la orden de pago
     """
+    name = models.CharField(_('Name'), max_length=80)
     account_move_id = models.ForeignKey(
         PyAccountMove,
         on_delete=models.PROTECT,
@@ -106,6 +118,11 @@ class PyAccountMoveDetail(PyFather):
         null=True,
         blank=True
     )
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.name = get_next_value(self._meta.object_name, 'ACN')
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['pk']

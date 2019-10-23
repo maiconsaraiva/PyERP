@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from dal import autocomplete
-from tempus_dominus.widgets import DatePicker, DateTimePicker, TimePicker
+from tempus_dominus.widgets import DateTimePicker
 
 # Localfolder Library
 from ..models import PyInvoice, PyInvoiceDetail

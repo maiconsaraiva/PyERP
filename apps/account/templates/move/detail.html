@@ -28,4 +28,12 @@
 </div>
 {% include 'account/time_line.html' %}
 {% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#formset_table tr:last').after('<tr style="background-color: transparent;"><td colspan="7">&nbsp;</td></tr>');
+    $('#formset_table tr:last').after('<tr id="tr_resumen" style="background-color: #563D7C; color: #ffffff;"><td colspan="3">&nbsp;</td><td style="color: #ffffff;" id="t_debit">$ {{ object.debit }}</td><td style="color: #ffffff;" id="t_credit">$ {{ object.credit }}</td><td colspan="2">&nbsp;</td></tr>');
+  });
+</script>
+{% endblock %}
 

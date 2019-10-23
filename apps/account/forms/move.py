@@ -8,7 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from dal import autocomplete
-from tempus_dominus.widgets import DatePicker, DateTimePicker, TimePicker
+from taggit.forms import TagWidget
+from tempus_dominus.widgets import DateTimePicker
 
 # Localfolder Library
 from ..models import PyAccountMove, PyAccountMoveDetail
@@ -35,7 +36,7 @@ class AccountMoveForm(forms.ModelForm):
         widgets = {
             'journal_id': forms.Select(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'data-placeholder': _('Select a journal ...'),
                 },
             ),
@@ -54,14 +55,14 @@ class AccountMoveForm(forms.ModelForm):
             ),
             'company': forms.TextInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'placeholder': _('----------'),
                     # 'style': 'width: 150px',
                 },
             ),
             'reference': forms.TextInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'placeholder': _('----------'),
                     # 'style': 'width: 150px',
                 },
@@ -106,7 +107,7 @@ class AccountMoveDetailForm(forms.ModelForm):
                     # 'style': 'width: 180px',
                 },
             ),
-            'tags': forms.TextInput(
+            'tags': TagWidget(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'placeholder': _('----------'),

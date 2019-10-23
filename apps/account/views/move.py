@@ -7,16 +7,14 @@ import logging
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core import serializers
 from django.db import transaction
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
 
 # Thirdparty Library
-from apps.base.models import PyProduct
 from apps.base.views.web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
@@ -32,7 +30,7 @@ OBJECT_LIST_FIELDS = [
     {'string': ('Company'), 'field': 'company_move'},
     {'string': ('Reference'), 'field': 'reference'},
     {'string': ('Journal'), 'field': 'journal_id'},
-    {'string': ('Amount'), 'field': 'amount'},
+    {'string': ('Amount'), 'field': 'credit'},
     {'string': ('State'), 'field': 'state'},
 ]
 
@@ -115,20 +113,20 @@ class AccountMoveCreateView(LoginRequiredMixin, FatherCreateView):
             }
         ]
         if self.request.POST:
-            context['products'] = ACCOUNTING_NOTES(self.request.POST)
+            context['formset'] = ACCOUNTING_NOTES(self.request.POST)
         else:
-            context['products'] = ACCOUNTING_NOTES()
+            context['formset'] = ACCOUNTING_NOTES()
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        product = context['products']
+        formset = context['formset']
         with transaction.atomic():
             form.instance.uc = self.request.user.pk
             self.object = form.save()
-            if product.is_valid():
-                product.instance = self.object
-                product.save()
+            if formset.is_valid():
+                formset.instance = self.object
+                formset.save()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -160,23 +158,36 @@ class AccountMoveUpdateView(LoginRequiredMixin, FatherUpdateView):
         ]
         if self.request.POST:
             context['form'] = AccountMoveForm(self.request.POST, instance=self.object)
-            context['products'] = ACCOUNTING_NOTES(self.request.POST, instance=self.object)
+            context['formset'] = ACCOUNTING_NOTES(self.request.POST, instance=self.object)
         else:
             context['form'] = AccountMoveForm(instance=self.object)
-            context['products'] = ACCOUNTING_NOTES(instance=self.object)
+            context['formset'] = ACCOUNTING_NOTES(instance=self.object)
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        products = context['products']
+        formset = context['formset']
+        t_debit = 0
+        t_credit = 0
         if self.object.state == 0:
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
-                if form.is_valid() and products.is_valid():
-                    print("Form valid")
+                print("1")
+                if form.is_valid() and formset.is_valid():
+                    for obj in formset:
+                        print("2")
+                        t_debit += obj.cleaned_data['debit']
+                        t_credit += obj.cleaned_data['credit']
+                    if t_debit != t_credit:
+                        messages.error(
+                            self.request,
+                            _('Unbalanced accounting entry')
+                        )
+                        return super().form_invalid(form)
+
                     self.object = form.save(commit=False)
-                    products.instance = self.object
-                    products.save()
+                    formset.instance = self.object
+                    formset.save()
                     self.object.save()
                     return super().form_valid(form)
                 else:
@@ -220,16 +231,6 @@ class AccountMoveDeleteView(LoginRequiredMixin, DeleteView):
         # if not detail:
         #     self.object.delete()
         return HttpResponseRedirect(self.success_url)
-
-
-# ========================================================================== #
-@login_required()
-def load_product(request):
-    context = {}
-    product_id = request.GET.get('product')
-    product = PyProduct.objects.filter(pk=product_id)
-    context['product'] = serializers.serialize('json', product)
-    return JsonResponse(data=context, safe=False)
 
 
 # ========================================================================== #

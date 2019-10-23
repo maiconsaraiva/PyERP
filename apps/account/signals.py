@@ -5,8 +5,9 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# Thirdparty Library
-from .models import PyInvoice, PyInvoiceDetail
+# Localfolder Library
+from .models import (
+    PyAccountMove, PyAccountMoveDetail, PyInvoice, PyInvoiceDetail)
 
 
 # ========================================================================== #
@@ -25,32 +26,32 @@ def calc_sale_order(sender, instance, **kwargs):
 
     amount_total = 0
 
-    for product in PyInvoiceDetail.objects.filter(invoice_id=instance.pk):
-        amount_untaxed = (product.quantity * product.price) - product.discount
-        if product.tax_id.all().exists():
-            for tax in product.tax_id.all():
+    for obj in PyInvoiceDetail.objects.filter(invoice_id=instance.pk):
+        amount_untaxed = (obj.quantity * obj.price) - obj.discount
+        if obj.tax_id.all().exists():
+            for tax in obj.tax_id.all():
                 if tax.pk == 1:
                     amount_tax_iva = (amount_untaxed * tax.amount)/100
                 else:
                     amount_tax_other += (amount_untaxed * tax.amount)/100
         else:
             amount_exempt = amount_untaxed
-        product.active = True
-        product.company_id = instance.company_id
-        product.amount_untaxed = amount_untaxed
-        product.amount_tax_iva = amount_tax_iva
-        product.amount_tax_other = amount_tax_other
-        product.amount_tax_total = amount_tax_iva + amount_tax_other
-        product.amount_exempt = amount_exempt
-        product.amount_total = amount_untaxed + amount_tax_iva + amount_tax_other
-        product.save()
+        obj.active = True
+        obj.company_id = instance.company_id
+        obj.amount_untaxed = amount_untaxed
+        obj.amount_tax_iva = amount_tax_iva
+        obj.amount_tax_other = amount_tax_other
+        obj.amount_tax_total = amount_tax_iva + amount_tax_other
+        obj.amount_exempt = amount_exempt
+        obj.amount_total = amount_untaxed + amount_tax_iva + amount_tax_other
+        obj.save()
 
-        t_amount_untaxed += product.amount_untaxed
-        t_amount_tax_iva += product.amount_tax_iva
-        t_amount_tax_other += product.amount_tax_other
-        t_amount_tax_total += product.amount_tax_total
-        t_amount_exempt += product.amount_exempt
-        amount_total += product.amount_total
+        t_amount_untaxed += obj.amount_untaxed
+        t_amount_tax_iva += obj.amount_tax_iva
+        t_amount_tax_other += obj.amount_tax_other
+        t_amount_tax_total += obj.amount_tax_total
+        t_amount_exempt += obj.amount_exempt
+        amount_total += obj.amount_total
 
         amount_untaxed = 0
         amount_exempt = 0
@@ -63,3 +64,15 @@ def calc_sale_order(sender, instance, **kwargs):
     instance.amount_tax_total = t_amount_tax_total
     instance.amount_exempt = t_amount_exempt
     instance.amount_total = amount_total
+
+
+# ========================================================================== #
+@receiver(post_save, sender=PyAccountMove)
+def calc_account_move(sender, instance, **kwargs):
+    t_adebit = 0
+    t_credit = 0
+    for obj in PyAccountMoveDetail.objects.filter(account_move_id=instance.pk):
+        t_adebit += obj.debit
+        t_credit += obj.credit
+    instance.debit = t_adebit
+    instance.credit = t_credit

@@ -8,15 +8,18 @@ from example.models import Product, Order, OrderedItem
 ## Inline Formset Example ##
 ############################
 
+
 class OrderForm(models.ModelForm):
     class Meta:
         model = Order
         fields = '__all__'
 
+
 class OrderedItemForm(models.ModelForm):
     class Meta:
         model = OrderedItem
         fields = '__all__'
+
 
 class AutoCompleteOrderedItemForm(models.ModelForm):
     """
