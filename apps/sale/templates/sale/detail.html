@@ -4,240 +4,172 @@
 
 {% block head %}
 <style>
-    .list-inline-item:not(:last-child) {
-        margin-right: .0rem;
-    }
-    .breadcrumb {
-        padding: .75rem 1rem .75rem 0rem;
-        background-color: Transparent;
-    }
-    .card-header {
-        border-bottom: none;
-    }
-    .breadcrumb-item a {
-        color: #563D7C;
-        font-weight: bold;
-    }
+  .list-inline-item:not(:last-child) {
+    margin-right: .0rem;
+  }
+  .breadcrumb {
+    padding: .75rem 1rem .75rem 0rem;
+    background-color: Transparent;
+  }
+  .card-header {
+    border-bottom: none;
+  }
+  .breadcrumb-item a {
+    color: #563D7C;
+    font-weight: bold;
+  }
 </style>
 {% endblock %}
 {% block content %}
 <div class="row" style="padding:5px;">
-    <div class="card card-outline col-12">
-        <div class="card-header">
-            <div>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        {% for btn in breadcrumbs %}
-                            {% if btn.url %}
-                                <li class="breadcrumb-item"><a href="{% url btn.url %}">{{ btn.name }}</a></li>
-                            {% else %}
-                                <li class="breadcrumb-item active" aria-current="page">{{ btn.name }}</li>
-                            {% endif %}
-                        {% endfor %}
-                    </ol>
-                </nav>
-            </div>
-            <div class="d-flex">
-                <div>
-                    <a title=" {{ _('Back') }}" href="{% url list_url %}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
-                    <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
-                    <button title="{{ _('Delete') }}" onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
-                    <a title="{{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
-                    <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
-                </div>
-                <div class="ml-auto state-bar no_active_bar">
-                    <style>
-                        .active_bar{
-                            font-weight: bold;
-                        }
-                        .no_active_bar{
-                            color:#777;
-                        }
-                        .btn-manger {
-                            color: {{ user.active_company.font_color }};
-                            background-color: {{ user.active_company.main_color }};
-                        }
-                    </style>
-                    {% if before %}
-                        <a title=" {{ _('Before') }}" href="{% url detail_url before.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
-                    {% else %}
-                        <a title=" {{ _('Before') }}" href="#" class="btn disabled btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
-                    {% endif %}
-                    {% if next %}
-                        <a title=" {{ _('Next') }}" href="{% url detail_url next.pk %}" class="btn btn-light btn-manger"> <i class="fas fa-chevron-right"></i></a>
-                    {% else %}
-                        <a title=" {{ _('Next') }}" href="#" class="btn disabled btn-manger"> <i class="fas fa-chevron-right"></i></a>
-                    {% endif %}
-                </div>
-            </div>
-            <hr class="style1">
-            <div class="d-flex align-items-center">
-                <div>
-                    {% if object.state == 0 %}
-                        <a title="{{ _('Confirm') }}" href="{% url 'PySaleOrder:state' object.pk 3 %}" class="btn btn-light">{{ _("Confirm") }}</a>
-                    {% endif %}
-                    {% if object.state != 2 %}
-                        <a title="{{ _('Cancel') }}" href="{% url 'PySaleOrder:state' object.pk 2 %}" class="btn btn-light">{{ _("Cancel") }}</a>
-                    {% endif %}
-                    {% if object.state == 2 or object.state == 3 %}
-                        <a title="{{ _('Draft') }}" href="{% url 'PySaleOrder:state' object.pk 0 %}" class="btn btn-light">{{ _("Draft") }}</a>
-                    {% endif %}
-                    <a title="_('Inactivate') }}" href="{% url 'PySaleOrder:active' object.pk 0 %}" class="btn btn-light">{{ _('Inactivate') }}</a>
-                </div>
-                <div class="ml-auto">
-                    <span class="{% if object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</span>
-                    <i class="fas fa-chevron-right"></i> <span class="{% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Sale Order") }}</span>
-                    {% if object.state == 2 %}
-                        <i class="fas fa-chevron-right"></i> <span class="font-weight-bold" style="color: #563D7C;">{{ _("Cancelled") }}</span>
-                    {% endif %}
-                </div>
-            </div>
-            <hr class="style1">
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-6">
-                    {% if object.img %}
-                        <img class="img img-responsive" border="1" name="image" src="{{ object.img.url }}" style="width: 90px; height: 90px;">
-                    {% endif %}
-                </div>
-            </div>
-            <div class="form-row">
-                {% for field in master_fields %}
-                    <div class="form-group row col-sm-6">
-                        <label class="col-sm-2 col-xl-2 col-form-label" for="{{ field.field }}">{{ field.string }}</label>
-                        <div class="col-sm-9">
-                            <input type="text" readonly class="form-control-plaintext" id="{{field.field}}" value="{{ object|get_obj_attr:field.field }}"/>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="row">
-                <table class="table table-bordered table-striped table-borderless">
-                    <thead>
-                        <tr>
-                            {% for field in detail_fields %}
-                            <th>{{ field.string }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if not detail %}
-                            <tr>
-                                {% for field in detail_fields %}
-                                <td>&nbsp;</td>
-                                {% endfor %}
-                            </tr>
-                        {% endif %}
-                        {% for object in detail %}
-                            <tr>
-                                {% for field in detail_fields %}
-                                    <td class="{{ field.align }}">
-                                        {% if field.field == 'tax_id' %}
-                                            {% for tax in object.tax_id.all %}
-                                                <span class="right badge badge-primary">{{ tax }}</span>
-                                            {% endfor %}
-                                        {% else %}
-                                            {% if  field.humanize %}
-                                                {{ object|get_obj_attr:field.field|intcomma }}
-                                            {% else %}
-                                                {{ object|get_obj_attr:field.field }}
-                                            {% endif %}
-                                        {% endif %}
-                                    </td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="card-footer">
-            <div class="row parent">
-                <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
-                <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
-            </div>
-            <div class="row">
-                <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
-                <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_exempt|intcomma }}</div>
-            </div>
-            <div class="row">
-                <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('IVA:') }}</div>
-                <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_tax_iva|intcomma }}</div>
-            </div>
-            <div class="row">
-                <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
-                <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_tax_other|intcomma }}</div>
-            </div>
-            <div class="row">
-                <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
-                <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_tax_total|intcomma  }}</div>
-            </div>
-            <hr class="style1">
-            <div class="row">
-                <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total:') }}</div>
-                <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_total|intcomma }}</div>
-            </div>
-            <hr class="style1">
-            <div class="row">
-                <div class="form-group row col-sm-12">
-                    <label class="col-1 col-form-label" >{{ _('Note') }}</label>
-                    <div class="col-11">
-                        <textarea name="note" cols="400" rows="1" class="form-control" style="width: 100%" id="id_note" readonly>{{ object.note}}</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.card-footer -->
+  <div class="card card-outline col-12">
+    <div class="card-header">
+      {% include 'sale/header.html' %}
     </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          {% if object.img %}
+            <img class="img img-responsive" border="1" name="image" src="{{ object.img.url }}" style="width: 90px; height: 90px;">
+          {% endif %}
+        </div>
+      </div>
+      <div class="form-row">
+        {% for field in master_fields %}
+          <div class="form-group row col-sm-6">
+            <label class="col-sm-2 col-xl-2 col-form-label" for="{{ field.field }}">{{ field.string }}</label>
+            <div class="col-sm-9">
+              <input type="text" readonly class="form-control-plaintext" id="{{field.field}}" value="{{ object|get_obj_attr:field.field }}"/>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <table class="table table-bordered table-striped table-borderless">
+          <thead>
+            <tr>
+              {% for field in detail_fields %}
+              <th>{{ field.string }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% if not detail %}
+              <tr>
+                {% for field in detail_fields %}
+                <td>&nbsp;</td>
+                {% endfor %}
+              </tr>
+            {% endif %}
+            {% for object in detail %}
+              <tr>
+                {% for field in detail_fields %}
+                  <td class="{{ field.align }}">
+                    {% if field.field == 'tax_id' %}
+                      {% for tax in object.tax_id.all %}
+                        <span class="right badge badge-primary">{{ tax }}</span>
+                      {% endfor %}
+                    {% else %}
+                      {% if  field.humanize %}
+                        {{ object|get_obj_attr:field.field|intcomma }}
+                      {% else %}
+                        {{ object|get_obj_attr:field.field }}
+                      {% endif %}
+                    {% endif %}
+                  </td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row parent">
+        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
+        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
+      </div>
+      <div class="row">
+        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
+        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_exempt|intcomma }}</div>
+      </div>
+      <div class="row">
+        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('IVA:') }}</div>
+        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_tax_iva|intcomma }}</div>
+      </div>
+      <div class="row">
+        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
+        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_tax_other|intcomma }}</div>
+      </div>
+      <div class="row">
+        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
+        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_tax_total|intcomma  }}</div>
+      </div>
+      <hr class="style1">
+      <div class="row">
+        <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total:') }}</div>
+        <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right">$ {{ object.amount_total|intcomma }}</div>
+      </div>
+      <hr class="style1">
+      <div class="row">
+        <div class="form-group row col-sm-12">
+          <label class="col-1 col-form-label" >{{ _('Note') }}</label>
+          <div class="col-11">
+            <textarea name="note" cols="400" rows="1" class="form-control" style="width: 100%" id="id_note" readonly>{{ object.note}}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-footer -->
+  </div>
 </div>
 
 <ul class="timeline">
-    <li>
-        <!-- timeline icon -->
-        <i class="fas fa-edit fa-log"></i>
-        <div class="timeline-item">
-            <span class="time"><i class="fa fa-clock-o"></i> <span style="font-size:0.7rem;">{{ object.fm }}</span> </span>
+  <li>
+    <!-- timeline icon -->
+    <i class="fas fa-edit fa-log"></i>
+    <div class="timeline-item">
+      <span class="time"><i class="fa fa-clock-o"></i> <span style="font-size:0.7rem;">{{ object.fm }}</span> </span>
 
-            <h3 class="timeline-header"><a href="#" class="log-a" style="color:#ADB5BD;">Modify</a> ...</h3>
+      <h3 class="timeline-header"><a href="#" class="log-a" style="color:#ADB5BD;">Modify</a> ...</h3>
 
-            <div class="timeline-body">
-                <span style="color:#ADB5BD;"><b>User: {{ object.um }}</b> ,</span> Date: {{ object.fm }}
-            </div>
-        </div>
-    </li>
-    <li>
-        <!-- timeline icon -->
-        <i class="fas fa-home fa-log"></i>
-        <div class="timeline-item">
-            <span class="time"><i class="fa fa-clock-o"></i> <span style="font-size:0.7rem;">{{ object.fc }}</span> </span>
+      <div class="timeline-body">
+        <span style="color:#ADB5BD;"><b>User: {{ object.um }}</b> ,</span> Date: {{ object.fm }}
+      </div>
+    </div>
+  </li>
+  <li>
+    <!-- timeline icon -->
+    <i class="fas fa-home fa-log"></i>
+    <div class="timeline-item">
+      <span class="time"><i class="fa fa-clock-o"></i> <span style="font-size:0.7rem;">{{ object.fc }}</span> </span>
 
-            <h3 class="timeline-header"><a href="#" class="log-a" style="color:#ADB5BD;">Create</a> ...</h3>
+      <h3 class="timeline-header"><a href="#" class="log-a" style="color:#ADB5BD;">Create</a> ...</h3>
 
-            <div class="timeline-body">
-                <span style="color:#ADB5BD;"><b>User: {{ object.uc }}</b> ,</span>  Date: {{ object.fc }}
-            </div>
-        </div>
-    </li>
+      <div class="timeline-body">
+        <span style="color:#ADB5BD;"><b>User: {{ object.uc }}</b> ,</span>  Date: {{ object.fc }}
+      </div>
+    </div>
+  </li>
 </ul>
 
 {% endblock %}
 {% block scripts %}
 <script>
-    $('.btn-danger').click(function (event) {
-        event.preventDefault();
-        if (confirm('{{ _("Are you sure you want to delete the form?") }}')){
-            window.location = $(this)[0].href;
-        }
-    });
+  $('.btn-danger').click(function (event) {
+    event.preventDefault();
+    if (confirm('{{ _("Are you sure you want to delete the form?") }}')){
+      window.location = $(this)[0].href;
+    }
+  });
 
-    $('.btn-warning').click(function (event) {
-        event.preventDefault();
-        if (confirm('{{ _("Are you sure you want to duplicate the form?") }}')){
-            window.location = $(this)[0].href;
-        }
-    });
+  $('.btn-warning').click(function (event) {
+    event.preventDefault();
+    if (confirm('{{ _("Are you sure you want to duplicate the form?") }}')){
+      window.location = $(this)[0].href;
+    }
+  });
 </script>
 {% endblock %}
 

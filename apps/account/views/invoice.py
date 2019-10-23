@@ -34,6 +34,15 @@ OBJECT_LIST_FIELDS = [
     {'string': ('Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
 ]
 
+OBJECT_TOTAL_FIELDS = [
+    {'string': _('Net Amount or Affection:'), 'field': 'amount_untaxed'},
+    {'string': _('Exempt Amount:'), 'field': 'amount_exempt'},
+    {'string': _('IVA:'), 'field': 'amount_tax_iva'},
+    {'string': _('Other taxes:'), 'field': 'amount_tax_other'},
+    {'string': _('Total taxes:'), 'field': 'amount_tax_total'},
+    {'string': _('Total:'), 'field': 'amount_total'},
+]
+
 OBJECT_DETAIL_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
     {'string': ('Date'), 'field': 'date_invoice'},
@@ -51,19 +60,12 @@ DETAIL_OBJECT_LIST_FIELDS = [
     {'string': _('Sub Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
 ]
 
-OBJECT_FORM_FIELDS = [
-    {'string': _('Client'), 'field': 'partner_id'},
-]
-
-LEAD_FIELDS_SHORT = ['name', 'partner_id']
-
 
 # ========================================================================== #
 class InvoiceListView(LoginRequiredMixin, FatherListView):
     """Lista de las ordenes de venta
     """
     model = PyInvoice
-    # template_name = 'invoice/saleorderlist.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
@@ -73,7 +75,8 @@ class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
     template_name = 'invoice/detail.html'
     extra_context = {
         'master_fields': OBJECT_DETAIL_FIELDS,
-        'detail_fields': DETAIL_OBJECT_LIST_FIELDS
+        'detail_fields': DETAIL_OBJECT_LIST_FIELDS,
+        'total_fields': OBJECT_TOTAL_FIELDS
     }
 
     def get_context_data(self, **kwargs):
@@ -100,7 +103,7 @@ class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
 
 
 # ========================================================================== #
-class InvoiceAddView(LoginRequiredMixin, FatherCreateView):
+class InvoiceCreateView(LoginRequiredMixin, FatherCreateView):
     """Vista para agregar las sale
     """
     model = PyInvoice
@@ -110,7 +113,6 @@ class InvoiceAddView(LoginRequiredMixin, FatherCreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['action_url'] = 'PyInvoice:sale-order-add'
         object_name = self.model._meta.object_name
         verbose_name = self.model._meta.verbose_name
         context['breadcrumbs'] = [
@@ -141,7 +143,7 @@ class InvoiceAddView(LoginRequiredMixin, FatherCreateView):
 
 
 # ========================================================================== #
-class InvoiceEditView(LoginRequiredMixin, FatherUpdateView):
+class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
     """Vista para editarar las sale
     """
     model = PyInvoice
@@ -179,6 +181,7 @@ class InvoiceEditView(LoginRequiredMixin, FatherUpdateView):
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and products.is_valid():
+                    print("Form valid")
                     self.object = form.save(commit=False)
                     products.instance = self.object
                     products.save()
@@ -189,7 +192,7 @@ class InvoiceEditView(LoginRequiredMixin, FatherUpdateView):
         else:
             messages.warning(
                 self.request,
-                _('The current order %(order)s status does not allow updates.') % {'order': self.object.name}
+                _('The current invoice %(obj)s status does not allow updates.') % {'obj': self.object.name}
             )
             return HttpResponseRedirect(self.get_success_url())
 
@@ -202,7 +205,7 @@ class InvoiceDeleteView(LoginRequiredMixin, DeleteView):
     """Vista para eliminar las sale
     """
     model = PyInvoice
-    template_name = 'invoice/delete.html'
+    template_name = 'account/delete.html'
     success_url = reverse_lazy('PyInvoice:list')
 
     def get_context_data(self, **kwargs):
@@ -255,15 +258,4 @@ def invoice_state(request, pk, state):
     invoice.save()
     return redirect(
         reverse_lazy('PyInvoice:detail', kwargs={'pk': pk})
-    )
-
-
-# ========================================================================== #
-@login_required()
-def invoice_active(request, pk, active):
-    invoice = PyInvoice.objects.get(pk=pk)
-    invoice.active = active
-    invoice.save()
-    return redirect(
-        reverse_lazy('PyInvoice:list')
     )

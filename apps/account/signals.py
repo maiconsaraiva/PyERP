@@ -6,11 +6,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Thirdparty Library
-from apps.sale.models import PySaleOrder, PySaleOrderDetail
+from .models import PyInvoice, PyInvoiceDetail
 
 
 # ========================================================================== #
-@receiver(post_save, sender=PySaleOrder)
+@receiver(post_save, sender=PyInvoice)
 def calc_sale_order(sender, instance, **kwargs):
     amount_untaxed = 0
     amount_exempt = 0
@@ -25,7 +25,7 @@ def calc_sale_order(sender, instance, **kwargs):
 
     amount_total = 0
 
-    for product in PySaleOrderDetail.objects.filter(sale_order_id=instance.pk):
+    for product in PyInvoiceDetail.objects.filter(invoice_id=instance.pk):
         amount_untaxed = (product.quantity * product.price) - product.discount
         if product.tax_id.all().exists():
             for tax in product.tax_id.all():

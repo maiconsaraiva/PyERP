@@ -6,11 +6,9 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from taggit.managers import TaggableManager
-
 # Thirdparty Library
 from apps.base.models import PyCompany, PyFather
-
+from taggit.managers import TaggableManager
 
 # Localfolder Library
 from .journal import PyJournal
@@ -26,14 +24,23 @@ ACCOUNT_MOVE_STATE = (
 
 # ========================================================================== #
 class PyAccountMove(PyFather):
-    code = models.CharField(_('Code'), max_length=80)
     name = models.CharField(_('Name'), max_length=80)
     state = models.CharField(
         choices=ACCOUNT_MOVE_STATE, max_length=64, default='draft')
-    journal = models.ForeignKey(PyJournal, on_delete=models.PROTECT)
-    date_move = models.DateTimeField(default=datetime.now(), null=True, blank=True)
-    reference_company = models.ForeignKey(PyCompany, on_delete=models.PROTECT)
-    amount_total = models.DecimalField(
+    journal_id = models.ForeignKey(PyJournal, on_delete=models.PROTECT)
+    date_move = models.DateTimeField(
+        default=datetime.now(),
+        null=True,
+        blank=True
+    )
+    company_move = models.ForeignKey(PyCompany, on_delete=models.PROTECT)
+    reference = models.CharField(
+        _('Reference'),
+        max_length=80,
+        null=True,
+        blank=True
+    )
+    amount = models.DecimalField(
         _('Total'),
         max_digits=10,
         decimal_places=2,
@@ -56,7 +63,7 @@ class PyAccountMove(PyFather):
         return reverse('PyAccountMove:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return "[{}] {}".format(self.code, self.name)
+        return "{}".format(self.name)
 
     class Meta:
         verbose_name = _("Account Move")
@@ -67,6 +74,11 @@ class PyAccountMove(PyFather):
 class PyAccountMoveDetail(PyFather):
     """Modelo del detalle de la orden de pago
     """
+    account_move_id = models.ForeignKey(
+        PyAccountMove,
+        on_delete=models.PROTECT,
+        verbose_name=_('account')
+    )
     account_plan_id = models.ForeignKey(
         PyAccountPlan,
         on_delete=models.PROTECT
@@ -74,9 +86,9 @@ class PyAccountMoveDetail(PyFather):
     reference_company = models.ForeignKey(
         PyCompany,
         on_delete=models.PROTECT,
-        verbose_name=_('Product')
+        verbose_name=_('company')
     )
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(blank=True, verbose_name=_('tag'))
     debit = models.DecimalField(
         _('debit'),
         max_digits=10,
@@ -88,6 +100,11 @@ class PyAccountMoveDetail(PyFather):
         max_digits=10,
         decimal_places=2,
         default=0
+    )
+    date_due = models.DateTimeField(
+        default=datetime.now(),
+        null=True,
+        blank=True
     )
 
     class Meta:

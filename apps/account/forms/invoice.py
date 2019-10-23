@@ -11,7 +11,7 @@ from dal import autocomplete
 from tempus_dominus.widgets import DatePicker, DateTimePicker, TimePicker
 
 # Localfolder Library
-from .models import PyInvoice, PyInvoiceDetail
+from ..models import PyInvoice, PyInvoiceDetail
 
 
 # ========================================================================== #

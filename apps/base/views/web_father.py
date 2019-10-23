@@ -77,6 +77,11 @@ class FatherListView(ListView):
         context['title'] = '{}'.format(verbose_name)
         context['detail_url'] = '{}:detail'.format(object_name)
         context['add_url'] = '{}:add'.format(object_name)
+        context['form_template'] = False
+        context['breadcrumbs'] = [{
+            'url': '',
+            'name': '{}'.format(verbose_name)
+        }]
         return context
 
     def get_queryset(self):
@@ -107,6 +112,8 @@ class FatherDetailView(DetailView):
         context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
         context['title'] = '{}'.format(verbose_name)
+        context['back_url'] = reverse_lazy('{}:list'.format(object_name))
+        context['state_url'] = '{}:state'.format(object_name)
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
@@ -115,6 +122,7 @@ class FatherDetailView(DetailView):
         context['update_url'] = '{}:update'.format(object_name)
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
+        context['form_template'] = False
         context['next'] = self.model.objects.filter(
             pk__gt=self.kwargs['pk'],
             active=True,
@@ -171,15 +179,13 @@ class FatherCreateView(CreateView):
         context['update_url'] = '{}:update'.format(object_name)
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
+        context['back_url'] = '{}:list'.format(object_name)
+        context['state_url'] = '{}:state'.format(object_name)
+        context['form_template'] = True
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
         }]
-
-        try:
-            context['back_url'] = reverse('{}:list'.format(object_name))
-        except:
-            pass
 
         return context
 
@@ -211,6 +217,12 @@ class FatherUpdateView(UpdateView):
         context['update_url'] = '{}:update'.format(object_name)
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
+        context['state_url'] = '{}:state'.format(object_name)
+        context['form_template'] = True
+        context['back_url'] = reverse_lazy(
+            '{}:detail'.format(object_name),
+            kwargs={'pk': self.object.pk}
+        )
         context['action_url'] = '{}:update'.format(object_name)
         context['next'] = self.model.objects.filter(
             pk__gt=self.kwargs['pk'],
@@ -226,13 +238,6 @@ class FatherUpdateView(UpdateView):
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
         }]
-        try:
-            context['back_url'] = reverse(
-                '{}:detail'.format(object_name),
-                kwargs={'pk': context['object'].pk}
-            )
-        except:
-            pass
         return context
 
     def form_valid(self, form):

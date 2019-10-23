@@ -8,49 +8,48 @@ from apps.base.views.web_father import (
     FatherUpdateView)
 
 # Localfolder Library
-from ..models import PyAccountPlan
+from ..models import PyJournal
 
 OBJECT_LIST_FIELDS = [
-    {'string': _("Code"), 'field': 'code'},
     {'string': _("Name"), 'field': 'name'},
+    {'string': _("Short Code"), 'field': 'short_code'},
+    {'string': _("Defaul Credit Account"), 'field': 'default_credit_account'},
+    {'string': _("Default Debit Account"), 'field': 'default_debit_account'},
     {'string': _("Type"), 'field': 'type'},
-    {'string': _("Reconcile"), 'field': 'reconcile'},
 ]
 
 OBJECT_FORM_FIELDS = [
-    'code',
     'name',
+    'short_code',
+    'default_credit_account',
+    'default_debit_account',
     'type',
-    'tags',
-    'reconcile',
-    'discontinued',
-    'tax_id'
 ]
 
 
-class AccountPlanListView(LoginRequiredMixin, FatherListView):
-    model = PyAccountPlan
+class JournalListView(LoginRequiredMixin, FatherListView):
+    model = PyJournal
     template_name = 'base/list.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
-class AccountPlanDetailView(LoginRequiredMixin, FatherDetailView):
-    model = PyAccountPlan
+class JournalDetailView(LoginRequiredMixin, FatherDetailView):
+    model = PyJournal
     template_name = 'base/detail.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
 
 
-class AccountPlanCreateView(LoginRequiredMixin, FatherCreateView):
-    model = PyAccountPlan
+class JournalCreateView(LoginRequiredMixin, FatherCreateView):
+    model = PyJournal
     fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
 
 
-class AccountPlanUpdateView(LoginRequiredMixin, FatherUpdateView):
-    model = PyAccountPlan
+class JournalUpdateView(LoginRequiredMixin, FatherUpdateView):
+    model = PyJournal
     fields = OBJECT_FORM_FIELDS
     template_name = 'base/form.html'
 
 
-class AccountPlanDeleteView(LoginRequiredMixin, FatherDeleteView):
-    model = PyAccountPlan
+class JournalDeleteView(LoginRequiredMixin, FatherDeleteView):
+    model = PyJournal

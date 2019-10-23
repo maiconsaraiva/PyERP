@@ -10,6 +10,19 @@
 <div class="row" style="padding:5px;">
     <div class="card card-outline lg col-12">
         <div class="card-header">
+            <div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        {% for btn in breadcrumbs %}
+                            {% if btn.url %}
+                                <li class="breadcrumb-item"><a href="{% url btn.url %}">{{ btn.name }}</a></li>
+                            {% else %}
+                                <li class="breadcrumb-item active" aria-current="page">{{ btn.name }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
+                </nav>
+            </div>
             <a title=" {{ _('Create') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-plus"></i></a>
             {% if  web_parameter.show_btn_export == 'True' %}
             <a title=" {{ _('Create') }}" href="{% url add_url %}" class="btn btn-light"><i class="fa fa-file-excel"></i></a>

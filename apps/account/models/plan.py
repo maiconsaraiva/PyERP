@@ -5,10 +5,9 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from taggit.managers import TaggableManager
-
 # Thirdparty Library
 from apps.base.models import PyFather, PyTax
+from taggit.managers import TaggableManager
 
 ACCOUNT_PLAN_TYPE = (
     ("To Charge", _("To Charge")),
