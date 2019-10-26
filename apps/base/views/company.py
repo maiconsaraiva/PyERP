@@ -4,6 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
+from dal import autocomplete
+
 # Localfolder Library
 from ..models import PyCompany, PyUser
 from .web_father import (
@@ -86,3 +89,14 @@ def change_active_company(request, company):
 # ========================================================================== #
 class CompanyDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyCompany
+
+
+# ========================================================================== #
+class CompanyAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        queryset = PyCompany.objects.filter(active=True)
+
+        if self.q:
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset

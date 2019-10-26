@@ -1,5 +1,5 @@
 # Standard Library
-from datetime import datetime
+from django.utils import timezone
 
 # Django Library
 from django.db import models
@@ -32,12 +32,17 @@ class PyAccountMove(PyFather):
         default=0
     )
     journal_id = models.ForeignKey(PyJournal, on_delete=models.PROTECT)
-    date_move = models.DateTimeField(
-        default=datetime.now(),
+    date_move = models.DateField(
+        default=timezone.now,
         null=True,
         blank=True
     )
-    company_move = models.ForeignKey(PyCompany, on_delete=models.PROTECT)
+    company_move = models.ForeignKey(
+        PyCompany,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True
+    )
     reference = models.CharField(
         _('Reference'),
         max_length=80,
@@ -67,7 +72,7 @@ class PyAccountMove(PyFather):
         self.name = get_next_value(self._meta.object_name, 'ACC')
 
         if not self.date_move or self.date_move == "":
-            self.date_move = datetime.now()
+            self.date_move = timezone.now
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -113,8 +118,8 @@ class PyAccountMoveDetail(PyFather):
         decimal_places=2,
         default=0
     )
-    date_due = models.DateTimeField(
-        default=datetime.now(),
+    date_due = models.DateField(
+        default=timezone.now,
         null=True,
         blank=True
     )
@@ -122,9 +127,12 @@ class PyAccountMoveDetail(PyFather):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.name = get_next_value(self._meta.object_name, 'ACN')
+
+        if not self.date_due or self.date_due == "":
+            self.date_due = timezone.now
         super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['pk']
-        verbose_name = _('Invoice detail')
-        verbose_name_plural = _('Invoice details')
+        verbose_name = _('Account Move detail')
+        verbose_name_plural = _('Account Move details')

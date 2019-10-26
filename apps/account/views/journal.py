@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from apps.base.views.web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
+from dal import autocomplete
 
 # Localfolder Library
 from ..models import PyJournal
@@ -53,3 +54,14 @@ class JournalUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 class JournalDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyJournal
+
+
+# ========================================================================== #
+class JournalAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        queryset = PyJournal.objects.filter(active=True)
+
+        if self.q:
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset

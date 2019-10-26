@@ -6,10 +6,10 @@ from .invoice import (
     InvoiceListView, invoice_state, load_product, load_tax)
 from .journal import (
     JournalCreateView, JournalDeleteView, JournalDetailView, JournalListView,
-    JournalUpdateView)
+    JournalUpdateView, JournalAutoComplete)
 from .move import (
     AccountMoveCreateView, AccountMoveDeleteView, AccountMoveDetailView,
     AccountMoveListView, AccountMoveUpdateView, move_state)
 from .plan import (
     AccountPlanCreateView, AccountPlanDeleteView, AccountPlanDetailView,
-    AccountPlanListView, AccountPlanUpdateView)
+    AccountPlanListView, AccountPlanUpdateView, AccountPlanAutoComplete)

@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from apps.base.views.web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
+from dal import autocomplete
 
 # Localfolder Library
 from ..models import PyAccountPlan
@@ -54,3 +55,14 @@ class AccountPlanUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 class AccountPlanDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyAccountPlan
+
+
+# ========================================================================== #
+class AccountPlanAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        queryset = PyAccountPlan.objects.filter(active=True)
+
+        if self.q:
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset

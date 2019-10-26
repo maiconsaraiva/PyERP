@@ -24,7 +24,7 @@ from .activatelanguage import ActivateLanguageView
 from .base_config import UpdateBaseConfigView
 from .company import (
     CompanyCreateView, CompanyDeleteView, CompanyDetailView, CompanyListView,
-    CompanyUpdateView, change_active_company)
+    CompanyUpdateView, change_active_company, CompanyAutoComplete)
 from .partner import CustomerListView, ProviderListView
 from .usercustom import (
     ActivateUserView, AvatarUpdateView, LogOutModalView, PasswordRecoveryView,

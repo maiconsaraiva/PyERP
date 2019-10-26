@@ -98,7 +98,7 @@ class AccountMoveCreateView(LoginRequiredMixin, FatherCreateView):
     """
     model = PyAccountMove
     form_class = AccountMoveForm
-    template_name = 'move/form.html'
+    template_name = 'move/form_1.html'
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -175,15 +175,14 @@ class AccountMoveUpdateView(LoginRequiredMixin, FatherUpdateView):
                 print("1")
                 if form.is_valid() and formset.is_valid():
                     for obj in formset:
-                        print("2")
                         t_debit += obj.cleaned_data['debit']
                         t_credit += obj.cleaned_data['credit']
-                    if t_debit != t_credit:
-                        messages.error(
-                            self.request,
-                            _('Unbalanced accounting entry')
-                        )
-                        return super().form_invalid(form)
+                    # if t_debit != t_credit:
+                    #     messages.error(
+                    #         self.request,
+                    #         _('Unbalanced accounting entry')
+                    #     )
+                    #     return super().form_invalid(form)
 
                     self.object = form.save(commit=False)
                     formset.instance = self.object

@@ -1,4 +1,20 @@
 # Django Library
 from django.contrib import admin
 
-# Register your models here.
+# Localfolder Library
+from .forms import AccountMoveDetailForm, AccountMoveForm
+from .models import PyAccountMove, PyAccountMoveDetail
+
+
+class PyAccountMoveDetailInline(admin.TabularInline):
+    model = PyAccountMoveDetail
+    form = AccountMoveDetailForm
+    extra = 0
+
+
+class PyAccountMoveAdmin(admin.ModelAdmin):
+    form = AccountMoveForm
+    inlines = [PyAccountMoveDetailInline]
+
+
+admin.site.register(PyAccountMove, PyAccountMoveAdmin)

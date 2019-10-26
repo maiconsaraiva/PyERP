@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 # Thirdparty Library
 from dal import autocomplete
 from taggit.forms import TagWidget
-from tempus_dominus.widgets import DateTimePicker
+from tempus_dominus.widgets import DatePicker
 
 # Localfolder Library
 from ..models import PyAccountMove, PyAccountMoveDetail
@@ -34,30 +34,28 @@ class AccountMoveForm(forms.ModelForm):
             'reference': 'Reference',
         }
         widgets = {
-            'journal_id': forms.Select(
+            'journal_id': autocomplete.ModelSelect2(
+                url='PyJournal:autocomplete',
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': _('Select a journal ...'),
+                    'data-placeholder': _('Select a journal')
                 },
             ),
-            'date_move': DateTimePicker(
+            'date_move': DatePicker(
                 options={
                     'useCurrent': True,
-                    'collapse': True,
-                    'icons': {
-                        'time': 'far fa-clock'
-                    }
+                    'collapse': False,
                 },
                 attrs={
-                    # 'append': 'fa fa-calendar',
                     'icon_toggle': True,
                 }
             ),
-            'company': forms.TextInput(
+            'company_move': autocomplete.ModelSelect2(
+                url='PyCompany:autocomplete',
                 attrs={
                     'class': 'form-control',
-                    'placeholder': _('----------'),
-                    # 'style': 'width: 150px',
+                    'data-placeholder': _('Select a company'),
+                    'disabled': 'true'
                 },
             ),
             'reference': forms.TextInput(
@@ -93,51 +91,45 @@ class AccountMoveDetailForm(forms.ModelForm):
             'date_due'
         ]
         widgets = {
-            'account_plan_id': forms.Select(
+            'account_plan_id': autocomplete.ModelSelect2(
+                url='PyAccountPlan:autocomplete',
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'data-placeholder': _('Select an account ...'),
-                    # 'style': 'width: 180px',
+                    'data-placeholder': _('Select an account'),
                 },
             ),
-            'reference_company': forms.Select(
+            'reference_company': autocomplete.ModelSelect2(
+                url='PyCompany:autocomplete',
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'data-placeholder': _('Select a company ...'),
-                    # 'style': 'width: 180px',
+                    'data-placeholder': _('Select a company'),
                 },
             ),
             'tags': TagWidget(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'placeholder': _('----------'),
-                    # 'style': 'width: 150px',
                 },
             ),
             'debit': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'data-placeholder': _('Debit'),
-                    # 'style': 'width: 80px',
                 },
             ),
             'credit': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
                     'data-placeholder': _('Credit'),
-                    # 'style': 'width: 80px',
                 },
             ),
-            'date_due': DateTimePicker(
+            'date_due': DatePicker(
                 options={
                     'useCurrent': True,
-                    'collapse': True,
-                    'icons': {
-                        'time': 'far fa-clock'
-                    }
+                    'collapse': False,
                 },
                 attrs={
-                    # 'append': 'fa fa-calendar',
+                    'class': 'form-control form-control-sm',
                     'icon_toggle': True,
                 }
             ),
@@ -153,6 +145,6 @@ ACCOUNTING_NOTES = inlineformset_factory(
     PyAccountMove, PyAccountMoveDetail,
     form=AccountMoveDetailForm,
     formset=BaseAccountMoveFormSet,
-    extra=1,
+    extra=0,
     can_delete=True
 )

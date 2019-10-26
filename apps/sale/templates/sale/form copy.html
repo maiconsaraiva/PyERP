@@ -1,0 +1,433 @@
+{% extends "base/dashboard.html" %}
+{% load humanize %}
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+{% load static %}
+{% load erp_tags %}
+{% block head %}
+<link rel="stylesheet" href="{% static '/bootstrap-select-1.13.9/dist/css/bootstrap-select.min.css' %}">
+<style>
+  /*.table .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    padding: 3px 12px;
+    height: calc(1.8125rem + 2px);
+    -moz-appearance: textfield;
+    background-color: transparent;
+    border: 0px solid transparent;
+  }
+  .table .select2-container--default .select2-selection--single .select2-selection__clear {
+    color: transparent;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-style: None;
+
+  }
+  .select2-container--default .select2-selection--multiple {
+    background-color: transparent;
+    border-radius: 4px;
+    cursor: text;
+    min-height: 0px;
+    border: none;
+    height: calc(1.8125rem + 2px);
+  }
+  .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #007bff;
+    border: 0px solid transparent;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+    font-size: 75%;
+  }
+  .select2-container--default .select2-search--inline .select2-search__field {
+    background: transparent;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    -webkit-appearance: textfield;
+      font-size: 75%;
+
+  }*/
+  .bootstrap-select > .dropdown-toggle {
+    height: calc(1.8125rem + 2px);
+    position: relative;
+    width: 100%;
+    text-align: right;
+    white-space: nowrap;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 0px solid transparent;
+  }
+  .bootstrap-select .dropdown-toggle .filter-option {
+    height: calc(1.8125rem + 2px);
+  }
+  .badge {
+    font-size: 65%;
+    font-weight: bold;
+  }
+  .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .0px solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+
+  }
+  .dropup .dropdown-toggle::after {
+
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: 0;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+  }
+  /*.table-sm td, .table-sm th {
+    padding: 0rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+  }*/
+  .table .form-control {
+    -moz-appearance: textfield;
+    background-color: transparent;
+    border: 0px solid transparent;
+  }
+  .form-control-sm {
+    font-size: 100%;
+  }
+  .form-control:disabled, .form-control[readonly] {
+    background-color: transparent;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .custom-select {
+    -moz-appearance: textfield;
+    background-color: transparent;
+    border: 0px solid transparent;
+    box-shadow: None;
+    background: None;
+    padding: 0;
+  }
+  .table th:last-child, td {
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    /*color: transparent;*/
+  }
+  .breadcrumb {
+    padding: .75rem 1rem .75rem 0rem;
+    background-color: Transparent;
+  }
+  .card-header {
+    border-bottom: none;
+  }
+  .breadcrumb-item a {
+    color: #563D7C;
+    font-weight: bold;
+  }
+</style>
+{% endblock %}
+{% block content %}
+  <div class="row" style="padding:5px;" >
+    <div class="card card-outline col-12">
+      <form method="post" class="form">
+        <div class="card-header">
+          {% include 'sale/header.html' %}
+        <div class="card-body">
+          <div class="form-row">
+            {% if object %}
+              <div class="form-group row col-sm-6">
+                <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
+                <div class="col-sm-9">
+                  <input type="text" value="{{ object.name }}" class="form-control"  style="width: 100%"  maxlength="80" disabled >
+                  <span class="help-block">
+                  </span>
+                </div>
+              </div>
+            {% else %}
+              <div class="form-group row col-sm-6">
+                <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
+                <div class="col-sm-9">
+                  <input type="text" value="Nuevo" class="form-control"  style="width: 100%"  maxlength="80" disabled >
+                  <span class="help-block">
+                  </span>
+                </div>
+              </div>
+            {% endif %}
+            {% csrf_token %}
+            {% for field in form %}
+              {% if field.auto_id != "id_note" %}
+                <div class="form-group row col-sm-6">
+                  <label class="col-sm-2 col-xl-2 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  <div class="col-sm-9">
+                    {{ field }}
+                    <span class="help-block">
+                      {% for error in field.errors %}
+                        <ul>
+                          <li class="text-red">{{ error }}</li>
+                        </ul>
+                      {% endfor %}
+                    </span>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="row">
+            <table class="table table-bordered table-striped table-borderless">
+              {{ products.management_form }}
+
+              {% for form in products.forms %}
+                {% if forloop.first %}
+                  <thead>
+                    <tr>
+                      {% for field in form.visible_fields %}
+                        <th>{{ field.label|capfirst }}</th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                {% endif %}
+                <tr class="formset_row">
+                  {% for field in form.visible_fields %}
+                    <td class="align-middle">
+                      {# Include the hidden fields in the form #}
+                      {% if forloop.first %}
+                        {% for hidden in form.hidden_fields %}
+                          {{ hidden }}
+                        {% endfor %}
+                      {% endif %}
+                      {{ field }}
+                    </td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="row">
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
+          </div>
+          <div class="row">
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div>
+          </div>
+          <div class="row">
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('IVA:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div>
+          </div>
+          <div class="row">
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div>
+          </div>
+          <div class="row">
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div>
+          </div>
+          <hr class="style1">
+          <div class="row">
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
+          </div>
+          <hr class="style1">
+          <div class="form-group row">
+            <label for="id_note" class="col-1 col-form-label">Note</label>
+            <div class="col-11">
+              <textarea name="note" cols="400" rows="1" class="form-control" data-placeholder="Descripción del presupuesto ..." style="width: 100%" id="id_note">{{ object.note}}</textarea>
+              <span class="help-block">
+
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-footer -->
+      </div>
+      <!-- /.card -->
+    </form>
+  </div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static '/bootstrap-select-1.13.9/dist/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static '/bootstrap-select-1.13.9/dist/js/i18n/defaults-es_ES.min.js' %}"></script>
+<script src="{% static 'formset/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+  /*Convierto todos los multiselect del formset en select2
+  */
+  //$("[id^='id_{{ products.prefix }}-'][id$='-tax_id']").select2()
+
+
+  /*Gestión de los formset
+  */
+  $(function() {
+
+    $('.formset_row').formset({
+      prefix: '{{ products.prefix }}',
+      clone: false,
+      addText: '{{ _("add product") }}',
+      deleteText: '<li class="fa fa-trash" style="padding: 3px;"></li>',
+      added:function(row) {
+        var formCount = $('#id_{{ products.prefix }}-TOTAL_FORMS').val();
+        $("[id^='id_{{ products.prefix }}-'][id$='-tax_id']").selectpicker('render');
+        $('span .selectpicker:odd', row || null).css("display", "none");
+        /*Initial values for the formset added
+        */
+        document.getElementById('id_{{ products.prefix }}-' + (formCount-1) + '-product_id').value = "";
+        document.getElementById('id_{{ products.prefix }}-' + (formCount-1) + '-quantity').value = 0;
+        document.getElementById('id_{{ products.prefix }}-' + (formCount-1) + '-uom_id').value = "";
+        document.getElementById('id_{{ products.prefix }}-' + (formCount-1) + '-price').value = 0;
+        document.getElementById('id_{{ products.prefix }}-' + (formCount-1) + '-discount').value = 0;
+        document.getElementById('id_{{ products.prefix }}-' + (formCount-1) + '-amount_total').value = 0;
+      },
+      removed: function() {
+        RecalculateProduct()
+      },
+    });
+  });
+
+  function RecalculateProduct() {
+    var formCount = $('#id_{{ products.prefix }}-TOTAL_FORMS').val();
+    var url = "{% url 'PySaleOrder:ajax_load_tax' %}";
+    var tax = [];
+    var taxes;
+
+    var amount_untaxed = 0
+    var amount_exempt = 0
+    var amount_tax_iva = 0
+    var amount_tax_other = 0
+    var amount_tax_total = 0
+    var amount_total = 0
+
+    var t_amount_untaxed = 0
+    var t_amount_exempt = 0
+    var t_amount_tax_iva = 0
+    var t_amount_tax_other = 0
+    var t_amount_tax_total = 0
+    var t_amount_total = 0
+
+    for (i = 0; i < formCount; i++) {
+      var formset_row = document.getElementById('id_{{ products.prefix }}-' + i + '-id').closest('tr');
+      console.log(formset_row.style.display)
+      if(formset_row.style.display != "none"){
+        price = parseFloat(document.getElementById('id_{{ products.prefix }}-' + i + '-price').value);
+        quantity = parseFloat(document.getElementById('id_{{ products.prefix }}-' + i + '-quantity').value);
+        descount = parseFloat(document.getElementById('id_{{ products.prefix }}-' + i + '-discount').value);
+        amount_untaxed += (quantity * price) - descount;
+
+        tax = $("#id_{{ products.prefix }}-" + i + "-tax_id").val()
+        $.ajax({
+          async: false,
+          url: url,
+          data: {
+            'tax': tax,
+          },
+          success: function (data) {
+            taxes = JSON.parse(data['tax']);
+          }
+        });
+
+        if (taxes.length > 0){
+          for (j = 0; j < taxes.length; j++) {
+            var object = taxes[j]
+            var tax_fields = object.fields;
+            if (object.pk == 1){
+              amount_tax_iva = (amount_untaxed * tax_fields.amount)/100
+            }
+            else{
+              amount_tax_other += (amount_untaxed * tax_fields.amount)/100
+
+            }
+          }
+        }
+        else{
+          amount_exempt = amount_untaxed
+        }
+        amount_total = amount_untaxed + amount_tax_iva + amount_tax_other
+        if (i < formCount){
+          document.getElementById('id_{{ products.prefix }}-' + i + '-amount_total').value = amount_total.toFixed(2);
+        }
+
+        t_amount_untaxed += amount_untaxed
+        t_amount_tax_iva += amount_tax_iva
+        t_amount_tax_other += amount_tax_other
+        t_amount_tax_total += amount_tax_iva + amount_tax_other
+        t_amount_exempt += amount_exempt
+        t_amount_total += amount_total
+
+        amount_untaxed = 0
+        amount_exempt = 0
+        amount_tax_iva = 0
+        amount_tax_other = 0
+        amount_total = 0
+      }
+    }
+    document.getElementById("t_amount_untaxed").innerHTML = "$ " + t_amount_untaxed.toFixed(2);
+    document.getElementById("t_amount_exempt").innerHTML = "$ " + t_amount_exempt.toFixed(2);
+    document.getElementById("t_amount_tax_iva").innerHTML = "$ " + t_amount_tax_iva.toFixed(2);
+    document.getElementById("t_amount_tax_other").innerHTML = "$ " + t_amount_tax_other.toFixed(2);
+    document.getElementById("t_amount_tax_total").innerHTML = "$ " + t_amount_tax_total.toFixed(2);
+    document.getElementById("t_amount_total").innerHTML = "$ " + t_amount_total.toFixed(2);
+  }
+
+
+  /*Cargo en el formulario los datos originales del producto
+  */
+  //$("[id^='id_{{ products.prefix }}-'][id$='-product_id']").on("select2:select", function (e) {
+  $("[id^='id_{{ products.prefix }}-'][id$='-product_id']").on("change", function (e) {
+    var selected_element = $(e.currentTarget);
+    var select_val = selected_element.val();
+    var select_id = e.currentTarget.id;
+    var index = select_id.replace( /(^.+\D)(\d+)(\D.+$)/i,'$2');
+    var url = "{% url 'PySaleOrder:ajax_load_product' %}";
+
+    $.ajax({
+      url: url,
+      data: {
+        'product': select_val
+      },
+      success: function (data) {
+        var product = JSON.parse(data['product']);
+        var object = product[0]
+        var product_fields = object.fields;
+
+        document.getElementById('id_{{ products.prefix }}-' + index + '-description').value = product_fields.description;
+        document.getElementById('id_{{ products.prefix }}-' + index + '-uom_id').value = product_fields.uom_id;
+        document.getElementById('id_{{ products.prefix }}-' + index + '-price').value = product_fields.price;
+        //$('#id_{{ products.prefix }}-' + index + '-tax_id').select2().val(product_fields.tax).trigger('change')
+        //$('#id_{{ products.prefix }}-' + index + '-tax_id').val(product_fields.tax).trigger('change')
+        $('#id_{{ products.prefix }}-' + index + '-tax_id').selectpicker('val', product_fields.tax);
+      }
+    });
+
+
+  });
+
+  $("[id^='id_{{ products.prefix }}-']").on("change", function (e) {
+    RecalculateProduct();
+  });
+</script>
+{% endblock %}
