@@ -33,6 +33,8 @@ from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
 from .wparameter import PyWParameter
+from .uom import (
+    UomCreateView, UomDeleteView, UomDetailView, UomListView, UomUpdateView, UomAutoComplete)
 
 
 def _web_parameter():

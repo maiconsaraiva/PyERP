@@ -3,8 +3,8 @@ from django.urls import path
 
 # Localfolder Library
 from ..views import (
-    JournalCreateView, JournalDeleteView, JournalDetailView, JournalListView,
-    JournalUpdateView, JournalAutoComplete)
+    JournalAutoComplete, JournalCreateView, JournalDeleteView,
+    JournalDetailView, JournalListView, JournalUpdateView)
 
 app_name = 'PyJournal'
 

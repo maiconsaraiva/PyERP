@@ -5,8 +5,9 @@ from django.urls import path
 
 # Localfolder Library
 from ..views.company import (
-    CompanyCreateView, CompanyDeleteView, CompanyDetailView, CompanyListView,
-    CompanyUpdateView, change_active_company, CompanyAutoComplete)
+    CompanyAutoComplete, CompanyCreateView, CompanyDeleteView,
+    CompanyDetailView, CompanyListView, CompanyUpdateView,
+    change_active_company)
 
 app_name = 'PyCompany'
 

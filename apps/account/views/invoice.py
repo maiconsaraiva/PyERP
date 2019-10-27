@@ -122,20 +122,20 @@ class InvoiceCreateView(LoginRequiredMixin, FatherCreateView):
             }
         ]
         if self.request.POST:
-            context['products'] = PRODUCT_FORMSET(self.request.POST)
+            context['formset'] = PRODUCT_FORMSET(self.request.POST)
         else:
-            context['products'] = PRODUCT_FORMSET()
+            context['formset'] = PRODUCT_FORMSET()
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        product = context['products']
+        formset = context['formset']
         with transaction.atomic():
             form.instance.uc = self.request.user.pk
             self.object = form.save()
-            if product.is_valid():
-                product.instance = self.object
-                product.save()
+            if formset.is_valid():
+                formset.instance = self.object
+                formset.save()
         return super().form_valid(form)
 
     def get_success_url(self):

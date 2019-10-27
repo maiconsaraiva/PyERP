@@ -117,11 +117,12 @@ class SaleOrderDetailForm(forms.ModelForm):
                     # 'style': 'width: 80px',
                 },
             ),
-            'uom_id': forms.Select(
+            'uom_id': autocomplete.ModelSelect2(
+                url='PyUom:autocomplete',
                 attrs={
-                    'class': 'custom-select custom-select-sm',
-                    'data-placeholder': _('Unit measurement ...'),
-                    # 'style': 'width: 80px',
+                    'class': 'form-control form-control-sm',
+                    'data-placeholder': _('Select a UOM ...'),
+                    'style': 'width: 180px',
                 },
             ),
             'price': forms.NumberInput(

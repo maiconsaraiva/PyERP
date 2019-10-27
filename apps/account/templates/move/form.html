@@ -293,14 +293,14 @@
                     </td>
                     <td class="field-account_plan_id{%if field.errors %} table-danger{% endif %}">
                       <div class="related-widget-wrapper">
-                        <select name="{{ formset.prefix }}-__prefix__-account_plan_id" class="form-control" data-placeholder="Select an account" id="id_{{ formset.prefix }}-__prefix__-account_plan_id" data-autocomplete-light-language="es" data-autocomplete-light-url="/account/plan/autocomplete" data-autocomplete-light-function="select2">
+                        <select onchange="RecalculateFormset()" name="{{ formset.prefix }}-__prefix__-account_plan_id" class="form-control" data-placeholder="Select an account" id="id_{{ formset.prefix }}-__prefix__-account_plan_id" data-autocomplete-light-language="es" data-autocomplete-light-url="/account/plan/autocomplete" data-autocomplete-light-function="select2">
                           <option value="" selected>---------</option>
                         </select>
                       </div>
                     </td>
                     <td class="field-reference_company{%if field.errors %} table-danger{% endif %}">
                       <div class="related-widget-wrapper">
-                        <select name="{{ formset.prefix }}-__prefix__-reference_company" class="form-control" data-placeholder="Select a company" id="id_{{ formset.prefix }}-__prefix__-reference_company" data-autocomplete-light-language="es" data-autocomplete-light-url="/company/autocomplete" data-autocomplete-light-function="select2">
+                        <select onchange="RecalculateFormset()" name="{{ formset.prefix }}-__prefix__-reference_company" class="form-control" data-placeholder="Select a company" id="id_{{ formset.prefix }}-__prefix__-reference_company" data-autocomplete-light-language="es" data-autocomplete-light-url="/company/autocomplete" data-autocomplete-light-function="select2">
                           <option value="" selected>---------</option>
                         </select>
                       </div>
@@ -309,10 +309,10 @@
                         <input type="text" name="{{ formset.prefix }}-__prefix__-tags" class="form-control" placeholder="----------" id="id_{{ formset.prefix }}-__prefix__-tags">
                     </td>
                     <td class="field-debit{%if field.errors %} table-danger{% endif %}">
-                        <input type="number" name="{{ formset.prefix }}-__prefix__-debit" value="0" class="form-control" data-placeholder="Debit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-debit">
+                        <input onchange="RecalculateFormset()" type="number" name="{{ formset.prefix }}-__prefix__-debit" value="0" class="form-control" data-placeholder="Debit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-debit">
                     </td>
                     <td class="field-credit{%if field.errors %} table-danger{% endif %}">
-                        <input type="number" name="{{ formset.prefix }}-__prefix__-credit" value="0" class="form-control" data-placeholder="Credit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-credit">
+                        <input onchange="RecalculateFormset()" type="number" name="{{ formset.prefix }}-__prefix__-credit" value="0" class="form-control" data-placeholder="Credit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-credit">
                     </td>
                     <td class="field-date_due{%if field.errors %} table-danger{% endif %}">
                       <div class="input-group" id="div_id_{{ formset.prefix }}___prefix___date_due" data-target-input="nearest">
@@ -375,29 +375,36 @@
 
     for (i = 0; i < formCount; i++) {
       var formset_row = document.getElementById('id_{{ formset.prefix }}-' + i + '-id').closest('tr');
-      if(formset_row.style.display != "none"){
-        t_debit += parseFloat(document.getElementById('id_{{ formset.prefix }}-' + i + '-debit').value);
-        t_credit += parseFloat(document.getElementById('id_{{ formset.prefix }}-' + i + '-credit').value);
+      if(formset_row.style.display != "none" && !$("#id_{{ formset.prefix }}-" + i + "-DELETE").is(':checked')){
+        t_debit += parseFloat($("#id_{{ formset.prefix }}-" + i + "-debit").val());
+        t_credit += parseFloat($("#id_{{ formset.prefix }}-" + i + "-credit").val());
       }
     }
     if (t_credit.toFixed(2) != t_debit.toFixed(2)){
-      document.getElementById("tr_resumen").className = "bg-danger";
+      $("#tr_resumen").addClass("bg-danger");
       toastr.error("{{ _('Unbalanced accounting entry') }}")
     }
     else{
-      document.getElementById("tr_resumen").className = "";
+      $("#tr_resumen").removeClass("bg-danger");
     }
-    document.getElementById("t_credit").innerHTML = "$ " + t_credit.toFixed(2);
-    document.getElementById("t_debit").innerHTML = "$ " + t_debit.toFixed(2);
+    $("#t_credit").html("$ " + t_credit.toFixed(2));
+    $("#t_debit").html("$ " + t_debit.toFixed(2));
   }
 
   $("[id^='id_{{ formset.prefix }}-']").on("change", function (e) {
     RecalculateFormset();
   });
 
+  $("[id^='id_{{ formset.prefix }}-'][id$='-DELETE']").change(function() {
+      if(this.checked) {
+          RecalculateFormset();
+      }
+  });
+
   $(document).ready(function(){
     $('#formset_table tr:last').after('<tr style="background-color: transparent;"><td colspan="8">&nbsp;</td></tr>');
     $('#formset_table tr:last').after('<tr id="tr_resumen" style="background-color: #563D7C; color: #ffffff;"><td colspan="4"></td><td style="color: #ffffff;" id="t_debit">$ {{ object.debit }}</td><td style="color: #ffffff;" id="t_credit">$ {{ object.credit }}</td><td colspan="2"></td></tr>');
+    RecalculateFormset();
   });
 </script>
 {% endblock %}

@@ -1,11 +1,13 @@
 # Django Library
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+# Thirdparty Library
+from dal import autocomplete
+
 # Localfolder Library
-from ..models import PyUom
+from ..models import PyProduct, PyUom
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
     FatherUpdateView)
@@ -25,6 +27,7 @@ class UomListView(LoginRequiredMixin, FatherListView):
     model = PyUom
     template_name = 'base/list.html'
     extra_context = {'fields': OBJECT_LIST_FIELDS}
+
 
 class UomDetailView(LoginRequiredMixin, FatherDetailView):
     model = PyUom
@@ -46,3 +49,14 @@ class UomUpdateView(LoginRequiredMixin, FatherUpdateView):
 
 class UomDeleteView(LoginRequiredMixin, FatherDeleteView):
     model = PyUom
+
+
+# ========================================================================== #
+class UomAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        queryset = PyUom.objects.filter(active=True)
+
+        if self.q:
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset

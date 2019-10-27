@@ -172,10 +172,10 @@ class AccountMoveUpdateView(LoginRequiredMixin, FatherUpdateView):
         if self.object.state == 0:
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
-                print("1")
                 if form.is_valid() and formset.is_valid():
                     for obj in formset:
-                        if 'account_plan_id' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] == False:
+                        print(obj.cleaned_data)
+                        if 'DELETE' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] == False:
                             t_debit += obj.cleaned_data['debit']
                             t_credit += obj.cleaned_data['credit']
                     if t_debit != t_credit:
