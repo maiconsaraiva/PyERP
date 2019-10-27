@@ -16,13 +16,13 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ STATIC_URL }}plugins/toastr/toastr.min.css">
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="{% static '/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{% static '/dist/css/adminlte.min.css' %}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    {{ formset.media }}
 
     <!-- Admin Libraries -->
     <script type="text/javascript" src="/admin/jsi18n/"></script>
@@ -30,8 +30,6 @@
     <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
     <script type="text/javascript" src="/static/admin/js/core.js"></script>
     <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
-
-    {{ formset.media }}
 
     <!-- Bootstrap 4 -->
     <script src="{% static '/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -41,8 +39,7 @@
     <script src="{% static '/dist/js/adminlte.min.js' %}"></script>
     <!-- Toastr -->
     <script src="{{ STATIC_URL }}plugins/toastr/toastr.min.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{% static '/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
 {% endblock header %}
 {% block head %}
 <link rel="stylesheet" href="{% static '/bootstrap-select-1.13.9/dist/css/bootstrap-select.min.css' %}">
@@ -128,7 +125,6 @@
 
   }
   .dropup .dropdown-toggle::after {
-
     display: inline-block;
     margin-left: .255em;
     vertical-align: .255em;
@@ -149,7 +145,7 @@
     border: 0px solid transparent;
   }
   .form-control-sm {
-    font-size: 75%;
+    font-size: 100%;
   }
   .form-control:disabled, .form-control[readonly] {
     background-color: transparent;
@@ -199,6 +195,15 @@
     vertical-align: middle;
     border-top: 1px solid #dee2e6;
   }
+  .table-striped tbody tr add-row {
+    background-color: transparent;
+}
+
+
+.add-row, td a{
+    /*color: {{ user.active_company.main_color }} !important;*/
+    background-color: transparent;
+}
 </style>
 {% endblock %}
 
@@ -250,95 +255,97 @@
             {% endif %}
           {% endfor %}
         </div>
-          <div class="js-inline-admin-formset inline-group" id="{{ formset.prefix }}-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#{{ formset.prefix }}&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;{{ formset.prefix }}&quot;, &quot;addText&quot;: &quot;{{ _('add accounting note') }}.&quot;, &quot;deleteText&quot;: &quot;Eliminar&quot;}}">
-            <div class="tabular inline-related last-related">
-              {{ formset.management_form }}
-              <fieldset>
-                <table  class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th class="original"></th>
-                      {% for field in formset.form %}
-                        {% if not field.widget.is_hidden %}
-                          <th class="column-{{ field.name }}">{{ field.label|capfirst }}</th>
-                        {% endif %}
-                      {% endfor %}
-                      {% if formset.can_delete %}<th></th>{% endif %}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for inline_form in formset %}
-                      <tr class="{% cycle 'row1' 'row2' %}" id="{{ formset.prefix }}-{{ forloop.counter0 }}">
-                        <td class="original {%if field.errors %}table-danger{% endif %}">
-                          {% for hidden in inline_form.hidden_fields %}
-                            {{ hidden }}
-                          {% endfor %}
-                        </td>
-                        {% for field in inline_form.visible_fields %}
-                          <td {% if field.name %} class="field-{{ field.name }}"{% endif %}>
-                              {{ field }}
-                          </td>
-                        {% endfor %}
-                      </tr>
+        <div class="js-inline-admin-formset inline-group" id="{{ formset.prefix }}-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#{{ formset.prefix }}&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;{{ formset.prefix }}&quot;, &quot;addText&quot;: &quot;{{ _('add accounting note') }}.&quot;, &quot;deleteText&quot;: &quot;Eliminar&quot;}}">
+          <div class="tabular inline-related last-related">
+            {{ formset.management_form }}
+            <fieldset>
+              <table id="formset_table" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="original"></th>
+                    {% for field in formset.form %}
+                      {% if not field.widget.is_hidden %}
+                        <th class="column-{{ field.name }}">{{ field.label|capfirst }}</th>
+                      {% endif %}
                     {% endfor %}
-                    <tr class="row1  empty-form" id="{{ formset.prefix }}-empty">
-                      <td class="original {%if field.errors %}table-danger{% endif %}">
-                        <input type="hidden" name="{{ formset.prefix }}-__prefix__-id" id="id_{{ formset.prefix }}-__prefix__-id">
-                        <input type="hidden" name="{{ formset.prefix }}-__prefix__-account_move_id" id="id_{{ formset.prefix }}-__prefix__-account_move_id">
+                    {% if formset.can_delete %}<th>a</th>{% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for inline_form in formset %}
+                    <tr class="{% cycle 'row1' 'row2' %}" id="{{ formset.prefix }}-{{ forloop.counter0 }}">
+                      <td class="original{%if field.errors %} table-danger{% endif %}">
+                        {% for hidden in inline_form.hidden_fields %}
+                          {{ hidden }}
+                        {% endfor %}
                       </td>
-                      <td class="field-account_plan_id {%if field.errors %}table-danger{% endif %}">
-                        <div class="related-widget-wrapper">
-                          <select name="{{ formset.prefix }}-__prefix__-account_plan_id" class="form-control" data-placeholder="Select an account" id="id_{{ formset.prefix }}-__prefix__-account_plan_id" data-autocomplete-light-language="es" data-autocomplete-light-url="/account/plan/autocomplete" data-autocomplete-light-function="select2">
-                            <option value="" selected>---------</option>
-                          </select>
-                        </div>
-                      </td>
-                      <td class="field-reference_company {%if field.errors %}table-danger{% endif %}">
-                        <div class="related-widget-wrapper">
-                          <select name="{{ formset.prefix }}-__prefix__-reference_company" class="form-control" data-placeholder="Select a company" id="id_{{ formset.prefix }}-__prefix__-reference_company" data-autocomplete-light-language="es" data-autocomplete-light-url="/company/autocomplete" data-autocomplete-light-function="select2">
-                            <option value="" selected>---------</option>
-                          </select>
-                        </div>
-                      </td>
-                      <td class="field-tags {%if field.errors %}table-danger{% endif %}">
-                          <input type="text" name="{{ formset.prefix }}-__prefix__-tags" class="form-control" placeholder="----------" id="id_{{ formset.prefix }}-__prefix__-tags">
-                      </td>
-                      <td class="field-debit {%if field.errors %}table-danger{% endif %}">
-                          <input type="number" name="{{ formset.prefix }}-__prefix__-debit" value="0" class="form-control" data-placeholder="Debit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-debit">
-                      </td>
-                      <td class="field-credit {%if field.errors %}table-danger{% endif %}">
-                          <input type="number" name="{{ formset.prefix }}-__prefix__-credit" value="0" class="form-control" data-placeholder="Credit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-credit">
-                      </td>
-                      <td class="field-date_due {%if field.errors %}table-danger{% endif %}">
-                        <div class="input-group" id="div_id_{{ formset.prefix }}___prefix___date_due" data-target-input="nearest">
-                          <input type="text" name="{{ formset.prefix }}-__prefix__-date_due" id="id_{{ formset.prefix }}___prefix___date_due" class="form-control  datetimepicker-input" data-toggle="datetimepicker" data-target="#id_{{ formset.prefix }}___prefix___date_due">
-                        </div>
-                        <script type="text/javascript">
-                            "use strict";
-                            var name = "foo";
-                            var __prefix__ = document.getElementById('id_{{ formset.prefix }}-INITIAL_FORMS').value
-                            var func = new Function(
-                                "return \
-                                  function deferDateTimePicker_id_{{ formset.prefix }}_" + __prefix__ + "_date_due(){ \
-                                    if (window.jQuery && $.fn.datetimepicker) { \
-                                      $('#id_pyaccountmovedetail_set___prefix___date_due').datetimepicker({'format': 'L', 'useCurrent': true, 'collapse': true, 'date': '2019-10-25T14:42:27'}); \
-                                    } else { \
-                                      setTimeout(function() { deferDateTimePicker_id_{{ formset.prefix }}_" + __prefix__ + "_date_due() }, 50); \
-                                    } \
-                                  }"
-                            )();
-
-                            //call it, to test it
-                            func();
-                        </script>
-                      </td>
-                      <td class="delete {%if field.errors %}table-danger{% endif %}"></td>
+                      {% for field in inline_form.visible_fields %}
+                        <td class="{% if field.name %}field-{{ field.name }}{% endif %}{%if field.errors %} table-danger{% endif %}">
+                            {{ field }}
+                        </td>
+                      {% endfor %}
                     </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
+                  {% endfor %}
+                  <tr class="row1  empty-form" id="{{ formset.prefix }}-empty">
+                    <td class="original{%if field.errors %} table-danger{% endif %}">
+                      <input type="hidden" name="{{ formset.prefix }}-__prefix__-id" id="id_{{ formset.prefix }}-__prefix__-id">
+                      <input type="hidden" name="{{ formset.prefix }}-__prefix__-account_move_id" id="id_{{ formset.prefix }}-__prefix__-account_move_id">
+                    </td>
+                    <td class="field-account_plan_id{%if field.errors %} table-danger{% endif %}">
+                      <div class="related-widget-wrapper">
+                        <select name="{{ formset.prefix }}-__prefix__-account_plan_id" class="form-control" data-placeholder="Select an account" id="id_{{ formset.prefix }}-__prefix__-account_plan_id" data-autocomplete-light-language="es" data-autocomplete-light-url="/account/plan/autocomplete" data-autocomplete-light-function="select2">
+                          <option value="" selected>---------</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td class="field-reference_company{%if field.errors %} table-danger{% endif %}">
+                      <div class="related-widget-wrapper">
+                        <select name="{{ formset.prefix }}-__prefix__-reference_company" class="form-control" data-placeholder="Select a company" id="id_{{ formset.prefix }}-__prefix__-reference_company" data-autocomplete-light-language="es" data-autocomplete-light-url="/company/autocomplete" data-autocomplete-light-function="select2">
+                          <option value="" selected>---------</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td class="field-tags{%if field.errors %} table-danger{% endif %}">
+                        <input type="text" name="{{ formset.prefix }}-__prefix__-tags" class="form-control" placeholder="----------" id="id_{{ formset.prefix }}-__prefix__-tags">
+                    </td>
+                    <td class="field-debit{%if field.errors %} table-danger{% endif %}">
+                        <input type="number" name="{{ formset.prefix }}-__prefix__-debit" value="0" class="form-control" data-placeholder="Debit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-debit">
+                    </td>
+                    <td class="field-credit{%if field.errors %} table-danger{% endif %}">
+                        <input type="number" name="{{ formset.prefix }}-__prefix__-credit" value="0" class="form-control" data-placeholder="Credit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-credit">
+                    </td>
+                    <td class="field-date_due{%if field.errors %} table-danger{% endif %}">
+                      <div class="input-group" id="div_id_{{ formset.prefix }}___prefix___date_due" data-target-input="nearest">
+                        <input type="text" name="{{ formset.prefix }}-__prefix__-date_due" id="id_{{ formset.prefix }}___prefix___date_due" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#id_{{ formset.prefix }}___prefix___date_due">
+                      </div>
+                      <script type="text/javascript">
+                          "use strict";
+                          var name = "foo";
+                          // $('[name =""{{ formset.prefix }}-2-date_due""]')
+                          var __prefix__ = document.getElementById('id_{{ formset.prefix }}-INITIAL_FORMS').value
+                          var func = new Function(
+                              "return \
+                                function deferDateTimePicker_id_{{ formset.prefix }}_" + __prefix__ + "_date_due(){ \
+                                  if (window.jQuery && $.fn.datetimepicker) { \
+                                    $('#id_pyaccountmovedetail_set___prefix___date_due').datetimepicker({'format': 'YYYY-MM-DD', 'useCurrent': true, 'collapse': true, 'date': '2019-10-25T14:42:27'}); \
+                                  } else { \
+                                    setTimeout(function() { deferDateTimePicker_id_{{ formset.prefix }}_" + __prefix__ + "_date_due() }, 50); \
+                                  } \
+                                }"
+                          )();
+
+                          //call it, to test it
+                          func();
+                      </script>
+                      <input type="hidden" name="initial-{{ formset.prefix }}-__prefix__-date_due" value="2019-07-25" id="initial-{{ formset.prefix }}-__prefix__-id_{{ formset.prefix }}-__prefix__-date_due" value="Null">
+                    </td>
+                    <td class="delete{%if field.errors %} table-danger{% endif %}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </fieldset>
           </div>
+        </div>
       </div>
       <!-- /.card-body -->
       <div class="card-footer">
@@ -349,3 +356,48 @@
   </form>
 </div>
 {% endblock content %}
+{% block scripts %}
+<script src="{% static '/bootstrap-select-1.13.9/dist/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static '/bootstrap-select-1.13.9/dist/js/i18n/defaults-es_ES.min.js' %}"></script>
+<script src="{% static 'formset/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+  /*Convierto todos los multiselect del formset en select2
+  */
+  //$("[id^='id_{{ formset.prefix }}-'][id$='-tax_id']").select2()
+
+
+  /*Gestión de los formset
+  */
+  function RecalculateFormset() {
+    var formCount = $('#id_{{ formset.prefix }}-TOTAL_FORMS').val();
+    var t_credit = 0
+    var t_debit = 0
+
+    for (i = 0; i < formCount; i++) {
+      var formset_row = document.getElementById('id_{{ formset.prefix }}-' + i + '-id').closest('tr');
+      if(formset_row.style.display != "none"){
+        t_debit += parseFloat(document.getElementById('id_{{ formset.prefix }}-' + i + '-debit').value);
+        t_credit += parseFloat(document.getElementById('id_{{ formset.prefix }}-' + i + '-credit').value);
+      }
+    }
+    if (t_credit.toFixed(2) != t_debit.toFixed(2)){
+      document.getElementById("tr_resumen").className = "bg-danger";
+      toastr.error("{{ _('Unbalanced accounting entry') }}")
+    }
+    else{
+      document.getElementById("tr_resumen").className = "";
+    }
+    document.getElementById("t_credit").innerHTML = "$ " + t_credit.toFixed(2);
+    document.getElementById("t_debit").innerHTML = "$ " + t_debit.toFixed(2);
+  }
+
+  $("[id^='id_{{ formset.prefix }}-']").on("change", function (e) {
+    RecalculateFormset();
+  });
+
+  $(document).ready(function(){
+    $('#formset_table tr:last').after('<tr style="background-color: transparent;"><td colspan="8">&nbsp;</td></tr>');
+    $('#formset_table tr:last').after('<tr id="tr_resumen" style="background-color: #563D7C; color: #ffffff;"><td colspan="4"></td><td style="color: #ffffff;" id="t_debit">$ {{ object.debit }}</td><td style="color: #ffffff;" id="t_credit">$ {{ object.credit }}</td><td colspan="2"></td></tr>');
+  });
+</script>
+{% endblock %}

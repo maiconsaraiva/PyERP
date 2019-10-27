@@ -168,23 +168,23 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = InvoiceForm(self.request.POST, instance=self.object)
-            context['products'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
+            context['formset'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
         else:
             context['form'] = InvoiceForm(instance=self.object)
-            context['products'] = PRODUCT_FORMSET(instance=self.object)
+            context['formset'] = PRODUCT_FORMSET(instance=self.object)
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        products = context['products']
+        formset = context['formset']
         if self.object.state == 0:
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
-                if form.is_valid() and products.is_valid():
+                if form.is_valid() and formset.is_valid():
                     print("Form valid")
                     self.object = form.save(commit=False)
-                    products.instance = self.object
-                    products.save()
+                    formset.instance = self.object
+                    formset.save()
                     self.object.save()
                     return super().form_valid(form)
                 else:

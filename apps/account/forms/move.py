@@ -44,9 +44,11 @@ class AccountMoveForm(forms.ModelForm):
             'date_move': DatePicker(
                 options={
                     'useCurrent': True,
-                    'collapse': False,
+                    'collapse': True,
+                    'icons': {}
                 },
                 attrs={
+                    # 'append': 'fa fa-calendar',
                     'icon_toggle': True,
                 }
             ),
@@ -126,7 +128,8 @@ class AccountMoveDetailForm(forms.ModelForm):
             'date_due': DatePicker(
                 options={
                     'useCurrent': True,
-                    'collapse': False,
+                    'collapse': True,
+                    'icons': {}
                 },
                 attrs={
                     'class': 'form-control form-control-sm',

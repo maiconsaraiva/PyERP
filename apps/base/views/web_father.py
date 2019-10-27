@@ -224,21 +224,23 @@ class FatherUpdateView(UpdateView):
             kwargs={'pk': self.object.pk}
         )
         context['action_url'] = '{}:update'.format(object_name)
-        context['next'] = self.model.objects.filter(
-            pk__gt=self.kwargs['pk'],
-            active=True,
-            company_id=self.request.user.active_company_id
-        ).first()
-        context['before'] = self.model.objects.filter(
-            pk__lt=self.kwargs['pk'],
-            active=True,
-            company_id=self.request.user.active_company_id
-        ).last()
+        if 'pk' in self.kwargs:
+            context['next'] = self.model.objects.filter(
+                pk__gt=self.kwargs['pk'],
+                active=True,
+                company_id=self.request.user.active_company_id
+            ).first()
+            context['before'] = self.model.objects.filter(
+                pk__lt=self.kwargs['pk'],
+                active=True,
+                company_id=self.request.user.active_company_id
+            ).last()
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
         }]
         return context
+
 
     def form_valid(self, form):
         """If the form is valid, save the associated model."""

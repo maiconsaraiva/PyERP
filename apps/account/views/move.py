@@ -175,14 +175,15 @@ class AccountMoveUpdateView(LoginRequiredMixin, FatherUpdateView):
                 print("1")
                 if form.is_valid() and formset.is_valid():
                     for obj in formset:
-                        t_debit += obj.cleaned_data['debit']
-                        t_credit += obj.cleaned_data['credit']
-                    # if t_debit != t_credit:
-                    #     messages.error(
-                    #         self.request,
-                    #         _('Unbalanced accounting entry')
-                    #     )
-                    #     return super().form_invalid(form)
+                        if 'account_plan_id' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] == False:
+                            t_debit += obj.cleaned_data['debit']
+                            t_credit += obj.cleaned_data['credit']
+                    if t_debit != t_credit:
+                        messages.error(
+                            self.request,
+                            _('Unbalanced accounting entry')
+                        )
+                        return super().form_invalid(form)
 
                     self.object = form.save(commit=False)
                     formset.instance = self.object

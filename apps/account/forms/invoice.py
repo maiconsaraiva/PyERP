@@ -88,21 +88,21 @@ class SaleOrderDetailForm(forms.ModelForm):
             'amount_total',
         ]
         widgets = {
-            'product_id': forms.Select(
-                attrs={
-                    'class': 'form-control form-control-sm',
-                    'data-placeholder': _('Select a product ...'),
-                    # 'style': 'width: 180px',
-                },
-            ),
-            # 'product_id': autocomplete.ModelSelect2(
-            #     url='PyProduct:autocomplete',
+            # 'product_id': forms.Select(
             #     attrs={
             #         'class': 'form-control form-control-sm',
             #         'data-placeholder': _('Select a product ...'),
-            #         'style': 'width: 180px',
+            #         # 'style': 'width: 180px',
             #     },
             # ),
+            'product_id': autocomplete.ModelSelect2(
+                url='PyProduct:autocomplete',
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'data-placeholder': _('Select a product ...'),
+                    'style': 'width: 180px',
+                },
+            ),
             'description': forms.TextInput(
                 attrs={
                     'class': 'form-control form-control-sm',
@@ -139,21 +139,21 @@ class SaleOrderDetailForm(forms.ModelForm):
                     # 'style': 'width: 80px',
                 },
             ),
-            'tax_id': CustomSelect(
-                attrs={
-                    'class': 'selectpicker',
-                    'data-placeholder': _('Select taxes...'),
-                    # 'style': 'width: 150px',
-                },
-            ),
-            # 'tax_id': autocomplete.ModelSelect2Multiple(
-            #     url='PyTax:autocomplete',
+            # 'tax_id': CustomSelect(
             #     attrs={
-            #         'class': 'form-control  custom-select custom-select-sm',
+            #         'class': 'form-control',
             #         'data-placeholder': _('Select taxes...'),
-            #         'style': 'width: 280px',
+            #         # 'style': 'width: 150px',
             #     },
             # ),
+            'tax_id': autocomplete.ModelSelect2Multiple(
+                url='PyTax:autocomplete',
+                attrs={
+                    'class': 'form-control  custom-select',
+                    'data-placeholder': _('Select taxes...'),
+                    'style': 'width: 280px',
+                },
+            ),
             'amount_total': forms.TextInput(
                 attrs={
                     'class': 'form-control form-control-sm text-right',
@@ -174,6 +174,6 @@ PRODUCT_FORMSET = inlineformset_factory(
     PyInvoice, PyInvoiceDetail,
     form=SaleOrderDetailForm,
     formset=BaseProductFormSet,
-    extra=1,
+    extra=0,
     can_delete=True
 )
