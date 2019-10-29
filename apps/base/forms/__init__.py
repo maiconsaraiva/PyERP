@@ -12,7 +12,6 @@ from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from dal import autocomplete
-from tempus_dominus.widgets import DatePicker
 
 # Localfolder Library
 from ..models import PyCompany, PyCountry, PyUser

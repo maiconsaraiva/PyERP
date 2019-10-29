@@ -31,11 +31,7 @@ class PyAccountMove(PyFather):
         default=0
     )
     journal_id = models.ForeignKey(PyJournal, on_delete=models.PROTECT)
-    date_move = models.DateField(
-        default=timezone.now,
-        null=True,
-        blank=True
-    )
+    date_move = models.DateField(default=timezone.now)
     company_move = models.ForeignKey(
         PyCompany,
         on_delete=models.PROTECT,
@@ -117,11 +113,7 @@ class PyAccountMoveDetail(PyFather):
         decimal_places=2,
         default=0
     )
-    date_due = models.DateField(
-        default=timezone.now,
-        null=True,
-        blank=True
-    )
+    date_due = models.DateField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         if not self.pk:

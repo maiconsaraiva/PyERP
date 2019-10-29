@@ -12,7 +12,7 @@ from .models import (
 
 # ========================================================================== #
 @receiver(post_save, sender=PyInvoice)
-def calc_sale_order(sender, instance, **kwargs):
+def calc_invoice(sender, instance, **kwargs):
     amount_untaxed = 0
     amount_exempt = 0
     amount_tax_iva = 0
@@ -74,5 +74,8 @@ def calc_account_move(sender, instance, **kwargs):
     for obj in PyAccountMoveDetail.objects.filter(account_move_id=instance.pk):
         t_adebit += obj.debit
         t_credit += obj.credit
+        obj.company_id = instance.company_id
+        obj.save()
+
     instance.debit = t_adebit
     instance.credit = t_credit

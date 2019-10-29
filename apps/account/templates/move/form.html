@@ -22,192 +22,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    {{ formset.media }}
-
-    <!-- Admin Libraries -->
-    <script type="text/javascript" src="/admin/jsi18n/"></script>
-    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
-    <script type="text/javascript" src="/static/admin/js/core.js"></script>
-    <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
-
-    <!-- Bootstrap 4 -->
-    <script src="{% static '/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- FastClick -->
-    <script src="{% static '/plugins/fastclick/fastclick.js' %}"></script>
-    <!-- AdminLTE App -->
-    <script src="{% static '/dist/js/adminlte.min.js' %}"></script>
-    <!-- Toastr -->
-    <script src="{{ STATIC_URL }}plugins/toastr/toastr.min.js"></script>
-
+    {{ form.media }}
 {% endblock header %}
 {% block head %}
-<link rel="stylesheet" href="{% static '/bootstrap-select-1.13.9/dist/css/bootstrap-select.min.css' %}">
-<style>
-  .table .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
-    padding: 3px 12px;
-    height: calc(1.8125rem + 2px);
-    -moz-appearance: textfield;
-    background-color: transparent;
-    border: 0px solid transparent;
-  }
-  .table .select2-container--default .select2-selection--single .select2-selection__clear {
-    display: none;
-  }
-  .table .select2-container--default .select2-selection--single .select2-selection__arrow b {
-    display: none;
-  }
-  .select2-container--default .select2-selection--multiple {
-    background-color: transparent;
-    border-radius: 4px;
-    cursor: text;
-    min-height: 0px;
-    border: none;
-    height: calc(1.8125rem + 2px);
-  }
-  .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #007bff;
-    border: 0px solid transparent;
-    border-radius: 4px;
-    cursor: default;
-    float: left;
-    margin-right: 5px;
-    margin-top: 5px;
-    padding: 0 5px;
-    font-size: 75%;
-  }
-  .select2-container--default .select2-search--inline .select2-search__field {
-    background: transparent;
-    border: none;
-    outline: 0;
-    box-shadow: none;
-    -webkit-appearance: textfield;
-      font-size: 75%;
-
-  }
-  .bootstrap-select > .dropdown-toggle {
-    height: calc(1.8125rem + 2px);
-    position: relative;
-    width: 100%;
-    text-align: right;
-    white-space: nowrap;
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    background-color: transparent;
-    border: 0px solid transparent;
-  }
-  .bootstrap-select .dropdown-toggle .filter-option {
-    height: calc(1.8125rem + 2px);
-  }
-  .badge {
-    font-size: 65%;
-    font-weight: bold;
-  }
-  .dropdown-toggle::after {
-    display: inline-block;
-    margin-left: .255em;
-    vertical-align: .255em;
-    content: "";
-    border-top: .0px solid;
-    border-right: .3em solid transparent;
-    border-bottom: 0;
-    border-left: .3em solid transparent;
-
-  }
-  .dropup .dropdown-toggle::after {
-    display: inline-block;
-    margin-left: .255em;
-    vertical-align: .255em;
-    content: "";
-    border-top: 0;
-    border-right: .3em solid transparent;
-    border-bottom: 0;
-    border-left: .3em solid transparent;
-  }
-  /*.table-sm td, .table-sm th {
-    padding: 0rem;
-    padding-top: 0rem;
-    padding-bottom: 0rem;
-  }*/
-  .table .form-control {
-    -moz-appearance: textfield;
-    background-color: transparent;
-    border: 0px solid transparent;
-  }
-  .form-control-sm {
-    font-size: 100%;
-  }
-  .form-control:disabled, .form-control[readonly] {
-    background-color: transparent;
-  }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  .custom-select {
-    -moz-appearance: textfield;
-    background-color: transparent;
-    border: 0px solid transparent;
-    box-shadow: None;
-    background: None;
-    padding: 0;
-  }
-  .table th:last-child, td {
-    padding-bottom: 0px !important;
-    padding-top: 0px !important;
-    /*color: transparent;*/
-  }
-  .breadcrumb {
-    padding: .75rem 1rem .75rem 0rem;
-    background-color: Transparent;
-  }
-  .card-header {
-    border-bottom: none;
-  }
-  .breadcrumb-item a {
-    color: #563D7C;
-    font-weight: bold;
-  }
-  .empty-form {
-    display: none;
-  }
-  .inline-group .tabular th.original {
-    width: 0px;
-    padding: 0;
-  }
-  .inline-group .tabular tr td.original {
-    padding: 0;
-    width: 0;
-  }
-  .table td, .table th {
-    padding: 0;
-    vertical-align: middle;
-    border-top: 1px solid #dee2e6;
-  }
-  .table-striped tbody tr add-row {
-    background-color: transparent;
-}
-
-
-.add-row, td a{
-    /*color: {{ user.active_company.main_color }} !important;*/
-    background-color: transparent;
-}
-</style>
+    <link rel="stylesheet" href="{% static 'css/formset.css' %}">
 {% endblock %}
-
-
 {% block content %}
 <div class="row" style="padding:5px;" >
   <div class="card card-outline col-12">
@@ -255,7 +74,6 @@
             {% endif %}
           {% endfor %}
         </div>
-        <div class="js-inline-admin-formset inline-group" id="{{ formset.prefix }}-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#{{ formset.prefix }}&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;{{ formset.prefix }}&quot;, &quot;addText&quot;: &quot;{{ _('add accounting note') }}.&quot;, &quot;deleteText&quot;: &quot;Eliminar&quot;}}">
           <div class="tabular inline-related last-related">
             {{ formset.management_form }}
             <fieldset>
@@ -268,7 +86,7 @@
                         <th class="column-{{ field.name }}">{{ field.label|capfirst }}</th>
                       {% endif %}
                     {% endfor %}
-                    {% if formset.can_delete %}<th>a</th>{% endif %}
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -284,68 +102,29 @@
                             {{ field }}
                         </td>
                       {% endfor %}
+                      <td class="field-DELETE"><span id="delete-row" class="delete-row"><li class="fa fa-trash" style="padding-right: 3px;"></li></span></td>
                     </tr>
                   {% endfor %}
-                  <tr class="row1  empty-form" id="{{ formset.prefix }}-empty">
-                    <td class="original{%if field.errors %} table-danger{% endif %}">
-                      <input type="hidden" name="{{ formset.prefix }}-__prefix__-id" id="id_{{ formset.prefix }}-__prefix__-id">
-                      <input type="hidden" name="{{ formset.prefix }}-__prefix__-account_move_id" id="id_{{ formset.prefix }}-__prefix__-account_move_id">
+                  <tr class="formset-template" id="{{ formset.prefix }}-__prefix__" style="display: none">
+                    <td class="original {%if field.errors %}table-danger{% endif %}">
+                      {% for hidden in formset.empty_form.hidden_fields %}
+                        {{ hidden }}
+                      {% endfor %}
                     </td>
-                    <td class="field-account_plan_id{%if field.errors %} table-danger{% endif %}">
-                      <div class="related-widget-wrapper">
-                        <select onchange="RecalculateFormset()" name="{{ formset.prefix }}-__prefix__-account_plan_id" class="form-control" data-placeholder="Select an account" id="id_{{ formset.prefix }}-__prefix__-account_plan_id" data-autocomplete-light-language="es" data-autocomplete-light-url="/account/plan/autocomplete" data-autocomplete-light-function="select2">
-                          <option value="" selected>---------</option>
-                        </select>
-                      </div>
-                    </td>
-                    <td class="field-reference_company{%if field.errors %} table-danger{% endif %}">
-                      <div class="related-widget-wrapper">
-                        <select onchange="RecalculateFormset()" name="{{ formset.prefix }}-__prefix__-reference_company" class="form-control" data-placeholder="Select a company" id="id_{{ formset.prefix }}-__prefix__-reference_company" data-autocomplete-light-language="es" data-autocomplete-light-url="/company/autocomplete" data-autocomplete-light-function="select2">
-                          <option value="" selected>---------</option>
-                        </select>
-                      </div>
-                    </td>
-                    <td class="field-tags{%if field.errors %} table-danger{% endif %}">
-                        <input type="text" name="{{ formset.prefix }}-__prefix__-tags" class="form-control" placeholder="----------" id="id_{{ formset.prefix }}-__prefix__-tags">
-                    </td>
-                    <td class="field-debit{%if field.errors %} table-danger{% endif %}">
-                        <input onchange="RecalculateFormset()" type="number" name="{{ formset.prefix }}-__prefix__-debit" value="0" class="form-control" data-placeholder="Debit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-debit">
-                    </td>
-                    <td class="field-credit{%if field.errors %} table-danger{% endif %}">
-                        <input onchange="RecalculateFormset()" type="number" name="{{ formset.prefix }}-__prefix__-credit" value="0" class="form-control" data-placeholder="Credit" step="0.01" id="id_{{ formset.prefix }}-__prefix__-credit">
-                    </td>
-                    <td class="field-date_due{%if field.errors %} table-danger{% endif %}">
-                      <div class="input-group" id="div_id_{{ formset.prefix }}___prefix___date_due" data-target-input="nearest">
-                        <input type="text" name="{{ formset.prefix }}-__prefix__-date_due" id="id_{{ formset.prefix }}___prefix___date_due" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#id_{{ formset.prefix }}___prefix___date_due">
-                      </div>
-                      <script type="text/javascript">
-                          "use strict";
-                          var name = "foo";
-                          // $('[name =""{{ formset.prefix }}-2-date_due""]')
-                          var __prefix__ = document.getElementById('id_{{ formset.prefix }}-INITIAL_FORMS').value
-                          var func = new Function(
-                              "return \
-                                function deferDateTimePicker_id_{{ formset.prefix }}_" + __prefix__ + "_date_due(){ \
-                                  if (window.jQuery && $.fn.datetimepicker) { \
-                                    $('#id_pyaccountmovedetail_set___prefix___date_due').datetimepicker({'format': 'YYYY-MM-DD', 'useCurrent': true, 'collapse': true, 'date': '2019-10-25T14:42:27'}); \
-                                  } else { \
-                                    setTimeout(function() { deferDateTimePicker_id_{{ formset.prefix }}_" + __prefix__ + "_date_due() }, 50); \
-                                  } \
-                                }"
-                          )();
-
-                          //call it, to test it
-                          func();
-                      </script>
-                      <input type="hidden" name="initial-{{ formset.prefix }}-__prefix__-date_due" value="2019-07-25" id="initial-{{ formset.prefix }}-__prefix__-id_{{ formset.prefix }}-__prefix__-date_due" value="Null">
-                    </td>
-                    <td class="delete{%if field.errors %} table-danger{% endif %}"></td>
+                    {% for field in formset.empty_form.visible_fields %}
+                      <td class="{% if field.name %}field-{{ field.name }}{% endif %} {%if field.errors %}table-danger{% endif %}">
+                          {{ field }}
+                      </td>
+                    {% endfor %}
+                    <td class="field-DELETE"><span id="delete-row" class="delete-row"><li class="fa fa-trash" style="padding-right: 3px;"></li></span></td>
                   </tr>
                 </tbody>
+                <tfoot>
+                </tfoot>
               </table>
             </fieldset>
+            <span id="add-row" class="add-row">Add form</span>
           </div>
-        </div>
       </div>
       <!-- /.card-body -->
       <div class="card-footer">
@@ -357,27 +136,78 @@
 </div>
 {% endblock content %}
 {% block scripts %}
-<script src="{% static '/bootstrap-select-1.13.9/dist/js/bootstrap-select.min.js' %}"></script>
-<script src="{% static '/bootstrap-select-1.13.9/dist/js/i18n/defaults-es_ES.min.js' %}"></script>
-<script src="{% static 'formset/jquery.formset.js' %}"></script>
 <script type="text/javascript">
-  /*Convierto todos los multiselect del formset en select2
-  */
-  //$("[id^='id_{{ formset.prefix }}-'][id$='-tax_id']").select2()
+  $('#add-row').click(function() {
+    var form_idx = $('#id_{{ formset.prefix }}-TOTAL_FORMS').val();
+    form_cloned = $('<div>').append($('.formset-template').clone()).html().replace(/formset-template/g, '');
+    form_cloned = form_cloned.replace(/__prefix__/g, form_idx);
+    //alert(form_cloned);
+    $('#formset_table tbody').append(form_cloned);
+    $('#{{ formset.prefix }}-' + form_idx).show();
+    $('#id_{{ formset.prefix }}-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+
+    $("#formset_table tbody tr:visible").each(function (index) {
+      $(this).css("background-color", !!(index & 1)? "inherit" : "rgba(0,0,0,.05");
+    });
+
+    var datepickerDict = {};
+    var isBootstrap4 = $.fn.collapse.Constructor.VERSION.split('.').shift() == "4";
+    $("[dp_config]:not([disabled])").each(function (i, element) {
+        var $element = $(element), data = {};
+        try {
+            data = JSON.parse($element.attr('dp_config'));
+        }
+        catch (x) { }
+        if (data.id && data.options) {
+            data.$element = $element.datetimepicker(data.options);
+            data.datepickerdata = $element.data("DateTimePicker");
+            datepickerDict[data.id] = data;
+            data.$element.next('.input-group-addon').on('click', function(){
+                data.datepickerdata.show();
+            });
+            if(isBootstrap4){
+                data.$element.on("dp.show", function (e) {
+                    $('.collapse.in').addClass('show');
+                });
+            }
+        }
+    });
+    if(isBootstrap4) {
+        $('body').on('show.bs.collapse','.bootstrap-datetimepicker-widget .collapse',function(e){
+            $(e.target).addClass('in');
+        });
+        $('body').on('hidden.bs.collapse','.bootstrap-datetimepicker-widget .collapse',function(e){
+            $(e.target).removeClass('in');
+        });
+    }
+  });
 
 
-  /*Gestión de los formset
-  */
-  function RecalculateFormset() {
+  $('.delete-row').click(function() {
+    id = '#id_' + $(this).closest("tr").attr('id') + '-DELETE';
+    $(id).prop('checked', true);
+    $(this).closest("tr").hide();
+    alert($(id).is(':checked'));
+
+    $("#formset_table tbody tr:visible").each(function (index) {
+      $(this).css("background-color", !!(index & 1)? "inherit" : "rgba(0,0,0,.05");
+    });
+    //$('#id_{{ formset.prefix }}-TOTAL_FORMS').val(parseInt(form_idx) - 1);
+  });
+
+  /* =================== Recalculo del asiento contable =================== */
+  /*function RecalculateFormset() {
     var formCount = $('#id_{{ formset.prefix }}-TOTAL_FORMS').val();
     var t_credit = 0
     var t_debit = 0
 
     for (i = 0; i < formCount; i++) {
-      var formset_row = document.getElementById('id_{{ formset.prefix }}-' + i + '-id').closest('tr');
-      if(formset_row.style.display != "none" && !$("#id_{{ formset.prefix }}-" + i + "-DELETE").is(':checked')){
-        t_debit += parseFloat($("#id_{{ formset.prefix }}-" + i + "-debit").val());
-        t_credit += parseFloat($("#id_{{ formset.prefix }}-" + i + "-credit").val());
+      if($("#id_{{ formset.prefix }}-" + i + "-id").length){
+        var formset_row = document.getElementById('id_{{ formset.prefix }}-' + i + '-id').closest('tr');
+        if(formset_row.style.display != "none" && !$("#id_{{ formset.prefix }}-" + i + "-DELETE").is(':checked')){
+          t_debit += parseFloat($("#id_{{ formset.prefix }}-" + i + "-debit").val());
+          t_credit += parseFloat($("#id_{{ formset.prefix }}-" + i + "-credit").val());
+        }
       }
     }
     if (t_credit.toFixed(2) != t_debit.toFixed(2)){
@@ -389,22 +219,35 @@
     }
     $("#t_credit").html("$ " + t_credit.toFixed(2));
     $("#t_debit").html("$ " + t_debit.toFixed(2));
-  }
+  }*/
 
-  $("[id^='id_{{ formset.prefix }}-']").on("change", function (e) {
+
+  /* =================== Recalculo del asiento contable =================== */
+  /* Si cualquier campo de cualquier linea cambia, se recalcula el asiento  */
+  /* contable.                                                               */
+  /*$("[id^='id_{{ formset.prefix }}-']").on("change", function (e) {
     RecalculateFormset();
-  });
+  });*/
 
-  $("[id^='id_{{ formset.prefix }}-'][id$='-DELETE']").change(function() {
+
+  /* =================== Recalculo del asiento contable =================== */
+  /* Si marco alguna línea (nota contable) para eliminar del asiento        */
+  /* contable, entonces se recalcula el asiento contable.                   */
+
+  /*$("[id^='id_{{ formset.prefix }}-'][id$='-DELETE']").change(function() {
       if(this.checked) {
           RecalculateFormset();
       }
-  });
+  });*/
+
+
+  /* =================== Recalculo del asiento contable =================== */
+  /* Se agrega las filas del resumen del asiento contable al terminar de    */
+  /* cargar la página y se recalcula el asiento contable.                   */
 
   $(document).ready(function(){
-    $('#formset_table tr:last').after('<tr style="background-color: transparent;"><td colspan="8">&nbsp;</td></tr>');
-    $('#formset_table tr:last').after('<tr id="tr_resumen" style="background-color: #563D7C; color: #ffffff;"><td colspan="4"></td><td style="color: #ffffff;" id="t_debit">$ {{ object.debit }}</td><td style="color: #ffffff;" id="t_credit">$ {{ object.credit }}</td><td colspan="2"></td></tr>');
-    RecalculateFormset();
+    //$('#formset_table tfoot').append('<tr style="background-color: transparent;"><td colspan="8">&nbsp;</td></tr>');
+    $('#formset_table tfoot').append('<tr id="tr_resumen" style="background-color: #563D7C; color: #ffffff;"><td colspan="4"></td><td style="color: #ffffff;" id="t_debit">$ {{ object.debit }}</td><td style="color: #ffffff;" id="t_credit">$ {{ object.credit }}</td><td colspan="2"></td></tr>');
   });
 </script>
 {% endblock %}

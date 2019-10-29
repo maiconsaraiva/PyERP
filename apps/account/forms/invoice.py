@@ -8,10 +8,14 @@ from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from dal import autocomplete
-from tempus_dominus.widgets import DateTimePicker
+from bootstrap_datepicker_plus import DatePickerInput
 
 # Localfolder Library
 from ..models import PyInvoice, PyInvoiceDetail
+
+
+class MyDatePickerInput(DatePickerInput):
+    template_name = 'datepicker_plus/date-picker.html'
 
 
 # ========================================================================== #
@@ -40,19 +44,7 @@ class InvoiceForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'date_invoice': DateTimePicker(
-                options={
-                    'useCurrent': True,
-                    'collapse': True,
-                    'icons': {
-                        'time': 'far fa-clock'
-                    }
-                },
-                attrs={
-                    # 'append': 'fa fa-calendar',
-                    'icon_toggle': True,
-                }
-            ),
+            'date_invoice': MyDatePickerInput(format='%d/%m/%Y'),
             'note': forms.Textarea(
                 attrs={
                     'class': 'form-control',
@@ -64,13 +56,6 @@ class InvoiceForm(forms.ModelForm):
 
 
 # ========================================================================== #
-class CustomSelect(forms.SelectMultiple):
-    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
-        options = super(CustomSelect, self).create_option(name, value, label, selected, index, subindex=None, attrs=None)
-        options['attrs']['data-content'] = """<span class='badge badge-primary'>{}</span>""".format(label)
-        return options
-
-
 class SaleOrderDetailForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
     """
@@ -88,79 +73,58 @@ class SaleOrderDetailForm(forms.ModelForm):
             'amount_total',
         ]
         widgets = {
-            # 'product_id': forms.Select(
-            #     attrs={
-            #         'class': 'form-control form-control-sm',
-            #         'data-placeholder': _('Select a product ...'),
-            #         # 'style': 'width: 180px',
-            #     },
-            # ),
             'product_id': autocomplete.ModelSelect2(
                 url='PyProduct:autocomplete',
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'data-placeholder': _('Select a product ...'),
-                    'style': 'width: 180px',
                 },
             ),
             'description': forms.TextInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'placeholder': _('----------'),
-                    # 'style': 'width: 150px',
                 },
             ),
             'quantity': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'data-placeholder': _('Product quantity ...'),
-                    # 'style': 'width: 80px',
                 },
             ),
             'uom_id': autocomplete.ModelSelect2(
                 url='PyUom:autocomplete',
                 attrs={
-                    'class': 'form-control form-control-sm',
+                    'class': 'form-control',
                     'data-placeholder': _('Select a UOM ...'),
-                    'style': 'width: 180px',
                 },
             ),
             'price': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm text-right',
+                    'class': 'form-control text-right',
                     'data-placeholder': 'Precio del producto ...',
-                    # 'style': 'width: 80px',
                     'value': 0,
                 },
             ),
             'discount': forms.NumberInput(
                 attrs={
-                    'class': 'form-control form-control-sm text-right',
+                    'class': 'form-control text-right',
                     'data-placeholder': 'Descuento ...',
-                    # 'style': 'width: 80px',
                 },
             ),
-            # 'tax_id': CustomSelect(
-            #     attrs={
-            #         'class': 'form-control',
-            #         'data-placeholder': _('Select taxes...'),
-            #         # 'style': 'width: 150px',
-            #     },
-            # ),
             'tax_id': autocomplete.ModelSelect2Multiple(
                 url='PyTax:autocomplete',
                 attrs={
-                    'class': 'form-control  custom-select',
+                    'class': 'form-control',
                     'data-placeholder': _('Select taxes...'),
-                    'style': 'width: 280px',
                 },
             ),
             'amount_total': forms.TextInput(
                 attrs={
-                    'class': 'form-control form-control-sm text-right',
+                    'class': 'form-control text-right',
                     'data-placeholder': 'Total ...',
-                    # 'style': 'width: 80px',
                     'readonly': True,
+                    'style': 'width: 6.5em;',
                 },
             ),
         }
@@ -170,6 +134,7 @@ class BaseProductFormSet(BaseInlineFormSet):
     def add_fields(self, form, index):
         super().add_fields(form, index)
         form.fields[DELETION_FIELD_NAME].label = ''
+
 
 PRODUCT_FORMSET = inlineformset_factory(
     PyInvoice, PyInvoiceDetail,

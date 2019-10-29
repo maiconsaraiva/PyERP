@@ -109,7 +109,6 @@ class InvoiceCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyInvoice
     form_class = InvoiceForm
     template_name = 'invoice/form.html'
-    success_url = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

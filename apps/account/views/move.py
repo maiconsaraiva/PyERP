@@ -98,7 +98,7 @@ class AccountMoveCreateView(LoginRequiredMixin, FatherCreateView):
     """
     model = PyAccountMove
     form_class = AccountMoveForm
-    template_name = 'move/form_1.html'
+    template_name = 'move/form.html'
     success_url = None
 
     def get_context_data(self, **kwargs):
@@ -121,13 +121,29 @@ class AccountMoveCreateView(LoginRequiredMixin, FatherCreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
+        t_debit = 0
+        t_credit = 0
         with transaction.atomic():
             form.instance.uc = self.request.user.pk
-            self.object = form.save()
-            if formset.is_valid():
+            if form.is_valid() and formset.is_valid():
+                for obj in formset:
+                    print(obj.cleaned_data)
+                    if 'DELETE' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] == False:
+                        t_debit += obj.cleaned_data['debit']
+                        t_credit += obj.cleaned_data['credit']
+                if t_debit != t_credit:
+                    messages.error(
+                        self.request,
+                        _('Unbalanced accounting entry')
+                    )
+                    return super().form_invalid(form)
+
+                self.object = form.save()
                 formset.instance = self.object
                 formset.save()
-        return super().form_valid(form)
+                return super().form_valid(form)
+            else:
+                return super().form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy('PyAccountMove:detail', kwargs={'pk': self.object.pk})
@@ -174,7 +190,7 @@ class AccountMoveUpdateView(LoginRequiredMixin, FatherUpdateView):
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and formset.is_valid():
                     for obj in formset:
-                        print(obj.cleaned_data)
+                        print(obj.cleaned_data['DELETE'])
                         if 'DELETE' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] == False:
                             t_debit += obj.cleaned_data['debit']
                             t_credit += obj.cleaned_data['credit']

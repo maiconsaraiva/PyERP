@@ -1,5 +1,6 @@
 # Standard Library
-from datetime import datetime
+
+from django.utils import timezone
 
 # Django Library
 from django.db import models
@@ -33,7 +34,7 @@ class PyInvoice(PyFather):
         blank=True,
         on_delete=models.PROTECT
     )
-    date_invoice = models.DateTimeField(default=datetime.now(), null=True, blank=True)
+    date_invoice = models.DateField(default=timezone.now)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
         max_digits=10,
@@ -85,7 +86,7 @@ class PyInvoice(PyFather):
             self.name = get_next_value(self._meta.object_name, 'INV')
 
         if not self.date_invoice or self.date_invoice == "":
-            self.date_invoice = datetime.now()
+            self.date_invoice = timezone.now
         super().save(*args, **kwargs)
 
 

@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
 from dal import autocomplete
-from tempus_dominus.widgets import DatePicker, DateTimePicker, TimePicker
+from bootstrap_datepicker_plus import DatePickerInput
 
 # Localfolder Library
 from .models import PySaleOrder, PySaleOrderDetail
@@ -40,19 +40,7 @@ class SaleOrderForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'date_order': DateTimePicker(
-                options={
-                    'useCurrent': True,
-                    'collapse': True,
-                    'icons': {
-                        'time': 'far fa-clock'
-                    }
-                },
-                attrs={
-                    # 'append': 'fa fa-calendar',
-                    'icon_toggle': True,
-                }
-            ),
+            'date_order': DatePickerInput(format='%d/%m/%Y'),
             'note': forms.Textarea(
                 attrs={
                     'class': 'form-control',

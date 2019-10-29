@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fdb9486219e3e23d12a04b30b6e26a0407dc1456226d8001be047683f92541c6"
+            "sha256": "51d7598b3f190fe1fdd9a57970842acef2c8074cc5ce360e5ad5e5fb4ec4c627"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -53,6 +53,14 @@
             ],
             "index": "pypi",
             "version": "==3.4.1"
+        },
+        "django-bootstrap-datepicker-plus": {
+            "hashes": [
+                "sha256:490058eba99d47f48a7d24fa78581c0e36375bdc7aa9605783eeb170d51fd0df",
+                "sha256:a8bc19cc6846f97ff1e6c447f4e0387881d16e8afa1e8bd7a652c19e545c566b"
+            ],
+            "index": "pypi",
+            "version": "==3.0.5"
         },
         "django-bootstrap4": {
             "hashes": [
@@ -120,14 +128,6 @@
             ],
             "index": "pypi",
             "version": "==1.1.0"
-        },
-        "django-tempus-dominus": {
-            "hashes": [
-                "sha256:551b87ae707623f7f7019647aa8013a3682f8c3c7bda2699204b4e723c0510a1",
-                "sha256:5ad14b23d3e87b9a53801ca101f44a2edad619ac37d553a86790f73ac81c05b2"
-            ],
-            "index": "pypi",
-            "version": "==5.1.2.8"
         },
         "django-userforeignkey": {
             "hashes": [

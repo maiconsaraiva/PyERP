@@ -11,19 +11,12 @@
 
   {% block header %}
     <link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static '/plugins/fontawesome-free/css/all.min.css' %}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ STATIC_URL }}plugins/toastr/toastr.min.css">
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="{% static '/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{% static '/plugins/select2/css/select2.min.css' %}">
-    <!-- Bootstrap4 Duallistbox -->
-    <link rel="stylesheet" href="{% static '/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css' %}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{% static '/dist/css/adminlte.min.css' %}">
     <!-- Google Font: Source Sans Pro -->
@@ -34,26 +27,27 @@
 
     <!-- jQuery -->
     <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.js' %}"></script>
+  {% endblock header %}
+  {% block head %}
+  {% endblock %}
+
+  {% block headscripts %}
+    <!-- Admin Libraries -->
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="{% static '/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- Bootstrap4 Duallistbox -->
-    <script src="{% static '/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js' %}"></script>
-    <!-- InputMask -->
-    <script src="{% static '/plugins/inputmask/jquery.inputmask.bundle.js' %}"></script>
-    <script src="{% static '/plugins/moment/moment.min.js' %}"></script>
-    <!-- bootstrap color picker -->
-    <script src="{% static '/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js' %}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{% static '/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
     <!-- FastClick -->
     <script src="{% static '/plugins/fastclick/fastclick.js' %}"></script>
     <!-- AdminLTE App -->
     <script src="{% static '/dist/js/adminlte.min.js' %}"></script>
     <!-- Toastr -->
     <script src="{{ STATIC_URL }}plugins/toastr/toastr.min.js"></script>
-  {% endblock header %}
-  {% block head %}
-  {% endblock %}
+  {% endblock headscripts %}
 </head>
 <body class="hold-transition {% if not web_parameter.get_sidebar_collapse == 'True' %} sidebar-collapse {% endif %} sidebar-mini ">
 
@@ -115,6 +109,7 @@
 
     .add-row, .delete-row .fa-trash{
         color: {{ user.active_company.main_color }} !important;
+        cursor: pointer;
     }
 
     .badge-primary {

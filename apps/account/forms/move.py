@@ -9,10 +9,14 @@ from django.utils.translation import ugettext_lazy as _
 # Thirdparty Library
 from dal import autocomplete
 from taggit.forms import TagWidget
-from tempus_dominus.widgets import DatePicker
+from bootstrap_datepicker_plus import DatePickerInput
 
 # Localfolder Library
 from ..models import PyAccountMove, PyAccountMoveDetail
+
+
+class MyDatePickerInput(DatePickerInput):
+    template_name = 'datepicker_plus/date-picker.html'
 
 
 # ========================================================================== #
@@ -41,15 +45,12 @@ class AccountMoveForm(forms.ModelForm):
                     'data-placeholder': _('Select a journal')
                 },
             ),
-            'date_move': DatePicker(
+            'date_move': MyDatePickerInput(
                 options={
-                    'useCurrent': True,
-                    'collapse': True,
-                    'icons': {}
-                },
-                attrs={
-                    # 'append': 'fa fa-calendar',
-                    'icon_toggle': True,
+                    "format": "DD/<Month>/YYYY", # moment date-time format
+                    "showClose": True,
+                    "showClear": True,
+                    "showTodayButton": True,
                 }
             ),
             'company_move': autocomplete.ModelSelect2(
@@ -69,13 +70,6 @@ class AccountMoveForm(forms.ModelForm):
             ),
         }
 
-
-# ========================================================================== #
-class CustomSelect(forms.SelectMultiple):
-    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
-        options = super(CustomSelect, self).create_option(name, value, label, selected, index, subindex=None, attrs=None)
-        options['attrs']['data-content'] = """<span class='badge badge-primary'>{}</span>""".format(label)
-        return options
 
 
 class AccountMoveDetailForm(forms.ModelForm):
@@ -125,17 +119,7 @@ class AccountMoveDetailForm(forms.ModelForm):
                     'data-placeholder': _('Credit'),
                 },
             ),
-            'date_due': DatePicker(
-                options={
-                    'useCurrent': True,
-                    'collapse': True,
-                    'icons': {}
-                },
-                attrs={
-                    'class': 'form-control form-control-sm',
-                    'icon_toggle': True,
-                }
-            ),
+            'date_due': MyDatePickerInput(format='%d/%m/%Y'),
         }
 
 
@@ -143,6 +127,8 @@ class BaseAccountMoveFormSet(BaseInlineFormSet):
     def add_fields(self, form, index):
         super().add_fields(form, index)
         form.fields[DELETION_FIELD_NAME].label = ''
+        # form.fields[DELETION_FIELD_NAME].widget = forms.HiddenInput()
+
 
 ACCOUNTING_NOTES = inlineformset_factory(
     PyAccountMove, PyAccountMoveDetail,

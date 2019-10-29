@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
     'bootstrap4',
-    'tempus_dominus',
+    'bootstrap_datepicker_plus',
     'rest_framework',
     'rest_framework.authtoken',
 
@@ -80,11 +80,6 @@ with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
     for line in ins_apps_file.readlines():
         INSTALLED_APPS += [line.strip()]
 
-
-# ========================================================================== #
-# Para la localizacion i18n de los componentes de fecha y hora de bootstrap
-
-TEMPUS_DOMINUS_LOCALIZE = False
 
 
 # ========================================================================== #

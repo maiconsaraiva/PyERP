@@ -6,7 +6,7 @@
 {% bootstrap_javascript jquery='full' %}
 {% bootstrap_messages %}
 
-{% load static %}
+{% load i18n static %}
 {% load erp_tags %}
 {% block header %}
     <link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
@@ -22,189 +22,10 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    {{ formset.media }}
-
-    <!-- Admin Libraries -->
-    <script type="text/javascript" src="/admin/jsi18n/"></script>
-    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
-    <script type="text/javascript" src="/static/admin/js/core.js"></script>
-    <script type="text/javascript" src="/static/admin/js/inlines.js"></script>
-
-    <!-- Bootstrap 4 -->
-    <script src="{% static '/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- FastClick -->
-    <script src="{% static '/plugins/fastclick/fastclick.js' %}"></script>
-    <!-- AdminLTE App -->
-    <script src="{% static '/dist/js/adminlte.min.js' %}"></script>
-    <!-- Toastr -->
-    <script src="{{ STATIC_URL }}plugins/toastr/toastr.min.js"></script>
-
+    {{ form.media }}
 {% endblock header %}
 {% block head %}
-<link rel="stylesheet" href="{% static '/bootstrap-select-1.13.9/dist/css/bootstrap-select.min.css' %}">
-<style>
-  .table .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
-    padding: 3px 12px;
-    height: calc(1.8125rem + 2px);
-    -moz-appearance: textfield;
-    background-color: transparent;
-    border: 0px solid transparent;
-  }
-  .table .select2-container--default .select2-selection--single .select2-selection__clear {
-    display: none;
-  }
-  .table .select2-container--default .select2-selection--single .select2-selection__arrow b {
-    display: none;
-  }
-  .select2-container--default .select2-selection--multiple {
-    background-color: transparent;
-    border-radius: 4px;
-    cursor: text;
-    min-height: 0px;
-    border: none;
-    height: calc(1.8125rem + 2px);
-  }
-  .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #007bff;
-    border: 0px solid transparent;
-    border-radius: 4px;
-    cursor: default;
-    float: left;
-    margin-right: 5px;
-    margin-top: 5px;
-    padding: 0 5px;
-    font-size: 75%;
-  }
-  .select2-container--default .select2-search--inline .select2-search__field {
-    background: transparent;
-    border: none;
-    outline: 0;
-    box-shadow: none;
-    -webkit-appearance: textfield;
-      font-size: 75%;
-
-  }
-  .bootstrap-select > .dropdown-toggle {
-    height: calc(1.8125rem + 2px);
-    position: relative;
-    width: 100%;
-    text-align: right;
-    white-space: nowrap;
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    background-color: transparent;
-    border: 0px solid transparent;
-  }
-  .bootstrap-select .dropdown-toggle .filter-option {
-    height: calc(1.8125rem + 2px);
-  }
-  .badge {
-    font-size: 65%;
-    font-weight: bold;
-  }
-  .dropdown-toggle::after {
-    display: inline-block;
-    margin-left: .255em;
-    vertical-align: .255em;
-    content: "";
-    border-top: .0px solid;
-    border-right: .3em solid transparent;
-    border-bottom: 0;
-    border-left: .3em solid transparent;
-
-  }
-  .dropup .dropdown-toggle::after {
-    display: inline-block;
-    margin-left: .255em;
-    vertical-align: .255em;
-    content: "";
-    border-top: 0;
-    border-right: .3em solid transparent;
-    border-bottom: 0;
-    border-left: .3em solid transparent;
-  }
-  /*.table-sm td, .table-sm th {
-    padding: 0rem;
-    padding-top: 0rem;
-    padding-bottom: 0rem;
-  }*/
-  .table .form-control {
-    -moz-appearance: textfield;
-    background-color: transparent;
-    border: 0px solid transparent;
-  }
-  .form-control-sm {
-    font-size: 100%;
-  }
-  .form-control:disabled, .form-control[readonly] {
-    background-color: transparent;
-  }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  .custom-select {
-    -moz-appearance: textfield;
-    background-color: transparent;
-    border: 0px solid transparent;
-    box-shadow: None;
-    background: None;
-    padding: 0;
-  }
-  .table th:last-child, td {
-    padding-bottom: 0px !important;
-    padding-top: 0px !important;
-    /*color: transparent;*/
-  }
-  .breadcrumb {
-    padding: .75rem 1rem .75rem 0rem;
-    background-color: Transparent;
-  }
-  .card-header {
-    border-bottom: none;
-  }
-  .breadcrumb-item a {
-    color: #563D7C;
-    font-weight: bold;
-  }
-  .empty-form {
-    display: none;
-  }
-  .inline-group .tabular th.original {
-    width: 0px;
-    padding: 0;
-  }
-  .inline-group .tabular tr td.original {
-    padding: 0;
-    width: 0;
-  }
-  .table td, .table th {
-    padding: 0;
-    vertical-align: middle;
-    border-top: 1px solid #dee2e6;
-  }
-  .table-striped tbody tr add-row {
-    background-color: transparent;
-}
-
-
-.add-row, td a{
-    /*color: {{ user.active_company.main_color }} !important;*/
-    background-color: transparent;
-}
-</style>
+    <link rel="stylesheet" href="{% static 'css/formset.css' %}">
 {% endblock %}
 {% block content %}
   <div class="row" style="padding:5px;" >
@@ -253,7 +74,6 @@
               {% endif %}
             {% endfor %}
           </div>
-        <div class="js-inline-admin-formset inline-group" id="{{ formset.prefix }}-group" data-inline-type="tabular" data-inline-formset="{&quot;name&quot;: &quot;#{{ formset.prefix }}&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;{{ formset.prefix }}&quot;, &quot;addText&quot;: &quot;{{ _('add product') }}.&quot;, &quot;deleteText&quot;: &quot;Eliminar&quot;}}">
           <div class="tabular inline-related last-related">
             {{ formset.management_form }}
             <fieldset>
@@ -266,80 +86,70 @@
                         <th class="column-{{ field.name }}">{{ field.label|capfirst }}</th>
                       {% endif %}
                     {% endfor %}
-                    {% if formset.can_delete %}<th></th>{% endif %}
+                    {% if formset.can_delete %}<th>a</th>{% endif %}
                   </tr>
                 </thead>
                 <tbody>
                   {% for inline_form in formset %}
                     <tr class="{% cycle 'row1' 'row2' %}" id="{{ formset.prefix }}-{{ forloop.counter0 }}">
-                      <td class="original {%if field.errors %}table-danger{% endif %}">
+                      <td class="original{%if field.errors %} table-danger{% endif %}">
                         {% for hidden in inline_form.hidden_fields %}
                           {{ hidden }}
                         {% endfor %}
                       </td>
                       {% for field in inline_form.visible_fields %}
-                        <td class="{% if field.name %}field-{{ field.name }}{% endif %} {%if field.errors %}table-danger{% endif %}">
+                        <td class="{% if field.name %}field-{{ field.name }}{% endif %}{%if field.errors %} table-danger{% endif %}">
                             {{ field }}
                         </td>
                       {% endfor %}
                     </tr>
                   {% endfor %}
-                  <tr class="row1  empty-form" id="{{ formset.prefix }}-empty">
-                    <td class="original{%if field.errors %} table-danger{% endif %}"><input type="hidden" name="{{ formset.prefix }}-__prefix__-id" id="id_{{ formset.prefix }}-__prefix__-id"><input type="hidden" name="{{ formset.prefix }}-__prefix__-invoice_id" id="id_{{ formset.prefix }}-__prefix__-invoice_id"></td>
-                    <td class="field-product_id{%if field.errors %} table-danger{% endif %}"><select onchange="FindProduct(event)" name="pyinvoicedetail_set-__prefix__-product_id" class="form-control form-control-sm" data-placeholder="Select a product ..." style="width: 180px" id="id_pyinvoicedetail_set-__prefix__-product_id" data-autocomplete-light-language="es" data-autocomplete-light-url="/product/autocomplete" data-autocomplete-light-function="select2"><option value="" selected>---------</option></select></td>
-                    <td class="field-description{%if field.errors %} table-danger{% endif %}"><input onchange="RecalculateFormset()" type="text" name="pyinvoicedetail_set-__prefix__-description" class="form-control form-control-sm" placeholder="----------" id="id_pyinvoicedetail_set-__prefix__-description"></td>
-                    <td class="field-quantity{%if field.errors %} table-danger{% endif %}"><input onchange="RecalculateFormset()" type="number" name="pyinvoicedetail_set-__prefix__-quantity" value="0" class="form-control form-control-sm" data-placeholder="Product quantity ..." step="0.01" id="id_pyinvoicedetail_set-__prefix__-quantity"></td>
-                    <td class="field-uom_id{%if field.errors %} table-danger{% endif %}"><select onchange="RecalculateFormset()" name="pyinvoicedetail_set-__prefix__-uom_id" class="custom-select custom-select-sm" data-placeholder="Unit measurement ..." id="id_pyinvoicedetail_set-__prefix__-uom_id">
-                    <option value="" selected>---------</option>
-
-                    <option value="1">Caja</option>
-
-                    <option value="2">Unidad(es)</option>
-
-                    <option value="3">Bolsa(s)</option>
-
-                    <option value="4">Saco(s)</option>
-
-                  </select></td>
-                    <td class="field-price{%if field.errors %} table-danger{% endif %}"><input onchange="RecalculateFormset()" type="number" name="pyinvoicedetail_set-__prefix__-price" value="0" class="form-control form-control-sm text-right" data-placeholder="Precio del producto ..." value="0" step="0.01" id="id_pyinvoicedetail_set-__prefix__-price"></td>
-                    <td class="field-discount{%if field.errors %} table-danger{% endif %}"><input onchange="RecalculateFormset()" type="number" name="pyinvoicedetail_set-__prefix__-discount" value="0" class="form-control form-control-sm text-right" data-placeholder="Descuento ..." step="0.01" id="id_pyinvoicedetail_set-__prefix__-discount"></td>
-                    <td class="field-tax_id{%if field.errors %} table-danger{% endif %}"><select onchange="RecalculateFormset()" name="pyinvoicedetail_set-__prefix__-tax_id" class="form-control  custom-select custom-select-sm" data-placeholder="Select taxes..." style="width: 280px" id="id_pyinvoicedetail_set-__prefix__-tax_id" data-autocomplete-light-language="es" data-autocomplete-light-url="/tax/autocomplete" data-autocomplete-light-function="select2" multiple></select></td>
-                    <td class="field-amount_total{%if field.errors %} table-danger{% endif %}">
-                    <input onchange="RecalculateFormset()" type="text" name="pyinvoicedetail_set-__prefix__-amount_total" value="0" class="form-control form-control-sm text-right" readonly="" id="id_pyinvoicedetail_set-__prefix__-amount_total">
-                    <td class="field-DELETEdelete{%if field.errors %} table-danger{% endif %}"></td>
+                  <tr class="formset-template" id="{{ formset.prefix }}-__prefix__" style="display: none">
+                    <td class="original {%if field.errors %}table-danger{% endif %}">
+                      {% for hidden in formset.empty_form.hidden_fields %}
+                        {{ hidden }}
+                      {% endfor %}
+                    </td>
+                    {% for field in formset.empty_form.visible_fields %}
+                      <td class="{% if field.name %}field-{{ field.name }}{% endif %} {%if field.errors %}table-danger{% endif %}">
+                          {{ field }}
+                      </td>
+                    {% endfor %}
                   </tr>
                 </tbody>
+                <tfoot>
+                </tfoot>
               </table>
             </fieldset>
+            <span id="add-row" class="add-row">Add form</span>
           </div>
-        </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
           <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
           </div>
           <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div>
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div>
           </div>
           <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('IVA:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div>
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('IVA:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div>
           </div>
           <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div>
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div>
           </div>
           <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div>
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div>
           </div>
           <hr class="style1">
           <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-11 font-weight-bold text-right">{{ _('Total:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-1 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
+            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total:') }}</div>
+            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
           </div>
           <hr class="style1">
           <div class="form-group row">
@@ -358,22 +168,19 @@
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript">
-  (function($) {
-    $('.inline-deletelink').click(function() {
-      alert("Hey");
-      var index = $('#id_inline_test_models-TOTAL_FORMS').val()
-      var newTable = $('#id_inline_test_models-__prefix__-DELETE').parents('table').clone()
-      newTable.find(':input').each(function() {
-        for (attr of ['name', 'id'])
-          $(this).attr(attr, $(this).attr(attr).replace('__prefix__', index))
-        })
-        newTable.insertBefore($(this))
-        $('#id_inline_test_models-TOTAL_FORMS').val(
-            parseInt($('#id_inline_test_models-TOTAL_FORMS').val()) + 1
-        )
-        newTable.slideDown()
-    })
-})($)
+  $('#add-row').click(function() {
+    var form_idx = $('#id_{{ formset.prefix }}-TOTAL_FORMS').val();
+    form_cloned = $('<div>').append($('.formset-template').clone()).html().replace(/formset-template/g, '');
+    form_cloned = form_cloned.replace(/__prefix__/g, form_idx);
+    //alert(form_cloned);
+    $('#formset_table tbody').append(form_cloned);
+    $('#{{ formset.prefix }}-' + form_idx).show();
+    $('#id_{{ formset.prefix }}-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+
+    $("#formset_table tbody tr:visible").each(function (index) {
+      $(this).css("background-color", !!(index & 1)? "inherit" : "rgba(0,0,0,.05");
+    });
+  });
 
   function RecalculateFormset() {
     var formCount = $('#id_{{ formset.prefix }}-TOTAL_FORMS').val();
@@ -488,6 +295,15 @@
 
   $("[id^='id_{{ formset.prefix }}-']").on("change", function (e) {
     RecalculateFormset();
+  });
+
+
+  /* ======================= Recalculo del Invoice ======================== */
+  /* cargar la página y se recalcula el asiento contable.                   */
+
+  $(document).ready(function(){
+    //$('#formset_table tfoot').append('<tr style="background-color: transparent;"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+    //RecalculateFormset();
   });
 </script>
 {% endblock %}
