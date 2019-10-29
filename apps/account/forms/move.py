@@ -47,7 +47,7 @@ class AccountMoveForm(forms.ModelForm):
             ),
             'date_move': MyDatePickerInput(
                 options={
-                    "format": "DD/<Month>/YYYY", # moment date-time format
+                    "format": "DD/MM/YYYY",
                     "showClose": True,
                     "showClear": True,
                     "showTodayButton": True,
@@ -71,13 +71,12 @@ class AccountMoveForm(forms.ModelForm):
         }
 
 
-
 class AccountMoveDetailForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
     """
+
     class Meta:
         model = PyAccountMoveDetail
-        exclude = ()
         fields = [
             'account_plan_id',
             'reference_company',
@@ -122,12 +121,20 @@ class AccountMoveDetailForm(forms.ModelForm):
             'date_due': MyDatePickerInput(format='%d/%m/%Y'),
         }
 
+    def set_index(self, index):
+        self.fields['formset_index'].initial = index
+
 
 class BaseAccountMoveFormSet(BaseInlineFormSet):
     def add_fields(self, form, index):
         super().add_fields(form, index)
         form.fields[DELETION_FIELD_NAME].label = ''
-        # form.fields[DELETION_FIELD_NAME].widget = forms.HiddenInput()
+        form.fields[DELETION_FIELD_NAME].widget = forms.HiddenInput(
+            attrs={
+                'value': 'false',
+            },
+
+        )
 
 
 ACCOUNTING_NOTES = inlineformset_factory(

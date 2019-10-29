@@ -14,6 +14,10 @@ from bootstrap_datepicker_plus import DatePickerInput
 from .models import PySaleOrder, PySaleOrderDetail
 
 
+class MyDatePickerInput(DatePickerInput):
+    template_name = 'datepicker_plus/date-picker.html'
+
+
 # ========================================================================== #
 class SaleOrderForm(forms.ModelForm):
     """Formulario para agregar y/o editar ordenes de compra
@@ -40,7 +44,14 @@ class SaleOrderForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'date_order': DatePickerInput(format='%d/%m/%Y'),
+            'date_order': MyDatePickerInput(
+                options={
+                    "format": "DD/MM/YYYY HH:mm", # moment date-time format
+                    "showClose": True,
+                    "showClear": True,
+                    "showTodayButton": True,
+                }
+            ),
             'note': forms.Textarea(
                 attrs={
                     'class': 'form-control',
@@ -49,14 +60,6 @@ class SaleOrderForm(forms.ModelForm):
                 },
             ),
         }
-
-
-# ========================================================================== #
-class CustomSelect(forms.SelectMultiple):
-    def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
-        options = super(CustomSelect, self).create_option(name, value, label, selected, index, subindex=None, attrs=None)
-        options['attrs']['data-content'] = """<span class='badge badge-primary'>{}</span>""".format(label)
-        return options
 
 
 class SaleOrderDetailForm(forms.ModelForm):
@@ -76,21 +79,14 @@ class SaleOrderDetailForm(forms.ModelForm):
             'amount_total',
         ]
         widgets = {
-            'product_id': forms.Select(
+            'product_id': autocomplete.ModelSelect2(
+                url='PyProduct:autocomplete',
                 attrs={
                     'class': 'form-control form-control-sm',
                     'data-placeholder': _('Select a product ...'),
-                    # 'style': 'width: 180px',
+                    'style': 'width: 180px',
                 },
             ),
-            # 'product_id': autocomplete.ModelSelect2(
-            #     url='PyProduct:autocomplete',
-            #     attrs={
-            #         'class': 'form-control form-control-sm',
-            #         'data-placeholder': _('Select a product ...'),
-            #         'style': 'width: 180px',
-            #     },
-            # ),
             'description': forms.TextInput(
                 attrs={
                     'class': 'form-control form-control-sm',
@@ -127,21 +123,14 @@ class SaleOrderDetailForm(forms.ModelForm):
                     # 'style': 'width: 80px',
                 },
             ),
-            'tax_id': CustomSelect(
+            'tax_id': autocomplete.ModelSelect2Multiple(
+                url='PyTax:autocomplete',
                 attrs={
-                    'class': 'selectpicker',
+                    'class': 'form-control  custom-select custom-select-sm',
                     'data-placeholder': _('Select taxes...'),
-                    # 'style': 'width: 150px',
+                    'style': 'width: 280px',
                 },
             ),
-            # 'tax_id': autocomplete.ModelSelect2Multiple(
-            #     url='PyTax:autocomplete',
-            #     attrs={
-            #         'class': 'form-control  custom-select custom-select-sm',
-            #         'data-placeholder': _('Select taxes...'),
-            #         'style': 'width: 280px',
-            #     },
-            # ),
             'amount_total': forms.TextInput(
                 attrs={
                     'class': 'form-control form-control-sm text-right',
@@ -157,11 +146,18 @@ class BaseProductFormSet(BaseInlineFormSet):
     def add_fields(self, form, index):
         super().add_fields(form, index)
         form.fields[DELETION_FIELD_NAME].label = ''
+        form.fields[DELETION_FIELD_NAME].widget = forms.HiddenInput(
+            attrs={
+                'value': 'false',
+            },
+
+        )
+
 
 PRODUCT_FORMSET = inlineformset_factory(
     PySaleOrder, PySaleOrderDetail,
     form=SaleOrderDetailForm,
     formset=BaseProductFormSet,
-    extra=1,
+    extra=0,
     can_delete=True
 )

@@ -6,7 +6,7 @@
 {% bootstrap_javascript jquery='full' %}
 {% bootstrap_messages %}
 
-{% load i18n static %}
+{% load static %}
 {% load erp_tags %}
 {% block header %}
     <link rel="shortcut icon" href="{% static '.' %}/dist/favicon.png" type="image/x-icon"/>
@@ -28,151 +28,153 @@
     <link rel="stylesheet" href="{% static 'css/formset.css' %}">
 {% endblock %}
 {% block content %}
-  <div class="row" style="padding:5px;" >
-    <div class="card card-outline col-12">
-      <form method="post" class="form">
-        <div class="card-header">
-          {% include 'account/header.html' %}
-        </div>
-        <div class="card-body">
-          <div class="form-row">
-            {% if object %}
-              <div class="form-group row col-sm-6">
-                <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
-                <div class="col-sm-9">
-                  <input type="text" value="{{ object.name }}" class="form-control"  style="width: 100%"  maxlength="80" disabled >
-                  <span class="help-block">
-                  </span>
-                </div>
+<div class="row" style="padding:5px;" >
+  <div class="card card-outline col-12">
+    <form method="post" class="form">
+      {% csrf_token %}
+      <div class="card-header">
+        {% include 'base/header_botons.html' %}
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          {% if object %}
+            <div class="form-group row col-sm-6">
+              <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
+              <div class="col-sm-9">
+                <input type="text" value="{{ object.name }}" class="form-control"  style="width: 100%"  maxlength="80" disabled >
+                <span class="help-block">
+                </span>
               </div>
-            {% else %}
+            </div>
+          {% else %}
+            <div class="form-group row col-sm-6">
+              <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
+              <div class="col-sm-9">
+                <input type="text" value="Nuevo" class="form-control"  style="width: 100%"  maxlength="80" disabled >
+                <span class="help-block">
+                </span>
+              </div>
+            </div>
+          {% endif %}
+          {% for field in form %}
+            {% if field.auto_id != "id_note" %}
               <div class="form-group row col-sm-6">
-                <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
+                <label class="col-sm-2 col-xl-2 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
                 <div class="col-sm-9">
-                  <input type="text" value="Nuevo" class="form-control"  style="width: 100%"  maxlength="80" disabled >
+                  {{ field }}
                   <span class="help-block">
+                    {% for error in field.errors %}
+                      <ul>
+                        <li class="text-red">{{ error }}</li>
+                      </ul>
+                    {% endfor %}
                   </span>
                 </div>
               </div>
             {% endif %}
-            {% csrf_token %}
-            {% for field in form %}
-              {% if field.auto_id != "id_note" %}
-                <div class="form-group row col-sm-6">
-                  <label class="col-sm-2 col-xl-2 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                  <div class="col-sm-9">
-                    {{ field }}
-                    <span class="help-block">
-                      {% for error in field.errors %}
-                        <ul>
-                          <li class="text-red">{{ error }}</li>
-                        </ul>
-                      {% endfor %}
-                    </span>
-                  </div>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-          <div class="tabular inline-related last-related">
-            {{ formset.management_form }}
-            <fieldset>
-              <table id="formset_table" class="table table-striped">
-                <thead>
-                  <tr>
-                    <th class="original"></th>
-                    {% for field in formset.form %}
-                      {% if not field.widget.is_hidden %}
-                        <th class="column-{{ field.name }}">{{ field.label|capfirst }}</th>
-                      {% endif %}
-                    {% endfor %}
-                    {% if formset.can_delete %}<th>a</th>{% endif %}
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for inline_form in formset %}
-                    <tr class="{% cycle 'row1' 'row2' %}" id="{{ formset.prefix }}-{{ forloop.counter0 }}">
-                      <td class="original{%if field.errors %} table-danger{% endif %}">
-                        {% for hidden in inline_form.hidden_fields %}
-                          {{ hidden }}
-                        {% endfor %}
-                      </td>
-                      {% for field in inline_form.visible_fields %}
-                        <td class="{% if field.name %}field-{{ field.name }}{% endif %}{%if field.errors %} table-danger{% endif %}">
-                            {{ field }}
-                        </td>
-                      {% endfor %}
-                    </tr>
+          {% endfor %}
+        </div>
+        <div>
+          {{ formset.management_form }}
+          <fieldset>
+            <table id="formset_table" class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="original"></th>
+                  {% for field in formset.form %}
+                    {% if not field.widget.is_hidden %}
+                      <th class="column-{{ field.name }}">{{ field.label|capfirst }}</th>
+                    {% endif %}
                   {% endfor %}
-                  <tr class="formset-template" id="{{ formset.prefix }}-__prefix__" style="display: none">
-                    <td class="original {%if field.errors %}table-danger{% endif %}">
-                      {% for hidden in formset.empty_form.hidden_fields %}
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for inline_form in formset %}
+                  <tr class="{% cycle 'row1' 'row2' %}" id="{{ formset.prefix }}-{{ forloop.counter0 }}">
+                    <td class="original{%if field.errors %} table-danger{% endif %}">
+                      {% for hidden in inline_form.hidden_fields %}
                         {{ hidden }}
                       {% endfor %}
                     </td>
-                    {% for field in formset.empty_form.visible_fields %}
-                      <td class="{% if field.name %}field-{{ field.name }}{% endif %} {%if field.errors %}table-danger{% endif %}">
+                    {% for field in inline_form.visible_fields %}
+                      <td class="{% if field.name %}field-{{ field.name }}{% endif %}{%if field.errors %} table-danger{% endif %}">
                           {{ field }}
                       </td>
                     {% endfor %}
+                    <td id="{{ formset.prefix }}-DELETE-{{ forloop.counter0 }}" class="field-DELETE"><span class="delete-row"><li class="fa fa-trash" style="padding-right: 3px;"></li></span></td>
                   </tr>
-                </tbody>
-                <tfoot>
-                </tfoot>
-              </table>
-            </fieldset>
-            <span id="add-row" class="add-row">Add form</span>
-          </div>
+                {% endfor %}
+                <tr class="formset-template" id="{{ formset.prefix }}-__prefix__" style="display: none">
+                  <td class="original {%if field.errors %}table-danger{% endif %}">
+                    {% for hidden in formset.empty_form.hidden_fields %}
+                      {{ hidden }}
+                    {% endfor %}
+                  </td>
+                  {% for field in formset.empty_form.visible_fields %}
+                    <td class="{% if field.name %}field-{{ field.name }}{% endif %} {%if field.errors %}table-danger{% endif %}">
+                        {{ field }}
+                    </td>
+                  {% endfor %}
+                  <td id="{{ formset.prefix }}-DELETE-__prefix__" class="field-DELETE"><span class="delete-row"><li class="fa fa-trash" style="padding-right: 3px;"></li></span></td>
+                </tr>
+              </tbody>
+              <tfoot>
+              </tfoot>
+            </table>
+          </fieldset>
+          <span id="add-row" class="add-row">Add form</span>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
-          </div>
-          <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div>
-          </div>
-          <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('IVA:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div>
-          </div>
-          <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div>
-          </div>
-          <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div>
-          </div>
-          <hr class="style1">
-          <div class="row">
-            <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total:') }}</div>
-            <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
-          </div>
-          <hr class="style1">
-          <div class="form-group row">
-            <label for="id_note" class="col-1 col-form-label">Note</label>
-            <div class="col-11">
-              <textarea name="note" cols="400" rows="1" class="form-control" data-placeholder="Notas de la factura ..." style="width: 100%" id="id_note">{{ object.note}}</textarea>
-              <span class="help-block"></span>
-            </div>
-          </div>
-        </div>
-        <!-- /.card-footer -->
       </div>
-      <!-- /.card -->
+      <!-- /.card-body -->
+      <div class="card-footer">
+        <div class="row">
+          <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Net Amount or Affection:') }}</div>
+          <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div>
+        </div>
+        <div class="row">
+          <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Exempt Amount:') }}</div>
+          <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div>
+        </div>
+        <div class="row">
+          <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('IVA:') }}</div>
+          <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div>
+        </div>
+        <div class="row">
+          <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Other taxes:') }}</div>
+          <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div>
+        </div>
+        <div class="row">
+          <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total taxes:') }}</div>
+          <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div>
+        </div>
+        <hr class="style1">
+        <div class="row">
+          <div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _('Total:') }}</div>
+          <div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div>
+        </div>
+        <hr class="style1">
+        <div class="form-group row">
+          <label for="id_note" class="col-1 col-form-label">Note</label>
+          <div class="col-11">
+            <textarea name="note" cols="400" rows="1" class="form-control" data-placeholder="Notas de la factura ..." style="width: 100%" id="id_note">{{ object.note}}</textarea>
+            <span class="help-block"></span>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-footer -->
     </form>
   </div>
+  <!-- /.card -->
+</div>
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript">
+  /* ========================= Add Accounting Note ========================= */
   $('#add-row').click(function() {
     var form_idx = $('#id_{{ formset.prefix }}-TOTAL_FORMS').val();
     form_cloned = $('<div>').append($('.formset-template').clone()).html().replace(/formset-template/g, '');
     form_cloned = form_cloned.replace(/__prefix__/g, form_idx);
-    //alert(form_cloned);
     $('#formset_table tbody').append(form_cloned);
     $('#{{ formset.prefix }}-' + form_idx).show();
     $('#id_{{ formset.prefix }}-TOTAL_FORMS').val(parseInt(form_idx) + 1);
@@ -180,9 +182,108 @@
     $("#formset_table tbody tr:visible").each(function (index) {
       $(this).css("background-color", !!(index & 1)? "inherit" : "rgba(0,0,0,.05");
     });
+
+    var datepickerDict = {};
+    var isBootstrap4 = $.fn.collapse.Constructor.VERSION.split('.').shift() == "4";
+    $("[dp_config]:not([disabled])").each(function (i, element) {
+        var $element = $(element), data = {};
+        try {
+            data = JSON.parse($element.attr('dp_config'));
+        }
+        catch (x) { }
+        if (data.id && data.options) {
+            data.$element = $element.datetimepicker(data.options);
+            data.datepickerdata = $element.data("DateTimePicker");
+            datepickerDict[data.id] = data;
+            data.$element.next('.input-group-addon').on('click', function(){
+                data.datepickerdata.show();
+            });
+            if(isBootstrap4){
+                data.$element.on("dp.show", function (e) {
+                    $('.collapse.in').addClass('show');
+                });
+            }
+        }
+    });
+    if(isBootstrap4) {
+        $('body').on('show.bs.collapse','.bootstrap-datetimepicker-widget .collapse',function(e){
+            $(e.target).addClass('in');
+        });
+        $('body').on('hidden.bs.collapse','.bootstrap-datetimepicker-widget .collapse',function(e){
+            $(e.target).removeClass('in');
+        });
+    }
   });
 
-  function RecalculateFormset() {
+
+  /* ======================= Remove Accounting Note ======================= */
+  $(document).on('click', '[id^="{{ formset.prefix }}-DELETE-"]', function(e){
+    var id = '#id_' + $(this).closest("tr").attr('id') + '-DELETE';
+    $(id).val("true")
+    $(this).closest("tr").hide();
+
+    $("#formset_table tbody tr:visible").each(function (index) {
+      $(this).css("background-color", !!(index & 1)? "inherit" : "rgba(0,0,0,.05");
+    });
+  });
+
+
+  /* ======================= Find Product & Taxes ======================= */
+  $(document).on('change', '[id^="id_{{ formset.prefix }}-"][id$="-product_id"]', function(event){
+    var id = '#id_' + $(this).closest("tr").attr('id');
+    FindProduct(event, id);
+  });
+
+  function FindProduct(event, id){
+    var selected_element = $(event.currentTarget);
+    var select_val = selected_element.val();
+    //var select_id = event.currentTarget.id;
+    //var index = select_id.replace( /(^.+\D)(\d+)(\D.+$)/i,'$2');
+    var url = "{% url 'PyInvoice:ajax_load_product' %}";
+    var url_tax = "{% url 'PyInvoice:ajax_load_tax' %}";
+    var tax = [];
+    var taxes;
+
+    $.ajax({
+      async: false,
+      url: url,
+      data: {
+        'product': select_val
+      },
+      success: function (data) {
+        var product = JSON.parse(data['product']);
+        var object = product[0]
+        var product_fields = object.fields;
+        taxes = product_fields.tax;
+
+        $(id + '-description').val(product_fields.name);
+        $(id + '-uom_id').val(product_fields.uom_id);
+        $(id + '-price').val(product_fields.price);
+      }
+    });
+
+    var taxSelect = $(id + '-tax_id');
+    taxSelect.val(null).trigger('change');
+    $.ajax({
+      url: url_tax,
+      data: {
+        'tax': taxes,
+      },
+    }).then(function (data) {
+      var data_tax = JSON.parse(data['tax']);
+      var dataItems = "";
+      $.each(data_tax, function (index, itemData) {
+        // create the option and append to Select2
+        var option = new Option(itemData.fields.name, itemData.pk, true, true);
+        taxSelect.append(option).trigger('change');
+      });
+    });
+
+  }
+
+
+  /* ======================== Calculating Invoice ========================= */
+  /*function RecalculateFormset() {
     var formCount = $('#id_{{ formset.prefix }}-TOTAL_FORMS').val();
     var url = "{% url 'PyInvoice:ajax_load_tax' %}";
     var tax = [];
@@ -263,47 +364,19 @@
     document.getElementById("t_amount_tax_other").innerHTML = "$ " + t_amount_tax_other.toFixed(2);
     document.getElementById("t_amount_tax_total").innerHTML = "$ " + t_amount_tax_total.toFixed(2);
     document.getElementById("t_amount_total").innerHTML = "$ " + t_amount_total.toFixed(2);
-  }
+  }*/
 
-  $("[id^='id_{{ formset.prefix }}-'][id$='-product_id']").on("change", function (event) {
-    FindProduct(event);
-  });
-
-  function FindProduct(event){
-    var selected_element = $(event.currentTarget);
-    var select_val = selected_element.val();
-    var select_id = event.currentTarget.id;
-    var index = select_id.replace( /(^.+\D)(\d+)(\D.+$)/i,'$2');
-    var url = "{% url 'PyInvoice:ajax_load_product' %}";
-
-    $.ajax({
-      url: url,
-      data: {
-        'product': select_val
-      },
-      success: function (data) {
-        var product = JSON.parse(data['product']);
-        var object = product[0]
-        var product_fields = object.fields;
-
-        document.getElementById('id_{{ formset.prefix }}-' + index + '-description').value = product_fields.description;
-        document.getElementById('id_{{ formset.prefix }}-' + index + '-uom_id').value = product_fields.uom_id;
-        document.getElementById('id_{{ formset.prefix }}-' + index + '-price').value = product_fields.price;
-      }
-    });
-  }
-
-  $("[id^='id_{{ formset.prefix }}-']").on("change", function (e) {
+  //$("[id^='id_{{ formset.prefix }}-']").on("change", function (e) {
+  /*$(document).on('change', '[id^="id_{{ formset.prefix }}-"]', function(event){
     RecalculateFormset();
-  });
+  });*/
 
 
   /* ======================= Recalculo del Invoice ======================== */
   /* cargar la página y se recalcula el asiento contable.                   */
 
-  $(document).ready(function(){
-    //$('#formset_table tfoot').append('<tr style="background-color: transparent;"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
-    //RecalculateFormset();
-  });
+  /*$(document).ready(function(){
+    RecalculateFormset();
+  });*/
 </script>
 {% endblock %}

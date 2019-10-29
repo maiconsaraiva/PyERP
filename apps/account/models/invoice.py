@@ -34,7 +34,7 @@ class PyInvoice(PyFather):
         blank=True,
         on_delete=models.PROTECT
     )
-    date_invoice = models.DateField(default=timezone.now)
+    date_invoice = models.DateTimeField(default=timezone.now)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
         max_digits=10,

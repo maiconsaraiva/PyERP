@@ -44,7 +44,14 @@ class InvoiceForm(forms.ModelForm):
                     'style': 'width: 100%',
                 },
             ),
-            'date_invoice': MyDatePickerInput(format='%d/%m/%Y'),
+            'date_invoice': MyDatePickerInput(
+                options={
+                    "format": "DD/MM/YYYY HH:mm", # moment date-time format
+                    "showClose": True,
+                    "showClear": True,
+                    "showTodayButton": True,
+                }
+            ),
             'note': forms.Textarea(
                 attrs={
                     'class': 'form-control',
@@ -134,6 +141,12 @@ class BaseProductFormSet(BaseInlineFormSet):
     def add_fields(self, form, index):
         super().add_fields(form, index)
         form.fields[DELETION_FIELD_NAME].label = ''
+        form.fields[DELETION_FIELD_NAME].widget = forms.HiddenInput(
+            attrs={
+                'value': 'false',
+            },
+
+        )
 
 
 PRODUCT_FORMSET = inlineformset_factory(

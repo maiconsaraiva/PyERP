@@ -128,7 +128,7 @@ class AccountMoveCreateView(LoginRequiredMixin, FatherCreateView):
             if form.is_valid() and formset.is_valid():
                 for obj in formset:
                     print(obj.cleaned_data)
-                    if 'DELETE' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] == False:
+                    if 'DELETE' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] is False:
                         t_debit += obj.cleaned_data['debit']
                         t_credit += obj.cleaned_data['credit']
                 if t_debit != t_credit:
@@ -190,8 +190,8 @@ class AccountMoveUpdateView(LoginRequiredMixin, FatherUpdateView):
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and formset.is_valid():
                     for obj in formset:
-                        print(obj.cleaned_data['DELETE'])
-                        if 'DELETE' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] == False:
+                        print(obj.cleaned_data)
+                        if 'DELETE' in obj.cleaned_data.keys() and obj.cleaned_data['DELETE'] is False:
                             t_debit += obj.cleaned_data['debit']
                             t_credit += obj.cleaned_data['credit']
                     if t_debit != t_credit:
@@ -228,7 +228,6 @@ class AccountMoveDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('PyAccountMove:list')
 
     def get_context_data(self, **kwargs):
-        pk = self.kwargs.get(self.pk_url_kwarg)
         self.object = self.get_object()
         context = super().get_context_data(**kwargs)
         context['title'] = _('Delete Invoice')

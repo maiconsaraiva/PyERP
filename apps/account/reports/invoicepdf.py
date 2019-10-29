@@ -21,19 +21,27 @@ from reportlab.platypus import Table, TableStyle
 locale.setlocale(locale.LC_ALL, '')
 locale._override_localeconv = {'mon_thousands_sep': '.'}
 
+INVOICE_STATE = (
+    (0, _('draft')),
+    (1, _('open')),
+    (2, _('cancel')),
+    (3, _('confirmed'))
+)
+
 
 def invoice_pdf(request, pk):
     """ Función para imprimir la orden de ventas
     """
+
+    # Teh Invoice
+    invoice = PyInvoice.objects.get(pk=pk)
+
     response = HttpResponse(content_type='application/pdf')
-    pdf_name = _("clientes.pdf")
+    pdf_name = _("clientinvoice_{}.pdf").format(invoice.name)
     response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
 
-    # Los productos de la orden
-    _sale_order = PyInvoice.objects.get(pk=pk)
-
     # Los productos de la orden ya en una matriz
-    _products = PyInvoiceDetail.objects.filter(sale_order_id=pk).only(
+    products = PyInvoiceDetail.objects.filter(invoice_id=pk).only(
         "product_id",
         "description",
         "quantity",
@@ -43,44 +51,49 @@ def invoice_pdf(request, pk):
     )
 
     # Create a file-like buffer to receive PDF data.
-    _buffer = io.BytesIO()
+    buffer = io.BytesIO()
 
     # Create the PDF object, using the buffer as its "file."
-    _pdf = canvas.Canvas(_buffer, pagesize=letter)
+    pdf = canvas.Canvas(buffer, pagesize=letter)
 
     # Header corporativa
     archivo_imagen = settings.MEDIA_ROOT+'/pyerp-marketing/PyERP_logo_2.png'
     # Definimos el tamaño de la imagen a cargar y las coordenadas
-    _pdf.drawImage(archivo_imagen, 30, 710, 120, 90, preserveAspectRatio=True)
-    _pdf.setLineWidth(.3)
-    _pdf.line(30, 735, 582, 735)
+    pdf.drawImage(archivo_imagen, 30, 710, 120, 90, preserveAspectRatio=True)
+    pdf.setLineWidth(.3)
+    pdf.line(30, 735, 582, 735)
+
+    for x, y in INVOICE_STATE:
+        if x == invoice.state:
+            state = y
 
     # Header del reporte
-    _pdf.setFont('Helvetica', 22)
-    _pdf.drawString(30, 650, 'Budget # ' + _sale_order.name)
+    title = ('{} Invoice # {}').format(state, invoice.name)
+    pdf.setFont('Helvetica', 22)
+    pdf.drawString(30, 650, title)
 
-    _pdf.setFont('Helvetica-Bold', 12)
-    _pdf.drawString(30, 625, 'Quotation Date:')
+    pdf.setFont('Helvetica-Bold', 12)
+    pdf.drawString(30, 625, 'Invoice Date:')
 
-    _pdf.setFont('Helvetica-Bold', 12)
-    _pdf.drawString(180, 625, 'Seller:')
+    # pdf.setFont('Helvetica-Bold', 12)
+    # pdf.drawString(180, 625, 'Seller:')
 
     today = timezone.now()
-    _pdf.setFont('Helvetica', 12)
-    _pdf.drawString(30, 610, today.strftime("%Y-%m-%d %H:%M:%S"))
+    pdf.setFont('Helvetica', 12)
+    pdf.drawString(30, 610, today.strftime("%Y-%m-%d %H:%M:%S"))
 
-    _pdf.setFont('Helvetica', 12)
-    _pdf.drawString(180, 610, 'Nombre del Vendedor')
+    # pdf.setFont('Helvetica', 12)
+    # pdf.drawString(180, 610, 'Nombre del Vendedor')
 
     # Alto y ancho de la hoja
-    _width, _height = letter
+    width, height = letter
 
     # A partir de que altura debriamos imprimir la tabla
-    _high = 550
+    high = 550
 
     # Header de la tabla
-    _data_header = []
-    _data_header.append([
+    data_header = []
+    data_header.append([
         # "Producto",
         _('Description'),
         _('Quantity'),
@@ -91,7 +104,7 @@ def invoice_pdf(request, pk):
 
     # Imprimir el header de la tabla
     table = Table(
-        _data_header,
+        data_header,
         colWidths=[7*cm, 3*cm, 3*cm, 3*cm, 3.5*cm]
     )
     table.setStyle(
@@ -107,13 +120,13 @@ def invoice_pdf(request, pk):
             ('FONTSIZE', (0, 0), (-1, 0), 10),
         ])
     )
-    table.wrapOn(_pdf, _width, _height)
-    table.drawOn(_pdf, 30, _high)
+    table.wrapOn(pdf, width, height)
+    table.drawOn(pdf, 30, high)
 
-    if _products:
+    if products:
         # Cuerpo de la tabla
         _data_table = []
-        for _product in _products:
+        for _product in products:
             _data_table.append(
                 [
                     _product.product_id,
@@ -129,7 +142,7 @@ def invoice_pdf(request, pk):
                     )
                 ]
             )
-            _high = _high - 18
+            high = high - 18
 
         # Imprimir cuerpo la tabla
         table = Table(
@@ -149,34 +162,34 @@ def invoice_pdf(request, pk):
             ])
         )
 
-    table.wrapOn(_pdf, _width, _height)
-    table.drawOn(_pdf, 30, _high)
+    table.wrapOn(pdf, width, height)
+    table.drawOn(pdf, 30, high)
 
     # Footer de la tabla
-    _data_foot = []
-    _data_foot.append(
-        ["", _('Net Amount or Affection') + ":", "$ " + locale.format('%.2f', _sale_order.amount_untaxed, grouping=True, monetary=True)]
+    data_foot = []
+    data_foot.append(
+        ["", _('Net Amount or Affection') + ":", "$ " + locale.format('%.2f', invoice.amount_untaxed, grouping=True, monetary=True)]
     )
-    _data_foot.append(
-        ["", _('Exempt Amount') + ":", "$ " + locale.format('%.2f', _sale_order.amount_exempt, grouping=True, monetary=True)]
+    data_foot.append(
+        ["", _('Exempt Amount') + ":", "$ " + locale.format('%.2f', invoice.amount_exempt, grouping=True, monetary=True)]
     )
-    _data_foot.append(
-        ["", _('I.V.A') + ":", "$ " + locale.format('%.2f', _sale_order.amount_tax_iva, grouping=True, monetary=True)]
+    data_foot.append(
+        ["", _('I.V.A') + ":", "$ " + locale.format('%.2f', invoice.amount_tax_iva, grouping=True, monetary=True)]
     )
-    _data_foot.append(
-        ["", _('Other taxes') + ":", "$ " + locale.format('%.2f', _sale_order.amount_tax_other, grouping=True, monetary=True)]
+    data_foot.append(
+        ["", _('Other taxes') + ":", "$ " + locale.format('%.2f', invoice.amount_tax_other, grouping=True, monetary=True)]
     )
-    _data_foot.append(
-        ["", _('Total taxes') + ":", "$ " + locale.format('%.2f', _sale_order.amount_tax_total, grouping=True, monetary=True)]
+    data_foot.append(
+        ["", _('Total taxes') + ":", "$ " + locale.format('%.2f', invoice.amount_tax_total, grouping=True, monetary=True)]
     )
-    _data_foot.append(
-        ["", _('Total') + ":", "$ " + locale.format('%.2f', _sale_order.amount_total, grouping=True, monetary=True)]
+    data_foot.append(
+        ["", _('Total') + ":", "$ " + locale.format('%.2f', invoice.amount_total, grouping=True, monetary=True)]
     )
 
-    _high = _high - (18 * 7)
+    high = high - (18 * 7)
     # Imprimir cuerpo la tabla
     table = Table(
-        _data_foot,
+        data_foot,
         colWidths=[11*cm, 5*cm, 3.5*cm]
     )
     table.setStyle(
@@ -194,16 +207,16 @@ def invoice_pdf(request, pk):
             ('FONTNAME', (1, 2), (1, 2), 'Helvetica-Bold'),
         ])
     )
-    table.wrapOn(_pdf, _width, _height)
-    table.drawOn(_pdf, 30, _high)
+    table.wrapOn(pdf, width, height)
+    table.drawOn(pdf, 30, high)
 
     # Close the PDF object cleanly, and we're done.
-    _pdf.showPage()
-    _pdf.save()
+    pdf.showPage()
+    pdf.save()
 
     # FileResponse sets the Content-Disposition header so that browsers
     # present the option to save the file.
-    _buffer.seek(0)
-    response.write(_buffer.getvalue())
+    buffer.seek(0)
+    response.write(buffer.getvalue())
 
     return response

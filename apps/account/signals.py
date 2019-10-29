@@ -71,11 +71,13 @@ def calc_invoice(sender, instance, **kwargs):
 def calc_account_move(sender, instance, **kwargs):
     t_adebit = 0
     t_credit = 0
-    for obj in PyAccountMoveDetail.objects.filter(account_move_id=instance.pk):
+    for i, obj in enumerate(PyAccountMoveDetail.objects.filter(account_move_id=instance.pk)):
         t_adebit += obj.debit
         t_credit += obj.credit
         obj.company_id = instance.company_id
         obj.save()
+        if i == 0:
+            instance.company_move = obj.reference_company
 
     instance.debit = t_adebit
     instance.credit = t_credit
