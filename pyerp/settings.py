@@ -53,8 +53,6 @@ INSTALLED_APPS = [
 
     # Third-Party Apps
     'taggit',
-    'dynamic_formsets',
-    'crispy_forms',
     'dal',
     'dal_select2',
     'bootstrap4',
