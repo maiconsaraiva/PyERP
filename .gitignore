@@ -12,8 +12,7 @@ installed_apps.py
 docker-compose.yml
 Dockerfile
 bin/
-vscodes
-vscode
+*vscode
 
 !media/avatar/
 media/avatar/*
