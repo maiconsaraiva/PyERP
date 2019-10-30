@@ -11,15 +11,15 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{% url 'PyInvoice:list' %}" class="nav-link">
             <i class="far fa-dot-circle nav-icon"></i>
-            <p>{{ _("Provider Invoice") }}</p>
+            <p>{{ _("Customer Invoice") }}</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'PyInvoice:list' %}" class="nav-link">
+          <a href="#" class="nav-link">
             <i class="far fa-dot-circle nav-icon"></i>
-            <p>{{ _("Client Invoice") }}</p>
+            <p>{{ _("Provider Invoice") }}</p>
           </a>
         </li>
       </ul>

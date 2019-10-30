@@ -20,11 +20,11 @@ msgstr ""
 
 #: apps/account/templates/account/menu.html:5
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #: apps/marketing/templates/marketing/menu.html:5
 msgid "Marketing"
-msgstr ""
+msgstr "Mercadeo"
 
 #: apps/payroll/templates/payroll/menu.html:5
 msgid "Payroll"
@@ -44,8 +44,8 @@ msgstr "Hacemos tu día fácil"
 
 #: pyerp/settings.py:229
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 #: pyerp/settings.py:230
 msgid "Spanish"
-msgstr ""
+msgstr "Esáñol"

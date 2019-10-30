@@ -79,11 +79,8 @@ with open('%s/installed_apps.py' % BASE_DIR, 'r') as ins_apps_file:
         INSTALLED_APPS += [line.strip()]
 
 
-
 # ========================================================================== #
-""" Esta configuración hace disponible todas esta variables en cualquier
-plantilla
-"""
+# This configuration makes all these variables available in any template
 APP_NAME = 'PyERP'
 SLOGAN = _('We make your Day Easy')
 PREFIX = 'Py'
