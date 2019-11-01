@@ -7,8 +7,8 @@ from django.forms.models import BaseInlineFormSet, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-from dal import autocomplete
 from bootstrap_datepicker_plus import DatePickerInput
+from dal import autocomplete
 
 # Localfolder Library
 from .models import PySaleOrder, PySaleOrderDetail

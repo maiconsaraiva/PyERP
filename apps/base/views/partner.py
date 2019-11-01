@@ -88,7 +88,7 @@ class PartnerAutoComplete(autocomplete.Select2QuerySetView):
     """Servicio de auto completado para el modelo PyPartner
     """
     def get_queryset(self):
-        queryset = PyPartner.objects.all()
+        queryset = PyPartner.objects.all().order_by('name')
         if self.q:
             queryset = queryset.filter(name__icontains=self.q, active=True)
         return queryset

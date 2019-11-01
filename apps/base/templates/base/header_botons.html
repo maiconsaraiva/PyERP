@@ -14,9 +14,7 @@
 </div>
 <div class="d-flex">
   <div>
-    {% if object %}
-      <a title=" {{ _('Back') }}" href="{{ back_url }}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
-    {% endif %}
+    <a title=" {{ _('Back') }}" href="{{ back_url }}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
     {% if form_template %}
       <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
     {% else %}
@@ -43,15 +41,15 @@
         background-color: {{ user.active_company.main_color }};
       }
     </style>
-    {% if before %}
-      <a title=" {{ _('Before') }}" href="{% url detail_url before.pk %}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
+    {% if backward %}
+      <a title=" {{ _('backward') }}" href="{{ backward }}" class="btn btn-light btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
     {% else %}
-      <a title=" {{ _('Before') }}" href="#" class="btn disabled btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
+      <a title=" {{ _('backward') }}" href="#" class="btn disabled btn-manger ml-2"> <i class="fas fa-chevron-left"></i></a>
     {% endif %}
-    {% if next %}
-      <a title=" {{ _('Next') }}" href="{% url detail_url next.pk %}" class="btn btn-light btn-manger"> <i class="fas fa-chevron-right"></i></a>
+    {% if forward %}
+      <a title=" {{ _('forward') }}" href="{{ forward }}" class="btn btn-light btn-manger"> <i class="fas fa-chevron-right"></i></a>
     {% else %}
-      <a title=" {{ _('Next') }}" href="#" class="btn disabled btn-manger"> <i class="fas fa-chevron-right"></i></a>
+      <a title=" {{ _('forward') }}" href="#" class="btn disabled btn-manger"> <i class="fas fa-chevron-right"></i></a>
     {% endif %}
   </div>
 </div>
@@ -59,23 +57,15 @@
 <div class="d-flex align-items-center">
   <div>
     {% if object %}
-      {% if object.state == 0 %}
-        <a title="{{ _('Confirm') }}" href="{% url state_url object.pk 3 %}" class="btn btn-light">{{ _("Confirm") }}</a>
-      {% endif %}
-      {% if object.state != 2 %}
-        <a title="{{ _('Cancel') }}" href="{% url state_url object.pk 2 %}" class="btn btn-light">{{ _("Cancel") }}</a>
-      {% endif %}
-      {% if object.state == 2 or object.state == 3 %}
-        <a title="{{ _('Draft') }}" href="{% url state_url object.pk 0 %}" class="btn btn-light">{{ _("Draft") }}</a>
-      {% endif %}
+      {% for btn in header_state_botons %}
+        <a title="{{ btn.name }}" href="{{ btn.url }}" class="btn btn-light {{ btn.class }}">{{ btn.name }}</a>
+      {% endfor %}
     {% endif %}
   </div>
   <div class="ml-auto">
-    <span class="{% if object.state != 0 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Draft") }}</span>
-    <i class="fas fa-chevron-right"></i> <span class="{% if object.state != 3 %}text-muted{% else %}font-weight-bold{% endif %}" style="color: #563D7C;">{{ _("Confirmed") }}</span>
-    {% if object.state == 2 %}
-      <i class="fas fa-chevron-right"></i> <span class="font-weight-bold" style="color: #563D7C;">{{ _("Cancelled") }}</span>
-    {% endif %}
+    {% for btn in header_state %}
+      <span class="{{ btn.class }}" style="color: {{ user.active_company.main_color }};">{{ btn.name }}</span>{% if not forloop.last %} <i class="fas fa-chevron-right" style="color: {{ user.active_company.main_color }};"></i>{% endif %}
+    {% endfor %}
   </div>
 </div>
 <hr class="style1">

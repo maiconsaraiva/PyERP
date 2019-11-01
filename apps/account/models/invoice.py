@@ -1,9 +1,6 @@
-# Standard Library
-
-from django.utils import timezone
-
 # Django Library
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
@@ -80,6 +77,7 @@ class PyInvoice(PyFather):
         ordering = ['pk']
         verbose_name = _('Invoice')
         verbose_name_plural = _('Invoices')
+
 
     def save(self, *args, **kwargs):
         if not self.pk:

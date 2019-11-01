@@ -1,8 +1,6 @@
-# Standard Library
-from datetime import datetime
-
 # Django Library
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
@@ -13,7 +11,8 @@ SALE_STATE = (
         (0, _('draft')),
         (1, _('open')),
         (2, _('cancel')),
-        (3, _('confirmed'))
+        (3, _('confirmed')),
+        (4, _('invoiced'))
     )
 
 
@@ -26,7 +25,7 @@ class PySaleOrder(PyFather):
         PyPartner,
         on_delete=models.PROTECT
     )
-    date_order = models.DateTimeField(default=datetime.now(), null=True, blank=True)
+    date_order = models.DateTimeField(default=timezone.now, null=True, blank=True)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
         max_digits=10,
@@ -78,7 +77,7 @@ class PySaleOrder(PyFather):
             self.name = get_next_value(self._meta.object_name, 'SO')
 
         if not self.date_order or self.date_order == "":
-            self.date_order = datetime.now()
+            self.date_order = default=timezone.now
         super().save(*args, **kwargs)
 
 

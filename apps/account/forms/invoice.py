@@ -7,8 +7,8 @@ from django.forms.models import BaseInlineFormSet, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
-from dal import autocomplete
 from bootstrap_datepicker_plus import DatePickerInput
+from dal import autocomplete
 
 # Localfolder Library
 from ..models import PyInvoice, PyInvoiceDetail
@@ -40,7 +40,7 @@ class InvoiceForm(forms.ModelForm):
                 url='PyPartner:autocomplete',
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': 'Seleccione un cliente ...',
+                    'placeholder': 'Seleccione un cliente ...',
                     'style': 'width: 100%',
                 },
             ),
@@ -55,8 +55,9 @@ class InvoiceForm(forms.ModelForm):
             'note': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': 'Descripción del presupuesto ...',
+                    'placeholder': _('Invoice notes ...'),
                     'style': 'width: 100%',
+                    'rows': '1',
                 },
             ),
         }
@@ -142,10 +143,7 @@ class BaseProductFormSet(BaseInlineFormSet):
         super().add_fields(form, index)
         form.fields[DELETION_FIELD_NAME].label = ''
         form.fields[DELETION_FIELD_NAME].widget = forms.HiddenInput(
-            attrs={
-                'value': 'false',
-            },
-
+            attrs={'value': 'false',},
         )
 
 

@@ -23,6 +23,7 @@ from apps.base.views.web_father import (
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, SaleOrderForm
 from .models import PySaleOrder, PySaleOrderDetail
+from apps.account.models import PyInvoice, PyInvoiceDetail
 
 LOGGER = logging.getLogger(__name__)
 
@@ -90,6 +91,70 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
                 'name': self.object.name
             }
         ]
+        context['header_state_botons'] = []
+        context['header_state'] = [
+            {'name': _('Draft'), 'class': 'text-muted'},
+            {'name': _('Confirmed'), 'class': 'text-muted'},
+            {'name': _('Invoiced'), 'class': 'text-muted'},
+            {'name': _('Cancelled'), 'class': 'text-muted'}
+        ]
+        if self.object.state == 0:
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 3}
+                    ),
+                    'name': _('Confirm'),
+                    'class': 'important'
+                }
+            )
+            print(context['header_state'])
+            context['header_state'].pop(3)
+            context['header_state'].pop(2)
+            context['header_state'][0]['class'] = 'font-weight-bold'
+        if self.object.state not in (2, 4):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 2}
+                    ),
+                    'name': _('Cancel'),
+                    'class': ''
+                }
+            )
+        if self.object.state in (2, 3):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 0}
+                    ),
+                    'name': _('Draft'),
+                    'class': ''
+                }
+            )
+            if self.object.state == 2:
+                context['header_state'][3]['class'] = 'font-weight-bold'
+                context['header_state'].pop(2)
+            if self.object.state == 3:
+                context['header_state_botons'].append(
+                    {
+                        'url': reverse_lazy(
+                            '{}:state'.format(object_name),
+                            kwargs={'pk': self.object.pk, 'state': 4}
+                        ),
+                        'name': _('To Invoice'),
+                        'class': ''
+                    }
+                )
+                context['header_state'][1]['class'] = 'font-weight-bold'
+                context['header_state'].pop(3)
+                context['header_state'].pop(2)
+        if self.object.state == 4:
+            context['header_state'][2]['class'] = 'font-weight-bold'
+            context['header_state'].pop(3)
         context['print_url'] = '{}:pdf'.format(object_name)
         context['detail'] = PySaleOrderDetail.objects.filter(
             active=True,
@@ -163,10 +228,79 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
                 'name': self.object.name
             }
         ]
+        context['header_state_botons'] = []
+        context['header_state'] = [
+            {'name': _('Draft'), 'class': 'text-muted'},
+            {'name': _('Confirmed'), 'class': 'text-muted'},
+            {'name': _('Invoiced'), 'class': 'text-muted'},
+            {'name': _('Cancelled'), 'class': 'text-muted'}
+        ]
+        if self.object.state == 0:
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 3}
+                    ),
+                    'name': _('Confirm'),
+                    'class': 'important'
+                }
+            )
+            context['header_state'].pop(3)
+            context['header_state'].pop(2)
+            context['header_state'][0]['class'] = 'font-weight-bold'
+        if self.object.state not in (2, 4):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 2}
+                    ),
+                    'name': _('Cancel'),
+                    'class': ''
+                }
+            )
+        if self.object.state in (2, 3):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 0}
+                    ),
+                    'name': _('Draft'),
+                    'class': ''
+                }
+            )
+            if self.object.state == 2:
+                context['header_state'][3]['class'] = 'font-weight-bold'
+                context['header_state'].pop(2)
+            if self.object.state == 3:
+                context['header_state_botons'].append(
+                    {
+                        'url': reverse_lazy(
+                            '{}:state'.format(object_name),
+                            kwargs={'pk': self.object.pk, 'state': 4}
+                        ),
+                        'name': _('To Invoice'),
+                        'class': ''
+                    }
+                )
+                context['header_state'][1]['class'] = 'font-weight-bold'
+                context['header_state'].pop(3)
+                context['header_state'].pop(2)
+        if self.object.state == 4:
+            context['header_state'][2]['class'] = 'font-weight-bold'
+            context['header_state'].pop(3)
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
-            context['form'] = SaleOrderForm(self.request.POST, instance=self.object)
-            context['formset'] = PRODUCT_FORMSET(self.request.POST, instance=self.object)
+            context['form'] = SaleOrderForm(
+                self.request.POST,
+                instance=self.object
+            )
+            context['formset'] = PRODUCT_FORMSET(
+                self.request.POST,
+                instance=self.object
+            )
         else:
             context['form'] = SaleOrderForm(instance=self.object)
             context['formset'] = PRODUCT_FORMSET(instance=self.object)
@@ -251,8 +385,51 @@ def load_tax(request):
 @login_required()
 def sale_order_state(request, pk, state):
     sale_order = PySaleOrder.objects.get(pk=pk)
-    sale_order.state = state
-    sale_order.save()
+    if sale_order.state != 4:
+        with transaction.atomic():
+            sale_order.state = state
+            sale_order.save()
+            if state == 4:
+                invoice = PyInvoice.objects.create(
+                    uc=request.user.pk,
+                    company_id=sale_order.company_id,
+                    partner_id=sale_order.partner_id,
+                    sale_order_id=sale_order,
+                    amount_untaxed=sale_order.amount_untaxed,
+                    amount_tax_iva=sale_order.amount_tax_iva,
+                    amount_tax_other=sale_order.amount_tax_other,
+                    amount_tax_total=sale_order.amount_tax_total,
+                    amount_exempt=sale_order.amount_exempt,
+                    amount_total=sale_order.amount_total,
+                    description=sale_order.description,
+                )
+                sale_order_detail = PySaleOrderDetail.objects.filter(sale_order_id=pk)
+                for sod in sale_order_detail:
+                    invoice_detail = PyInvoiceDetail.objects.create(
+                        product_id=sod.product_id,
+                        invoice_id=invoice,
+                        description=sod.description,
+                        quantity=sod.quantity,
+                        uom_id=sod.uom_id,
+                        price=sod.price,
+                        amount_untaxed=sod.amount_untaxed,
+                        amount_tax_iva=sod.amount_tax_iva,
+                        amount_tax_other=sod.amount_tax_other,
+                        amount_tax_total=sod.amount_tax_total,
+                        amount_exempt=sod.amount_exempt,
+                        discount=sod.discount,
+                        amount_total=sod.amount_total
+                    )
+                    invoice_detail.tax_id.set(sod.tax_id.all())
+                # sale_order_detail_tax
+                return redirect(
+                    reverse_lazy('PyInvoice:detail', kwargs={'pk': invoice.pk})
+                )
+    else:
+        messages.warning(
+                self.request,
+                _('The current order %(order)s status does not allow updates.') % {'order': self.object.name}
+            )
     return redirect(
         reverse_lazy('PySaleOrder:detail', kwargs={'pk': pk})
     )
@@ -262,8 +439,12 @@ def sale_order_state(request, pk, state):
 @login_required()
 def sale_order_active(request, pk, active):
     sale_order = PySaleOrder.objects.get(pk=pk)
-    sale_order.active = active
-    sale_order.save()
-    return redirect(
-        reverse_lazy('PySaleOrder:list')
-    )
+    if sale_order.estate != 4:
+        sale_order.active = active
+        sale_order.save()
+    else:
+        messages.warning(
+                self.request,
+                _('The current order %(order)s status does not allow updates.') % {'order': self.object.name}
+            )
+    return redirect(reverse_lazy('PySaleOrder:list'))

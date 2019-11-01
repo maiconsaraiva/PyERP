@@ -7,9 +7,9 @@ from django.forms.models import BaseInlineFormSet, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
 # Thirdparty Library
+from bootstrap_datepicker_plus import DatePickerInput
 from dal import autocomplete
 from taggit.forms import TagWidget
-from bootstrap_datepicker_plus import DatePickerInput
 
 # Localfolder Library
 from ..models import PyAccountMove, PyAccountMoveDetail

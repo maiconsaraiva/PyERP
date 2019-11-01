@@ -113,7 +113,6 @@ class FatherDetailView(DetailView):
         context['company'] = PyCompany.objects.filter(active=True)
         context['title'] = '{}'.format(verbose_name)
         context['back_url'] = reverse_lazy('{}:list'.format(object_name))
-        context['state_url'] = '{}:state'.format(object_name)
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
@@ -123,16 +122,28 @@ class FatherDetailView(DetailView):
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
         context['form_template'] = False
-        context['next'] = self.model.objects.filter(
+        forward = self.model.objects.filter(
             pk__gt=self.kwargs['pk'],
             active=True,
             company_id=self.request.user.active_company_id
         ).first()
-        context['before'] = self.model.objects.filter(
+        backward = self.model.objects.filter(
             pk__lt=self.kwargs['pk'],
             active=True,
             company_id=self.request.user.active_company_id
-        ).last()
+        ).order_by('-pk').first()
+        if forward:
+            context['forward'] = reverse_lazy(
+                '{}:detail'.format(object_name),
+                kwargs={'pk': forward.pk}
+            )
+        if backward:
+            context['backward'] = reverse_lazy(
+                '{}:detail'.format(object_name),
+                kwargs={
+                    'pk': backward.pk
+                }
+            )
         context['activate_form'] = ActivateForm(
             initial={
                 'object_name': object_name,
@@ -179,8 +190,7 @@ class FatherCreateView(CreateView):
         context['update_url'] = '{}:update'.format(object_name)
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
-        context['back_url'] = '{}:list'.format(object_name)
-        context['state_url'] = '{}:state'.format(object_name)
+        context['back_url'] = reverse_lazy('{}:list'.format(object_name))
         context['form_template'] = True
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
@@ -217,24 +227,34 @@ class FatherUpdateView(UpdateView):
         context['update_url'] = '{}:update'.format(object_name)
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
-        context['state_url'] = '{}:state'.format(object_name)
         context['form_template'] = True
         context['back_url'] = reverse_lazy(
             '{}:detail'.format(object_name),
             kwargs={'pk': self.object.pk}
         )
         context['action_url'] = '{}:update'.format(object_name)
-        if 'pk' in self.kwargs:
-            context['next'] = self.model.objects.filter(
-                pk__gt=self.kwargs['pk'],
-                active=True,
-                company_id=self.request.user.active_company_id
-            ).first()
-            context['before'] = self.model.objects.filter(
-                pk__lt=self.kwargs['pk'],
-                active=True,
-                company_id=self.request.user.active_company_id
-            ).last()
+        forward = self.model.objects.filter(
+            pk__gt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).first()
+        backward = self.model.objects.filter(
+            pk__lt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).order_by('-pk').first()
+        if forward:
+            context['forward'] = reverse_lazy(
+                '{}:update'.format(object_name),
+                kwargs={'pk': forward.pk}
+            )
+        if backward:
+            context['backward'] = reverse_lazy(
+                '{}:update'.format(object_name),
+                kwargs={
+                    'pk': backward.pk
+                }
+            )
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)
