@@ -7,13 +7,20 @@ from django.utils.translation import ugettext_lazy as _
 from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
 from apps.base.views.sequence import get_next_value
 
-SALE_STATE = (
-        (0, _('draft')),
-        (1, _('open')),
-        (2, _('cancel')),
-        (3, _('confirmed')),
-        (4, _('invoiced'))
-    )
+
+# ========================================================================== #
+class PySaleOrderType(PyFather):
+    """Modelo de la orden de pago
+    """
+    name = models.CharField(_('Name'), max_length=80, editable=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = _('Sale order state')
+        verbose_name_plural = _('Sale order states')
 
 
 # ========================================================================== #
@@ -24,6 +31,14 @@ class PySaleOrder(PyFather):
     partner_id = models.ForeignKey(
         PyPartner,
         on_delete=models.PROTECT
+    )
+    seller_id = models.ForeignKey(
+        PyPartner,
+        on_delete=models.PROTECT,
+        related_name='sale_order_seller',
+        verbose_name=_('Seller'),
+        null=True,
+        blank=True
     )
     date_order = models.DateTimeField(default=timezone.now, null=True, blank=True)
     amount_untaxed = models.DecimalField(
@@ -59,10 +74,12 @@ class PySaleOrder(PyFather):
         default=0
     )
     description = models.TextField(_('Description'), blank=True, null=True)
-    state = models.IntegerField(
-        _('Status'),
-        choices=SALE_STATE,
-        default=0
+    state = models.ForeignKey(
+        PySaleOrderType,
+        on_delete=models.PROTECT,
+        verbose_name=_('State'),
+        default=1
+
     )
     note = models.TextField(_('NOte'), blank=True, null=True)
     date_confirm = models.DateTimeField(null=True)
@@ -97,6 +114,18 @@ class PySaleOrderDetail(PyFather):
     description = models.TextField(blank=True, null=True)
     quantity = models.DecimalField(
         _('Quantity'),
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    invoiced_quantity = models.DecimalField(
+        _('Invoiced'),
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+    delivered_quantity = models.DecimalField(
+        _('Delivered'),
         max_digits=10,
         decimal_places=2,
         default=0

@@ -47,6 +47,8 @@ OBJECT_DETAIL_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
     {'string': ('Date'), 'field': 'date_invoice'},
     {'string': _('Client'), 'field': 'partner_id'},
+    {'string': _('Seller'), 'field': 'seller_id'},
+    {'string': _('Origin'), 'field': 'origin'},
 ]
 
 DETAIL_OBJECT_LIST_FIELDS = [

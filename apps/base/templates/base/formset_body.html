@@ -31,6 +31,9 @@
   <div class="card card-outline col-12">
     <form method="post" class="form">
       {% csrf_token %}
+      {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
       <div class="card-header">
         {% include 'base/header_botons.html' %}
       </div>
@@ -49,13 +52,13 @@
             <div class="form-group row col-sm-6">
               <label class="col-sm-2 col-xl-2 col-form-label" for="id_name">Name</label>
               <div class="col-sm-9">
-                <input type="text" value="Nuevo" class="form-control"  style="width: 100%"  maxlength="80" disabled >
+                <input type="text" value="{{ _('New') }}" class="form-control"  style="width: 100%"  maxlength="80" disabled >
                 <span class="help-block">
                 </span>
               </div>
             </div>
           {% endif %}
-          {% for field in form %}
+          {% for field in form.visible_fields %}
             {% if field.auto_id != "id_note" %}
               <div class="form-group row col-sm-6">
                 <label class="col-sm-2 col-xl-2 col-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>

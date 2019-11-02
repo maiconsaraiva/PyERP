@@ -25,6 +25,14 @@ class PyInvoice(PyFather):
         PyPartner,
         on_delete=models.PROTECT
     )
+    seller_id = models.ForeignKey(
+        PyPartner,
+        on_delete=models.PROTECT,
+        related_name='invoice_seller',
+        verbose_name=_('Seller'),
+        null=True,
+        blank=True
+    )
     sale_order_id = models.ForeignKey(
         PySaleOrder,
         null=True,
@@ -72,6 +80,7 @@ class PyInvoice(PyFather):
     )
     note = models.TextField(_('Note'), blank=True, null=True)
     date_confirm = models.DateTimeField(null=True)
+    origin = models.TextField(_('Origin'), blank=True, null=True)
 
     class Meta:
         ordering = ['pk']

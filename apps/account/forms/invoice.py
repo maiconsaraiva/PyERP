@@ -1,4 +1,4 @@
-"""Formularios del modulo sale
+"""Formularios del modulo invoice
 """
 # Django Library
 from django import forms
@@ -27,26 +27,36 @@ class InvoiceForm(forms.ModelForm):
         fields = [
             'date_invoice',
             'partner_id',
-            'note'
+            'seller_id',
+            'note',
+            'company_id'
         ]
         labels = {
             'partner_id': _('Client',),
             'note': _('Note'),
             'date_invoice': _('Date')
-            # 'description': 'Descripción',
         }
         widgets = {
             'partner_id': autocomplete.ModelSelect2(
                 url='PyPartner:autocomplete',
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Seleccione un cliente ...',
+                    'data-placeholder': 'Seleccione un cliente ...',
+                    'style': 'width: 100%',
+                },
+            ),
+            'seller_id': autocomplete.ModelSelect2(
+                url='PyPartner:autocomplete',
+                forward=['company_id'],
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': _('Choose a seller ...'),
                     'style': 'width: 100%',
                 },
             ),
             'date_invoice': MyDatePickerInput(
                 options={
-                    "format": "DD/MM/YYYY HH:mm", # moment date-time format
+                    "format": "DD/MM/YYYY HH:mm",
                     "showClose": True,
                     "showClear": True,
                     "showTodayButton": True,
@@ -60,6 +70,7 @@ class InvoiceForm(forms.ModelForm):
                     'rows': '1',
                 },
             ),
+            'company_id': forms.HiddenInput(),
         }
 
 

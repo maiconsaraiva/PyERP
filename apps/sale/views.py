@@ -31,6 +31,7 @@ OBJECT_LIST_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
     {'string': _('Client'), 'field': 'partner_id'},
     {'string': ('Date'), 'field': 'date_order'},
+    {'string': ('State'), 'field': 'state'},
     {'string': ('Net Amount'), 'field': 'amount_untaxed', 'align': 'text-right', 'humanize': True},
     {'string': ('Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
 ]
@@ -45,6 +46,8 @@ DETAIL_OBJECT_LIST_FIELDS = [
     {'string': _('Product'), 'field': 'product_id'},
     {'string': _('Description'), 'field': 'description'},
     {'string': _('Quantity'), 'field': 'quantity', 'align': 'text-center', 'humanize': True},
+    {'string': _('Invoiced'), 'field': 'invoiced_quantity', 'align': 'text-center', 'humanize': True},
+    {'string': _('Delivered'), 'field': 'delivered_quantity', 'align': 'text-center', 'humanize': True},
     {'string': ('UOM'), 'field': 'uom_id', 'align': 'text-left', 'humanize': True},
     {'string': ('Price'), 'field': 'price', 'align': 'text-right', 'humanize': True},
     {'string': _('Discount'), 'field': 'discount', 'align': 'text-right', 'humanize': True},
@@ -98,7 +101,7 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
             {'name': _('Invoiced'), 'class': 'text-muted'},
             {'name': _('Cancelled'), 'class': 'text-muted'}
         ]
-        if self.object.state == 0:
+        if self.object.state.pk == 1:
             context['header_state_botons'].append(
                 {
                     'url': reverse_lazy(
@@ -109,11 +112,10 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
                     'class': 'important'
                 }
             )
-            print(context['header_state'])
             context['header_state'].pop(3)
             context['header_state'].pop(2)
             context['header_state'][0]['class'] = 'font-weight-bold'
-        if self.object.state not in (2, 4):
+        if self.object.state.pk not in (2, 4):
             context['header_state_botons'].append(
                 {
                     'url': reverse_lazy(
@@ -124,21 +126,21 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
                     'class': ''
                 }
             )
-        if self.object.state in (2, 3):
+        if self.object.state.pk in (2, 3):
             context['header_state_botons'].append(
                 {
                     'url': reverse_lazy(
                         '{}:state'.format(object_name),
-                        kwargs={'pk': self.object.pk, 'state': 0}
+                        kwargs={'pk': self.object.pk, 'state': 1}
                     ),
                     'name': _('Draft'),
                     'class': ''
                 }
             )
-            if self.object.state == 2:
+            if self.object.state.pk == 2:
                 context['header_state'][3]['class'] = 'font-weight-bold'
                 context['header_state'].pop(2)
-            if self.object.state == 3:
+            if self.object.state.pk == 3:
                 context['header_state_botons'].append(
                     {
                         'url': reverse_lazy(
@@ -152,7 +154,7 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
                 context['header_state'][1]['class'] = 'font-weight-bold'
                 context['header_state'].pop(3)
                 context['header_state'].pop(2)
-        if self.object.state == 4:
+        if self.object.state.pk == 4:
             context['header_state'][2]['class'] = 'font-weight-bold'
             context['header_state'].pop(3)
         context['print_url'] = '{}:pdf'.format(object_name)
@@ -235,7 +237,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
             {'name': _('Invoiced'), 'class': 'text-muted'},
             {'name': _('Cancelled'), 'class': 'text-muted'}
         ]
-        if self.object.state == 0:
+        if self.object.state.pk == 1:
             context['header_state_botons'].append(
                 {
                     'url': reverse_lazy(
@@ -249,7 +251,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
             context['header_state'].pop(3)
             context['header_state'].pop(2)
             context['header_state'][0]['class'] = 'font-weight-bold'
-        if self.object.state not in (2, 4):
+        if self.object.state.pk not in (2, 4):
             context['header_state_botons'].append(
                 {
                     'url': reverse_lazy(
@@ -260,21 +262,21 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
                     'class': ''
                 }
             )
-        if self.object.state in (2, 3):
+        if self.object.state.pk in (2, 3):
             context['header_state_botons'].append(
                 {
                     'url': reverse_lazy(
                         '{}:state'.format(object_name),
-                        kwargs={'pk': self.object.pk, 'state': 0}
+                        kwargs={'pk': self.object.pk, 'state': 1}
                     ),
                     'name': _('Draft'),
                     'class': ''
                 }
             )
-            if self.object.state == 2:
+            if self.object.state.pk == 2:
                 context['header_state'][3]['class'] = 'font-weight-bold'
                 context['header_state'].pop(2)
-            if self.object.state == 3:
+            if self.object.state.pk == 3:
                 context['header_state_botons'].append(
                     {
                         'url': reverse_lazy(
@@ -288,7 +290,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
                 context['header_state'][1]['class'] = 'font-weight-bold'
                 context['header_state'].pop(3)
                 context['header_state'].pop(2)
-        if self.object.state == 4:
+        if self.object.state.pk == 4:
             context['header_state'][2]['class'] = 'font-weight-bold'
             context['header_state'].pop(3)
         context['print_url'] = '{}:pdf'.format(object_name)
@@ -309,7 +311,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
-        if self.object.state == 0:
+        if self.object.state.pk == 0:
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and formset.is_valid():
@@ -390,38 +392,7 @@ def sale_order_state(request, pk, state):
             sale_order.state = state
             sale_order.save()
             if state == 4:
-                invoice = PyInvoice.objects.create(
-                    uc=request.user.pk,
-                    company_id=sale_order.company_id,
-                    partner_id=sale_order.partner_id,
-                    sale_order_id=sale_order,
-                    amount_untaxed=sale_order.amount_untaxed,
-                    amount_tax_iva=sale_order.amount_tax_iva,
-                    amount_tax_other=sale_order.amount_tax_other,
-                    amount_tax_total=sale_order.amount_tax_total,
-                    amount_exempt=sale_order.amount_exempt,
-                    amount_total=sale_order.amount_total,
-                    description=sale_order.description,
-                )
-                sale_order_detail = PySaleOrderDetail.objects.filter(sale_order_id=pk)
-                for sod in sale_order_detail:
-                    invoice_detail = PyInvoiceDetail.objects.create(
-                        product_id=sod.product_id,
-                        invoice_id=invoice,
-                        description=sod.description,
-                        quantity=sod.quantity,
-                        uom_id=sod.uom_id,
-                        price=sod.price,
-                        amount_untaxed=sod.amount_untaxed,
-                        amount_tax_iva=sod.amount_tax_iva,
-                        amount_tax_other=sod.amount_tax_other,
-                        amount_tax_total=sod.amount_tax_total,
-                        amount_exempt=sod.amount_exempt,
-                        discount=sod.discount,
-                        amount_total=sod.amount_total
-                    )
-                    invoice_detail.tax_id.set(sod.tax_id.all())
-                # sale_order_detail_tax
+                invoice = sale_order_to_invoice(request, sale_order)
                 return redirect(
                     reverse_lazy('PyInvoice:detail', kwargs={'pk': invoice.pk})
                 )
@@ -448,3 +419,50 @@ def sale_order_active(request, pk, active):
                 _('The current order %(order)s status does not allow updates.') % {'order': self.object.name}
             )
     return redirect(reverse_lazy('PySaleOrder:list'))
+
+
+# ========================================================================== #
+@login_required()
+def sale_order_to_invoice(request, sale_order):
+    # Create the invoice master
+    invoice = PyInvoice.objects.create(
+        uc=request.user.pk,
+        company_id=sale_order.company_id,
+        partner_id=sale_order.partner_id,
+        sale_order_id=sale_order,
+        amount_untaxed=sale_order.amount_untaxed,
+        amount_tax_iva=sale_order.amount_tax_iva,
+        amount_tax_other=sale_order.amount_tax_other,
+        amount_tax_total=sale_order.amount_tax_total,
+        amount_exempt=sale_order.amount_exempt,
+        amount_total=sale_order.amount_total,
+        description=sale_order.description,
+        origin=sale_order.name,
+    )
+
+    # Create the invoice detail
+    sale_order_detail = PySaleOrderDetail.objects.filter(
+        sale_order_id=sale_order.pk
+    )
+    for sod in sale_order_detail:
+        invoice_detail = PyInvoiceDetail.objects.create(
+            uc=request.user.pk,
+            company_id=sod.company_id,
+            product_id=sod.product_id,
+            invoice_id=invoice,
+            description=sod.description,
+            quantity=sod.quantity,
+            uom_id=sod.uom_id,
+            price=sod.price,
+            amount_untaxed=sod.amount_untaxed,
+            amount_tax_iva=sod.amount_tax_iva,
+            amount_tax_other=sod.amount_tax_other,
+            amount_tax_total=sod.amount_tax_total,
+            amount_exempt=sod.amount_exempt,
+            discount=sod.discount,
+            amount_total=sod.amount_total
+        )
+
+        # Create the invoice detail product m2m tax records
+        invoice_detail.tax_id.set(sod.tax_id.all())
+    return invoice

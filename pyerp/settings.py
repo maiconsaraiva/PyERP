@@ -43,6 +43,8 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'www.pyerp.cl', 'pyerp.cl'
 
 INSTALLED_APPS = [
     # Django Apps
+    'rosetta',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

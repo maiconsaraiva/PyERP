@@ -42,6 +42,8 @@ PyPDF2 = "==1.26.0"
 django-settings-export = "*"
 django-taggit = "*"
 django-bootstrap-datepicker-plus = "*"
+django-modeltranslation = "*"
+django-rosetta = "*"
 
 [requires]
 python_version = "3.7"

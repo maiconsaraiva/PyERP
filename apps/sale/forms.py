@@ -27,26 +27,36 @@ class SaleOrderForm(forms.ModelForm):
         fields = [
             'date_order',
             'partner_id',
-            'note'
+            'seller_id',
+            'note',
+            'company_id'
         ]
         labels = {
             'partner_id': _('Client',),
             'note': _('Note'),
             'date_order': _('Date')
-            # 'description': 'Descripción',
         }
         widgets = {
             'partner_id': autocomplete.ModelSelect2(
                 url='PyPartner:autocomplete',
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': 'Seleccione un cliente ...',
+                    'data-placeholder': _('Choose a client ...'),
+                    'style': 'width: 100%',
+                },
+            ),
+            'seller_id': autocomplete.ModelSelect2(
+                url='PyPartner:autocomplete',
+                forward=['company_id'],
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': _('Choose a seller ...'),
                     'style': 'width: 100%',
                 },
             ),
             'date_order': MyDatePickerInput(
                 options={
-                    "format": "DD/MM/YYYY HH:mm", # moment date-time format
+                    "format": "DD/MM/YYYY HH:mm",
                     "showClose": True,
                     "showClear": True,
                     "showTodayButton": True,
@@ -55,10 +65,11 @@ class SaleOrderForm(forms.ModelForm):
             'note': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'data-placeholder': 'Descripción del presupuesto ...',
+                    'placeholder': _('Description ...'),
                     'style': 'width: 100%',
                 },
             ),
+            'company_id': forms.HiddenInput(),
         }
 
 
@@ -72,6 +83,8 @@ class SaleOrderDetailForm(forms.ModelForm):
             'product_id',
             'description',
             'quantity',
+            'invoiced_quantity',
+            'delivered_quantity',
             'uom_id',
             'price',
             'discount',
@@ -91,27 +104,39 @@ class SaleOrderDetailForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control form-control-sm',
                     'placeholder': _('----------'),
-                    # 'style': 'width: 150px',
                 },
             ),
             'quantity': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm',
-                    'data-placeholder': _('Product quantity ...'),
-                    # 'style': 'width: 80px',
+                    'placeholder': _('Product quantity ...'),
                 },
             ),
-            'uom_id': forms.Select(
+            'invoiced_quantity': forms.NumberInput(
                 attrs={
-                    'class': 'custom-select custom-select-sm',
-                    'data-placeholder': _('Unit measurement ...'),
-                    # 'style': 'width: 80px',
+                    'class': 'form-control form-control-sm',
+                    'placeholder': _('Invoiced ...'),
+                    'readonly': True,
+                },
+            ),
+            'delivered_quantity': forms.NumberInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'placeholder': _('Delivered'),
+                    'readonly': True,
+                },
+            ),
+            'uom_id': autocomplete.ModelSelect2(
+                url='PyUom:autocomplete',
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': _('Select a UOM ...'),
                 },
             ),
             'price': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm text-right',
-                    'data-placeholder': 'Precio del producto ...',
+                    'placeholder': 'Precio del producto ...',
                     # 'style': 'width: 80px',
                     'value': 0,
                 },
@@ -119,7 +144,7 @@ class SaleOrderDetailForm(forms.ModelForm):
             'discount': forms.NumberInput(
                 attrs={
                     'class': 'form-control form-control-sm text-right',
-                    'data-placeholder': 'Descuento ...',
+                    'placeholder': 'Descuento ...',
                     # 'style': 'width: 80px',
                 },
             ),
@@ -134,7 +159,7 @@ class SaleOrderDetailForm(forms.ModelForm):
             'amount_total': forms.TextInput(
                 attrs={
                     'class': 'form-control form-control-sm text-right',
-                    'data-placeholder': 'Total ...',
+                    'placeholder': 'Total ...',
                     # 'style': 'width: 80px',
                     'readonly': True,
                 },

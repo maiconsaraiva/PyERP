@@ -32,6 +32,11 @@ urlpatterns += i18n_patterns(
     ),
 )
 
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += [
+        path('rosetta/', include('rosetta.urls'))
+    ]
+
 
 # ========================================================================== #
 # Recorrer el archivo de aplicaciones instaladas y construir sus rutas
