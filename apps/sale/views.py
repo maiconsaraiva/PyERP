@@ -43,6 +43,15 @@ OBJECT_DETAIL_FIELDS = [
     {'string': _('Seller'), 'field': 'seller_id'},
 ]
 
+OBJECT_TOTAL_FIELDS = [
+    {'string': _('Net Amount or Affection:'), 'field': 'amount_untaxed'},
+    {'string': _('Exempt Amount:'), 'field': 'amount_exempt'},
+    {'string': _('IVA:'), 'field': 'amount_tax_iva'},
+    {'string': _('Other taxes:'), 'field': 'amount_tax_other'},
+    {'string': _('Total taxes:'), 'field': 'amount_tax_total'},
+    {'string': _('Total:'), 'field': 'amount_total'},
+]
+
 DETAIL_OBJECT_LIST_FIELDS = [
     {'string': _('Product'), 'field': 'product_id'},
     {'string': _('Description'), 'field': 'description'},
@@ -77,8 +86,10 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
     model = PySaleOrder
     template_name = 'sale/detail.html'
     extra_context = {
+        'fields': OBJECT_LIST_FIELDS,
         'master_fields': OBJECT_DETAIL_FIELDS,
-        'detail_fields': DETAIL_OBJECT_LIST_FIELDS
+        'detail_fields': DETAIL_OBJECT_LIST_FIELDS,
+        'total_fields': OBJECT_TOTAL_FIELDS
     }
 
     def get_context_data(self, **kwargs):
@@ -198,6 +209,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
     model = PySaleOrder
     form_class = SaleOrderForm
     template_name = 'sale/form.html'
+    extra_context = {'total_fields': OBJECT_TOTAL_FIELDS}
 
     def get_context_data(self, **kwargs):
         _pk = self.kwargs.get(self.pk_url_kwarg)
@@ -262,8 +274,8 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
                         'class': ''
                     }
                 )
-        if self.object.state.pk == 4:
-            context['header_state'][2]['class'] = 'font-weight-bold'
+        # if self.object.state.pk == 4:
+        #     context['header_state'][2]['class'] = 'font-weight-bold'
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = SaleOrderForm(

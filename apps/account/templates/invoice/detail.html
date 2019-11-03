@@ -7,8 +7,23 @@
   .list-inline-item:not(:last-child) {
     margin-right: .0rem;
   }
+  .breadcrumb {
+    padding: .75rem 1rem .75rem 0rem;
+    background-color: Transparent;
+  }
   .card-header {
     border-bottom: none;
+  }
+  .breadcrumb-item a {
+    color: #563D7C;
+    font-weight: bold;
+  }
+  .table {
+    -moz-appearance: textfield;
+    background-color: transparent;
+    border: 0px solid transparent;
+    font-size: 90%;
+    height: calc(1.81245rem + 2px);
   }
 </style>
 {% endblock %}
@@ -19,10 +34,10 @@
       {% include 'base/header_botons.html' %}
     </div>
     <div class="card-body">
-      {% include 'account/body.html' %}
+      {% include 'base/detail_body.html' %}
     </div>
     <div class="card-footer">
-      {% include 'account/footer_total.html' %}
+      {% include 'base/footer_total.html' %}
       <hr class="style1">
       <div class="row">
         <div class="form-group row col-sm-12">
@@ -36,6 +51,6 @@
     <!-- /.card-footer -->
   </div>
 </div>
-{% include 'account/time_line.html' %}
+{% include 'base/time_line.html' %}
 {% endblock %}
 

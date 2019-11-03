@@ -115,20 +115,13 @@
 
   }
 
-
   $(document).ready(function(){
+    /* Default seller when doesn't exist */
     var sellerSelect = $('#id_seller_id');
-    var option = new Option('{{ request.user.partner_id }}', {{ request.user.partner_id.pk }}, true, true);
-    sellerSelect.append(option).trigger('change');
-    $('#detail-footer').append('<div class="row"><div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _("Net Amount or Affection:") }}</div><div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_untaxed">$ {{ object.amount_untaxed|intcomma }}</div></div>');
-    $('#detail-footer').append('<div class="row"><div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _("Exempt Amount:") }}</div><div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_exempt">$ {{ object.amount_exempt|intcomma }}</div></div>');
-    $('#detail-footer').append('<div class="row"><div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _("IVA:") }}</div><div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_iva">$ {{ object.amount_tax_iva|intcomma }}</div></div>');
-    $('#detail-footer').append('<div class="row"><div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _("Other taxes:") }}</div><div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_other">$ {{ object.amount_tax_other|intcomma }}</div></div>');
-    $('#detail-footer').append('<div class="row"><div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _("Total taxes:") }}</div><div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_tax_total">$ {{ object.amount_tax_total|intcomma  }}</div></div>');
-    $('#detail-footer').append('<hr class="style1">');
-    $('#detail-footer').append('<div class="row"><div class="col col-sm-7 col-md-8 col-lg-9 col-xl-10 font-weight-bold text-right">{{ _("Total:") }}</div><div class="col col-sm-5 col-md-4 col-lg-3 col-xl-2 text-right" id="t_amount_total">$ {{ object.amount_total|intcomma }}</div></div>');
-    $('#detail-footer').append('<hr class="style1">');
-    $('#detail-footer').append('<div class="form-group row"><label for="id_note" class="col-1 col-form-label">Note</label><div class="col-11"><textarea name="note" cols="40" rows="1" class="form-control" placeholder="Invoice notes ..." style="width: 100%" id="id_note"></textarea></div></div>');
+    if (!sellerSelect.val()){
+      var option = new Option('{{ request.user.partner_id }}', {{ request.user.partner_id.pk }}, true, true);
+      sellerSelect.append(option).trigger('change');
+    }
   });
 </script>
 {% endblock %}
