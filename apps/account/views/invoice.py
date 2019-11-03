@@ -22,7 +22,7 @@ from apps.base.views.web_father import (
 
 # Localfolder Library
 from ..forms import PRODUCT_FORMSET, InvoiceForm
-from ..models import PyInvoice, PyInvoiceDetail
+from ..models import PyInvoice, PyInvoiceDetail, PyInvoiceType
 
 LOGGER = logging.getLogger(__name__)
 
@@ -30,6 +30,7 @@ OBJECT_LIST_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
     {'string': _('Client'), 'field': 'partner_id'},
     {'string': ('Date'), 'field': 'date_invoice'},
+    {'string': ('State'), 'field': 'state'},
     {'string': ('Net Amount'), 'field': 'amount_untaxed', 'align': 'text-right', 'humanize': True},
     {'string': ('Total'), 'field': 'amount_total', 'align': 'text-right', 'humanize': True},
 ]
@@ -95,6 +96,52 @@ class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
                 'name': self.object.name
             }
         ]
+        context['header_state_botons'] = []
+        context['header_state'] = self.object.state.state
+        if self.object.state.pk == 1:
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 3}
+                    ),
+                    'name': _('Confirm'),
+                    'class': 'important'
+                }
+            )
+        if self.object.state.pk not in (2, 4):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 2}
+                    ),
+                    'name': _('Cancel'),
+                    'class': ''
+                }
+            )
+        if self.object.state.pk in (2, 3):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 1}
+                    ),
+                    'name': _('Draft'),
+                    'class': ''
+                }
+            )
+            # if self.object.state.pk == 3:
+            #     context['header_state_botons'].append(
+            #         {
+            #             'url': reverse_lazy(
+            #                 '{}:state'.format(object_name),
+            #                 kwargs={'pk': self.object.pk, 'state': 4}
+            #             ),
+            #             'name': _('To Invoice'),
+            #             'class': ''
+            #         }
+            #     )
         context['print_url'] = '{}:pdf'.format(object_name)
         context['detail'] = PyInvoiceDetail.objects.filter(
             active=True,
@@ -166,6 +213,52 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
                 'name': self.object.name
             }
         ]
+        context['header_state_botons'] = []
+        context['header_state'] = self.object.state.state
+        if self.object.state.pk == 1:
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 3}
+                    ),
+                    'name': _('Confirm'),
+                    'class': 'important'
+                }
+            )
+        if self.object.state.pk not in (2, 4):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 2}
+                    ),
+                    'name': _('Cancel'),
+                    'class': ''
+                }
+            )
+        if self.object.state.pk in (2, 3):
+            context['header_state_botons'].append(
+                {
+                    'url': reverse_lazy(
+                        '{}:state'.format(object_name),
+                        kwargs={'pk': self.object.pk, 'state': 1}
+                    ),
+                    'name': _('Draft'),
+                    'class': ''
+                }
+            )
+            # if self.object.state.pk == 3:
+            #     context['header_state_botons'].append(
+            #         {
+            #             'url': reverse_lazy(
+            #                 '{}:state'.format(object_name),
+            #                 kwargs={'pk': self.object.pk, 'state': 4}
+            #             ),
+            #             'name': _('To Invoice'),
+            #             'class': ''
+            #         }
+            #     )
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = InvoiceForm(self.request.POST, instance=self.object)
@@ -178,7 +271,7 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
-        if self.object.state == 0:
+        if self.object.state.pk == 1:
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and formset.is_valid():
@@ -255,8 +348,21 @@ def load_tax(request):
 @login_required()
 def invoice_state(request, pk, state):
     invoice = PyInvoice.objects.get(pk=pk)
-    invoice.state = state
-    invoice.save()
+    state = PyInvoiceType.objects.get(pk=state)
+    if invoice.state != 4:
+        with transaction.atomic():
+            invoice.state = state
+            invoice.save()
+            # if state == 4:
+            #     invoice = sale_order_to_invoice(request, sale_order)
+            #     return redirect(
+            #         reverse_lazy('PyInvoice:detail', kwargs={'pk': invoice.pk})
+            #     )
+    else:
+        messages.warning(
+                self.request,
+                _('The current invoice %(invoice)s status does not allow updates.') % {'invoice': self.object.name}
+            )
     return redirect(
         reverse_lazy('PyInvoice:detail', kwargs={'pk': pk})
     )

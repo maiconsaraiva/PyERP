@@ -40,6 +40,7 @@ OBJECT_DETAIL_FIELDS = [
     {'string': _('Name'), 'field': 'name'},
     {'string': ('Date'), 'field': 'date_order'},
     {'string': _('Client'), 'field': 'partner_id'},
+    {'string': _('Seller'), 'field': 'seller_id'},
 ]
 
 DETAIL_OBJECT_LIST_FIELDS = [
@@ -95,12 +96,7 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
             }
         ]
         context['header_state_botons'] = []
-        context['header_state'] = [
-            {'name': _('Draft'), 'class': 'text-muted'},
-            {'name': _('Confirmed'), 'class': 'text-muted'},
-            {'name': _('Invoiced'), 'class': 'text-muted'},
-            {'name': _('Cancelled'), 'class': 'text-muted'}
-        ]
+        context['header_state'] = self.object.state.state
         if self.object.state.pk == 1:
             context['header_state_botons'].append(
                 {
@@ -112,9 +108,6 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
                     'class': 'important'
                 }
             )
-            context['header_state'].pop(3)
-            context['header_state'].pop(2)
-            context['header_state'][0]['class'] = 'font-weight-bold'
         if self.object.state.pk not in (2, 4):
             context['header_state_botons'].append(
                 {
@@ -137,9 +130,6 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
                     'class': ''
                 }
             )
-            if self.object.state.pk == 2:
-                context['header_state'][3]['class'] = 'font-weight-bold'
-                context['header_state'].pop(2)
             if self.object.state.pk == 3:
                 context['header_state_botons'].append(
                     {
@@ -151,12 +141,6 @@ class SaleOrderDetailView(LoginRequiredMixin, FatherDetailView):
                         'class': ''
                     }
                 )
-                context['header_state'][1]['class'] = 'font-weight-bold'
-                context['header_state'].pop(3)
-                context['header_state'].pop(2)
-        if self.object.state.pk == 4:
-            context['header_state'][2]['class'] = 'font-weight-bold'
-            context['header_state'].pop(3)
         context['print_url'] = '{}:pdf'.format(object_name)
         context['detail'] = PySaleOrderDetail.objects.filter(
             active=True,
@@ -231,12 +215,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
             }
         ]
         context['header_state_botons'] = []
-        context['header_state'] = [
-            {'name': _('Draft'), 'class': 'text-muted'},
-            {'name': _('Confirmed'), 'class': 'text-muted'},
-            {'name': _('Invoiced'), 'class': 'text-muted'},
-            {'name': _('Cancelled'), 'class': 'text-muted'}
-        ]
+        context['header_state'] = self.object.state.state
         if self.object.state.pk == 1:
             context['header_state_botons'].append(
                 {
@@ -248,9 +227,6 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
                     'class': 'important'
                 }
             )
-            context['header_state'].pop(3)
-            context['header_state'].pop(2)
-            context['header_state'][0]['class'] = 'font-weight-bold'
         if self.object.state.pk not in (2, 4):
             context['header_state_botons'].append(
                 {
@@ -275,7 +251,6 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
             )
             if self.object.state.pk == 2:
                 context['header_state'][3]['class'] = 'font-weight-bold'
-                context['header_state'].pop(2)
             if self.object.state.pk == 3:
                 context['header_state_botons'].append(
                     {
@@ -287,12 +262,8 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
                         'class': ''
                     }
                 )
-                context['header_state'][1]['class'] = 'font-weight-bold'
-                context['header_state'].pop(3)
-                context['header_state'].pop(2)
         if self.object.state.pk == 4:
             context['header_state'][2]['class'] = 'font-weight-bold'
-            context['header_state'].pop(3)
         context['print_url'] = '{}:pdf'.format(object_name)
         if self.request.POST:
             context['form'] = SaleOrderForm(
@@ -311,7 +282,7 @@ class SaleOrderEditView(LoginRequiredMixin, FatherUpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['formset']
-        if self.object.state.pk == 0:
+        if self.object.state.pk == 1:
             with transaction.atomic():
                 form.instance.um = self.request.user.pk
                 if form.is_valid() and formset.is_valid():

@@ -8,12 +8,20 @@ from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
 from apps.base.views.sequence import get_next_value
 from apps.sale.models import PySaleOrder
 
-INVOICE_STATE = (
-        (0, _('draft')),
-        (1, _('open')),
-        (2, _('cancel')),
-        (3, _('confirmed'))
-    )
+
+# ========================================================================== #
+class PyInvoiceType(PyFather):
+    """Modelo de la orden de pago
+    """
+    name = models.CharField(_('Name'), max_length=80, editable=False)
+    state = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Invoice state')
+        verbose_name_plural = _('Invoice states')
 
 
 # ========================================================================== #
@@ -73,14 +81,15 @@ class PyInvoice(PyFather):
         default=0
     )
     description = models.TextField(_('Description'), blank=True, null=True)
-    state = models.IntegerField(
-        _('Status'),
-        choices=INVOICE_STATE,
-        default=0
+    state = models.ForeignKey(
+        PyInvoiceType,
+        on_delete=models.PROTECT,
+        verbose_name=_('State'),
+        default=1
     )
     note = models.TextField(_('Note'), blank=True, null=True)
     date_confirm = models.DateTimeField(null=True)
-    origin = models.TextField(_('Origin'), blank=True, null=True)
+    origin = models.CharField(_('Origin'), max_length=80, blank=True, null=True)
 
     class Meta:
         ordering = ['pk']

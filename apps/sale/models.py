@@ -13,12 +13,12 @@ class PySaleOrderType(PyFather):
     """Modelo de la orden de pago
     """
     name = models.CharField(_('Name'), max_length=80, editable=False)
+    state = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['name']
         verbose_name = _('Sale order state')
         verbose_name_plural = _('Sale order states')
 
@@ -79,7 +79,6 @@ class PySaleOrder(PyFather):
         on_delete=models.PROTECT,
         verbose_name=_('State'),
         default=1
-
     )
     note = models.TextField(_('NOte'), blank=True, null=True)
     date_confirm = models.DateTimeField(null=True)

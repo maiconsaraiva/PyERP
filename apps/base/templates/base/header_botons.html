@@ -63,10 +63,7 @@
     {% endif %}
   </div>
   <div class="ml-auto">
-  <span class="flag-icon flag-icon-gr"></span>
-    {% for btn in header_state %}
-      <span class="{{ btn.class }}" style="color: {{ user.active_company.main_color }};">{{ btn.name }}</span>{% if not forloop.last %} <i class="fas fa-chevron-right" style="color: {{ user.active_company.main_color }};"></i>{% endif %}
-    {% endfor %}
+    {{ header_state|safe }}
   </div>
 </div>
 <hr class="style1">

@@ -215,6 +215,7 @@ PASSWORD_RESET_TIMEOUT_DAYS = 1
 
 LANGUAGE_CODE = 'en'
 TIME_ZONE = 'America/Santiago'
+# DATETIME_FORMAT = 'd b Y h:i'
 # Restricts languages
 LANGUAGES = [
     ('en', _('English')),

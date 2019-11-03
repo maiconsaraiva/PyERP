@@ -233,28 +233,29 @@ class FatherUpdateView(UpdateView):
             kwargs={'pk': self.object.pk}
         )
         context['action_url'] = '{}:update'.format(object_name)
-        forward = self.model.objects.filter(
-            pk__gt=self.kwargs['pk'],
-            active=True,
-            company_id=self.request.user.active_company_id
-        ).first()
-        backward = self.model.objects.filter(
-            pk__lt=self.kwargs['pk'],
-            active=True,
-            company_id=self.request.user.active_company_id
-        ).order_by('-pk').first()
-        if forward:
-            context['forward'] = reverse_lazy(
-                '{}:update'.format(object_name),
-                kwargs={'pk': forward.pk}
-            )
-        if backward:
-            context['backward'] = reverse_lazy(
-                '{}:update'.format(object_name),
-                kwargs={
-                    'pk': backward.pk
-                }
-            )
+        if 'pk' in self.kwargs:
+            forward = self.model.objects.filter(
+                pk__gt=self.kwargs['pk'],
+                active=True,
+                company_id=self.request.user.active_company_id
+            ).first()
+            backward = self.model.objects.filter(
+                pk__lt=self.kwargs['pk'],
+                active=True,
+                company_id=self.request.user.active_company_id
+            ).order_by('-pk').first()
+            if forward:
+                context['forward'] = reverse_lazy(
+                    '{}:update'.format(object_name),
+                    kwargs={'pk': forward.pk}
+                )
+            if backward:
+                context['backward'] = reverse_lazy(
+                    '{}:update'.format(object_name),
+                    kwargs={
+                        'pk': backward.pk
+                    }
+                )
         context['breadcrumbs'] = [{
             'url': '{}:list'.format(object_name),
             'name': '{}'.format(verbose_name)

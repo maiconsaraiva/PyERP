@@ -29,7 +29,8 @@ class InvoiceForm(forms.ModelForm):
             'partner_id',
             'seller_id',
             'note',
-            'company_id'
+            'company_id',
+            'origin'
         ]
         labels = {
             'partner_id': _('Client',),
@@ -71,6 +72,12 @@ class InvoiceForm(forms.ModelForm):
                 },
             ),
             'company_id': forms.HiddenInput(),
+            'origin': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': 'Origin'
+                },
+            ),
         }
 
 
