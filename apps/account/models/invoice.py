@@ -7,6 +7,12 @@ from django.utils.translation import ugettext_lazy as _
 from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
 from apps.base.views.sequence import get_next_value
 from apps.sale.models import PySaleOrder
+from apps.purchase.models import PyPurchaseOrder
+
+INVOICE_TYPE = (
+        (1, _('sale')),
+        (2, _('purchase')),
+    )
 
 
 # ========================================================================== #
@@ -29,6 +35,12 @@ class PyInvoice(PyFather):
     """Modelo de la orden de pago
     """
     name = models.CharField(_('Name'), max_length=80, editable=False)
+    type = models.IntegerField(
+        _('Type'),
+        choices=INVOICE_TYPE,
+        null=True,
+        blank=True
+    )
     partner_id = models.ForeignKey(
         PyPartner,
         on_delete=models.PROTECT
@@ -43,6 +55,12 @@ class PyInvoice(PyFather):
     )
     sale_order_id = models.ForeignKey(
         PySaleOrder,
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT
+    )
+    purchase_order_id = models.ForeignKey(
+        PyPurchaseOrder,
         null=True,
         blank=True,
         on_delete=models.PROTECT

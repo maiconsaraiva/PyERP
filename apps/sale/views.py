@@ -22,7 +22,7 @@ from apps.base.views.web_father import (
 
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, SaleOrderForm
-from .models import PySaleOrder, PySaleOrderDetail
+from .models import PySaleOrder, PySaleOrderDetail, PySaleOrderState
 from apps.account.models import PyInvoice, PyInvoiceDetail
 
 LOGGER = logging.getLogger(__name__)
@@ -370,14 +370,15 @@ def load_tax(request):
 @login_required()
 def sale_order_state(request, pk, state):
     sale_order = PySaleOrder.objects.get(pk=pk)
+    state = PySaleOrderState.objects.get(pk=state)
     if sale_order.state != 4:
         with transaction.atomic():
             sale_order.state = state
             sale_order.save()
-            if state == 4:
+            if state.pk == 4:
                 invoice = sale_order_to_invoice(request, sale_order)
                 return redirect(
-                    reverse_lazy('PyInvoice:detail', kwargs={'pk': invoice.pk})
+                    reverse_lazy('PyInvoice:detail', kwargs={'pk': invoice.pk, 'type': 2})
                 )
     else:
         messages.warning(
@@ -387,21 +388,6 @@ def sale_order_state(request, pk, state):
     return redirect(
         reverse_lazy('PySaleOrder:detail', kwargs={'pk': pk})
     )
-
-
-# ========================================================================== #
-@login_required()
-def sale_order_active(request, pk, active):
-    sale_order = PySaleOrder.objects.get(pk=pk)
-    if sale_order.estate != 4:
-        sale_order.active = active
-        sale_order.save()
-    else:
-        messages.warning(
-                self.request,
-                _('The current order %(order)s status does not allow updates.') % {'order': self.object.name}
-            )
-    return redirect(reverse_lazy('PySaleOrder:list'))
 
 
 # ========================================================================== #

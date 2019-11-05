@@ -79,7 +79,7 @@ class FatherListView(ListView):
         context['add_url'] = '{}:add'.format(object_name)
         context['form_template'] = False
         context['breadcrumbs'] = [{
-            'url': '',
+            'url': False,
             'name': '{}'.format(verbose_name)
         }]
         return context
@@ -114,11 +114,14 @@ class FatherDetailView(DetailView):
         context['title'] = '{}'.format(verbose_name)
         context['back_url'] = reverse_lazy('{}:list'.format(object_name))
         context['breadcrumbs'] = [{
-            'url': '{}:list'.format(object_name),
+            'url': reverse_lazy('{}:list'.format(object_name)),
             'name': '{}'.format(verbose_name)
         }]
         context['list_url'] = '{}:list'.format(object_name)
-        context['update_url'] = '{}:update'.format(object_name)
+        context['update_url'] = reverse_lazy(
+                '{}:update'.format(object_name),
+                kwargs={'pk': self.object.pk}
+            )
         context['delete_url'] = '{}:delete'.format(object_name)
         context['detail_url'] = '{}:detail'.format(object_name)
         context['form_template'] = False
@@ -193,7 +196,7 @@ class FatherCreateView(CreateView):
         context['back_url'] = reverse_lazy('{}:list'.format(object_name))
         context['form_template'] = True
         context['breadcrumbs'] = [{
-            'url': '{}:list'.format(object_name),
+            'url': reverse_lazy('{}:list'.format(object_name)),
             'name': '{}'.format(verbose_name)
         }]
 
@@ -257,7 +260,7 @@ class FatherUpdateView(UpdateView):
                     }
                 )
         context['breadcrumbs'] = [{
-            'url': '{}:list'.format(object_name),
+            'url': reverse_lazy('{}:list'.format(object_name)),
             'name': '{}'.format(verbose_name)
         }]
         return context

@@ -31,11 +31,6 @@ class SaleOrderForm(forms.ModelForm):
             'note',
             'company_id'
         ]
-        labels = {
-            'partner_id': _('Client',),
-            'note': _('Note'),
-            'date_order': _('Date')
-        }
         widgets = {
             'partner_id': autocomplete.ModelSelect2(
                 url='PyPartner:autocomplete',

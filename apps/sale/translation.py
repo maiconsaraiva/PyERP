@@ -1,7 +1,7 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import PySaleOrderType
+from .models import PySaleOrderState
 
 
-@register(PySaleOrderType)
-class PySaleOrderTypeTranslationOptions(TranslationOptions):
+@register(PySaleOrderState)
+class PySaleOrderStateTranslationOptions(TranslationOptions):
     fields = ('name',)

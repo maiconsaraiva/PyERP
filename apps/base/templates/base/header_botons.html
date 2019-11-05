@@ -4,7 +4,7 @@
     <ol class="breadcrumb">
       {% for btn in breadcrumbs %}
         {% if btn.url %}
-          <li class="breadcrumb-item"><a href="{% url btn.url %}">{{ btn.name }}</a></li>
+          <li class="breadcrumb-item"><a href="{{ btn.url }}">{{ btn.name }}</a></li>
         {% else %}
           <li class="breadcrumb-item active" aria-current="page">{{ btn.name }}</li>
         {% endif %}
@@ -18,11 +18,11 @@
     {% if form_template %}
       <button title=" {{ _('Save') }}" type="submit" class="btn btn-light"><i class="far fa-save"></i></button>
     {% else %}
-      <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
+      <a title=" {{ _('Edit') }}" href="{{ update_url }}" class="btn btn-light"><i class="fa fa-pen"></i></a>
     {% endif %}
     {% if object %}
-      <button title="{{ _('Delete') }}" onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
-      <a title="{{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
+      <button title="{{ _('Delete') }}" onclick="return abrir_modal('{{ delete_url }}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
+      <a title="{{ _('Duplicate') }}" href="#" class="btn btn-light"><i class="fa fa-copy"></i></a>
       {% if print_url %}
         <a title="{{ _('Print') }}" href="{% url print_url object.pk %}" class="btn btn-light"><i class="fas fa-download"></i></a>
       {% endif %}

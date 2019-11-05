@@ -9,7 +9,7 @@ from apps.base.views.sequence import get_next_value
 
 
 # ========================================================================== #
-class PySaleOrderType(PyFather):
+class PySaleOrderState(PyFather):
     """Modelo de la orden de pago
     """
     name = models.CharField(_('Name'), max_length=80, editable=False)
@@ -30,7 +30,8 @@ class PySaleOrder(PyFather):
     name = models.CharField(_('Name'), max_length=80, editable=False)
     partner_id = models.ForeignKey(
         PyPartner,
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        verbose_name=_('Client'),
     )
     seller_id = models.ForeignKey(
         PyPartner,
@@ -75,7 +76,7 @@ class PySaleOrder(PyFather):
     )
     description = models.TextField(_('Description'), blank=True, null=True)
     state = models.ForeignKey(
-        PySaleOrderType,
+        PySaleOrderState,
         on_delete=models.PROTECT,
         verbose_name=_('State'),
         default=1
@@ -85,8 +86,8 @@ class PySaleOrder(PyFather):
 
     class Meta:
         ordering = ['pk']
-        verbose_name = _('Sale order')
-        verbose_name_plural = _('Sale orders')
+        verbose_name = _('Sale Order')
+        verbose_name_plural = _('Sale Orders')
 
     def save(self, *args, **kwargs):
         if not self.pk:

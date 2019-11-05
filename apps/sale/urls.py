@@ -8,7 +8,7 @@ from .reports.saleorderpdf import sale_order_pdf
 from .views import (
     SaleOrderAddView, SaleOrderDeleteView, SaleOrderDetailView,
     SaleOrderEditView, SaleOrderListView, load_product, load_tax,
-    sale_order_active, sale_order_state)
+    sale_order_state)
 
 app_name = 'PySaleOrder'
 
@@ -28,10 +28,9 @@ urlpatterns = [
         name='delete'
     ),
     path(
-        'sale-order-state/<int:pk>/<int:state>', sale_order_state, name='state'
-    ),
-    path(
-        'sale-order-active/<int:pk>/<int:active>', sale_order_active, name='active'
+        'sale-order-state/<int:pk>/<int:state>',
+        sale_order_state,
+        name='state'
     ),
 
     # ======================== Sale Orders AJAX URL's ====================== #
