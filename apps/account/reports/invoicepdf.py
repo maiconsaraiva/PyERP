@@ -21,13 +21,6 @@ from reportlab.platypus import Table, TableStyle
 locale.setlocale(locale.LC_ALL, '')
 locale._override_localeconv = {'mon_thousands_sep': '.'}
 
-INVOICE_STATE = (
-    (0, _('draft')),
-    (1, _('open')),
-    (2, _('cancel')),
-    (3, _('confirmed'))
-)
-
 
 def invoice_pdf(request, pk):
     """ Función para imprimir la orden de ventas
@@ -63,24 +56,55 @@ def invoice_pdf(request, pk):
     pdf.setLineWidth(.3)
     pdf.line(30, 735, 582, 735)
 
-    for x, y in INVOICE_STATE:
-        if x == invoice.state:
-            state = y
+    # Data Customer or Provider 1
+    if invoice.type == 1:
+        dir_1_1 = ('{}').format(invoice.seller_id)
+        dir_1_2 = ('{}').format(invoice.seller_id.street)
+        dir_1_3 = ('{}').format(invoice.seller_id.country_id)
+        dir_1_4 = ('{}').format(invoice.seller_id.phone)
+        dir_1_5 = ('{}').format(invoice.seller_id.email)
+        dir_2_1 = ('{}').format(invoice.partner_id)
+        dir_2_2 = ('{}').format(invoice.partner_id.street)
+        dir_2_3 = ('{}').format(invoice.partner_id.country_id)
+        dir_2_4 = ('{}').format(invoice.partner_id.phone)
+        dir_2_5 = ('{}').format(invoice.partner_id.email)
+    elif invoice.type == 2:
+        dir_1_1 = ('{}').format(invoice.partner_id)
+        dir_1_2 = ('{}').format(invoice.partner_id.street)
+        dir_1_3 = ('{}').format(invoice.partner_id.country_id)
+        dir_1_4 = ('{}').format(invoice.partner_id.phone)
+        dir_1_5 = ('{}').format(invoice.partner_id.email)
+        dir_2_1 = ('{}').format(invoice.seller_id)
+        dir_2_2 = ('{}').format(invoice.seller_id.street)
+        dir_2_3 = ('{}').format(invoice.seller_id.country_id)
+        dir_2_4 = ('{}').format(invoice.seller_id.phone)
+        dir_2_5 = ('{}').format(invoice.seller_id.email)
+    pdf.setFont('Helvetica', 8)
+    pdf.drawString(30, 725, dir_1_1)
+    pdf.drawString(30, 715, dir_1_2)
+    pdf.drawString(30, 705, dir_1_3)
+    pdf.drawString(30, 695, dir_1_4)
+    pdf.drawString(30, 685, dir_1_5)
+    pdf.drawString(300, 675, dir_2_1)
+    pdf.drawString(300, 665, dir_2_2)
+    pdf.drawString(300, 655, dir_2_3)
+    pdf.drawString(300, 645, dir_2_4)
+    pdf.drawString(300, 635, dir_2_5)
 
     # Header del reporte
-    title = ('{} Invoice # {}').format(state, invoice.name)
+    title = ('{} Invoice # {}').format(invoice.state, invoice.name)
     pdf.setFont('Helvetica', 22)
-    pdf.drawString(30, 650, title)
+    pdf.drawString(30, 620, title)
 
     pdf.setFont('Helvetica-Bold', 12)
-    pdf.drawString(30, 625, 'Invoice Date:')
+    pdf.drawString(30, 600, 'Invoice Date:')
 
     # pdf.setFont('Helvetica-Bold', 12)
     # pdf.drawString(180, 625, 'Seller:')
 
     today = timezone.now()
     pdf.setFont('Helvetica', 12)
-    pdf.drawString(30, 610, today.strftime("%Y-%m-%d %H:%M:%S"))
+    pdf.drawString(30, 585, today.strftime("%Y-%m-%d %H:%M:%S"))
 
     # pdf.setFont('Helvetica', 12)
     # pdf.drawString(180, 610, 'Nombre del Vendedor')

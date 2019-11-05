@@ -30,13 +30,9 @@ class InvoiceForm(forms.ModelForm):
             'seller_id',
             'note',
             'company_id',
-            'origin'
+            'origin',
+            'type'
         ]
-        labels = {
-            'partner_id': _('Client',),
-            'note': _('Note'),
-            'date_invoice': _('Date')
-        }
         widgets = {
             'partner_id': autocomplete.ModelSelect2(
                 url='PyPartner:autocomplete',
@@ -72,6 +68,7 @@ class InvoiceForm(forms.ModelForm):
                 },
             ),
             'company_id': forms.HiddenInput(),
+            'type': forms.HiddenInput(),
             'origin': forms.TextInput(
                 attrs={
                     'class': 'form-control',

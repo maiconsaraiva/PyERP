@@ -6,11 +6,11 @@
 <div class="card card-outline col-12">
     <div class="card-header">
         {% for btn in breadcrumbs %}
-        <a title=" {{ _('Back') }}" href="{% url btn.url %}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
+        <a title=" {{ _('Back') }}" href="{{ btn.url }}" class="btn btn-light"><i class="fas fa-arrow-left"></i></a>
         {% endfor %}
-        <a title=" {{ _('Edit') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-pen"></i></a>
+        <a title=" {{ _('Edit') }}" href="{{ update_url }}" class="btn btn-light"><i class="fa fa-pen"></i></a>
         <button title="{{ _('Delete') }}" onclick="return abrir_modal('{% url delete_url object.pk %}')" type="button" class="btn btn-light"><span class="fa fa-trash"></span></button>
-        <a title="{{ _('Duplicate') }}" href="{% url update_url object.pk %}" class="btn btn-light"><i class="fa fa-copy"></i></a>
+        <a title="{{ _('Duplicate') }}" href="#" class="btn btn-light"><i class="fa fa-copy"></i></a>
         {% for btn in breadcrumbs %}
         <div class="float-right state-bar no_active_bar">
 

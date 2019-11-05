@@ -378,7 +378,12 @@ def purchase_order_state(request, pk, state):
             if state.pk == 4:
                 invoice = purchase_order_to_invoice(request, purchase_order)
                 return redirect(
-                    reverse_lazy('PyInvoice:detail', kwargs={'pk': invoice.pk})
+                    reverse_lazy(
+                        'PyInvoice:detail', kwargs={
+                            'pk': invoice.pk,
+                            'type': 2
+                        }
+                    )
                 )
     else:
         messages.warning(

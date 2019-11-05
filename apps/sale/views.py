@@ -378,7 +378,13 @@ def sale_order_state(request, pk, state):
             if state.pk == 4:
                 invoice = sale_order_to_invoice(request, sale_order)
                 return redirect(
-                    reverse_lazy('PyInvoice:detail', kwargs={'pk': invoice.pk, 'type': 2})
+                    reverse_lazy(
+                        'PyInvoice:detail',
+                        kwargs={
+                            'pk': invoice.pk,
+                            'type': 1
+                        }
+                    )
                 )
     else:
         messages.warning(

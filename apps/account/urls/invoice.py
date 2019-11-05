@@ -26,7 +26,11 @@ urlpatterns = [
         InvoiceDeleteView.as_view(),
         name='delete'
     ),
-    path('state/<int:pk>/<int:state>/<int:type>/', invoice_state, name='state'),
+    path(
+        'state/<int:pk>/<int:state>/<int:type>/',
+        invoice_state,
+        name='state'
+    ),
 
     # ======================== Invoice= AJAX URL's ========================= #
     path('load-product/', load_product, name='ajax_load_product'),

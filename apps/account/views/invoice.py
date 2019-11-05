@@ -76,15 +76,34 @@ class InvoiceListView(LoginRequiredMixin, FatherListView):
         _type = self.kwargs['type']
         object_name = self.model._meta.object_name
         verbose_name = self.model._meta.verbose_name
-        # context['detail_url'] = reverse_lazy(
-        #         '{}:detail'.format(object_name),
-        #         kwargs={'pk': self.object.pk, 'type': _type}
-        #     )
         context['add_url'] = reverse_lazy(
-                '{}:add'.format(object_name),
-                kwargs={'type': _type}
-            )
+            '{}:add'.format(object_name),
+            kwargs={'type': _type}
+        )
+        context['type'] = _type
+        if _type == 1:
+            context['breadcrumbs'] = [{
+                'url': False,
+                'name': _('Customer Invoice')
+            }]
+        elif _type == 2:
+            context['breadcrumbs'] = [{
+                'url': False,
+                'name': _('Provider Invoice')
+            }]
         return context
+
+    def get_queryset(self):
+        _type = self.kwargs['type']
+        if self.model._meta.object_name in self.EXLUDE_FROM_FILTER:
+            queryset = self.model.objects.filter(active=True)
+        else:
+            queryset = self.model.objects.filter(
+                company_id=self.request.user.active_company_id,
+                active=True,
+                type=_type
+            )
+        return queryset
 
 
 # ========================================================================== #
@@ -103,17 +122,17 @@ class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
         object_name = self.model._meta.object_name
         verbose_name = self.model._meta.verbose_name
         context['back_url'] = reverse_lazy(
-                '{}:list'.format(object_name),
-                kwargs={'type': _type}
-            )
+            '{}:list'.format(object_name),
+            kwargs={'type': _type}
+        )
         context['update_url'] = reverse_lazy(
-                '{}:update'.format(object_name),
-                kwargs={'pk': self.object.pk, 'type': _type}
-            )
+            '{}:update'.format(object_name),
+            kwargs={'pk': self.object.pk, 'type': _type}
+        )
         context['delete_url'] = reverse_lazy(
-                '{}:delete'.format(object_name),
-                kwargs={'pk': self.object.pk, 'type': _type}
-            )
+            '{}:delete'.format(object_name),
+            kwargs={'pk': self.object.pk, 'type': _type}
+        )
         forward = self.model.objects.filter(
             pk__gt=self.kwargs['pk'],
             active=True,
@@ -134,13 +153,19 @@ class InvoiceDetailView(LoginRequiredMixin, FatherDetailView):
                 '{}:detail'.format(object_name),
                 kwargs={'pk': backward.pk, 'type': _type}
             )
+
+        if _type == 1:
+            url_name = _('Customer Invoice')
+        elif _type == 2:
+            url_name = _('Provider Invoice')
+
         context['breadcrumbs'] = [
             {
                 'url': reverse_lazy(
                     '{}:list'.format(object_name),
                     kwargs={'type': _type}
                 ),
-                'name': '{}'.format(verbose_name)
+                'name': url_name
             },
             {
                 'url': False,
@@ -215,15 +240,28 @@ class InvoiceCreateView(LoginRequiredMixin, FatherCreateView):
         _type = self.kwargs['type']
         object_name = self.model._meta.object_name
         verbose_name = self.model._meta.verbose_name
+        data = {'type': _type}
+        context['form'] = InvoiceForm(initial=data)
+
+        if _type == 1:
+            url_name = _('Customer Invoice')
+        elif _type == 2:
+            url_name = _('Provider Invoice')
+
         context['breadcrumbs'] = [
             {
                 'url': reverse_lazy(
                     '{}:list'.format(object_name),
                     kwargs={'type': _type}
                 ),
-                'name': '{}'.format(verbose_name)
+                'name': url_name
             }
         ]
+        context['back_url'] = reverse_lazy(
+            '{}:list'.format(object_name),
+            kwargs={'type': _type}
+        )
+        context['type'] = _type
         if self.request.POST:
             context['formset'] = PRODUCT_FORMSET(self.request.POST)
         else:
@@ -242,7 +280,11 @@ class InvoiceCreateView(LoginRequiredMixin, FatherCreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('PyInvoice:detail', kwargs={'pk': self.object.pk})
+        _type = self.kwargs['type']
+        return reverse_lazy(
+            'PyInvoice:detail',
+            kwargs={'pk': self.object.pk, 'type': _type}
+        )
 
 
 # ========================================================================== #
@@ -259,13 +301,47 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
         context = super().get_context_data(**kwargs)
         object_name = self.model._meta.object_name
         verbose_name = self.model._meta.verbose_name
+        context['back_url'] = reverse_lazy(
+            '{}:detail'.format(object_name),
+            kwargs={'pk': self.object.pk, 'type': _type}
+        )
+        context['delete_url'] = reverse_lazy(
+            '{}:delete'.format(object_name),
+            kwargs={'pk': self.object.pk, 'type': _type}
+        )
+        forward = self.model.objects.filter(
+            pk__gt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).first()
+        backward = self.model.objects.filter(
+            pk__lt=self.kwargs['pk'],
+            active=True,
+            company_id=self.request.user.active_company_id
+        ).order_by('-pk').first()
+        if forward:
+            context['forward'] = reverse_lazy(
+                '{}:detail'.format(object_name),
+                kwargs={'pk': forward.pk, 'type': _type}
+            )
+        if backward:
+            context['backward'] = reverse_lazy(
+                '{}:detail'.format(object_name),
+                kwargs={'pk': backward.pk, 'type': _type}
+            )
+
+        if _type == 1:
+            url_name = _('Customer Invoice')
+        elif _type == 2:
+            url_name = _('Provider Invoice')
+
         context['breadcrumbs'] = [
             {
                 'url': reverse_lazy(
                     '{}:list'.format(object_name),
                     kwargs={'type': _type}
                 ),
-                'name': '{}'.format(verbose_name)
+                'name': url_name
             },
             {
                 'url': False,
@@ -279,7 +355,7 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
                 {
                     'url': reverse_lazy(
                         '{}:state'.format(object_name),
-                        kwargs={'pk': self.object.pk, 'state': 3}
+                        kwargs={'pk': self.object.pk, 'state': 3, 'type': _type}
                     ),
                     'name': _('Confirm'),
                     'class': 'important'
@@ -290,7 +366,7 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
                 {
                     'url': reverse_lazy(
                         '{}:state'.format(object_name),
-                        kwargs={'pk': self.object.pk, 'state': 2}
+                        kwargs={'pk': self.object.pk, 'state': 2, 'type': _type}
                     ),
                     'name': _('Cancel'),
                     'class': ''
@@ -301,7 +377,7 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
                 {
                     'url': reverse_lazy(
                         '{}:state'.format(object_name),
-                        kwargs={'pk': self.object.pk, 'state': 1}
+                        kwargs={'pk': self.object.pk, 'state': 1, 'type': _type}
                     ),
                     'name': _('Draft'),
                     'class': ''
@@ -350,7 +426,11 @@ class InvoiceUpdateView(LoginRequiredMixin, FatherUpdateView):
             return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse_lazy('PyInvoice:detail', kwargs={'pk': self.object.pk})
+        _type = self.kwargs['type']
+        return reverse_lazy(
+            'PyInvoice:detail',
+            kwargs={'pk': self.object.pk, 'type': _type}
+        )
 
 
 # ========================================================================== #
