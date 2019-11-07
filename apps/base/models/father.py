@@ -64,5 +64,4 @@ class PyFather(models.Model):
                     _Model = eval(lines)
                     _Model.save()
         else:
-            print('No Existe')
             print(route_csv)

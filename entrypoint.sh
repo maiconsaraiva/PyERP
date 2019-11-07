@@ -16,7 +16,7 @@ python manage.py collectstatic --no-input --clear
 
 # Apply database migrations
 echo "Apply database migrations"
-python manage.py migrate
+python manage.py init_pyerp
 
 # Start server
 echo "Starting server"

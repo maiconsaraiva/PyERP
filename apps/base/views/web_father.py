@@ -7,7 +7,7 @@ from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 
 # Thirdparty Library
-from apps.sale.models import *
+# from apps.sale.models import *
 
 # Localfolder Library
 from ..forms import ActivateForm

@@ -1,6 +1,5 @@
 # Django Library
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Localfolder Library
@@ -16,7 +15,7 @@ POSITION_CHOICE = (
 class PyCurrency(PyFather):
     name = models.CharField('Nombre', max_length=40)
     alias = models.CharField('Alias', max_length=40)
-    symbol = models.CharField('Símbolo', max_length=3)
+    symbol = models.CharField('Símbolo', max_length=15)
     country = models.ForeignKey(PyCountry, on_delete=models.PROTECT)
     iso = models.CharField(max_length=30)
     position = models.CharField(
