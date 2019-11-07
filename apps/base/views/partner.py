@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from dal import autocomplete
 
 # Localfolder Library
+from ..forms import PartnerForm
 from ..models import PyPartner
 from .web_father import (
     FatherCreateView, FatherDeleteView, FatherDetailView, FatherListView,
@@ -60,7 +61,7 @@ class ProviderListView(LoginRequiredMixin, FatherListView):
 # ========================================================================== #
 class PartnerCreateView(LoginRequiredMixin, FatherCreateView):
     model = PyPartner
-    fields = OBJECT_FORM_FIELDS
+    form_class = PartnerForm
     template_name = 'base/form.html'
 
 
@@ -74,7 +75,7 @@ class PartnerDetailView(LoginRequiredMixin, FatherDetailView):
 # ========================================================================== #
 class PartnerUpdateView(LoginRequiredMixin, FatherUpdateView):
     model = PyPartner
-    fields = OBJECT_FORM_FIELDS
+    form_class = PartnerForm
     template_name = 'base/form.html'
 
 

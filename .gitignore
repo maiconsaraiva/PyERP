@@ -9,9 +9,6 @@ __pycache__
 git-completion.bash
 django_bash_completion.bash
 installed_apps.py
-docker-compose.yml
-Dockerfile
-bin/
 *vscode
 
 !media/avatar/

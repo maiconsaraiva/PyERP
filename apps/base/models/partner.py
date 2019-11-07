@@ -5,7 +5,6 @@ import os
 from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 # Localfolder Library
@@ -27,12 +26,17 @@ def image_path(instance, filename):
     root, ext = os.path.splitext(filename)
     return "partner/{id}{ext}".format(id=instance.pk, ext=ext)
 
+
 class PyPartner(PyFather):
     name = models.CharField(_("Name"), max_length=40)
     street = models.CharField(_("Street"), max_length=100, blank=True)
     street_2 = models.CharField(_("Street Other"), max_length=100, blank=True)
-    country_id = models.ForeignKey(PyCountry, null=True, blank=True, on_delete=models.PROTECT)
-
+    country_id = models.ForeignKey(
+        PyCountry,
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT
+    )
     city = models.CharField(_("City"), max_length=50, blank=True)
     phone = models.CharField(_("Phone"), max_length=20, blank=True)
     email = models.EmailField(_("Email"), max_length=40, blank=True)
@@ -41,8 +45,14 @@ class PyPartner(PyFather):
     for_invoice = models.BooleanField(_("For Invoice"), default=True)
     note = models.TextField(blank=True, null=True)
     not_email = models.BooleanField(_("No Email"), default=False)
-    parent_id = models.ForeignKey('self', null=True, blank=True, default=None, on_delete=models.PROTECT)
-
+    parent_id = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.PROTECT,
+        verbose_name=_('Partner parent')
+    )
     img = models.ImageField(
         max_length=255,
         storage=RenameImage(),
@@ -51,8 +61,12 @@ class PyPartner(PyFather):
         null=True,
         default='partner/default_partner.png'
     )
-
-    type = models.CharField(_("type"), choices=TYPE_CHOICE, max_length=64, default='company')
+    type = models.CharField(
+        _("type"),
+        choices=TYPE_CHOICE,
+        max_length=64,
+        default='company'
+    )
 
     def __str__(self):
         return self.name

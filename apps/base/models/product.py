@@ -39,12 +39,30 @@ class PyProduct(PyFather):
     bar_code = models.CharField(_("Bar Code"), max_length=80, blank=True)
     price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2, default=1)
     cost = models.DecimalField(_("Cost"), max_digits=10, decimal_places=2, default=0)
-    category_id = models.ForeignKey(PyProductCategory, null=True, blank=True, on_delete=models.PROTECT)
-    web_category_id = models.ForeignKey(PyProductWebCategory, null=True, blank=True, on_delete=models.PROTECT)
+    category_id = models.ForeignKey(
+        PyProductCategory,
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT,
+        verbose_name=_('Category')
+    )
+    web_category_id = models.ForeignKey(
+        PyProductWebCategory,
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT,
+        verbose_name=_('Web category')
+    )
     description = models.TextField(_("Description"), blank=True, null=True)
     features = models.TextField(_("Features"), blank=True, null=True)
     uom_id = models.ForeignKey(PyUom, null=True, blank=True, on_delete=models.PROTECT)
-    brand_id = models.ForeignKey(PyProductBrand, null=True, blank=True, on_delete=models.PROTECT)
+    brand_id = models.ForeignKey(
+        PyProductBrand,
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT,
+        verbose_name=_('Brand')
+    )
     tax = models.ManyToManyField(PyTax, blank=True)
     youtube_video = models.CharField(null=True, blank=True, max_length=300)
     img = models.ImageField(

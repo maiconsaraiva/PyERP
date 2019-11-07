@@ -15,6 +15,7 @@ from dal import autocomplete
 
 # Localfolder Library
 from ..models import PyCompany, PyCountry, PyUser
+from .partner import PartnerForm
 
 
 class PerfilForm(forms.ModelForm):

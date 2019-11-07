@@ -21,29 +21,73 @@ class ProductForm(forms.ModelForm):
         model = PyProduct
         fields = [
             'name',
+            'img',
             'uom_id',
             'category_id',
-            'tax',
             'web_category_id',
+            'price',
+            'cost',
+            'tax',
             'brand_id',
             'code',
             'bar_code',
-            'price',
-            'cost',
             'type',
             'web_active',
             'pos_active',
-            'youtube_video',
-            'img',
             'description',
             'features',
+            'youtube_video',
         ]
         widgets = {
             'tax': autocomplete.ModelSelect2Multiple(
                 url='PyTax:autocomplete',
                 attrs={
                     'data-placeholder': _('Select taxes...'),
-                    'style': 'padding: 0 .75rem',
+                    'style': 'width: 100%',
+                },
+            ),
+            'uom_id': autocomplete.ModelSelect2(
+                url='PyUom:autocomplete',
+                attrs={
+                    'class': 'form-control',
+                    'data-placeholder': _('Select a UOM ...'),
+                    'style': 'width: 100%',
+                },
+            ),
+            'type': forms.Select(
+                attrs={
+                    'class': 'static-select2',
+                },
+            ),
+            'category_id': forms.Select(
+                attrs={
+                    'class': 'static-select2',
+                },
+            ),
+            'web_category_id': forms.Select(
+                attrs={
+                    'class': 'static-select2',
+                },
+            ),
+            'brand_id': forms.Select(
+                attrs={
+                    'class': 'static-select2',
+                },
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': _('Description ...'),
+                    'style': 'width: 100%',
+                    'rows': '1',
+                },
+            ),
+            'features': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': _('Features ...'),
+                    'style': 'width: 100%',
+                    'rows': '1',
                 },
             ),
         }

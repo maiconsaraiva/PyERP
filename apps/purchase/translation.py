@@ -1,4 +1,7 @@
-from modeltranslation.translator import register, TranslationOptions
+# Thirdparty Library
+from modeltranslation.translator import TranslationOptions, register
+
+# Localfolder Library
 from .models import PyPurchaseOrderState
 
 

@@ -6,8 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 # Thirdparty Library
 from apps.base.models import PyFather, PyPartner, PyProduct, PyTax, PyUom
 from apps.base.views.sequence import get_next_value
-from apps.sale.models import PySaleOrder
 from apps.purchase.models import PyPurchaseOrder
+from apps.sale.models import PySaleOrder
 
 INVOICE_TYPE = (
         (1, _('sale')),
@@ -43,7 +43,8 @@ class PyInvoice(PyFather):
     )
     partner_id = models.ForeignKey(
         PyPartner,
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        verbose_name=_('Client')
     )
     seller_id = models.ForeignKey(
         PyPartner,

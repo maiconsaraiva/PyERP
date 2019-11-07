@@ -16,14 +16,15 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
 
 # Thirdparty Library
+from apps.account.models import PyInvoice, PyInvoiceDetail
 from apps.base.models import PyProduct, PyTax
 from apps.base.views.web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
 
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, PyPurchaseOrderForm
-from .models import PyPurchaseOrder, PyPurchaseOrderDetail, PyPurchaseOrderState
-from apps.account.models import PyInvoice, PyInvoiceDetail
+from .models import (
+    PyPurchaseOrder, PyPurchaseOrderDetail, PyPurchaseOrderState)
 
 LOGGER = logging.getLogger(__name__)
 

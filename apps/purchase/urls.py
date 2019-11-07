@@ -6,9 +6,9 @@ from django.urls import path
 # Localfolder Library
 from .reports.purchaseorderpdf import purchase_order_pdf
 from .views import (
-    PyPurchaseOrderAddView, PyPurchaseOrderDeleteView, PyPurchaseOrderDetailView,
-    PyPurchaseOrderEditView, PyPurchaseOrderListView, load_product, load_tax,
-    purchase_order_state)
+    PyPurchaseOrderAddView, PyPurchaseOrderDeleteView,
+    PyPurchaseOrderDetailView, PyPurchaseOrderEditView,
+    PyPurchaseOrderListView, load_product, load_tax, purchase_order_state)
 
 app_name = 'PyPurchaseOrder'
 

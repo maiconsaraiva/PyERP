@@ -1,7 +1,7 @@
 # Django Library
 from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
@@ -46,7 +46,7 @@ class FatherTemplateView(TemplateView):
         context['web_parameter'] = _web_parameter()
         context['parameter'] = _parameter()
         context['meta'] = _web_meta()
-        context['count_plugin']= _count_plugin
+        context['count_plugin'] = _count_plugin
         context['company'] = PyCompany.objects.filter(active=True)
         return context
 
@@ -76,7 +76,7 @@ class FatherListView(ListView):
         context['company'] = PyCompany.objects.filter(active=True)
         context['title'] = '{}'.format(verbose_name)
         context['detail_url'] = '{}:detail'.format(object_name)
-        context['add_url'] = '{}:add'.format(object_name)
+        context['add_url'] = reverse_lazy('{}:add'.format(object_name))
         context['form_template'] = False
         context['breadcrumbs'] = [{
             'url': False,
@@ -169,8 +169,10 @@ class FatherDetailView(DetailView):
             # Get the single item from the filtered queryset
             obj = queryset.get()
         except queryset.model.DoesNotExist:
-            raise Http404(_("No %(verbose_name)s found matching the query") %
-                        {'verbose_name': queryset.model._meta.verbose_name})
+            raise Http404(
+                _("No %(verbose_name)s found matching the query") %
+                {'verbose_name': queryset.model._meta.verbose_name}
+            )
         return obj
 
     class Meta:
@@ -265,7 +267,6 @@ class FatherUpdateView(UpdateView):
         }]
         return context
 
-
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
         self.object = form.save(commit=False)
@@ -310,7 +311,9 @@ def inactive_object(request):
         if form.is_valid():
             object_name = form.cleaned_data['object_name']
             object_pk = form.cleaned_data['object_pk']
-            object_to = eval('{}.objects.get(pk={})'.format(object_name, object_pk))
+            object_to = eval(
+                '{}.objects.get(pk={})'.format(object_name, object_pk)
+            )
             object_to.active = False
             object_to.save()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
@@ -323,14 +326,9 @@ def active_object(request):
         if form.is_valid():
             object_name = form.cleaned_data['object_name']
             object_pk = form.cleaned_data['object_pk']
-            object_to = eval('{}.objects.get(pk={})'.format(object_name, object_pk))
+            object_to = eval(
+                '{}.objects.get(pk={})'.format(object_name, object_pk)
+            )
             object_to.active = True
             object_to.save()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
-
-
-
-"""Las vistas que se declaran a contiuación corresponde a un intento por
-estandarizar el CRUD los modulos que involucran un maestro detalle:Sale Order,
-Invoice y otras
-"""

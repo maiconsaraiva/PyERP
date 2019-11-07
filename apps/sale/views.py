@@ -16,6 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DeleteView
 
 # Thirdparty Library
+from apps.account.models import PyInvoice, PyInvoiceDetail
 from apps.base.models import PyProduct, PyTax
 from apps.base.views.web_father import (
     FatherCreateView, FatherDetailView, FatherListView, FatherUpdateView)
@@ -23,7 +24,6 @@ from apps.base.views.web_father import (
 # Localfolder Library
 from .forms import PRODUCT_FORMSET, SaleOrderForm
 from .models import PySaleOrder, PySaleOrderDetail, PySaleOrderState
-from apps.account.models import PyInvoice, PyInvoiceDetail
 
 LOGGER = logging.getLogger(__name__)
 

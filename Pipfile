@@ -44,6 +44,7 @@ django-taggit = "*"
 django-bootstrap-datepicker-plus = "*"
 django-modeltranslation = "*"
 django-rosetta = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
