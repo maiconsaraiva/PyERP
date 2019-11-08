@@ -17,7 +17,7 @@ services:
       - .env.web
     depends_on:
       - db
-    container_name: pyerp-container-python
+    container_name: container-python
   db:
     restart: always
     image: postgres:11.4-alpine
@@ -27,7 +27,7 @@ services:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    container_name: pyerp-container-postgres
+    container_name: container-postgres
   nginx:
     restart: always
     build:
@@ -41,7 +41,7 @@ services:
       - "80:80"
     depends_on:
       - web
-    container_name: pyerp-container-nginx
+    container_name: container-nginx
 
 volumes:
   postgres_data:
