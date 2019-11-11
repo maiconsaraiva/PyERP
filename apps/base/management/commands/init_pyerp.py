@@ -85,6 +85,7 @@ class Command(BaseCommand):
             )
         )
         if not PyPlugin.objects.all().exists():
+            # open('installed_apps.py', 'w').close()
             FILE_NAME = 'info.json'
             folder_apps = '{}/apps'.format(settings.BASE_DIR)
             plugin_list = tuple(
@@ -97,6 +98,7 @@ class Command(BaseCommand):
                     app_counnter += 1
                     with open(file) as json_file:
                         data = json.load(json_file)
+                        print(data['name'].lower())
                         plugin = PyPlugin(
                             name=data['name'].lower(),
                             description=data['description'],
@@ -104,10 +106,10 @@ class Command(BaseCommand):
                             fa=data['fa'],
                             version=data['version'],
                             website=data['website'],
-                            color=data['color']
+                            color=data['color'],
+                            installed=data['installed']
                         )
                         plugin.save()
-            open('installed_apps.py', 'w').close()
             self.stdout.write('Loaded {} plugin(s)'.format(app_counnter))
 
         # ================================================================== #
@@ -116,3 +118,11 @@ class Command(BaseCommand):
             self.style.MIGRATE_LABEL('python manage.py runserver ') +
             self.style.SUCCESS('to start the development server.')
         )
+
+        # ================================================================== #
+        self.stdout.write(
+            self.style.MIGRATE_HEADING(_('*** Generating  plugin migrations...'))
+        )
+        call_command('init_purchase',)
+        call_command('init_sale',)
+        call_command('init_account',)

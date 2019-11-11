@@ -404,6 +404,8 @@ def purchase_order_to_invoice(request, purchase_order):
         uc=request.user.pk,
         company_id=purchase_order.company_id,
         partner_id=purchase_order.partner_id,
+        seller_id=request.user.partner_id,
+        type=2,
         purchase_order_id=purchase_order,
         amount_untaxed=purchase_order.amount_untaxed,
         amount_tax_iva=purchase_order.amount_tax_iva,

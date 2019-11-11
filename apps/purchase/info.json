@@ -11,6 +11,7 @@
 	"type":"public",
 	"color":"bg-green",
 	"fa":"fa-book",
-	"sequence":"3"
+	"sequence":"3",
+	"installed":"1"
 
 }

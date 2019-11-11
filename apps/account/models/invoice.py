@@ -16,10 +16,10 @@ INVOICE_TYPE = (
 
 
 # ========================================================================== #
-class PyInvoiceType(PyFather):
+class PyInvoiceState(PyFather):
     """Modelo de la orden de pago
     """
-    name = models.CharField(_('Name'), max_length=80, editable=False)
+    name = models.CharField(_('Name'), max_length=80)
     state = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -101,7 +101,7 @@ class PyInvoice(PyFather):
     )
     description = models.TextField(_('Description'), blank=True, null=True)
     state = models.ForeignKey(
-        PyInvoiceType,
+        PyInvoiceState,
         on_delete=models.PROTECT,
         verbose_name=_('State'),
         default=1

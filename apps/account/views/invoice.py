@@ -22,7 +22,7 @@ from apps.base.views.web_father import (
 
 # Localfolder Library
 from ..forms import PRODUCT_FORMSET, InvoiceForm
-from ..models import PyInvoice, PyInvoiceDetail, PyInvoiceType
+from ..models import PyInvoice, PyInvoiceDetail, PyInvoiceState
 
 LOGGER = logging.getLogger(__name__)
 
@@ -486,7 +486,7 @@ def load_tax(request):
 @login_required()
 def invoice_state(request, pk, state):
     invoice = PyInvoice.objects.get(pk=pk)
-    state = PyInvoiceType.objects.get(pk=state)
+    state = PyInvoiceState.objects.get(pk=state)
     if invoice.state != 4:
         with transaction.atomic():
             invoice.state = state

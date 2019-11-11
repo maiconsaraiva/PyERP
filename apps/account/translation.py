@@ -2,9 +2,9 @@
 from modeltranslation.translator import TranslationOptions, register
 
 # Localfolder Library
-from .models import PyInvoiceType
+from .models import PyInvoiceState
 
 
-@register(PyInvoiceType)
-class PyInvoiceTypeTranslationOptions(TranslationOptions):
-    fields = ('name',)
+@register(PyInvoiceState)
+class PyInvoiceStateTranslationOptions(TranslationOptions):
+    fields = ('name', 'state',)

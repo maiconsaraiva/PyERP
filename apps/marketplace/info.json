@@ -11,6 +11,6 @@
 	"type":"public",
 	"color":"bg-danger",
 	"fa":"fa-tasks",
-	"sequence":"1"
-
+	"sequence":"1",
+	"installed":"0"
 }

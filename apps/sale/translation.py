@@ -7,4 +7,4 @@ from .models import PySaleOrderState
 
 @register(PySaleOrderState)
 class PySaleOrderStateTranslationOptions(TranslationOptions):
-    fields = ('name',)
+    fields = ('name', 'state')

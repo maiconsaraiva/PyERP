@@ -11,6 +11,7 @@
 	"type":"public",
 	"color":"bg-indigo",
 	"fa":"fa-desktop",
-	"sequence":"5"
+	"sequence":"5",
+	"installed":"0"
 
 }

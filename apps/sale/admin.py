@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Thirdparty Library
-from apps.sale.models import PySaleOrder, PySaleOrderDetail
+from apps.sale.models import PySaleOrder, PySaleOrderDetail, PySaleOrderState
 
 # Register your models here.
 
@@ -29,3 +29,5 @@ class PySaleOrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(PySaleOrder, PySaleOrderAdmin)
+
+admin.site.register(PySaleOrderState)

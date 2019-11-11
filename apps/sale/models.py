@@ -12,7 +12,7 @@ from apps.base.views.sequence import get_next_value
 class PySaleOrderState(PyFather):
     """Modelo de la orden de pago
     """
-    name = models.CharField(_('Name'), max_length=80, editable=False)
+    name = models.CharField(_('Name'), max_length=80, blank=True, null=True)
     state = models.TextField(blank=True, null=True)
 
     def __str__(self):

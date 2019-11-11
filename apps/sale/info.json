@@ -11,6 +11,7 @@
 	"type":"public",
 	"color":"bg-warning",
 	"fa":"fa-file",
-	"sequence":"2"
+	"sequence":"2",
+	"installed":"1"
 
 }

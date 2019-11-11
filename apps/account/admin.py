@@ -3,7 +3,7 @@ from django.contrib import admin
 
 # Localfolder Library
 from .forms import AccountMoveDetailForm, AccountMoveForm
-from .models import PyAccountMove, PyAccountMoveDetail
+from .models import PyAccountMove, PyAccountMoveDetail, PyInvoiceState
 
 
 class PyAccountMoveDetailInline(admin.TabularInline):
@@ -18,3 +18,4 @@ class PyAccountMoveAdmin(admin.ModelAdmin):
 
 
 admin.site.register(PyAccountMove, PyAccountMoveAdmin)
+admin.site.register(PyInvoiceState)

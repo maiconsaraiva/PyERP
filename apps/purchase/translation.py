@@ -7,4 +7,4 @@ from .models import PyPurchaseOrderState
 
 @register(PyPurchaseOrderState)
 class PyPurchaseOrderStateTranslationOptions(TranslationOptions):
-    fields = ('name',)
+    fields = ('name', 'state',)
