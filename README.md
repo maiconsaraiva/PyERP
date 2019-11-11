@@ -3,6 +3,13 @@ PyERP is an project open-source, user-oriented, **ERP** system based on Django f
 
 [Dcumentation](https://falconsoft3d.github.io/pyerp/)
 
+# Deploy
+```
+apt-get update && apt-get upgrade -y
+apt  install docker.io
+docker-compose up -d --build
+```
+
 # Telegram Group (Pyerp)
 https://t.me/pyerp
 
