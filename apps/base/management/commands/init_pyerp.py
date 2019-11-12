@@ -114,7 +114,7 @@ class Command(BaseCommand):
                         if data['installed'] == '1':
                             installed_apps.write('apps.{}\n'.format(data['name'].lower()))
                             comand_app = 'init_{}'.format(data['name'].lower())
-                            sleep(3)
+                            sleep(5)
                             call_command(comand_app,)
             installed_apps.close()
             self.stdout.write('Loaded {} plugin(s)'.format(app_counnter))
