@@ -4,6 +4,7 @@
 # Standard Library
 import json
 from os import listdir, path
+from time import sleep
 
 # Django Library
 from django.conf import settings
@@ -92,13 +93,13 @@ class Command(BaseCommand):
                 set(name['name'] for name in PyPlugin.objects.all().values('name'))
             )
             app_counnter = 0
+            installed_apps = open('installed_apps.py', 'a+')
             for folder in listdir(folder_apps):
                 file = folder_apps + "/" + folder + "/" + FILE_NAME
                 if path.isfile(file) and folder not in plugin_list:
                     app_counnter += 1
                     with open(file) as json_file:
                         data = json.load(json_file)
-                        print(data['name'].lower())
                         plugin = PyPlugin(
                             name=data['name'].lower(),
                             description=data['description'],
@@ -110,6 +111,12 @@ class Command(BaseCommand):
                             installed=data['installed']
                         )
                         plugin.save()
+                        if data['installed'] == '1':
+                            installed_apps.write('apps.{}\n'.format(data['name'].lower()))
+                            comand_app = 'init_{}'.format(data['name'].lower())
+                            sleep(1)
+                            call_command(comand_app,)
+            installed_apps.close()
             self.stdout.write('Loaded {} plugin(s)'.format(app_counnter))
 
         # ================================================================== #
@@ -120,9 +127,11 @@ class Command(BaseCommand):
         )
 
         # ================================================================== #
-        self.stdout.write(
-            self.style.MIGRATE_HEADING(_('*** Generating  plugin migrations...'))
-        )
-        call_command('init_purchase',)
-        call_command('init_sale',)
-        call_command('init_account',)
+        # self.stdout.write(
+        #     self.style.MIGRATE_HEADING(_('*** Generating  plugin migrations...'))
+        # )
+
+        # sleep(3)
+        # call_command('init_purchase',)
+        # call_command('init_sale',)
+        # call_command('init_account',)
