@@ -1,3 +1,3 @@
-apps.purchase
 apps.sale
+apps.purchase
 apps.account

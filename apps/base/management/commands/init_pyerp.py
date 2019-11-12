@@ -85,7 +85,7 @@ class Command(BaseCommand):
             )
         )
         if not PyPlugin.objects.all().exists():
-            # open('installed_apps.py', 'w').close()
+            open('installed_apps.py', 'w').close()
             FILE_NAME = 'info.json'
             folder_apps = '{}/apps'.format(settings.BASE_DIR)
             plugin_list = tuple(

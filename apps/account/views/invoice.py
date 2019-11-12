@@ -484,7 +484,7 @@ def load_tax(request):
 
 # ========================================================================== #
 @login_required()
-def invoice_state(request, pk, state):
+def invoice_state(request, pk, state, type):
     invoice = PyInvoice.objects.get(pk=pk)
     state = PyInvoiceState.objects.get(pk=state)
     if invoice.state != 4:
@@ -502,5 +502,5 @@ def invoice_state(request, pk, state):
                 _('The current invoice %(invoice)s status does not allow updates.') % {'invoice': self.object.name}
             )
     return redirect(
-        reverse_lazy('PyInvoice:detail', kwargs={'pk': pk})
+        reverse_lazy('PyInvoice:detail', kwargs={'pk': pk, 'type': type})
     )
