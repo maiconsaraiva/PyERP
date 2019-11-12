@@ -15,9 +15,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose up -d --build
 ```
 
-# Telegram Group (Pyerp)
-https://t.me/pyerp
-
 ![Alt text](https://github.com/falconsoft3d/pyerp/blob/master/marketing/pyerp-m.png?raw=true "Ynext")
 
 # Install PyERP using the following command
