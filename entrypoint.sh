@@ -20,7 +20,9 @@ python manage.py init_pyerp
 
 # Install plugins in testing
 echo "Install plugins in testing"
-python manage.py install_plugin
+python manage.py init_purchase
+python manage.py init_sale
+python manage.py init_account
 
 # Start server
 echo "Starting server"
