@@ -18,10 +18,12 @@ python manage.py collectstatic --no-input --clear
 echo "Apply database migrations"
 python manage.py init_pyerp
 
+# Install plugins in testing
+echo "Install plugins in testing"
+python manage.py install_plugin
+
 # Start server
 echo "Starting server"
 bin/gunicorn_start.sh
-
-
 
 exec "$@"

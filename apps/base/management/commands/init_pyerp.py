@@ -113,9 +113,6 @@ class Command(BaseCommand):
                         plugin.save()
                         if data['installed'] == '1':
                             installed_apps.write('apps.{}\n'.format(data['name'].lower()))
-                            comand_app = 'init_{}'.format(data['name'].lower())
-                            sleep(5)
-                            call_command(comand_app,)
             installed_apps.close()
             self.stdout.write('Loaded {} plugin(s)'.format(app_counnter))
 
@@ -125,13 +122,3 @@ class Command(BaseCommand):
             self.style.MIGRATE_LABEL('python manage.py runserver ') +
             self.style.SUCCESS('to start the development server.')
         )
-
-        # ================================================================== #
-        # self.stdout.write(
-        #     self.style.MIGRATE_HEADING(_('*** Generating  plugin migrations...'))
-        # )
-
-        # sleep(3)
-        # call_command('init_purchase',)
-        # call_command('init_sale',)
-        # call_command('init_account',)
