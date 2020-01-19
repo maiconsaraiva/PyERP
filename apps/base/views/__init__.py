@@ -130,5 +130,5 @@ def DoChangePassword(self, pk, **kwargs):
     if user and self.POST['new_password1'] == self.POST['new_password2']:
         user.set_password(self.POST['new_password1'])
     else:
-        return render(self, 'base/change_password.html', {'pk': pk, 'error': 'Las contraseñas no coinciden.'})
+        return render(self, 'base/change_password.html', {'pk': pk, 'error': 'Passwords do not match.'})
     return redirect(reverse('PyUser:user-detail', kwargs={'pk': pk}))

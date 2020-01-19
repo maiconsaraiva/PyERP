@@ -27,7 +27,7 @@ def IndexEasy(request):
             currency = PyCurrency.objects.get(country=country)
             email = context['form'].cleaned_data.get('email')
             password = context['form'].cleaned_data.get('password')
-            company = PyCompany.create(name, country, currency)
+            company = PyCompany.create(name, country, currency,1)
 
             BaseConfig.create(company)
             PyWebsiteConfig.create(company.id)

@@ -99,10 +99,14 @@ class PyCompany(PyFather):
         return '{}'.format(self.name)
 
     @classmethod
-    def create(cls, name, country, currency):
+    def create(cls, name, country, currency, company_id):
         """Crea un propietario de manera sencilla
         """
-        pycompany = cls(name=name, country=country, currency_id=currency)
+        if company_id:
+            pycompany = cls(name=name, country=country, currency_id=currency, company_id=company_id)
+        else:
+            pycompany = cls(name=name, country=country, currency_id=currency)
+
         pycompany.save()
 
         return pycompany

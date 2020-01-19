@@ -37,7 +37,7 @@ SECRET_KEY = '(5u_8%)7z-9t#pxxg8@$bt99rr)m6*ceuqf4-ic79-mmd8=^mw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'www.pyerp.cl', 'pyerp.cl', 'test.pyerp.cl']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'www.pyerp.co', 'pyerp.co', 'test.pyerp.co']
 
 
 # Application definition
@@ -156,15 +156,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pyerp.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
@@ -216,13 +207,6 @@ PASSWORD_RESET_TIMEOUT_DAYS = 1
 # ========================================================================== #
 """ Este bloque contiene toda la configuración para la loclización
 """
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
-# def gettext(cadena):
-#     '''  "dummy" gettext() function
-#     '''
-#     return cadena
 
 LANGUAGE_CODE = 'en'
 TIME_ZONE = 'America/Santiago'
