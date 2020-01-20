@@ -49,33 +49,33 @@ class PyPurchaseOrder(PyFather):
     )
     amount_untaxed = models.DecimalField(
         _('Amount un'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_tax_iva = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_tax_other = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_tax_total = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_exempt = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_total = models.DecimalField(
         _('Total'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
@@ -119,19 +119,19 @@ class PyPurchaseOrderDetail(PyFather):
     description = models.TextField(blank=True, null=True)
     quantity = models.DecimalField(
         _('Quantity'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     invoiced_quantity = models.DecimalField(
         _('Invoiced'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     delivered_quantity = models.DecimalField(
         _('Delivered'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
@@ -144,41 +144,41 @@ class PyPurchaseOrderDetail(PyFather):
     )
     price = models.DecimalField(
         _('Price'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     tax_id = models.ManyToManyField(PyTax, verbose_name=_('Tax'), blank=True)
     amount_untaxed = models.DecimalField(
         _('Amount un'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_tax_iva = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_tax_other = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_tax_total = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     amount_exempt = models.DecimalField(
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
-    discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    discount = models.DecimalField(max_digits=100, decimal_places=2, default=0)
     amount_total = models.DecimalField(
         _('Total'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )

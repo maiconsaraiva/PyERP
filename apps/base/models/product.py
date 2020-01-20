@@ -37,8 +37,8 @@ class PyProduct(PyFather):
     name = models.CharField(_("Name"), max_length=80)
     code = models.CharField(_("Code"), max_length=80, blank=True)
     bar_code = models.CharField(_("Bar Code"), max_length=80, blank=True)
-    price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2, default=1)
-    cost = models.DecimalField(_("Cost"), max_digits=10, decimal_places=2, default=0)
+    price = models.DecimalField(_("Price"), max_digits=100, decimal_places=2, default=1)
+    cost = models.DecimalField(_("Cost"), max_digits=100, decimal_places=2, default=0)
     category_id = models.ForeignKey(
         PyProductCategory,
         null=True,

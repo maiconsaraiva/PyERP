@@ -113,7 +113,7 @@ class PyInvoiceDetail(PyFather):
     amount_tax_other = models.DecimalField(max_digits=100, decimal_places=2, default=0)
     amount_tax_total = models.DecimalField(max_digits=100, decimal_places=2, default=0)
     amount_exempt = models.DecimalField(max_digits=100, decimal_places=2, default=0)
-    discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    discount = models.DecimalField(max_digits=100, decimal_places=2, default=0)
     amount_total = models.DecimalField(
         _("Total"), max_digits=100, decimal_places=2, default=0
     )

@@ -46,19 +46,19 @@ class PyAccountMove(PyFather):
     )
     amount = models.DecimalField(
         _('Total'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     debit = models.DecimalField(
         _('debit'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     credit = models.DecimalField(
         _('credit'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
@@ -103,13 +103,13 @@ class PyAccountMoveDetail(PyFather):
     tags = TaggableManager(blank=True, verbose_name=_('tag'))
     debit = models.DecimalField(
         _('debit'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )
     credit = models.DecimalField(
         _('credit'),
-        max_digits=10,
+        max_digits=100,
         decimal_places=2,
         default=0
     )

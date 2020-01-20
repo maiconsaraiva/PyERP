@@ -15,8 +15,8 @@ TYPE_CHOICE = (
 
 class PyUom(PyFather):
     name = models.CharField(_("Name"), max_length=255)
-    ratio = models.DecimalField(_("Ratio"), max_digits=10, decimal_places=2, default=1)
-    rouding = models.DecimalField(_("Ratio"), max_digits=10, decimal_places=2, default=0.01)
+    ratio = models.DecimalField(_("Ratio"), max_digits=100, decimal_places=2, default=1)
+    rouding = models.DecimalField(_("Ratio"), max_digits=100, decimal_places=2, default=0.01)
     type = models.CharField(_("type"), choices=TYPE_CHOICE, max_length=64, default='consu')
     category_id = models.ForeignKey(PyProductCategoryUOM, null=True, blank=True, on_delete=models.PROTECT)
 
