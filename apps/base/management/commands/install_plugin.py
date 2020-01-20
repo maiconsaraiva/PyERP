@@ -32,10 +32,14 @@ class Command(BaseCommand):
                 _('*** Install plugins in testing...')
             )
         )
-        installed_plugin = PyPlugin.objects.filter(installed=True)
-        app_counnter = 0
-        for plugin in installed_plugin:
-            app_counnter += 1
-            comand_app = 'init_{}'.format(plugin.name)
-            call_command(comand_app,)
-        self.stdout.write('Installed {} plugin(s)'.format(app_counnter))
+        # installed_plugin = PyPlugin.objects.filter(installed=True)
+        # app_counnter = 0
+        # for plugin in installed_plugin:
+        #     app_counnter += 1
+        #     comand_app = 'init_{}'.format(plugin.name)
+        #     call_command(comand_app,)
+        # self.stdout.write('Installed {} plugin(s)'.format(app_counnter))
+
+        call_command('init_purchase',)
+        call_command('init_sale',)
+        call_command('init_account',)

@@ -6,8 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Localfolder Library
-from .models import (
-    PyAccountMove, PyAccountMoveDetail, PyInvoice, PyInvoiceDetail)
+from .models import PyAccountMove, PyAccountMoveDetail, PyInvoice, PyInvoiceDetail
 
 
 # ========================================================================== #
@@ -31,9 +30,9 @@ def calc_invoice(sender, instance, **kwargs):
         if obj.tax_id.all().exists():
             for tax in obj.tax_id.all():
                 if tax.pk == 1:
-                    amount_tax_iva = (amount_untaxed * tax.amount)/100
+                    amount_tax_iva = (amount_untaxed * tax.amount) / 100
                 else:
-                    amount_tax_other += (amount_untaxed * tax.amount)/100
+                    amount_tax_other += (amount_untaxed * tax.amount) / 100
         else:
             amount_exempt = amount_untaxed
         obj.active = True
@@ -71,7 +70,9 @@ def calc_invoice(sender, instance, **kwargs):
 def calc_account_move(sender, instance, **kwargs):
     t_adebit = 0
     t_credit = 0
-    for i, obj in enumerate(PyAccountMoveDetail.objects.filter(account_move_id=instance.pk)):
+    for i, obj in enumerate(
+        PyAccountMoveDetail.objects.filter(account_move_id=instance.pk)
+    ):
         t_adebit += obj.debit
         t_credit += obj.credit
         obj.company_id = instance.company_id
